@@ -11,7 +11,7 @@ namespace VirtoCommerce.CoreModule.Data.Migrations
                 "dbo.FulfillmentCenter",
                 c => new
                     {
-                        FulfillmentCenterId = c.String(nullable: false, maxLength: 128),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 128),
                         Description = c.String(maxLength: 256),
                         MaxReleasesPerPickBatch = c.Int(nullable: false),
@@ -26,16 +26,39 @@ namespace VirtoCommerce.CoreModule.Data.Migrations
                         PostalCode = c.String(nullable: false, maxLength: 32),
                         CreatedDate = c.DateTime(nullable: false),
                         ModifiedDate = c.DateTime(),
-                        CreatedBy = c.String(),
-                        ModifiedBy = c.String(),
+                        CreatedBy = c.String(maxLength: 64),
+                        ModifiedBy = c.String(maxLength: 64),
                         Discriminator = c.String(maxLength: 128),
                     })
-                .PrimaryKey(t => t.FulfillmentCenterId);
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.SeoUrlKeyword",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Language = c.String(nullable: false, maxLength: 5),
+                        Keyword = c.String(nullable: false, maxLength: 255),
+                        KeywordValue = c.String(nullable: false, maxLength: 255),
+                        IsActive = c.Boolean(nullable: false),
+                        KeywordType = c.Int(nullable: false),
+                        Title = c.String(maxLength: 255),
+                        MetaDescription = c.String(maxLength: 1024),
+                        MetaKeywords = c.String(maxLength: 255),
+                        ImageAltDescription = c.String(maxLength: 255),
+                        CreatedDate = c.DateTime(nullable: false),
+                        ModifiedDate = c.DateTime(),
+                        CreatedBy = c.String(maxLength: 64),
+                        ModifiedBy = c.String(maxLength: 64),
+                        Discriminator = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id);
             
         }
         
         public override void Down()
         {
+            DropTable("dbo.SeoUrlKeyword");
             DropTable("dbo.FulfillmentCenter");
         }
     }

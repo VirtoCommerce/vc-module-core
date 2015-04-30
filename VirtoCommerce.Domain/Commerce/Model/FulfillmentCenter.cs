@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 
-namespace VirtoCommerce.Domain.Fulfillment.Model
+namespace VirtoCommerce.Domain.Commerce.Model
 {
 	public class FulfillmentCenter : Entity
 	{
