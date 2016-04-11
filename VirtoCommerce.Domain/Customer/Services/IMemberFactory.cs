@@ -9,12 +9,11 @@ using VirtoCommerce.Platform.Core.Common;
 namespace VirtoCommerce.Domain.Customer.Services
 {
     /// <summary>
-    /// Abstraction for member CRUD operations
+    /// Represent abstract factory for any custom members  services (with this extension point developer can extend exist members system by new types)
     /// </summary>
-    public interface IMemberService
+    public interface IMemberFactory 
     {
-        Member[] GetByIds(string[] memberIds, string[] memberTypes = null);
-        void CreateOrUpdate(Member[] members);
-        void Delete(string[] ids, string[] memberTypes = null);
+        Member TryCreateMember(string memberType);
+        MembersSearchCriteria CreateMemberSearchCriteria();
     }
 }
