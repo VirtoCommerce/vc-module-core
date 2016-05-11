@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.ModelBinding;
 using VirtoCommerce.CoreModule.Web.Converters;
 using VirtoCommerce.CoreModule.Web.Security;
 using VirtoCommerce.Domain.Commerce.Services;
@@ -14,7 +11,7 @@ using VirtoCommerce.Domain.Order.Model;
 using VirtoCommerce.Domain.Order.Services;
 using VirtoCommerce.Domain.Payment.Model;
 using VirtoCommerce.Domain.Store.Services;
-using VirtoCommerce.Platform.Core.Security;
+using VirtoCommerce.Platform.Core.Web.Security;
 using coreModel = VirtoCommerce.Domain.Commerce.Model;
 using coreTaxModel = VirtoCommerce.Domain.Tax.Model;
 using webModel = VirtoCommerce.CoreModule.Web.Model;
@@ -51,10 +48,10 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         {
             var retVal = new List<coreTaxModel.TaxRate>();
             var store = _storeService.GetById(storeId);
-            if(storeId != null)
+            if (storeId != null)
             {
                 var activeTaxProvider = store.TaxProviders.FirstOrDefault(x => x.IsActive);
-                if(activeTaxProvider != null)
+                if (activeTaxProvider != null)
                 {
                     evalContext.Store = store;
                     retVal.AddRange(activeTaxProvider.CalculateRates(evalContext));
@@ -157,7 +154,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                     }
 
                     return Ok(retVal);
-                }                
+                }
             }
             return Ok(new PostProcessPaymentResult { ErrorMessage = "cancel payment" });
         }
@@ -182,7 +179,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult GetSeoDuplicates(string objectId, string objectType)
         {
             var retVal = _seoDuplicateDetector.DetectSeoDuplicates(objectType, objectId, _commerceService.GetAllSeoDuplicates());
-            return Ok(retVal.ToArray());       
+            return Ok(retVal.ToArray());
         }
         /// <summary>
         /// Find all SEO records for object by slug 
