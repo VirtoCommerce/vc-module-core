@@ -133,6 +133,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="VirtoCommerce.CoreModule.Data.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201504301238451_Initial.resx">
