@@ -12,6 +12,8 @@ Go to VC Manager Configuration -> Modules -> Commerce core module -> Install
 * **VirtoCommerce.Core.FixedRateShippingMethod.Rate** - fixed rate for 'fixed rate' shipping method
 * **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - fixed rate for 'fixed rate' tax provider
 
+# Development
+https://www.nuget.org/packages/VirtoCommerce.Domain
 # Licence
 Copyright (c) Virtosoftware Ltd.  All rights reserved.
 
