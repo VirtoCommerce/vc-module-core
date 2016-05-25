@@ -16,7 +16,7 @@ Install the module.
 
 # Module development
 Add to you VC project module
-<a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain NuGet package</a>
+https://www.nuget.org/packages/VirtoCommerce.Domain  NuGet package
 
 # API
 Online API documentation
