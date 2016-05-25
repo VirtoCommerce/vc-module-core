@@ -13,7 +13,9 @@ Go to VC Manager Configuration -> Modules -> Commerce core module -> Install
 * **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - fixed rate for 'fixed rate' tax provider
 
 # Development
-https://www.nuget.org/packages/VirtoCommerce.Domain
+Add to you VC project module
+<a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain</a>  nuget package and you can use all VC eCommerce domain model 
+
 # Licence
 Copyright (c) Virtosoftware Ltd.  All rights reserved.
 
