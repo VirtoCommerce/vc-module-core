@@ -4,7 +4,8 @@ Also expose some common eCommerce API for storefront security, SEO, fulmilments,
 <a href="http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module" target="_blank">Commerce core module API online documentation</a>
 # Installation
 Install the module.
-Go to VC Manager Configuration -> Modules -> Commerce core module -> Install
+* Automaticaly: go to VC Manager Configuration -> Modules -> Commerce core module -> Install
+* Manualy: download module zip archive from <a href="https://github.com/VirtoCommerce/vc-module-core/releases"> vc-module-core/releases</a> then go to VC Manager Configuration -> Modules -> Advanced -> upload and install
 # Settings
 * **VirtoCommerce.Core.General.TaxTypes** -  manual defined tax categories which can be used for assign to any objects (category, products etc)
 * **VirtoCommerce.Core.General.WeightUnits** - contains  weight units 
@@ -12,9 +13,11 @@ Go to VC Manager Configuration -> Modules -> Commerce core module -> Install
 * **VirtoCommerce.Core.FixedRateShippingMethod.Rate** - fixed rate for 'fixed rate' shipping method
 * **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - fixed rate for 'fixed rate' tax provider
 
-# Development
+# Module development
 Add to you VC project module
 <a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain nuget package</a>  and you can use all VC eCommerce domain model 
+
+# API client
 
 # Licence
 Copyright (c) Virtosoftware Ltd.  All rights reserved.
