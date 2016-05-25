@@ -18,7 +18,11 @@ Install the module.
 Add to you VC project module
 <a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain NuGet package</a>
 
-# API client
+# API
+Online API documentation
+http://demo.virtocommerce.com/admin/docs/ui/index#!/Catalog_module
+C# API client NuGet package
+*place url here*
 
 # Licence
 Copyright (c) Virtosoftware Ltd.  All rights reserved.
