@@ -5,7 +5,8 @@ Also expose some common eCommerce API for storefront security, SEO, fulmilments,
 # Installation
 Install the module.
 * Automaticaly: go to VC Manager Configuration -> Modules -> Commerce core module -> Install
-* Manualy: download module zip archive from <a href="https://github.com/VirtoCommerce/vc-module-core/releases"> vc-module-core/releases</a> then go to VC Manager Configuration -> Modules -> Advanced -> upload and install
+* Manualy: download module zip archive from <a href="https://github.com/VirtoCommerce/vc-module-core/releases" target="_blank">vc-module-core/releases</a>  then go to VC Manager Configuration->Modules->Advanced-> upload module archive and install.
+
 # Settings
 * **VirtoCommerce.Core.General.TaxTypes** -  manual defined tax categories which can be used for assign to any objects (category, products etc)
 * **VirtoCommerce.Core.General.WeightUnits** - contains  weight units 
