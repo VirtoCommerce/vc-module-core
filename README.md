@@ -14,7 +14,7 @@ Go to VC Manager Configuration -> Modules -> Commerce core module -> Install
 
 # Development
 Add to you VC project module
-<a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain</a>  nuget package and you can use all VC eCommerce domain model 
+<a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain nuget package</a>  and you can use all VC eCommerce domain model 
 
 # Licence
 Copyright (c) Virtosoftware Ltd.  All rights reserved.
