@@ -1,30 +1,26 @@
 # VirtoCommerce.Core
-Current module represent common eCommerce domain model and base abstractions which can be used and implemented in derived modules.
-Also expose some common eCommerce API for storefront security, SEO, fulmilments, payments and tax evaluation.
-<a href="http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module" target="_blank">Commerce core module API online documentation</a>
+VirtoCommerce.Core module represents common eCommerce domain model and base abstractions, which can be used and implemented in derived modules.
+It also exposes some common eCommerce API for storefront security, SEO, fulfillments, payments and taxes evaluation.
+
 # Installation
-Install the module.
-* Automaticaly: go to VC Manager Configuration -> Modules -> Commerce core module -> Install
-* Manualy: download module zip archive from <a href="https://github.com/VirtoCommerce/vc-module-core/releases" target="_blank">vc-module-core/releases</a>  then go to VC Manager Configuration->Modules->Advanced-> upload module archive and install.
+Installing the module:
+* Automatically: in VC Manager go to Configuration -> Modules -> Commerce core module -> Install
+* Manually: download module zip package from <a href="https://github.com/VirtoCommerce/vc-module-core/releases" target="_blank">vc-module-core/releases</a> . In VC Manager go to Configuration -> Modules -> Advanced -> upload module package -> Install.
 
 # Settings
-* **VirtoCommerce.Core.General.TaxTypes** -  manual defined tax categories which can be used for assign to any objects (category, products etc)
-* **VirtoCommerce.Core.General.WeightUnits** - contains  weight units 
-* **VirtoCommerce.Core.General.Languages** - list of supported  language culture names (en-US, ru-RU etc)
-* **VirtoCommerce.Core.FixedRateShippingMethod.Rate** - fixed rate for 'fixed rate' shipping method
-* **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - fixed rate for 'fixed rate' tax provider
+* **VirtoCommerce.Core.General.TaxTypes** -  manually defined tax categories which can be assigned to eligible objects (category, product, etc.)
+* **VirtoCommerce.Core.General.WeightUnits** - mass units available for physical goods weighting
+* **VirtoCommerce.Core.General.Languages** - supported  languages (culture names) (en-US, ru-RU, etc.)
+* **VirtoCommerce.Core.FixedRateShippingMethod.Rate** - amount (rate) for “Fixed rate” shipping method
+* **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - percentage (rate) for “Fixed rate” tax provider
 
-# Module development
-Add to you VC project module
-https://www.nuget.org/packages/VirtoCommerce.Domain  NuGet package
+# Available resources
+* eCommerce domain model and service interfaces as a <a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">NuGet package</a>
+* core eCommerce service implementations as a <a href="https://www.nuget.org/packages/VirtoCommerce.CoreModule.Data" target="_blank">NuGet package</a>
+* core eCommerce C# API client as a <a href="" target="_blank">NuGet package **place url here**</a>
+* API client documentation http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module
 
-# API
-Online API documentation
-http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module
-C# API client NuGet package
-*place url here*
-
-# Licence
+# License
 Copyright (c) Virtosoftware Ltd.  All rights reserved.
 
 Licensed under the Virto Commerce Open Software License (the "License"); you
