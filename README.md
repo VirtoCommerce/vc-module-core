@@ -20,7 +20,7 @@ Add to you VC project module
 
 # API
 Online API documentation
-http://demo.virtocommerce.com/admin/docs/ui/index#!/Catalog_module
+http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module
 C# API client NuGet package
 *place url here*
 
