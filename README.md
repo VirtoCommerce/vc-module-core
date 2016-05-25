@@ -16,7 +16,7 @@ Install the module.
 
 # Module development
 Add to you VC project module
-<a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain nuget package</a>  and you can use all VC eCommerce domain model 
+<a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">VirtoCommerce.Domain nuget package</a>
 
 # API client
 
