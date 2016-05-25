@@ -1,4 +1,4 @@
-# vc-module-core
+# VirtoCommerce.Core
 Current module represent common eCommerce domain model and base abstractions which can be used and implemented in derived modules.
 Also expose some common eCommerce API for storefront security, SEO, fulmilments, payments and tax evaluation.
 <a href="http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module" target="_blank">Commerce core module API online documentation</a>
