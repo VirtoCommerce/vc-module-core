@@ -12,22 +12,22 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreSecurityApplicationUserLogin
+    /// KeyValuePair
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreSecurityApplicationUserLogin :  IEquatable<VirtoCommercePlatformCoreSecurityApplicationUserLogin>
+    public partial class KeyValuePair :  IEquatable<KeyValuePair>
     {
         /// <summary>
-        /// Gets or Sets LoginProvider
+        /// Gets or Sets Key
         /// </summary>
-        [DataMember(Name="loginProvider", EmitDefaultValue=false)]
-        public string LoginProvider { get; set; }
+        [DataMember(Name="key", EmitDefaultValue=false)]
+        public string Key { get; set; }
 
         /// <summary>
-        /// Gets or Sets ProviderKey
+        /// Gets or Sets Value
         /// </summary>
-        [DataMember(Name="providerKey", EmitDefaultValue=false)]
-        public string ProviderKey { get; set; }
+        [DataMember(Name="value", EmitDefaultValue=false)]
+        public string Value { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -36,9 +36,9 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreSecurityApplicationUserLogin {\n");
-            sb.Append("  LoginProvider: ").Append(LoginProvider).Append("\n");
-            sb.Append("  ProviderKey: ").Append(ProviderKey).Append("\n");
+            sb.Append("class KeyValuePair {\n");
+            sb.Append("  Key: ").Append(Key).Append("\n");
+            sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -60,15 +60,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreSecurityApplicationUserLogin);
+            return this.Equals(obj as KeyValuePair);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreSecurityApplicationUserLogin instances are equal
+        /// Returns true if KeyValuePair instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreSecurityApplicationUserLogin to be compared</param>
+        /// <param name="other">Instance of KeyValuePair to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreSecurityApplicationUserLogin other)
+        public bool Equals(KeyValuePair other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -76,14 +76,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
 
             return 
                 (
-                    this.LoginProvider == other.LoginProvider ||
-                    this.LoginProvider != null &&
-                    this.LoginProvider.Equals(other.LoginProvider)
+                    this.Key == other.Key ||
+                    this.Key != null &&
+                    this.Key.Equals(other.Key)
                 ) && 
                 (
-                    this.ProviderKey == other.ProviderKey ||
-                    this.ProviderKey != null &&
-                    this.ProviderKey.Equals(other.ProviderKey)
+                    this.Value == other.Value ||
+                    this.Value != null &&
+                    this.Value.Equals(other.Value)
                 );
         }
 
@@ -99,11 +99,11 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
 
-                if (this.LoginProvider != null)
-                    hash = hash * 59 + this.LoginProvider.GetHashCode();
+                if (this.Key != null)
+                    hash = hash * 59 + this.Key.GetHashCode();
 
-                if (this.ProviderKey != null)
-                    hash = hash * 59 + this.ProviderKey.GetHashCode();
+                if (this.Value != null)
+                    hash = hash * 59 + this.Value.GetHashCode();
 
                 return hash;
             }

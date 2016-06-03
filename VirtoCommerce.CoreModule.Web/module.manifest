@@ -19,7 +19,6 @@
 
     <assemblyFile>VirtoCommerce.CoreModule.Web.dll</assemblyFile>
     <moduleType>VirtoCommerce.CoreModule.Web.Module, VirtoCommerce.CoreModule.Web</moduleType>
-    <useFullTypeNameInSwagger>true</useFullTypeNameInSwagger>
 
     <styles>
         <directory virtualPath="$/Content/css" searchPattern="*.css" searchSubdirectories="true" />

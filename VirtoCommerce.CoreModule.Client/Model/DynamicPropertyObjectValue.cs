@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue
+    /// DynamicPropertyObjectValue
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue :  IEquatable<VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue>
+    public partial class DynamicPropertyObjectValue :  IEquatable<DynamicPropertyObjectValue>
     {
         /// <summary>
         /// Gets or Sets Locale
@@ -36,7 +36,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue {\n");
+            sb.Append("class DynamicPropertyObjectValue {\n");
             sb.Append("  Locale: ").Append(Locale).Append("\n");
             sb.Append("  Value: ").Append(Value).Append("\n");
             sb.Append("}\n");
@@ -60,15 +60,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue);
+            return this.Equals(obj as DynamicPropertyObjectValue);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue instances are equal
+        /// Returns true if DynamicPropertyObjectValue instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue to be compared</param>
+        /// <param name="other">Instance of DynamicPropertyObjectValue to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue other)
+        public bool Equals(DynamicPropertyObjectValue other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

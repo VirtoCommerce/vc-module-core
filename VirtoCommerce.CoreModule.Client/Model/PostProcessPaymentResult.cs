@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainPaymentModelPostProcessPaymentResult
+    /// PostProcessPaymentResult
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainPaymentModelPostProcessPaymentResult :  IEquatable<VirtoCommerceDomainPaymentModelPostProcessPaymentResult>
+    public partial class PostProcessPaymentResult :  IEquatable<PostProcessPaymentResult>
     {
         /// <summary>
         /// Gets or Sets NewPaymentStatus
@@ -60,7 +60,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainPaymentModelPostProcessPaymentResult {\n");
+            sb.Append("class PostProcessPaymentResult {\n");
             sb.Append("  NewPaymentStatus: ").Append(NewPaymentStatus).Append("\n");
             sb.Append("  IsSuccess: ").Append(IsSuccess).Append("\n");
             sb.Append("  ErrorMessage: ").Append(ErrorMessage).Append("\n");
@@ -88,15 +88,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainPaymentModelPostProcessPaymentResult);
+            return this.Equals(obj as PostProcessPaymentResult);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainPaymentModelPostProcessPaymentResult instances are equal
+        /// Returns true if PostProcessPaymentResult instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainPaymentModelPostProcessPaymentResult to be compared</param>
+        /// <param name="other">Instance of PostProcessPaymentResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainPaymentModelPostProcessPaymentResult other)
+        public bool Equals(PostProcessPaymentResult other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

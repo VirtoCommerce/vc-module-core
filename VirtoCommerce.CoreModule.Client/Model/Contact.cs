@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainCustomerModelContact
+    /// Contact
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainCustomerModelContact :  IEquatable<VirtoCommerceDomainCustomerModelContact>
+    public partial class Contact :  IEquatable<Contact>
     {
         /// <summary>
         /// Gets or Sets FirstName
@@ -93,7 +93,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets SecurityAccounts
         /// </summary>
         [DataMember(Name="securityAccounts", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityApplicationUserExtended> SecurityAccounts { get; set; }
+        public List<ApplicationUserExtended> SecurityAccounts { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -111,7 +111,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Addresses
         /// </summary>
         [DataMember(Name="addresses", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainCommerceModelAddress> Addresses { get; set; }
+        public List<Address> Addresses { get; set; }
 
         /// <summary>
         /// Gets or Sets Phones
@@ -129,7 +129,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Notes
         /// </summary>
         [DataMember(Name="notes", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainCustomerModelNote> Notes { get; set; }
+        public List<Note> Notes { get; set; }
 
         /// <summary>
         /// Gets or Sets ObjectType
@@ -141,7 +141,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets DynamicProperties
         /// </summary>
         [DataMember(Name="dynamicProperties", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty> DynamicProperties { get; set; }
+        public List<DynamicObjectProperty> DynamicProperties { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedDate
@@ -180,7 +180,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainCustomerModelContact {\n");
+            sb.Append("class Contact {\n");
             sb.Append("  FirstName: ").Append(FirstName).Append("\n");
             sb.Append("  MiddleName: ").Append(MiddleName).Append("\n");
             sb.Append("  LastName: ").Append(LastName).Append("\n");
@@ -228,15 +228,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainCustomerModelContact);
+            return this.Equals(obj as Contact);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainCustomerModelContact instances are equal
+        /// Returns true if Contact instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainCustomerModelContact to be compared</param>
+        /// <param name="other">Instance of Contact to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainCustomerModelContact other)
+        public bool Equals(Contact other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

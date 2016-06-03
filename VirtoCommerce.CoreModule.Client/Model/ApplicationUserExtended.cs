@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreSecurityApplicationUserExtended
+    /// ApplicationUserExtended
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreSecurityApplicationUserExtended :  IEquatable<VirtoCommercePlatformCoreSecurityApplicationUserExtended>
+    public partial class ApplicationUserExtended :  IEquatable<ApplicationUserExtended>
     {
         /// <summary>
         /// Gets or Sets Id
@@ -99,13 +99,13 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Logins
         /// </summary>
         [DataMember(Name="logins", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityApplicationUserLogin> Logins { get; set; }
+        public List<ApplicationUserLogin> Logins { get; set; }
 
         /// <summary>
         /// Gets or Sets Roles
         /// </summary>
         [DataMember(Name="roles", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityRole> Roles { get; set; }
+        public List<Role> Roles { get; set; }
 
         /// <summary>
         /// Gets or Sets Permissions
@@ -117,7 +117,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets ApiAccounts
         /// </summary>
         [DataMember(Name="apiAccounts", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityApiAccount> ApiAccounts { get; set; }
+        public List<ApiAccount> ApiAccounts { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -126,7 +126,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreSecurityApplicationUserExtended {\n");
+            sb.Append("class ApplicationUserExtended {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  UserName: ").Append(UserName).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
@@ -165,15 +165,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreSecurityApplicationUserExtended);
+            return this.Equals(obj as ApplicationUserExtended);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreSecurityApplicationUserExtended instances are equal
+        /// Returns true if ApplicationUserExtended instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreSecurityApplicationUserExtended to be compared</param>
+        /// <param name="other">Instance of ApplicationUserExtended to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreSecurityApplicationUserExtended other)
+        public bool Equals(ApplicationUserExtended other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

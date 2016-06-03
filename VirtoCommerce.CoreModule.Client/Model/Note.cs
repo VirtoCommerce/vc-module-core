@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainCustomerModelNote
+    /// Note
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainCustomerModelNote :  IEquatable<VirtoCommerceDomainCustomerModelNote>
+    public partial class Note :  IEquatable<Note>
     {
         /// <summary>
         /// Gets or Sets Title
@@ -66,7 +66,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainCustomerModelNote {\n");
+            sb.Append("class Note {\n");
             sb.Append("  Title: ").Append(Title).Append("\n");
             sb.Append("  Body: ").Append(Body).Append("\n");
             sb.Append("  CreatedDate: ").Append(CreatedDate).Append("\n");
@@ -95,15 +95,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainCustomerModelNote);
+            return this.Equals(obj as Note);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainCustomerModelNote instances are equal
+        /// Returns true if Note instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainCustomerModelNote to be compared</param>
+        /// <param name="other">Instance of Note to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainCustomerModelNote other)
+        public bool Equals(Note other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

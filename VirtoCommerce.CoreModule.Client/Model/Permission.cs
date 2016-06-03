@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreSecurityRole
+    /// Permission
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreSecurityRole :  IEquatable<VirtoCommercePlatformCoreSecurityRole>
+    public partial class Permission :  IEquatable<Permission>
     {
         /// <summary>
         /// Gets or Sets Name
@@ -30,10 +30,28 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets Permissions
+        /// Gets or Sets ModuleId
         /// </summary>
-        [DataMember(Name="permissions", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityPermission> Permissions { get; set; }
+        [DataMember(Name="moduleId", EmitDefaultValue=false)]
+        public string ModuleId { get; set; }
+
+        /// <summary>
+        /// Gets or Sets GroupName
+        /// </summary>
+        [DataMember(Name="groupName", EmitDefaultValue=false)]
+        public string GroupName { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AssignedScopes
+        /// </summary>
+        [DataMember(Name="assignedScopes", EmitDefaultValue=false)]
+        public List<PermissionScope> AssignedScopes { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AvailableScopes
+        /// </summary>
+        [DataMember(Name="availableScopes", EmitDefaultValue=false)]
+        public List<PermissionScope> AvailableScopes { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -48,10 +66,13 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreSecurityRole {\n");
+            sb.Append("class Permission {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  Permissions: ").Append(Permissions).Append("\n");
+            sb.Append("  ModuleId: ").Append(ModuleId).Append("\n");
+            sb.Append("  GroupName: ").Append(GroupName).Append("\n");
+            sb.Append("  AssignedScopes: ").Append(AssignedScopes).Append("\n");
+            sb.Append("  AvailableScopes: ").Append(AvailableScopes).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -74,15 +95,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreSecurityRole);
+            return this.Equals(obj as Permission);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreSecurityRole instances are equal
+        /// Returns true if Permission instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreSecurityRole to be compared</param>
+        /// <param name="other">Instance of Permission to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreSecurityRole other)
+        public bool Equals(Permission other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -100,9 +121,24 @@ namespace VirtoCommerce.CoreModule.Client.Model
                     this.Description.Equals(other.Description)
                 ) && 
                 (
-                    this.Permissions == other.Permissions ||
-                    this.Permissions != null &&
-                    this.Permissions.SequenceEqual(other.Permissions)
+                    this.ModuleId == other.ModuleId ||
+                    this.ModuleId != null &&
+                    this.ModuleId.Equals(other.ModuleId)
+                ) && 
+                (
+                    this.GroupName == other.GroupName ||
+                    this.GroupName != null &&
+                    this.GroupName.Equals(other.GroupName)
+                ) && 
+                (
+                    this.AssignedScopes == other.AssignedScopes ||
+                    this.AssignedScopes != null &&
+                    this.AssignedScopes.SequenceEqual(other.AssignedScopes)
+                ) && 
+                (
+                    this.AvailableScopes == other.AvailableScopes ||
+                    this.AvailableScopes != null &&
+                    this.AvailableScopes.SequenceEqual(other.AvailableScopes)
                 ) && 
                 (
                     this.Id == other.Id ||
@@ -129,8 +165,17 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 if (this.Description != null)
                     hash = hash * 59 + this.Description.GetHashCode();
 
-                if (this.Permissions != null)
-                    hash = hash * 59 + this.Permissions.GetHashCode();
+                if (this.ModuleId != null)
+                    hash = hash * 59 + this.ModuleId.GetHashCode();
+
+                if (this.GroupName != null)
+                    hash = hash * 59 + this.GroupName.GetHashCode();
+
+                if (this.AssignedScopes != null)
+                    hash = hash * 59 + this.AssignedScopes.GetHashCode();
+
+                if (this.AvailableScopes != null)
+                    hash = hash * 59 + this.AvailableScopes.GetHashCode();
 
                 if (this.Id != null)
                     hash = hash * 59 + this.Id.GetHashCode();

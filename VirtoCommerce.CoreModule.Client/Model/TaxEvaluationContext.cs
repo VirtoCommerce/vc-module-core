@@ -12,16 +12,16 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainTaxModelTaxEvaluationContext
+    /// TaxEvaluationContext
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainTaxModelTaxEvaluationContext :  IEquatable<VirtoCommerceDomainTaxModelTaxEvaluationContext>
+    public partial class TaxEvaluationContext :  IEquatable<TaxEvaluationContext>
     {
         /// <summary>
         /// Gets or Sets Store
         /// </summary>
         [DataMember(Name="store", EmitDefaultValue=false)]
-        public VirtoCommerceDomainStoreModelStore Store { get; set; }
+        public Store Store { get; set; }
 
         /// <summary>
         /// Gets or Sets Code
@@ -39,19 +39,19 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Customer
         /// </summary>
         [DataMember(Name="customer", EmitDefaultValue=false)]
-        public VirtoCommerceDomainCustomerModelContact Customer { get; set; }
+        public Contact Customer { get; set; }
 
         /// <summary>
         /// Gets or Sets Organization
         /// </summary>
         [DataMember(Name="organization", EmitDefaultValue=false)]
-        public VirtoCommerceDomainCustomerModelOrganization Organization { get; set; }
+        public Organization Organization { get; set; }
 
         /// <summary>
         /// Gets or Sets Address
         /// </summary>
         [DataMember(Name="address", EmitDefaultValue=false)]
-        public VirtoCommerceDomainCommerceModelAddress Address { get; set; }
+        public Address Address { get; set; }
 
         /// <summary>
         /// Gets or Sets Currency
@@ -63,7 +63,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Lines
         /// </summary>
         [DataMember(Name="lines", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainTaxModelTaxLine> Lines { get; set; }
+        public List<TaxLine> Lines { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -78,7 +78,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainTaxModelTaxEvaluationContext {\n");
+            sb.Append("class TaxEvaluationContext {\n");
             sb.Append("  Store: ").Append(Store).Append("\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Type: ").Append(Type).Append("\n");
@@ -109,15 +109,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainTaxModelTaxEvaluationContext);
+            return this.Equals(obj as TaxEvaluationContext);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainTaxModelTaxEvaluationContext instances are equal
+        /// Returns true if TaxEvaluationContext instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainTaxModelTaxEvaluationContext to be compared</param>
+        /// <param name="other">Instance of TaxEvaluationContext to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainTaxModelTaxEvaluationContext other)
+        public bool Equals(TaxEvaluationContext other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

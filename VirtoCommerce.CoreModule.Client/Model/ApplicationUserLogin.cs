@@ -12,22 +12,22 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName
+    /// ApplicationUserLogin
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName :  IEquatable<VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName>
+    public partial class ApplicationUserLogin :  IEquatable<ApplicationUserLogin>
     {
         /// <summary>
-        /// Gets or Sets Locale
+        /// Gets or Sets LoginProvider
         /// </summary>
-        [DataMember(Name="locale", EmitDefaultValue=false)]
-        public string Locale { get; set; }
+        [DataMember(Name="loginProvider", EmitDefaultValue=false)]
+        public string LoginProvider { get; set; }
 
         /// <summary>
-        /// Gets or Sets Name
+        /// Gets or Sets ProviderKey
         /// </summary>
-        [DataMember(Name="name", EmitDefaultValue=false)]
-        public string Name { get; set; }
+        [DataMember(Name="providerKey", EmitDefaultValue=false)]
+        public string ProviderKey { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -36,9 +36,9 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName {\n");
-            sb.Append("  Locale: ").Append(Locale).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("class ApplicationUserLogin {\n");
+            sb.Append("  LoginProvider: ").Append(LoginProvider).Append("\n");
+            sb.Append("  ProviderKey: ").Append(ProviderKey).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -60,15 +60,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName);
+            return this.Equals(obj as ApplicationUserLogin);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName instances are equal
+        /// Returns true if ApplicationUserLogin instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName to be compared</param>
+        /// <param name="other">Instance of ApplicationUserLogin to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName other)
+        public bool Equals(ApplicationUserLogin other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -76,14 +76,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
 
             return 
                 (
-                    this.Locale == other.Locale ||
-                    this.Locale != null &&
-                    this.Locale.Equals(other.Locale)
+                    this.LoginProvider == other.LoginProvider ||
+                    this.LoginProvider != null &&
+                    this.LoginProvider.Equals(other.LoginProvider)
                 ) && 
                 (
-                    this.Name == other.Name ||
-                    this.Name != null &&
-                    this.Name.Equals(other.Name)
+                    this.ProviderKey == other.ProviderKey ||
+                    this.ProviderKey != null &&
+                    this.ProviderKey.Equals(other.ProviderKey)
                 );
         }
 
@@ -99,11 +99,11 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
 
-                if (this.Locale != null)
-                    hash = hash * 59 + this.Locale.GetHashCode();
+                if (this.LoginProvider != null)
+                    hash = hash * 59 + this.LoginProvider.GetHashCode();
 
-                if (this.Name != null)
-                    hash = hash * 59 + this.Name.GetHashCode();
+                if (this.ProviderKey != null)
+                    hash = hash * 59 + this.ProviderKey.GetHashCode();
 
                 return hash;
             }

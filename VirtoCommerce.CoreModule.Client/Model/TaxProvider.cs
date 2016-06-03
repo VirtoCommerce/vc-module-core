@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainPaymentModelPaymentMethod
+    /// TaxProvider
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainPaymentModelPaymentMethod :  IEquatable<VirtoCommerceDomainPaymentModelPaymentMethod>
+    public partial class TaxProvider :  IEquatable<TaxProvider>
     {
         /// <summary>
         /// Gets or Sets Code
@@ -54,28 +54,10 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public int? Priority { get; set; }
 
         /// <summary>
-        /// Gets or Sets IsAvailableForPartial
-        /// </summary>
-        [DataMember(Name="isAvailableForPartial", EmitDefaultValue=false)]
-        public bool? IsAvailableForPartial { get; set; }
-
-        /// <summary>
         /// Gets or Sets Settings
         /// </summary>
         [DataMember(Name="settings", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSettingsSettingEntry> Settings { get; set; }
-
-        /// <summary>
-        /// Gets or Sets PaymentMethodType
-        /// </summary>
-        [DataMember(Name="paymentMethodType", EmitDefaultValue=false)]
-        public string PaymentMethodType { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets PaymentMethodGroupType
-        /// </summary>
-        [DataMember(Name="paymentMethodGroupType", EmitDefaultValue=false)]
-        public string PaymentMethodGroupType { get; private set; }
+        public List<SettingEntry> Settings { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -90,17 +72,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainPaymentModelPaymentMethod {\n");
+            sb.Append("class TaxProvider {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  LogoUrl: ").Append(LogoUrl).Append("\n");
             sb.Append("  IsActive: ").Append(IsActive).Append("\n");
             sb.Append("  Priority: ").Append(Priority).Append("\n");
-            sb.Append("  IsAvailableForPartial: ").Append(IsAvailableForPartial).Append("\n");
             sb.Append("  Settings: ").Append(Settings).Append("\n");
-            sb.Append("  PaymentMethodType: ").Append(PaymentMethodType).Append("\n");
-            sb.Append("  PaymentMethodGroupType: ").Append(PaymentMethodGroupType).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -123,15 +102,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainPaymentModelPaymentMethod);
+            return this.Equals(obj as TaxProvider);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainPaymentModelPaymentMethod instances are equal
+        /// Returns true if TaxProvider instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainPaymentModelPaymentMethod to be compared</param>
+        /// <param name="other">Instance of TaxProvider to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainPaymentModelPaymentMethod other)
+        public bool Equals(TaxProvider other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -169,24 +148,9 @@ namespace VirtoCommerce.CoreModule.Client.Model
                     this.Priority.Equals(other.Priority)
                 ) && 
                 (
-                    this.IsAvailableForPartial == other.IsAvailableForPartial ||
-                    this.IsAvailableForPartial != null &&
-                    this.IsAvailableForPartial.Equals(other.IsAvailableForPartial)
-                ) && 
-                (
                     this.Settings == other.Settings ||
                     this.Settings != null &&
                     this.Settings.SequenceEqual(other.Settings)
-                ) && 
-                (
-                    this.PaymentMethodType == other.PaymentMethodType ||
-                    this.PaymentMethodType != null &&
-                    this.PaymentMethodType.Equals(other.PaymentMethodType)
-                ) && 
-                (
-                    this.PaymentMethodGroupType == other.PaymentMethodGroupType ||
-                    this.PaymentMethodGroupType != null &&
-                    this.PaymentMethodGroupType.Equals(other.PaymentMethodGroupType)
                 ) && 
                 (
                     this.Id == other.Id ||
@@ -225,17 +189,8 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 if (this.Priority != null)
                     hash = hash * 59 + this.Priority.GetHashCode();
 
-                if (this.IsAvailableForPartial != null)
-                    hash = hash * 59 + this.IsAvailableForPartial.GetHashCode();
-
                 if (this.Settings != null)
                     hash = hash * 59 + this.Settings.GetHashCode();
-
-                if (this.PaymentMethodType != null)
-                    hash = hash * 59 + this.PaymentMethodType.GetHashCode();
-
-                if (this.PaymentMethodGroupType != null)
-                    hash = hash * 59 + this.PaymentMethodGroupType.GetHashCode();
 
                 if (this.Id != null)
                     hash = hash * 59 + this.Id.GetHashCode();

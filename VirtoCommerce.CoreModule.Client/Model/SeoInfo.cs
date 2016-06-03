@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainCommerceModelSeoInfo
+    /// SeoInfo
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainCommerceModelSeoInfo :  IEquatable<VirtoCommerceDomainCommerceModelSeoInfo>
+    public partial class SeoInfo :  IEquatable<SeoInfo>
     {
         /// <summary>
         /// Gets or Sets Name
@@ -120,7 +120,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainCommerceModelSeoInfo {\n");
+            sb.Append("class SeoInfo {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  SemanticUrl: ").Append(SemanticUrl).Append("\n");
             sb.Append("  PageTitle: ").Append(PageTitle).Append("\n");
@@ -158,15 +158,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainCommerceModelSeoInfo);
+            return this.Equals(obj as SeoInfo);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainCommerceModelSeoInfo instances are equal
+        /// Returns true if SeoInfo instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainCommerceModelSeoInfo to be compared</param>
+        /// <param name="other">Instance of SeoInfo to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainCommerceModelSeoInfo other)
+        public bool Equals(SeoInfo other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

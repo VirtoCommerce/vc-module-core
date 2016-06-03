@@ -12,22 +12,22 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreSecuritySecurityResult
+    /// DynamicPropertyName
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreSecuritySecurityResult :  IEquatable<VirtoCommercePlatformCoreSecuritySecurityResult>
+    public partial class DynamicPropertyName :  IEquatable<DynamicPropertyName>
     {
         /// <summary>
-        /// Gets or Sets Succeeded
+        /// Gets or Sets Locale
         /// </summary>
-        [DataMember(Name="succeeded", EmitDefaultValue=false)]
-        public bool? Succeeded { get; set; }
+        [DataMember(Name="locale", EmitDefaultValue=false)]
+        public string Locale { get; set; }
 
         /// <summary>
-        /// Gets or Sets Errors
+        /// Gets or Sets Name
         /// </summary>
-        [DataMember(Name="errors", EmitDefaultValue=false)]
-        public List<string> Errors { get; set; }
+        [DataMember(Name="name", EmitDefaultValue=false)]
+        public string Name { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -36,9 +36,9 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreSecuritySecurityResult {\n");
-            sb.Append("  Succeeded: ").Append(Succeeded).Append("\n");
-            sb.Append("  Errors: ").Append(Errors).Append("\n");
+            sb.Append("class DynamicPropertyName {\n");
+            sb.Append("  Locale: ").Append(Locale).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -60,15 +60,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreSecuritySecurityResult);
+            return this.Equals(obj as DynamicPropertyName);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreSecuritySecurityResult instances are equal
+        /// Returns true if DynamicPropertyName instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreSecuritySecurityResult to be compared</param>
+        /// <param name="other">Instance of DynamicPropertyName to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreSecuritySecurityResult other)
+        public bool Equals(DynamicPropertyName other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -76,14 +76,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
 
             return 
                 (
-                    this.Succeeded == other.Succeeded ||
-                    this.Succeeded != null &&
-                    this.Succeeded.Equals(other.Succeeded)
+                    this.Locale == other.Locale ||
+                    this.Locale != null &&
+                    this.Locale.Equals(other.Locale)
                 ) && 
                 (
-                    this.Errors == other.Errors ||
-                    this.Errors != null &&
-                    this.Errors.SequenceEqual(other.Errors)
+                    this.Name == other.Name ||
+                    this.Name != null &&
+                    this.Name.Equals(other.Name)
                 );
         }
 
@@ -99,11 +99,11 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
 
-                if (this.Succeeded != null)
-                    hash = hash * 59 + this.Succeeded.GetHashCode();
+                if (this.Locale != null)
+                    hash = hash * 59 + this.Locale.GetHashCode();
 
-                if (this.Errors != null)
-                    hash = hash * 59 + this.Errors.GetHashCode();
+                if (this.Name != null)
+                    hash = hash * 59 + this.Name.GetHashCode();
 
                 return hash;
             }

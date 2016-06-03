@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainTaxModelTaxProvider
+    /// TaxLine
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainTaxModelTaxProvider :  IEquatable<VirtoCommerceDomainTaxModelTaxProvider>
+    public partial class TaxLine :  IEquatable<TaxLine>
     {
         /// <summary>
         /// Gets or Sets Code
@@ -30,34 +30,22 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Description
+        /// Gets or Sets Amount
         /// </summary>
-        [DataMember(Name="description", EmitDefaultValue=false)]
-        public string Description { get; set; }
+        [DataMember(Name="amount", EmitDefaultValue=false)]
+        public double? Amount { get; set; }
 
         /// <summary>
-        /// Gets or Sets LogoUrl
+        /// Gets or Sets Price
         /// </summary>
-        [DataMember(Name="logoUrl", EmitDefaultValue=false)]
-        public string LogoUrl { get; set; }
+        [DataMember(Name="price", EmitDefaultValue=false)]
+        public double? Price { get; set; }
 
         /// <summary>
-        /// Gets or Sets IsActive
+        /// Gets or Sets TaxType
         /// </summary>
-        [DataMember(Name="isActive", EmitDefaultValue=false)]
-        public bool? IsActive { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Priority
-        /// </summary>
-        [DataMember(Name="priority", EmitDefaultValue=false)]
-        public int? Priority { get; set; }
-
-        /// <summary>
-        /// Gets or Sets Settings
-        /// </summary>
-        [DataMember(Name="settings", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSettingsSettingEntry> Settings { get; set; }
+        [DataMember(Name="taxType", EmitDefaultValue=false)]
+        public string TaxType { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -72,14 +60,12 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainTaxModelTaxProvider {\n");
+            sb.Append("class TaxLine {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  LogoUrl: ").Append(LogoUrl).Append("\n");
-            sb.Append("  IsActive: ").Append(IsActive).Append("\n");
-            sb.Append("  Priority: ").Append(Priority).Append("\n");
-            sb.Append("  Settings: ").Append(Settings).Append("\n");
+            sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  Price: ").Append(Price).Append("\n");
+            sb.Append("  TaxType: ").Append(TaxType).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -102,15 +88,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainTaxModelTaxProvider);
+            return this.Equals(obj as TaxLine);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainTaxModelTaxProvider instances are equal
+        /// Returns true if TaxLine instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainTaxModelTaxProvider to be compared</param>
+        /// <param name="other">Instance of TaxLine to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainTaxModelTaxProvider other)
+        public bool Equals(TaxLine other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -128,29 +114,19 @@ namespace VirtoCommerce.CoreModule.Client.Model
                     this.Name.Equals(other.Name)
                 ) && 
                 (
-                    this.Description == other.Description ||
-                    this.Description != null &&
-                    this.Description.Equals(other.Description)
+                    this.Amount == other.Amount ||
+                    this.Amount != null &&
+                    this.Amount.Equals(other.Amount)
                 ) && 
                 (
-                    this.LogoUrl == other.LogoUrl ||
-                    this.LogoUrl != null &&
-                    this.LogoUrl.Equals(other.LogoUrl)
+                    this.Price == other.Price ||
+                    this.Price != null &&
+                    this.Price.Equals(other.Price)
                 ) && 
                 (
-                    this.IsActive == other.IsActive ||
-                    this.IsActive != null &&
-                    this.IsActive.Equals(other.IsActive)
-                ) && 
-                (
-                    this.Priority == other.Priority ||
-                    this.Priority != null &&
-                    this.Priority.Equals(other.Priority)
-                ) && 
-                (
-                    this.Settings == other.Settings ||
-                    this.Settings != null &&
-                    this.Settings.SequenceEqual(other.Settings)
+                    this.TaxType == other.TaxType ||
+                    this.TaxType != null &&
+                    this.TaxType.Equals(other.TaxType)
                 ) && 
                 (
                     this.Id == other.Id ||
@@ -177,20 +153,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 if (this.Name != null)
                     hash = hash * 59 + this.Name.GetHashCode();
 
-                if (this.Description != null)
-                    hash = hash * 59 + this.Description.GetHashCode();
+                if (this.Amount != null)
+                    hash = hash * 59 + this.Amount.GetHashCode();
 
-                if (this.LogoUrl != null)
-                    hash = hash * 59 + this.LogoUrl.GetHashCode();
+                if (this.Price != null)
+                    hash = hash * 59 + this.Price.GetHashCode();
 
-                if (this.IsActive != null)
-                    hash = hash * 59 + this.IsActive.GetHashCode();
-
-                if (this.Priority != null)
-                    hash = hash * 59 + this.Priority.GetHashCode();
-
-                if (this.Settings != null)
-                    hash = hash * 59 + this.Settings.GetHashCode();
+                if (this.TaxType != null)
+                    hash = hash * 59 + this.TaxType.GetHashCode();
 
                 if (this.Id != null)
                     hash = hash * 59 + this.Id.GetHashCode();

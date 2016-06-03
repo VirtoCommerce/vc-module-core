@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainStoreModelStore
+    /// Store
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainStoreModelStore :  IEquatable<VirtoCommerceDomainStoreModelStore>
+    public partial class Store :  IEquatable<Store>
     {
         /// <summary>
         /// Gets or Sets Name
@@ -111,13 +111,13 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets FulfillmentCenter
         /// </summary>
         [DataMember(Name="fulfillmentCenter", EmitDefaultValue=false)]
-        public VirtoCommerceDomainCommerceModelFulfillmentCenter FulfillmentCenter { get; set; }
+        public FulfillmentCenter FulfillmentCenter { get; set; }
 
         /// <summary>
         /// Gets or Sets ReturnsFulfillmentCenter
         /// </summary>
         [DataMember(Name="returnsFulfillmentCenter", EmitDefaultValue=false)]
-        public VirtoCommerceDomainCommerceModelFulfillmentCenter ReturnsFulfillmentCenter { get; set; }
+        public FulfillmentCenter ReturnsFulfillmentCenter { get; set; }
 
         /// <summary>
         /// Gets or Sets Languages
@@ -141,19 +141,19 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets TaxProviders
         /// </summary>
         [DataMember(Name="taxProviders", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainTaxModelTaxProvider> TaxProviders { get; set; }
+        public List<TaxProvider> TaxProviders { get; set; }
 
         /// <summary>
         /// Gets or Sets PaymentMethods
         /// </summary>
         [DataMember(Name="paymentMethods", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainPaymentModelPaymentMethod> PaymentMethods { get; set; }
+        public List<PaymentMethod> PaymentMethods { get; set; }
 
         /// <summary>
         /// Gets or Sets ShippingMethods
         /// </summary>
         [DataMember(Name="shippingMethods", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainShippingModelShippingMethod> ShippingMethods { get; set; }
+        public List<ShippingMethod> ShippingMethods { get; set; }
 
         /// <summary>
         /// Gets or Sets SeoObjectType
@@ -165,7 +165,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets SeoInfos
         /// </summary>
         [DataMember(Name="seoInfos", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainCommerceModelSeoInfo> SeoInfos { get; set; }
+        public List<SeoInfo> SeoInfos { get; set; }
 
         /// <summary>
         /// Gets or Sets ObjectType
@@ -177,13 +177,13 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets DynamicProperties
         /// </summary>
         [DataMember(Name="dynamicProperties", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty> DynamicProperties { get; set; }
+        public List<DynamicObjectProperty> DynamicProperties { get; set; }
 
         /// <summary>
         /// Gets or Sets Settings
         /// </summary>
         [DataMember(Name="settings", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSettingsSettingEntry> Settings { get; set; }
+        public List<SettingEntry> Settings { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedDate
@@ -222,7 +222,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainStoreModelStore {\n");
+            sb.Append("class Store {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  StoreState: ").Append(StoreState).Append("\n");
@@ -277,15 +277,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainStoreModelStore);
+            return this.Equals(obj as Store);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainStoreModelStore instances are equal
+        /// Returns true if Store instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainStoreModelStore to be compared</param>
+        /// <param name="other">Instance of Store to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainStoreModelStore other)
+        public bool Equals(Store other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

@@ -12,11 +12,17 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreSecurityPermission
+    /// ShippingMethod
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreSecurityPermission :  IEquatable<VirtoCommercePlatformCoreSecurityPermission>
+    public partial class ShippingMethod :  IEquatable<ShippingMethod>
     {
+        /// <summary>
+        /// Gets or Sets Code
+        /// </summary>
+        [DataMember(Name="code", EmitDefaultValue=false)]
+        public string Code { get; set; }
+
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
@@ -30,28 +36,34 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets ModuleId
+        /// Gets or Sets LogoUrl
         /// </summary>
-        [DataMember(Name="moduleId", EmitDefaultValue=false)]
-        public string ModuleId { get; set; }
+        [DataMember(Name="logoUrl", EmitDefaultValue=false)]
+        public string LogoUrl { get; set; }
 
         /// <summary>
-        /// Gets or Sets GroupName
+        /// Gets or Sets IsActive
         /// </summary>
-        [DataMember(Name="groupName", EmitDefaultValue=false)]
-        public string GroupName { get; set; }
+        [DataMember(Name="isActive", EmitDefaultValue=false)]
+        public bool? IsActive { get; set; }
 
         /// <summary>
-        /// Gets or Sets AssignedScopes
+        /// Gets or Sets Priority
         /// </summary>
-        [DataMember(Name="assignedScopes", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityPermissionScope> AssignedScopes { get; set; }
+        [DataMember(Name="priority", EmitDefaultValue=false)]
+        public int? Priority { get; set; }
 
         /// <summary>
-        /// Gets or Sets AvailableScopes
+        /// Gets or Sets TaxType
         /// </summary>
-        [DataMember(Name="availableScopes", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityPermissionScope> AvailableScopes { get; set; }
+        [DataMember(Name="taxType", EmitDefaultValue=false)]
+        public string TaxType { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Settings
+        /// </summary>
+        [DataMember(Name="settings", EmitDefaultValue=false)]
+        public List<SettingEntry> Settings { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -66,13 +78,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreSecurityPermission {\n");
+            sb.Append("class ShippingMethod {\n");
+            sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
-            sb.Append("  ModuleId: ").Append(ModuleId).Append("\n");
-            sb.Append("  GroupName: ").Append(GroupName).Append("\n");
-            sb.Append("  AssignedScopes: ").Append(AssignedScopes).Append("\n");
-            sb.Append("  AvailableScopes: ").Append(AvailableScopes).Append("\n");
+            sb.Append("  LogoUrl: ").Append(LogoUrl).Append("\n");
+            sb.Append("  IsActive: ").Append(IsActive).Append("\n");
+            sb.Append("  Priority: ").Append(Priority).Append("\n");
+            sb.Append("  TaxType: ").Append(TaxType).Append("\n");
+            sb.Append("  Settings: ").Append(Settings).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -95,21 +109,26 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreSecurityPermission);
+            return this.Equals(obj as ShippingMethod);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreSecurityPermission instances are equal
+        /// Returns true if ShippingMethod instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreSecurityPermission to be compared</param>
+        /// <param name="other">Instance of ShippingMethod to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreSecurityPermission other)
+        public bool Equals(ShippingMethod other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
                 return false;
 
             return 
+                (
+                    this.Code == other.Code ||
+                    this.Code != null &&
+                    this.Code.Equals(other.Code)
+                ) && 
                 (
                     this.Name == other.Name ||
                     this.Name != null &&
@@ -121,24 +140,29 @@ namespace VirtoCommerce.CoreModule.Client.Model
                     this.Description.Equals(other.Description)
                 ) && 
                 (
-                    this.ModuleId == other.ModuleId ||
-                    this.ModuleId != null &&
-                    this.ModuleId.Equals(other.ModuleId)
+                    this.LogoUrl == other.LogoUrl ||
+                    this.LogoUrl != null &&
+                    this.LogoUrl.Equals(other.LogoUrl)
                 ) && 
                 (
-                    this.GroupName == other.GroupName ||
-                    this.GroupName != null &&
-                    this.GroupName.Equals(other.GroupName)
+                    this.IsActive == other.IsActive ||
+                    this.IsActive != null &&
+                    this.IsActive.Equals(other.IsActive)
                 ) && 
                 (
-                    this.AssignedScopes == other.AssignedScopes ||
-                    this.AssignedScopes != null &&
-                    this.AssignedScopes.SequenceEqual(other.AssignedScopes)
+                    this.Priority == other.Priority ||
+                    this.Priority != null &&
+                    this.Priority.Equals(other.Priority)
                 ) && 
                 (
-                    this.AvailableScopes == other.AvailableScopes ||
-                    this.AvailableScopes != null &&
-                    this.AvailableScopes.SequenceEqual(other.AvailableScopes)
+                    this.TaxType == other.TaxType ||
+                    this.TaxType != null &&
+                    this.TaxType.Equals(other.TaxType)
+                ) && 
+                (
+                    this.Settings == other.Settings ||
+                    this.Settings != null &&
+                    this.Settings.SequenceEqual(other.Settings)
                 ) && 
                 (
                     this.Id == other.Id ||
@@ -159,23 +183,29 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
 
+                if (this.Code != null)
+                    hash = hash * 59 + this.Code.GetHashCode();
+
                 if (this.Name != null)
                     hash = hash * 59 + this.Name.GetHashCode();
 
                 if (this.Description != null)
                     hash = hash * 59 + this.Description.GetHashCode();
 
-                if (this.ModuleId != null)
-                    hash = hash * 59 + this.ModuleId.GetHashCode();
+                if (this.LogoUrl != null)
+                    hash = hash * 59 + this.LogoUrl.GetHashCode();
 
-                if (this.GroupName != null)
-                    hash = hash * 59 + this.GroupName.GetHashCode();
+                if (this.IsActive != null)
+                    hash = hash * 59 + this.IsActive.GetHashCode();
 
-                if (this.AssignedScopes != null)
-                    hash = hash * 59 + this.AssignedScopes.GetHashCode();
+                if (this.Priority != null)
+                    hash = hash * 59 + this.Priority.GetHashCode();
 
-                if (this.AvailableScopes != null)
-                    hash = hash * 59 + this.AvailableScopes.GetHashCode();
+                if (this.TaxType != null)
+                    hash = hash * 59 + this.TaxType.GetHashCode();
+
+                if (this.Settings != null)
+                    hash = hash * 59 + this.Settings.GetHashCode();
 
                 if (this.Id != null)
                     hash = hash * 59 + this.Id.GetHashCode();

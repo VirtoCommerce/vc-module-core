@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreSecurityApiAccount
+    /// ApiAccount
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreSecurityApiAccount :  IEquatable<VirtoCommercePlatformCoreSecurityApiAccount>
+    public partial class ApiAccount :  IEquatable<ApiAccount>
     {
         /// <summary>
         /// Gets or Sets Id
@@ -60,7 +60,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreSecurityApiAccount {\n");
+            sb.Append("class ApiAccount {\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  ApiAccountType: ").Append(ApiAccountType).Append("\n");
@@ -88,15 +88,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreSecurityApiAccount);
+            return this.Equals(obj as ApiAccount);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreSecurityApiAccount instances are equal
+        /// Returns true if ApiAccount instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreSecurityApiAccount to be compared</param>
+        /// <param name="other">Instance of ApiAccount to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreSecurityApiAccount other)
+        public bool Equals(ApiAccount other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

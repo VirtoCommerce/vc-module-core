@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainCustomerModelOrganization
+    /// Organization
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainCustomerModelOrganization :  IEquatable<VirtoCommerceDomainCustomerModelOrganization>
+    public partial class Organization :  IEquatable<Organization>
     {
         /// <summary>
         /// Gets or Sets Description
@@ -57,7 +57,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Addresses
         /// </summary>
         [DataMember(Name="addresses", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainCommerceModelAddress> Addresses { get; set; }
+        public List<Address> Addresses { get; set; }
 
         /// <summary>
         /// Gets or Sets Phones
@@ -75,7 +75,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Notes
         /// </summary>
         [DataMember(Name="notes", EmitDefaultValue=false)]
-        public List<VirtoCommerceDomainCustomerModelNote> Notes { get; set; }
+        public List<Note> Notes { get; set; }
 
         /// <summary>
         /// Gets or Sets ObjectType
@@ -87,7 +87,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets DynamicProperties
         /// </summary>
         [DataMember(Name="dynamicProperties", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty> DynamicProperties { get; set; }
+        public List<DynamicObjectProperty> DynamicProperties { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedDate
@@ -126,7 +126,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainCustomerModelOrganization {\n");
+            sb.Append("class Organization {\n");
             sb.Append("  Description: ").Append(Description).Append("\n");
             sb.Append("  BusinessCategory: ").Append(BusinessCategory).Append("\n");
             sb.Append("  OwnerId: ").Append(OwnerId).Append("\n");
@@ -165,15 +165,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainCustomerModelOrganization);
+            return this.Equals(obj as Organization);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainCustomerModelOrganization instances are equal
+        /// Returns true if Organization instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainCustomerModelOrganization to be compared</param>
+        /// <param name="other">Instance of Organization to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainCustomerModelOrganization other)
+        public bool Equals(Organization other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
