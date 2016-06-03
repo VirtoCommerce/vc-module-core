@@ -160,9 +160,7 @@
     <Compile Include="Model\StorefrontUser.cs" />
     <Compile Include="Model\SignInResult.cs" />
     <Compile Include="Security\CommercePredefinedPermissions.cs" />
-    <Compile Include="Converters\FulfillmentCenterConverter.cs" />
     <Compile Include="ExportImport\CoreExportImport.cs" />
-    <Compile Include="Model\FulfillmentCenter.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

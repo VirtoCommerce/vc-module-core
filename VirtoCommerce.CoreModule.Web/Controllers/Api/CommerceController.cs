@@ -65,11 +65,11 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// Return all fulfillment centers registered in the system
         /// </summary>
         [HttpGet]
-        [ResponseType(typeof(webModel.FulfillmentCenter[]))]
+        [ResponseType(typeof(coreModel.FulfillmentCenter[]))]
         [Route("fulfillment/centers")]
         public IHttpActionResult GetFulfillmentCenters()
         {
-            var retVal = _commerceService.GetAllFulfillmentCenters().Select(x => x.ToWebModel()).ToArray();
+            var retVal = _commerceService.GetAllFulfillmentCenters().ToArray();
             return Ok(retVal);
         }
 
@@ -78,13 +78,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// </summary>
         /// <param name="id">fulfillment center id</param>
         [HttpGet]
-        [ResponseType(typeof(webModel.FulfillmentCenter))]
+        [ResponseType(typeof(coreModel.FulfillmentCenter))]
         [Route("fulfillment/centers/{id}")]
         [CheckPermission(Permission = CommercePredefinedPermissions.Read)]
         public IHttpActionResult GetFulfillmentCenter(string id)
         {
             var retVal = _commerceService.GetAllFulfillmentCenters().First(x => x.Id == id);
-            return Ok(retVal.ToWebModel());
+            return Ok(retVal);
         }
 
         /// <summary>
@@ -92,12 +92,12 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// </summary>
         /// <param name="center">fulfillment center</param>
         [HttpPut]
-        [ResponseType(typeof(webModel.FulfillmentCenter))]
+        [ResponseType(typeof(coreModel.FulfillmentCenter))]
         [Route("fulfillment/centers")]
         [CheckPermission(Permissions = new[] { CommercePredefinedPermissions.Create, CommercePredefinedPermissions.Update })]
-        public IHttpActionResult UpdateFulfillmentCenter(webModel.FulfillmentCenter center)
+        public IHttpActionResult UpdateFulfillmentCenter(coreModel.FulfillmentCenter center)
         {
-            var retVal = _commerceService.UpsertFulfillmentCenter(center.ToCoreModel());
+            var retVal = _commerceService.UpsertFulfillmentCenter(center);
             return Ok(retVal);
         }
 
