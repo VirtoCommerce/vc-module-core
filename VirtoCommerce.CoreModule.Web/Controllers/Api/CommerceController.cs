@@ -95,6 +95,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [ResponseType(typeof(coreModel.FulfillmentCenter))]
         [Route("fulfillment/centers")]
         [CheckPermission(Permissions = new[] { CommercePredefinedPermissions.Create, CommercePredefinedPermissions.Update })]
+        [CLSCompliant(false)]
         public IHttpActionResult UpdateFulfillmentCenter(coreModel.FulfillmentCenter center)
         {
             var retVal = _commerceService.UpsertFulfillmentCenter(center);
@@ -150,7 +151,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
                     if (retVal != null)
                     {
-                        _customerOrderService.Update(new CustomerOrder[] { order });
+                        _customerOrderService.Update(new[] { order });
                     }
 
                     return Ok(retVal);
@@ -215,7 +216,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route("currencies")]
-        [CheckPermission(Permissions = new[] { CommercePredefinedPermissions.Update })]
+        [CheckPermission(Permission = CommercePredefinedPermissions.Update)]
         public IHttpActionResult UpdateCurrency(coreModel.Currency currency)
         {
             _commerceService.UpsertCurrencies(new[] { currency });
@@ -229,7 +230,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPost]
         [ResponseType(typeof(void))]
         [Route("currencies")]
-        [CheckPermission(Permissions = new[] { CommercePredefinedPermissions.Create })]
+        [CheckPermission(Permission = CommercePredefinedPermissions.Create)]
         public IHttpActionResult CreateCurrency(coreModel.Currency currency)
         {
             _commerceService.UpsertCurrencies(new[] { currency });
@@ -243,7 +244,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpDelete]
         [ResponseType(typeof(void))]
         [Route("currencies")]
-        [CheckPermission(Permissions = new[] { CommercePredefinedPermissions.Delete })]
+        [CheckPermission(Permission = CommercePredefinedPermissions.Delete)]
         public IHttpActionResult DeleteCurrencies([FromUri] string[] codes)
         {
             _commerceService.DeleteCurrencies(codes);
