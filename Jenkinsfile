@@ -8,6 +8,9 @@ node {
 		
 	if (env.BRANCH_NAME == 'master') {
 		stage 'Nuget Package'
-			bat 'nuget\\build.bat'
+			dir('nuget') {
+		   		bat 'build.bat'
+			}
+			
 	}
 }
