@@ -17,7 +17,7 @@ Installing the module:
 # Available resources
 * eCommerce domain model and service interfaces as a <a href="https://www.nuget.org/packages/VirtoCommerce.Domain" target="_blank">NuGet package</a>
 * core eCommerce service implementations as a <a href="https://www.nuget.org/packages/VirtoCommerce.CoreModule.Data" target="_blank">NuGet package</a>
-* core eCommerce C# API client as a <a href="" target="_blank">NuGet package **place url here**</a>
+* core eCommerce C# API client as a <a href="https://www.nuget.org/packages/VirtoCommerce.CoreModule.Client" target="_blank">NuGet package</a>
 * API client documentation http://demo.virtocommerce.com/admin/docs/ui/index#!/Commerce_core_module
 
 # License
