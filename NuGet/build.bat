@@ -11,5 +11,3 @@ IF NOT DEFINED MSBUILD_PATH SET MSBUILD_PATH=%WINDIR%\Microsoft.NET\Framework\v4
 nuget pack "%SOURCE_DIR%\VirtoCommerce.CoreModule.Client\VirtoCommerce.CoreModule.Client.csproj" -IncludeReferencedProjects -Symbols -Properties Configuration=Release -o "%TARGET_DIR%"
 nuget pack "%SOURCE_DIR%\VirtoCommerce.Domain\VirtoCommerce.Domain.csproj" -IncludeReferencedProjects -Symbols -Properties Configuration=Release -o "%TARGET_DIR%"
 nuget pack "%SOURCE_DIR%\VirtoCommerce.CoreModule.Data\VirtoCommerce.CoreModule.Data.csproj" -IncludeReferencedProjects -Symbols -Properties Configuration=Release -o "%TARGET_DIR%"
-
-@pause
