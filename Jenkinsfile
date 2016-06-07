@@ -1,6 +1,6 @@
 node {
 	stage 'Checkout'
-		checkout scm
+		checkout([$class: 'GitSCM', extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\\.cs', includedRegions: '']]])
 
 	stage 'Build'
 		bat "Nuget restore VirtoCommerce.CoreModule.sln"
