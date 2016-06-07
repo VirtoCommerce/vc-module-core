@@ -1,6 +1,6 @@
 node {
 	def nugetHome = tool 'Nuget'
-	echo $PATH
+	echo env.BRANCH_NAME
 	stage 'Checkout'
 		checkout scm
 
