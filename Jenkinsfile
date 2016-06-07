@@ -11,7 +11,7 @@ node {
 		
 	if (env.BRANCH_NAME == 'master') {
 		stage 'Update Version'
-			bat "powershell.exe -File \"c:\\Builds\\Jenkins\\VCF\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
+			bat "powershell.exe -File \"${env.VC_RES}\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
 		
 		stage 'Nuget Package'
 	   		bat 'Nuget\\build.bat'
