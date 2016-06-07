@@ -1,6 +1,6 @@
 node {
 	def nugetHome = tool 'Nuget'
-	bat "echo %PATH%"
+	bat "echo $PATH"
 	stage 'Checkout'
 		checkout scm
 
