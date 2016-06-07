@@ -8,7 +8,7 @@ node {
 		
 	if (env.BRANCH_NAME == 'master') {
 		stage 'Update Version'
-			bat "\"powershell\" \"${env.VC_RES}\script\version2.ps1\" -solutiondir \"${env.WORKSPACE}\""
+			bat "powershell ${env.VC_RES}\script\version2.ps1 -solutiondir ${env.WORKSPACE}"
 		
 		stage 'Nuget Package'
 	   		bat 'Nuget\\build.bat'
