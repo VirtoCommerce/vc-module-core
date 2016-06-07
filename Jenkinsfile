@@ -10,4 +10,7 @@ node {
 		stage 'Nuget Package'
 	   		bat 'Nuget\\build.bat'
 	}
+	
+	step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+	
 }
