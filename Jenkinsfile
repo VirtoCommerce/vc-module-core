@@ -10,7 +10,7 @@ node {
 		
 	if (env.BRANCH_NAME == 'master') {
 		stage 'Update Version'
-			bat 'powershell.exe "c:\\Builds\\Jenkins\\VCF\\script\\version2.ps1" -solutiondir "c:\Builds\Jenkins\jobs\Virto Commerce 2.x Modules Build\vc-module-core\master\workspace"'
+			bat 'powershell.exe "c:\\Builds\\Jenkins\\VCF\\script\\version2.ps1" -solutiondir "c:\\Builds\\Jenkins\\jobs\\Virto Commerce 2.x Modules Build\\vc-module-core\\master\\workspace"'
 		
 		stage 'Nuget Package'
 	   		bat 'Nuget\\build.bat'
