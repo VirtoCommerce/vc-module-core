@@ -1,5 +1,6 @@
 node {
 	def nugetHome = tool 'Nuget'
+	println System.getenv('PATH')
 	stage 'Checkout'
 		checkout scm
 
