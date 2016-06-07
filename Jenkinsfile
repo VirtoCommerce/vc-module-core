@@ -1,4 +1,6 @@
 node {
+	env.WORKSPACE = pwd()
+	echo "${env.WORKSPACE}"
 	stage 'Checkout'
 		checkout([$class: 'GitSCM', extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\\.cs', includedRegions: '']]])
 
