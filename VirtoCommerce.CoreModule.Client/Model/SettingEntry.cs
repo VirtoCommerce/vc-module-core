@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreSettingsSettingEntry
+    /// SettingEntry
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreSettingsSettingEntry :  IEquatable<VirtoCommercePlatformCoreSettingsSettingEntry>
+    public partial class SettingEntry :  IEquatable<SettingEntry>
     {
         /// <summary>
         /// Gets or Sets ModuleId
@@ -102,7 +102,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreSettingsSettingEntry {\n");
+            sb.Append("class SettingEntry {\n");
             sb.Append("  ModuleId: ").Append(ModuleId).Append("\n");
             sb.Append("  ObjectId: ").Append(ObjectId).Append("\n");
             sb.Append("  ObjectType: ").Append(ObjectType).Append("\n");
@@ -137,15 +137,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreSettingsSettingEntry);
+            return this.Equals(obj as SettingEntry);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreSettingsSettingEntry instances are equal
+        /// Returns true if SettingEntry instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreSettingsSettingEntry to be compared</param>
+        /// <param name="other">Instance of SettingEntry to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreSettingsSettingEntry other)
+        public bool Equals(SettingEntry other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

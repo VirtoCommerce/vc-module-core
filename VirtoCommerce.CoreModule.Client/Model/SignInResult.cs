@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceCoreModuleWebModelSignInResult
+    /// SignInResult
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceCoreModuleWebModelSignInResult :  IEquatable<VirtoCommerceCoreModuleWebModelSignInResult>
+    public partial class SignInResult :  IEquatable<SignInResult>
     {
         /// <summary>
         /// Gets or Sets Status
@@ -30,7 +30,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceCoreModuleWebModelSignInResult {\n");
+            sb.Append("class SignInResult {\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -53,15 +53,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceCoreModuleWebModelSignInResult);
+            return this.Equals(obj as SignInResult);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceCoreModuleWebModelSignInResult instances are equal
+        /// Returns true if SignInResult instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceCoreModuleWebModelSignInResult to be compared</param>
+        /// <param name="other">Instance of SignInResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceCoreModuleWebModelSignInResult other)
+        public bool Equals(SignInResult other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

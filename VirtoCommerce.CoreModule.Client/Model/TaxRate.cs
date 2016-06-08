@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainTaxModelTaxRate
+    /// TaxRate
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainTaxModelTaxRate :  IEquatable<VirtoCommerceDomainTaxModelTaxRate>
+    public partial class TaxRate :  IEquatable<TaxRate>
     {
         /// <summary>
         /// Gets or Sets Rate
@@ -33,13 +33,13 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Line
         /// </summary>
         [DataMember(Name="line", EmitDefaultValue=false)]
-        public VirtoCommerceDomainTaxModelTaxLine Line { get; set; }
+        public TaxLine Line { get; set; }
 
         /// <summary>
         /// Gets or Sets TaxProvider
         /// </summary>
         [DataMember(Name="taxProvider", EmitDefaultValue=false)]
-        public VirtoCommerceDomainTaxModelTaxProvider TaxProvider { get; set; }
+        public TaxProvider TaxProvider { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -48,7 +48,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainTaxModelTaxRate {\n");
+            sb.Append("class TaxRate {\n");
             sb.Append("  Rate: ").Append(Rate).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  Line: ").Append(Line).Append("\n");
@@ -74,15 +74,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainTaxModelTaxRate);
+            return this.Equals(obj as TaxRate);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainTaxModelTaxRate instances are equal
+        /// Returns true if TaxRate instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainTaxModelTaxRate to be compared</param>
+        /// <param name="other">Instance of TaxRate to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainTaxModelTaxRate other)
+        public bool Equals(TaxRate other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

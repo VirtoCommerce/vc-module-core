@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainCommerceModelAddress
+    /// Address
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainCommerceModelAddress :  IEquatable<VirtoCommerceDomainCommerceModelAddress>
+    public partial class Address :  IEquatable<Address>
     {
         /// <summary>
         /// Gets or Sets AddressType
@@ -126,7 +126,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainCommerceModelAddress {\n");
+            sb.Append("class Address {\n");
             sb.Append("  AddressType: ").Append(AddressType).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Organization: ").Append(Organization).Append("\n");
@@ -165,15 +165,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainCommerceModelAddress);
+            return this.Equals(obj as Address);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainCommerceModelAddress instances are equal
+        /// Returns true if Address instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainCommerceModelAddress to be compared</param>
+        /// <param name="other">Instance of Address to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainCommerceModelAddress other)
+        public bool Equals(Address other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceCoreModuleWebModelStorefrontUser
+    /// StorefrontUser
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceCoreModuleWebModelStorefrontUser :  IEquatable<VirtoCommerceCoreModuleWebModelStorefrontUser>
+    public partial class StorefrontUser :  IEquatable<StorefrontUser>
     {
         /// <summary>
         /// List of stores which  user can sing in
@@ -106,13 +106,13 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Logins
         /// </summary>
         [DataMember(Name="logins", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityApplicationUserLogin> Logins { get; set; }
+        public List<ApplicationUserLogin> Logins { get; set; }
 
         /// <summary>
         /// Gets or Sets Roles
         /// </summary>
         [DataMember(Name="roles", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityRole> Roles { get; set; }
+        public List<Role> Roles { get; set; }
 
         /// <summary>
         /// Gets or Sets Permissions
@@ -124,7 +124,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets ApiAccounts
         /// </summary>
         [DataMember(Name="apiAccounts", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreSecurityApiAccount> ApiAccounts { get; set; }
+        public List<ApiAccount> ApiAccounts { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -133,7 +133,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceCoreModuleWebModelStorefrontUser {\n");
+            sb.Append("class StorefrontUser {\n");
             sb.Append("  AllowedStores: ").Append(AllowedStores).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  UserName: ").Append(UserName).Append("\n");
@@ -173,15 +173,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceCoreModuleWebModelStorefrontUser);
+            return this.Equals(obj as StorefrontUser);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceCoreModuleWebModelStorefrontUser instances are equal
+        /// Returns true if StorefrontUser instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceCoreModuleWebModelStorefrontUser to be compared</param>
+        /// <param name="other">Instance of StorefrontUser to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceCoreModuleWebModelStorefrontUser other)
+        public bool Equals(StorefrontUser other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

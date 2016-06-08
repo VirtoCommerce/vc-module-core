@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty
+    /// DynamicObjectProperty
     /// </summary>
     [DataContract]
-    public partial class VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty :  IEquatable<VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty>
+    public partial class DynamicObjectProperty :  IEquatable<DynamicObjectProperty>
     {
         /// <summary>
         /// Gets or Sets ObjectId
@@ -27,7 +27,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets Values
         /// </summary>
         [DataMember(Name="values", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue> Values { get; set; }
+        public List<DynamicPropertyObjectValue> Values { get; set; }
 
         /// <summary>
         /// Gets or Sets Name
@@ -75,7 +75,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         /// Gets or Sets DisplayNames
         /// </summary>
         [DataMember(Name="displayNames", EmitDefaultValue=false)]
-        public List<VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName> DisplayNames { get; set; }
+        public List<DynamicPropertyName> DisplayNames { get; set; }
 
         /// <summary>
         /// Gets or Sets CreatedDate
@@ -114,7 +114,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty {\n");
+            sb.Append("class DynamicObjectProperty {\n");
             sb.Append("  ObjectId: ").Append(ObjectId).Append("\n");
             sb.Append("  Values: ").Append(Values).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
@@ -151,15 +151,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty);
+            return this.Equals(obj as DynamicObjectProperty);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty instances are equal
+        /// Returns true if DynamicObjectProperty instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty to be compared</param>
+        /// <param name="other">Instance of DynamicObjectProperty to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty other)
+        public bool Equals(DynamicObjectProperty other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

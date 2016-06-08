@@ -51,43 +51,45 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Api\VirtoCommerceCoreApi.cs" />
     <Compile Include="Client\ApiClient.cs" />
     <Compile Include="Client\ApiException.cs" />
     <Compile Include="Client\ApiResponse.cs" />
     <Compile Include="Client\Configuration.cs" />
     <Compile Include="Client\IApiAccessor.cs" />
-    <Compile Include="Model\VirtoCommerceCoreModuleWebModelFulfillmentCenter.cs" />
-    <Compile Include="Model\VirtoCommerceCoreModuleWebModelKeyValuePair.cs" />
-    <Compile Include="Model\VirtoCommerceCoreModuleWebModelPaymentCallbackParameters.cs" />
-    <Compile Include="Model\VirtoCommerceCoreModuleWebModelSignInResult.cs" />
-    <Compile Include="Model\VirtoCommerceCoreModuleWebModelStorefrontUser.cs" />
-    <Compile Include="Model\VirtoCommerceDomainCommerceModelAddress.cs" />
-    <Compile Include="Model\VirtoCommerceDomainCommerceModelCurrency.cs" />
-    <Compile Include="Model\VirtoCommerceDomainCommerceModelFulfillmentCenter.cs" />
-    <Compile Include="Model\VirtoCommerceDomainCommerceModelSeoInfo.cs" />
-    <Compile Include="Model\VirtoCommerceDomainCustomerModelContact.cs" />
-    <Compile Include="Model\VirtoCommerceDomainCustomerModelNote.cs" />
-    <Compile Include="Model\VirtoCommerceDomainCustomerModelOrganization.cs" />
-    <Compile Include="Model\VirtoCommerceDomainPaymentModelPaymentMethod.cs" />
-    <Compile Include="Model\VirtoCommerceDomainPaymentModelPostProcessPaymentResult.cs" />
-    <Compile Include="Model\VirtoCommerceDomainShippingModelShippingMethod.cs" />
-    <Compile Include="Model\VirtoCommerceDomainStoreModelStore.cs" />
-    <Compile Include="Model\VirtoCommerceDomainTaxModelTaxEvaluationContext.cs" />
-    <Compile Include="Model\VirtoCommerceDomainTaxModelTaxLine.cs" />
-    <Compile Include="Model\VirtoCommerceDomainTaxModelTaxProvider.cs" />
-    <Compile Include="Model\VirtoCommerceDomainTaxModelTaxRate.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreDynamicPropertiesDynamicObjectProperty.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyName.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreDynamicPropertiesDynamicPropertyObjectValue.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSecurityApiAccount.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSecurityApplicationUserExtended.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSecurityApplicationUserLogin.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSecurityPermission.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSecurityPermissionScope.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSecurityRole.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSecuritySecurityResult.cs" />
-    <Compile Include="Model\VirtoCommercePlatformCoreSettingsSettingEntry.cs" />
+    <Compile Include="Model\Address.cs" />
+    <Compile Include="Model\ApiAccount.cs" />
+    <Compile Include="Model\ApplicationUserExtended.cs" />
+    <Compile Include="Model\ApplicationUserLogin.cs" />
+    <Compile Include="Model\Contact.cs" />
+    <Compile Include="Model\Currency.cs" />
+    <Compile Include="Model\DynamicObjectProperty.cs" />
+    <Compile Include="Model\DynamicPropertyName.cs" />
+    <Compile Include="Model\DynamicPropertyObjectValue.cs" />
+    <Compile Include="Model\FulfillmentCenter.cs" />
+    <Compile Include="Model\KeyValuePair.cs" />
+    <Compile Include="Model\Note.cs" />
+    <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\PaymentCallbackParameters.cs" />
+    <Compile Include="Model\PaymentMethod.cs" />
+    <Compile Include="Model\Permission.cs" />
+    <Compile Include="Model\PermissionScope.cs" />
+    <Compile Include="Model\PostProcessPaymentResult.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\SecurityResult.cs" />
+    <Compile Include="Model\SeoInfo.cs" />
+    <Compile Include="Model\SettingEntry.cs" />
+    <Compile Include="Model\ShippingMethod.cs" />
+    <Compile Include="Model\SignInResult.cs" />
+    <Compile Include="Model\Store.cs" />
+    <Compile Include="Model\StorefrontUser.cs" />
+    <Compile Include="Model\TaxEvaluationContext.cs" />
+    <Compile Include="Model\TaxLine.cs" />
+    <Compile Include="Model\TaxProvider.cs" />
+    <Compile Include="Model\TaxRate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,16 +12,28 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceCoreModuleWebModelPaymentCallbackParameters
+    /// PermissionScope
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceCoreModuleWebModelPaymentCallbackParameters :  IEquatable<VirtoCommerceCoreModuleWebModelPaymentCallbackParameters>
+    public partial class PermissionScope :  IEquatable<PermissionScope>
     {
         /// <summary>
-        /// Gets or Sets Parameters
+        /// Gets or Sets Type
         /// </summary>
-        [DataMember(Name="parameters", EmitDefaultValue=false)]
-        public List<VirtoCommerceCoreModuleWebModelKeyValuePair> Parameters { get; set; }
+        [DataMember(Name="type", EmitDefaultValue=false)]
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Label
+        /// </summary>
+        [DataMember(Name="label", EmitDefaultValue=false)]
+        public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Scope
+        /// </summary>
+        [DataMember(Name="scope", EmitDefaultValue=false)]
+        public string Scope { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -30,8 +42,10 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceCoreModuleWebModelPaymentCallbackParameters {\n");
-            sb.Append("  Parameters: ").Append(Parameters).Append("\n");
+            sb.Append("class PermissionScope {\n");
+            sb.Append("  Type: ").Append(Type).Append("\n");
+            sb.Append("  Label: ").Append(Label).Append("\n");
+            sb.Append("  Scope: ").Append(Scope).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -53,15 +67,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceCoreModuleWebModelPaymentCallbackParameters);
+            return this.Equals(obj as PermissionScope);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceCoreModuleWebModelPaymentCallbackParameters instances are equal
+        /// Returns true if PermissionScope instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceCoreModuleWebModelPaymentCallbackParameters to be compared</param>
+        /// <param name="other">Instance of PermissionScope to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters other)
+        public bool Equals(PermissionScope other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -69,9 +83,19 @@ namespace VirtoCommerce.CoreModule.Client.Model
 
             return 
                 (
-                    this.Parameters == other.Parameters ||
-                    this.Parameters != null &&
-                    this.Parameters.SequenceEqual(other.Parameters)
+                    this.Type == other.Type ||
+                    this.Type != null &&
+                    this.Type.Equals(other.Type)
+                ) && 
+                (
+                    this.Label == other.Label ||
+                    this.Label != null &&
+                    this.Label.Equals(other.Label)
+                ) && 
+                (
+                    this.Scope == other.Scope ||
+                    this.Scope != null &&
+                    this.Scope.Equals(other.Scope)
                 );
         }
 
@@ -87,8 +111,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
 
-                if (this.Parameters != null)
-                    hash = hash * 59 + this.Parameters.GetHashCode();
+                if (this.Type != null)
+                    hash = hash * 59 + this.Type.GetHashCode();
+
+                if (this.Label != null)
+                    hash = hash * 59 + this.Label.GetHashCode();
+
+                if (this.Scope != null)
+                    hash = hash * 59 + this.Scope.GetHashCode();
 
                 return hash;
             }

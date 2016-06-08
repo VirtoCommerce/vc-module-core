@@ -12,10 +12,10 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainCommerceModelCurrency
+    /// Currency
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainCommerceModelCurrency :  IEquatable<VirtoCommerceDomainCommerceModelCurrency>
+    public partial class Currency :  IEquatable<Currency>
     {
         /// <summary>
         /// Gets or Sets Code
@@ -60,7 +60,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainCommerceModelCurrency {\n");
+            sb.Append("class Currency {\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  IsPrimary: ").Append(IsPrimary).Append("\n");
@@ -88,15 +88,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainCommerceModelCurrency);
+            return this.Equals(obj as Currency);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainCommerceModelCurrency instances are equal
+        /// Returns true if Currency instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainCommerceModelCurrency to be compared</param>
+        /// <param name="other">Instance of Currency to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainCommerceModelCurrency other)
+        public bool Equals(Currency other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

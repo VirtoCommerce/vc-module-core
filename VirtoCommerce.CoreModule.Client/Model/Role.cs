@@ -12,17 +12,11 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceDomainTaxModelTaxLine
+    /// Role
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceDomainTaxModelTaxLine :  IEquatable<VirtoCommerceDomainTaxModelTaxLine>
+    public partial class Role :  IEquatable<Role>
     {
-        /// <summary>
-        /// Gets or Sets Code
-        /// </summary>
-        [DataMember(Name="code", EmitDefaultValue=false)]
-        public string Code { get; set; }
-
         /// <summary>
         /// Gets or Sets Name
         /// </summary>
@@ -30,22 +24,16 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets or Sets Amount
+        /// Gets or Sets Description
         /// </summary>
-        [DataMember(Name="amount", EmitDefaultValue=false)]
-        public double? Amount { get; set; }
+        [DataMember(Name="description", EmitDefaultValue=false)]
+        public string Description { get; set; }
 
         /// <summary>
-        /// Gets or Sets Price
+        /// Gets or Sets Permissions
         /// </summary>
-        [DataMember(Name="price", EmitDefaultValue=false)]
-        public double? Price { get; set; }
-
-        /// <summary>
-        /// Gets or Sets TaxType
-        /// </summary>
-        [DataMember(Name="taxType", EmitDefaultValue=false)]
-        public string TaxType { get; set; }
+        [DataMember(Name="permissions", EmitDefaultValue=false)]
+        public List<Permission> Permissions { get; set; }
 
         /// <summary>
         /// Gets or Sets Id
@@ -60,12 +48,10 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceDomainTaxModelTaxLine {\n");
-            sb.Append("  Code: ").Append(Code).Append("\n");
+            sb.Append("class Role {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
-            sb.Append("  Amount: ").Append(Amount).Append("\n");
-            sb.Append("  Price: ").Append(Price).Append("\n");
-            sb.Append("  TaxType: ").Append(TaxType).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Permissions: ").Append(Permissions).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -88,15 +74,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceDomainTaxModelTaxLine);
+            return this.Equals(obj as Role);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceDomainTaxModelTaxLine instances are equal
+        /// Returns true if Role instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceDomainTaxModelTaxLine to be compared</param>
+        /// <param name="other">Instance of Role to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceDomainTaxModelTaxLine other)
+        public bool Equals(Role other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -104,29 +90,19 @@ namespace VirtoCommerce.CoreModule.Client.Model
 
             return 
                 (
-                    this.Code == other.Code ||
-                    this.Code != null &&
-                    this.Code.Equals(other.Code)
-                ) && 
-                (
                     this.Name == other.Name ||
                     this.Name != null &&
                     this.Name.Equals(other.Name)
                 ) && 
                 (
-                    this.Amount == other.Amount ||
-                    this.Amount != null &&
-                    this.Amount.Equals(other.Amount)
+                    this.Description == other.Description ||
+                    this.Description != null &&
+                    this.Description.Equals(other.Description)
                 ) && 
                 (
-                    this.Price == other.Price ||
-                    this.Price != null &&
-                    this.Price.Equals(other.Price)
-                ) && 
-                (
-                    this.TaxType == other.TaxType ||
-                    this.TaxType != null &&
-                    this.TaxType.Equals(other.TaxType)
+                    this.Permissions == other.Permissions ||
+                    this.Permissions != null &&
+                    this.Permissions.SequenceEqual(other.Permissions)
                 ) && 
                 (
                     this.Id == other.Id ||
@@ -147,20 +123,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
 
-                if (this.Code != null)
-                    hash = hash * 59 + this.Code.GetHashCode();
-
                 if (this.Name != null)
                     hash = hash * 59 + this.Name.GetHashCode();
 
-                if (this.Amount != null)
-                    hash = hash * 59 + this.Amount.GetHashCode();
+                if (this.Description != null)
+                    hash = hash * 59 + this.Description.GetHashCode();
 
-                if (this.Price != null)
-                    hash = hash * 59 + this.Price.GetHashCode();
-
-                if (this.TaxType != null)
-                    hash = hash * 59 + this.TaxType.GetHashCode();
+                if (this.Permissions != null)
+                    hash = hash * 59 + this.Permissions.GetHashCode();
 
                 if (this.Id != null)
                     hash = hash * 59 + this.Id.GetHashCode();

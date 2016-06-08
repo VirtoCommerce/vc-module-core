@@ -12,22 +12,22 @@ using Newtonsoft.Json.Converters;
 namespace VirtoCommerce.CoreModule.Client.Model
 {
     /// <summary>
-    /// VirtoCommerceCoreModuleWebModelKeyValuePair
+    /// SecurityResult
     /// </summary>
     [DataContract]
-    public partial class VirtoCommerceCoreModuleWebModelKeyValuePair :  IEquatable<VirtoCommerceCoreModuleWebModelKeyValuePair>
+    public partial class SecurityResult :  IEquatable<SecurityResult>
     {
         /// <summary>
-        /// Gets or Sets Key
+        /// Gets or Sets Succeeded
         /// </summary>
-        [DataMember(Name="key", EmitDefaultValue=false)]
-        public string Key { get; set; }
+        [DataMember(Name="succeeded", EmitDefaultValue=false)]
+        public bool? Succeeded { get; set; }
 
         /// <summary>
-        /// Gets or Sets Value
+        /// Gets or Sets Errors
         /// </summary>
-        [DataMember(Name="value", EmitDefaultValue=false)]
-        public string Value { get; set; }
+        [DataMember(Name="errors", EmitDefaultValue=false)]
+        public List<string> Errors { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -36,9 +36,9 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class VirtoCommerceCoreModuleWebModelKeyValuePair {\n");
-            sb.Append("  Key: ").Append(Key).Append("\n");
-            sb.Append("  Value: ").Append(Value).Append("\n");
+            sb.Append("class SecurityResult {\n");
+            sb.Append("  Succeeded: ").Append(Succeeded).Append("\n");
+            sb.Append("  Errors: ").Append(Errors).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -60,15 +60,15 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as VirtoCommerceCoreModuleWebModelKeyValuePair);
+            return this.Equals(obj as SecurityResult);
         }
 
         /// <summary>
-        /// Returns true if VirtoCommerceCoreModuleWebModelKeyValuePair instances are equal
+        /// Returns true if SecurityResult instances are equal
         /// </summary>
-        /// <param name="other">Instance of VirtoCommerceCoreModuleWebModelKeyValuePair to be compared</param>
+        /// <param name="other">Instance of SecurityResult to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(VirtoCommerceCoreModuleWebModelKeyValuePair other)
+        public bool Equals(SecurityResult other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)
@@ -76,14 +76,14 @@ namespace VirtoCommerce.CoreModule.Client.Model
 
             return 
                 (
-                    this.Key == other.Key ||
-                    this.Key != null &&
-                    this.Key.Equals(other.Key)
+                    this.Succeeded == other.Succeeded ||
+                    this.Succeeded != null &&
+                    this.Succeeded.Equals(other.Succeeded)
                 ) && 
                 (
-                    this.Value == other.Value ||
-                    this.Value != null &&
-                    this.Value.Equals(other.Value)
+                    this.Errors == other.Errors ||
+                    this.Errors != null &&
+                    this.Errors.SequenceEqual(other.Errors)
                 );
         }
 
@@ -99,11 +99,11 @@ namespace VirtoCommerce.CoreModule.Client.Model
                 int hash = 41;
                 // Suitable nullity checks etc, of course :)
 
-                if (this.Key != null)
-                    hash = hash * 59 + this.Key.GetHashCode();
+                if (this.Succeeded != null)
+                    hash = hash * 59 + this.Succeeded.GetHashCode();
 
-                if (this.Value != null)
-                    hash = hash * 59 + this.Value.GetHashCode();
+                if (this.Errors != null)
+                    hash = hash * 59 + this.Errors.GetHashCode();
 
                 return hash;
             }

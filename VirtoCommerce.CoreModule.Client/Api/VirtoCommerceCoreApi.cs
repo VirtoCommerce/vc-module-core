@@ -23,7 +23,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns></returns>
-        void CommerceBatchUpdateSeoInfos(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos);
+        void CommerceBatchUpdateSeoInfos(List<SeoInfo> seoInfos);
 
         /// <summary>
         /// Batch create or update seo infos
@@ -34,7 +34,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> CommerceBatchUpdateSeoInfosWithHttpInfo(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos);
+        ApiResponse<Object> CommerceBatchUpdateSeoInfosWithHttpInfo(List<SeoInfo> seoInfos);
         /// <summary>
         /// Create new currency
         /// </summary>
@@ -44,7 +44,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns></returns>
-        void CommerceCreateCurrency(VirtoCommerceDomainCommerceModelCurrency currency);
+        void CommerceCreateCurrency(Currency currency);
 
         /// <summary>
         /// Create new currency
@@ -55,7 +55,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> CommerceCreateCurrencyWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency);
+        ApiResponse<Object> CommerceCreateCurrencyWithHttpInfo(Currency currency);
         /// <summary>
         /// Delete currencies
         /// </summary>
@@ -86,8 +86,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;</returns>
-        List<VirtoCommerceDomainTaxModelTaxRate> CommerceEvaluateTaxes(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext);
+        /// <returns>List&lt;TaxRate&gt;</returns>
+        List<TaxRate> CommerceEvaluateTaxes(string storeId, TaxEvaluationContext evalContext);
 
         /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context
@@ -98,8 +98,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;</returns>
-        ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>> CommerceEvaluateTaxesWithHttpInfo(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext);
+        /// <returns>ApiResponse of List&lt;TaxRate&gt;</returns>
+        ApiResponse<List<TaxRate>> CommerceEvaluateTaxesWithHttpInfo(string storeId, TaxEvaluationContext evalContext);
         /// <summary>
         /// Return all currencies registered in the system
         /// </summary>
@@ -107,8 +107,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;</returns>
-        List<VirtoCommerceDomainCommerceModelCurrency> CommerceGetAllCurrencies();
+        /// <returns>List&lt;Currency&gt;</returns>
+        List<Currency> CommerceGetAllCurrencies();
 
         /// <summary>
         /// Return all currencies registered in the system
@@ -117,8 +117,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;</returns>
-        ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>> CommerceGetAllCurrenciesWithHttpInfo();
+        /// <returns>ApiResponse of List&lt;Currency&gt;</returns>
+        ApiResponse<List<Currency>> CommerceGetAllCurrenciesWithHttpInfo();
         /// <summary>
         /// Find fulfillment center by id
         /// </summary>
@@ -127,8 +127,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        VirtoCommerceCoreModuleWebModelFulfillmentCenter CommerceGetFulfillmentCenter(string id);
+        /// <returns>FulfillmentCenter</returns>
+        FulfillmentCenter CommerceGetFulfillmentCenter(string id);
 
         /// <summary>
         /// Find fulfillment center by id
@@ -138,8 +138,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceGetFulfillmentCenterWithHttpInfo(string id);
+        /// <returns>ApiResponse of FulfillmentCenter</returns>
+        ApiResponse<FulfillmentCenter> CommerceGetFulfillmentCenterWithHttpInfo(string id);
         /// <summary>
         /// Return all fulfillment centers registered in the system
         /// </summary>
@@ -147,8 +147,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;</returns>
-        List<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceGetFulfillmentCenters();
+        /// <returns>List&lt;FulfillmentCenter&gt;</returns>
+        List<FulfillmentCenter> CommerceGetFulfillmentCenters();
 
         /// <summary>
         /// Return all fulfillment centers registered in the system
@@ -157,8 +157,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;</returns>
-        ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceGetFulfillmentCentersWithHttpInfo();
+        /// <returns>ApiResponse of List&lt;FulfillmentCenter&gt;</returns>
+        ApiResponse<List<FulfillmentCenter>> CommerceGetFulfillmentCentersWithHttpInfo();
         /// <summary>
         /// 
         /// </summary>
@@ -168,8 +168,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        List<VirtoCommerceDomainCommerceModelSeoInfo> CommerceGetSeoDuplicates(string objectId, string objectType);
+        /// <returns>List&lt;SeoInfo&gt;</returns>
+        List<SeoInfo> CommerceGetSeoDuplicates(string objectId, string objectType);
 
         /// <summary>
         /// 
@@ -180,8 +180,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoDuplicatesWithHttpInfo(string objectId, string objectType);
+        /// <returns>ApiResponse of List&lt;SeoInfo&gt;</returns>
+        ApiResponse<List<SeoInfo>> CommerceGetSeoDuplicatesWithHttpInfo(string objectId, string objectType);
         /// <summary>
         /// Find all SEO records for object by slug
         /// </summary>
@@ -190,8 +190,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        List<VirtoCommerceDomainCommerceModelSeoInfo> CommerceGetSeoInfoBySlug(string slug);
+        /// <returns>List&lt;SeoInfo&gt;</returns>
+        List<SeoInfo> CommerceGetSeoInfoBySlug(string slug);
 
         /// <summary>
         /// Find all SEO records for object by slug
@@ -201,8 +201,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoInfoBySlugWithHttpInfo(string slug);
+        /// <returns>ApiResponse of List&lt;SeoInfo&gt;</returns>
+        ApiResponse<List<SeoInfo>> CommerceGetSeoInfoBySlugWithHttpInfo(string slug);
         /// <summary>
         /// Payment callback operation used by external payment services to inform post process payment in our system
         /// </summary>
@@ -211,8 +211,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>VirtoCommerceDomainPaymentModelPostProcessPaymentResult</returns>
-        VirtoCommerceDomainPaymentModelPostProcessPaymentResult CommercePostProcessPayment(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback);
+        /// <returns>PostProcessPaymentResult</returns>
+        PostProcessPaymentResult CommercePostProcessPayment(PaymentCallbackParameters callback);
 
         /// <summary>
         /// Payment callback operation used by external payment services to inform post process payment in our system
@@ -222,8 +222,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>ApiResponse of VirtoCommerceDomainPaymentModelPostProcessPaymentResult</returns>
-        ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult> CommercePostProcessPaymentWithHttpInfo(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback);
+        /// <returns>ApiResponse of PostProcessPaymentResult</returns>
+        ApiResponse<PostProcessPaymentResult> CommercePostProcessPaymentWithHttpInfo(PaymentCallbackParameters callback);
         /// <summary>
         /// Update a existing currency
         /// </summary>
@@ -233,7 +233,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns></returns>
-        void CommerceUpdateCurrency(VirtoCommerceDomainCommerceModelCurrency currency);
+        void CommerceUpdateCurrency(Currency currency);
 
         /// <summary>
         /// Update a existing currency
@@ -244,7 +244,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        ApiResponse<Object> CommerceUpdateCurrencyWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency);
+        ApiResponse<Object> CommerceUpdateCurrencyWithHttpInfo(Currency currency);
         /// <summary>
         /// Update a existing fulfillment center
         /// </summary>
@@ -253,8 +253,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        VirtoCommerceCoreModuleWebModelFulfillmentCenter CommerceUpdateFulfillmentCenter(VirtoCommerceCoreModuleWebModelFulfillmentCenter center);
+        /// <returns>FulfillmentCenter</returns>
+        FulfillmentCenter CommerceUpdateFulfillmentCenter(FulfillmentCenter center);
 
         /// <summary>
         /// Update a existing fulfillment center
@@ -264,8 +264,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceUpdateFulfillmentCenterWithHttpInfo(VirtoCommerceCoreModuleWebModelFulfillmentCenter center);
+        /// <returns>ApiResponse of FulfillmentCenter</returns>
+        ApiResponse<FulfillmentCenter> CommerceUpdateFulfillmentCenterWithHttpInfo(FulfillmentCenter center);
         /// <summary>
         /// Create a new user
         /// </summary>
@@ -274,8 +274,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        VirtoCommercePlatformCoreSecuritySecurityResult StorefrontSecurityCreate(VirtoCommercePlatformCoreSecurityApplicationUserExtended user);
+        /// <returns>SecurityResult</returns>
+        SecurityResult StorefrontSecurityCreate(ApplicationUserExtended user);
 
         /// <summary>
         /// Create a new user
@@ -285,8 +285,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>ApiResponse of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityCreateWithHttpInfo(VirtoCommercePlatformCoreSecurityApplicationUserExtended user);
+        /// <returns>ApiResponse of SecurityResult</returns>
+        ApiResponse<SecurityResult> StorefrontSecurityCreateWithHttpInfo(ApplicationUserExtended user);
         /// <summary>
         /// Generate a password reset token
         /// </summary>
@@ -322,8 +322,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        VirtoCommerceCoreModuleWebModelStorefrontUser StorefrontSecurityGetUserById(string userId);
+        /// <returns>StorefrontUser</returns>
+        StorefrontUser StorefrontSecurityGetUserById(string userId);
 
         /// <summary>
         /// Get user details by user ID
@@ -333,8 +333,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByIdWithHttpInfo(string userId);
+        /// <returns>ApiResponse of StorefrontUser</returns>
+        ApiResponse<StorefrontUser> StorefrontSecurityGetUserByIdWithHttpInfo(string userId);
         /// <summary>
         /// Get user details by external login provider
         /// </summary>
@@ -344,8 +344,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        VirtoCommerceCoreModuleWebModelStorefrontUser StorefrontSecurityGetUserByLogin(string loginProvider, string providerKey);
+        /// <returns>StorefrontUser</returns>
+        StorefrontUser StorefrontSecurityGetUserByLogin(string loginProvider, string providerKey);
 
         /// <summary>
         /// Get user details by external login provider
@@ -356,8 +356,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByLoginWithHttpInfo(string loginProvider, string providerKey);
+        /// <returns>ApiResponse of StorefrontUser</returns>
+        ApiResponse<StorefrontUser> StorefrontSecurityGetUserByLoginWithHttpInfo(string loginProvider, string providerKey);
         /// <summary>
         /// Get user details by user name
         /// </summary>
@@ -366,8 +366,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        VirtoCommerceCoreModuleWebModelStorefrontUser StorefrontSecurityGetUserByName(string userName);
+        /// <returns>StorefrontUser</returns>
+        StorefrontUser StorefrontSecurityGetUserByName(string userName);
 
         /// <summary>
         /// Get user details by user name
@@ -377,8 +377,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByNameWithHttpInfo(string userName);
+        /// <returns>ApiResponse of StorefrontUser</returns>
+        ApiResponse<StorefrontUser> StorefrontSecurityGetUserByNameWithHttpInfo(string userName);
         /// <summary>
         /// Sign in with user name and password
         /// </summary>
@@ -388,8 +388,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelSignInResult</returns>
-        VirtoCommerceCoreModuleWebModelSignInResult StorefrontSecurityPasswordSignIn(string userName, string password);
+        /// <returns>SignInResult</returns>
+        SignInResult StorefrontSecurityPasswordSignIn(string userName, string password);
 
         /// <summary>
         /// Sign in with user name and password
@@ -400,8 +400,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelSignInResult</returns>
-        ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult> StorefrontSecurityPasswordSignInWithHttpInfo(string userName, string password);
+        /// <returns>ApiResponse of SignInResult</returns>
+        ApiResponse<SignInResult> StorefrontSecurityPasswordSignInWithHttpInfo(string userName, string password);
         /// <summary>
         /// Reset a password for the user
         /// </summary>
@@ -412,8 +412,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        VirtoCommercePlatformCoreSecuritySecurityResult StorefrontSecurityResetPassword(string userId, string token, string newPassword);
+        /// <returns>SecurityResult</returns>
+        SecurityResult StorefrontSecurityResetPassword(string userId, string token, string newPassword);
 
         /// <summary>
         /// Reset a password for the user
@@ -425,8 +425,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>ApiResponse of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityResetPasswordWithHttpInfo(string userId, string token, string newPassword);
+        /// <returns>ApiResponse of SecurityResult</returns>
+        ApiResponse<SecurityResult> StorefrontSecurityResetPasswordWithHttpInfo(string userId, string token, string newPassword);
         #endregion Synchronous Operations
         #region Asynchronous Operations
         /// <summary>
@@ -438,7 +438,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task CommerceBatchUpdateSeoInfosAsync(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos);
+        System.Threading.Tasks.Task CommerceBatchUpdateSeoInfosAsync(List<SeoInfo> seoInfos);
 
         /// <summary>
         /// Batch create or update seo infos
@@ -449,7 +449,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<object>> CommerceBatchUpdateSeoInfosAsyncWithHttpInfo(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos);
+        System.Threading.Tasks.Task<ApiResponse<object>> CommerceBatchUpdateSeoInfosAsyncWithHttpInfo(List<SeoInfo> seoInfos);
         /// <summary>
         /// Create new currency
         /// </summary>
@@ -459,7 +459,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task CommerceCreateCurrencyAsync(VirtoCommerceDomainCommerceModelCurrency currency);
+        System.Threading.Tasks.Task CommerceCreateCurrencyAsync(Currency currency);
 
         /// <summary>
         /// Create new currency
@@ -470,7 +470,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<object>> CommerceCreateCurrencyAsyncWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency);
+        System.Threading.Tasks.Task<ApiResponse<object>> CommerceCreateCurrencyAsyncWithHttpInfo(Currency currency);
         /// <summary>
         /// Delete currencies
         /// </summary>
@@ -501,8 +501,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>Task of List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;</returns>
-        System.Threading.Tasks.Task<List<VirtoCommerceDomainTaxModelTaxRate>> CommerceEvaluateTaxesAsync(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext);
+        /// <returns>Task of List&lt;TaxRate&gt;</returns>
+        System.Threading.Tasks.Task<List<TaxRate>> CommerceEvaluateTaxesAsync(string storeId, TaxEvaluationContext evalContext);
 
         /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context
@@ -513,8 +513,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>>> CommerceEvaluateTaxesAsyncWithHttpInfo(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext);
+        /// <returns>Task of ApiResponse (List&lt;TaxRate&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<TaxRate>>> CommerceEvaluateTaxesAsyncWithHttpInfo(string storeId, TaxEvaluationContext evalContext);
         /// <summary>
         /// Return all currencies registered in the system
         /// </summary>
@@ -522,8 +522,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;</returns>
-        System.Threading.Tasks.Task<List<VirtoCommerceDomainCommerceModelCurrency>> CommerceGetAllCurrenciesAsync();
+        /// <returns>Task of List&lt;Currency&gt;</returns>
+        System.Threading.Tasks.Task<List<Currency>> CommerceGetAllCurrenciesAsync();
 
         /// <summary>
         /// Return all currencies registered in the system
@@ -532,8 +532,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>>> CommerceGetAllCurrenciesAsyncWithHttpInfo();
+        /// <returns>Task of ApiResponse (List&lt;Currency&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<Currency>>> CommerceGetAllCurrenciesAsyncWithHttpInfo();
         /// <summary>
         /// Find fulfillment center by id
         /// </summary>
@@ -542,8 +542,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceGetFulfillmentCenterAsync(string id);
+        /// <returns>Task of FulfillmentCenter</returns>
+        System.Threading.Tasks.Task<FulfillmentCenter> CommerceGetFulfillmentCenterAsync(string id);
 
         /// <summary>
         /// Find fulfillment center by id
@@ -553,8 +553,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelFulfillmentCenter)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceGetFulfillmentCenterAsyncWithHttpInfo(string id);
+        /// <returns>Task of ApiResponse (FulfillmentCenter)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FulfillmentCenter>> CommerceGetFulfillmentCenterAsyncWithHttpInfo(string id);
         /// <summary>
         /// Return all fulfillment centers registered in the system
         /// </summary>
@@ -562,8 +562,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;</returns>
-        System.Threading.Tasks.Task<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceGetFulfillmentCentersAsync();
+        /// <returns>Task of List&lt;FulfillmentCenter&gt;</returns>
+        System.Threading.Tasks.Task<List<FulfillmentCenter>> CommerceGetFulfillmentCentersAsync();
 
         /// <summary>
         /// Return all fulfillment centers registered in the system
@@ -572,8 +572,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// 
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>>> CommerceGetFulfillmentCentersAsyncWithHttpInfo();
+        /// <returns>Task of ApiResponse (List&lt;FulfillmentCenter&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<FulfillmentCenter>>> CommerceGetFulfillmentCentersAsyncWithHttpInfo();
         /// <summary>
         /// 
         /// </summary>
@@ -583,8 +583,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>Task of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        System.Threading.Tasks.Task<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoDuplicatesAsync(string objectId, string objectType);
+        /// <returns>Task of List&lt;SeoInfo&gt;</returns>
+        System.Threading.Tasks.Task<List<SeoInfo>> CommerceGetSeoDuplicatesAsync(string objectId, string objectType);
 
         /// <summary>
         /// 
@@ -595,8 +595,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>> CommerceGetSeoDuplicatesAsyncWithHttpInfo(string objectId, string objectType);
+        /// <returns>Task of ApiResponse (List&lt;SeoInfo&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<SeoInfo>>> CommerceGetSeoDuplicatesAsyncWithHttpInfo(string objectId, string objectType);
         /// <summary>
         /// Find all SEO records for object by slug
         /// </summary>
@@ -605,8 +605,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>Task of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        System.Threading.Tasks.Task<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoInfoBySlugAsync(string slug);
+        /// <returns>Task of List&lt;SeoInfo&gt;</returns>
+        System.Threading.Tasks.Task<List<SeoInfo>> CommerceGetSeoInfoBySlugAsync(string slug);
 
         /// <summary>
         /// Find all SEO records for object by slug
@@ -616,8 +616,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;)</returns>
-        System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>> CommerceGetSeoInfoBySlugAsyncWithHttpInfo(string slug);
+        /// <returns>Task of ApiResponse (List&lt;SeoInfo&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<SeoInfo>>> CommerceGetSeoInfoBySlugAsyncWithHttpInfo(string slug);
         /// <summary>
         /// Payment callback operation used by external payment services to inform post process payment in our system
         /// </summary>
@@ -626,8 +626,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>Task of VirtoCommerceDomainPaymentModelPostProcessPaymentResult</returns>
-        System.Threading.Tasks.Task<VirtoCommerceDomainPaymentModelPostProcessPaymentResult> CommercePostProcessPaymentAsync(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback);
+        /// <returns>Task of PostProcessPaymentResult</returns>
+        System.Threading.Tasks.Task<PostProcessPaymentResult> CommercePostProcessPaymentAsync(PaymentCallbackParameters callback);
 
         /// <summary>
         /// Payment callback operation used by external payment services to inform post process payment in our system
@@ -637,8 +637,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>Task of ApiResponse (VirtoCommerceDomainPaymentModelPostProcessPaymentResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult>> CommercePostProcessPaymentAsyncWithHttpInfo(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback);
+        /// <returns>Task of ApiResponse (PostProcessPaymentResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<PostProcessPaymentResult>> CommercePostProcessPaymentAsyncWithHttpInfo(PaymentCallbackParameters callback);
         /// <summary>
         /// Update a existing currency
         /// </summary>
@@ -648,7 +648,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of void</returns>
-        System.Threading.Tasks.Task CommerceUpdateCurrencyAsync(VirtoCommerceDomainCommerceModelCurrency currency);
+        System.Threading.Tasks.Task CommerceUpdateCurrencyAsync(Currency currency);
 
         /// <summary>
         /// Update a existing currency
@@ -659,7 +659,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of ApiResponse</returns>
-        System.Threading.Tasks.Task<ApiResponse<object>> CommerceUpdateCurrencyAsyncWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency);
+        System.Threading.Tasks.Task<ApiResponse<object>> CommerceUpdateCurrencyAsyncWithHttpInfo(Currency currency);
         /// <summary>
         /// Update a existing fulfillment center
         /// </summary>
@@ -668,8 +668,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceUpdateFulfillmentCenterAsync(VirtoCommerceCoreModuleWebModelFulfillmentCenter center);
+        /// <returns>Task of FulfillmentCenter</returns>
+        System.Threading.Tasks.Task<FulfillmentCenter> CommerceUpdateFulfillmentCenterAsync(FulfillmentCenter center);
 
         /// <summary>
         /// Update a existing fulfillment center
@@ -679,8 +679,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelFulfillmentCenter)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceUpdateFulfillmentCenterAsyncWithHttpInfo(VirtoCommerceCoreModuleWebModelFulfillmentCenter center);
+        /// <returns>Task of ApiResponse (FulfillmentCenter)</returns>
+        System.Threading.Tasks.Task<ApiResponse<FulfillmentCenter>> CommerceUpdateFulfillmentCenterAsyncWithHttpInfo(FulfillmentCenter center);
         /// <summary>
         /// Create a new user
         /// </summary>
@@ -689,8 +689,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>Task of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        System.Threading.Tasks.Task<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityCreateAsync(VirtoCommercePlatformCoreSecurityApplicationUserExtended user);
+        /// <returns>Task of SecurityResult</returns>
+        System.Threading.Tasks.Task<SecurityResult> StorefrontSecurityCreateAsync(ApplicationUserExtended user);
 
         /// <summary>
         /// Create a new user
@@ -700,8 +700,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>Task of ApiResponse (VirtoCommercePlatformCoreSecuritySecurityResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>> StorefrontSecurityCreateAsyncWithHttpInfo(VirtoCommercePlatformCoreSecurityApplicationUserExtended user);
+        /// <returns>Task of ApiResponse (SecurityResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SecurityResult>> StorefrontSecurityCreateAsyncWithHttpInfo(ApplicationUserExtended user);
         /// <summary>
         /// Generate a password reset token
         /// </summary>
@@ -737,8 +737,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByIdAsync(string userId);
+        /// <returns>Task of StorefrontUser</returns>
+        System.Threading.Tasks.Task<StorefrontUser> StorefrontSecurityGetUserByIdAsync(string userId);
 
         /// <summary>
         /// Get user details by user ID
@@ -748,8 +748,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelStorefrontUser)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>> StorefrontSecurityGetUserByIdAsyncWithHttpInfo(string userId);
+        /// <returns>Task of ApiResponse (StorefrontUser)</returns>
+        System.Threading.Tasks.Task<ApiResponse<StorefrontUser>> StorefrontSecurityGetUserByIdAsyncWithHttpInfo(string userId);
         /// <summary>
         /// Get user details by external login provider
         /// </summary>
@@ -759,8 +759,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByLoginAsync(string loginProvider, string providerKey);
+        /// <returns>Task of StorefrontUser</returns>
+        System.Threading.Tasks.Task<StorefrontUser> StorefrontSecurityGetUserByLoginAsync(string loginProvider, string providerKey);
 
         /// <summary>
         /// Get user details by external login provider
@@ -771,8 +771,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelStorefrontUser)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>> StorefrontSecurityGetUserByLoginAsyncWithHttpInfo(string loginProvider, string providerKey);
+        /// <returns>Task of ApiResponse (StorefrontUser)</returns>
+        System.Threading.Tasks.Task<ApiResponse<StorefrontUser>> StorefrontSecurityGetUserByLoginAsyncWithHttpInfo(string loginProvider, string providerKey);
         /// <summary>
         /// Get user details by user name
         /// </summary>
@@ -781,8 +781,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByNameAsync(string userName);
+        /// <returns>Task of StorefrontUser</returns>
+        System.Threading.Tasks.Task<StorefrontUser> StorefrontSecurityGetUserByNameAsync(string userName);
 
         /// <summary>
         /// Get user details by user name
@@ -792,8 +792,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </remarks>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelStorefrontUser)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>> StorefrontSecurityGetUserByNameAsyncWithHttpInfo(string userName);
+        /// <returns>Task of ApiResponse (StorefrontUser)</returns>
+        System.Threading.Tasks.Task<ApiResponse<StorefrontUser>> StorefrontSecurityGetUserByNameAsyncWithHttpInfo(string userName);
         /// <summary>
         /// Sign in with user name and password
         /// </summary>
@@ -803,8 +803,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelSignInResult</returns>
-        System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelSignInResult> StorefrontSecurityPasswordSignInAsync(string userName, string password);
+        /// <returns>Task of SignInResult</returns>
+        System.Threading.Tasks.Task<SignInResult> StorefrontSecurityPasswordSignInAsync(string userName, string password);
 
         /// <summary>
         /// Sign in with user name and password
@@ -815,8 +815,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelSignInResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult>> StorefrontSecurityPasswordSignInAsyncWithHttpInfo(string userName, string password);
+        /// <returns>Task of ApiResponse (SignInResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SignInResult>> StorefrontSecurityPasswordSignInAsyncWithHttpInfo(string userName, string password);
         /// <summary>
         /// Reset a password for the user
         /// </summary>
@@ -827,8 +827,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>Task of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        System.Threading.Tasks.Task<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityResetPasswordAsync(string userId, string token, string newPassword);
+        /// <returns>Task of SecurityResult</returns>
+        System.Threading.Tasks.Task<SecurityResult> StorefrontSecurityResetPasswordAsync(string userId, string token, string newPassword);
 
         /// <summary>
         /// Reset a password for the user
@@ -840,8 +840,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>Task of ApiResponse (VirtoCommercePlatformCoreSecuritySecurityResult)</returns>
-        System.Threading.Tasks.Task<ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>> StorefrontSecurityResetPasswordAsyncWithHttpInfo(string userId, string token, string newPassword);
+        /// <returns>Task of ApiResponse (SecurityResult)</returns>
+        System.Threading.Tasks.Task<ApiResponse<SecurityResult>> StorefrontSecurityResetPasswordAsyncWithHttpInfo(string userId, string token, string newPassword);
         #endregion Asynchronous Operations
     }
 
@@ -889,7 +889,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns></returns>
-        public void CommerceBatchUpdateSeoInfos(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos)
+        public void CommerceBatchUpdateSeoInfos(List<SeoInfo> seoInfos)
         {
              CommerceBatchUpdateSeoInfosWithHttpInfo(seoInfos);
         }
@@ -900,7 +900,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<object> CommerceBatchUpdateSeoInfosWithHttpInfo(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos)
+        public ApiResponse<object> CommerceBatchUpdateSeoInfosWithHttpInfo(List<SeoInfo> seoInfos)
         {
             // verify the required parameter 'seoInfos' is set
             if (seoInfos == null)
@@ -968,7 +968,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task CommerceBatchUpdateSeoInfosAsync(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos)
+        public async System.Threading.Tasks.Task CommerceBatchUpdateSeoInfosAsync(List<SeoInfo> seoInfos)
         {
              await CommerceBatchUpdateSeoInfosAsyncWithHttpInfo(seoInfos);
 
@@ -980,7 +980,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="seoInfos"></param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceBatchUpdateSeoInfosAsyncWithHttpInfo(List<VirtoCommerceDomainCommerceModelSeoInfo> seoInfos)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceBatchUpdateSeoInfosAsyncWithHttpInfo(List<SeoInfo> seoInfos)
         {
             // verify the required parameter 'seoInfos' is set
             if (seoInfos == null)
@@ -1047,7 +1047,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns></returns>
-        public void CommerceCreateCurrency(VirtoCommerceDomainCommerceModelCurrency currency)
+        public void CommerceCreateCurrency(Currency currency)
         {
              CommerceCreateCurrencyWithHttpInfo(currency);
         }
@@ -1058,7 +1058,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<object> CommerceCreateCurrencyWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency)
+        public ApiResponse<object> CommerceCreateCurrencyWithHttpInfo(Currency currency)
         {
             // verify the required parameter 'currency' is set
             if (currency == null)
@@ -1126,7 +1126,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task CommerceCreateCurrencyAsync(VirtoCommerceDomainCommerceModelCurrency currency)
+        public async System.Threading.Tasks.Task CommerceCreateCurrencyAsync(Currency currency)
         {
              await CommerceCreateCurrencyAsyncWithHttpInfo(currency);
 
@@ -1138,7 +1138,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceCreateCurrencyAsyncWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceCreateCurrencyAsyncWithHttpInfo(Currency currency)
         {
             // verify the required parameter 'currency' is set
             if (currency == null)
@@ -1339,10 +1339,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;</returns>
-        public List<VirtoCommerceDomainTaxModelTaxRate> CommerceEvaluateTaxes(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext)
+        /// <returns>List&lt;TaxRate&gt;</returns>
+        public List<TaxRate> CommerceEvaluateTaxes(string storeId, TaxEvaluationContext evalContext)
         {
-             ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>> localVarResponse = CommerceEvaluateTaxesWithHttpInfo(storeId, evalContext);
+             ApiResponse<List<TaxRate>> localVarResponse = CommerceEvaluateTaxesWithHttpInfo(storeId, evalContext);
              return localVarResponse.Data;
         }
 
@@ -1352,8 +1352,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;</returns>
-        public ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>> CommerceEvaluateTaxesWithHttpInfo(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext)
+        /// <returns>ApiResponse of List&lt;TaxRate&gt;</returns>
+        public ApiResponse<List<TaxRate>> CommerceEvaluateTaxesWithHttpInfo(string storeId, TaxEvaluationContext evalContext)
         {
             // verify the required parameter 'storeId' is set
             if (storeId == null)
@@ -1417,9 +1417,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceEvaluateTaxes: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>>(localVarStatusCode,
+            return new ApiResponse<List<TaxRate>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainTaxModelTaxRate>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainTaxModelTaxRate>)));
+                (List<TaxRate>)ApiClient.Deserialize(localVarResponse, typeof(List<TaxRate>)));
             
         }
 
@@ -1429,10 +1429,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>Task of List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;</returns>
-        public async System.Threading.Tasks.Task<List<VirtoCommerceDomainTaxModelTaxRate>> CommerceEvaluateTaxesAsync(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext)
+        /// <returns>Task of List&lt;TaxRate&gt;</returns>
+        public async System.Threading.Tasks.Task<List<TaxRate>> CommerceEvaluateTaxesAsync(string storeId, TaxEvaluationContext evalContext)
         {
-             ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>> localVarResponse = await CommerceEvaluateTaxesAsyncWithHttpInfo(storeId, evalContext);
+             ApiResponse<List<TaxRate>> localVarResponse = await CommerceEvaluateTaxesAsyncWithHttpInfo(storeId, evalContext);
              return localVarResponse.Data;
 
         }
@@ -1443,8 +1443,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="storeId"></param>
         /// <param name="evalContext"></param>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainTaxModelTaxRate&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>>> CommerceEvaluateTaxesAsyncWithHttpInfo(string storeId, VirtoCommerceDomainTaxModelTaxEvaluationContext evalContext)
+        /// <returns>Task of ApiResponse (List&lt;TaxRate&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<TaxRate>>> CommerceEvaluateTaxesAsyncWithHttpInfo(string storeId, TaxEvaluationContext evalContext)
         {
             // verify the required parameter 'storeId' is set
             if (storeId == null)
@@ -1508,19 +1508,19 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceEvaluateTaxes: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainTaxModelTaxRate>>(localVarStatusCode,
+            return new ApiResponse<List<TaxRate>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainTaxModelTaxRate>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainTaxModelTaxRate>)));
+                (List<TaxRate>)ApiClient.Deserialize(localVarResponse, typeof(List<TaxRate>)));
             
         }
         /// <summary>
         /// Return all currencies registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;</returns>
-        public List<VirtoCommerceDomainCommerceModelCurrency> CommerceGetAllCurrencies()
+        /// <returns>List&lt;Currency&gt;</returns>
+        public List<Currency> CommerceGetAllCurrencies()
         {
-             ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>> localVarResponse = CommerceGetAllCurrenciesWithHttpInfo();
+             ApiResponse<List<Currency>> localVarResponse = CommerceGetAllCurrenciesWithHttpInfo();
              return localVarResponse.Data;
         }
 
@@ -1528,8 +1528,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// Return all currencies registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;</returns>
-        public ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>> CommerceGetAllCurrenciesWithHttpInfo()
+        /// <returns>ApiResponse of List&lt;Currency&gt;</returns>
+        public ApiResponse<List<Currency>> CommerceGetAllCurrenciesWithHttpInfo()
         {
 
             var localVarPath = "/api/currencies";
@@ -1573,9 +1573,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetAllCurrencies: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>>(localVarStatusCode,
+            return new ApiResponse<List<Currency>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainCommerceModelCurrency>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainCommerceModelCurrency>)));
+                (List<Currency>)ApiClient.Deserialize(localVarResponse, typeof(List<Currency>)));
             
         }
 
@@ -1583,10 +1583,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// Return all currencies registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;</returns>
-        public async System.Threading.Tasks.Task<List<VirtoCommerceDomainCommerceModelCurrency>> CommerceGetAllCurrenciesAsync()
+        /// <returns>Task of List&lt;Currency&gt;</returns>
+        public async System.Threading.Tasks.Task<List<Currency>> CommerceGetAllCurrenciesAsync()
         {
-             ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>> localVarResponse = await CommerceGetAllCurrenciesAsyncWithHttpInfo();
+             ApiResponse<List<Currency>> localVarResponse = await CommerceGetAllCurrenciesAsyncWithHttpInfo();
              return localVarResponse.Data;
 
         }
@@ -1595,8 +1595,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// Return all currencies registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainCommerceModelCurrency&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>>> CommerceGetAllCurrenciesAsyncWithHttpInfo()
+        /// <returns>Task of ApiResponse (List&lt;Currency&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<Currency>>> CommerceGetAllCurrenciesAsyncWithHttpInfo()
         {
 
             var localVarPath = "/api/currencies";
@@ -1640,9 +1640,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetAllCurrencies: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainCommerceModelCurrency>>(localVarStatusCode,
+            return new ApiResponse<List<Currency>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainCommerceModelCurrency>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainCommerceModelCurrency>)));
+                (List<Currency>)ApiClient.Deserialize(localVarResponse, typeof(List<Currency>)));
             
         }
         /// <summary>
@@ -1650,10 +1650,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        public VirtoCommerceCoreModuleWebModelFulfillmentCenter CommerceGetFulfillmentCenter(string id)
+        /// <returns>FulfillmentCenter</returns>
+        public FulfillmentCenter CommerceGetFulfillmentCenter(string id)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> localVarResponse = CommerceGetFulfillmentCenterWithHttpInfo(id);
+             ApiResponse<FulfillmentCenter> localVarResponse = CommerceGetFulfillmentCenterWithHttpInfo(id);
              return localVarResponse.Data;
         }
 
@@ -1662,8 +1662,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        public ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceGetFulfillmentCenterWithHttpInfo(string id)
+        /// <returns>ApiResponse of FulfillmentCenter</returns>
+        public ApiResponse<FulfillmentCenter> CommerceGetFulfillmentCenterWithHttpInfo(string id)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1711,9 +1711,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetFulfillmentCenter: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>(localVarStatusCode,
+            return new ApiResponse<FulfillmentCenter>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelFulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelFulfillmentCenter)));
+                (FulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(FulfillmentCenter)));
             
         }
 
@@ -1722,10 +1722,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        public async System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceGetFulfillmentCenterAsync(string id)
+        /// <returns>Task of FulfillmentCenter</returns>
+        public async System.Threading.Tasks.Task<FulfillmentCenter> CommerceGetFulfillmentCenterAsync(string id)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> localVarResponse = await CommerceGetFulfillmentCenterAsyncWithHttpInfo(id);
+             ApiResponse<FulfillmentCenter> localVarResponse = await CommerceGetFulfillmentCenterAsyncWithHttpInfo(id);
              return localVarResponse.Data;
 
         }
@@ -1735,8 +1735,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="id">fulfillment center id</param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelFulfillmentCenter)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceGetFulfillmentCenterAsyncWithHttpInfo(string id)
+        /// <returns>Task of ApiResponse (FulfillmentCenter)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<FulfillmentCenter>> CommerceGetFulfillmentCenterAsyncWithHttpInfo(string id)
         {
             // verify the required parameter 'id' is set
             if (id == null)
@@ -1784,19 +1784,19 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetFulfillmentCenter: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>(localVarStatusCode,
+            return new ApiResponse<FulfillmentCenter>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelFulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelFulfillmentCenter)));
+                (FulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(FulfillmentCenter)));
             
         }
         /// <summary>
         /// Return all fulfillment centers registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;</returns>
-        public List<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceGetFulfillmentCenters()
+        /// <returns>List&lt;FulfillmentCenter&gt;</returns>
+        public List<FulfillmentCenter> CommerceGetFulfillmentCenters()
         {
-             ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> localVarResponse = CommerceGetFulfillmentCentersWithHttpInfo();
+             ApiResponse<List<FulfillmentCenter>> localVarResponse = CommerceGetFulfillmentCentersWithHttpInfo();
              return localVarResponse.Data;
         }
 
@@ -1804,8 +1804,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// Return all fulfillment centers registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;</returns>
-        public ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceGetFulfillmentCentersWithHttpInfo()
+        /// <returns>ApiResponse of List&lt;FulfillmentCenter&gt;</returns>
+        public ApiResponse<List<FulfillmentCenter>> CommerceGetFulfillmentCentersWithHttpInfo()
         {
 
             var localVarPath = "/api/fulfillment/centers";
@@ -1849,9 +1849,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetFulfillmentCenters: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>>(localVarStatusCode,
+            return new ApiResponse<List<FulfillmentCenter>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>)));
+                (List<FulfillmentCenter>)ApiClient.Deserialize(localVarResponse, typeof(List<FulfillmentCenter>)));
             
         }
 
@@ -1859,10 +1859,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// Return all fulfillment centers registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;</returns>
-        public async System.Threading.Tasks.Task<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceGetFulfillmentCentersAsync()
+        /// <returns>Task of List&lt;FulfillmentCenter&gt;</returns>
+        public async System.Threading.Tasks.Task<List<FulfillmentCenter>> CommerceGetFulfillmentCentersAsync()
         {
-             ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> localVarResponse = await CommerceGetFulfillmentCentersAsyncWithHttpInfo();
+             ApiResponse<List<FulfillmentCenter>> localVarResponse = await CommerceGetFulfillmentCentersAsyncWithHttpInfo();
              return localVarResponse.Data;
 
         }
@@ -1871,8 +1871,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// Return all fulfillment centers registered in the system 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceCoreModuleWebModelFulfillmentCenter&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>>> CommerceGetFulfillmentCentersAsyncWithHttpInfo()
+        /// <returns>Task of ApiResponse (List&lt;FulfillmentCenter&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<FulfillmentCenter>>> CommerceGetFulfillmentCentersAsyncWithHttpInfo()
         {
 
             var localVarPath = "/api/fulfillment/centers";
@@ -1916,9 +1916,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetFulfillmentCenters: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>>(localVarStatusCode,
+            return new ApiResponse<List<FulfillmentCenter>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceCoreModuleWebModelFulfillmentCenter>)));
+                (List<FulfillmentCenter>)ApiClient.Deserialize(localVarResponse, typeof(List<FulfillmentCenter>)));
             
         }
         /// <summary>
@@ -1927,10 +1927,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        public List<VirtoCommerceDomainCommerceModelSeoInfo> CommerceGetSeoDuplicates(string objectId, string objectType)
+        /// <returns>List&lt;SeoInfo&gt;</returns>
+        public List<SeoInfo> CommerceGetSeoDuplicates(string objectId, string objectType)
         {
-             ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> localVarResponse = CommerceGetSeoDuplicatesWithHttpInfo(objectId, objectType);
+             ApiResponse<List<SeoInfo>> localVarResponse = CommerceGetSeoDuplicatesWithHttpInfo(objectId, objectType);
              return localVarResponse.Data;
         }
 
@@ -1940,8 +1940,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        public ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoDuplicatesWithHttpInfo(string objectId, string objectType)
+        /// <returns>ApiResponse of List&lt;SeoInfo&gt;</returns>
+        public ApiResponse<List<SeoInfo>> CommerceGetSeoDuplicatesWithHttpInfo(string objectId, string objectType)
         {
             // verify the required parameter 'objectId' is set
             if (objectId == null)
@@ -1993,9 +1993,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetSeoDuplicates: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>(localVarStatusCode,
+            return new ApiResponse<List<SeoInfo>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainCommerceModelSeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainCommerceModelSeoInfo>)));
+                (List<SeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<SeoInfo>)));
             
         }
 
@@ -2005,10 +2005,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>Task of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        public async System.Threading.Tasks.Task<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoDuplicatesAsync(string objectId, string objectType)
+        /// <returns>Task of List&lt;SeoInfo&gt;</returns>
+        public async System.Threading.Tasks.Task<List<SeoInfo>> CommerceGetSeoDuplicatesAsync(string objectId, string objectType)
         {
-             ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> localVarResponse = await CommerceGetSeoDuplicatesAsyncWithHttpInfo(objectId, objectType);
+             ApiResponse<List<SeoInfo>> localVarResponse = await CommerceGetSeoDuplicatesAsyncWithHttpInfo(objectId, objectType);
              return localVarResponse.Data;
 
         }
@@ -2019,8 +2019,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="objectId"></param>
         /// <param name="objectType"></param>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>> CommerceGetSeoDuplicatesAsyncWithHttpInfo(string objectId, string objectType)
+        /// <returns>Task of ApiResponse (List&lt;SeoInfo&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<SeoInfo>>> CommerceGetSeoDuplicatesAsyncWithHttpInfo(string objectId, string objectType)
         {
             // verify the required parameter 'objectId' is set
             if (objectId == null)
@@ -2072,9 +2072,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetSeoDuplicates: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>(localVarStatusCode,
+            return new ApiResponse<List<SeoInfo>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainCommerceModelSeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainCommerceModelSeoInfo>)));
+                (List<SeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<SeoInfo>)));
             
         }
         /// <summary>
@@ -2082,10 +2082,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        public List<VirtoCommerceDomainCommerceModelSeoInfo> CommerceGetSeoInfoBySlug(string slug)
+        /// <returns>List&lt;SeoInfo&gt;</returns>
+        public List<SeoInfo> CommerceGetSeoInfoBySlug(string slug)
         {
-             ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> localVarResponse = CommerceGetSeoInfoBySlugWithHttpInfo(slug);
+             ApiResponse<List<SeoInfo>> localVarResponse = CommerceGetSeoInfoBySlugWithHttpInfo(slug);
              return localVarResponse.Data;
         }
 
@@ -2094,8 +2094,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>ApiResponse of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        public ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoInfoBySlugWithHttpInfo(string slug)
+        /// <returns>ApiResponse of List&lt;SeoInfo&gt;</returns>
+        public ApiResponse<List<SeoInfo>> CommerceGetSeoInfoBySlugWithHttpInfo(string slug)
         {
             // verify the required parameter 'slug' is set
             if (slug == null)
@@ -2143,9 +2143,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetSeoInfoBySlug: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>(localVarStatusCode,
+            return new ApiResponse<List<SeoInfo>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainCommerceModelSeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainCommerceModelSeoInfo>)));
+                (List<SeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<SeoInfo>)));
             
         }
 
@@ -2154,10 +2154,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>Task of List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;</returns>
-        public async System.Threading.Tasks.Task<List<VirtoCommerceDomainCommerceModelSeoInfo>> CommerceGetSeoInfoBySlugAsync(string slug)
+        /// <returns>Task of List&lt;SeoInfo&gt;</returns>
+        public async System.Threading.Tasks.Task<List<SeoInfo>> CommerceGetSeoInfoBySlugAsync(string slug)
         {
-             ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>> localVarResponse = await CommerceGetSeoInfoBySlugAsyncWithHttpInfo(slug);
+             ApiResponse<List<SeoInfo>> localVarResponse = await CommerceGetSeoInfoBySlugAsyncWithHttpInfo(slug);
              return localVarResponse.Data;
 
         }
@@ -2167,8 +2167,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="slug">slug</param>
-        /// <returns>Task of ApiResponse (List&lt;VirtoCommerceDomainCommerceModelSeoInfo&gt;)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>> CommerceGetSeoInfoBySlugAsyncWithHttpInfo(string slug)
+        /// <returns>Task of ApiResponse (List&lt;SeoInfo&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<SeoInfo>>> CommerceGetSeoInfoBySlugAsyncWithHttpInfo(string slug)
         {
             // verify the required parameter 'slug' is set
             if (slug == null)
@@ -2216,9 +2216,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceGetSeoInfoBySlug: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<List<VirtoCommerceDomainCommerceModelSeoInfo>>(localVarStatusCode,
+            return new ApiResponse<List<SeoInfo>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (List<VirtoCommerceDomainCommerceModelSeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<VirtoCommerceDomainCommerceModelSeoInfo>)));
+                (List<SeoInfo>)ApiClient.Deserialize(localVarResponse, typeof(List<SeoInfo>)));
             
         }
         /// <summary>
@@ -2226,10 +2226,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>VirtoCommerceDomainPaymentModelPostProcessPaymentResult</returns>
-        public VirtoCommerceDomainPaymentModelPostProcessPaymentResult CommercePostProcessPayment(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback)
+        /// <returns>PostProcessPaymentResult</returns>
+        public PostProcessPaymentResult CommercePostProcessPayment(PaymentCallbackParameters callback)
         {
-             ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult> localVarResponse = CommercePostProcessPaymentWithHttpInfo(callback);
+             ApiResponse<PostProcessPaymentResult> localVarResponse = CommercePostProcessPaymentWithHttpInfo(callback);
              return localVarResponse.Data;
         }
 
@@ -2238,8 +2238,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>ApiResponse of VirtoCommerceDomainPaymentModelPostProcessPaymentResult</returns>
-        public ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult> CommercePostProcessPaymentWithHttpInfo(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback)
+        /// <returns>ApiResponse of PostProcessPaymentResult</returns>
+        public ApiResponse<PostProcessPaymentResult> CommercePostProcessPaymentWithHttpInfo(PaymentCallbackParameters callback)
         {
             // verify the required parameter 'callback' is set
             if (callback == null)
@@ -2299,9 +2299,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommercePostProcessPayment: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult>(localVarStatusCode,
+            return new ApiResponse<PostProcessPaymentResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceDomainPaymentModelPostProcessPaymentResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceDomainPaymentModelPostProcessPaymentResult)));
+                (PostProcessPaymentResult)ApiClient.Deserialize(localVarResponse, typeof(PostProcessPaymentResult)));
             
         }
 
@@ -2310,10 +2310,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>Task of VirtoCommerceDomainPaymentModelPostProcessPaymentResult</returns>
-        public async System.Threading.Tasks.Task<VirtoCommerceDomainPaymentModelPostProcessPaymentResult> CommercePostProcessPaymentAsync(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback)
+        /// <returns>Task of PostProcessPaymentResult</returns>
+        public async System.Threading.Tasks.Task<PostProcessPaymentResult> CommercePostProcessPaymentAsync(PaymentCallbackParameters callback)
         {
-             ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult> localVarResponse = await CommercePostProcessPaymentAsyncWithHttpInfo(callback);
+             ApiResponse<PostProcessPaymentResult> localVarResponse = await CommercePostProcessPaymentAsyncWithHttpInfo(callback);
              return localVarResponse.Data;
 
         }
@@ -2323,8 +2323,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="callback">payment callback parameters</param>
-        /// <returns>Task of ApiResponse (VirtoCommerceDomainPaymentModelPostProcessPaymentResult)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult>> CommercePostProcessPaymentAsyncWithHttpInfo(VirtoCommerceCoreModuleWebModelPaymentCallbackParameters callback)
+        /// <returns>Task of ApiResponse (PostProcessPaymentResult)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<PostProcessPaymentResult>> CommercePostProcessPaymentAsyncWithHttpInfo(PaymentCallbackParameters callback)
         {
             // verify the required parameter 'callback' is set
             if (callback == null)
@@ -2384,9 +2384,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommercePostProcessPayment: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceDomainPaymentModelPostProcessPaymentResult>(localVarStatusCode,
+            return new ApiResponse<PostProcessPaymentResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceDomainPaymentModelPostProcessPaymentResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceDomainPaymentModelPostProcessPaymentResult)));
+                (PostProcessPaymentResult)ApiClient.Deserialize(localVarResponse, typeof(PostProcessPaymentResult)));
             
         }
         /// <summary>
@@ -2395,7 +2395,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns></returns>
-        public void CommerceUpdateCurrency(VirtoCommerceDomainCommerceModelCurrency currency)
+        public void CommerceUpdateCurrency(Currency currency)
         {
              CommerceUpdateCurrencyWithHttpInfo(currency);
         }
@@ -2406,7 +2406,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>ApiResponse of Object(void)</returns>
-        public ApiResponse<object> CommerceUpdateCurrencyWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency)
+        public ApiResponse<object> CommerceUpdateCurrencyWithHttpInfo(Currency currency)
         {
             // verify the required parameter 'currency' is set
             if (currency == null)
@@ -2474,7 +2474,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of void</returns>
-        public async System.Threading.Tasks.Task CommerceUpdateCurrencyAsync(VirtoCommerceDomainCommerceModelCurrency currency)
+        public async System.Threading.Tasks.Task CommerceUpdateCurrencyAsync(Currency currency)
         {
              await CommerceUpdateCurrencyAsyncWithHttpInfo(currency);
 
@@ -2486,7 +2486,7 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="currency">currency</param>
         /// <returns>Task of ApiResponse</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceUpdateCurrencyAsyncWithHttpInfo(VirtoCommerceDomainCommerceModelCurrency currency)
+        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceUpdateCurrencyAsyncWithHttpInfo(Currency currency)
         {
             // verify the required parameter 'currency' is set
             if (currency == null)
@@ -2552,10 +2552,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        public VirtoCommerceCoreModuleWebModelFulfillmentCenter CommerceUpdateFulfillmentCenter(VirtoCommerceCoreModuleWebModelFulfillmentCenter center)
+        /// <returns>FulfillmentCenter</returns>
+        public FulfillmentCenter CommerceUpdateFulfillmentCenter(FulfillmentCenter center)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> localVarResponse = CommerceUpdateFulfillmentCenterWithHttpInfo(center);
+             ApiResponse<FulfillmentCenter> localVarResponse = CommerceUpdateFulfillmentCenterWithHttpInfo(center);
              return localVarResponse.Data;
         }
 
@@ -2564,8 +2564,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        public ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceUpdateFulfillmentCenterWithHttpInfo(VirtoCommerceCoreModuleWebModelFulfillmentCenter center)
+        /// <returns>ApiResponse of FulfillmentCenter</returns>
+        public ApiResponse<FulfillmentCenter> CommerceUpdateFulfillmentCenterWithHttpInfo(FulfillmentCenter center)
         {
             // verify the required parameter 'center' is set
             if (center == null)
@@ -2625,9 +2625,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceUpdateFulfillmentCenter: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>(localVarStatusCode,
+            return new ApiResponse<FulfillmentCenter>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelFulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelFulfillmentCenter)));
+                (FulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(FulfillmentCenter)));
             
         }
 
@@ -2636,10 +2636,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelFulfillmentCenter</returns>
-        public async System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelFulfillmentCenter> CommerceUpdateFulfillmentCenterAsync(VirtoCommerceCoreModuleWebModelFulfillmentCenter center)
+        /// <returns>Task of FulfillmentCenter</returns>
+        public async System.Threading.Tasks.Task<FulfillmentCenter> CommerceUpdateFulfillmentCenterAsync(FulfillmentCenter center)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter> localVarResponse = await CommerceUpdateFulfillmentCenterAsyncWithHttpInfo(center);
+             ApiResponse<FulfillmentCenter> localVarResponse = await CommerceUpdateFulfillmentCenterAsyncWithHttpInfo(center);
              return localVarResponse.Data;
 
         }
@@ -2649,8 +2649,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="center">fulfillment center</param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelFulfillmentCenter)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>> CommerceUpdateFulfillmentCenterAsyncWithHttpInfo(VirtoCommerceCoreModuleWebModelFulfillmentCenter center)
+        /// <returns>Task of ApiResponse (FulfillmentCenter)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<FulfillmentCenter>> CommerceUpdateFulfillmentCenterAsyncWithHttpInfo(FulfillmentCenter center)
         {
             // verify the required parameter 'center' is set
             if (center == null)
@@ -2710,9 +2710,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling CommerceUpdateFulfillmentCenter: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelFulfillmentCenter>(localVarStatusCode,
+            return new ApiResponse<FulfillmentCenter>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelFulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelFulfillmentCenter)));
+                (FulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(FulfillmentCenter)));
             
         }
         /// <summary>
@@ -2720,10 +2720,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        public VirtoCommercePlatformCoreSecuritySecurityResult StorefrontSecurityCreate(VirtoCommercePlatformCoreSecurityApplicationUserExtended user)
+        /// <returns>SecurityResult</returns>
+        public SecurityResult StorefrontSecurityCreate(ApplicationUserExtended user)
         {
-             ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> localVarResponse = StorefrontSecurityCreateWithHttpInfo(user);
+             ApiResponse<SecurityResult> localVarResponse = StorefrontSecurityCreateWithHttpInfo(user);
              return localVarResponse.Data;
         }
 
@@ -2732,8 +2732,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>ApiResponse of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        public ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityCreateWithHttpInfo(VirtoCommercePlatformCoreSecurityApplicationUserExtended user)
+        /// <returns>ApiResponse of SecurityResult</returns>
+        public ApiResponse<SecurityResult> StorefrontSecurityCreateWithHttpInfo(ApplicationUserExtended user)
         {
             // verify the required parameter 'user' is set
             if (user == null)
@@ -2793,9 +2793,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityCreate: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>(localVarStatusCode,
+            return new ApiResponse<SecurityResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommercePlatformCoreSecuritySecurityResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommercePlatformCoreSecuritySecurityResult)));
+                (SecurityResult)ApiClient.Deserialize(localVarResponse, typeof(SecurityResult)));
             
         }
 
@@ -2804,10 +2804,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>Task of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        public async System.Threading.Tasks.Task<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityCreateAsync(VirtoCommercePlatformCoreSecurityApplicationUserExtended user)
+        /// <returns>Task of SecurityResult</returns>
+        public async System.Threading.Tasks.Task<SecurityResult> StorefrontSecurityCreateAsync(ApplicationUserExtended user)
         {
-             ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> localVarResponse = await StorefrontSecurityCreateAsyncWithHttpInfo(user);
+             ApiResponse<SecurityResult> localVarResponse = await StorefrontSecurityCreateAsyncWithHttpInfo(user);
              return localVarResponse.Data;
 
         }
@@ -2817,8 +2817,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="user"></param>
-        /// <returns>Task of ApiResponse (VirtoCommercePlatformCoreSecuritySecurityResult)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>> StorefrontSecurityCreateAsyncWithHttpInfo(VirtoCommercePlatformCoreSecurityApplicationUserExtended user)
+        /// <returns>Task of ApiResponse (SecurityResult)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<SecurityResult>> StorefrontSecurityCreateAsyncWithHttpInfo(ApplicationUserExtended user)
         {
             // verify the required parameter 'user' is set
             if (user == null)
@@ -2878,9 +2878,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityCreate: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>(localVarStatusCode,
+            return new ApiResponse<SecurityResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommercePlatformCoreSecuritySecurityResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommercePlatformCoreSecuritySecurityResult)));
+                (SecurityResult)ApiClient.Deserialize(localVarResponse, typeof(SecurityResult)));
             
         }
         /// <summary>
@@ -3058,10 +3058,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public VirtoCommerceCoreModuleWebModelStorefrontUser StorefrontSecurityGetUserById(string userId)
+        /// <returns>StorefrontUser</returns>
+        public StorefrontUser StorefrontSecurityGetUserById(string userId)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> localVarResponse = StorefrontSecurityGetUserByIdWithHttpInfo(userId);
+             ApiResponse<StorefrontUser> localVarResponse = StorefrontSecurityGetUserByIdWithHttpInfo(userId);
              return localVarResponse.Data;
         }
 
@@ -3070,8 +3070,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByIdWithHttpInfo(string userId)
+        /// <returns>ApiResponse of StorefrontUser</returns>
+        public ApiResponse<StorefrontUser> StorefrontSecurityGetUserByIdWithHttpInfo(string userId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3119,9 +3119,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityGetUserById: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>(localVarStatusCode,
+            return new ApiResponse<StorefrontUser>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelStorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelStorefrontUser)));
+                (StorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(StorefrontUser)));
             
         }
 
@@ -3130,10 +3130,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public async System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByIdAsync(string userId)
+        /// <returns>Task of StorefrontUser</returns>
+        public async System.Threading.Tasks.Task<StorefrontUser> StorefrontSecurityGetUserByIdAsync(string userId)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> localVarResponse = await StorefrontSecurityGetUserByIdAsyncWithHttpInfo(userId);
+             ApiResponse<StorefrontUser> localVarResponse = await StorefrontSecurityGetUserByIdAsyncWithHttpInfo(userId);
              return localVarResponse.Data;
 
         }
@@ -3143,8 +3143,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userId"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelStorefrontUser)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>> StorefrontSecurityGetUserByIdAsyncWithHttpInfo(string userId)
+        /// <returns>Task of ApiResponse (StorefrontUser)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<StorefrontUser>> StorefrontSecurityGetUserByIdAsyncWithHttpInfo(string userId)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3192,9 +3192,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityGetUserById: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>(localVarStatusCode,
+            return new ApiResponse<StorefrontUser>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelStorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelStorefrontUser)));
+                (StorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(StorefrontUser)));
             
         }
         /// <summary>
@@ -3203,10 +3203,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public VirtoCommerceCoreModuleWebModelStorefrontUser StorefrontSecurityGetUserByLogin(string loginProvider, string providerKey)
+        /// <returns>StorefrontUser</returns>
+        public StorefrontUser StorefrontSecurityGetUserByLogin(string loginProvider, string providerKey)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> localVarResponse = StorefrontSecurityGetUserByLoginWithHttpInfo(loginProvider, providerKey);
+             ApiResponse<StorefrontUser> localVarResponse = StorefrontSecurityGetUserByLoginWithHttpInfo(loginProvider, providerKey);
              return localVarResponse.Data;
         }
 
@@ -3216,8 +3216,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByLoginWithHttpInfo(string loginProvider, string providerKey)
+        /// <returns>ApiResponse of StorefrontUser</returns>
+        public ApiResponse<StorefrontUser> StorefrontSecurityGetUserByLoginWithHttpInfo(string loginProvider, string providerKey)
         {
             // verify the required parameter 'loginProvider' is set
             if (loginProvider == null)
@@ -3269,9 +3269,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityGetUserByLogin: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>(localVarStatusCode,
+            return new ApiResponse<StorefrontUser>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelStorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelStorefrontUser)));
+                (StorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(StorefrontUser)));
             
         }
 
@@ -3281,10 +3281,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public async System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByLoginAsync(string loginProvider, string providerKey)
+        /// <returns>Task of StorefrontUser</returns>
+        public async System.Threading.Tasks.Task<StorefrontUser> StorefrontSecurityGetUserByLoginAsync(string loginProvider, string providerKey)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> localVarResponse = await StorefrontSecurityGetUserByLoginAsyncWithHttpInfo(loginProvider, providerKey);
+             ApiResponse<StorefrontUser> localVarResponse = await StorefrontSecurityGetUserByLoginAsyncWithHttpInfo(loginProvider, providerKey);
              return localVarResponse.Data;
 
         }
@@ -3295,8 +3295,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="loginProvider"></param>
         /// <param name="providerKey"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelStorefrontUser)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>> StorefrontSecurityGetUserByLoginAsyncWithHttpInfo(string loginProvider, string providerKey)
+        /// <returns>Task of ApiResponse (StorefrontUser)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<StorefrontUser>> StorefrontSecurityGetUserByLoginAsyncWithHttpInfo(string loginProvider, string providerKey)
         {
             // verify the required parameter 'loginProvider' is set
             if (loginProvider == null)
@@ -3348,9 +3348,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityGetUserByLogin: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>(localVarStatusCode,
+            return new ApiResponse<StorefrontUser>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelStorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelStorefrontUser)));
+                (StorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(StorefrontUser)));
             
         }
         /// <summary>
@@ -3358,10 +3358,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public VirtoCommerceCoreModuleWebModelStorefrontUser StorefrontSecurityGetUserByName(string userName)
+        /// <returns>StorefrontUser</returns>
+        public StorefrontUser StorefrontSecurityGetUserByName(string userName)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> localVarResponse = StorefrontSecurityGetUserByNameWithHttpInfo(userName);
+             ApiResponse<StorefrontUser> localVarResponse = StorefrontSecurityGetUserByNameWithHttpInfo(userName);
              return localVarResponse.Data;
         }
 
@@ -3370,8 +3370,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByNameWithHttpInfo(string userName)
+        /// <returns>ApiResponse of StorefrontUser</returns>
+        public ApiResponse<StorefrontUser> StorefrontSecurityGetUserByNameWithHttpInfo(string userName)
         {
             // verify the required parameter 'userName' is set
             if (userName == null)
@@ -3419,9 +3419,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityGetUserByName: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>(localVarStatusCode,
+            return new ApiResponse<StorefrontUser>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelStorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelStorefrontUser)));
+                (StorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(StorefrontUser)));
             
         }
 
@@ -3430,10 +3430,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelStorefrontUser</returns>
-        public async System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelStorefrontUser> StorefrontSecurityGetUserByNameAsync(string userName)
+        /// <returns>Task of StorefrontUser</returns>
+        public async System.Threading.Tasks.Task<StorefrontUser> StorefrontSecurityGetUserByNameAsync(string userName)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser> localVarResponse = await StorefrontSecurityGetUserByNameAsyncWithHttpInfo(userName);
+             ApiResponse<StorefrontUser> localVarResponse = await StorefrontSecurityGetUserByNameAsyncWithHttpInfo(userName);
              return localVarResponse.Data;
 
         }
@@ -3443,8 +3443,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelStorefrontUser)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>> StorefrontSecurityGetUserByNameAsyncWithHttpInfo(string userName)
+        /// <returns>Task of ApiResponse (StorefrontUser)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<StorefrontUser>> StorefrontSecurityGetUserByNameAsyncWithHttpInfo(string userName)
         {
             // verify the required parameter 'userName' is set
             if (userName == null)
@@ -3492,9 +3492,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityGetUserByName: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelStorefrontUser>(localVarStatusCode,
+            return new ApiResponse<StorefrontUser>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelStorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelStorefrontUser)));
+                (StorefrontUser)ApiClient.Deserialize(localVarResponse, typeof(StorefrontUser)));
             
         }
         /// <summary>
@@ -3503,10 +3503,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>VirtoCommerceCoreModuleWebModelSignInResult</returns>
-        public VirtoCommerceCoreModuleWebModelSignInResult StorefrontSecurityPasswordSignIn(string userName, string password)
+        /// <returns>SignInResult</returns>
+        public SignInResult StorefrontSecurityPasswordSignIn(string userName, string password)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult> localVarResponse = StorefrontSecurityPasswordSignInWithHttpInfo(userName, password);
+             ApiResponse<SignInResult> localVarResponse = StorefrontSecurityPasswordSignInWithHttpInfo(userName, password);
              return localVarResponse.Data;
         }
 
@@ -3516,8 +3516,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>ApiResponse of VirtoCommerceCoreModuleWebModelSignInResult</returns>
-        public ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult> StorefrontSecurityPasswordSignInWithHttpInfo(string userName, string password)
+        /// <returns>ApiResponse of SignInResult</returns>
+        public ApiResponse<SignInResult> StorefrontSecurityPasswordSignInWithHttpInfo(string userName, string password)
         {
             // verify the required parameter 'userName' is set
             if (userName == null)
@@ -3569,9 +3569,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityPasswordSignIn: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult>(localVarStatusCode,
+            return new ApiResponse<SignInResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelSignInResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelSignInResult)));
+                (SignInResult)ApiClient.Deserialize(localVarResponse, typeof(SignInResult)));
             
         }
 
@@ -3581,10 +3581,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>Task of VirtoCommerceCoreModuleWebModelSignInResult</returns>
-        public async System.Threading.Tasks.Task<VirtoCommerceCoreModuleWebModelSignInResult> StorefrontSecurityPasswordSignInAsync(string userName, string password)
+        /// <returns>Task of SignInResult</returns>
+        public async System.Threading.Tasks.Task<SignInResult> StorefrontSecurityPasswordSignInAsync(string userName, string password)
         {
-             ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult> localVarResponse = await StorefrontSecurityPasswordSignInAsyncWithHttpInfo(userName, password);
+             ApiResponse<SignInResult> localVarResponse = await StorefrontSecurityPasswordSignInAsyncWithHttpInfo(userName, password);
              return localVarResponse.Data;
 
         }
@@ -3595,8 +3595,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="userName"></param>
         /// <param name="password"></param>
-        /// <returns>Task of ApiResponse (VirtoCommerceCoreModuleWebModelSignInResult)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult>> StorefrontSecurityPasswordSignInAsyncWithHttpInfo(string userName, string password)
+        /// <returns>Task of ApiResponse (SignInResult)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<SignInResult>> StorefrontSecurityPasswordSignInAsyncWithHttpInfo(string userName, string password)
         {
             // verify the required parameter 'userName' is set
             if (userName == null)
@@ -3648,9 +3648,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityPasswordSignIn: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommerceCoreModuleWebModelSignInResult>(localVarStatusCode,
+            return new ApiResponse<SignInResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommerceCoreModuleWebModelSignInResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommerceCoreModuleWebModelSignInResult)));
+                (SignInResult)ApiClient.Deserialize(localVarResponse, typeof(SignInResult)));
             
         }
         /// <summary>
@@ -3660,10 +3660,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        public VirtoCommercePlatformCoreSecuritySecurityResult StorefrontSecurityResetPassword(string userId, string token, string newPassword)
+        /// <returns>SecurityResult</returns>
+        public SecurityResult StorefrontSecurityResetPassword(string userId, string token, string newPassword)
         {
-             ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> localVarResponse = StorefrontSecurityResetPasswordWithHttpInfo(userId, token, newPassword);
+             ApiResponse<SecurityResult> localVarResponse = StorefrontSecurityResetPasswordWithHttpInfo(userId, token, newPassword);
              return localVarResponse.Data;
         }
 
@@ -3674,8 +3674,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>ApiResponse of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        public ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityResetPasswordWithHttpInfo(string userId, string token, string newPassword)
+        /// <returns>ApiResponse of SecurityResult</returns>
+        public ApiResponse<SecurityResult> StorefrontSecurityResetPasswordWithHttpInfo(string userId, string token, string newPassword)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3731,9 +3731,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityResetPassword: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>(localVarStatusCode,
+            return new ApiResponse<SecurityResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommercePlatformCoreSecuritySecurityResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommercePlatformCoreSecuritySecurityResult)));
+                (SecurityResult)ApiClient.Deserialize(localVarResponse, typeof(SecurityResult)));
             
         }
 
@@ -3744,10 +3744,10 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>Task of VirtoCommercePlatformCoreSecuritySecurityResult</returns>
-        public async System.Threading.Tasks.Task<VirtoCommercePlatformCoreSecuritySecurityResult> StorefrontSecurityResetPasswordAsync(string userId, string token, string newPassword)
+        /// <returns>Task of SecurityResult</returns>
+        public async System.Threading.Tasks.Task<SecurityResult> StorefrontSecurityResetPasswordAsync(string userId, string token, string newPassword)
         {
-             ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult> localVarResponse = await StorefrontSecurityResetPasswordAsyncWithHttpInfo(userId, token, newPassword);
+             ApiResponse<SecurityResult> localVarResponse = await StorefrontSecurityResetPasswordAsyncWithHttpInfo(userId, token, newPassword);
              return localVarResponse.Data;
 
         }
@@ -3759,8 +3759,8 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="userId"></param>
         /// <param name="token"></param>
         /// <param name="newPassword"></param>
-        /// <returns>Task of ApiResponse (VirtoCommercePlatformCoreSecuritySecurityResult)</returns>
-        public async System.Threading.Tasks.Task<ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>> StorefrontSecurityResetPasswordAsyncWithHttpInfo(string userId, string token, string newPassword)
+        /// <returns>Task of ApiResponse (SecurityResult)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<SecurityResult>> StorefrontSecurityResetPasswordAsyncWithHttpInfo(string userId, string token, string newPassword)
         {
             // verify the required parameter 'userId' is set
             if (userId == null)
@@ -3816,9 +3816,9 @@ namespace VirtoCommerce.CoreModule.Client.Api
             else if (localVarStatusCode == 0)
                 throw new ApiException(localVarStatusCode, "Error calling StorefrontSecurityResetPassword: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
 
-            return new ApiResponse<VirtoCommercePlatformCoreSecuritySecurityResult>(localVarStatusCode,
+            return new ApiResponse<SecurityResult>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (VirtoCommercePlatformCoreSecuritySecurityResult)ApiClient.Deserialize(localVarResponse, typeof(VirtoCommercePlatformCoreSecuritySecurityResult)));
+                (SecurityResult)ApiClient.Deserialize(localVarResponse, typeof(SecurityResult)));
             
         }
     }
