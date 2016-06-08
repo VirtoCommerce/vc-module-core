@@ -44,7 +44,11 @@ namespace VirtoCommerce.CoreModule.Data.Shipping
 				throw new NullReferenceException("shippingEvalContext");
 			}
 
-			return new ShippingRate[] { new ShippingRate { Rate = Rate, Currency = shippingEvalContext.ShoppingCart.Currency, ShippingMethod = this } };
-		}
+            return new ShippingRate[]
+            {
+                new ShippingRate { Rate = Rate, Currency = shippingEvalContext.ShoppingCart.Currency, ShippingMethod = this, OptionName = "Ground", OptionDescription = "Ground shipping" },
+                new ShippingRate { Rate = Rate, Currency = shippingEvalContext.ShoppingCart.Currency, ShippingMethod = this, OptionName = "Air", OptionDescription = "Air shipping" }
+            };
+        }
 	}
 }
