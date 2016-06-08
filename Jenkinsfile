@@ -12,9 +12,13 @@ node {
 	if (env.BRANCH_NAME == 'master') {
 		stage 'Update Version'
 			bat "powershell.exe -File \"${env.VC_RES}\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
+			bat "\"c:\\Program Files (x86)\\Git\\cmd\\git.exe\" commit -am \"Updated version number\""
+			bat "\"c:\\Program Files (x86)\\Git\\cmd\\git.exe\" push"
 		
 		stage 'Nuget Package'
 	   		bat 'Nuget\\build.bat'
+	   		
+	   	
 	} 
 	
 	step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
