@@ -12,7 +12,19 @@ node {
 	if (env.BRANCH_NAME == 'master') {
 		stage 'Update Version'
 			bat "powershell.exe -File \"${env.VC_RES}\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
-		
+			def build = manager.build
+			def workspace = build.getWorkspace()
+			def listener = manager.listener
+			def environment = build.getEnvironment(listener)
+			
+			final def project = build.getProject()
+			final def gitScm = project.getScm()
+			final def gitClient = gitScm.createClient(listener, environment, build, workspace);
+			
+			//final def remoteURI = new URIish("origin")
+			gitClient.commit("Updated version number")
+			gitClient.push().execute()
+				
 		stage 'Nuget Package'
 	   		bat 'Nuget\\build.bat'
 	   		
@@ -20,17 +32,4 @@ node {
 	} 
 	
 	step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
-	
-	def build = manager.build
-	def workspace = build.getWorkspace()
-	def listener = manager.listener
-	def environment = build.getEnvironment(listener)
-	
-	final def project = build.getProject()
-	final def gitScm = project.getScm()
-	final def gitClient = gitScm.createClient(listener, environment, build, workspace);
-	
-	//final def remoteURI = new URIish("origin")
-	gitClient.commit("Updated version number")
-	gitClient.push().execute()	
 }
