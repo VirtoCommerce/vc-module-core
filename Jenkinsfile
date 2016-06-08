@@ -1,8 +1,9 @@
+import org.eclipse.jgit.transport.URIish
+
 node {
 	env.WORKSPACE = pwd()
 	stage 'Checkout'
 		checkout([$class: 'GitSCM', extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\\.cs', includedRegions: '']]])
-		bat "powershell.exe -File \"${env.VC_RES}\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
 		
 	stage 'Build'
 		bat "Nuget restore VirtoCommerce.CoreModule.sln"
@@ -10,10 +11,25 @@ node {
 		
 	if (env.BRANCH_NAME == 'master') {
 				
-		stage 'Nuget Package'
+		stage 'Publish'
+			bat "powershell.exe -File \"${env.VC_RES}\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
+			def build = manager.build
+			def workspace = build.getWorkspace()
+			def listener = manager.listener
+			def environment = build.getEnvironment(listener)
+			
+			final def project = build.getProject()
+			final def gitScm = project.getScm()
+			final GitClient gitClient = gitScm.createClient(listener, environment, build, workspace);
+			
+			final def gitTagName = "TAG_NAME"
+			final def comment = "COMMENT"
+			final def remoteURI = new URIish("origin")
+			
+			gitClient.tag(gitTagName, comment)
+			gitClient.push().tags(true).to(remoteURI).execute()
 	   		bat 'Nuget\\build.bat'
 	   		
-	   	
 	} 
 	
 	step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
