@@ -23,4 +23,16 @@ node {
 	
 	step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
 	
+	def build = manager.build
+	def workspace = build.getWorkspace()
+	def listener = manager.listener
+	def environment = build.getEnvironment(listener)
+	
+	final def project = build.getProject()
+	final def gitScm = project.getScm()
+	final GitClient gitClient = gitScm.createClient(listener, environment, build, workspace);
+	
+	final def remoteURI = new URIish("origin")
+	
+	gitClient.push().to(remoteURI).execute()	
 }
