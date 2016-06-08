@@ -1,12 +1,9 @@
 node {
 	env.WORKSPACE = pwd()
-	echo "${env.WORKSPACE}"
-	echo "${env.VC_RES}"
 	stage 'Checkout'
 		checkout([$class: 'GitSCM', extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\\.cs', includedRegions: '']]])
 		bat "powershell.exe -File \"${env.VC_RES}\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
-		git commit
-		git push
+		bat "\"c:\\Program Files (x86)\\Git\\cmd\\git.exe\" commit -am \"Updated version number\"""
 		
 	stage 'Build'
 		bat "Nuget restore VirtoCommerce.CoreModule.sln"
