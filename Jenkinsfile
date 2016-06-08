@@ -12,8 +12,6 @@ node {
 	if (env.BRANCH_NAME == 'master') {
 		stage 'Update Version'
 			bat "powershell.exe -File \"${env.VC_RES}\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
-			bat "\"c:\\Program Files (x86)\\Git\\cmd\\git.exe\" commit -am \"Updated version number\""
-			bat "\"c:\\Program Files (x86)\\Git\\cmd\\git.exe\" push"
 		
 		stage 'Nuget Package'
 	   		bat 'Nuget\\build.bat'
@@ -33,6 +31,6 @@ node {
 	final def gitClient = gitScm.createClient(listener, environment, build, workspace);
 	
 	//final def remoteURI = new URIish("origin")
-	
+	gitClient.commit("Updated version number")
 	gitClient.push().execute()	
 }
