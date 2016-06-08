@@ -5,7 +5,7 @@ node {
 	env.WORKSPACE = pwd()
 	stage 'Checkout'
 		checkout([$class: 'GitSCM', extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\\.cs', includedRegions: '']]])
-		def workspace = build.getWorkspace()
+		println build.getClass()
 
 	stage 'Build'
 		bat "Nuget restore VirtoCommerce.CoreModule.sln"
