@@ -1,5 +1,5 @@
 import org.eclipse.jgit.transport.URIish
-import org.jenkinsci.plugins.gitclient
+import org.jenkinsci.plugins.gitclient.GitClient
 
 node {
 	env.WORKSPACE = pwd()
