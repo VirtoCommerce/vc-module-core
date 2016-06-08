@@ -32,7 +32,7 @@ node {
 	final def gitScm = project.getScm()
 	final def gitClient = gitScm.createClient(listener, environment, build, workspace);
 	
-	final def remoteURI = new URIish("origin")
+	//final def remoteURI = new URIish("origin")
 	
-	gitClient.push().to(remoteURI).execute()	
+	gitClient.push().execute()	
 }
