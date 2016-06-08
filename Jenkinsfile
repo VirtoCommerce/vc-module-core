@@ -8,9 +8,7 @@ node {
 		def workspace = build.getWorkspace()
 		def environment = build.getEnvironment(listener)
 		final def project = build.getProject()
-		final def gitScm = project.getScm()
-		final def gitClient = gitScm.createClient(listener, environment, build, workspace);
-		
+
 	stage 'Build'
 		bat "Nuget restore VirtoCommerce.CoreModule.sln"
 		bat "\"${tool 'MSBuild 12.0'}\" VirtoCommerce.CoreModule.sln /p:Configuration=Debug /p:Platform=\"Any CPU\""
