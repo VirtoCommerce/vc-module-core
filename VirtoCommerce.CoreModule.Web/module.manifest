@@ -15,7 +15,7 @@
     <projectUrl>http://virtocommerce.com/</projectUrl>
     <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
     <releaseNotes>First version.</releaseNotes>
-    <copyright>Copyright © 2011-2015 Virto Commerce. All rights reserved</copyright>
+    <copyright>Copyright © 2011-2016 Virto Commerce. All rights reserved</copyright>
     <tags>security core</tags>
 
     <assemblyFile>VirtoCommerce.CoreModule.Web.dll</assemblyFile>
