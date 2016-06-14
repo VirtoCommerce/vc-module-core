@@ -1,4 +1,7 @@
-virtoModule {
-	name = 'core'
-	solution = 'VirtoCommerce.CoreModule.sln'
+node
+{
+	virtoModule {
+		name = 'core'
+		solution = 'VirtoCommerce.CoreModule.sln'
+	}
 }
