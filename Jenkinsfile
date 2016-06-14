@@ -1,4 +1,4 @@
-virtoModule(
-	name = 'core',
+virtoModule {
+	name = 'core'
 	solution = 'VirtoCommerce.CoreModule.sln'
-)
+}
