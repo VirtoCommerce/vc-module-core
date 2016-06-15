@@ -21,7 +21,7 @@ node
 		]]
 	])
 	
-	/*
+	/* 
 	checkout([
 		$class: 'GitSCM', 
 		branches: [[name: "refs/heads/${env.BRANCH_NAME}"]], 
