@@ -1,6 +1,11 @@
+#!groovy
+
 node
 {
 	//checkout scm
+	git url: 'git@github.com:VirtoCommerce/vc-module-core.git'
+	
+	/*
 	checkout([
 		$class: 'GitSCM', 
 		branches: [[name: "refs/heads/${env.BRANCH_NAME}"]], 
@@ -10,6 +15,7 @@ node
 			refspec: 'master'
 		]]
 	])
+	*/
 	/*
 	: [
 		$class: 'GitSCM', 
