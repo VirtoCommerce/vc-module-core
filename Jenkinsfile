@@ -3,7 +3,7 @@ node
 	//checkout scm
 	checkout([
 		$class: 'GitSCM', 
-		branches: [[name: */${env.BRANCH_NAME}]]
+		branches: [[name: "*/${env.BRANCH_NAME}"]]
 	])
 	/*
 	: [
