@@ -1,6 +1,6 @@
 node
 {
-	buildModule name='core', solution='VirtoCommerce.CoreModule.sln'
+	buildModule('core', 'VirtoCommerce.CoreModule.sln')
 	/*
 	virtoModule {
 		name = 'core'
