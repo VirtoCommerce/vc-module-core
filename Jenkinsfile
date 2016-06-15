@@ -1,6 +1,8 @@
 node
 {
-	checkout scm: [
+	checkout scm
+	/*
+	: [
 		$class: 'GitSCM', 
 		extensions: [[
 			$class: 'PathRestriction', 
@@ -8,6 +10,7 @@ node
 			includedRegions: ''
 		]]
 	]
+	*/
 	/*
 	virtoModule {
 		name = 'core'
