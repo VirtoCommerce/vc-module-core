@@ -1,7 +1,7 @@
 node
 {
 	//checkout scm
-	checkout([$class: 'GitSCM', branches: [[name: "refs/remotes/origin/master"]], userRemoteConfigs: [[refspec: '+refs/pull/*:refs/remotes/origin/pr/*']]])
+	checkout([$class: 'GitSCM', branches: [[name: "*/master"]], userRemoteConfigs: [[refspec: '+refs/pull/*:refs/remotes/origin/pr/*']]])
 	/*
 	: [
 		$class: 'GitSCM', 
