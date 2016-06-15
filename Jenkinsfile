@@ -5,7 +5,7 @@ node
 		$class: 'GitSCM', 
 		branches: [[name: "*/${env.BRANCH_NAME}"]], 
 		userRemoteConfigs: [[
-			credentialsId: 'sasha-jenkins', url: "git@github.com:VirtoCommerce/${repo}.git"
+			credentialsId: 'sasha-jenkins', url: "git@github.com:VirtoCommerce/vc-module-core.git"
 		]]
 	])
 	/*
