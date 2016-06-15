@@ -3,7 +3,23 @@
 node
 {
 	//checkout scm
-	git url: 'git@github.com:VirtoCommerce/vc-module-core.git'
+	checkout([
+		$class: 'GitSCM', 
+		branches: [[name: "refs/heads/${env.BRANCH_NAME}"]], 
+		userRemoteConfigs: [[
+			credentialsId: 'sasha-jenkins', 
+			url: "git@github.com:VirtoCommerce/vc-module-core.git"
+		]],
+		extensions: [[
+			$class: 'PathRestriction', 
+			excludedRegions: 'CommonAssemblyInfo\\.cs', 
+			includedRegions: ''
+		],
+		[
+			$class: 'MessageExclusion', 
+			excludedMessage: '.*\\[ignore-this-commit\\].*'
+		]]
+	])
 	
 	/*
 	checkout([
@@ -13,6 +29,15 @@ node
 			credentialsId: 'sasha-jenkins', 
 			url: "git@github.com:VirtoCommerce/vc-module-core.git",
 			refspec: 'master'
+		]],
+		extensions: [[
+			$class: 'PathRestriction', 
+			excludedRegions: 'CommonAssemblyInfo\\.cs', 
+			includedRegions: ''
+		],
+		[
+			$class: 'MessageExclusion', 
+			excludedMessage: '.*\\[ignore-this-commit\\].*'
 		]]
 	])
 	*/
