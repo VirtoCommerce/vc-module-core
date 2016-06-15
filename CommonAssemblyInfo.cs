@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Virto Commerce Core Module")]
 [assembly: AssemblyCopyright("Copyright © VirtoCommerce 2011-2016")]
 
-[assembly: AssemblyFileVersion("2.11.6.0")]
+[assembly: AssemblyFileVersion("2.11.7.0")]
 [assembly: AssemblyVersion("2.11.0.0")]
 
 #if DEBUG
@@ -26,6 +26,7 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 [assembly: CLSCompliant(true)]
+
 
 
 
