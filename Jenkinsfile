@@ -1,6 +1,6 @@
 node
 {
-	checkout scm
+	checkout([$class: 'GitSCM'])
 	/*
 	: [
 		$class: 'GitSCM', 
