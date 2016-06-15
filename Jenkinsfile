@@ -5,3 +5,5 @@ node
 		solution = 'VirtoCommerce.CoreModule.sln'
 	} 
 }
+
+
