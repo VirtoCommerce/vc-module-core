@@ -1,6 +1,6 @@
 node
 {
-	checkout([$class: 'GitSCM'])
+	checkout([$class: 'GitSCM', branches: [[name: "${env.BRANCH_NAME}"]]])
 	/*
 	: [
 		$class: 'GitSCM', 
