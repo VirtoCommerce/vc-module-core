@@ -10,15 +10,12 @@ node
 			credentialsId: 'sasha-jenkins', 
 			url: "git@github.com:VirtoCommerce/vc-module-core.git"
 		]],
-		extensions: [[
-			$class: 'PathRestriction', 
-			excludedRegions: 'CommonAssemblyInfo\\.cs', 
-			includedRegions: ''
-		],
-		[
-			$class: 'MessageExclusion', 
-			excludedMessage: '.*\\[ignore-this-commit\\].*'
-		]]
+		extensions: [
+			[
+				$class: 'MessageExclusion', 
+				excludedMessage: '.*\\[ignore-this-commit\\].*'
+			]
+		]
 	])
 	
 	/* sample
