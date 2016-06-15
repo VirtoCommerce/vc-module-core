@@ -3,8 +3,7 @@ node
 	//checkout scm
 	checkout([
 		$class: 'GitSCM', 
-		branches: [[name: */${env.BRANCH_NAME}]]/*, 
-		userRemoteConfigs: [[refspec: '+refs/pull/*:refs/remotes/origin/pr/*']]*/
+		branches: [[name: */${env.BRANCH_NAME}]]
 	])
 	/*
 	: [
@@ -15,6 +14,8 @@ node
 			includedRegions: ''
 		]]
 	]
+	
+	userRemoteConfigs: [[refspec: '+refs/pull/*:refs/remotes/origin/pr/*']]*
 	*/
 	/*
 	virtoModule {
