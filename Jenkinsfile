@@ -26,7 +26,7 @@ def buildModule(name, solution) {
 		//checkout scm
 		//checkout([$class: 'GitSCM', branches: [[name: "*/${env.BRANCH_NAME}"]], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: ''], [$class: 'CheckoutOption']], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'sasha-jenkins', url: "git@github.com:VirtoCommerce/${repo}.git"]]])
 		//checkout([$class: 'GitSCM', extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\\.cs']]])
-		checkout([$class: 'GitSCM', branches: [[name: "*/${env.BRANCH_NAME}"]], extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\.cs', includedRegions: '']], userRemoteConfigs: [[credentialsId: 'sasha-jenkins', url: "git@github.com:VirtoCommerce/${repo}.git"]]])
+		checkout([$class: 'GitSCM', branches: [[name: "*/${env.BRANCH_NAME}"]], extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo.*', includedRegions: '']], userRemoteConfigs: [[credentialsId: 'sasha-jenkins', url: "git@github.com:VirtoCommerce/${repo}.git"]]])
 
 		stage 'Build'
 			bat "Nuget restore ${solution}"
