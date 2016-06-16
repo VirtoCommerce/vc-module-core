@@ -2,7 +2,21 @@
 
 node
 {
+	stage 'Checkout'
+        	checkout([
+            	$class: 'GitSCM', 
+            	branches: [[name: '*/master']], 
+            	extensions: [[
+			    $class: 'PathRestriction', 
+			    excludedRegions: 'CommonAssemblyInfo\\.cs', 
+			    includedRegions: ''
+		    ]], 
+            	userRemoteConfigs: [[
+	                credentialsId: 'sasha-jenkins', 
+        	        url: 'git@github.com:VirtoCommerce/vc-modules-jenkinssample.git']]])
+                
 	//checkout scm
+	/*
 	checkout([
 		$class: 'GitSCM', 
 		branches: [[name: "refs/heads/${env.BRANCH_NAME}"]], 
@@ -17,7 +31,7 @@ node
 			]
 		]
 	])
-	
+	*/
 	/*
 	checkout([
 		$class: 'GitSCM', 
