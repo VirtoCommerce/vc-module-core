@@ -1,4 +1,4 @@
-[![Build Status](http://ci.virtocommerce.com:8080/buildStatus/icon?job=Virto Commerce 2.x Modules Build/vc-module-core/master)](http://ci.virtocommerce.com:8080/job/Virto Commerce 2.x Modules Build/job/vc-module-core/job/master)
+[![Build Status](http://ci.virtocommerce.com:8080/buildStatus/icon?job=vc-2-org/vc-module-core/master)](http://ci.virtocommerce.com:8080/job/vc-2-org/vc-module-core/master)
 
 # VirtoCommerce.Core
 VirtoCommerce.Core module represents common eCommerce domain model and base abstractions, which can be used and implemented in derived modules.
