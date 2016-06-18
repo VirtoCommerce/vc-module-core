@@ -103,6 +103,18 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         }
 
         /// <summary>
+        /// Delete  fulfillment centers registered in the system
+        /// </summary>
+        [HttpDelete]
+        [ResponseType(typeof(coreModel.FulfillmentCenter[]))]
+        [Route("fulfillment/centers")]
+        public IHttpActionResult DeleteFulfillmentCenters([FromUri] string[] ids)
+        {
+            _commerceService.DeleteFulfillmentCenter(ids);
+            return Ok();
+        }
+
+        /// <summary>
         /// Payment callback operation used by external payment services to inform post process payment in our system
         /// </summary>
         /// <param name="callback">payment callback parameters</param>

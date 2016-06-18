@@ -37,7 +37,8 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// Can be Physical, Digital or Subscription.
         /// </summary>
         public string ProductType { get; set; }
-
+        //Type of product package (set of package types with their specific dimensions)
+        public string PackageType { get; set; }
         public string WeightUnit { get; set; }
         public decimal? Weight { get; set; }
 

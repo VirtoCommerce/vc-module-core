@@ -22,6 +22,9 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public int Level { get; set; }
         public Category[] Parents { get; set; }
 
+        //Type of product package (set of package types with their specific dimensions) can be inherited by nested products and categories
+        public string PackageType { get; set; }
+
         public int Priority { get; set; }
 
         public bool? IsActive { get; set; }
