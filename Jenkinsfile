@@ -1,22 +1,73 @@
-import org.eclipse.jgit.transport.URIish
-import org.jenkinsci.plugins.gitclient.GitClient
+#!groovy
 
-node {
-	env.WORKSPACE = pwd()
+node
+{
 	stage 'Checkout'
-		checkout([$class: 'GitSCM', extensions: [[$class: 'PathRestriction', excludedRegions: 'CommonAssemblyInfo\\.cs', includedRegions: '']]])
-		
-	stage 'Build'
-		bat "Nuget restore VirtoCommerce.CoreModule.sln"
-		bat "\"${tool 'MSBuild 12.0'}\" VirtoCommerce.CoreModule.sln /p:Configuration=Debug /p:Platform=\"Any CPU\""
-		
-	if (env.BRANCH_NAME == 'master') {
-				
-		stage 'Publish'
-			bat "powershell.exe -File \"${env.VC_RES}\\script\\version3.ps1\" -solutiondir \"${env.WORKSPACE}\""
-	   		bat 'Nuget\\build.bat'
-	   		
-	} 
+        	checkout([
+            	$class: 'GitSCM', 
+            	branches: [[name: '*/master']], 
+            	extensions: [[
+			    $class: 'PathRestriction', 
+			    excludedRegions: 'CommonAssemblyInfo\\.cs', 
+			    includedRegions: ''
+		    ]], 
+            	userRemoteConfigs: [[
+	                credentialsId: 'sasha-jenkins', 
+        	        url: 'git@github.com:VirtoCommerce/vc-modules-jenkinssample.git']]])
+                
+	//checkout scm
+	/*
+	checkout([
+		$class: 'GitSCM', 
+		branches: [[name: "refs/heads/${env.BRANCH_NAME}"]], 
+		userRemoteConfigs: [[
+			credentialsId: 'sasha-jenkins', 
+			url: "git@github.com:VirtoCommerce/vc-module-core.git"
+		]],
+		extensions: [
+			[
+				$class: 'MessageExclusion', 
+				excludedMessage: '.*\\[ignore-this-commit\\].*'
+			]
+		]
+	])
+	*/
+	/*
+	checkout([
+		$class: 'GitSCM', 
+		branches: [[name: "refs/heads/${env.BRANCH_NAME}"]], 
+		userRemoteConfigs: [[
+			credentialsId: 'sasha-jenkins', 
+			url: "git@github.com:VirtoCommerce/vc-module-core.git",
+			refspec: 'master'
+		]],
+		extensions: [[
+			$class: 'PathRestriction', 
+			excludedRegions: 'CommonAssemblyInfo\\.cs', 
+			includedRegions: ''
+		],
+		[
+			$class: 'MessageExclusion', 
+			excludedMessage: '.*\\[ignore-this-commit\\].*'
+		]]
+	])
+	*/
+	/*
+	: [
+		$class: 'GitSCM', 
+		extensions: [[
+			$class: 'PathRestriction', 
+			excludedRegions: 'CommonAssemblyInfo\\.cs', 
+			includedRegions: ''
+		]]
+	]
 	
-	step([$class: 'GitHubCommitStatusSetter', statusResultSource: [$class: 'ConditionalStatusResultSource', results: []]])
+	userRemoteConfigs: [[refspec: '+refs/pull/*:refs/remotes/origin/pr/*']]*
+	*/
+	/*
+	virtoModule {
+		name = 'core'
+		solution = 'VirtoCommerce.CoreModule.sln'
+	} 
+	*/
 }
