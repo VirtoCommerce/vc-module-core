@@ -78,6 +78,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> CommerceDeleteCurrenciesWithHttpInfo(List<string> codes);
         /// <summary>
+        /// Delete  fulfillment centers registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>List&lt;FulfillmentCenter&gt;</returns>
+        List<FulfillmentCenter> CommerceDeleteFulfillmentCenters(List<string> ids);
+
+        /// <summary>
+        /// Delete  fulfillment centers registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>ApiResponse of List&lt;FulfillmentCenter&gt;</returns>
+        ApiResponse<List<FulfillmentCenter>> CommerceDeleteFulfillmentCentersWithHttpInfo(List<string> ids);
+        /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context
         /// </summary>
         /// <remarks>
@@ -492,6 +513,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="codes">currency codes</param>
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<object>> CommerceDeleteCurrenciesAsyncWithHttpInfo(List<string> codes);
+        /// <summary>
+        /// Delete  fulfillment centers registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>Task of List&lt;FulfillmentCenter&gt;</returns>
+        System.Threading.Tasks.Task<List<FulfillmentCenter>> CommerceDeleteFulfillmentCentersAsync(List<string> ids);
+
+        /// <summary>
+        /// Delete  fulfillment centers registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>Task of ApiResponse (List&lt;FulfillmentCenter&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<FulfillmentCenter>>> CommerceDeleteFulfillmentCentersAsyncWithHttpInfo(List<string> ids);
         /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context
         /// </summary>
@@ -1332,6 +1374,150 @@ namespace VirtoCommerce.CoreModule.Client.Api
             return new ApiResponse<object>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 null);
+        }
+        /// <summary>
+        /// Delete  fulfillment centers registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>List&lt;FulfillmentCenter&gt;</returns>
+        public List<FulfillmentCenter> CommerceDeleteFulfillmentCenters(List<string> ids)
+        {
+             ApiResponse<List<FulfillmentCenter>> localVarResponse = CommerceDeleteFulfillmentCentersWithHttpInfo(ids);
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Delete  fulfillment centers registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>ApiResponse of List&lt;FulfillmentCenter&gt;</returns>
+        public ApiResponse<List<FulfillmentCenter>> CommerceDeleteFulfillmentCentersWithHttpInfo(List<string> ids)
+        {
+            // verify the required parameter 'ids' is set
+            if (ids == null)
+                throw new ApiException(400, "Missing required parameter 'ids' when calling VirtoCommerceCoreApi->CommerceDeleteFulfillmentCenters");
+
+            var localVarPath = "/api/fulfillment/centers";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (ids != null) localVarQueryParams.Add("ids", ApiClient.ParameterToString(ids)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeleteFulfillmentCenters: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeleteFulfillmentCenters: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<List<FulfillmentCenter>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<FulfillmentCenter>)ApiClient.Deserialize(localVarResponse, typeof(List<FulfillmentCenter>)));
+            
+        }
+
+        /// <summary>
+        /// Delete  fulfillment centers registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>Task of List&lt;FulfillmentCenter&gt;</returns>
+        public async System.Threading.Tasks.Task<List<FulfillmentCenter>> CommerceDeleteFulfillmentCentersAsync(List<string> ids)
+        {
+             ApiResponse<List<FulfillmentCenter>> localVarResponse = await CommerceDeleteFulfillmentCentersAsyncWithHttpInfo(ids);
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Delete  fulfillment centers registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids"></param>
+        /// <returns>Task of ApiResponse (List&lt;FulfillmentCenter&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<FulfillmentCenter>>> CommerceDeleteFulfillmentCentersAsyncWithHttpInfo(List<string> ids)
+        {
+            // verify the required parameter 'ids' is set
+            if (ids == null)
+                throw new ApiException(400, "Missing required parameter 'ids' when calling VirtoCommerceCoreApi->CommerceDeleteFulfillmentCenters");
+
+            var localVarPath = "/api/fulfillment/centers";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (ids != null) localVarQueryParams.Add("ids", ApiClient.ParameterToString(ids)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)await ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeleteFulfillmentCenters: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeleteFulfillmentCenters: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<List<FulfillmentCenter>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<FulfillmentCenter>)ApiClient.Deserialize(localVarResponse, typeof(List<FulfillmentCenter>)));
+            
         }
         /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context 
