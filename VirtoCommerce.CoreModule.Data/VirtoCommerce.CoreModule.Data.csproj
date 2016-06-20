@@ -125,6 +125,7 @@
     <Compile Include="Model\FulfillmentCenter.cs" />
     <Compile Include="Model\SeoUrlKeyword.cs" />
     <Compile Include="Model\Sequence.cs" />
+    <Compile Include="Observers\RegistrationEmailObserver.cs" />
     <Compile Include="Payment\DefaultManualPaymentMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommerceRepositoryImpl.cs" />
