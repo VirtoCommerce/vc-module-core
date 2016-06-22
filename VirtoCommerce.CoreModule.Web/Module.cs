@@ -17,6 +17,8 @@ using VirtoCommerce.CoreModule.Data.Services;
 using VirtoCommerce.Domain.Tax.Services;
 using VirtoCommerce.CoreModule.Data.Tax;
 using VirtoCommerce.Domain.Commerce.Model;
+using VirtoCommerce.CoreModule.Data.Observers;
+using VirtoCommerce.Domain.Customer.Events;
 
 namespace VirtoCommerce.CoreModule.Web
 {
@@ -69,6 +71,10 @@ namespace VirtoCommerce.CoreModule.Web
             var paymentService = new PaymentMethodsServiceImpl();
             _container.RegisterInstance<IPaymentMethodsService>(paymentService);
             #endregion
+
+            //Registration welcome email notification.
+            _container.RegisterType<IObserver<MemberChangingEvent>, RegistrationEmailObserver>("RegistrationEmailObserver");
+
         }
 
         public override void PostInitialize()
