@@ -123,9 +123,9 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [ResponseType(typeof(PostProcessPaymentResult))]
         public IHttpActionResult PostProcessPayment(webModel.PaymentCallbackParameters callback)
         {
-            if (callback != null && callback.Parameters != null && callback.Parameters.Any(param => param.Key == "orderid"))
+            if (callback != null && callback.Parameters != null && callback.Parameters.Any(param => param.Key.ToLower() == "orderid"))
             {
-                var orderId = callback.Parameters.First(param => param.Key == "orderid").Value;
+                var orderId = callback.Parameters.First(param => param.Key.ToLower() == "orderid").Value;
                 //some payment method require customer number to be passed and returned. First search customer order by number
                 var order = _customerOrderService.GetByOrderNumber(orderId, CustomerOrderResponseGroup.Full);
 
@@ -160,12 +160,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                     };
 
                     var retVal = paymentMethod.PostProcessPayment(context);
-
                     if (retVal != null)
                     {
                         _customerOrderService.Update(new[] { order });
                     }
 
+                    // order Number is required
+                    retVal.OrderId = order.Number;
                     return Ok(retVal);
                 }
             }
