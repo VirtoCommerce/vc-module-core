@@ -9,6 +9,7 @@
                     <span class="list-descr">{{ 'core.blades.currency-list.labels.exchange-rate' | translate }} {{data.exchangeRate}}</span>
                 </li>
             </ul>
+            <p class="note" ng-if="!blade.currentEntities.length">{{ 'catalog.blades.currency-list.labels.no-currencies' | translate }}</p>
         </div>
     </div>
 </div>

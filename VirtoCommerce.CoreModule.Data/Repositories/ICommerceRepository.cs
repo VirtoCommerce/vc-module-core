@@ -13,6 +13,7 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
         IQueryable<SeoUrlKeyword> SeoUrlKeywords { get; }
         IQueryable<Sequence> Sequences { get; }
         IQueryable<Currency> Currencies { get; }
+        IQueryable<PackageType> PackageTypes { get; }
 
         SeoUrlKeyword[] GetSeoByIds(string[] ids);
         SeoUrlKeyword[] GetObjectSeoUrlKeywords(string objectType, string objectId);

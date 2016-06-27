@@ -38,6 +38,8 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
             modelBuilder.Entity<Currency>().HasKey(x => x.Id).Property(x => x.Id);
             modelBuilder.Entity<Currency>().ToTable("Currency");
 
+            modelBuilder.Entity<PackageType>().HasKey(x => x.Id).Property(x => x.Id);
+            modelBuilder.Entity<PackageType>().ToTable("PackageType");
 
             base.OnModelCreating(modelBuilder);
         }
@@ -60,7 +62,10 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
         {
             get { return GetAsQueryable<Currency>(); }
         }
-
+        public IQueryable<PackageType> PackageTypes
+        {
+            get { return GetAsQueryable<PackageType>(); }
+        }
         public SeoUrlKeyword[] GetSeoByIds(string[] ids)
         {
             return SeoUrlKeywords.Where(x => ids.Contains(x.Id)).OrderBy(x => x.Keyword).ToArray();

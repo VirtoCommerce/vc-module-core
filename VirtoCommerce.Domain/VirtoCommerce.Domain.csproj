@@ -120,6 +120,7 @@
     <Compile Include="Catalog\Services\ISkuGenerator.cs" />
     <Compile Include="Commerce\Model\IHaveTaxDetalization.cs" />
     <Compile Include="Commerce\Model\ISupportCancellation.cs" />
+    <Compile Include="Commerce\Model\PackageType.cs" />
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
     <Compile Include="Commerce\Services\ISeoDuplicatesDetector.cs" />

@@ -85,6 +85,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Converters\PackageTypeConverter.cs" />
     <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\SeoUrlKeywordConverter.cs" />
     <Compile Include="Converters\FulfillmentCenterConverter.cs" />
@@ -120,9 +121,14 @@
     <Compile Include="Migrations\201604080904338_LanguageOptional.Designer.cs">
       <DependentUpon>201604080904338_LanguageOptional.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606271126089_packageTypes.cs" />
+    <Compile Include="Migrations\201606271126089_packageTypes.Designer.cs">
+      <DependentUpon>201606271126089_packageTypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Currency.cs" />
     <Compile Include="Model\FulfillmentCenter.cs" />
+    <Compile Include="Model\PackageType.cs" />
     <Compile Include="Model\SeoUrlKeyword.cs" />
     <Compile Include="Model\Sequence.cs" />
     <Compile Include="Observers\RegistrationEmailObserver.cs" />
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201604080904338_LanguageOptional.resx">
       <DependentUpon>201604080904338_LanguageOptional.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606271126089_packageTypes.resx">
+      <DependentUpon>201606271126089_packageTypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

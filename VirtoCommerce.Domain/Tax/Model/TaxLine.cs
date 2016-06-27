@@ -14,8 +14,17 @@ namespace VirtoCommerce.Domain.Tax.Model
     {
         public string Code { get; set; }
         public string Name { get; set; }
+        /// <summary>
+        /// Item quantity
+        /// </summary>
         public decimal Amount { get; set; }
+        /// <summary>
+        /// Price per item
+        /// </summary>
         public decimal Price { get; set; }
+        /// <summary>
+        /// Tax category/type
+        /// </summary>
         public string TaxType { get; set; }
     }
 }
