@@ -73,6 +73,7 @@
     <Compile Include="Model\KeyValuePair.cs" />
     <Compile Include="Model\Note.cs" />
     <Compile Include="Model\Organization.cs" />
+    <Compile Include="Model\PackageType.cs" />
     <Compile Include="Model\PaymentCallbackParameters.cs" />
     <Compile Include="Model\PaymentMethod.cs" />
     <Compile Include="Model\Permission.cs" />
