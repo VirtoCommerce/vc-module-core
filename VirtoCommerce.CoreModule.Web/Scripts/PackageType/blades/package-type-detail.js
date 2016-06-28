@@ -12,12 +12,16 @@
     				angular.copy(blade.currentEntity, blade.origEntity);
     				$scope.bladeClose();
     				blade.parentBlade.refresh(true);
+    			},function (error) {
+    				bladeNavigationService.setError('Error ' + error.status, blade);
     			});
     		} else {
     			packageTypeApi.update(blade.currentEntity, function (data) {
     				angular.copy(blade.currentEntity, blade.origEntity);
     				$scope.bladeClose();
     				blade.parentBlade.refresh(true);
+    			}, function (error) {
+    				bladeNavigationService.setError('Error ' + error.status, blade);
     			});
     		}
 
@@ -99,6 +103,8 @@
     						angular.copy(blade.currentEntity, blade.origEntity);
     						$scope.bladeClose();
     						blade.parentBlade.refresh(true);
+    					}, function (error) {
+    						bladeNavigationService.setError('Error ' + error.status, blade);
     					});
     				}
     			}

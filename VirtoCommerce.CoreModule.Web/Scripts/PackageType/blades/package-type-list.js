@@ -13,6 +13,8 @@ function ($scope, packageTypeApi, bladeNavigationService) {
 			if (parentRefresh && blade.parentRefresh) {
 				blade.parentRefresh(results);
 			}
+		}, function (error) {
+			bladeNavigationService.setError('Error ' + error.status, blade);
 		});
 	};
 

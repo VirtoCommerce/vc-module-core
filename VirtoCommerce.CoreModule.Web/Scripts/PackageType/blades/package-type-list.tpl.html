@@ -3,7 +3,6 @@
         <div class="inner-block clearfix">
             <ul class="list __items">
                 <li class="list-item" ng-repeat="data in blade.currentEntities track by $index" ng-class="{'__selected': data.name === selectedNodeId}" ng-click='selectNode(data)'>
-                    <i class="list-ico fa"></i>
                     <span style="font-weight:bold; margin-right:12px;">{{data.name}}</span>
                     <span class="name">{{data.height}}/{{data.width}}/{{data.length}} {{data.measureUnit}}</span>
                 </li>
