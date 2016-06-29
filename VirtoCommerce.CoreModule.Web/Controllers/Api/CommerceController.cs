@@ -22,14 +22,12 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
     public class CommerceController : ApiController
     {
         private readonly ICommerceService _commerceService;
-        private readonly ICustomerOrderService _customerOrderService;
         private readonly IStoreService _storeService;
         private readonly ISeoDuplicatesDetector _seoDuplicateDetector;
 
-        public CommerceController(ICommerceService commerceService, ICustomerOrderService customerOrderService, IStoreService storeService, ISeoDuplicatesDetector seoDuplicateDetector)
+        public CommerceController(ICommerceService commerceService, IStoreService storeService, ISeoDuplicatesDetector seoDuplicateDetector)
         {
             _commerceService = commerceService;
-            _customerOrderService = customerOrderService;
             _storeService = storeService;
             _seoDuplicateDetector = seoDuplicateDetector;
         }
@@ -80,7 +78,6 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpGet]
         [ResponseType(typeof(coreModel.FulfillmentCenter))]
         [Route("fulfillment/centers/{id}")]
-        [CheckPermission(Permission = CommercePredefinedPermissions.Read)]
         public IHttpActionResult GetFulfillmentCenter(string id)
         {
             var retVal = _commerceService.GetAllFulfillmentCenters().First(x => x.Id == id);
@@ -94,7 +91,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPut]
         [ResponseType(typeof(coreModel.FulfillmentCenter))]
         [Route("fulfillment/centers")]
-        [CheckPermission(Permissions = new[] { CommercePredefinedPermissions.Create, CommercePredefinedPermissions.Update })]
+        [CheckPermission(Permissions = new[] { CommercePredefinedPermissions.FulfillmentCreate, CommercePredefinedPermissions.FulfillmentUpdate })]
         [CLSCompliant(false)]
         public IHttpActionResult UpdateFulfillmentCenter(coreModel.FulfillmentCenter center)
         {
@@ -108,70 +105,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpDelete]
         [ResponseType(typeof(coreModel.FulfillmentCenter[]))]
         [Route("fulfillment/centers")]
+        [CheckPermission(Permission = CommercePredefinedPermissions.FulfillmentDelete)]
         public IHttpActionResult DeleteFulfillmentCenters([FromUri] string[] ids)
         {
             _commerceService.DeleteFulfillmentCenter(ids);
             return Ok();
         }
-
-        /// <summary>
-        /// Payment callback operation used by external payment services to inform post process payment in our system
-        /// </summary>
-        /// <param name="callback">payment callback parameters</param>
-        [HttpPost]
-        [Route("paymentcallback")]
-        [ResponseType(typeof(PostProcessPaymentResult))]
-        public IHttpActionResult PostProcessPayment(webModel.PaymentCallbackParameters callback)
-        {
-            if (callback != null && callback.Parameters != null && callback.Parameters.Any(param => param.Key == "orderid"))
-            {
-                var orderId = callback.Parameters.First(param => param.Key == "orderid").Value;
-                //some payment method require customer number to be passed and returned. First search customer order by number
-                var order = _customerOrderService.GetByOrderNumber(orderId, CustomerOrderResponseGroup.Full);
-
-                //if order not found by order number search by order id
-                if (order == null)
-                    order = _customerOrderService.GetById(orderId, CustomerOrderResponseGroup.Full);
-
-                var store = _storeService.GetById(order.StoreId);
-                var parameters = new NameValueCollection();
-                foreach (var param in callback.Parameters)
-                {
-                    parameters.Add(param.Key, param.Value);
-                }
-                var paymentMethod = store.PaymentMethods.Where(x => x.IsActive).FirstOrDefault(x => x.ValidatePostProcessRequest(parameters).IsSuccess);
-                if (paymentMethod != null)
-                {
-                    var paymentOuterId = paymentMethod.ValidatePostProcessRequest(parameters).OuterId;
-
-                    var payment = order.InPayments.FirstOrDefault(x => string.IsNullOrEmpty(x.OuterId) || x.OuterId == paymentOuterId);
-                    if (payment == null)
-                    {
-                        throw new NullReferenceException("appropriate paymentMethod not found");
-                    }
-
-                    var context = new PostProcessPaymentEvaluationContext
-                    {
-                        Order = order,
-                        Payment = payment,
-                        Store = store,
-                        OuterId = paymentOuterId,
-                        Parameters = parameters
-                    };
-
-                    var retVal = paymentMethod.PostProcessPayment(context);
-
-                    if (retVal != null)
-                    {
-                        _customerOrderService.Update(new[] { order });
-                    }
-
-                    return Ok(retVal);
-                }
-            }
-            return Ok(new PostProcessPaymentResult { ErrorMessage = "cancel payment" });
-        }
-
+    
         /// <summary>
         /// Batch create or update seo infos
         /// </summary>
@@ -201,7 +141,6 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpGet]
         [ResponseType(typeof(coreModel.SeoInfo[]))]
         [Route("seoinfos/{slug}")]
-        [CheckPermission(Permission = CommercePredefinedPermissions.Read)]
         public IHttpActionResult GetSeoInfoBySlug(string slug)
         {
             var retVal = _commerceService.GetSeoByKeyword(slug).ToArray();
@@ -228,7 +167,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPut]
         [ResponseType(typeof(void))]
         [Route("currencies")]
-        [CheckPermission(Permission = CommercePredefinedPermissions.Update)]
+        [CheckPermission(Permission = CommercePredefinedPermissions.CurrencyUpdate)]
         public IHttpActionResult UpdateCurrency(coreModel.Currency currency)
         {
             _commerceService.UpsertCurrencies(new[] { currency });
@@ -242,7 +181,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPost]
         [ResponseType(typeof(void))]
         [Route("currencies")]
-        [CheckPermission(Permission = CommercePredefinedPermissions.Create)]
+        [CheckPermission(Permission = CommercePredefinedPermissions.CurrencyCreate)]
         public IHttpActionResult CreateCurrency(coreModel.Currency currency)
         {
             _commerceService.UpsertCurrencies(new[] { currency });
@@ -256,10 +195,65 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpDelete]
         [ResponseType(typeof(void))]
         [Route("currencies")]
-        [CheckPermission(Permission = CommercePredefinedPermissions.Delete)]
+        [CheckPermission(Permission = CommercePredefinedPermissions.CurrencyDelete)]
         public IHttpActionResult DeleteCurrencies([FromUri] string[] codes)
         {
             _commerceService.DeleteCurrencies(codes);
+            return Ok();
+        }
+
+
+        /// <summary>
+        /// Return all package types registered in the system
+        /// </summary>
+        [HttpGet]
+        [ResponseType(typeof(coreModel.PackageType[]))]
+        [Route("packageTypes")]
+        public IHttpActionResult GetAllPackageTypes()
+        {
+            var retVal = _commerceService.GetAllPackageTypes().ToArray();
+            return Ok(retVal);
+        }
+
+        /// <summary>
+        ///  Update a existing package type 
+        /// </summary>
+        /// <param name="packageType">package type</param>
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        [Route("packageTypes")]
+        [CheckPermission(Permission = CommercePredefinedPermissions.PackageTypeUpdate)]
+        public IHttpActionResult UpdatePackageType(coreModel.PackageType packageType)
+        {
+            _commerceService.UpsertPackageTypes(new[] { packageType });
+            return Ok();
+        }
+
+        /// <summary>
+        ///  Create new package type 
+        /// </summary>
+        /// <param name="packageType">package type</param>
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        [Route("packageTypes")]
+        [CheckPermission(Permission = CommercePredefinedPermissions.PackageTypeCreate)]
+        public IHttpActionResult CreatePackageType(coreModel.PackageType packageType)
+        {
+            _commerceService.UpsertPackageTypes(new[] { packageType });
+            return Ok();
+        }
+
+        /// <summary>
+        ///  Delete package types 
+        /// </summary>
+        /// <param name="ids">package type ids</param>
+        [HttpDelete]
+        [ResponseType(typeof(void))]
+        [Route("packageTypes")]
+        [CheckPermission(Permission = CommercePredefinedPermissions.PackageTypeDelete)]
+        public IHttpActionResult DeletePackageTypes([FromUri] string[] ids)
+        {
+            _commerceService.DeletePackageTypes(ids);
             return Ok();
         }
     }

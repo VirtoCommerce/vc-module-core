@@ -57,6 +57,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <returns>ApiResponse of Object(void)</returns>
         ApiResponse<Object> CommerceCreateCurrencyWithHttpInfo(Currency currency);
         /// <summary>
+        /// Create new package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns></returns>
+        void CommerceCreatePackageType(PackageType packageType);
+
+        /// <summary>
+        /// Create new package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> CommerceCreatePackageTypeWithHttpInfo(PackageType packageType);
+        /// <summary>
         /// Delete currencies
         /// </summary>
         /// <remarks>
@@ -99,6 +120,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <returns>ApiResponse of List&lt;FulfillmentCenter&gt;</returns>
         ApiResponse<List<FulfillmentCenter>> CommerceDeleteFulfillmentCentersWithHttpInfo(List<string> ids);
         /// <summary>
+        /// Delete package types
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns></returns>
+        void CommerceDeletePackageTypes(List<string> ids);
+
+        /// <summary>
+        /// Delete package types
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> CommerceDeletePackageTypesWithHttpInfo(List<string> ids);
+        /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context
         /// </summary>
         /// <remarks>
@@ -140,6 +182,25 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>ApiResponse of List&lt;Currency&gt;</returns>
         ApiResponse<List<Currency>> CommerceGetAllCurrenciesWithHttpInfo();
+        /// <summary>
+        /// Return all package types registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;PackageType&gt;</returns>
+        List<PackageType> CommerceGetAllPackageTypes();
+
+        /// <summary>
+        /// Return all package types registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;PackageType&gt;</returns>
+        ApiResponse<List<PackageType>> CommerceGetAllPackageTypesWithHttpInfo();
         /// <summary>
         /// Find fulfillment center by id
         /// </summary>
@@ -287,6 +348,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="center">fulfillment center</param>
         /// <returns>ApiResponse of FulfillmentCenter</returns>
         ApiResponse<FulfillmentCenter> CommerceUpdateFulfillmentCenterWithHttpInfo(FulfillmentCenter center);
+        /// <summary>
+        /// Update a existing package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns></returns>
+        void CommerceUpdatePackageType(PackageType packageType);
+
+        /// <summary>
+        /// Update a existing package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        ApiResponse<Object> CommerceUpdatePackageTypeWithHttpInfo(PackageType packageType);
         /// <summary>
         /// Create a new user
         /// </summary>
@@ -493,6 +575,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <returns>Task of ApiResponse</returns>
         System.Threading.Tasks.Task<ApiResponse<object>> CommerceCreateCurrencyAsyncWithHttpInfo(Currency currency);
         /// <summary>
+        /// Create new package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task CommerceCreatePackageTypeAsync(PackageType packageType);
+
+        /// <summary>
+        /// Create new package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<object>> CommerceCreatePackageTypeAsyncWithHttpInfo(PackageType packageType);
+        /// <summary>
         /// Delete currencies
         /// </summary>
         /// <remarks>
@@ -535,6 +638,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <returns>Task of ApiResponse (List&lt;FulfillmentCenter&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<FulfillmentCenter>>> CommerceDeleteFulfillmentCentersAsyncWithHttpInfo(List<string> ids);
         /// <summary>
+        /// Delete package types
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task CommerceDeletePackageTypesAsync(List<string> ids);
+
+        /// <summary>
+        /// Delete package types
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<object>> CommerceDeletePackageTypesAsyncWithHttpInfo(List<string> ids);
+        /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context
         /// </summary>
         /// <remarks>
@@ -576,6 +700,25 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
         /// <returns>Task of ApiResponse (List&lt;Currency&gt;)</returns>
         System.Threading.Tasks.Task<ApiResponse<List<Currency>>> CommerceGetAllCurrenciesAsyncWithHttpInfo();
+        /// <summary>
+        /// Return all package types registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of List&lt;PackageType&gt;</returns>
+        System.Threading.Tasks.Task<List<PackageType>> CommerceGetAllPackageTypesAsync();
+
+        /// <summary>
+        /// Return all package types registered in the system
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (List&lt;PackageType&gt;)</returns>
+        System.Threading.Tasks.Task<ApiResponse<List<PackageType>>> CommerceGetAllPackageTypesAsyncWithHttpInfo();
         /// <summary>
         /// Find fulfillment center by id
         /// </summary>
@@ -723,6 +866,27 @@ namespace VirtoCommerce.CoreModule.Client.Api
         /// <param name="center">fulfillment center</param>
         /// <returns>Task of ApiResponse (FulfillmentCenter)</returns>
         System.Threading.Tasks.Task<ApiResponse<FulfillmentCenter>> CommerceUpdateFulfillmentCenterAsyncWithHttpInfo(FulfillmentCenter center);
+        /// <summary>
+        /// Update a existing package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of void</returns>
+        System.Threading.Tasks.Task CommerceUpdatePackageTypeAsync(PackageType packageType);
+
+        /// <summary>
+        /// Update a existing package type
+        /// </summary>
+        /// <remarks>
+        /// 
+        /// </remarks>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of ApiResponse</returns>
+        System.Threading.Tasks.Task<ApiResponse<object>> CommerceUpdatePackageTypeAsyncWithHttpInfo(PackageType packageType);
         /// <summary>
         /// Create a new user
         /// </summary>
@@ -1242,6 +1406,164 @@ namespace VirtoCommerce.CoreModule.Client.Api
                 null);
         }
         /// <summary>
+        /// Create new package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns></returns>
+        public void CommerceCreatePackageType(PackageType packageType)
+        {
+             CommerceCreatePackageTypeWithHttpInfo(packageType);
+        }
+
+        /// <summary>
+        /// Create new package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<object> CommerceCreatePackageTypeWithHttpInfo(PackageType packageType)
+        {
+            // verify the required parameter 'packageType' is set
+            if (packageType == null)
+                throw new ApiException(400, "Missing required parameter 'packageType' when calling VirtoCommerceCoreApi->CommerceCreatePackageType");
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml", 
+                "application/x-www-form-urlencoded"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (packageType.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = ApiClient.Serialize(packageType); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = packageType; // byte array
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)ApiClient.CallApi(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceCreatePackageType: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceCreatePackageType: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            
+            return new ApiResponse<object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Create new package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task CommerceCreatePackageTypeAsync(PackageType packageType)
+        {
+             await CommerceCreatePackageTypeAsyncWithHttpInfo(packageType);
+
+        }
+
+        /// <summary>
+        /// Create new package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceCreatePackageTypeAsyncWithHttpInfo(PackageType packageType)
+        {
+            // verify the required parameter 'packageType' is set
+            if (packageType == null)
+                throw new ApiException(400, "Missing required parameter 'packageType' when calling VirtoCommerceCoreApi->CommerceCreatePackageType");
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml", 
+                "application/x-www-form-urlencoded"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (packageType.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = ApiClient.Serialize(packageType); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = packageType; // byte array
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)await ApiClient.CallApiAsync(localVarPath,
+                Method.POST, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceCreatePackageType: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceCreatePackageType: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            
+            return new ApiResponse<object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+        /// <summary>
         /// Delete currencies 
         /// </summary>
         /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
@@ -1518,6 +1840,140 @@ namespace VirtoCommerce.CoreModule.Client.Api
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (List<FulfillmentCenter>)ApiClient.Deserialize(localVarResponse, typeof(List<FulfillmentCenter>)));
             
+        }
+        /// <summary>
+        /// Delete package types 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns></returns>
+        public void CommerceDeletePackageTypes(List<string> ids)
+        {
+             CommerceDeletePackageTypesWithHttpInfo(ids);
+        }
+
+        /// <summary>
+        /// Delete package types 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<object> CommerceDeletePackageTypesWithHttpInfo(List<string> ids)
+        {
+            // verify the required parameter 'ids' is set
+            if (ids == null)
+                throw new ApiException(400, "Missing required parameter 'ids' when calling VirtoCommerceCoreApi->CommerceDeletePackageTypes");
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (ids != null) localVarQueryParams.Add("ids", ApiClient.ParameterToString(ids)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)ApiClient.CallApi(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeletePackageTypes: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeletePackageTypes: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            
+            return new ApiResponse<object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Delete package types 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task CommerceDeletePackageTypesAsync(List<string> ids)
+        {
+             await CommerceDeletePackageTypesAsyncWithHttpInfo(ids);
+
+        }
+
+        /// <summary>
+        /// Delete package types 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="ids">package type ids</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceDeletePackageTypesAsyncWithHttpInfo(List<string> ids)
+        {
+            // verify the required parameter 'ids' is set
+            if (ids == null)
+                throw new ApiException(400, "Missing required parameter 'ids' when calling VirtoCommerceCoreApi->CommerceDeletePackageTypes");
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (ids != null) localVarQueryParams.Add("ids", ApiClient.ParameterToString(ids)); // query parameter
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)await ApiClient.CallApiAsync(localVarPath,
+                Method.DELETE, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeletePackageTypes: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceDeletePackageTypes: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            
+            return new ApiResponse<object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
         }
         /// <summary>
         /// Evaluate and return all tax rates for specified store and evaluation context 
@@ -1829,6 +2285,138 @@ namespace VirtoCommerce.CoreModule.Client.Api
             return new ApiResponse<List<Currency>>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (List<Currency>)ApiClient.Deserialize(localVarResponse, typeof(List<Currency>)));
+            
+        }
+        /// <summary>
+        /// Return all package types registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>List&lt;PackageType&gt;</returns>
+        public List<PackageType> CommerceGetAllPackageTypes()
+        {
+             ApiResponse<List<PackageType>> localVarResponse = CommerceGetAllPackageTypesWithHttpInfo();
+             return localVarResponse.Data;
+        }
+
+        /// <summary>
+        /// Return all package types registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>ApiResponse of List&lt;PackageType&gt;</returns>
+        public ApiResponse<List<PackageType>> CommerceGetAllPackageTypesWithHttpInfo()
+        {
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)ApiClient.CallApi(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceGetAllPackageTypes: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceGetAllPackageTypes: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<List<PackageType>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<PackageType>)ApiClient.Deserialize(localVarResponse, typeof(List<PackageType>)));
+            
+        }
+
+        /// <summary>
+        /// Return all package types registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of List&lt;PackageType&gt;</returns>
+        public async System.Threading.Tasks.Task<List<PackageType>> CommerceGetAllPackageTypesAsync()
+        {
+             ApiResponse<List<PackageType>> localVarResponse = await CommerceGetAllPackageTypesAsyncWithHttpInfo();
+             return localVarResponse.Data;
+
+        }
+
+        /// <summary>
+        /// Return all package types registered in the system 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <returns>Task of ApiResponse (List&lt;PackageType&gt;)</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<List<PackageType>>> CommerceGetAllPackageTypesAsyncWithHttpInfo()
+        {
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml"
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)await ApiClient.CallApiAsync(localVarPath,
+                Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceGetAllPackageTypes: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceGetAllPackageTypes: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            return new ApiResponse<List<PackageType>>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                (List<PackageType>)ApiClient.Deserialize(localVarResponse, typeof(List<PackageType>)));
             
         }
         /// <summary>
@@ -2900,6 +3488,164 @@ namespace VirtoCommerce.CoreModule.Client.Api
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
                 (FulfillmentCenter)ApiClient.Deserialize(localVarResponse, typeof(FulfillmentCenter)));
             
+        }
+        /// <summary>
+        /// Update a existing package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns></returns>
+        public void CommerceUpdatePackageType(PackageType packageType)
+        {
+             CommerceUpdatePackageTypeWithHttpInfo(packageType);
+        }
+
+        /// <summary>
+        /// Update a existing package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>ApiResponse of Object(void)</returns>
+        public ApiResponse<object> CommerceUpdatePackageTypeWithHttpInfo(PackageType packageType)
+        {
+            // verify the required parameter 'packageType' is set
+            if (packageType == null)
+                throw new ApiException(400, "Missing required parameter 'packageType' when calling VirtoCommerceCoreApi->CommerceUpdatePackageType");
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml", 
+                "application/x-www-form-urlencoded"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (packageType.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = ApiClient.Serialize(packageType); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = packageType; // byte array
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)ApiClient.CallApi(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceUpdatePackageType: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceUpdatePackageType: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            
+            return new ApiResponse<object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
+        }
+
+        /// <summary>
+        /// Update a existing package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of void</returns>
+        public async System.Threading.Tasks.Task CommerceUpdatePackageTypeAsync(PackageType packageType)
+        {
+             await CommerceUpdatePackageTypeAsyncWithHttpInfo(packageType);
+
+        }
+
+        /// <summary>
+        /// Update a existing package type 
+        /// </summary>
+        /// <exception cref="VirtoCommerce.CoreModule.Client.Client.ApiException">Thrown when fails to make API call</exception>
+        /// <param name="packageType">package type</param>
+        /// <returns>Task of ApiResponse</returns>
+        public async System.Threading.Tasks.Task<ApiResponse<object>> CommerceUpdatePackageTypeAsyncWithHttpInfo(PackageType packageType)
+        {
+            // verify the required parameter 'packageType' is set
+            if (packageType == null)
+                throw new ApiException(400, "Missing required parameter 'packageType' when calling VirtoCommerceCoreApi->CommerceUpdatePackageType");
+
+            var localVarPath = "/api/packageTypes";
+            var localVarPathParams = new Dictionary<string, string>();
+            var localVarQueryParams = new Dictionary<string, string>();
+            var localVarHeaderParams = new Dictionary<string, string>(Configuration.DefaultHeader);
+            var localVarFormParams = new Dictionary<string, string>();
+            var localVarFileParams = new Dictionary<string, FileParameter>();
+            object localVarPostBody = null;
+
+            // to determine the Content-Type header
+            string[] localVarHttpContentTypes = new string[] {
+                "application/json", 
+                "text/json", 
+                "application/xml", 
+                "text/xml", 
+                "application/x-www-form-urlencoded"
+            };
+            string localVarHttpContentType = ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+
+            // to determine the Accept header
+            string[] localVarHttpHeaderAccepts = new string[] {
+            };
+            string localVarHttpHeaderAccept = ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
+            if (localVarHttpHeaderAccept != null)
+                localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
+
+            // set "format" to json by default
+            // e.g. /pet/{petId}.{format} becomes /pet/{petId}.json
+            localVarPathParams.Add("format", "json");
+            if (packageType.GetType() != typeof(byte[]))
+            {
+                localVarPostBody = ApiClient.Serialize(packageType); // http body (model) parameter
+            }
+            else
+            {
+                localVarPostBody = packageType; // byte array
+            }
+
+
+            // make the HTTP request
+            IRestResponse localVarResponse = (IRestResponse)await ApiClient.CallApiAsync(localVarPath,
+                Method.PUT, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarFileParams,
+                localVarPathParams, localVarHttpContentType);
+
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
+
+            if (localVarStatusCode >= 400 && (localVarStatusCode != 404 || Configuration.ThrowExceptionWhenStatusCodeIs404))
+                throw new ApiException(localVarStatusCode, "Error calling CommerceUpdatePackageType: " + localVarResponse.Content, localVarResponse.Content);
+            else if (localVarStatusCode == 0)
+                throw new ApiException(localVarStatusCode, "Error calling CommerceUpdatePackageType: " + localVarResponse.ErrorMessage, localVarResponse.ErrorMessage);
+
+            
+            return new ApiResponse<object>(localVarStatusCode,
+                localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
+                null);
         }
         /// <summary>
         /// Create a new user 

@@ -13,6 +13,7 @@ namespace VirtoCommerce.CoreModule.Web.ExportImport
 	{
 		public FulfillmentCenter[] FulfillmentCenters { get; set; }
         public Currency[] Currencies { get; set; }
+        public PackageType[] PackageTypes { get; set; }
 	}
 
 	public sealed class CoreExportImport
@@ -38,10 +39,15 @@ namespace VirtoCommerce.CoreModule.Web.ExportImport
             {
                 backupObject.FulfillmentCenters.ForEach(x => _commerceService.UpsertFulfillmentCenter(x));
             }
-            progressCallback(new ExportImportProgressInfo("imporing currencies"));
+            progressCallback(new ExportImportProgressInfo("importing currencies"));
             if (backupObject.Currencies != null)
             {
                 _commerceService.UpsertCurrencies(backupObject.Currencies);
+            }
+            progressCallback(new ExportImportProgressInfo("importing package types"));
+            if (backupObject.PackageTypes != null)
+            {
+                _commerceService.UpsertPackageTypes(backupObject.PackageTypes);
             }
 
         }
@@ -55,10 +61,16 @@ namespace VirtoCommerce.CoreModule.Web.ExportImport
             progressCallback(new ExportImportProgressInfo("currencies loading"));
             var currencies = _commerceService.GetAllCurrencies().ToArray();
             progressCallback(new ExportImportProgressInfo(string.Format("currencies loaded: {0}", currencies.Count())));
+
+            progressCallback(new ExportImportProgressInfo("package types loading"));
+            var packageTypes = _commerceService.GetAllPackageTypes().ToArray();
+            progressCallback(new ExportImportProgressInfo(string.Format("package types  loaded: {0}", packageTypes.Count())));
+
             return new BackupObject()
             {
                 FulfillmentCenters = fulfillments,
-                Currencies = currencies
+                Currencies = currencies,
+                PackageTypes = packageTypes
 			};
 		}
 	}

@@ -2,11 +2,16 @@
 {
     public static class CommercePredefinedPermissions
     {
-        public const string Read = "core:fulfillment:read",
-            Create = "core:fulfillment:create",
-            //Access = "core:fulfillment:access",
-            Update = "core:fulfillment:update",
-            Delete = "core:fulfillment:delete";
-        //public const string PaymentgatewayManage = "core:paymentgateway:manage";
+        public const string  FulfillmentCreate = "core:fulfillment:create",
+            FulfillmentUpdate = "core:fulfillment:update",
+            FulfillmentDelete = "core:fulfillment:delete";
+
+        public const string CurrencyCreate = "core:currency:create",
+          CurrencyUpdate = "core:currency:update",
+          CurrencyDelete = "core:currency:delete";
+
+        public const string PackageTypeCreate = "core:packageType:create",
+         PackageTypeUpdate = "core:packageType:update",
+         PackageTypeDelete = "core:packageType:delete";
     }
 }

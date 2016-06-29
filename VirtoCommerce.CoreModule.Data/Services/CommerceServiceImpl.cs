@@ -284,6 +284,53 @@ namespace VirtoCommerce.CoreModule.Data.Services
             }
         }
 
+        public IEnumerable<coreModel.PackageType> GetAllPackageTypes()
+        {
+            using (var repository = _repositoryFactory())
+            {
+                var result = repository.PackageTypes.OrderBy(x => x.Name).ToArray()
+                                                    .Select(x => x.ToCoreModel());
+                return result;
+            }
+        }
+
+        public void UpsertPackageTypes(coreModel.PackageType[] packageTypes)
+        {
+            if (packageTypes == null)
+                throw new ArgumentNullException("packageTypes");
+
+            using (var repository = _repositoryFactory())
+            {
+                foreach (var packageType in packageTypes)
+                {                   
+                    var sourceEntry = packageType.ToDataModel();
+                    var targetEntry = repository.PackageTypes.FirstOrDefault(x => x.Id == packageType.Id);               
+                    if (targetEntry == null)
+                    {
+                        repository.Add(sourceEntry);
+                    }
+                    else
+                    {
+                        sourceEntry.Patch(targetEntry);
+                    }
+                }
+                CommitChanges(repository);
+            }
+        }
+
+        public void DeletePackageTypes(string[] ids)
+        {
+            using (var repository = _repositoryFactory())
+            {
+                foreach (var packageType in repository.PackageTypes.Where(x => ids.Contains(x.Id)))
+                {                
+                    repository.Remove(packageType);
+                }
+                CommitChanges(repository);
+            }
+        }
+
+
         #endregion
     }
 }

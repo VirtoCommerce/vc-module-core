@@ -23,5 +23,9 @@ namespace VirtoCommerce.Domain.Commerce.Services
         void UpsertSeoForObjects(ISeoSupport[] seoSupportObjects);
         void DeleteSeoForObject(ISeoSupport seoSupportObject);
 
-	}
+        IEnumerable<PackageType> GetAllPackageTypes();
+        void UpsertPackageTypes(PackageType[] packageTypes);
+        void DeletePackageTypes(string[] ids);
+
+    }
 }

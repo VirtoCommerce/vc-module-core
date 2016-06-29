@@ -81,12 +81,12 @@ namespace VirtoCommerce.Domain.Payment.Model
 
 		public abstract RefundProcessPaymentResult RefundProcessPayment(RefundProcessPaymentEvaluationContext context);
 
-		/// <summary>
-		/// Method that validate parameters in querystring of request to push url
-		/// </summary>
-		/// <param name="queryString">Query string of payment push request (external payment system or frontend)</param>
-		/// <returns>Result of validation</returns>
-		public abstract ValidatePostProcessRequestResult ValidatePostProcessRequest(NameValueCollection queryString);
+        /// <summary>
+        /// Method that validates parameters in querystring of request to push URL
+        /// </summary>
+        /// <param name="queryString">Query string of payment push request (external payment system or storefront)</param>
+        /// <returns>Validation result</returns>
+        public abstract ValidatePostProcessRequestResult ValidatePostProcessRequest(NameValueCollection queryString);
 
 		public string GetSetting(string settingName)
 		{
