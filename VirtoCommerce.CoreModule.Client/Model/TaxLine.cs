@@ -36,6 +36,12 @@ namespace VirtoCommerce.CoreModule.Client.Model
         public double? Amount { get; set; }
 
         /// <summary>
+        /// Gets or Sets Quantity
+        /// </summary>
+        [DataMember(Name="quantity", EmitDefaultValue=false)]
+        public int? Quantity { get; set; }
+
+        /// <summary>
         /// Gets or Sets Price
         /// </summary>
         [DataMember(Name="price", EmitDefaultValue=false)]
@@ -64,6 +70,7 @@ namespace VirtoCommerce.CoreModule.Client.Model
             sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  Price: ").Append(Price).Append("\n");
             sb.Append("  TaxType: ").Append(TaxType).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
@@ -119,6 +126,11 @@ namespace VirtoCommerce.CoreModule.Client.Model
                     this.Amount.Equals(other.Amount)
                 ) && 
                 (
+                    this.Quantity == other.Quantity ||
+                    this.Quantity != null &&
+                    this.Quantity.Equals(other.Quantity)
+                ) && 
+                (
                     this.Price == other.Price ||
                     this.Price != null &&
                     this.Price.Equals(other.Price)
@@ -155,6 +167,9 @@ namespace VirtoCommerce.CoreModule.Client.Model
 
                 if (this.Amount != null)
                     hash = hash * 59 + this.Amount.GetHashCode();
+
+                if (this.Quantity != null)
+                    hash = hash * 59 + this.Quantity.GetHashCode();
 
                 if (this.Price != null)
                     hash = hash * 59 + this.Price.GetHashCode();
