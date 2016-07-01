@@ -29,6 +29,8 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public Entity AssociatedObject { get; set; }
 
+        public string[] Tags { get; set; }
+
         #region Obsolete properties
         [Obsolete]
         public string Description { get; set; }
