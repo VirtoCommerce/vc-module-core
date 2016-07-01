@@ -141,7 +141,7 @@
                 "title": "Predefined package size dimensions",
                 "subtitle": "Manage system packages types",
                 "labels": {
-                    "no-package": "No predefined packages"
+                    "no-packages": "No predefined packages"
                 }
             },
             "package-type-detail": {
