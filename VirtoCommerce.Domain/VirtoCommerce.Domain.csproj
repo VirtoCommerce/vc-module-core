@@ -324,7 +324,7 @@
     <None Include="VirtoCommerce.Domain.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Search\Filters\Filters.xml" />
+    <None Include="Search\Filters\Filters.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
