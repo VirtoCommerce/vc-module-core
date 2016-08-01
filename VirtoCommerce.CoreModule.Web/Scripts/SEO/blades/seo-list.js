@@ -2,13 +2,14 @@
 .controller('virtoCommerce.coreModule.seo.seoListController', ['$scope', 'platformWebApp.uiGridHelper', 'virtoCommerce.storeModule.stores', 'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', function ($scope, uiGridHelper, stores, bladeNavigationService, dialogService) {
     var blade = $scope.blade;
     $scope.selectedNodeId = null; // need to initialize to null
-    blade.currentEntity = blade.seoContainerObject;
 
     var storesPromise = blade.fixedStoreId ? null : stores.query().$promise;
 
-    blade.refresh = function () {
-        blade.currentEntities = blade.currentEntity.seoInfos;
-        blade.isLoading = false;
+    blade.refresh = function (seoContainerObject) {
+        if (seoContainerObject) {
+            blade.seoContainerObject = seoContainerObject;
+            blade.currentEntities = blade.seoContainerObject.seoInfos;
+        }
     };
 
     $scope.resolveDuplicates = function () {
@@ -19,7 +20,6 @@
             seoContainerObject: blade.seoContainerObject,
             defaultContainerId: blade.defaultContainerId,
             languages: blade.languages,
-            parentRefresh: blade.refresh,
             controller: 'virtoCommerce.coreModule.seo.seoDuplicatesController',
             template: 'Modules/$(VirtoCommerce.Core)/Scripts/SEO/blades/seo-duplicates.tpl.html'
         };
@@ -46,7 +46,6 @@
             isNew: isNew,
             seoContainerObject: blade.seoContainerObject,
             languages: blade.languages,
-            parentRefresh: blade.refresh,
             updatePermission: blade.updatePermission,
             controller: 'virtoCommerce.coreModule.seo.seoDetailController',
             template: 'Modules/$(VirtoCommerce.Core)/Scripts/SEO/blades/seo-detail.tpl.html'
@@ -76,7 +75,7 @@
                 if (remove) {
                     bladeNavigationService.closeChildrenBlades(blade, function () {
                         _.each(selection, function (x) {
-                            blade.currentEntity.seoInfos.splice(blade.currentEntity.seoInfos.indexOf(x), 1);
+                            blade.seoContainerObject.seoInfos.splice(blade.seoContainerObject.seoInfos.indexOf(x), 1);
                         });
                     });
                 }
@@ -114,5 +113,6 @@
     blade.headIcon = 'fa-globe';
     blade.subtitle = 'core.blades.seo-list.subtitle';
 
-    blade.refresh();
+    blade.refresh(blade.seoContainerObject);
+    blade.isLoading = false;
 }]);
