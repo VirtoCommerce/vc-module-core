@@ -141,7 +141,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                         }
                     }
 
-                    if (seoObject.SeoInfos != null && seoObject.SeoInfos.Any())
+                    if (seoObject.SeoInfos != null)
                     {
                         var target = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(repository.GetObjectSeoUrlKeywords(objectType, seoObject.Id)) };
                         var source = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(seoObject.SeoInfos.Select(x => x.ToDataModel())) };

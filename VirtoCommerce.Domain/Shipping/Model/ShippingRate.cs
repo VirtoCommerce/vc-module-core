@@ -9,8 +9,8 @@ namespace VirtoCommerce.Domain.Shipping.Model
 {
 	public class ShippingRate
 	{
-		/// <summary>
-		/// Shipping option name
+    	/// <summary>
+		/// Shipping option name or identifier
 		/// </summary>
 		public string OptionName { get; set; }
 

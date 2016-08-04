@@ -7,7 +7,7 @@
                 <br />
                 <button class="btn" ng-click="resolveDuplicates()">{{ 'core.blades.seo-list.labels.resolve-duplicates' | translate }}</button>
             </div>
-            <div class="table-wrapper" ng-init="setGridOptions({
+            <div class="table-wrapper" ng-if="blade.currentEntities.length" ng-init="setGridOptions({
                     rowTemplate: 'list.row.html',
                     rowHeight: 60,
                     columnDefs: [

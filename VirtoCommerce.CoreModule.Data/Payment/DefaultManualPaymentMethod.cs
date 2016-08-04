@@ -26,9 +26,10 @@ namespace VirtoCommerce.CoreModule.Data.Payment
 
 		public override ProcessPaymentResult ProcessPayment(ProcessPaymentEvaluationContext context)
 		{
-			context.Payment.PaymentStatus = PaymentStatus.Authorized;
+			context.Payment.PaymentStatus = PaymentStatus.Paid;
 			context.Payment.OuterId = context.Payment.Number;
 			context.Payment.CapturedDate = DateTime.UtcNow;
+            context.Payment.IsApproved = true;
 			return new ProcessPaymentResult { IsSuccess = true, NewPaymentStatus = PaymentStatus.Authorized };
 		}
 

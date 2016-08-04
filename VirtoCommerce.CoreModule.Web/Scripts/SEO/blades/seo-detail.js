@@ -22,9 +22,6 @@
         if (!blade.noClose) {
             $scope.bladeClose();
         }
-
-        if (blade.parentRefresh)
-            blade.parentRefresh();
     }
 
     function saveChanges_noClose() {
