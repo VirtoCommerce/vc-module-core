@@ -66,6 +66,10 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public string Vendor { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        /// <summary>
+        /// Product order position in catalog
+        /// </summary>
+        public int Priority { get; set; }
 
         public ICollection<Property> Properties { get; set; }
         public ICollection<PropertyValue> PropertyValues { get; set; }
