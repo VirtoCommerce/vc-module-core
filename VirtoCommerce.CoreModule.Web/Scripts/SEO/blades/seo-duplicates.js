@@ -64,8 +64,6 @@
                     $rootScope.$broadcast("refresh-entity-by-id", blade.seoContainerObject.id);
                 }
             });
-            if (blade.parentRefresh)
-                blade.parentRefresh();
         }, function (error) { bladeNavigationService.setError('Error: ' + error.status, blade); });
     };
 
