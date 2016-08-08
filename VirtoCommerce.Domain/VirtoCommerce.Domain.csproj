@@ -232,7 +232,10 @@
     <Compile Include="Pricing\Model\PriceEvaluationContext.cs" />
     <Compile Include="Pricing\Model\Pricelist.cs" />
     <Compile Include="Pricing\Model\PricelistAssignment.cs" />
+    <Compile Include="Pricing\Model\Search\SearchCriteria.cs" />
+    <Compile Include="Pricing\Model\Search\SearchResult.cs" />
     <Compile Include="Pricing\Services\DefaultPricingExtensionManagerImpl.cs" />
+    <Compile Include="Pricing\Services\IPricingSearchService.cs" />
     <Compile Include="Pricing\Services\IPricingExtensionManager.cs" />
     <Compile Include="Pricing\Services\IPricingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
