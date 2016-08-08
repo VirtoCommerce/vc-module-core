@@ -14,6 +14,7 @@ namespace VirtoCommerce.Domain.Pricing.Services
         IEnumerable<PricelistAssignment> GetPriceListAssignments();
 
         Price CreatePrice(Price price);
+        void CreatePrices(Price[] prices);
         Pricelist CreatePricelist(Pricelist priceList);
         PricelistAssignment CreatePriceListAssignment(PricelistAssignment assignment);
 
