@@ -4,14 +4,10 @@ using VirtoCommerce.Domain.Pricing.Model;
 namespace VirtoCommerce.Domain.Pricing.Services
 {
     public interface IPricingService
-    {
-        Price GetPriceById(string id);
-        IEnumerable<Price> GetPricesById(IEnumerable<string> ids);
-        Pricelist GetPricelistById(string id);
-        PricelistAssignment GetPricelistAssignmentById(string id);
-
-        IEnumerable<Pricelist> GetPriceLists();
-        IEnumerable<PricelistAssignment> GetPriceListAssignments();
+    {        
+        Price[] GetPricesById(string[] ids);
+        Pricelist[] GetPricelistsById(string[] ids);
+        PricelistAssignment[] GetPricelistAssignmentsById(string[] ids);
 
         void SavePrices(Price[] prices);
         void SavePricelists(Pricelist[] priceLists);
