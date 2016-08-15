@@ -6,16 +6,10 @@ using System.Threading.Tasks;
 
 namespace VirtoCommerce.Domain.Pricing.Model.Search
 {
-    public class SearchResult
+    public class PricingSearchResult<T>
     {
-        public SearchResult()
-        {
-            Prices = new List<Price>();
-        }
-
         public int TotalCount { get; set; }
-
-        public List<Price> Prices { get; set; }
+        public ICollection<T> Results { get; set; }
 
     }
 }

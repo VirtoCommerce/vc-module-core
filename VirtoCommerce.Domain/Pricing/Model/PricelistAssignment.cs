@@ -14,6 +14,7 @@ namespace VirtoCommerce.Domain.Pricing.Model
 	public class PricelistAssignment : AuditableEntity
 	{
 		public string CatalogId { get; set; }
+        public Catalog.Model.Catalog Catalog { get; set; }
 		public string PricelistId { get; set; }
         public Pricelist Pricelist { get; set; }
 		public string Name { get; set; }
