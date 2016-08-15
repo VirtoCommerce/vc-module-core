@@ -11,7 +11,7 @@ namespace VirtoCommerce.Domain.Pricing.Services
     public interface IPricingSearchService
     {
         PricingSearchResult<Price> SearchPrices(PricesSearchCriteria criteria);
-        PricingSearchResult<Pricelist> SearchPricelists(PricingSearchCriteria criteria);
-        PricingSearchResult<PricelistAssignment> SearchPricelistAssignments(PricingSearchCriteria criteria);
+        PricingSearchResult<Pricelist> SearchPricelists(PricelistSearchCriteria criteria);
+        PricingSearchResult<PricelistAssignment> SearchPricelistAssignments(PricelistAssignmentsSearchCriteria criteria);
     }
 }
