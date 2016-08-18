@@ -8,17 +8,17 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Order.Events
 {
-	public class OrderChangeEvent
+	public class OrderOperationChangeEvent
 	{
-		public OrderChangeEvent(EntryState state, CustomerOrder origOrder, CustomerOrder modifiedOrder)
+		public OrderOperationChangeEvent(EntryState state, OrderOperation origOperation, OrderOperation modifiedOperation)
 		{
 			ChangeState = state;
-			OrigOrder = origOrder;
-			ModifiedOrder = modifiedOrder;
+            OrigOperation = origOperation;
+            ModifiedOperation = modifiedOperation;
 		}
 
 		public EntryState ChangeState { get; set; }
-		public CustomerOrder OrigOrder { get; set; }
-		public CustomerOrder ModifiedOrder { get; set; }
+		public OrderOperation OrigOperation { get; set; }
+		public OrderOperation ModifiedOperation { get; set; }
 	}
 }

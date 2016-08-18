@@ -4,7 +4,7 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-    public class CustomerOrder : Operation, IHaveTaxDetalization
+    public class CustomerOrder : OrderOperation, IHaveTaxDetalization
 	{
 		public string CustomerId { get; set; }
 		public string CustomerName { get; set; }

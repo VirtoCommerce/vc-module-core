@@ -51,7 +51,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.11.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.11.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\VirtoCommerce.Platform.Core.2.11.2\lib\net451\VirtoCommerce.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
@@ -71,7 +71,6 @@
     <Compile Include="Cart\Model\ShipmentItem.cs" />
     <Compile Include="Cart\Model\ShipmentMethod.cs" />
     <Compile Include="Cart\Model\ShoppingCart.cs" />
-    <Compile Include="Cart\Services\ICartTotalsCalculator.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
     <Compile Include="Catalog\Model\Asset.cs" />
@@ -121,6 +120,8 @@
     <Compile Include="Commerce\Model\IHaveTaxDetalization.cs" />
     <Compile Include="Commerce\Model\ISupportCancellation.cs" />
     <Compile Include="Commerce\Model\PackageType.cs" />
+    <Compile Include="Commerce\Model\Search\GenericSearchResult.cs" />
+    <Compile Include="Commerce\Model\Search\SearchCriteriaBase.cs" />
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
     <Compile Include="Commerce\Services\ISeoDuplicatesDetector.cs" />
@@ -186,29 +187,22 @@
     <Compile Include="Marketing\Services\DefaultMarketingExtensionManagerImpl.cs" />
     <Compile Include="Order\Model\Coupon.cs" />
     <Compile Include="Order\Model\CustomerOrder.cs" />
-    <Compile Include="Order\Model\IFinanceInOperation.cs" />
-    <Compile Include="Order\Model\IFinanceOperation.cs" />
-    <Compile Include="Order\Model\IFinanceOutOperation.cs" />
-    <Compile Include="Order\Model\IHaveDimension.cs" />
-    <Compile Include="Order\Model\IOperation.cs" />
-    <Compile Include="Order\Model\IPosition.cs" />
+    <Compile Include="Commerce\Model\IHaveDimension.cs" />
+    <Compile Include="Commerce\Model\IOperation.cs" />
     <Compile Include="Order\Model\LineItem.cs" />
-    <Compile Include="Order\Model\OperationProperty.cs" />
-    <Compile Include="Order\Model\PropertyValueType.cs" />
-    <Compile Include="Order\Model\ResponseGroup.cs" />
+    <Compile Include="Order\Model\CustomerOrderResponseGroup.cs" />
     <Compile Include="Order\Model\ShipmentPackage.cs" />
     <Compile Include="Order\Model\ShipmentItem.cs" />
     <Compile Include="Common\IUniqueNumberGenerator.cs" />
-    <Compile Include="Order\Model\CustomerOrderResponseGroup.cs" />
     <Compile Include="Order\Model\Discount.cs" />
-    <Compile Include="Order\Model\Operation.cs" />
+    <Compile Include="Order\Model\OrderOperation.cs" />
     <Compile Include="Order\Model\PaymentIn.cs" />
-    <Compile Include="Order\Model\Search\SearchCriteria.cs" />
-    <Compile Include="Order\Model\Search\SearchResult.cs" />
+    <Compile Include="Order\Model\Search\CustomerOrderSearchCriteria.cs" />
     <Compile Include="Order\Model\Shipment.cs" />
     <Compile Include="Order\Services\ICustomerOrderService.cs" />
     <Compile Include="Order\Services\ICustomerOrderSearchService.cs" />
     <Compile Include="Order\Events\OrderChangeEvent.cs" />
+    <Compile Include="Order\Services\OrderOperationServiceDecorator.cs" />
     <Compile Include="Payment\Model\BankCardInfo.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentEvaluationContext.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentResult.cs" />

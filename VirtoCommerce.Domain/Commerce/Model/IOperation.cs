@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 
 
-namespace VirtoCommerce.Domain.Order.Model
+namespace VirtoCommerce.Domain.Commerce.Model
 {
-	public interface IOperation
+	public interface IOperation : IEntity
 	{
 		string Number { get; set; }
 		bool IsApproved { get; set; }

@@ -9,14 +9,12 @@ using VirtoCommerce.Domain.Commerce.Model;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public abstract class Operation : AuditableEntity, IOperation, ISupportCancellation, IHasDynamicProperties
+	public abstract class OrderOperation : AuditableEntity, IOperation, ISupportCancellation, IHasDynamicProperties
 	{
-		public string OperationType { 
-			get
-			{
-				return this.GetType().Name;
-			}
-		}
+        public OrderOperation()
+        {
+            ObjectType = this.GetType().Name;
+        }	
 
 		public string ParentOperationId { get; set; }
 		public string Number { get; set; }
