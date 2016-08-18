@@ -183,6 +183,28 @@ namespace VirtoCommerce.Domain.Catalog.Model
             }
         }
 
+        /// <summary>
+        /// Search by vendor
+        /// </summary>
+        public string VendorId { get; set; }
+
+        private string[] _vendorIds;
+        public string[] VendorIds
+        {
+            get
+            {
+                if (_vendorIds == null && !string.IsNullOrEmpty(VendorId))
+                {
+                    _vendorIds = new[] { VendorId };
+                }
+                return _vendorIds;
+            }
+            set
+            {
+                _vendorIds = value;
+            }
+        }
+
         public DateTime? StartDateFrom { get; set; }
 
         public void Normalize()
