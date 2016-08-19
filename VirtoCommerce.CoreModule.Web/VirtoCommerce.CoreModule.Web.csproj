@@ -182,7 +182,9 @@
   <ItemGroup>
     <Content Include="Content\css\dynamic-expression.css" />
     <Content Include="Content\logoVC.png" />
-    <Content Include="module.manifest" />
+    <Content Include="module.manifest">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\common\blades\address-list.js" />
     <Content Include="Scripts\common\blades\address-detail.js" />
     <Content Include="Scripts\common\blades\address-detail.tpl.html" />
