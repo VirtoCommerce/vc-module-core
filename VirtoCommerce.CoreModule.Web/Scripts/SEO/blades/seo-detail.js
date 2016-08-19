@@ -14,7 +14,11 @@
     };
 
     $scope.saveChanges = function () {
-        if (blade.isNew) {
+    	if (blade.isNew) {
+    		if (!blade.seoContainerObject.seoInfos)
+    		{
+    			blade.seoContainerObject.seoInfos = [];
+    		}
             blade.seoContainerObject.seoInfos.push(blade.currentEntity);
         }
 
