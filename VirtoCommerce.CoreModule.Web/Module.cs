@@ -89,14 +89,14 @@ namespace VirtoCommerce.CoreModule.Web
             {
                 Name = "fixed tax rate",
                 Description = "Fixed percent tax rate",
-                LogoUrl = "http://virtocommerce.com/Content/images/logo.jpg"
+                LogoUrl = "https://github.com/VirtoCommerce/vc-module-core/raw/master/VirtoCommerce.CoreModule.Web/Content/logoVC.png"
             });
 
             shippingService.RegisterShippingMethod(() => new FixedRateShippingMethod(moduleSettings.First(x => x.Name == "VirtoCommerce.Core.FixedRateShippingMethod.Rate"))
             {
                 Name = "fixed rate",
                 Description = "Fixed rate shipping method",
-                LogoUrl = "http://virtocommerce.com/Content/images/logo.jpg"
+                LogoUrl = "https://github.com/VirtoCommerce/vc-module-core/raw/master/VirtoCommerce.CoreModule.Web/Content/logoVC.png"
 
             });
 
@@ -105,7 +105,7 @@ namespace VirtoCommerce.CoreModule.Web
                 IsActive = true,
                 Name = "Manual test payment method",
                 Description = "Manual test, don't use on production",
-                LogoUrl = "http://virtocommerce.com/Content/images/logo.jpg",
+                LogoUrl = "https://github.com/VirtoCommerce/vc-module-core/raw/master/VirtoCommerce.CoreModule.Web/Content/logoVC.png",
             });
 
             var currencies = commerceService.GetAllCurrencies();
