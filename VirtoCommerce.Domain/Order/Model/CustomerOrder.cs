@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.DynamicProperties;
+using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-    public class CustomerOrder : OrderOperation, IHaveTaxDetalization
+    public class CustomerOrder : OrderOperation, IHaveTaxDetalization, ISupportSecurityScopes
 	{
 		public string CustomerId { get; set; }
 		public string CustomerName { get; set; }
@@ -36,6 +38,10 @@ namespace VirtoCommerce.Domain.Order.Model
 
 		public ICollection<TaxDetail> TaxDetails { get; set; }
 
-		#endregion
-	}
+        #endregion
+
+        #region ISupportSecurityScopes Members
+        public IEnumerable<string> Scopes { get; set; } 
+        #endregion
+    }
 }

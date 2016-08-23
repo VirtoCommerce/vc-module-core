@@ -27,6 +27,7 @@ namespace VirtoCommerce.Domain.Order.Model
 		public decimal Sum { get; set; }
 		public decimal Tax { get; set; }
 
+        public IEnumerable<IOperation> ChildrenOperations { get; set; }
 		#region ISupportCancelation Members
 
 		public bool IsCancelled { get; set; }

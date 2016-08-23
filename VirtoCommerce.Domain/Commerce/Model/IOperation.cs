@@ -19,5 +19,6 @@ namespace VirtoCommerce.Domain.Commerce.Model
 		bool TaxIncluded { get; set; }
 		decimal Sum { get; set; }
 		decimal Tax { get; set; }
+        IEnumerable<IOperation> ChildrenOperations { get; set; }
 	}
 }

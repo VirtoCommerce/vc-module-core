@@ -8,7 +8,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class CustomerOrderOrderSearchCriteria : SearchCriteriaBase
+	public class CustomerOrderSearchCriteria : SearchCriteriaBase
     {		     
 
         public string Keyword { get; set; }

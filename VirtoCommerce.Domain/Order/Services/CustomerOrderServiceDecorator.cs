@@ -11,17 +11,16 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Order.Services
 {  
-    public sealed class OrderOperationServiceDecorator : ICustomerOrderService, ICustomerOrderSearchService
+    public sealed class CustomerOrderServiceDecorator : ICustomerOrderService, ICustomerOrderSearchService
     {        
         #region IOrderOperationService Members
-        public CustomerOrder[] GetByIds(string[] operationIds, string responseGroup = null, string[] operationTypes = null)
+        public CustomerOrder[] GetByIds(string[] operationIds, string responseGroup = null)
         {
             var retVal = new ConcurrentBag<CustomerOrder>();
             var orderServiceGroups = GetServiceTypeInfoGroups<ICustomerOrderService>();
             Parallel.ForEach(orderServiceGroups, (serviceGroup) =>
             {
-                var allInheritedTypeNames = serviceGroup.SelectMany(m => m.AllInheritedTypeNames).Distinct().ToArray();
-                foreach (var order in serviceGroup.Key.GetByIds(operationIds, responseGroup, allInheritedTypeNames))
+                foreach (var order in serviceGroup.Key.GetByIds(operationIds, responseGroup))
                 {
                     retVal.Add(order);
                 }
@@ -43,13 +42,12 @@ namespace VirtoCommerce.Domain.Order.Services
             });
         }
 
-        public void Delete(string[] ids, string[] memberTypes = null)
+        public void Delete(string[] ids)
         {
             var orderServiceGroups = GetServiceTypeInfoGroups<ICustomerOrderService>();
             Parallel.ForEach(orderServiceGroups, (serviceGroup) =>
             {
-                var allInheritedTypeNames = serviceGroup.SelectMany(m => m.AllInheritedTypeNames).Distinct().ToArray();
-                serviceGroup.Key.Delete(ids, allInheritedTypeNames);
+                serviceGroup.Key.Delete(ids);
             });
         }
         #endregion
@@ -60,7 +58,7 @@ namespace VirtoCommerce.Domain.Order.Services
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        public GenericSearchResult<CustomerOrder> SearchCustomerOrders(CustomerOrderOrderSearchCriteria criteria)
+        public GenericSearchResult<CustomerOrder> SearchCustomerOrders(CustomerOrderSearchCriteria criteria)
         {
             var retVal = new GenericSearchResult<CustomerOrder>();
             var skip = criteria.Skip;

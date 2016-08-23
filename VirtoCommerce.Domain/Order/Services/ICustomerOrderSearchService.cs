@@ -10,6 +10,6 @@ namespace VirtoCommerce.Domain.Order.Services
 {
 	public interface ICustomerOrderSearchService
 	{
-        GenericSearchResult<CustomerOrder> SearchCustomerOrders(CustomerOrderOrderSearchCriteria criteria);
+        GenericSearchResult<CustomerOrder> SearchCustomerOrders(CustomerOrderSearchCriteria criteria);
 	}
 }

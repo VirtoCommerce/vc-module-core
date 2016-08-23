@@ -9,8 +9,8 @@ namespace VirtoCommerce.Domain.Order.Services
 {
 	public interface ICustomerOrderService 
 	{
-        CustomerOrder[] GetByIds(string[] orderIds, string responseGroup = null, string[] operationTypes = null);
+        CustomerOrder[] GetByIds(string[] orderIds, string responseGroup = null);
         void SaveChanges(CustomerOrder[] orders);
-        void Delete(string[] ids, string[] operationTypes = null);
+        void Delete(string[] ids);
     }
 }
