@@ -65,20 +65,24 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// old price
         /// </summary>
         public decimal ListPrice { get; set; }
+        public decimal ListPriceWithTax { get; set; }
         /// <summary>
         /// new price
         /// </summary>
 		public decimal SalePrice { get; set; }
+        public decimal SalePriceWithTax { get; set; }
         /// <summary>
         /// Resulting price with discount 
         /// </summary>
 		public decimal PlacedPrice { get; set; }
+        public decimal PlacedPriceWithTax { get; set; }
         /// <summary>
         /// PlacedPrice * Quantity
         /// </summary>
-		public decimal ExtendedPrice { get; set; }
+        public decimal ExtendedPrice { get; set; }
+        public decimal ExtendedPriceWithTax { get; set; }
 
-		public decimal DiscountTotal { get; set; }
+        public decimal DiscountTotal { get; set; }
 		public decimal TaxTotal { get; set; }
 
 		public ICollection<Discount> Discounts { get; set; }

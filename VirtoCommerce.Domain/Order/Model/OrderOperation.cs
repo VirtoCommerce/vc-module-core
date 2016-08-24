@@ -13,9 +13,9 @@ namespace VirtoCommerce.Domain.Order.Model
 	{
         public OrderOperation()
         {
-            ObjectType = this.GetType().Name;
+            OperationType = this.GetType().Name;
         }	
-
+        public string OperationType { get; set; }
 		public string ParentOperationId { get; set; }
 		public string Number { get; set; }
 		public bool IsApproved { get; set; }

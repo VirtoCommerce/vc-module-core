@@ -10,6 +10,7 @@ namespace VirtoCommerce.Domain.Commerce.Model
 {
 	public interface IOperation : IEntity
 	{
+        string OperationType { get; set; }
 		string Number { get; set; }
 		bool IsApproved { get; set; }
 		string Status { get; set; }
@@ -19,6 +20,9 @@ namespace VirtoCommerce.Domain.Commerce.Model
 		bool TaxIncluded { get; set; }
 		decimal Sum { get; set; }
 		decimal Tax { get; set; }
+
+        string ParentOperationId { get; set; }
+
         IEnumerable<IOperation> ChildrenOperations { get; set; }
 	}
 }

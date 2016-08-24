@@ -29,7 +29,9 @@ namespace VirtoCommerce.Domain.Cart.Model
 		public bool? TaxIncluded { get; set; }
 
 		public decimal ShippingPrice { get; set; }
-		public decimal Total { get; set; }
+        public decimal ShippingPriceWithTax { get; set; }
+
+        public decimal Total { get; set; }
 		public decimal DiscountTotal { get; set; }
 		public decimal TaxTotal { get; set; }
 		public decimal ItemSubtotal { get; set; }
