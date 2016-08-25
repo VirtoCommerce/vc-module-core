@@ -37,11 +37,17 @@ namespace VirtoCommerce.Domain.Cart.Model
         public decimal? VolumetricWeight { get; set; }
 
 		public decimal Total { get; set; }
+        public decimal TotalWithTaxe { get; set; }
 		public decimal SubTotal { get; set; }
+        public decimal SubTotalWithTax { get; set; }
 		public decimal ShippingTotal { get; set; }
-		public decimal HandlingTotal { get; set; }
+        public decimal ShippingTotalWithTax { get; set; }
+        public decimal HandlingTotal { get; set; }
+        public decimal HandlingTotalWithTax { get; set; }
 		public decimal DiscountTotal { get; set; }
-		public decimal TaxTotal { get; set; }
+        public decimal DiscountTotalWithTax { get; set; }
+
+        public decimal TaxTotal { get; set; }
 
 		public ICollection<Address> Addresses { get; set; }
 		public ICollection<LineItem> Items { get; set; }
