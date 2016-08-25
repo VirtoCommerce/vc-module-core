@@ -8,7 +8,11 @@ namespace VirtoCommerce.Domain.Commerce.Model.Search
 {
     public class GenericSearchResult<T>
     {
+        public GenericSearchResult()
+        {
+            Results = new List<T>();
+        }
         public int TotalCount { get; set; }
-        public List<T> Results { get; set; }
+        public ICollection<T> Results { get; set; }
     }
 }

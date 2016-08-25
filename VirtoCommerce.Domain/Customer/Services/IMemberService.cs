@@ -13,8 +13,8 @@ namespace VirtoCommerce.Domain.Customer.Services
     /// </summary>
     public interface IMemberService
     {
-        Member[] GetByIds(string[] memberIds, string[] memberTypes = null);
-        void CreateOrUpdate(Member[] members);
+        Member[] GetByIds(string[] memberIds, string responseGroup = null, string[] memberTypes = null);
+        void SaveChanges(Member[] members);
         void Delete(string[] ids, string[] memberTypes = null);
     }
 }
