@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtoCommerce.Domain.Catalog.Model;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Pricing.Model
@@ -10,7 +11,9 @@ namespace VirtoCommerce.Domain.Pricing.Model
 	public class Price : AuditableEntity, ICloneable
 	{
 		public string PricelistId { get; set; }
+        public Pricelist Pricelist { get; set; }
 		public string Currency { get; set; }
+        public CatalogProduct Product { get; set; }
 		public string ProductId { get; set; }
 		public decimal? Sale { get; set; }
 		public decimal List { get; set; }
@@ -37,6 +40,8 @@ namespace VirtoCommerce.Domain.Pricing.Model
 				PricelistId = this.PricelistId,
 				Currency = this.Currency,
 				ProductId = this.ProductId,
+                Product = this.Product,
+                Pricelist = this.Pricelist,
 				Sale = this.Sale,
 				List = this.List,
 				MinQuantity = this.MinQuantity

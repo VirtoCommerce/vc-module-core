@@ -26,7 +26,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         /// </summary>
         public string GroupName { get; set; }
 
-        #region MyRegion
+        #region ISeoSupport Members
         public string SeoObjectType { get { return GetType().Name; } }
         public ICollection<SeoInfo> SeoInfos { get; set; }
         #endregion

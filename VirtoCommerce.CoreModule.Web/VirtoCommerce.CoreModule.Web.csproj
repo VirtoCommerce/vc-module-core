@@ -148,20 +148,20 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.11.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.11.2\lib\net451\VirtoCommerce.Platform.Core.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.11.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.11.5\lib\net451\VirtoCommerce.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Core.Web, Version=2.11.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.Web.2.11.2\lib\net451\VirtoCommerce.Platform.Core.Web.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core.Web, Version=2.11.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.Web.2.11.5\lib\net451\VirtoCommerce.Platform.Core.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data, Version=2.11.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.11.2\lib\net451\VirtoCommerce.Platform.Data.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Data, Version=2.11.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.11.5\lib\net451\VirtoCommerce.Platform.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data.Security, Version=2.11.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.Security.2.11.2\lib\net451\VirtoCommerce.Platform.Data.Security.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Data.Security, Version=2.11.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.Security.2.11.4\lib\net451\VirtoCommerce.Platform.Data.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -182,7 +182,9 @@
   <ItemGroup>
     <Content Include="Content\css\dynamic-expression.css" />
     <Content Include="Content\logoVC.png" />
-    <Content Include="module.manifest" />
+    <Content Include="module.manifest">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\common\blades\address-list.js" />
     <Content Include="Scripts\common\blades\address-detail.js" />
     <Content Include="Scripts\common\blades\address-detail.tpl.html" />
