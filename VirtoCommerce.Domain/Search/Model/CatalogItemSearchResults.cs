@@ -21,7 +21,7 @@ namespace VirtoCommerce.Domain.Search.Model
         ISearchCriteria _SearchCriteria;
 
         public virtual ISearchCriteria SearchCriteria
-        {
+        { 
             get { return _SearchCriteria; }
         }
 
