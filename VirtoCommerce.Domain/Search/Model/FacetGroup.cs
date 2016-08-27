@@ -1,10 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
 namespace VirtoCommerce.Domain.Search.Model
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public struct FacetTypes
     {
         public const string Attribute = "attr";
@@ -13,6 +15,7 @@ namespace VirtoCommerce.Domain.Search.Model
         public const string Category = "category";
     }
 
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public class FacetGroup : INotifyPropertyChanged
     {
         /// <summary>
@@ -75,6 +78,7 @@ namespace VirtoCommerce.Domain.Search.Model
         public event PropertyChangedEventHandler PropertyChanged;
     }
 
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public class FacetCollection<T> : ObservableCollection<T> where T : Facet
     {
         protected string ParentKeyProperty { get; set; }

@@ -4,7 +4,8 @@ using VirtoCommerce.Domain.Search.Model;
 
 namespace VirtoCommerce.Domain.Search.Services
 {
-   public interface IBrowseFilterService
+    [Obsolete("Moved to search module and will be removed in the next release")]
+    public interface IBrowseFilterService
     {
         ISearchFilter[] GetFilters(IDictionary<string, object> context);
     }
