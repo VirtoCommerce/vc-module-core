@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace VirtoCommerce.Domain.Search.Model
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public class ResultDocument : IDocument
     {
         private readonly List<IDocumentField> _fields = new List<IDocumentField>();

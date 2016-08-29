@@ -1,5 +1,8 @@
-﻿namespace VirtoCommerce.Domain.Search.Model
+﻿using System;
+
+namespace VirtoCommerce.Domain.Search.Model
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     /// <summary>
     /// Contains information about keys of items to be indexed. Partition is part of the bigger job that was split into mini jobs called partitions that
     /// could be processed by multiple job processers in parallel.

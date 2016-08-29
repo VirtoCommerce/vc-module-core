@@ -92,9 +92,9 @@ namespace VirtoCommerce.CoreModule.Web
                 LogoUrl = "https://raw.githubusercontent.com/VirtoCommerce/vc-module-core/master/VirtoCommerce.CoreModule.Web/Content/logoVC.png"
             });
 
-            shippingService.RegisterShippingMethod(() => new FixedRateShippingMethod(moduleSettings.First(x => x.Name == "VirtoCommerce.Core.FixedRateShippingMethod.Rate"))
+            shippingService.RegisterShippingMethod(() => new FixedRateShippingMethod(moduleSettings.First(x => x.Name.StartsWith("VirtoCommerce.Core.FixedRateShippingMethod")))
             {
-                Name = "fixed rate",
+                Name = "fixed shipping rate",
                 Description = "Fixed rate shipping method",
                 LogoUrl = "https://raw.githubusercontent.com/VirtoCommerce/vc-module-core/master/VirtoCommerce.CoreModule.Web/Content/logoVC.png"
 

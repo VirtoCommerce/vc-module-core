@@ -253,8 +253,7 @@
     <Compile Include="Search\Filters\PriceRangeFilter.cs" />
     <Compile Include="Search\Filters\RangeFilter.cs" />
     <Compile Include="Search\ISearchProviderManager.cs" />
-    <Compile Include="Search\Model\CatalogIndexedSearchCriteria.cs" />
-    <Compile Include="Search\Model\CatalogIndexedSearchResults.cs" />
+    <Compile Include="Search\Model\CatalogItemSearchResults.cs" />
     <Compile Include="Search\Model\CategoryFilter.cs" />
     <Compile Include="Search\Model\CategoryFilterValue.cs" />
     <Compile Include="Search\Model\DocumentField.cs" />
@@ -279,12 +278,10 @@
     <Compile Include="Search\Services\ISearchProvider.cs" />
     <Compile Include="Search\Services\ISearchQueryBuilder.cs" />
     <Compile Include="Search\Model\ISearchResults.cs" />
-    <Compile Include="Search\Model\KeywordSearchCriteria.cs" />
     <Compile Include="Search\Model\OperationType.cs" />
     <Compile Include="Search\Model\Partition.cs" />
     <Compile Include="Search\Model\ResultDocument.cs" />
     <Compile Include="Search\Model\ResultDocuments.cs" />
-    <Compile Include="Search\Model\SearchCriteriaBase.cs" />
     <Compile Include="Search\Model\SearchEventArgs.cs" />
     <Compile Include="Search\Model\SearchException.cs" />
     <Compile Include="Search\Model\SearchIndexEventArgs.cs" />

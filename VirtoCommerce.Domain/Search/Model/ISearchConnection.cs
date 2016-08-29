@@ -1,5 +1,8 @@
-﻿namespace VirtoCommerce.Domain.Search.Model
+﻿using System;
+
+namespace VirtoCommerce.Domain.Search.Model
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public interface ISearchConnection
     {
         /// <summary>
@@ -9,6 +12,7 @@
         /// The Data Source.
         /// </value>
         string DataSource { get; }
+
         string Scope { get; }
 
         /// <summary>
@@ -20,6 +24,5 @@
         string Provider { get; }
 
         string AccessKey { get; }
-
     }
 }
