@@ -6,7 +6,8 @@ using VirtoCommerce.Domain.Search.Model;
 
 namespace VirtoCommerce.Domain.Search.Services
 {
-  public interface ISearchService
+    [Obsolete("Moved to search module and will be removed in the next release")]
+    public interface ISearchService
 	{
         /// <summary>
         /// Builds the index in the specified scope for the specified index document types. Pass empty document type to index all items.

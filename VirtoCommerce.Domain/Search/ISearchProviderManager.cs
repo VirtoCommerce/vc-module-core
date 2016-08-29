@@ -6,6 +6,7 @@ using VirtoCommerce.Domain.Search.Services;
 
 namespace VirtoCommerce.Domain.Search
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public interface ISearchProviderManager
     {
         void RegisterSearchProvider(string name, Func<ISearchConnection, ISearchProvider> factory);

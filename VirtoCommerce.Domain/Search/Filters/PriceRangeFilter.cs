@@ -1,7 +1,9 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace VirtoCommerce.Domain.Search.Filters
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public partial class PriceRangeFilter
     {
         public string CacheKey

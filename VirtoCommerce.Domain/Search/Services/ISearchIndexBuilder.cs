@@ -4,6 +4,7 @@ using VirtoCommerce.Domain.Search.Model;
 
 namespace VirtoCommerce.Domain.Search.Services
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public interface ISearchIndexBuilder
     {
         string DocumentType { get; }

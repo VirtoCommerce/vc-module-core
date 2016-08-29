@@ -1,6 +1,9 @@
-﻿namespace VirtoCommerce.Domain.Search.Model
+﻿using System;
+
+namespace VirtoCommerce.Domain.Search.Model
 {
-	public class CategoryFilterValue : ISearchFilterValue
+    [Obsolete("Moved to search module and will be removed in the next release")]
+    public class CategoryFilterValue : ISearchFilterValue
     {
         public string Outline { get; set; }
 

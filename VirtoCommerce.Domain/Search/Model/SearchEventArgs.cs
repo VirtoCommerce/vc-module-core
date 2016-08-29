@@ -2,6 +2,7 @@
 
 namespace VirtoCommerce.Domain.Search.Model
 {
+    [Obsolete("Moved to search module and will be removed in the next release")]
     public class SearchEventArgs : EventArgs
     {
         private string _Message = String.Empty;
