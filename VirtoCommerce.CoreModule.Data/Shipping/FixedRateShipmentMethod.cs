@@ -22,18 +22,20 @@ namespace VirtoCommerce.CoreModule.Data.Shipping
 			Settings = settings;
 		}
 
-		private decimal Rate
+        private decimal GroundOptionRate
+        {
+            get
+            {
+                return Settings.GetSettingValue<decimal>("VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate", 0);          
+            }
+        }
+
+        private decimal AirOptionRate
 		{
 			get
 			{
-				decimal retVal = 0;
-                var settingRate = Settings.Where(x => x.Name == "VirtoCommerce.Core.FixedRateShippingMethod.Rate").FirstOrDefault();
-				if(settingRate != null)
-				{
-					retVal = Decimal.Parse(settingRate.Value, CultureInfo.InvariantCulture);
-				}
-				return retVal;
-			}
+                return Settings.GetSettingValue<decimal>("VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate", 0);
+            }
 		}
 
 		public override IEnumerable<ShippingRate> CalculateRates(Domain.Common.IEvaluationContext context)
@@ -46,8 +48,8 @@ namespace VirtoCommerce.CoreModule.Data.Shipping
 
             return new ShippingRate[]
             {
-                new ShippingRate { Rate = Rate, Currency = shippingEvalContext.ShoppingCart.Currency, ShippingMethod = this, OptionName = "Ground", OptionDescription = "Ground shipping" },
-                new ShippingRate { Rate = Rate, Currency = shippingEvalContext.ShoppingCart.Currency, ShippingMethod = this, OptionName = "Air", OptionDescription = "Air shipping" }
+                new ShippingRate { Rate = GroundOptionRate, Currency = shippingEvalContext.ShoppingCart.Currency, ShippingMethod = this, OptionName = "Ground", OptionDescription = "Ground shipping" },
+                new ShippingRate { Rate = AirOptionRate, Currency = shippingEvalContext.ShoppingCart.Currency, ShippingMethod = this, OptionName = "Air", OptionDescription = "Air shipping" }
             };
         }
 	}

@@ -89,12 +89,19 @@
                 <description>Module description in platform export/import wizard</description>
             </setting>
             <setting>
-                <name>VirtoCommerce.Core.FixedRateShippingMethod.Rate</name>
+                <name>VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate</name>
                 <valueType>decimal</valueType>
                 <defaultValue>0.00</defaultValue>
-                <title>Fixed shipping rate</title>
-                <description>Fixed shipping rate</description>
+                <title>Ground shipping rate</title>
+                <description>Fixed Ground shipping rate</description>
             </setting>
+			<setting>
+				<name>VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate</name>
+				<valueType>decimal</valueType>
+				<defaultValue>0.00</defaultValue>
+				<title>Air shipping rate</title>
+				<description>Fixed Air shipping rate</description>
+			</setting>
             <setting>
                 <name>VirtoCommerce.Core.FixedTaxRateProvider.Rate</name>
                 <valueType>decimal</valueType>
