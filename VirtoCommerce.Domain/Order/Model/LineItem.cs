@@ -22,14 +22,52 @@ namespace VirtoCommerce.Domain.Order.Model
         /// List item price without any discount and taxes
         /// </summary>
         public decimal BasePrice { get; set; }
+        public decimal BasePriceWithTax { get; set; }
         /// <summary>
-        /// Placed price with static and dynamic discounts applied but without tax
+        /// Placed price without tax
         /// </summary>
         public decimal Price { get; set; }
+        public decimal PriceWithTax { get; set; }
+
         /// <summary>
-        /// Total discount amount ( defined manually via price list and dynamic discounts)
+        /// Gets the value of line item subtotal price (actual price * line item quantity)
         /// </summary>
+        public virtual decimal ExtendedPrice
+        {
+            get
+            {
+                return Price * Quantity;
+            }
+        }
+
+        public virtual decimal ExtendedPriceWithTax
+        {
+            get
+            {
+                return PriceWithTax * Quantity;
+            }
+        }
+
         public decimal DiscountAmount { get; set; }
+      
+        public decimal DiscountAmountWithTax { get; set; }
+
+        public virtual decimal DiscountTotal
+        {
+            get
+            {
+                return DiscountAmount * Quantity;
+            }
+        }
+
+        public virtual decimal DiscountTotalWithTax
+        {
+            get
+            {
+                return DiscountAmountWithTax * Quantity;
+            }
+        }
+
         /// <summary>
         /// Tax sum
         /// </summary>

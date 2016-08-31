@@ -27,6 +27,7 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public string ShipmentMethodOption { get; set; }
 
+        public Discount Discount { get; set; }
         /// <summary>
         ///  Shipment method contains additional shipment method information
         /// </summary>
@@ -52,12 +53,73 @@ namespace VirtoCommerce.Domain.Order.Model
 		public string TaxType { get; set; }
 
 		public Address DeliveryAddress { get; set; }
-		public decimal DiscountAmount { get; set; }
-		public Discount Discount { get; set; }
-	
-		#region ITaxDetailSupport Members
 
-		public ICollection<TaxDetail> TaxDetails { get; set; }
+        /// <summary>
+        /// Shipment base (old) price without any discount and taxes
+        /// </summary>
+        public decimal BasePrice { get; set; }
+        public decimal BasePriceWithTax { get; set; }
+
+        /// <summary>
+        /// Placed price without discount and taxes
+        /// </summary>
+        public decimal Price { get; set; }
+        public decimal PriceWithTax { get; set; }
+
+        public virtual decimal Total
+        {
+            get
+            {
+                return Price - DiscountAmount;
+            }           
+        }
+
+        public virtual decimal TotalWithTax
+        {
+            get
+            {
+                return PriceWithTax - DiscountAmountWithTax;
+            }
+        }
+
+        public virtual decimal ItemsSubtotal
+        {
+            get
+            {
+                decimal retVal = 0;
+                if(Items != null)
+                {
+                    retVal = Items.Sum(i => i.LineItem.ExtendedPrice);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal ItemsSubtotalWithTax
+        {
+            get
+            {
+                decimal retVal = 0;
+                if (Items != null)
+                {
+                    retVal = Items.Sum(i => i.LineItem.ExtendedPriceWithTax);
+                }
+                return retVal;
+            }
+        }    
+
+        public decimal DiscountAmount { get; set; }
+        public decimal DiscountAmountWithTax { get; set; }
+
+        public virtual decimal TaxTotal
+        {
+            get { return Tax; }
+            set { Tax = value; }
+        }
+
+        #region ITaxDetailSupport Members
+
+        public ICollection<TaxDetail> TaxDetails { get; set; }
 
 		#endregion
 	}
