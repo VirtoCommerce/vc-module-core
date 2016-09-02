@@ -83,7 +83,9 @@ namespace VirtoCommerce.Domain.Cart.Model
         public decimal ExtendedPriceWithTax { get; set; }
 
         public decimal DiscountTotal { get; set; }
-		public decimal TaxTotal { get; set; }
+        public decimal DiscountTotalWithTax { get; set; }
+
+        public decimal TaxTotal { get; set; }
 
 		public ICollection<Discount> Discounts { get; set; }
 

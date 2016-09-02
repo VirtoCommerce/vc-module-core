@@ -32,11 +32,26 @@ namespace VirtoCommerce.Domain.Cart.Model
         public decimal ShippingPriceWithTax { get; set; }
 
         public decimal Total { get; set; }
+        public decimal TotalWithTax { get; set; }
+
 		public decimal DiscountTotal { get; set; }
-		public decimal TaxTotal { get; set; }
-		public decimal ItemSubtotal { get; set; }
-		public decimal Subtotal { get; set; }
-		public Address DeliveryAddress { get; set; }
+        public decimal DiscountTotalWithTax { get; set; }
+
+        public decimal TaxTotal { get; set; }
+
+        /// <summary>
+        /// Total of  shipment items
+        /// </summary>
+        public decimal ItemSubtotal { get; set; }
+        public decimal ItemSubtotalWithTax { get; set; }
+
+        /// <summary>
+        /// ShippingPrice - DiscountTotal
+        /// </summary>
+        public decimal Subtotal { get; set; }
+        public decimal SubtotalWithTax { get; set; }
+
+        public Address DeliveryAddress { get; set; }
 
 		public ICollection<Discount> Discounts { get; set; }
 		public ICollection<ShipmentItem> Items { get; set; }
