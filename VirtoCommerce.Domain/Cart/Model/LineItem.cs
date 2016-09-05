@@ -62,32 +62,181 @@ namespace VirtoCommerce.Domain.Cart.Model
         public Price Price { get; set; }
 
         /// <summary>
-        /// old price
+        /// old price for one unit
         /// </summary>
-        public decimal ListPrice { get; set; }
-        public decimal ListPriceWithTax { get; set; }
-        /// <summary>
-        /// new price
-        /// </summary>
-		public decimal SalePrice { get; set; }
-        public decimal SalePriceWithTax { get; set; }
-        /// <summary>
-        /// Resulting price with discount 
-        /// </summary>
-		public decimal PlacedPrice { get; set; }
-        public decimal PlacedPriceWithTax { get; set; }
-        /// <summary>
-        /// PlacedPrice * Quantity
-        /// </summary>
-        public decimal ExtendedPrice { get; set; }
-        public decimal ExtendedPriceWithTax { get; set; }
+        public virtual decimal ListPrice { get; set; }
 
-        public decimal DiscountTotal { get; set; }
-        public decimal DiscountTotalWithTax { get; set; }
+        private decimal? _listPriceWithTax;
+        public virtual decimal ListPriceWithTax
+        {
+            get
+            {
+                return _listPriceWithTax ?? ListPrice;
+            }
+            set
+            {
+                _listPriceWithTax = value;
+            }
+        }
 
-        public decimal TaxTotal { get; set; }
+        private decimal? _salePrice;
+        /// <summary>
+        /// new price for one unit
+        /// </summary>
+		public virtual decimal SalePrice
+        {
+            get
+            {
+                return _salePrice ?? ListPrice;
+            }
+            set
+            {
+                _salePrice = value;
+            }
+        }
 
-		public ICollection<Discount> Discounts { get; set; }
+        private decimal? _salePriceWithTax;
+        public virtual decimal SalePriceWithTax
+        {
+            get
+            {
+                return _salePriceWithTax ?? SalePrice;
+            }
+            set
+            {
+                _salePriceWithTax = value;
+            }
+        }
+
+        /// <summary>
+        /// Resulting price with discount for one unit
+        /// </summary>
+		public virtual decimal PlacedPrice
+        {
+            get
+            {
+                return ListPrice - DiscountAmount;
+            }
+        }
+        public virtual decimal PlacedPriceWithTax
+        {
+            get
+            {
+                return ListPriceWithTax - DiscountAmountWithTax;
+            }
+        }
+
+
+        public virtual decimal ExtendedPrice
+        {
+            get
+            {
+                return PlacedPrice * Quantity;
+            }
+        }
+
+        public virtual decimal ExtendedPriceWithTax
+        {
+            get
+            {
+                return PlacedPriceWithTax * Quantity;
+            }
+        }
+
+        /// <summary>
+        /// Gets the value of the single qty line item discount amount
+        /// </summary>
+        private decimal? _discountAmount;
+        public virtual decimal DiscountAmount
+        {
+            get
+            {
+                var retVal = _discountAmount;
+                if (retVal == null)
+                {
+                    retVal = ListPrice -  SalePrice;                
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _discountAmount = value;
+            }
+        }
+
+        private decimal? _discountAmountWithTax;
+        public virtual decimal DiscountAmountWithTax
+        {
+            get
+            {
+                var retVal = _discountAmountWithTax;
+                if (retVal == null)
+                {
+                    retVal = ListPriceWithTax - SalePriceWithTax;                 
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _discountAmountWithTax = value;
+            }
+        }
+
+        private decimal? _discountTotal;
+        public virtual decimal DiscountTotal
+        {
+            get
+            {
+                var retVal = _discountTotal;
+                if(retVal == null)
+                {
+                    retVal = DiscountAmount * Quantity;
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _discountTotal = value;
+            }
+        }
+
+        private decimal? _discountTotalWithTax;
+        public virtual decimal DiscountTotalWithTax
+        {
+            get
+            {
+                var retVal = _discountTotalWithTax;
+                if (retVal == null)
+                {
+                    retVal = DiscountAmountWithTax * Quantity;
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _discountTotalWithTax = value;
+            }
+        }
+
+        private decimal? _taxTotal;
+        public virtual decimal TaxTotal
+        {
+            get
+            {
+                var retVal = _taxTotal;
+                if (retVal == null)
+                {
+                    retVal = Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _taxTotal = value;
+            }
+        }
+
+        public ICollection<Discount> Discounts { get; set; }
 
 		#region IHaveTaxDetalization Members
 		public ICollection<TaxDetail> TaxDetails { get; set; }

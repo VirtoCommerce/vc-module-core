@@ -53,32 +53,58 @@ namespace VirtoCommerce.Domain.Order.Model
 		public string TaxType { get; set; }
 
 		public Address DeliveryAddress { get; set; }
-
+    
         /// <summary>
-        /// Shipment base (old) price without any discount and taxes
-        /// </summary>
-        public decimal BasePrice { get; set; }
-        public decimal BasePriceWithTax { get; set; }
-
-        /// <summary>
-        /// Placed price without discount and taxes
+        ///  shipping  price without discount and tax
         /// </summary>
         public decimal Price { get; set; }
-        public decimal PriceWithTax { get; set; }
 
+        private decimal? _priceWithTax;
+        public virtual decimal PriceWithTax
+        {
+            get
+            {
+                return _priceWithTax ?? Price;
+            }
+            set
+            {
+                _priceWithTax = value;
+            }
+        }
+
+        private decimal? _total;
         public virtual decimal Total
         {
             get
             {
-                return Price - DiscountAmount;
-            }           
+                var retVal = _total;
+                if(retVal == null)
+                {
+                    retVal = Price - DiscountAmount;
+                }
+                return retVal.Value;
+            }    
+            set
+            {
+                _total = value;
+            }       
         }
 
+        private decimal? _totalWithTax;
         public virtual decimal TotalWithTax
         {
             get
             {
-                return PriceWithTax - DiscountAmountWithTax;
+                var retVal = _totalWithTax;
+                if (retVal == null)
+                {
+                    retVal = PriceWithTax - DiscountAmountWithTax;
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _totalWithTax = value;
             }
         }
 
@@ -106,16 +132,43 @@ namespace VirtoCommerce.Domain.Order.Model
                 }
                 return retVal;
             }
-        }    
+        }
 
-        public decimal DiscountAmount { get; set; }
-        public decimal DiscountAmountWithTax { get; set; }
+     
+        public virtual decimal DiscountAmount { get; set; }
 
+        private decimal? _dicountAmountWithTax;
+        public virtual decimal DiscountAmountWithTax
+        {
+            get
+            {
+                return _dicountAmountWithTax ?? DiscountAmount;             
+            }
+            set
+            {
+                _dicountAmountWithTax = value;
+            }
+        }
+
+
+        private decimal? _taxTotal;
         public virtual decimal TaxTotal
         {
-            get { return Tax; }
-            set { Tax = value; }
+            get
+            {
+                var retVal = _taxTotal;
+                if (retVal == null)
+                {
+                    retVal = Math.Abs(TotalWithTax - Total);
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _taxTotal = value;
+            }
         }
+
 
         #region ITaxDetailSupport Members
 

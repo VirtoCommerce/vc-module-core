@@ -18,25 +18,53 @@ namespace VirtoCommerce.Domain.Order.Model
         public string PriceId { get; set; }
 
         public string Currency { get; set; }
+     
         /// <summary>
-        /// List item price without any discount and taxes
-        /// </summary>
-        public decimal BasePrice { get; set; }
-        public decimal BasePriceWithTax { get; set; }
-        /// <summary>
-        /// Placed price without tax
+        ///  unit price without discount and tax
         /// </summary>
         public decimal Price { get; set; }
-        public decimal PriceWithTax { get; set; }
+
+        private decimal? _priceWithTax;
+        public virtual decimal PriceWithTax
+        {
+            get
+            {
+                return _priceWithTax ?? Price;
+            }
+            set
+            {
+                _priceWithTax = value;
+            }
+        }
+
+        /// <summary>
+        /// Resulting price with discount for one unit
+        /// </summary>
+        public virtual decimal PlacedPrice
+        {
+            get
+            {
+                return Price - DiscountAmount;
+            }
+        }
+
+        public virtual decimal PlacedPriceWithTax
+        {
+            get
+            {
+                return PriceWithTax - DiscountAmountWithTax;
+            }
+        }
+
 
         /// <summary>
         /// Gets the value of line item subtotal price (actual price * line item quantity)
-        /// </summary>
+        /// </summary>        
         public virtual decimal ExtendedPrice
         {
             get
             {
-                return Price * Quantity;
+                return PlacedPrice * Quantity;
             }
         }
 
@@ -44,34 +72,80 @@ namespace VirtoCommerce.Domain.Order.Model
         {
             get
             {
-                return PriceWithTax * Quantity;
+                return PlacedPriceWithTax * Quantity;
             }
         }
 
-        public decimal DiscountAmount { get; set; }
-      
-        public decimal DiscountAmountWithTax { get; set; }
+        public virtual decimal DiscountAmount { get; set; }
 
+        private decimal? _dicountAmountWithTax;
+        public virtual decimal DiscountAmountWithTax
+        {
+            get
+            {
+                return _dicountAmountWithTax ?? DiscountAmount;
+            }
+            set
+            {
+                _dicountAmountWithTax = value;
+            }
+        }
+
+
+        private decimal? _discountTotal;
         public virtual decimal DiscountTotal
         {
             get
             {
-                return DiscountAmount * Quantity;
+                var retVal = _discountTotal;
+                if (retVal == null)
+                {
+                    retVal = DiscountAmount * Quantity;
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _discountTotal = value;
             }
         }
 
+        private decimal? _discountTotalWithTax;
         public virtual decimal DiscountTotalWithTax
         {
             get
             {
-                return DiscountAmountWithTax * Quantity;
+                var retVal = _discountTotalWithTax;
+                if (retVal == null)
+                {
+                    retVal = DiscountAmountWithTax * Quantity;
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _discountTotalWithTax = value;
             }
         }
 
-        /// <summary>
-        /// Tax sum
-        /// </summary>
-        public decimal Tax { get; set; }
+
+        private decimal? _tax;
+        public virtual decimal Tax
+        {
+            get
+            {
+                var retVal = _tax;
+                if (retVal == null)
+                {
+                    retVal = Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _tax = value;
+            }
+        }
 
         /// <summary>
         /// Tax category or type

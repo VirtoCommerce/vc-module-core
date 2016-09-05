@@ -36,20 +36,197 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public decimal? VolumetricWeight { get; set; }
 
-		public decimal Total { get; set; }
-        public decimal TotalWithTax { get; set; }
-		public decimal SubTotal { get; set; }
-        public decimal SubTotalWithTax { get; set; }
-		public decimal ShippingTotal { get; set; }
-        public decimal ShippingTotalWithTax { get; set; }
-        public decimal HandlingTotal { get; set; }
-        public decimal HandlingTotalWithTax { get; set; }
-		public decimal DiscountTotal { get; set; }
-        public decimal DiscountTotalWithTax { get; set; }
+        private decimal? _total;
+        public virtual decimal Total
+        {
+            get
+            {
+                var retVal = _total;
+                if (retVal == null)
+                {
+                    retVal = SubTotal + TaxTotal + ShippingTotal - DiscountTotal;
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _total = value;
+            }
+        }
 
-        public decimal TaxTotal { get; set; }
+        private decimal? _subtotal;
+        public virtual decimal SubTotal
+        {
+            get
+            {
+                var retVal = _subtotal;
+                if(retVal == null)
+                {
+                    retVal = 0;
+                    if (!Items.IsNullOrEmpty())
+                    {
+                        retVal = Items.Sum(i => i.ListPrice * i.Quantity);
+                    }
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _subtotal = value;
+            }
+        }
 
-		public ICollection<Address> Addresses { get; set; }
+        private decimal? _subtotalWithTax;
+        public virtual decimal SubTotalWithTax
+        {
+            get
+            {
+                var retVal = _subtotalWithTax;
+                if (retVal == null)
+                {
+                    retVal = 0;
+                    if (!Items.IsNullOrEmpty())
+                    {
+                        retVal = Items.Sum(i => i.ListPriceWithTax * i.Quantity);
+                    }
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _subtotalWithTax = value;
+            }
+        }
+
+        private decimal? _shippingTotal;
+        public virtual decimal ShippingTotal
+        {
+            get
+            {
+                var retVal = _shippingTotal;
+                if (retVal == null)
+                {
+                    retVal = 0;
+                    if (!Shipments.IsNullOrEmpty())
+                    {
+                        retVal = Shipments.Sum(s => s.ShippingPrice);
+                    }
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _shippingTotal = value;
+            }
+        }
+        private decimal? _shippingTotalWithTax;
+        public virtual decimal ShippingTotalWithTax
+        {
+            get
+            {
+                var retVal = _shippingTotalWithTax;
+                if (retVal == null)
+                {
+                    retVal = 0;
+                    if (!Shipments.IsNullOrEmpty())
+                    {
+                        retVal = Shipments.Sum(s => s.ShippingPriceWithTax);
+                    }
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _shippingTotalWithTax = value;
+            }
+        }
+
+        public virtual decimal HandlingTotal { get; set; }
+        public virtual decimal HandlingTotalWithTax { get; set; }
+
+        public virtual decimal DiscountAmount { get; set; }
+        public virtual decimal DiscountAmountWithTax { get; set; }
+
+        private decimal? _discountTotal;
+		public virtual decimal DiscountTotal
+        {
+            get
+            {
+                var retVal = _discountTotal;
+                if(retVal == null)
+                {
+                    retVal = DiscountAmount;                  
+                    if(!Items.IsNullOrEmpty())
+                    {
+                        retVal += Items.Sum(i => i.DiscountTotal);
+                    }
+                    if (!Shipments.IsNullOrEmpty())
+                    {
+                        retVal += Shipments.Sum(s => s.DiscountTotal);
+                    }
+                }
+                return retVal.Value;             
+            }
+            set
+            {
+                _discountTotal = value;
+            }
+        }
+
+        private decimal? _discountTotalWithTax;
+        public virtual decimal DiscountTotalWithTax
+        {
+            get
+            {
+                var retVal = _discountTotalWithTax;
+                if (retVal == null)
+                {
+                    retVal = DiscountAmountWithTax;               
+                    if (!Items.IsNullOrEmpty())
+                    {
+                        retVal += Items.Sum(i => i.DiscountTotalWithTax);
+                    }
+                    if (!Shipments.IsNullOrEmpty())
+                    {
+                        retVal += Shipments.Sum(s => s.DiscountTotalWithTax);
+                    }
+                }
+                return retVal.Value;
+            }
+
+            set
+            {
+                _discountTotalWithTax = value;
+            }
+        }
+
+        private decimal? _taxTotal;
+        public virtual decimal TaxTotal
+        {
+            get
+            {
+                var retVal = _taxTotal;
+                if (retVal == null)
+                {
+                    retVal = 0;
+                    if (!Items.IsNullOrEmpty())
+                    {
+                        retVal += Items.Sum(i => i.TaxTotal);
+                    }
+                    if (!Shipments.IsNullOrEmpty())
+                    {
+                        retVal += Shipments.Sum(s => s.TaxTotal);
+                    }
+                }
+                return retVal.Value;
+            }
+            set
+            {
+                _taxTotal = value;
+            }
+        }
+
+        public ICollection<Address> Addresses { get; set; }
 		public ICollection<LineItem> Items { get; set; }
 		public ICollection<Payment> Payments { get; set; }
 		public ICollection<Shipment> Shipments { get; set; }
