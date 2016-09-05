@@ -141,7 +141,7 @@ namespace VirtoCommerce.Domain.Cart.Model
             get
             {
                 var retVal = _itemSubtotalWithTax;
-                if (retVal == null && !Items.IsNullOrEmpty())
+                if (retVal == null)
                 {
                     retVal = 0;
                     if (!Items.IsNullOrEmpty())
