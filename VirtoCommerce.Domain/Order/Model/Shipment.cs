@@ -72,39 +72,19 @@ namespace VirtoCommerce.Domain.Order.Model
             }
         }
 
-        private decimal? _total;
         public virtual decimal Total
         {
             get
             {
-                var retVal = _total;
-                if(retVal == null)
-                {
-                    retVal = Price - DiscountAmount;
-                }
-                return retVal.Value;
-            }    
-            set
-            {
-                _total = value;
-            }       
+                return Price - DiscountAmount;
+            }
         }
 
-        private decimal? _totalWithTax;
         public virtual decimal TotalWithTax
         {
             get
             {
-                var retVal = _totalWithTax;
-                if (retVal == null)
-                {
-                    retVal = PriceWithTax - DiscountAmountWithTax;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _totalWithTax = value;
+                return PriceWithTax - DiscountAmountWithTax;
             }
         }
 
@@ -151,21 +131,11 @@ namespace VirtoCommerce.Domain.Order.Model
         }
 
 
-        private decimal? _taxTotal;
         public virtual decimal TaxTotal
         {
             get
             {
-                var retVal = _taxTotal;
-                if (retVal == null)
-                {
-                    retVal = Math.Abs(TotalWithTax - Total);
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _taxTotal = value;
+                return Math.Abs(TotalWithTax - Total);
             }
         }
 

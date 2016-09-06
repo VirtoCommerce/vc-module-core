@@ -56,7 +56,6 @@ namespace VirtoCommerce.Domain.Order.Model
             }
         }
 
-
         /// <summary>
         /// Gets the value of line item subtotal price (actual price * line item quantity)
         /// </summary>        
@@ -91,60 +90,28 @@ namespace VirtoCommerce.Domain.Order.Model
             }
         }
 
-
-        private decimal? _discountTotal;
         public virtual decimal DiscountTotal
         {
             get
             {
-                var retVal = _discountTotal;
-                if (retVal == null)
-                {
-                    retVal = DiscountAmount * Quantity;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _discountTotal = value;
-            }
+               return DiscountAmount * Quantity;
+            }         
         }
 
-        private decimal? _discountTotalWithTax;
         public virtual decimal DiscountTotalWithTax
         {
             get
             {
-                var retVal = _discountTotalWithTax;
-                if (retVal == null)
-                {
-                    retVal = DiscountAmountWithTax * Quantity;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _discountTotalWithTax = value;
+                return DiscountAmountWithTax * Quantity;
             }
         }
 
-
-        private decimal? _tax;
         public virtual decimal Tax
         {
             get
             {
-                var retVal = _tax;
-                if (retVal == null)
-                {
-                    retVal = Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _tax = value;
-            }
+               return Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
+            }         
         }
 
         /// <summary>

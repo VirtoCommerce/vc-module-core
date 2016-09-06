@@ -146,35 +146,15 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// <summary>
         /// Gets the value of the single qty line item discount amount
         /// </summary>
-        private decimal? _discountAmount;
-        public virtual decimal DiscountAmount
-        {
-            get
-            {
-                var retVal = _discountAmount;
-                if (retVal == null)
-                {
-                    retVal = ListPrice -  SalePrice;                
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _discountAmount = value;
-            }
-        }
+        public virtual decimal DiscountAmount { get; set; }
+      
 
         private decimal? _discountAmountWithTax;
         public virtual decimal DiscountAmountWithTax
         {
             get
             {
-                var retVal = _discountAmountWithTax;
-                if (retVal == null)
-                {
-                    retVal = ListPriceWithTax - SalePriceWithTax;                 
-                }
-                return retVal.Value;
+                return _discountAmountWithTax ?? DiscountAmount;
             }
             set
             {
@@ -182,57 +162,27 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        private decimal? _discountTotal;
         public virtual decimal DiscountTotal
         {
             get
             {
-                var retVal = _discountTotal;
-                if(retVal == null)
-                {
-                    retVal = DiscountAmount * Quantity;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _discountTotal = value;
+                return DiscountAmount * Quantity;
             }
         }
 
-        private decimal? _discountTotalWithTax;
         public virtual decimal DiscountTotalWithTax
         {
             get
             {
-                var retVal = _discountTotalWithTax;
-                if (retVal == null)
-                {
-                    retVal = DiscountAmountWithTax * Quantity;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _discountTotalWithTax = value;
+                return DiscountAmountWithTax * Quantity;
             }
         }
 
-        private decimal? _taxTotal;
         public virtual decimal TaxTotal
         {
             get
             {
-                var retVal = _taxTotal;
-                if (retVal == null)
-                {
-                    retVal = Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _taxTotal = value;
+               return Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
             }
         }
 

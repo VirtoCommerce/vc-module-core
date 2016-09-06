@@ -64,9 +64,8 @@
     <Compile Include="Cart\Model\Coupon.cs" />
     <Compile Include="Cart\Model\LineItem.cs" />
     <Compile Include="Cart\Model\Payment.cs" />
-    <Compile Include="Cart\Model\Search\SearchCriteria.cs" />
+    <Compile Include="Cart\Model\Search\ShoppingCartSearchCriteria.cs" />
     <Compile Include="Cart\Model\Discount.cs" />
-    <Compile Include="Cart\Model\Search\SearchResult.cs" />
     <Compile Include="Cart\Model\Shipment.cs" />
     <Compile Include="Cart\Model\PaymentMethod.cs" />
     <Compile Include="Cart\Model\ShipmentItem.cs" />

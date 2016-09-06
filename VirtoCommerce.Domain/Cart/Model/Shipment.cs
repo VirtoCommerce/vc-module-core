@@ -42,39 +42,19 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        private decimal? _total;
         public virtual decimal Total
         {
             get
             {
-                var retVal = _total;
-                if(retVal == null)
-                {
-                    retVal = ShippingPrice - DiscountTotal;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _total = value;
+                return ShippingPrice - DiscountTotal;
             }
         }
 
-        private decimal? _totalWithTax;
         public virtual decimal TotalWithTax
         {
             get
             {
-                var retVal = _totalWithTax;
-                if (retVal == null)
-                {
-                    retVal = ShippingPriceWithTax - DiscountTotalWithTax;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _totalWithTax = value;
+                return ShippingPriceWithTax - DiscountTotalWithTax;
             }
         }
 
@@ -92,25 +72,14 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        private decimal? _taxTotal;
         public virtual decimal TaxTotal
         {
             get
             {
-                var retVal = _taxTotal;
-                if(retVal == null)
-                {
-                    retVal = Math.Abs(TotalWithTax - Total);
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _taxTotal = value;
+                return Math.Abs(TotalWithTax - Total);
             }
         }
 
-        private decimal? _itemSubtotal;
         /// <summary>
         /// Total of  shipment items
         /// </summary>
@@ -118,78 +87,43 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                var retVal = _itemSubtotal;
-                if (retVal == null)
+
+                var retVal = 0m;
+                if (!Items.IsNullOrEmpty())
                 {
-                    retVal = 0;
-                    if (!Items.IsNullOrEmpty())
-                    {
-                        retVal = Items.Sum(i => i.LineItem.ExtendedPrice);
-                    }
+                    retVal = Items.Sum(i => i.LineItem.ExtendedPrice);
                 }
-                return retVal.Value;
-            }
-            set
-            {
-                _itemSubtotal = value;
+                return retVal;
+
             }
         }
 
-        private decimal? _itemSubtotalWithTax;
         public decimal ItemSubtotalWithTax
         {
             get
             {
-                var retVal = _itemSubtotalWithTax;
-                if (retVal == null)
+                var retVal = 0m;
+                if (!Items.IsNullOrEmpty())
                 {
-                    retVal = 0;
-                    if (!Items.IsNullOrEmpty())
-                    {
-                        retVal = Items.Sum(i => i.LineItem.ExtendedPriceWithTax);
-                    }
+                    retVal = Items.Sum(i => i.LineItem.ExtendedPriceWithTax);
                 }
-                return retVal.Value;
-            }
-            set
-            {
-                _itemSubtotalWithTax = value;
-            }
+                return retVal;
+            }       
         }
 
-        private decimal? _subtotal;
         public decimal Subtotal
         {
             get
             {
-                var retVal = _subtotal;
-                if (retVal == null)
-                {
-                    retVal = ShippingPrice - DiscountTotal; 
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _subtotal = value;
+                return ShippingPrice - DiscountTotal;
             }
         }
 
-        private decimal? _subtotalWithTax;
         public decimal SubtotalWithTax
         {
             get
             {
-                var retVal = _subtotalWithTax;
-                if (retVal == null)
-                {
-                    retVal = ShippingPriceWithTax - DiscountTotalWithTax;
-                }
-                return retVal.Value;
-            }
-            set
-            {
-                _subtotalWithTax = value;
+                return ShippingPriceWithTax - DiscountTotalWithTax;
             }
         }
 
