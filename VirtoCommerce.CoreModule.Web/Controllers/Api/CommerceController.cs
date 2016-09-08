@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Description;
 using VirtoCommerce.CoreModule.Web.Converters;
@@ -103,13 +104,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// Delete  fulfillment centers registered in the system
         /// </summary>
         [HttpDelete]
-        [ResponseType(typeof(coreModel.FulfillmentCenter[]))]
+        [ResponseType(typeof(void))]
         [Route("fulfillment/centers")]
         [CheckPermission(Permission = CommercePredefinedPermissions.FulfillmentDelete)]
         public IHttpActionResult DeleteFulfillmentCenters([FromUri] string[] ids)
         {
             _commerceService.DeleteFulfillmentCenter(ids);
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
     
         /// <summary>
@@ -123,7 +124,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult BatchUpdateSeoInfos(coreModel.SeoInfo[] seoInfos)
         {
             _commerceService.UpsertSeoInfos(seoInfos);
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         [HttpGet]
@@ -144,7 +145,6 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult GetSeoInfoBySlug(string slug)
         {
             var retVal = _commerceService.GetSeoByKeyword(slug).ToArray();
-
             return Ok(retVal);
         }
 
@@ -171,7 +171,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult UpdateCurrency(coreModel.Currency currency)
         {
             _commerceService.UpsertCurrencies(new[] { currency });
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult CreateCurrency(coreModel.Currency currency)
         {
             _commerceService.UpsertCurrencies(new[] { currency });
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         /// <summary>
@@ -199,7 +199,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult DeleteCurrencies([FromUri] string[] codes)
         {
             _commerceService.DeleteCurrencies(codes);
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
 
@@ -226,7 +226,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult UpdatePackageType(coreModel.PackageType packageType)
         {
             _commerceService.UpsertPackageTypes(new[] { packageType });
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult CreatePackageType(coreModel.PackageType packageType)
         {
             _commerceService.UpsertPackageTypes(new[] { packageType });
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public IHttpActionResult DeletePackageTypes([FromUri] string[] ids)
         {
             _commerceService.DeletePackageTypes(ids);
-            return Ok();
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }
