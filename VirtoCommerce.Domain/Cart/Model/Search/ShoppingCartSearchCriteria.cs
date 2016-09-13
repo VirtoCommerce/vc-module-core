@@ -13,5 +13,6 @@ namespace VirtoCommerce.Domain.Cart.Model
         public string Keyword { get; set; }
         public string CustomerId { get; set; }
         public string StoreId { get; set; }
+        public string Currency { get; set; }
     }
 }

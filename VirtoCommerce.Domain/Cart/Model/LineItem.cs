@@ -115,14 +115,16 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return ListPrice - DiscountAmount;
+                //Math.Max special for case when ListPrice < SalePrice
+                return Math.Max(ListPrice, SalePrice) - DiscountAmount;
             }
         }
         public virtual decimal PlacedPriceWithTax
         {
             get
             {
-                return ListPriceWithTax - DiscountAmountWithTax;
+                //Math.Max special for case when ListPriceWithTax < SalePriceWithTax
+                return Math.Max(ListPriceWithTax, SalePriceWithTax) - DiscountAmountWithTax;
             }
         }
 
