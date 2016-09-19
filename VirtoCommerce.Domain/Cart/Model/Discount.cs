@@ -13,19 +13,7 @@ namespace VirtoCommerce.Domain.Cart.Model
 		public string PromotionId { get; set; }
 		public string Currency { get; set; }
 		public virtual decimal DiscountAmount { get; set; }
-        private decimal? _discountAmountWithTax;
-
-        public virtual decimal DiscountAmountWithTax
-        {
-            get
-            {
-                return _discountAmountWithTax ?? DiscountAmount;
-            }
-            set
-            {
-                _discountAmountWithTax = value;
-            }
-        }
+        public virtual decimal DiscountAmountWithTax { get; set; }
         public string Coupon { get; set; }
 		public string Description { get; set; }
 	}

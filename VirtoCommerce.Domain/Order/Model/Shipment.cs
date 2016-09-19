@@ -6,7 +6,7 @@ using VirtoCommerce.Domain.Shipping.Model;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class Shipment : OrderOperation, IHaveTaxDetalization, ISupportCancellation
+	public class Shipment : OrderOperation, IHaveTaxDetalization, ISupportCancellation, ITaxable
 	{
 		public string OrganizationId { get; set; }
 		public string OrganizationName { get; set; }
@@ -50,25 +50,14 @@ namespace VirtoCommerce.Domain.Order.Model
 		public decimal? Length { get; set; }
 		public decimal? Width { get; set; }
 
-		public string TaxType { get; set; }
-
 		public Address DeliveryAddress { get; set; }
-    
-        /// <summary>
-        ///  shipping  price without discount and tax
-        /// </summary>
-        public decimal Price { get; set; }
 
-        private decimal? _priceWithTax;
+        public virtual decimal Price { get; set; }
         public virtual decimal PriceWithTax
         {
             get
             {
-                return _priceWithTax ?? Price;
-            }
-            set
-            {
-                _priceWithTax = value;
+                return Price + Price * TaxPercentRate;
             }
         }
 
@@ -88,56 +77,34 @@ namespace VirtoCommerce.Domain.Order.Model
             }
         }
 
-        public virtual decimal ItemsSubtotal
-        {
-            get
-            {
-                decimal retVal = 0;
-                if(Items != null)
-                {
-                    retVal = Items.Sum(i => i.LineItem.ExtendedPrice);
-                }
-                return retVal;
-            }
-        }
-
-        public virtual decimal ItemsSubtotalWithTax
-        {
-            get
-            {
-                decimal retVal = 0;
-                if (Items != null)
-                {
-                    retVal = Items.Sum(i => i.LineItem.ExtendedPriceWithTax);
-                }
-                return retVal;
-            }
-        }
-
-     
         public virtual decimal DiscountAmount { get; set; }
-
-        private decimal? _dicountAmountWithTax;
         public virtual decimal DiscountAmountWithTax
         {
             get
             {
-                return _dicountAmountWithTax ?? DiscountAmount;             
-            }
-            set
-            {
-                _dicountAmountWithTax = value;
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
             }
         }
 
+        #region ITaxable Members
 
-        public virtual decimal TaxTotal
+        /// <summary>
+        /// Tax category or type
+        /// </summary>
+        public string TaxType { get; set; }
+
+        public decimal TaxTotal
         {
             get
             {
-                return Math.Abs(TotalWithTax - Total);
+                return TotalWithTax - Total;
             }
         }
+
+        public decimal TaxPercentRate { get; set; }
+
+        #endregion
+
 
 
         #region ITaxDetailSupport Members

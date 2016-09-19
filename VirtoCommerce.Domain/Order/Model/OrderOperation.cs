@@ -23,10 +23,7 @@ namespace VirtoCommerce.Domain.Order.Model
 
 		public string Comment { get; set; }
 		public string Currency { get; set; }
-		public bool TaxIncluded { get; set;	}
-		public decimal Sum { get; set; }
-		public decimal Tax { get; set; }
-
+	
         public IEnumerable<IOperation> ChildrenOperations { get; set; }
 		#region ISupportCancelation Members
 

@@ -119,6 +119,7 @@
     <Compile Include="Catalog\Services\ISkuGenerator.cs" />
     <Compile Include="Commerce\Model\IHaveTaxDetalization.cs" />
     <Compile Include="Commerce\Model\ISupportCancellation.cs" />
+    <Compile Include="Commerce\Model\ITaxable.cs" />
     <Compile Include="Commerce\Model\PackageType.cs" />
     <Compile Include="Commerce\Model\Search\GenericSearchResult.cs" />
     <Compile Include="Commerce\Model\Search\SearchCriteriaBase.cs" />

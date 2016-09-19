@@ -10,7 +10,7 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-    public class LineItem : AuditableEntity, IHaveTaxDetalization, ISupportCancellation, IHaveDimension, IHasDynamicProperties
+    public class LineItem : AuditableEntity, IHaveTaxDetalization, ISupportCancellation, IHaveDimension, IHasDynamicProperties, ITaxable
     {
         /// <summary>
         /// Price id
@@ -24,17 +24,12 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public decimal Price { get; set; }
 
-        private decimal? _priceWithTax;
         public virtual decimal PriceWithTax
         {
             get
             {
-                return _priceWithTax ?? Price;
-            }
-            set
-            {
-                _priceWithTax = value;
-            }
+                return Price + Price * TaxPercentRate;
+            }         
         }
 
         /// <summary>
@@ -47,18 +42,14 @@ namespace VirtoCommerce.Domain.Order.Model
                 return Price - DiscountAmount;
             }
         }
-
         public virtual decimal PlacedPriceWithTax
         {
             get
             {
-                return PriceWithTax - DiscountAmountWithTax;
+                return PlacedPrice + PlacedPrice * TaxPercentRate;
             }
         }
 
-        /// <summary>
-        /// Gets the value of line item subtotal price (actual price * line item quantity)
-        /// </summary>        
         public virtual decimal ExtendedPrice
         {
             get
@@ -75,50 +66,55 @@ namespace VirtoCommerce.Domain.Order.Model
             }
         }
 
+        /// <summary>
+        /// Gets the value of the single qty line item discount amount
+        /// </summary>
         public virtual decimal DiscountAmount { get; set; }
 
-        private decimal? _dicountAmountWithTax;
         public virtual decimal DiscountAmountWithTax
         {
             get
             {
-                return _dicountAmountWithTax ?? DiscountAmount;
-            }
-            set
-            {
-                _dicountAmountWithTax = value;
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
             }
         }
 
-        public virtual decimal DiscountTotal
+        public decimal DiscountTotal
         {
             get
             {
-               return DiscountAmount * Quantity;
-            }         
-        }
-
-        public virtual decimal DiscountTotalWithTax
-        {
-            get
-            {
-                return DiscountAmountWithTax * Quantity;
+                return DiscountAmount * Math.Max(1, Quantity);
             }
         }
 
-        public virtual decimal Tax
+        public decimal DiscountTotalWithTax
         {
             get
             {
-               return Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
-            }         
+                return DiscountAmountWithTax * Math.Max(1, Quantity);
+            }
         }
+
+        #region ITaxable Members
 
         /// <summary>
         /// Tax category or type
         /// </summary>
         public string TaxType { get; set; }
 
+
+        public decimal TaxTotal
+        {
+            get
+            {
+                return ExtendedPriceWithTax - ExtendedPrice;
+            }
+        }
+
+        public decimal TaxPercentRate { get; set; }
+
+        #endregion
+        
         /// <summary>
         /// Reserve quantity
         /// </summary>
@@ -166,6 +162,8 @@ namespace VirtoCommerce.Domain.Order.Model
         #endregion
 
         public Discount Discount { get; set; }
+        #region IHaveTaxDetalization Members
         public ICollection<TaxDetail> TaxDetails { get; set; }
+        #endregion
     }
 }

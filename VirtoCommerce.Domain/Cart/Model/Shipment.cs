@@ -8,8 +8,8 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class Shipment : Entity, IHaveTaxDetalization
-	{
+	public class Shipment : Entity, IHaveTaxDetalization, ITaxable
+    {
 		public string ShipmentMethodCode { get; set; }
         public string ShipmentMethodOption { get; set; }
         public string  WarehouseLocation { get; set; }
@@ -25,20 +25,13 @@ namespace VirtoCommerce.Domain.Cart.Model
 		public decimal? Length { get; set; }
 		public decimal? Width { get; set; }
 
-		public string TaxType { get; set; }
+		public virtual decimal Price { get; set; }
 
-		public virtual decimal ShippingPrice { get; set; }
-
-        private decimal? _shippingPriceWithTax;
-        public virtual decimal ShippingPriceWithTax
+        public virtual decimal PriceWithTax
         {
             get
             {
-                return _shippingPriceWithTax ?? ShippingPrice;
-            }
-            set
-            {
-                _shippingPriceWithTax = value;
+                return Price + Price * TaxPercentRate;
             }
         }
 
@@ -46,7 +39,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return ShippingPrice - DiscountTotal;
+                return Price - DiscountAmount;
             }
         }
 
@@ -54,78 +47,38 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return ShippingPriceWithTax - DiscountTotalWithTax;
+                return PriceWithTax - DiscountAmountWithTax;
             }
         }
 
-        public virtual decimal DiscountTotal { get; set; }
-        private decimal? _dicountTotalWithTax;
-        public virtual decimal DiscountTotalWithTax
+        public virtual decimal DiscountAmount { get; set; }
+        public virtual decimal DiscountAmountWithTax
         {
             get
             {
-                return _dicountTotalWithTax ?? DiscountTotal;             
-            }
-            set
-            {
-                _dicountTotalWithTax = value;
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
             }
         }
 
-        public virtual decimal TaxTotal
-        {
-            get
-            {
-                return Math.Abs(TotalWithTax - Total);
-            }
-        }
+        #region ITaxable Members
 
         /// <summary>
-        /// Total of  shipment items
+        /// Tax category or type
         /// </summary>
-        public virtual decimal ItemSubtotal
+        public string TaxType { get; set; }
+
+        public decimal TaxTotal
         {
             get
             {
-
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal = Items.Sum(i => i.LineItem.ExtendedPrice);
-                }
-                return retVal;
-
+                return TotalWithTax - Total;
             }
         }
 
-        public decimal ItemSubtotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal = Items.Sum(i => i.LineItem.ExtendedPriceWithTax);
-                }
-                return retVal;
-            }       
-        }
+        public decimal TaxPercentRate { get; set; }
 
-        public decimal Subtotal
-        {
-            get
-            {
-                return ShippingPrice - DiscountTotal;
-            }
-        }
+        #endregion
 
-        public decimal SubtotalWithTax
-        {
-            get
-            {
-                return ShippingPriceWithTax - DiscountTotalWithTax;
-            }
-        }
 
         public Address DeliveryAddress { get; set; }
 

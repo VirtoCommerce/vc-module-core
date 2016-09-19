@@ -9,7 +9,7 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class ShoppingCart : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties
+	public class ShoppingCart : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable
     {
 		public string Name { get; set; }
 		public string StoreId { get; set; }
@@ -35,6 +35,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         public string ValidationType { get; set; }
 
         public decimal? VolumetricWeight { get; set; }
+        //Grand  cart total
         public virtual decimal Total
         {
             get
@@ -69,6 +70,33 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
+        public virtual decimal SubTotalDiscount
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Items.IsNullOrEmpty())
+                {
+                    retVal = Items.Sum(i => i.DiscountTotal);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal SubTotalDiscountWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Items.IsNullOrEmpty())
+                {
+                    retVal = Items.Sum(i => i.DiscountTotalWithTax);
+                }
+                return retVal;
+            }
+        }
+
+
         public virtual decimal ShippingTotal
         {
             get
@@ -76,30 +104,88 @@ namespace VirtoCommerce.Domain.Cart.Model
                 var retVal = 0m;
                 if (!Shipments.IsNullOrEmpty())
                 {
-                    retVal = Shipments.Sum(s => s.ShippingPrice);
+                    retVal = Shipments.Sum(s => s.Total);
                 }
                 return retVal;
             }
         }
 
-        public virtual decimal ShippingTotalWithTax
+        public virtual decimal ShippingTotalWithPrice
         {
             get
             {
                 var retVal = 0m;
                 if (!Shipments.IsNullOrEmpty())
                 {
-                    retVal = Shipments.Sum(s => s.ShippingPriceWithTax);
+                    retVal = Shipments.Sum(s => s.TotalWithTax);
                 }
                 return retVal;
             }
         }
 
+        public virtual decimal ShippingSubTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal = Shipments.Sum(s => s.Price);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal ShippingSubTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal = Shipments.Sum(s => s.PriceWithTax);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal ShippingDiscountTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal = Shipments.Sum(s => s.DiscountAmount);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal ShippingDiscountTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal = Shipments.Sum(s => s.DiscountAmountWithTax);
+                }
+                return retVal;
+            }
+        }
+
+
         public virtual decimal HandlingTotal { get; set; }
         public virtual decimal HandlingTotalWithTax { get; set; }
 
+        /// <summary>
+        /// Cart subtotal discount
+        /// When a discount is applied to the cart subtotal, the tax calculation has already been applied, and is reflected in the tax subtotal.
+        /// Therefore, a discount applying to the cart subtotal will occur after tax.
+        /// For instance, if the cart subtotal is $100, and $15 is the tax subtotal, a cart - wide discount of 10 % will yield a total of $105($100 subtotal – $10 discount + $15 tax on the original $100).
+        /// </summary>
         public virtual decimal DiscountAmount { get; set; }
-        public virtual decimal DiscountAmountWithTax { get; set; }
 
         public virtual decimal DiscountTotal
         {
@@ -112,7 +198,7 @@ namespace VirtoCommerce.Domain.Cart.Model
                 }
                 if (!Shipments.IsNullOrEmpty())
                 {
-                    retVal += Shipments.Sum(s => s.DiscountTotal);
+                    retVal += Shipments.Sum(s => s.DiscountAmount);
                 }
                 return retVal;
             }
@@ -121,21 +207,35 @@ namespace VirtoCommerce.Domain.Cart.Model
         public virtual decimal DiscountTotalWithTax
         {
             get
-            {
-                var retVal = DiscountAmountWithTax;
+            {            
+                var retVal = DiscountAmount;
                 if (!Items.IsNullOrEmpty())
                 {
                     retVal += Items.Sum(i => i.DiscountTotalWithTax);
                 }
                 if (!Shipments.IsNullOrEmpty())
                 {
-                    retVal += Shipments.Sum(s => s.DiscountTotalWithTax);
+                    retVal += Shipments.Sum(s => s.DiscountAmountWithTax);
                 }
                 return retVal;
             }
-        }
+        }     
 
-        public virtual decimal TaxTotal
+        public ICollection<Address> Addresses { get; set; }
+		public ICollection<LineItem> Items { get; set; }
+		public ICollection<Payment> Payments { get; set; }
+		public ICollection<Shipment> Shipments { get; set; }
+		public ICollection<Discount> Discounts { get; set; }
+		public Coupon Coupon { get; set; }
+
+        #region ITaxable Members
+
+        /// <summary>
+        /// Tax category or type
+        /// </summary>
+        public string TaxType { get; set; }
+
+        public decimal TaxTotal
         {
             get
             {
@@ -152,15 +252,11 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        public ICollection<Address> Addresses { get; set; }
-		public ICollection<LineItem> Items { get; set; }
-		public ICollection<Payment> Payments { get; set; }
-		public ICollection<Shipment> Shipments { get; set; }
-		public ICollection<Discount> Discounts { get; set; }
-		public Coupon Coupon { get; set; }
+        public decimal TaxPercentRate { get; set; }
 
-		#region IHaveTaxDetalization Members
-		public ICollection<TaxDetail> TaxDetails { get; set; }
+        #endregion
+        #region IHaveTaxDetalization Members
+        public ICollection<TaxDetail> TaxDetails { get; set; }
         #endregion
 
         #region IHasDynamicProperties Members

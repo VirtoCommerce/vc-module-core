@@ -17,9 +17,6 @@ namespace VirtoCommerce.Domain.Commerce.Model
 
 		string Comment { get; set; }
 		string Currency { get; set; }
-		bool TaxIncluded { get; set; }
-		decimal Sum { get; set; }
-		decimal Tax { get; set; }
 
         string ParentOperationId { get; set; }
 

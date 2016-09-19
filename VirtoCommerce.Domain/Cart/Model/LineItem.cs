@@ -11,8 +11,8 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-    public class LineItem : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties
-	{
+    public class LineItem : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable
+    {
 		public string ProductId { get; set; }
 		public CatalogProduct Product { get; set; }
 		public string CatalogId { get; set; }
@@ -38,7 +38,6 @@ namespace VirtoCommerce.Domain.Cart.Model
 
 		public bool IsReccuring { get; set; }
 
-		public string TaxType { get; set; }
 		public bool TaxIncluded { get; set; }
 
 		public decimal? VolumetricWeight { get; set; }
@@ -60,29 +59,18 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public string PriceId { get; set; }
         public Price Price { get; set; }
-
-        /// <summary>
-        /// old price for one unit
-        /// </summary>
+    
         public virtual decimal ListPrice { get; set; }
 
-        private decimal? _listPriceWithTax;
-        public virtual decimal ListPriceWithTax
+        public decimal ListPriceWithTax
         {
             get
             {
-                return _listPriceWithTax ?? ListPrice;
-            }
-            set
-            {
-                _listPriceWithTax = value;
+                return ListPrice + ListPrice * TaxPercentRate;
             }
         }
 
         private decimal? _salePrice;
-        /// <summary>
-        /// new price for one unit
-        /// </summary>
 		public virtual decimal SalePrice
         {
             get
@@ -95,16 +83,11 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        private decimal? _salePriceWithTax;
-        public virtual decimal SalePriceWithTax
+        public decimal SalePriceWithTax
         {
             get
             {
-                return _salePriceWithTax ?? SalePrice;
-            }
-            set
-            {
-                _salePriceWithTax = value;
+                return SalePrice + SalePrice * TaxPercentRate;
             }
         }
 
@@ -115,19 +98,16 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                //Math.Max special for case when ListPrice < SalePrice
-                return Math.Max(ListPrice, SalePrice) - DiscountAmount;
+                return ListPrice - DiscountAmount;
             }
         }
         public virtual decimal PlacedPriceWithTax
         {
             get
             {
-                //Math.Max special for case when ListPriceWithTax < SalePriceWithTax
-                return Math.Max(ListPriceWithTax, SalePriceWithTax) - DiscountAmountWithTax;
+                return PlacedPrice + PlacedPrice * TaxPercentRate;
             }
         }
-
 
         public virtual decimal ExtendedPrice
         {
@@ -149,49 +129,55 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// Gets the value of the single qty line item discount amount
         /// </summary>
         public virtual decimal DiscountAmount { get; set; }
-      
 
-        private decimal? _discountAmountWithTax;
         public virtual decimal DiscountAmountWithTax
         {
             get
             {
-                return _discountAmountWithTax ?? DiscountAmount;
-            }
-            set
-            {
-                _discountAmountWithTax = value;
-            }
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
+            }           
         }
 
-        public virtual decimal DiscountTotal
+        public decimal DiscountTotal
         {
             get
             {
-                return DiscountAmount * Quantity;
+                return DiscountAmount * Math.Max(1, Quantity);
             }
         }
 
-        public virtual decimal DiscountTotalWithTax
+        public decimal DiscountTotalWithTax
         {
             get
             {
-                return DiscountAmountWithTax * Quantity;
-            }
-        }
-
-        public virtual decimal TaxTotal
-        {
-            get
-            {
-               return Math.Abs(ExtendedPriceWithTax - ExtendedPrice);
+                return DiscountAmountWithTax * Math.Max(1, Quantity);
             }
         }
 
         public ICollection<Discount> Discounts { get; set; }
 
-		#region IHaveTaxDetalization Members
-		public ICollection<TaxDetail> TaxDetails { get; set; }
+        #region ITaxable Members
+
+        /// <summary>
+        /// Tax category or type
+        /// </summary>
+        public string TaxType { get; set; }
+
+
+        public decimal TaxTotal
+        {
+            get
+            {
+                return ExtendedPriceWithTax - ExtendedPrice;
+            }
+        }
+
+        public decimal TaxPercentRate { get; set; }
+
+        #endregion
+
+        #region IHaveTaxDetalization Members
+        public ICollection<TaxDetail> TaxDetails { get; set; }
 		#endregion
 
         #region IHasDynamicProperties Members
