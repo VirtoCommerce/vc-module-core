@@ -161,7 +161,7 @@ namespace VirtoCommerce.Domain.Order.Model
         public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
         #endregion
 
-        public Discount Discount { get; set; }
+        public ICollection<Discount> Discounts { get; set; }
         #region IHaveTaxDetalization Members
         public ICollection<TaxDetail> TaxDetails { get; set; }
         #endregion

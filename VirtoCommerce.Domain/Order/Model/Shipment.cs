@@ -27,7 +27,6 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public string ShipmentMethodOption { get; set; }
 
-        public Discount Discount { get; set; }
         /// <summary>
         ///  Shipment method contains additional shipment method information
         /// </summary>
@@ -50,7 +49,9 @@ namespace VirtoCommerce.Domain.Order.Model
 		public decimal? Length { get; set; }
 		public decimal? Width { get; set; }
 
-		public Address DeliveryAddress { get; set; }
+        public ICollection<Discount> Discounts { get; set; }
+
+        public Address DeliveryAddress { get; set; }
 
         public virtual decimal Price { get; set; }
         public virtual decimal PriceWithTax

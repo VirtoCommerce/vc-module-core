@@ -26,7 +26,7 @@ namespace VirtoCommerce.Domain.Order.Model
 		public ICollection<LineItem> Items { get; set; }
 		public ICollection<Shipment> Shipments { get; set; }
 
-		public Discount Discount { get; set; }
+        public ICollection<Discount> Discounts { get; set; }
 
         /// <summary>
         /// When a discount is applied to the order, the tax calculation has already been applied, and is reflected in the tax.
