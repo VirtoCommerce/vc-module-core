@@ -47,7 +47,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         {
             var retVal = new List<coreTaxModel.TaxRate>();
             var store = _storeService.GetById(storeId);
-            if (storeId != null)
+            if (store != null)
             {
                 var activeTaxProvider = store.TaxProviders.FirstOrDefault(x => x.IsActive);
                 if (activeTaxProvider != null)
@@ -112,7 +112,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             _commerceService.DeleteFulfillmentCenter(ids);
             return StatusCode(HttpStatusCode.NoContent);
         }
-    
+
         /// <summary>
         /// Batch create or update seo infos
         /// </summary>
