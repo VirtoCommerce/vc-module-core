@@ -56,7 +56,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 result.AllowedStores = _storeService.GetUserAllowedStoreIds(result);
                 return Ok(result);
             }
-            return NotFound();
+            return Ok();
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return Ok(result);
             }
 
-            return NotFound();
+            return Ok();
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return Ok(result);
             }
 
-            return NotFound();
+            return Ok();
         }
 
         /// <summary>
