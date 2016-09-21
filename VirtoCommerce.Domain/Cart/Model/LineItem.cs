@@ -56,6 +56,10 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// to select appropriate validation strategy
         /// </summary>
         public string ValidationType { get; set; }
+        /// <summary>
+        /// Flag represent that current line item its is read only and cannot be changed or removed from cart
+        /// </summary>
+        public bool IsReadOnly { get; set; }
 
         public string PriceId { get; set; }
         public Price Price { get; set; }

@@ -34,7 +34,6 @@ namespace VirtoCommerce.Domain.Order.Model
 		public DateTime? CapturedDate { get; set; }
 		public DateTime? VoidedDate { get; set; }
 
-        public decimal Sum { get; set; }
         public ProcessPaymentResult ProcessPaymentResult { get; set; }
 	}
 }
