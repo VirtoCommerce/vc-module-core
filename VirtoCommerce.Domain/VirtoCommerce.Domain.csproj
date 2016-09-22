@@ -245,51 +245,6 @@
     <Compile Include="Quote\Model\TierPrice.cs" />
     <Compile Include="Quote\Services\IQuoteRequestService.cs" />
     <Compile Include="Quote\Services\IQuoteTotalsCalculator.cs" />
-    <Compile Include="Search\Filters\AttributeFilter.cs" />
-    <Compile Include="Search\Filters\FilterDisplayName.cs" />
-    <Compile Include="Search\Filters\Filters.cs">
-      <DependentUpon>Filters.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Search\Filters\PriceRangeFilter.cs" />
-    <Compile Include="Search\Filters\RangeFilter.cs" />
-    <Compile Include="Search\ISearchProviderManager.cs" />
-    <Compile Include="Search\Model\CatalogItemSearchResults.cs" />
-    <Compile Include="Search\Model\CategoryFilter.cs" />
-    <Compile Include="Search\Model\CategoryFilterValue.cs" />
-    <Compile Include="Search\Model\DocumentField.cs" />
-    <Compile Include="Search\Model\Facet.cs" />
-    <Compile Include="Search\Model\FacetGroup.cs" />
-    <Compile Include="Search\Model\FacetLabel.cs" />
-    <Compile Include="Search\Model\IDocument.cs" />
-    <Compile Include="Search\Model\IDocumentField.cs" />
-    <Compile Include="Search\Model\IDocuments.cs" />
-    <Compile Include="Search\Model\IndexBuildException.cs" />
-    <Compile Include="Search\Model\IndexDataType.cs" />
-    <Compile Include="Search\Model\IndexNotFoundException.cs" />
-    <Compile Include="Search\Model\IndexStore.cs" />
-    <Compile Include="Search\Model\IndexType.cs" />
-    <Compile Include="Search\Model\ISearchConnection.cs" />
-    <Compile Include="Search\Model\ISearchCriteria.cs" />
-    <Compile Include="Search\Model\ISearchFilter.cs" />
-    <Compile Include="Search\Services\ISearchFilterService.cs" />
-    <Compile Include="Search\Model\ISearchFilterValue.cs" />
-    <Compile Include="Search\Services\ISearchIndexBuilder.cs" />
-    <Compile Include="Search\Services\ISearchIndexController.cs" />
-    <Compile Include="Search\Services\ISearchProvider.cs" />
-    <Compile Include="Search\Services\ISearchQueryBuilder.cs" />
-    <Compile Include="Search\Model\ISearchResults.cs" />
-    <Compile Include="Search\Model\OperationType.cs" />
-    <Compile Include="Search\Model\Partition.cs" />
-    <Compile Include="Search\Model\ResultDocument.cs" />
-    <Compile Include="Search\Model\ResultDocuments.cs" />
-    <Compile Include="Search\Model\SearchEventArgs.cs" />
-    <Compile Include="Search\Model\SearchException.cs" />
-    <Compile Include="Search\Model\SearchIndexEventArgs.cs" />
-    <Compile Include="Search\Model\SearchProviders.cs" />
-    <Compile Include="Search\Model\SearchResults.cs" />
-    <Compile Include="Search\Model\SearchSort.cs" />
-    <Compile Include="Search\Model\SearchSortField.cs" />
-    <Compile Include="Search\Services\ISearchService.cs" />
     <Compile Include="Shipping\Model\ShippingEvaluationContext.cs" />
     <Compile Include="Shipping\Model\ShippingMethod.cs" />
     <Compile Include="Shipping\Model\ShippingRate.cs" />
@@ -312,14 +267,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Search\Filters\Filters.cd" />
-    <None Include="Search\Filters\Filters.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="VirtoCommerce.Domain.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Search\Filters\Filters.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
