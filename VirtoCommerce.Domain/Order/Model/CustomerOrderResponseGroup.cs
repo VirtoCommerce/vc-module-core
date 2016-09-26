@@ -9,11 +9,12 @@ namespace VirtoCommerce.Domain.Order.Model
 	[Flags]
 	public enum CustomerOrderResponseGroup
 	{
+		Default = 0,
 		WithItems = 1,
-		WithShipments = 2,
-		WithInPayments = 4,
+		WithInPayments = 2,
+		WithShipments = 4,
 		WithAddresses = 8,
-		WithProducts = 16,
-		Full = WithItems | WithShipments | WithInPayments | WithAddresses | WithProducts
+		WithDiscounts = 16,
+		Full = WithItems | WithInPayments | WithShipments | WithAddresses | WithDiscounts
 	}
 }

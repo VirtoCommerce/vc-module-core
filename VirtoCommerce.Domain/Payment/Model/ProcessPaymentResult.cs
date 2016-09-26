@@ -9,9 +9,11 @@ namespace VirtoCommerce.Domain.Payment.Model
 {
 	public class ProcessPaymentResult
 	{
+        public PaymentMethod PaymentMethod { get; set; }
+
 		public PaymentStatus NewPaymentStatus { get; set; }
 
-		public string RedirectUrl { get; set; }
+        public string RedirectUrl { get; set; }
 
 		public string HtmlForm { get; set; }
 

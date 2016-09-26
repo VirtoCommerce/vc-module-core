@@ -9,9 +9,8 @@ namespace VirtoCommerce.Domain.Cart.Services
 {
 	public interface IShoppingCartService
 	{
-		ShoppingCart GetById(string cartId);
-		ShoppingCart Create(ShoppingCart cart);
-		void Update(ShoppingCart[] carts);
+		ShoppingCart[] GetByIds(string[] cartIds, string responseGroup = null);
+		void SaveChanges(ShoppingCart[] carts);
 		void Delete(string[] cartIds);
 	}
 }

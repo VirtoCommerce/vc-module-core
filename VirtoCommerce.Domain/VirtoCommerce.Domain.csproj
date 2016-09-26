@@ -52,7 +52,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="VirtoCommerce.Platform.Core, Version=2.11.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.11.5\lib\net451\VirtoCommerce.Platform.Core.dll</HintPath>
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.12.0-rc3\lib\net451\VirtoCommerce.Platform.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -61,17 +61,16 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Cart\Events\CartChangeEvent.cs" />
+    <Compile Include="Cart\Model\Coupon.cs" />
     <Compile Include="Cart\Model\LineItem.cs" />
     <Compile Include="Cart\Model\Payment.cs" />
-    <Compile Include="Cart\Model\Search\SearchCriteria.cs" />
+    <Compile Include="Cart\Model\Search\ShoppingCartSearchCriteria.cs" />
     <Compile Include="Cart\Model\Discount.cs" />
-    <Compile Include="Cart\Model\Search\SearchResult.cs" />
     <Compile Include="Cart\Model\Shipment.cs" />
     <Compile Include="Cart\Model\PaymentMethod.cs" />
     <Compile Include="Cart\Model\ShipmentItem.cs" />
     <Compile Include="Cart\Model\ShipmentMethod.cs" />
     <Compile Include="Cart\Model\ShoppingCart.cs" />
-    <Compile Include="Cart\Services\ICartTotalsCalculator.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
     <Compile Include="Catalog\Model\Asset.cs" />
@@ -120,7 +119,10 @@
     <Compile Include="Catalog\Services\ISkuGenerator.cs" />
     <Compile Include="Commerce\Model\IHaveTaxDetalization.cs" />
     <Compile Include="Commerce\Model\ISupportCancellation.cs" />
+    <Compile Include="Commerce\Model\ITaxable.cs" />
     <Compile Include="Commerce\Model\PackageType.cs" />
+    <Compile Include="Commerce\Model\Search\GenericSearchResult.cs" />
+    <Compile Include="Commerce\Model\Search\SearchCriteriaBase.cs" />
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
     <Compile Include="Commerce\Services\ISeoDuplicatesDetector.cs" />
@@ -138,9 +140,8 @@
     <Compile Include="Customer\Model\Organization.cs" />
     <Compile Include="Customer\Model\PropertyValueType.cs" />
     <Compile Include="Customer\Model\Search\MembersSearchCriteria.cs" />
-    <Compile Include="Customer\Model\Search\MembersSearchResult.cs" />
     <Compile Include="Customer\Model\Vendor.cs" />
-    <Compile Include="Customer\Services\IMemberFactory.cs" />
+    <Compile Include="Customer\Services\MemberServiceDecorator.cs" />
     <Compile Include="Customer\Services\IMemberService.cs" />
     <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Services\ICommerceService.cs" />
@@ -186,25 +187,17 @@
     <Compile Include="Marketing\Services\DefaultMarketingExtensionManagerImpl.cs" />
     <Compile Include="Order\Model\Coupon.cs" />
     <Compile Include="Order\Model\CustomerOrder.cs" />
-    <Compile Include="Order\Model\IFinanceInOperation.cs" />
-    <Compile Include="Order\Model\IFinanceOperation.cs" />
-    <Compile Include="Order\Model\IFinanceOutOperation.cs" />
-    <Compile Include="Order\Model\IHaveDimension.cs" />
-    <Compile Include="Order\Model\IOperation.cs" />
-    <Compile Include="Order\Model\IPosition.cs" />
+    <Compile Include="Commerce\Model\IHaveDimension.cs" />
+    <Compile Include="Commerce\Model\IOperation.cs" />
     <Compile Include="Order\Model\LineItem.cs" />
-    <Compile Include="Order\Model\OperationProperty.cs" />
-    <Compile Include="Order\Model\PropertyValueType.cs" />
-    <Compile Include="Order\Model\ResponseGroup.cs" />
+    <Compile Include="Order\Model\CustomerOrderResponseGroup.cs" />
     <Compile Include="Order\Model\ShipmentPackage.cs" />
     <Compile Include="Order\Model\ShipmentItem.cs" />
     <Compile Include="Common\IUniqueNumberGenerator.cs" />
-    <Compile Include="Order\Model\CustomerOrderResponseGroup.cs" />
     <Compile Include="Order\Model\Discount.cs" />
-    <Compile Include="Order\Model\Operation.cs" />
+    <Compile Include="Order\Model\OrderOperation.cs" />
     <Compile Include="Order\Model\PaymentIn.cs" />
-    <Compile Include="Order\Model\Search\SearchCriteria.cs" />
-    <Compile Include="Order\Model\Search\SearchResult.cs" />
+    <Compile Include="Order\Model\Search\CustomerOrderSearchCriteria.cs" />
     <Compile Include="Order\Model\Shipment.cs" />
     <Compile Include="Order\Services\ICustomerOrderService.cs" />
     <Compile Include="Order\Services\ICustomerOrderSearchService.cs" />
@@ -247,60 +240,11 @@
     <Compile Include="Quote\Model\QuoteItem.cs" />
     <Compile Include="Quote\Model\QuoteRequest.cs" />
     <Compile Include="Quote\Model\Search\QuoteRequestSearchCriteria.cs" />
-    <Compile Include="Quote\Model\Search\QuoteRequestSearchResult.cs" />
     <Compile Include="Quote\Model\QuoteRequestTotals.cs" />
     <Compile Include="Quote\Model\ShipmentMethod.cs" />
     <Compile Include="Quote\Model\TierPrice.cs" />
     <Compile Include="Quote\Services\IQuoteRequestService.cs" />
     <Compile Include="Quote\Services\IQuoteTotalsCalculator.cs" />
-    <Compile Include="Search\Filters\AttributeFilter.cs" />
-    <Compile Include="Search\Filters\FilterDisplayName.cs" />
-    <Compile Include="Search\Filters\Filters.cs">
-      <DependentUpon>Filters.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Search\Filters\PriceRangeFilter.cs" />
-    <Compile Include="Search\Filters\RangeFilter.cs" />
-    <Compile Include="Search\ISearchProviderManager.cs" />
-    <Compile Include="Search\Model\CatalogIndexedSearchCriteria.cs" />
-    <Compile Include="Search\Model\CatalogIndexedSearchResults.cs" />
-    <Compile Include="Search\Model\CategoryFilter.cs" />
-    <Compile Include="Search\Model\CategoryFilterValue.cs" />
-    <Compile Include="Search\Model\DocumentField.cs" />
-    <Compile Include="Search\Model\Facet.cs" />
-    <Compile Include="Search\Model\FacetGroup.cs" />
-    <Compile Include="Search\Model\FacetLabel.cs" />
-    <Compile Include="Search\Model\IDocument.cs" />
-    <Compile Include="Search\Model\IDocumentField.cs" />
-    <Compile Include="Search\Model\IDocuments.cs" />
-    <Compile Include="Search\Model\IndexBuildException.cs" />
-    <Compile Include="Search\Model\IndexDataType.cs" />
-    <Compile Include="Search\Model\IndexNotFoundException.cs" />
-    <Compile Include="Search\Model\IndexStore.cs" />
-    <Compile Include="Search\Model\IndexType.cs" />
-    <Compile Include="Search\Model\ISearchConnection.cs" />
-    <Compile Include="Search\Model\ISearchCriteria.cs" />
-    <Compile Include="Search\Model\ISearchFilter.cs" />
-    <Compile Include="Search\Services\ISearchFilterService.cs" />
-    <Compile Include="Search\Model\ISearchFilterValue.cs" />
-    <Compile Include="Search\Services\ISearchIndexBuilder.cs" />
-    <Compile Include="Search\Services\ISearchIndexController.cs" />
-    <Compile Include="Search\Services\ISearchProvider.cs" />
-    <Compile Include="Search\Services\ISearchQueryBuilder.cs" />
-    <Compile Include="Search\Model\ISearchResults.cs" />
-    <Compile Include="Search\Model\KeywordSearchCriteria.cs" />
-    <Compile Include="Search\Model\OperationType.cs" />
-    <Compile Include="Search\Model\Partition.cs" />
-    <Compile Include="Search\Model\ResultDocument.cs" />
-    <Compile Include="Search\Model\ResultDocuments.cs" />
-    <Compile Include="Search\Model\SearchCriteriaBase.cs" />
-    <Compile Include="Search\Model\SearchEventArgs.cs" />
-    <Compile Include="Search\Model\SearchException.cs" />
-    <Compile Include="Search\Model\SearchIndexEventArgs.cs" />
-    <Compile Include="Search\Model\SearchProviders.cs" />
-    <Compile Include="Search\Model\SearchResults.cs" />
-    <Compile Include="Search\Model\SearchSort.cs" />
-    <Compile Include="Search\Model\SearchSortField.cs" />
-    <Compile Include="Search\Services\ISearchService.cs" />
     <Compile Include="Shipping\Model\ShippingEvaluationContext.cs" />
     <Compile Include="Shipping\Model\ShippingMethod.cs" />
     <Compile Include="Shipping\Model\ShippingRate.cs" />
@@ -323,14 +267,7 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Search\Filters\Filters.cd" />
-    <None Include="Search\Filters\Filters.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="VirtoCommerce.Domain.nuspec" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Search\Filters\Filters.xml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

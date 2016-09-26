@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using VirtoCommerce.Domain.Search.Model;
 
 namespace VirtoCommerce.Domain.Store.Model
 {

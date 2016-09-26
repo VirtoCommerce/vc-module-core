@@ -10,7 +10,7 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-    public class LineItem : AuditableEntity, IPosition, IHaveTaxDetalization, ISupportCancellation, IHaveDimension, IHasDynamicProperties
+    public class LineItem : AuditableEntity, IHaveTaxDetalization, ISupportCancellation, IHaveDimension, IHasDynamicProperties, ITaxable
     {
         /// <summary>
         /// Price id
@@ -18,28 +18,103 @@ namespace VirtoCommerce.Domain.Order.Model
         public string PriceId { get; set; }
 
         public string Currency { get; set; }
+     
         /// <summary>
-        /// List item price without any discount and taxes
-        /// </summary>
-        public decimal BasePrice { get; set; }
-        /// <summary>
-        /// Placed price with static and dynamic discounts applied but without tax
+        ///  unit price without discount and tax
         /// </summary>
         public decimal Price { get; set; }
+
+        public virtual decimal PriceWithTax
+        {
+            get
+            {
+                return Price + Price * TaxPercentRate;
+            }         
+        }
+
         /// <summary>
-        /// Total discount amount ( defined manually via price list and dynamic discounts)
+        /// Resulting price with discount for one unit
         /// </summary>
-        public decimal DiscountAmount { get; set; }
+        public virtual decimal PlacedPrice
+        {
+            get
+            {
+                return Price - DiscountAmount;
+            }
+        }
+        public virtual decimal PlacedPriceWithTax
+        {
+            get
+            {
+                return PlacedPrice + PlacedPrice * TaxPercentRate;
+            }
+        }
+
+        public virtual decimal ExtendedPrice
+        {
+            get
+            {
+                return PlacedPrice * Quantity;
+            }
+        }
+
+        public virtual decimal ExtendedPriceWithTax
+        {
+            get
+            {
+                return PlacedPriceWithTax * Quantity;
+            }
+        }
+
         /// <summary>
-        /// Tax sum
+        /// Gets the value of the single qty line item discount amount
         /// </summary>
-        public decimal Tax { get; set; }
+        public virtual decimal DiscountAmount { get; set; }
+
+        public virtual decimal DiscountAmountWithTax
+        {
+            get
+            {
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
+            }
+        }
+
+        public decimal DiscountTotal
+        {
+            get
+            {
+                return DiscountAmount * Math.Max(1, Quantity);
+            }
+        }
+
+        public decimal DiscountTotalWithTax
+        {
+            get
+            {
+                return DiscountAmountWithTax * Math.Max(1, Quantity);
+            }
+        }
+
+        #region ITaxable Members
 
         /// <summary>
         /// Tax category or type
         /// </summary>
         public string TaxType { get; set; }
 
+
+        public decimal TaxTotal
+        {
+            get
+            {
+                return ExtendedPriceWithTax - ExtendedPrice;
+            }
+        }
+
+        public decimal TaxPercentRate { get; set; }
+
+        #endregion
+        
         /// <summary>
         /// Reserve quantity
         /// </summary>
@@ -86,7 +161,9 @@ namespace VirtoCommerce.Domain.Order.Model
         public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
         #endregion
 
-        public Discount Discount { get; set; }
+        public ICollection<Discount> Discounts { get; set; }
+        #region IHaveTaxDetalization Members
         public ICollection<TaxDetail> TaxDetails { get; set; }
+        #endregion
     }
 }

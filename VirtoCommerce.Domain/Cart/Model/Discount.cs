@@ -12,7 +12,8 @@ namespace VirtoCommerce.Domain.Cart.Model
 	{
 		public string PromotionId { get; set; }
 		public string Currency { get; set; }
-		public decimal DiscountAmount { get; set; }
+		public virtual decimal DiscountAmount { get; set; }
+        public virtual decimal DiscountAmountWithTax { get; set; }
         public string Coupon { get; set; }
 		public string Description { get; set; }
 	}

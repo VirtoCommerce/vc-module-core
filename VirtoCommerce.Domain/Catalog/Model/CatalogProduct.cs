@@ -5,7 +5,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines
+    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHaveDimension
     {
         /// <summary>
         /// SKU code
@@ -39,13 +39,16 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public string ProductType { get; set; }
         //Type of product package (set of package types with their specific dimensions)
         public string PackageType { get; set; }
+
+        #region IHaveDimension Members
         public string WeightUnit { get; set; }
         public decimal? Weight { get; set; }
 
         public string MeasureUnit { get; set; }
         public decimal? Height { get; set; }
         public decimal? Length { get; set; }
-        public decimal? Width { get; set; }
+        public decimal? Width { get; set; } 
+        #endregion
 
         public bool? EnableReview { get; set; }
 

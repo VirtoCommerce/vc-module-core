@@ -1,4 +1,6 @@
-﻿namespace VirtoCommerce.Domain.Catalog.Model
+﻿using System;
+
+namespace VirtoCommerce.Domain.Catalog.Model
 {
     public class AggregationItem
     {

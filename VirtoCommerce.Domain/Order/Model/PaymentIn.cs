@@ -8,7 +8,7 @@ using VirtoCommerce.Domain.Payment.Model;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class PaymentIn : Operation, IFinanceInOperation
+	public class PaymentIn : OrderOperation
 	{
 		public string Purpose { get; set; }
         /// <summary>
@@ -33,5 +33,7 @@ namespace VirtoCommerce.Domain.Order.Model
 		public DateTime? AuthorizedDate { get; set; }
 		public DateTime? CapturedDate { get; set; }
 		public DateTime? VoidedDate { get; set; }
+
+        public ProcessPaymentResult ProcessPaymentResult { get; set; }
 	}
 }

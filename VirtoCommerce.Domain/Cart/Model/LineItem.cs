@@ -11,8 +11,8 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-    public class LineItem : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties
-	{
+    public class LineItem : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable
+    {
 		public string ProductId { get; set; }
 		public CatalogProduct Product { get; set; }
 		public string CatalogId { get; set; }
@@ -38,7 +38,6 @@ namespace VirtoCommerce.Domain.Cart.Model
 
 		public bool IsReccuring { get; set; }
 
-		public string TaxType { get; set; }
 		public bool TaxIncluded { get; set; }
 
 		public decimal? VolumetricWeight { get; set; }
@@ -57,34 +56,132 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// to select appropriate validation strategy
         /// </summary>
         public string ValidationType { get; set; }
+        /// <summary>
+        /// Flag represent that current line item its is read only and cannot be changed or removed from cart
+        /// </summary>
+        public bool IsReadOnly { get; set; }
 
         public string PriceId { get; set; }
         public Price Price { get; set; }
+    
+        public virtual decimal ListPrice { get; set; }
+
+        public decimal ListPriceWithTax
+        {
+            get
+            {
+                return ListPrice + ListPrice * TaxPercentRate;
+            }
+        }
+
+        private decimal? _salePrice;
+		public virtual decimal SalePrice
+        {
+            get
+            {
+                return _salePrice ?? ListPrice;
+            }
+            set
+            {
+                _salePrice = value;
+            }
+        }
+
+        public decimal SalePriceWithTax
+        {
+            get
+            {
+                return SalePrice + SalePrice * TaxPercentRate;
+            }
+        }
 
         /// <summary>
-        /// old price
+        /// Resulting price with discount for one unit
         /// </summary>
-        public decimal ListPrice { get; set; }
-        /// <summary>
-        /// new price
-        /// </summary>
-		public decimal SalePrice { get; set; }
-        /// <summary>
-        /// Resulting price with discount 
-        /// </summary>
-		public decimal PlacedPrice { get; set; }
-        /// <summary>
-        /// PlacedPrice * Quantity
-        /// </summary>
-		public decimal ExtendedPrice { get; set; }
+		public virtual decimal PlacedPrice
+        {
+            get
+            {
+                return ListPrice - DiscountAmount;
+            }
+        }
+        public virtual decimal PlacedPriceWithTax
+        {
+            get
+            {
+                return PlacedPrice + PlacedPrice * TaxPercentRate;
+            }
+        }
 
-		public decimal DiscountTotal { get; set; }
-		public decimal TaxTotal { get; set; }
+        public virtual decimal ExtendedPrice
+        {
+            get
+            {
+                return PlacedPrice * Quantity;
+            }
+        }
 
-		public ICollection<Discount> Discounts { get; set; }
+        public virtual decimal ExtendedPriceWithTax
+        {
+            get
+            {
+                return PlacedPriceWithTax * Quantity;
+            }
+        }
 
-		#region IHaveTaxDetalization Members
-		public ICollection<TaxDetail> TaxDetails { get; set; }
+        /// <summary>
+        /// Gets the value of the single qty line item discount amount
+        /// </summary>
+        public virtual decimal DiscountAmount { get; set; }
+
+        public virtual decimal DiscountAmountWithTax
+        {
+            get
+            {
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
+            }           
+        }
+
+        public decimal DiscountTotal
+        {
+            get
+            {
+                return DiscountAmount * Math.Max(1, Quantity);
+            }
+        }
+
+        public decimal DiscountTotalWithTax
+        {
+            get
+            {
+                return DiscountAmountWithTax * Math.Max(1, Quantity);
+            }
+        }
+
+        public ICollection<Discount> Discounts { get; set; }
+
+        #region ITaxable Members
+
+        /// <summary>
+        /// Tax category or type
+        /// </summary>
+        public string TaxType { get; set; }
+
+
+        public decimal TaxTotal
+        {
+            get
+            {
+                return ExtendedPriceWithTax - ExtendedPrice;
+            }
+        }
+
+        public decimal TaxPercentRate { get; set; }
+
+        #endregion
+
+        #region IHaveTaxDetalization Members
+        public ICollection<TaxDetail> TaxDetails { get; set; }
 		#endregion
 
         #region IHasDynamicProperties Members

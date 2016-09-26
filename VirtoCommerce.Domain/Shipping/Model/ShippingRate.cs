@@ -20,8 +20,13 @@ namespace VirtoCommerce.Domain.Shipping.Model
 		public string OptionDescription { get; set; }
 
 		public decimal Rate { get; set; }
+        public decimal RateWithTax { get; set; }
+
 		public string Currency { get; set; }
 
-		public ShippingMethod ShippingMethod { get; set; }
+        public decimal DiscountAmount { get; set; }
+        public decimal DiscountAmountWithTax { get; set; }
+
+        public ShippingMethod ShippingMethod { get; set; }
 	}
 }

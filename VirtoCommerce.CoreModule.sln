@@ -10,8 +10,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.Domain", "Vir
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Tests", "VirtoCommerce.CoreModule.Tests\VirtoCommerce.CoreModule.Tests.csproj", "{521E57F8-E304-44A6-8EC3-CA41663AE65E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Client", "VirtoCommerce.CoreModule.Client\VirtoCommerce.CoreModule.Client.csproj", "{2910C828-0887-4B9E-8BDB-77683C79D81D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,10 +32,6 @@ Global
 		{521E57F8-E304-44A6-8EC3-CA41663AE65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{521E57F8-E304-44A6-8EC3-CA41663AE65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{521E57F8-E304-44A6-8EC3-CA41663AE65E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2910C828-0887-4B9E-8BDB-77683C79D81D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2910C828-0887-4B9E-8BDB-77683C79D81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2910C828-0887-4B9E-8BDB-77683C79D81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2910C828-0887-4B9E-8BDB-77683C79D81D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
