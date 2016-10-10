@@ -156,3 +156,5 @@ $RECYCLE.BIN/
 *.zip
 
 .vs/
+/VirtoCommerce.CoreModule.Web/bower_components
+/VirtoCommerce.CoreModule.Web/node_modules
