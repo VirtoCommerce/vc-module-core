@@ -180,13 +180,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\allStyles.css" />
+    <Content Include="Content\css\common.css" />
+    <Content Include="Content\css\uikit-htmleditor.css" />
     <Content Include="Content\css\dynamic-expression.css" />
     <Content Include="Content\logoVC.png" />
+    <Content Include="gulpfile.js" />
     <Content Include="module.manifest" />
+    <Content Include="Scripts\allPackages.js" />
     <Content Include="Scripts\common\blades\address-list.js" />
     <Content Include="Scripts\common\blades\address-detail.js" />
     <Content Include="Scripts\common\blades\address-detail.tpl.html" />
     <Content Include="Scripts\common\common.js" />
+    <Content Include="Scripts\common\directives\uikit-htmleditor.js" />
     <Content Include="Scripts\common\directives\info-button.js" />
     <Content Include="Scripts\common\dynamicExpression\expression-tree.tpl.html" />
     <Content Include="Scripts\common\dynamicExpression\expression-directives.js" />
@@ -232,6 +238,8 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Localizations\en.VirtoCommerce.Core.json" />
+    <Content Include="bower.json" />
+    <Content Include="package.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
