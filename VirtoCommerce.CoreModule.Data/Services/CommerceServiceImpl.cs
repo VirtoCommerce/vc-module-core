@@ -204,7 +204,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 // Find seo entries for specified keyword. Also add other seo entries related to found object.
                 var query = repository.SeoUrlKeywords
                     .Where(x => x.Keyword == keyword)
-                    .Join(repository.SeoUrlKeywords, x => x.ObjectId, y => y.ObjectId, (x, y) => y)
+                    .Join(repository.SeoUrlKeywords, x => x.ObjectId + "_" + x.ObjectType, y => y.ObjectId + "_" + y.ObjectType, (x, y) => y)
                     .ToArray();
 
                 var result = query.Select(x => x.ToCoreModel()).ToList();
