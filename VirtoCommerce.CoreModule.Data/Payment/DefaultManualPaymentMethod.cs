@@ -30,7 +30,7 @@ namespace VirtoCommerce.CoreModule.Data.Payment
 			context.Payment.OuterId = context.Payment.Number;
 			context.Payment.CapturedDate = DateTime.UtcNow;
             context.Payment.IsApproved = true;
-			return new ProcessPaymentResult { IsSuccess = true, NewPaymentStatus = PaymentStatus.Authorized };
+            return new ProcessPaymentResult { IsSuccess = true, NewPaymentStatus = PaymentStatus.Paid };
 		}
 
 		public override PostProcessPaymentResult PostProcessPayment(PostProcessPaymentEvaluationContext context)
