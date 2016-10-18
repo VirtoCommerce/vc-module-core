@@ -14,7 +14,9 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public string Type { get; set; }
 
-        public int Priority { get; set; }        	   
+        public int Priority { get; set; }
+
+        public int? Quantity { get; set; }
         /// <summary>
         /// Each link element can have an associated object like Product, Category, etc.
         /// Is a primary key of associated object
