@@ -7,6 +7,8 @@
 }
 
     .list.__stats .list-item {
+        background: none;
+        color: #333;
         font-size: 14px;
         padding: 4px 0;
         position: inherit;
