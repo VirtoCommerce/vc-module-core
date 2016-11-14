@@ -13,5 +13,6 @@ namespace VirtoCommerce.Domain.Payment.Model
 		public int BankCardMonth { get; set; }
 		public int BankCardYear { get; set; }
 		public string BankCardCVV2 { get; set; }
-	}
+        public string CardholderName { get; set; }
+    }
 }
