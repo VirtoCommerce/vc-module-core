@@ -25,6 +25,8 @@ namespace VirtoCommerce.Domain.Cart.Model
 		public bool? IsRecuring { get; set; }
 		public string Comment { get; set; }
 
+        public string Status { get; set; }
+
 		public string WeightUnit { get; set; }
 		public decimal? Weight { get; set; }
 
@@ -40,7 +42,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return SubTotal + TaxTotal + ShippingTotal - DiscountTotal;
+                return SubTotal + TaxTotal + ShippingTotal + PaymentTotal - DiscountTotal;
             }
         }
 
@@ -110,7 +112,7 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        public virtual decimal ShippingTotalWithPrice
+        public virtual decimal ShippingTotalWithTax
         {
             get
             {
@@ -121,7 +123,7 @@ namespace VirtoCommerce.Domain.Cart.Model
                 }
                 return retVal;
             }
-        }
+        }      
 
         public virtual decimal ShippingSubTotal
         {
@@ -175,7 +177,82 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
+        public virtual decimal PaymentTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal = Payments.Sum(x => x.Total);
+                }
+                return retVal;
+            }
+        }
 
+        public virtual decimal PaymentTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal = Payments.Sum(x => x.TotalWithTax);
+                }
+                return retVal;
+            }
+        }
+        public virtual decimal PaymentSubTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal = Payments.Sum(x => x.Price);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentSubTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal = Payments.Sum(x => x.PriceWithTax);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentDiscountTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal = Payments.Sum(x => x.DiscountAmount);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentDiscountTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal = Payments.Sum(x => x.DiscountAmountWithTax);
+                }
+                return retVal;
+            }
+        }
         public virtual decimal HandlingTotal { get; set; }
         public virtual decimal HandlingTotalWithTax { get; set; }
 
@@ -200,6 +277,10 @@ namespace VirtoCommerce.Domain.Cart.Model
                 {
                     retVal += Shipments.Sum(s => s.DiscountAmount);
                 }
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal += Payments.Sum(s => s.DiscountAmount);
+                }
                 return retVal;
             }
         }
@@ -216,6 +297,10 @@ namespace VirtoCommerce.Domain.Cart.Model
                 if (!Shipments.IsNullOrEmpty())
                 {
                     retVal += Shipments.Sum(s => s.DiscountAmountWithTax);
+                }
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal += Payments.Sum(s => s.DiscountAmountWithTax);
                 }
                 return retVal;
             }
@@ -247,6 +332,10 @@ namespace VirtoCommerce.Domain.Cart.Model
                 if (!Shipments.IsNullOrEmpty())
                 {
                     retVal += Shipments.Sum(s => s.TaxTotal);
+                }
+                if (!Payments.IsNullOrEmpty())
+                {
+                    retVal += Payments.Sum(s => s.TaxTotal);
                 }
                 return retVal;
             }

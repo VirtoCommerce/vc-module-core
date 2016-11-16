@@ -4,14 +4,15 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Common;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Settings;
 
 namespace VirtoCommerce.Domain.Payment.Model
 {
-	public abstract class PaymentMethod : Entity, IHaveSettings
-	{
+	public abstract class PaymentMethod : Entity, IHaveSettings, IHaveTaxDetalization, ITaxable
+    {
 		public PaymentMethod(string code)
 		{
 			Id = Guid.NewGuid().ToString("N");
@@ -31,6 +32,42 @@ namespace VirtoCommerce.Domain.Payment.Model
 
         public bool IsAvailableForPartial { get; set; }
 
+        public string Currency { get; set; }
+
+        public virtual decimal Price { get; set; }
+        public virtual decimal PriceWithTax
+        {
+            get
+            {
+                return Price + Price * TaxPercentRate;
+            }
+        }
+
+        public virtual decimal Total
+        {
+            get
+            {
+                return Price - DiscountAmount;
+            }
+        }
+
+        public virtual decimal TotalWithTax
+        {
+            get
+            {
+                return PriceWithTax - DiscountAmountWithTax;
+            }
+        }
+
+        public virtual decimal DiscountAmount { get; set; }
+        public virtual decimal DiscountAmountWithTax
+        {
+            get
+            {
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
+            }
+        }
+
 
         #region IHaveSettings Members
 
@@ -39,12 +76,39 @@ namespace VirtoCommerce.Domain.Payment.Model
         /// </summary>
         public ICollection<SettingEntry> Settings { get; set; }
 
-		#endregion
+        #endregion
 
-		/// <summary>
-		/// Type of payment method
-		/// </summary>
-		public abstract PaymentMethodType PaymentMethodType { get; }
+        #region ITaxable Members
+
+        /// <summary>
+        /// Tax category or type
+        /// </summary>
+        public  string TaxType { get; set; }
+
+        public decimal TaxTotal
+        {
+            get
+            {
+                return TotalWithTax - Total;
+            }
+        }
+
+        public decimal TaxPercentRate { get; set; }
+
+        #endregion
+
+
+
+        #region ITaxDetailSupport Members
+
+        public ICollection<TaxDetail> TaxDetails { get; set; }
+
+        #endregion
+
+        /// <summary>
+        /// Type of payment method
+        /// </summary>
+        public abstract PaymentMethodType PaymentMethodType { get; }
 
 		/// <summary>
 		/// Type of payment method group

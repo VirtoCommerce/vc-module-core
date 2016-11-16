@@ -53,7 +53,7 @@ namespace VirtoCommerce.Domain.Order.Model
         {
             get
             {
-                return SubTotal +  ShippingSubTotal - DiscountTotal + TaxTotal;
+                return SubTotal +  ShippingSubTotal + TaxTotal + PaymentTotal - DiscountTotal;
             }
         }
 
@@ -148,7 +148,7 @@ namespace VirtoCommerce.Domain.Order.Model
                 return retVal;
             }
         }
-
+      
         public virtual decimal ShippingSubTotal
         {
             get
@@ -214,6 +214,98 @@ namespace VirtoCommerce.Domain.Order.Model
             }
         }
 
+        public virtual decimal PaymentTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal = InPayments.Sum(x => x.Total);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal = InPayments.Sum(x => x.TotalWithTax);
+                }
+                return retVal;
+            }
+        }
+
+
+        public virtual decimal PaymentSubTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal = InPayments.Sum(x => x.Price);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentSubTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal = InPayments.Sum(x => x.PriceWithTax);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentDiscountTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal = InPayments.Sum(x => x.DiscountAmount);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentDiscountTotalWithTax
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal = InPayments.Sum(x => x.DiscountAmountWithTax);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal PaymentTaxTotal
+        {
+            get
+            {
+                var retVal = 0m;
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal = InPayments.Sum(s => s.TaxTotal);
+                }
+                return retVal;
+            }
+        }
+
         public virtual decimal DiscountTotal
         {
             get
@@ -226,6 +318,10 @@ namespace VirtoCommerce.Domain.Order.Model
                 if (!Shipments.IsNullOrEmpty())
                 {
                     retVal += Shipments.Sum(s => s.DiscountAmount);
+                }
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal += InPayments.Sum(x => x.DiscountAmount);
                 }
                 return retVal;
             }
@@ -243,6 +339,10 @@ namespace VirtoCommerce.Domain.Order.Model
                 if (!Shipments.IsNullOrEmpty())
                 {
                     retVal += Shipments.Sum(s => s.DiscountAmountWithTax);
+                }
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal += InPayments.Sum(x => x.DiscountAmountWithTax);
                 }
                 return retVal;
             }
@@ -267,6 +367,10 @@ namespace VirtoCommerce.Domain.Order.Model
                 if (!Shipments.IsNullOrEmpty())
                 {
                     retVal += Shipments.Sum(s => s.TaxTotal);
+                }
+                if (!InPayments.IsNullOrEmpty())
+                {
+                    retVal += InPayments.Sum(x => x.TaxTotal);
                 }
                 return retVal;
             }

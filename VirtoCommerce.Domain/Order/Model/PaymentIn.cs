@@ -8,8 +8,8 @@ using VirtoCommerce.Domain.Payment.Model;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class PaymentIn : OrderOperation
-	{
+	public class PaymentIn : OrderOperation, IHaveTaxDetalization, ITaxable
+    {
 		public string Purpose { get; set; }
         /// <summary>
         /// Payment method (gateway) code
@@ -35,5 +35,68 @@ namespace VirtoCommerce.Domain.Order.Model
 		public DateTime? VoidedDate { get; set; }
 
         public ProcessPaymentResult ProcessPaymentResult { get; set; }
-	}
+
+        //the self cost of the payment method
+        public virtual decimal Price { get; set; }
+        public virtual decimal PriceWithTax
+        {
+            get
+            {
+                return Price + Price * TaxPercentRate;
+            }
+        }
+
+        public virtual decimal Total
+        {
+            get
+            {
+                return Price - DiscountAmount;
+            }
+        }
+
+        public virtual decimal TotalWithTax
+        {
+            get
+            {
+                return PriceWithTax - DiscountAmountWithTax;
+            }
+        }
+
+        public virtual decimal DiscountAmount { get; set; }
+        public virtual decimal DiscountAmountWithTax
+        {
+            get
+            {
+                return DiscountAmount + DiscountAmount * TaxPercentRate;
+            }
+        }
+
+
+        #region ITaxable Members
+
+        /// <summary>
+        /// Tax category or type
+        /// </summary>
+        public string TaxType { get; set; }
+
+        public decimal TaxTotal
+        {
+            get
+            {
+                return TotalWithTax - Total;
+            }
+        }
+
+        public decimal TaxPercentRate { get; set; }
+
+        #endregion
+
+        #region ITaxDetailSupport Members
+
+        public ICollection<TaxDetail> TaxDetails { get; set; }
+
+        #endregion
+
+        public ICollection<Discount> Discounts { get; set; }
+    }
 }
