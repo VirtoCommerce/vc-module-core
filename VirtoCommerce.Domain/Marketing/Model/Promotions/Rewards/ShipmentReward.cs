@@ -19,10 +19,13 @@ namespace VirtoCommerce.Domain.Marketing.Model
 			:base(other)
 		{
 			ShippingMethod = other.ShippingMethod;
-		}
-		public string ShippingMethod { get; set; }
+            ShippingMethodOption = other.ShippingMethodOption;
 
-		public override PromotionReward Clone()
+        }
+		public string ShippingMethod { get; set; }
+        public string ShippingMethodOption { get; set; }
+
+        public override PromotionReward Clone()
 		{
 			return new ShipmentReward(this);
 		}
@@ -30,7 +33,7 @@ namespace VirtoCommerce.Domain.Marketing.Model
 
 		public override string ToString()
 		{
-			return String.Format("{0} {1}", base.ToString(), ShippingMethod);
+			return String.Format("{0} {1} {2}", base.ToString(), ShippingMethod, ShippingMethodOption);
 		}
 	}
 }

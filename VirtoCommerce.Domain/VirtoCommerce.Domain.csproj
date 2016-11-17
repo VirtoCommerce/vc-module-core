@@ -171,6 +171,7 @@
     <Compile Include="Marketing\Model\Promotions\Rewards\CartSubtotalReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\CatalogItemAmountReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\GiftReward.cs" />
+    <Compile Include="Marketing\Model\Promotions\Rewards\PaymentReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\PromotionReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\RewardAmountType.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\ShipmentReward.cs" />

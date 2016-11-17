@@ -46,13 +46,21 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		/// Current shipment method
 		/// </summary>
 		public string ShipmentMethodCode { get; set; }
-		public decimal ShipmentMethodPrice { get; set; }
+        public string ShipmentMethodOption { get; set; }
+        public decimal ShipmentMethodPrice { get; set; }
 		public string[] AvailableShipmentMethodCodes { get; set; }
 
-		/// <summary>
-		/// Entered coupon
+        /// <summary>
+		/// Current payment method
 		/// </summary>
-		public string Coupon { get; set; }
+		public string PaymentMethodCode { get; set; }
+        public decimal PaymenttMethodPrice { get; set; }
+        public string[] AvailablePaymentMethodCodes { get; set; }
+
+        /// <summary>
+        /// Entered coupon
+        /// </summary>
+        public string Coupon { get; set; }
 		/// <summary>
 		/// List of product promo in cart
 		/// </summary>
