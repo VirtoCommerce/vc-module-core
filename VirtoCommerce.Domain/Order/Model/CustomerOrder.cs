@@ -53,7 +53,7 @@ namespace VirtoCommerce.Domain.Order.Model
         {
             get
             {
-                return SubTotal +  ShippingSubTotal + TaxTotal + PaymentTotal - DiscountTotal;
+                return SubTotal +  ShippingSubTotal + TaxTotal + PaymentSubTotal - DiscountTotal;
             }
         }
 

@@ -42,7 +42,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return SubTotal + TaxTotal + ShippingTotal + PaymentTotal - DiscountTotal;
+                return SubTotal + ShippingSubTotal + TaxTotal + PaymentSubTotal - DiscountTotal;
             }
         }
 
@@ -177,6 +177,7 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
+      
         public virtual decimal PaymentTotal
         {
             get
