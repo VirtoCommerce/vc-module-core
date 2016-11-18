@@ -39,6 +39,28 @@ namespace VirtoCommerce.Domain.Customer.Model
         }
 
         /// <summary>
+        /// Search by member Groups  (VIP, Partner etc)
+        /// </summary>
+        public string Group { get; set; }
+
+        private string[] _groups;
+        public string[] Groups
+        {
+            get
+            {
+                if (_groups == null && !string.IsNullOrEmpty(Group))
+                {
+                    _groups = new[] { Group };
+                }
+                return _groups;
+            }
+            set
+            {
+                _groups = value;
+            }
+        }
+
+        /// <summary>
         /// Word, part of word or phrase to search
         /// </summary>
         public string Keyword { get; set; }

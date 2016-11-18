@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VirtoCommerce.Domain.Cart.Model;
-using VirtoCommerce.Domain.Catalog.Model;
+﻿using System.Collections.Generic;
 using VirtoCommerce.Domain.Common;
-using VirtoCommerce.Domain.Marketing.Model;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
-	public class PromotionEvaluationContext : EvaluationContextBase
+    public class PromotionEvaluationContext : EvaluationContextBase
 	{
 		public PromotionEvaluationContext()
 		{
@@ -42,20 +35,21 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		
 		public decimal CartTotal { get; set; }
 
-		/// <summary>
-		/// Current shipment method
-		/// </summary>
-		public string ShipmentMethodCode { get; set; }
+        /// <summary>
+        /// Current shipment method
+        /// </summary>
+        public string ShipmentMethodCode { get; set; }
         public string ShipmentMethodOption { get; set; }
         public decimal ShipmentMethodPrice { get; set; }
 		public string[] AvailableShipmentMethodCodes { get; set; }
 
         /// <summary>
-		/// Current payment method
-		/// </summary>
-		public string PaymentMethodCode { get; set; }
-        public decimal PaymenttMethodPrice { get; set; }
+        /// Current payment method
+        /// </summary>
+        public string PaymentMethodCode { get; set; }
+        public decimal PaymentMethodPrice { get; set; }
         public string[] AvailablePaymentMethodCodes { get; set; }
+
 
         /// <summary>
         /// Entered coupon

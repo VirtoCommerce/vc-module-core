@@ -10,6 +10,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Customer.Services
 {
+    [Obsolete]
     public sealed class MemberServiceDecorator : IMemberSearchService, IMemberService
     {
         #region IMemberService Members

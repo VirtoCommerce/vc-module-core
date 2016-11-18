@@ -44,10 +44,14 @@ namespace VirtoCommerce.Domain.Common
 
 		public virtual string Language { get; set;}
 
+        /// <summary>
+        /// Any tags or groups belongs to user such as VIP, Wholesaler etc
+        /// </summary>
+        public string[] UserGroups { get; set; }
 
-		#region Navigation
+        #region Navigation
 
-		public virtual string ShopperSearchedPhraseInStore { get; set; }
+        public virtual string ShopperSearchedPhraseInStore { get; set; }
 
 		public virtual string ShopperSearchedPhraseOnInternet { get; set; }
 

@@ -19,6 +19,5 @@ namespace VirtoCommerce.Domain.Pricing.Model
 		public string OrganizationId { get; set; }
 		public DateTime? CertainDate { get; set; }
 		public string Currency { get; set; }
-		public string[] Tags { get; set; }
 	}
 }

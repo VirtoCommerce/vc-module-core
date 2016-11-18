@@ -21,6 +21,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         public ICollection<string> Phones { get; set; }
         public ICollection<string> Emails { get; set; }
         public ICollection<Note> Notes { get; set; }
+        public ICollection<string> Groups { get; set; }
 
         #region IHasDynamicProperties Members
         public string ObjectType { get; set; }
