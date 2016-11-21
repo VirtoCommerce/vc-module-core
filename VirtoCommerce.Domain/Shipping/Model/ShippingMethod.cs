@@ -9,13 +9,18 @@ using VirtoCommerce.Platform.Core.Settings;
 
 namespace VirtoCommerce.Domain.Shipping.Model
 {
-	public abstract class ShippingMethod : Entity, IHaveSettings
-	{
-		public ShippingMethod(string code)
+    public abstract class ShippingMethod : Entity, IHaveSettings
+    {
+        private ShippingMethod()
+        {
+            Id = Guid.NewGuid().ToString("N");
+            IsActive = true;
+        }
+
+        public ShippingMethod(string code)
+            :this()
 		{
-			Id = Guid.NewGuid().ToString("N");
 			Code = code;
-			IsActive = true;
 		}
 
 		/// <summary>

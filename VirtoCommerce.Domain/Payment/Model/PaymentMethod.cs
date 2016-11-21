@@ -13,9 +13,13 @@ namespace VirtoCommerce.Domain.Payment.Model
 {
 	public abstract class PaymentMethod : Entity, IHaveSettings, IHaveTaxDetalization, ITaxable
     {
+        private PaymentMethod()
+        {
+            Id = Guid.NewGuid().ToString("N");
+        }
 		public PaymentMethod(string code)
+            :this()
 		{
-			Id = Guid.NewGuid().ToString("N");
 			Code = code;
 		}
 
