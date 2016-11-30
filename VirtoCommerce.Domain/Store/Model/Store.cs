@@ -6,11 +6,12 @@ using VirtoCommerce.Domain.Shipping.Model;
 using VirtoCommerce.Domain.Tax.Model;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.DynamicProperties;
+using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 
 namespace VirtoCommerce.Domain.Store.Model
 {
-    public class Store : AuditableEntity, IHasDynamicProperties, IHaveSettings, ISeoSupport
+    public class Store : AuditableEntity, IHasDynamicProperties, IHaveSettings, ISeoSupport, ISupportSecurityScopes
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -78,5 +79,10 @@ namespace VirtoCommerce.Domain.Store.Model
         #region IHaveSettings Members
         public ICollection<SettingEntry> Settings { get; set; }
         #endregion
+
+        #region ISupportSecurityScopes Members
+        public IEnumerable<string> Scopes { get; set; }
+        #endregion
+
     }
 }
