@@ -29,8 +29,8 @@ namespace VirtoCommerce.Domain.Order.Model
             get
             {
                 return Price + Price * TaxPercentRate;
-            }         
-        }
+            }
+         }
 
         /// <summary>
         /// Resulting price with discount for one unit
@@ -56,7 +56,7 @@ namespace VirtoCommerce.Domain.Order.Model
             {
                 return PlacedPrice * Quantity;
             }
-        }
+         }
 
         public virtual decimal ExtendedPriceWithTax
         {
@@ -95,6 +95,16 @@ namespace VirtoCommerce.Domain.Order.Model
             }
         }
 
+        //Any extra Fee 
+        public virtual decimal Fee { get; set; }
+
+        public virtual decimal FeeWithTax
+        {
+            get
+            {
+                return Fee + Fee * TaxPercentRate;
+            }
+        }
         #region ITaxable Members
 
         /// <summary>
@@ -107,7 +117,7 @@ namespace VirtoCommerce.Domain.Order.Model
         {
             get
             {
-                return ExtendedPriceWithTax - ExtendedPrice;
+                return ExtendedPriceWithTax - ExtendedPrice + FeeWithTax - Fee;
             }
         }
 

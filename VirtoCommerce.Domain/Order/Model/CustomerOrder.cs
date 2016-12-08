@@ -53,7 +53,7 @@ namespace VirtoCommerce.Domain.Order.Model
         {
             get
             {
-                return SubTotal +  ShippingSubTotal + TaxTotal + PaymentSubTotal - DiscountTotal;
+                return SubTotal + ShippingSubTotal + TaxTotal + PaymentSubTotal + FeeTotal - DiscountTotal;
             }
         }
 
@@ -345,9 +345,54 @@ namespace VirtoCommerce.Domain.Order.Model
                     retVal += InPayments.Sum(x => x.DiscountAmountWithTax);
                 }
                 return retVal;
+            }         
+        }
+
+
+        //Any extra Fee 
+        public decimal Fee { get; set; }
+
+        public virtual decimal FeeWithTax
+        {
+            get
+            {
+                return Fee + Fee * TaxPercentRate;
             }
         }
 
+        public virtual decimal FeeTotal
+        {
+            get
+            {
+                var retVal = Fee;
+                if (!Items.IsNullOrEmpty())
+                {
+                    retVal += Items.Sum(i => i.Fee);
+                }
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal += Shipments.Sum(s => s.Fee);
+                }
+                return retVal;
+            }
+        }
+
+        public virtual decimal FeeTotalWithTax
+        {
+            get
+            {
+                var retVal = FeeWithTax;
+                if (!Items.IsNullOrEmpty())
+                {
+                    retVal += Items.Sum(i => i.FeeWithTax);
+                }
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal += Shipments.Sum(s => s.FeeWithTax);
+                }
+                return retVal;
+            }
+        }
         #region ITaxable Members
 
         /// <summary>
@@ -373,7 +418,7 @@ namespace VirtoCommerce.Domain.Order.Model
                     retVal += InPayments.Sum(x => x.TaxTotal);
                 }
                 return retVal;
-            }
+            }        
         }
 
         public decimal TaxPercentRate { get; set; }

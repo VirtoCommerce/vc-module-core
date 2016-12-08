@@ -13,43 +13,43 @@ namespace VirtoCommerce.Domain.Cart.Model
 {
     public class LineItem : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable
     {
-		public string ProductId { get; set; }
-		public CatalogProduct Product { get; set; }
-		public string CatalogId { get; set; }
-		public string CategoryId { get; set; }
-		public string Sku { get; set; }
+        public string ProductId { get; set; }
+        public CatalogProduct Product { get; set; }
+        public string CatalogId { get; set; }
+        public string CategoryId { get; set; }
+        public string Sku { get; set; }
         public string ProductType { get; set; }
 
-		public string Name { get; set; }
-		public int Quantity { get; set; }
+        public string Name { get; set; }
+        public int Quantity { get; set; }
 
-		public string FulfillmentLocationCode { get; set; }
-		public string ShipmentMethodCode { get; set; }
-		public bool RequiredShipping { get; set; }
-		public string ThumbnailImageUrl { get; set; }
-		public string ImageUrl { get; set; }
+        public string FulfillmentLocationCode { get; set; }
+        public string ShipmentMethodCode { get; set; }
+        public bool RequiredShipping { get; set; }
+        public string ThumbnailImageUrl { get; set; }
+        public string ImageUrl { get; set; }
 
-		public bool IsGift { get; set; }
-		public string Currency { get; set; }
+        public bool IsGift { get; set; }
+        public string Currency { get; set; }
 
-		public string LanguageCode { get; set; }
+        public string LanguageCode { get; set; }
 
-		public string Note { get; set; }
+        public string Note { get; set; }
 
-		public bool IsReccuring { get; set; }
+        public bool IsReccuring { get; set; }
 
-		public bool TaxIncluded { get; set; }
+        public bool TaxIncluded { get; set; }
 
-		public decimal? VolumetricWeight { get; set; }
+        public decimal? VolumetricWeight { get; set; }
 
 
-		public string WeightUnit { get; set; }
-		public decimal? Weight { get; set; }
+        public string WeightUnit { get; set; }
+        public decimal? Weight { get; set; }
 
-		public string MeasureUnit { get; set; }
-		public decimal? Height { get; set; }
-		public decimal? Length { get; set; }
-		public decimal? Width { get; set; }
+        public string MeasureUnit { get; set; }
+        public decimal? Height { get; set; }
+        public decimal? Length { get; set; }
+        public decimal? Width { get; set; }
 
         /// <summary>
         /// Represent any line item validation type (noPriceValidate, noQuantityValidate etc) this value can be used in storefront 
@@ -63,7 +63,7 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public string PriceId { get; set; }
         public Price Price { get; set; }
-    
+
         public virtual decimal ListPrice { get; set; }
 
         public decimal ListPriceWithTax
@@ -75,7 +75,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         }
 
         private decimal? _salePrice;
-		public virtual decimal SalePrice
+        public virtual decimal SalePrice
         {
             get
             {
@@ -139,7 +139,7 @@ namespace VirtoCommerce.Domain.Cart.Model
             get
             {
                 return DiscountAmount + DiscountAmount * TaxPercentRate;
-            }           
+            }
         }
 
         public decimal DiscountTotal
@@ -158,7 +158,18 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        public ICollection<Discount> Discounts { get; set; }
+        //Any extra Fee 
+        public virtual decimal Fee { get; set; }
+
+        public virtual decimal FeeWithTax
+        {
+            get
+            {
+                return Fee + Fee * TaxPercentRate;
+            }
+        }
+
+        public ICollection<Discount> Discounts { get; set; }      
 
         #region ITaxable Members
 
@@ -172,7 +183,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return ExtendedPriceWithTax - ExtendedPrice;
+                return ExtendedPriceWithTax - ExtendedPrice + FeeWithTax - Fee;
             }
         }
 
@@ -182,12 +193,12 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         #region IHaveTaxDetalization Members
         public ICollection<TaxDetail> TaxDetails { get; set; }
-		#endregion
+        #endregion
 
         #region IHasDynamicProperties Members
         public string ObjectType { get; set; }
         public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
 
         #endregion
-	}
+    }
 }

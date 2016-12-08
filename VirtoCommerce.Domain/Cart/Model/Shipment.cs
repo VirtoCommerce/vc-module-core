@@ -39,7 +39,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return Price - DiscountAmount;
+                return Price + Fee - DiscountAmount;
             }
         }
 
@@ -47,7 +47,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return PriceWithTax - DiscountAmountWithTax;
+                return PriceWithTax + FeeWithTax - DiscountAmountWithTax;
             }
         }
 
@@ -59,6 +59,18 @@ namespace VirtoCommerce.Domain.Cart.Model
                 return DiscountAmount + DiscountAmount * TaxPercentRate;
             }
         }
+
+        //Any extra Fee 
+        public virtual decimal Fee { get; set; }
+
+        public virtual decimal FeeWithTax
+        {
+            get
+            {
+                return Fee + Fee * TaxPercentRate;
+            }
+        }
+
 
         #region ITaxable Members
 

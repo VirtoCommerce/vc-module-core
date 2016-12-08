@@ -42,7 +42,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         {
             get
             {
-                return SubTotal + ShippingSubTotal + TaxTotal + PaymentSubTotal - DiscountTotal;
+                return SubTotal + ShippingSubTotal + TaxTotal + PaymentSubTotal + FeeTotal - DiscountTotal;
             }
         }
 
@@ -305,7 +305,52 @@ namespace VirtoCommerce.Domain.Cart.Model
                 }
                 return retVal;
             }
-        }     
+        }
+
+        //Any extra Fee 
+        public decimal Fee { get; set; }
+
+        public virtual decimal FeeWithTax
+        {
+            get
+            {
+                return Fee + Fee * TaxPercentRate;
+            }
+        }
+
+        public virtual decimal FeeTotal
+        {
+            get
+            {
+                var retVal = Fee;
+                if (!Items.IsNullOrEmpty())
+                {
+                    retVal += Items.Sum(i => i.Fee);
+                }
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal += Shipments.Sum(s => s.Fee);
+                }              
+                return retVal;
+            }
+        }
+
+        public virtual decimal FeeTotalWithTax
+        {
+            get
+            {
+                var retVal = FeeWithTax;
+                if (!Items.IsNullOrEmpty())
+                {
+                    retVal += Items.Sum(i => i.FeeWithTax);
+                }
+                if (!Shipments.IsNullOrEmpty())
+                {
+                    retVal += Shipments.Sum(s => s.FeeWithTax);
+                }
+                return retVal;
+            }
+        }
 
         public ICollection<Address> Addresses { get; set; }
 		public ICollection<LineItem> Items { get; set; }
