@@ -8,7 +8,7 @@ using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-    public class CustomerOrder : OrderOperation, IHaveTaxDetalization, ISupportSecurityScopes, ITaxable
+    public class CustomerOrder : OrderOperation, IHaveTaxDetalization, ISupportSecurityScopes, ITaxable, ILanguageSupport
 	{
   		public string CustomerId { get; set; }
 		public string CustomerName { get; set; }
@@ -20,6 +20,19 @@ namespace VirtoCommerce.Domain.Order.Model
 		public string EmployeeId { get; set; }
 		public string EmployeeName { get; set; }
 
+        /// <summary>
+        /// Flag determines that the order is the prototype
+        /// </summary>
+        public bool IsPrototype { get; set; }
+        /// <summary>
+        /// Number for subscription  associated with this order
+        /// </summary>
+        public string SubscriptionNumber { get; set; }
+        /// <summary>
+        /// Identifier for subscription  associated with this order
+        /// </summary>
+        public string SubscriptionId { get; set; }
+ 
 		public ICollection<Address> Addresses { get; set; }
 		public ICollection<PaymentIn> InPayments { get; set; }
 
@@ -422,6 +435,12 @@ namespace VirtoCommerce.Domain.Order.Model
         }
 
         public decimal TaxPercentRate { get; set; }
+
+        #endregion
+
+        #region ILanguageSupport Members
+
+        public string LanguageCode { get; set; }
 
         #endregion
 

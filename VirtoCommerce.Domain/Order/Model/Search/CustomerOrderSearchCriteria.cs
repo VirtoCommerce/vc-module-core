@@ -36,6 +36,41 @@ namespace VirtoCommerce.Domain.Order.Model
         }
 
         /// <summary>
+        /// Search orders with flag IsPrototype
+        /// </summary>
+        public bool WithPrototypes { get; set; }
+
+        /// <summary>
+        /// Search only recurring orders created by subscription
+        /// </summary>
+        public bool OnlyRecurring { get; set; }
+
+        /// <summary>
+        /// Search orders with given subscription
+        /// </summary>
+        public string SubscriptionId { get; set; }
+
+        /// <summary>
+        /// Search orders with given subscriptions
+        /// </summary>
+        private string[] _subscriptionIds;
+        public string[] SubscriptionIds
+        {
+            get
+            {
+                if (_subscriptionIds == null && !string.IsNullOrEmpty(SubscriptionId))
+                {
+                    _subscriptionIds = new[] { SubscriptionId };
+                }
+                return _subscriptionIds;
+            }
+            set
+            {
+                _subscriptionIds = value;
+            }
+        }
+
+        /// <summary>
         /// Search by status
         /// </summary>
         public string Status { get; set; }
