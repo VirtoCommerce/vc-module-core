@@ -366,7 +366,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// </summary>
         public string TaxType { get; set; }
 
-        public decimal TaxTotal
+        public virtual decimal TaxTotal
         {
             get
             {
@@ -387,7 +387,7 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        public decimal TaxPercentRate { get; set; }
+        public  decimal TaxPercentRate { get; set; }
 
         #endregion
         #region IHaveTaxDetalization Members

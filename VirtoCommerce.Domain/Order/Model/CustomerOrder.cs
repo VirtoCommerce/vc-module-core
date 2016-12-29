@@ -413,7 +413,7 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public string TaxType { get; set; }
 
-        public decimal TaxTotal
+        public virtual decimal TaxTotal
         {
             get
             {
