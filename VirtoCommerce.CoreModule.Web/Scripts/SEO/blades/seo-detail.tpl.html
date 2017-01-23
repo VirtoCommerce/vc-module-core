@@ -38,12 +38,12 @@
                 <div class="form-group">
                     <label class="form-label">{{'core.blades.seo-detail.labels.url-keyword' | translate}}</label>
                     <div class="form-input">
-                        <input ng-model="blade.currentEntity.semanticUrl" name="semanticUrl" required ui-validate="{invalidUrl:'semanticUrlValidator($value)', duplicate:'duplicateValidator($value)'}" ui-validate-watch="'blade.currentEntity.storeId'" placeholder="{{'core.blades.seo-detail.placeholders.url-keyword' | translate}}" autocomplete="off" />
+                        <input ng-model="blade.currentEntity.semanticUrl" name="semanticUrl" required ui-validate="{invalidUrl:'semanticUrlValidator($value)'}" ui-validate-watch="'blade.currentEntity.storeId'" placeholder="{{'core.blades.seo-detail.placeholders.url-keyword' | translate}}" autocomplete="off" />
                     </div>
                     <div class="form-error" ng-show="formScope.semanticUrl.$dirty">
                         <span ng-show="formScope.semanticUrl.$error.required">{{'core.blades.seo-detail.validations.url-keyword-required' | translate}}</span>
                         <span ng-show="formScope.semanticUrl.$error.invalidUrl">{{'core.blades.seo-detail.validations.url-keyword-invalid' | translate}}</span>
-                        <span ng-show="formScope.semanticUrl.$error.duplicate">{{'core.blades.seo-detail.validations.url-keyword-duplicate' | translate}}</span>
+                        <span ng-show="!duplicateValidator(blade.currentEntity.semanticUrl)">{{'core.blades.seo-detail.validations.url-keyword-duplicate' | translate}}</span>
                     </div>
                 </div>
                 <div class="form-group">

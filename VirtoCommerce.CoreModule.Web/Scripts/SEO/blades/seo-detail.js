@@ -36,8 +36,8 @@
     function isValid(data) {
         // check required and valid Url requirements
         return data.semanticUrl &&
-               $scope.semanticUrlValidator(data.semanticUrl) &&
-               $scope.duplicateValidator(data.semanticUrl);
+               $scope.semanticUrlValidator(data.semanticUrl);
+               //$scope.duplicateValidator(data.semanticUrl); // allow saving duplicates
     }
 
     $scope.semanticUrlValidator = function (value) {
