@@ -7,8 +7,7 @@ using VirtoCommerce.Domain.Order.Model;
 
 namespace VirtoCommerce.Domain.Payment.Model
 {
-	public class VoidProcessPaymentEvaluationContext
-	{
-		public PaymentIn Payment { get; set; }
+	public class VoidProcessPaymentEvaluationContext : PaymentEvaluationContextBase
+    {
 	}
 }

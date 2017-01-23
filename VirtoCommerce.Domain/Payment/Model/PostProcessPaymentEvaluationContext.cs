@@ -12,11 +12,10 @@ using System.Collections.Specialized;
 
 namespace VirtoCommerce.Domain.Payment.Model
 {
-	public class PostProcessPaymentEvaluationContext : IEvaluationContext
-	{
+	public class PostProcessPaymentEvaluationContext : PaymentEvaluationContextBase
+    {
 		public PostProcessPaymentEvaluationContext()
 		{
-
 		}
 
 		public PostProcessPaymentEvaluationContext(PaymentIn payment)
@@ -24,14 +23,8 @@ namespace VirtoCommerce.Domain.Payment.Model
 			this.Payment = payment;
 		}
 
-		public PaymentIn Payment { get; set; }
-
-		public CustomerOrder Order { get; set; }
-
 		public Store.Model.Store Store { get; set; }
 
 		public string OuterId { get; set; }
-
-        public NameValueCollection Parameters { get; set; }
 	}
 }

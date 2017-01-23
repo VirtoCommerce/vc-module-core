@@ -207,6 +207,7 @@
     <Compile Include="Payment\Model\CaptureProcessPaymentEvaluationContext.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentResult.cs" />
     <Compile Include="Payment\Model\IProcessResult.cs" />
+    <Compile Include="Payment\Model\PaymentEvaluationContextBase.cs" />
     <Compile Include="Payment\Model\PaymentMethodGroupType.cs" />
     <Compile Include="Payment\Model\PostProcessPaymentEvaluationContext.cs" />
     <Compile Include="Payment\Model\PaymentMethod.cs" />

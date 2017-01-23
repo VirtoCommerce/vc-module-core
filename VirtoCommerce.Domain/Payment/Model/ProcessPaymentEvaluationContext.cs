@@ -7,11 +7,10 @@ using VirtoCommerce.Domain.Order.Model;
 
 namespace VirtoCommerce.Domain.Payment.Model
 {
-	public class ProcessPaymentEvaluationContext
-	{
+	public class ProcessPaymentEvaluationContext : PaymentEvaluationContextBase
+    {
 		public ProcessPaymentEvaluationContext()
 		{
-
 		}
 
 		public ProcessPaymentEvaluationContext(PaymentIn payment)
@@ -19,12 +18,7 @@ namespace VirtoCommerce.Domain.Payment.Model
 			this.Payment = payment;
 		}
 
-		public PaymentIn Payment { get; set; }
-
-		public CustomerOrder Order { get; set; }
-
 		public Store.Model.Store Store { get; set; }
-
 		public BankCardInfo BankCardInfo { get; set; }
 	}
 }
