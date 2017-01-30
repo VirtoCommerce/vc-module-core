@@ -192,6 +192,7 @@
     <Compile Include="Commerce\Model\IOperation.cs" />
     <Compile Include="Order\Model\LineItem.cs" />
     <Compile Include="Order\Model\CustomerOrderResponseGroup.cs" />
+    <Compile Include="Order\Model\PaymentGatewayTransaction.cs" />
     <Compile Include="Order\Model\ShipmentPackage.cs" />
     <Compile Include="Order\Model\ShipmentItem.cs" />
     <Compile Include="Common\IUniqueNumberGenerator.cs" />

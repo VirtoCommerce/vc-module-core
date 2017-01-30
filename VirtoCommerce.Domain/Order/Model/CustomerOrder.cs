@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
-using VirtoCommerce.Platform.Core.DynamicProperties;
 using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Order.Model
@@ -445,7 +443,6 @@ namespace VirtoCommerce.Domain.Order.Model
 
         public string LanguageCode { get; set; }
 
-        #endregion
-
+        #endregion     
     }
 }

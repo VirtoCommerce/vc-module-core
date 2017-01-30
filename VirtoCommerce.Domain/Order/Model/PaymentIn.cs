@@ -98,5 +98,7 @@ namespace VirtoCommerce.Domain.Order.Model
         #endregion
 
         public ICollection<Discount> Discounts { get; set; }
+
+        public ICollection<PaymentGatewayTransaction> Transactions { get; set; }
     }
 }

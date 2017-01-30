@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.DynamicProperties;
 using VirtoCommerce.Domain.Commerce.Model;
+using VirtoCommerce.Platform.Core.ChangeLog;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public abstract class OrderOperation : AuditableEntity, IOperation, ISupportCancellation, IHasDynamicProperties
-	{
+    public abstract class OrderOperation : AuditableEntity, IOperation, ISupportCancellation, IHasDynamicProperties, IHasChangesHistory
+    {
         public OrderOperation()
         {
             OperationType = this.GetType().Name;
@@ -37,6 +35,10 @@ namespace VirtoCommerce.Domain.Order.Model
 		#region IHasDynamicProperties Members
 		public string ObjectType { get; set; }
 		public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
-		#endregion
-	}
+        #endregion
+
+        #region IHasChangesHistory
+        public ICollection<OperationLog> OperationsLog { get; set; }
+        #endregion
+    }
 }
