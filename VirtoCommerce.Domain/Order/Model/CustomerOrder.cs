@@ -9,17 +9,20 @@ using VirtoCommerce.Platform.Core.Security;
 namespace VirtoCommerce.Domain.Order.Model
 {
     public class CustomerOrder : OrderOperation, IHaveTaxDetalization, ISupportSecurityScopes, ITaxable, ILanguageSupport
-	{
-  		public string CustomerId { get; set; }
-		public string CustomerName { get; set; }
-		public string ChannelId { get; set; }
-		public string StoreId { get; set; }
-		public string StoreName { get; set; }
-		public string OrganizationId { get; set; }
-		public string OrganizationName { get; set; }
-		public string EmployeeId { get; set; }
-		public string EmployeeName { get; set; }
-
+    {
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
+        public string ChannelId { get; set; }
+        public string StoreId { get; set; }
+        public string StoreName { get; set; }
+        public string OrganizationId { get; set; }
+        public string OrganizationName { get; set; }
+        public string EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
+        /// <summary>
+        /// Payment plan id associated with this order
+        /// </summary>
+        public string PaymentPlanId { get; set; }
         /// <summary>
         /// Flag determines that the order is the prototype
         /// </summary>
