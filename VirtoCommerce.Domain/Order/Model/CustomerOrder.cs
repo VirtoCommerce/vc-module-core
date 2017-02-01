@@ -17,10 +17,12 @@ namespace VirtoCommerce.Domain.Order.Model
         public string OrganizationName { get; set; }
         public string EmployeeId { get; set; }
         public string EmployeeName { get; set; }
+
         /// <summary>
-        /// Payment plan id associated with this order
+        /// The basis shopping cart id of which the order was created
         /// </summary>
-        public string PaymentPlanId { get; set; }
+        public string ShoppingCartId { get; set; }
+    
         /// <summary>
         /// Flag determines that the order is the prototype
         /// </summary>
