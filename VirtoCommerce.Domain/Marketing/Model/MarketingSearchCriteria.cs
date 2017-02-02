@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using VirtoCommerce.Domain.Commerce.Model.Search;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
-	public class MarketingSearchCriteria
-	{
-		public MarketingSearchCriteria()
-		{
-			Count = 20;
-		}
+    public class MarketingSearchCriteria : SearchCriteriaBase
+    {
+        public string FolderId { get; set; }
 
-		public string FolderId { get; set; }
-		public SearchResponseGroup ResponseGroup { get; set; }
-		public string Keyword { get; set; }
-
-		public int Start { get; set; }
-
-		public int Count { get; set; }
-	}
+        public string Keyword { get; set; }
+    }
 }
