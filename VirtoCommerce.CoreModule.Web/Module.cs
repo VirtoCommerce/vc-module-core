@@ -19,6 +19,9 @@ using VirtoCommerce.CoreModule.Data.Tax;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.CoreModule.Data.Observers;
 using VirtoCommerce.Domain.Customer.Events;
+using System.Web.Http;
+using VirtoCommerce.OrderModule.Web.JsonConverters;
+using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Web
 {
@@ -121,6 +124,10 @@ namespace VirtoCommerce.CoreModule.Web
                 };
                 commerceService.UpsertCurrencies(new[] { defaultCurrency });
             }
+
+            //Next lines allow to use polymorph types in API controller methods
+            var httpConfiguration = _container.Resolve<HttpConfiguration>();
+            httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
         }
 
         #endregion

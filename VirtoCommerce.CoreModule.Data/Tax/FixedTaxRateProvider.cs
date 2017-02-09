@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VirtoCommerce.Domain.Tax.Model;
+using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Settings;
 
 namespace VirtoCommerce.CoreModule.Data.Tax
@@ -48,13 +49,13 @@ namespace VirtoCommerce.CoreModule.Data.Tax
 
             foreach (var line in taxEvalContext.Lines)
             {
-                var rate = new TaxRate
-                {
-                    Rate = line.Amount * Rate * 0.01m,
-                    Currency = taxEvalContext.Currency,
-                    TaxProvider = this,
-                    Line = line
-                };
+                var rate = AbstractTypeFactory<TaxRate>.TryCreateInstance();
+
+                rate.Rate = line.Amount * Rate * 0.01m;
+                rate.Currency = taxEvalContext.Currency;
+                rate.TaxProvider = this;
+                rate.Line = line;
+
                 retVal.Add(rate);
             }
 
