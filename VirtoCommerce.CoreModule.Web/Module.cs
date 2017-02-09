@@ -20,8 +20,7 @@ using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.CoreModule.Data.Observers;
 using VirtoCommerce.Domain.Customer.Events;
 using System.Web.Http;
-using VirtoCommerce.OrderModule.Web.JsonConverters;
-using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.CoreModule.Web.JsonConverters;
 
 namespace VirtoCommerce.CoreModule.Web
 {
