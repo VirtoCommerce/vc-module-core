@@ -152,6 +152,11 @@
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentEvaluationContext.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentFolder.cs" />
     <Compile Include="Marketing\Model\DynamicContent\IsHasFolder.cs" />
+    <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentPublicationSearchCriteria.cs" />
+    <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentFolderSearchCriteria.cs" />
+    <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentPlaceSearchCriteria.cs" />
+    <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentItemSearchCriteria.cs" />
+    <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentSearchCriteriaBase.cs" />
     <Compile Include="Marketing\Model\Promotions\CatalogPromotionResult.cs" />
     <Compile Include="Marketing\Model\Promotions\Coupon.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentItem.cs" />
@@ -178,11 +183,14 @@
     <Compile Include="Marketing\Model\Promotions\Rewards\SpecialOfferReward.cs" />
     <Compile Include="Marketing\Model\MarketingSearchCriteria.cs" />
     <Compile Include="Marketing\Model\MarketingSearchResult.cs" />
+    <Compile Include="Marketing\Model\Promotions\Search\PromotionSearchCriteria.cs" />
     <Compile Include="Marketing\Model\SearchResponseGroup.cs" />
+    <Compile Include="Marketing\Services\IDynamicContentSearchService.cs" />
     <Compile Include="Marketing\Services\IMarketingDynamicContentEvaluator.cs" />
     <Compile Include="Marketing\Services\IDynamicContentService.cs" />
     <Compile Include="Marketing\Services\IMarketingPromoEvaluator.cs" />
     <Compile Include="Marketing\Services\IMarketingSearchService.cs" />
+    <Compile Include="Marketing\Services\IPromotionSearchService.cs" />
     <Compile Include="Marketing\Services\IPromotionService.cs" />
     <Compile Include="Marketing\Services\IMarketingExtensionManager.cs" />
     <Compile Include="Marketing\Services\DefaultMarketingExtensionManagerImpl.cs" />

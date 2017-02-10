@@ -7,6 +7,7 @@ using VirtoCommerce.Domain.Marketing.Model;
 
 namespace VirtoCommerce.Domain.Marketing.Services
 {
+    [Obsolete]
 	public interface IMarketingSearchService
 	{
 		MarketingSearchResult SearchResources(MarketingSearchCriteria criteria);

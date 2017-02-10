@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
+    [Obsolete]
 	[Flags]
 	public enum SearchResponseGroup
 	{

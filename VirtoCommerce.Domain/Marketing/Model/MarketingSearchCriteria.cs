@@ -1,7 +1,9 @@
-﻿using VirtoCommerce.Domain.Commerce.Model.Search;
+﻿using System;
+using VirtoCommerce.Domain.Commerce.Model.Search;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
+    [Obsolete]
     public class MarketingSearchCriteria : SearchCriteriaBase
     {
         public string FolderId { get; set; }
