@@ -9,7 +9,7 @@ namespace VirtoCommerce.Domain.Marketing.Model.DynamicContent.Search
 {
     public class DynamicContentPublicationSearchCriteria : DynamicContentSearchCriteriaBase
     {
-        public string OnlyActive { get; set; }
+        public bool OnlyActive { get; set; }
         public string Store { get; set; }
     }
 }
