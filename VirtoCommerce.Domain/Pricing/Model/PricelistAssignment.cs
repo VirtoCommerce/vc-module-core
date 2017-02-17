@@ -14,8 +14,7 @@ namespace VirtoCommerce.Domain.Pricing.Model
 	public class PricelistAssignment : AuditableEntity
 	{
 		public string CatalogId { get; set; }
-        public Catalog.Model.Catalog Catalog { get; set; }
-		public string PricelistId { get; set; }
+        public string PricelistId { get; set; }
         public Pricelist Pricelist { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -43,5 +42,10 @@ namespace VirtoCommerce.Domain.Pricing.Model
         /// Deserialized conditional expression  used to evaluate current assignment availability 
         /// </summary>
         public Func<IEvaluationContext, bool> Condition { get; set; }
+
+        /// <summary>
+        /// List of conditions and rules to define Prices Assignment is valid
+        /// </summary>
+        public ConditionExpressionTree DynamicExpression { get; set; }
     }
 }
