@@ -42,7 +42,7 @@
     }
 
     $scope.getAddressName = function (address) {
-        return [address.countryCode, address.regionName, address.city, address.line1].join(",");
+        return [address.countryCode, address.regionName, address.city, address.line1].join(", ");
     };
 
     blade.headIcon = blade.parentBlade.headIcon;
