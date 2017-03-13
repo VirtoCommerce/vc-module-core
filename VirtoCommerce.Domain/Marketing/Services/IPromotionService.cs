@@ -13,11 +13,8 @@ namespace VirtoCommerce.Domain.Marketing.Services
         void UpdatePromotions(Promotion[] prmotions);
         void DeletePromotions(string[] ids);
 
-        Coupon GetCouponById(string id);
-        Coupon[] GetPersonalCoupons(string customerId);
-
         GenericSearchResult<Coupon> Search(CouponSearchCriteria criteria);
-        void SaveCoupons(Coupon[] coupon);
+        void SaveCoupons(Coupon[] coupons);
         void DeleteCoupons(string[] ids);
     }
 }
