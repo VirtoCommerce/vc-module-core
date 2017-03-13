@@ -183,6 +183,7 @@
     <Compile Include="Marketing\Model\Promotions\Rewards\SpecialOfferReward.cs" />
     <Compile Include="Marketing\Model\MarketingSearchCriteria.cs" />
     <Compile Include="Marketing\Model\MarketingSearchResult.cs" />
+    <Compile Include="Marketing\Model\Promotions\Search\CouponSearchCriteria.cs" />
     <Compile Include="Marketing\Model\Promotions\Search\PromotionSearchCriteria.cs" />
     <Compile Include="Marketing\Model\SearchResponseGroup.cs" />
     <Compile Include="Marketing\Services\IDynamicContentSearchService.cs" />
