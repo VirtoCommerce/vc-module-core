@@ -13,7 +13,7 @@ namespace VirtoCommerce.Domain.Marketing.Services
         void UpdatePromotions(Promotion[] prmotions);
         void DeletePromotions(string[] ids);
 
-        GenericSearchResult<Coupon> Search(CouponSearchCriteria criteria);
+        GenericSearchResult<Coupon> SearchCoupons(CouponSearchCriteria criteria);
         void SaveCoupons(Coupon[] coupons);
         void DeleteCoupons(string[] ids);
     }

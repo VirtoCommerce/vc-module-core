@@ -4,7 +4,6 @@ namespace VirtoCommerce.Domain.Marketing.Model
 {
     public class Coupon : AuditableEntity
     {
-
         public string CustomerId { get; set; }
 
         public string CustomerName { get; set; }
