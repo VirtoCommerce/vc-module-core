@@ -40,5 +40,7 @@ namespace VirtoCommerce.Domain.Marketing.Model
         public string RemainderDays { get; set; }
 
         public int MaxUsesNumber { get; set; }
+
+        public string PromotionId { get; set; }
     }
 }

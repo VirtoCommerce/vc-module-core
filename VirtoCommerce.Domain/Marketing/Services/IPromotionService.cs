@@ -16,5 +16,6 @@ namespace VirtoCommerce.Domain.Marketing.Services
         GenericSearchResult<Coupon> SearchCoupons(CouponSearchCriteria criteria);
         void SaveCoupons(Coupon[] coupons);
         void DeleteCoupons(string[] ids);
+        void ClearCoupons(string promotionId);
     }
 }
