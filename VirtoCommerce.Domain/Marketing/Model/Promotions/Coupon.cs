@@ -14,6 +14,8 @@ namespace VirtoCommerce.Domain.Marketing.Model
 
         public DateTime? UsedDate { get; set; }
 
+        public DateTime? ExpirationDate { get; set; }
+
         public string Code { get; set; }
 
         public decimal Amount { get; set; }
