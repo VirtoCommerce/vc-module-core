@@ -11,7 +11,6 @@ namespace VirtoCommerce.Domain.Marketing.Model
         {
             IsActive = true;
             Id = Name = this.GetType().Name;
-            Coupons = new List<Coupon>();
         }
 
         public string Store { get; set; }
@@ -20,8 +19,6 @@ namespace VirtoCommerce.Domain.Marketing.Model
         public bool IsActive { get; set; }
 
         public int Priority { get; set; }
-
-        public ICollection<Coupon> Coupons { get; set; }
 
         public int TotalCouponsCount { get; set; }
 

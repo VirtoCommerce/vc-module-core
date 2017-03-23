@@ -1,6 +1,4 @@
-﻿using VirtoCommerce.Domain.Commerce.Model.Search;
-using VirtoCommerce.Domain.Marketing.Model;
-using VirtoCommerce.Domain.Marketing.Model.Promotions.Search;
+﻿using VirtoCommerce.Domain.Marketing.Model;
 
 namespace VirtoCommerce.Domain.Marketing.Services
 {
@@ -12,10 +10,5 @@ namespace VirtoCommerce.Domain.Marketing.Services
         Promotion CreatePromotion(Promotion promotion);
         void UpdatePromotions(Promotion[] prmotions);
         void DeletePromotions(string[] ids);
-
-        GenericSearchResult<Coupon> SearchCoupons(CouponSearchCriteria criteria);
-        void SaveCoupons(Coupon[] coupons);
-        void DeleteCoupons(string[] ids);
-        void ClearCoupons(string promotionId);
     }
 }

@@ -157,6 +157,7 @@
     <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentPlaceSearchCriteria.cs" />
     <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentItemSearchCriteria.cs" />
     <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentSearchCriteriaBase.cs" />
+    <Compile Include="Marketing\Model\Promotions\ApplyCouponRequest.cs" />
     <Compile Include="Marketing\Model\Promotions\CatalogPromotionResult.cs" />
     <Compile Include="Marketing\Model\Promotions\Coupon.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentItem.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Marketing\Model\Promotions\Search\CouponSearchCriteria.cs" />
     <Compile Include="Marketing\Model\Promotions\Search\PromotionSearchCriteria.cs" />
     <Compile Include="Marketing\Model\SearchResponseGroup.cs" />
+    <Compile Include="Marketing\Services\ICouponService.cs" />
     <Compile Include="Marketing\Services\IDynamicContentSearchService.cs" />
     <Compile Include="Marketing\Services\IMarketingDynamicContentEvaluator.cs" />
     <Compile Include="Marketing\Services\IDynamicContentService.cs" />
