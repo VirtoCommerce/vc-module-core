@@ -15,5 +15,9 @@ namespace VirtoCommerce.Domain.Marketing.Model
         /// </summary>
         public string Code { get; set; }        
         public string PromotionId { get; set; }
+        /// <summary>
+        /// Total number of uses 
+        /// </summary>
+        public long TotalUsesCount { get; set; }
     }
 }
