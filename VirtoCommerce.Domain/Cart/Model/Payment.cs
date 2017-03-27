@@ -8,7 +8,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class Payment : AuditableEntity, IHaveTaxDetalization, ITaxable
+	public class Payment : AuditableEntity, IHaveTaxDetalization, ITaxable, IHasDiscounts
     {
 		public string OuterId { get; set; }
 		public string Currency { get; set; }
@@ -73,7 +73,10 @@ namespace VirtoCommerce.Domain.Cart.Model
         #endregion
 
 
+
+        #region IHasDiscounts
         public ICollection<Discount> Discounts { get; set; }
+        #endregion
 
         #region ITaxDetailSupport Members
 

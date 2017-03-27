@@ -11,7 +11,7 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-    public class LineItem : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable
+    public class LineItem : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable, IHasDiscounts
     {
         public string ProductId { get; set; }
         public CatalogProduct Product { get; set; }
@@ -169,7 +169,10 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        public ICollection<Discount> Discounts { get; set; }      
+
+        #region IHasDiscounts
+        public ICollection<Discount> Discounts { get; set; }
+        #endregion
 
         #region ITaxable Members
 

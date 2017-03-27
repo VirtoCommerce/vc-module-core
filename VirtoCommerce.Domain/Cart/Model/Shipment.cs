@@ -8,7 +8,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class Shipment : Entity, IHaveTaxDetalization, ITaxable
+	public class Shipment : Entity, IHaveTaxDetalization, ITaxable, IHasDiscounts
     {
 		public string ShipmentMethodCode { get; set; }
         public string ShipmentMethodOption { get; set; }
@@ -94,11 +94,15 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public Address DeliveryAddress { get; set; }
 
-		public ICollection<Discount> Discounts { get; set; }
 		public ICollection<ShipmentItem> Items { get; set; }
 
-		#region IHaveTaxDetalization Members
-		public ICollection<TaxDetail> TaxDetails { get; set; }
+
+        #region IHasDiscounts
+        public ICollection<Discount> Discounts { get; set; }
+        #endregion
+
+        #region IHaveTaxDetalization Members
+        public ICollection<TaxDetail> TaxDetails { get; set; }
 		#endregion
 		
 	}

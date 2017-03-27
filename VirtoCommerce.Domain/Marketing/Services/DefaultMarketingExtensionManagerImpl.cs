@@ -8,6 +8,9 @@ using VirtoCommerce.Domain.Marketing.Model;
 
 namespace VirtoCommerce.Domain.Marketing.Services
 {
+    /// <summary>
+    /// Uses for extensions of promotions and dynamic content dynamic expressions
+    /// </summary>
 	public class DefaultMarketingExtensionManagerImpl : IMarketingExtensionManager
 	{
 		private List<Promotion> _promotions = new List<Promotion>();

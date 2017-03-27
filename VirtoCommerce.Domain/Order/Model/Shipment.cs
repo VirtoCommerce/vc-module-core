@@ -6,7 +6,7 @@ using VirtoCommerce.Domain.Shipping.Model;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class Shipment : OrderOperation, IHaveTaxDetalization, ISupportCancellation, ITaxable
+	public class Shipment : OrderOperation, IHaveTaxDetalization, ISupportCancellation, ITaxable, IHasDiscounts
 	{
 		public string OrganizationId { get; set; }
 		public string OrganizationName { get; set; }
@@ -49,7 +49,10 @@ namespace VirtoCommerce.Domain.Order.Model
 		public decimal? Length { get; set; }
 		public decimal? Width { get; set; }
 
+
+        #region IHasDiscounts
         public ICollection<Discount> Discounts { get; set; }
+        #endregion
 
         public Address DeliveryAddress { get; set; }
 

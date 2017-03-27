@@ -3,17 +3,14 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
-
 	public class PromotionUsage : AuditableEntity
 	{
-		public string CustomerId { get; set; }
-		public string CustomerName { get; set; }
+        //The identifier of the object for which it was used
+        public string ObjectId { get; set; }
+        public string ObjectType { get; set; }
 
-		public int UsageCount { get; set; }
-
-		public int PromotionId { get; set; }
-
-		public Promotion Promotion { get; set; }
+        public string CouponCode { get; set; }
+        public string PromotionId { get; set; }
 
 	}
 }

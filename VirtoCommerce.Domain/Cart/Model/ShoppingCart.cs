@@ -9,7 +9,7 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class ShoppingCart : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable
+	public class ShoppingCart : AuditableEntity, IHaveTaxDetalization, IHasDynamicProperties, ITaxable, IHasDiscounts
     {
 		public string Name { get; set; }
 		public string StoreId { get; set; }
@@ -355,9 +355,12 @@ namespace VirtoCommerce.Domain.Cart.Model
         public ICollection<Address> Addresses { get; set; }
 		public ICollection<LineItem> Items { get; set; }
 		public ICollection<Payment> Payments { get; set; }
-		public ICollection<Shipment> Shipments { get; set; }
-		public ICollection<Discount> Discounts { get; set; }
-		public Coupon Coupon { get; set; }
+		public ICollection<Shipment> Shipments { get; set; }		
+		public string Coupon { get; set; }
+
+        #region IHasDiscounts
+        public ICollection<Discount> Discounts { get; set; } 
+        #endregion
 
         #region ITaxable Members
 

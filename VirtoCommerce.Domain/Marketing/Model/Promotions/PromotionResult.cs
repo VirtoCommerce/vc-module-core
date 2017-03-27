@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
-	/// <summary>
-	/// Результат вычисления МП
-	/// </summary>
+
 	public class PromotionResult
 	{
 		public PromotionResult()

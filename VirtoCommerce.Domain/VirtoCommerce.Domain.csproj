@@ -60,12 +60,11 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Cart\Events\CartChangedEvent.cs" />
     <Compile Include="Cart\Events\CartChangeEvent.cs" />
-    <Compile Include="Cart\Model\Coupon.cs" />
     <Compile Include="Cart\Model\LineItem.cs" />
     <Compile Include="Cart\Model\Payment.cs" />
     <Compile Include="Cart\Model\Search\ShoppingCartSearchCriteria.cs" />
-    <Compile Include="Cart\Model\Discount.cs" />
     <Compile Include="Cart\Model\Shipment.cs" />
     <Compile Include="Cart\Model\PaymentMethod.cs" />
     <Compile Include="Cart\Model\ShipmentItem.cs" />
@@ -93,6 +92,8 @@
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
     <Compile Include="Commerce\Model\Currency.cs" />
+    <Compile Include="Commerce\Model\Discount.cs" />
+    <Compile Include="Commerce\Model\IHasDiscounts.cs" />
     <Compile Include="Commerce\Model\IInheritable.cs" />
     <Compile Include="Commerce\Model\ILanguageSupport.cs" />
     <Compile Include="Catalog\Model\ILinkSupport.cs" />
@@ -157,7 +158,6 @@
     <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentPlaceSearchCriteria.cs" />
     <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentItemSearchCriteria.cs" />
     <Compile Include="Marketing\Model\DynamicContent\Search\DynamicContentSearchCriteriaBase.cs" />
-    <Compile Include="Marketing\Model\Promotions\ApplyCouponRequest.cs" />
     <Compile Include="Marketing\Model\Promotions\CatalogPromotionResult.cs" />
     <Compile Include="Marketing\Model\Promotions\Coupon.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentItem.cs" />
@@ -165,9 +165,6 @@
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentPublication.cs" />
     <Compile Include="Marketing\Model\Promotions\Expression\IRewardExpression.cs" />
     <Compile Include="Marketing\Model\Promotions\Expression\PromoDynamicExpressionTree.cs" />
-    <Compile Include="Marketing\Model\Promotions\IMarketingEvent.cs" />
-    <Compile Include="Marketing\Model\Promotions\DefaultOrderEventType.cs" />
-    <Compile Include="Marketing\Model\Promotions\MarketingEvent.cs" />
     <Compile Include="Marketing\Model\Promotions\ProductPromoEntry.cs" />
     <Compile Include="Marketing\Model\Promotions\Promotion.cs" />
     <Compile Include="Marketing\Model\Promotions\PromotionEvaluationContext.cs" />
@@ -182,22 +179,20 @@
     <Compile Include="Marketing\Model\Promotions\Rewards\RewardAmountType.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\ShipmentReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\SpecialOfferReward.cs" />
-    <Compile Include="Marketing\Model\MarketingSearchCriteria.cs" />
-    <Compile Include="Marketing\Model\MarketingSearchResult.cs" />
     <Compile Include="Marketing\Model\Promotions\Search\CouponSearchCriteria.cs" />
     <Compile Include="Marketing\Model\Promotions\Search\PromotionSearchCriteria.cs" />
-    <Compile Include="Marketing\Model\SearchResponseGroup.cs" />
+    <Compile Include="Marketing\Model\Promotions\Search\PromotionUsageSearchCriteria.cs" />
     <Compile Include="Marketing\Services\ICouponService.cs" />
     <Compile Include="Marketing\Services\IDynamicContentSearchService.cs" />
     <Compile Include="Marketing\Services\IMarketingDynamicContentEvaluator.cs" />
     <Compile Include="Marketing\Services\IDynamicContentService.cs" />
     <Compile Include="Marketing\Services\IMarketingPromoEvaluator.cs" />
-    <Compile Include="Marketing\Services\IMarketingSearchService.cs" />
+    <Compile Include="Marketing\Services\IPromotionUsageService.cs" />
     <Compile Include="Marketing\Services\IPromotionSearchService.cs" />
     <Compile Include="Marketing\Services\IPromotionService.cs" />
     <Compile Include="Marketing\Services\IMarketingExtensionManager.cs" />
     <Compile Include="Marketing\Services\DefaultMarketingExtensionManagerImpl.cs" />
-    <Compile Include="Order\Model\Coupon.cs" />
+    <Compile Include="Order\Events\OrderChangedEvent.cs" />
     <Compile Include="Order\Model\CustomerOrder.cs" />
     <Compile Include="Commerce\Model\IHaveDimension.cs" />
     <Compile Include="Commerce\Model\IOperation.cs" />
@@ -207,7 +202,6 @@
     <Compile Include="Order\Model\ShipmentPackage.cs" />
     <Compile Include="Order\Model\ShipmentItem.cs" />
     <Compile Include="Common\IUniqueNumberGenerator.cs" />
-    <Compile Include="Order\Model\Discount.cs" />
     <Compile Include="Order\Model\OrderOperation.cs" />
     <Compile Include="Order\Model\PaymentIn.cs" />
     <Compile Include="Order\Model\Search\CustomerOrderSearchCriteria.cs" />

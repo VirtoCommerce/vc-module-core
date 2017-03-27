@@ -10,7 +10,7 @@ using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-    public class LineItem : AuditableEntity, IHaveTaxDetalization, ISupportCancellation, IHaveDimension, IHasDynamicProperties, ITaxable
+    public class LineItem : AuditableEntity, IHaveTaxDetalization, ISupportCancellation, IHaveDimension, IHasDynamicProperties, ITaxable, IHasDiscounts
     {
         /// <summary>
         /// Price id
@@ -171,7 +171,11 @@ namespace VirtoCommerce.Domain.Order.Model
         public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
         #endregion
 
+
+        #region IHasDiscounts
         public ICollection<Discount> Discounts { get; set; }
+        #endregion
+
         #region IHaveTaxDetalization Members
         public ICollection<TaxDetail> TaxDetails { get; set; }
         #endregion

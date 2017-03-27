@@ -16,10 +16,5 @@ namespace VirtoCommerce.Domain.Marketing.Services
 		/// <param name="context"></param>
 		/// <returns></returns>
 		PromotionResult EvaluatePromotion(IEvaluationContext context);
-
-		/// <summary>
-		/// External event handler
-		/// </summary>
-		PromotionResult ProcessEvent(IMarketingEvent marketingEvent);
 	}
 }

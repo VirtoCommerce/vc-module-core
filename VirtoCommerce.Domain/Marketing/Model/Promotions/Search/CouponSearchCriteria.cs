@@ -4,10 +4,7 @@ namespace VirtoCommerce.Domain.Marketing.Model.Promotions.Search
 {
     public class CouponSearchCriteria : SearchCriteriaBase
     {
+        public string Code { get; set; }
         public string PromotionId { get; set; }
-
-        public string Keyword { get; set; }
-
-        public bool? IsActive { get; set; }
     }
 }

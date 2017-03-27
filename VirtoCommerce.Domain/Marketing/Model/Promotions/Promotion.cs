@@ -20,7 +20,7 @@ namespace VirtoCommerce.Domain.Marketing.Model
 
         public int Priority { get; set; }
 
-        public int TotalCouponsCount { get; set; }
+        public bool HasCoupons { get; set; }
 
         public string Description { get; set; }
 
@@ -31,19 +31,7 @@ namespace VirtoCommerce.Domain.Marketing.Model
 
         public DateTime? EndDate { get; set; }
 
-        public ICollection<PromotionUsage> Usages { get; set; }
-
         public virtual PromotionReward[] EvaluatePromotion(IEvaluationContext context)
-        {
-            return new PromotionReward[] { };
-        }
-
-        //public virtual CatalogPromotionResult EvaluateCatalogPromotion(IEvaluationContext context)
-        //{
-        //	return null;
-        //}
-
-        public virtual PromotionReward[] ProcessEvent(IMarketingEvent marketingEvent)
         {
             return new PromotionReward[] { };
         }

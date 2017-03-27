@@ -8,7 +8,7 @@ using VirtoCommerce.Domain.Payment.Model;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class PaymentIn : OrderOperation, IHaveTaxDetalization, ITaxable
+	public class PaymentIn : OrderOperation, IHaveTaxDetalization, ITaxable, IHasDiscounts
     {
 		public string Purpose { get; set; }
         /// <summary>
@@ -97,7 +97,10 @@ namespace VirtoCommerce.Domain.Order.Model
 
         #endregion
 
+
+        #region IHasDiscounts
         public ICollection<Discount> Discounts { get; set; }
+        #endregion
 
         public ICollection<PaymentGatewayTransaction> Transactions { get; set; }
     }

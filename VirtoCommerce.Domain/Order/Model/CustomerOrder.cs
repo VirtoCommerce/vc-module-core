@@ -6,7 +6,7 @@ using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-    public class CustomerOrder : OrderOperation, IHaveTaxDetalization, ISupportSecurityScopes, ITaxable, ILanguageSupport
+    public class CustomerOrder : OrderOperation, IHaveTaxDetalization, ISupportSecurityScopes, ITaxable, ILanguageSupport, IHasDiscounts
     {
         public string CustomerId { get; set; }
         public string CustomerName { get; set; }
@@ -42,7 +42,10 @@ namespace VirtoCommerce.Domain.Order.Model
 		public ICollection<LineItem> Items { get; set; }
 		public ICollection<Shipment> Shipments { get; set; }
 
+
+        #region IHasDiscounts
         public ICollection<Discount> Discounts { get; set; }
+        #endregion
 
         /// <summary>
         /// When a discount is applied to the order, the tax calculation has already been applied, and is reflected in the tax.

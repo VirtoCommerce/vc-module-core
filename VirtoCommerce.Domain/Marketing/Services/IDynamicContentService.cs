@@ -9,24 +9,20 @@ namespace VirtoCommerce.Domain.Marketing.Services
 {
 	public interface IDynamicContentService
 	{
-		DynamicContentFolder GetFolderById(string id);
-		DynamicContentFolder CreateFolder(DynamicContentFolder place);
-		void UpdateFolder(DynamicContentFolder place);
-		void DeleteFolder(string[] ids);
+		DynamicContentFolder[] GetFoldersByIds(string[] ids);
+        void SaveFolders(DynamicContentFolder[] folders);	
+		void DeleteFolders(string[] ids);
 
-		DynamicContentItem GetContentItemById(string id);
-		DynamicContentItem CreateContent(DynamicContentItem content);
-		void UpdateContents(DynamicContentItem[] contents);
-		void DeleteContents(string[] ids);
+		DynamicContentItem[] GetContentItemsByIds(string[] ids);
+        void SaveContentItems(DynamicContentItem[] items);
+		void DeleteContentItems(string[] ids);
 
-		DynamicContentPlace GetPlaceById(string id);
-		DynamicContentPlace CreatePlace(DynamicContentPlace place);
-		void UpdatePlace(DynamicContentPlace place);
-		void DeletePlaces(string[] ids);
+		DynamicContentPlace[] GetPlacesByIds(string[] ids);
+        void SavePlaces(DynamicContentPlace[] places);
+        void DeletePlaces(string[] ids);
 
-		DynamicContentPublication GetPublicationById(string id);
-		DynamicContentPublication CreatePublication(DynamicContentPublication publications);
-		void UpdatePublications(DynamicContentPublication[] publications);
+		DynamicContentPublication[] GetPublicationsByIds(string[] ids);
+		void SavePublications(DynamicContentPublication[] publications);
 		void DeletePublications(string[] ids);
 	}
 }

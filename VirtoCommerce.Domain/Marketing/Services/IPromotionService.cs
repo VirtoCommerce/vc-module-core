@@ -4,11 +4,8 @@ namespace VirtoCommerce.Domain.Marketing.Services
 {
     public interface IPromotionService
     {
-        Promotion[] GetActivePromotions();
-
-        Promotion GetPromotionById(string id);
-        Promotion CreatePromotion(Promotion promotion);
-        void UpdatePromotions(Promotion[] prmotions);
+        Promotion[] GetPromotionsByIds(string[] ids);
+        void SavePromotions(Promotion[] promotions);
         void DeletePromotions(string[] ids);
     }
 }
