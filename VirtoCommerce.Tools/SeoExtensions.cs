@@ -11,33 +11,30 @@ namespace VirtoCommerce.Tools
         /// Path: GrandParentCategory/ParentCategory/ProductCategory/Product
         /// </summary>
         /// <param name="outlines"></param>
-        /// <param name="seoLinksType"></param>
-        /// <param name="catalog"></param>
-        /// <param name="storeId"></param>
-        /// <param name="storeDefaultLanguage"></param>
+        /// <param name="store"></param>
         /// <param name="language"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public static string GetSeoPath(this IEnumerable<Outline> outlines, SeoLinksType seoLinksType, string catalog, string storeId, string storeDefaultLanguage, string language, string defaultValue)
+        public static string GetSeoPath(this IEnumerable<Outline> outlines, Store store, string language, string defaultValue)
         {
             var result = defaultValue;
 
-            if (outlines != null && seoLinksType != SeoLinksType.None)
+            if (outlines != null && store.SeoLinksType != SeoLinksType.None)
             {
                 // Find any outline for catalog
-                var outline = outlines.GetOutlineForCatalog(catalog);
+                var outline = outlines.GetOutlineForCatalog(store.Catalog);
 
                 if (outline != null)
                 {
                     var pathSegments = new List<string>();
 
-                    if (seoLinksType == SeoLinksType.Long)
+                    if (store.SeoLinksType == SeoLinksType.Long)
                     {
                         pathSegments.AddRange(outline.Items
                             .Where(i => i.SeoObjectType != "Catalog")
-                            .Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, storeId, storeDefaultLanguage, language)));
+                            .Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, store.Id, store.DefaultLanguage, language)));
                     }
-                    else if (seoLinksType == SeoLinksType.Collapsed)
+                    else if (store.SeoLinksType == SeoLinksType.Collapsed)
                     {
                         var lastItem = outline.Items.Last();
 
@@ -46,12 +43,12 @@ namespace VirtoCommerce.Tools
                         {
                             pathSegments.AddRange(outline.Items
                                 .Where(i => i.SeoObjectType != "Catalog" && i.HasVirtualParent != true)
-                                .Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, storeId, storeDefaultLanguage, language)));
+                                .Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, store.Id, store.DefaultLanguage, language)));
 
                             // Add product which is linked to a virtual category
                             if (lastItem.SeoObjectType != "Catalog" && lastItem.SeoObjectType != "Category" && lastItem.HasVirtualParent == true)
                             {
-                                pathSegments.Add(GetBestMatchingSeoKeyword(lastItem.SeoInfos, storeId, storeDefaultLanguage, language));
+                                pathSegments.Add(GetBestMatchingSeoKeyword(lastItem.SeoInfos, store.Id, store.DefaultLanguage, language));
                             }
                         }
                     }
@@ -60,7 +57,7 @@ namespace VirtoCommerce.Tools
                         var lastItem = outline.Items.LastOrDefault();
                         if (lastItem != null)
                         {
-                            pathSegments.Add(GetBestMatchingSeoKeyword(lastItem.SeoInfos, storeId, storeDefaultLanguage, language));
+                            pathSegments.Add(GetBestMatchingSeoKeyword(lastItem.SeoInfos, store.Id, store.DefaultLanguage, language));
                         }
                     }
 

@@ -61,6 +61,7 @@
     <Compile Include="OutlineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeoTests.cs" />
+    <Compile Include="UrlBuilderTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.Tools\VirtoCommerce.Tools.csproj">

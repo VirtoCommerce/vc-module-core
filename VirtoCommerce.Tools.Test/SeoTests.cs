@@ -8,10 +8,21 @@ namespace VirtoCommerce.Tools.Test
     [Trait("Category", "CI")]
     public class CategorySeoTests
     {
+        private readonly Store _store = new Store
+        {
+            Id = "Store1",
+            DefaultLanguage = "en-US",
+            Languages = new List<string>(new[]
+            {
+                "en-US",
+            }),
+            SeoLinksType = SeoLinksType.Collapsed,
+        };
+
         [Fact]
         public void When_HasNoSeoRecords_Expect_Null()
         {
-            var result = ((IEnumerable<Outline>)null).GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "en-US", null);
+            var result = ((IEnumerable<Outline>)null).GetSeoPath(_store, "en-US", null);
             Assert.Null(result);
         }
 
@@ -41,7 +52,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("category2", result);
         }
 
@@ -89,7 +100,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("grandparent2/parent2/category2", result);
         }
 
@@ -133,7 +144,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Null(result);
         }
 
@@ -176,7 +187,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("active-parent2/active-category2", result);
         }
 
@@ -225,7 +236,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("virtual-parent2/category2", result);
         }
     }
@@ -233,6 +244,17 @@ namespace VirtoCommerce.Tools.Test
     [Trait("Category", "CI")]
     public class ProductSeoTests
     {
+        private readonly Store _store = new Store
+        {
+            Id = "Store1",
+            DefaultLanguage = "en-US",
+            Languages = new List<string>(new[]
+            {
+                "en-US",
+            }),
+            SeoLinksType = SeoLinksType.Collapsed,
+        };
+
         [Fact]
         public void When_HasSeoRecordsAndNoCategorySeoRecords_Expect_Null()
         {
@@ -263,7 +285,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Null(result);
         }
 
@@ -302,7 +324,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("category2/product2", result);
         }
 
@@ -359,7 +381,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("grandparent2/parent2/category2/product2", result);
         }
 
@@ -412,7 +434,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Null(result);
         }
 
@@ -461,7 +483,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("virtual-parent2/product2", result);
         }
 
@@ -501,7 +523,7 @@ namespace VirtoCommerce.Tools.Test
                 },
             };
 
-            var result = outlines.GetSeoPath(SeoLinksType.Collapsed, null, "Store1", "en-US", "ru-RU", null);
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("virtual-parent2/product2", result);
         }
     }
