@@ -26,18 +26,11 @@ namespace VirtoCommerce.Tools
             { "default", ":folder/:categories/:title" },
         };
 
-
-        public FrontMatterPermalink(string urlTemplate)
-        {
-            UrlTemplate = urlTemplate;
-            Categories = new List<string>();
-        }
-
         //template-variable pattern.
-        public string UrlTemplate { get; }
+        public string UrlTemplate { get; set; }
         public string FilePath { get; set; }
         public DateTime? Date { get; set; }
-        public IList<string> Categories { get; }
+        public IList<string> Categories { get; set; }
 
         /// <summary>
         /// Build relative URL based on permalink template and other properties
@@ -45,7 +38,7 @@ namespace VirtoCommerce.Tools
         /// <returns></returns>
         public virtual string ToUrl()
         {
-            var result = UrlTemplate.Replace("~/", string.Empty);
+            var result = UrlTemplate?.Replace("~/", string.Empty) ?? string.Empty;
 
             if (BuiltInPermalinkStyles.ContainsKey(result))
             {
@@ -53,10 +46,11 @@ namespace VirtoCommerce.Tools
             }
 
             var removeLeadingSlash = !result.StartsWith("/");
+            var categories = Categories ?? new string[] { };
 
             result = result.Replace(":folder", FilePath != null ? Path.GetDirectoryName(FilePath).Replace("\\", "/") : string.Empty);
-            result = result.Replace(":categories", string.Join("/", Categories.ToArray()));
-            result = result.Replace(":dashcategories", string.Join("-", Categories.ToArray()));
+            result = result.Replace(":categories", string.Join("/", categories));
+            result = result.Replace(":dashcategories", string.Join("-", categories));
             result = result.Replace(":year", Date?.Year.ToString(CultureInfo.InvariantCulture) ?? string.Empty);
             result = result.Replace(":month", Date?.ToString("MM") ?? string.Empty);
             result = result.Replace(":day", Date?.ToString("dd") ?? string.Empty);
@@ -79,11 +73,11 @@ namespace VirtoCommerce.Tools
                             int categoryIndex;
                             if (int.TryParse(match.Groups[1].Value, out categoryIndex) && categoryIndex > 0)
                             {
-                                replacementValue = Categories.Skip(categoryIndex - 1).FirstOrDefault();
+                                replacementValue = categories.Skip(categoryIndex - 1).FirstOrDefault();
                             }
-                            else if (Categories.Any())
+                            else if (categories.Any())
                             {
-                                replacementValue = Categories.First();
+                                replacementValue = categories.First();
                             }
                         }
 
