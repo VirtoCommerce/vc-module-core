@@ -26,6 +26,15 @@ namespace VirtoCommerce.Tools
             { "default", ":folder/:categories/:title" },
         };
 
+        public FrontMatterPermalink()
+        {
+        }
+
+        public FrontMatterPermalink(string urlTemplate)
+        {
+            UrlTemplate = urlTemplate;
+        }
+
         //template-variable pattern.
         public string UrlTemplate { get; set; }
         public string FilePath { get; set; }
