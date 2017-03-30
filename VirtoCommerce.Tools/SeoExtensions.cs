@@ -91,14 +91,13 @@ namespace VirtoCommerce.Tools
                     .Select(s =>
                     {
                         var score = 0;
+
                         score += s.IsActive != false ? 16 : 0;
-                        if (!string.IsNullOrEmpty(slug))
-                        {
-                            score += slug.EqualsInvariant(s.SemanticUrl) ? 8 : 0;
-                        }
+                        score += !string.IsNullOrEmpty(slug) && slug.EqualsInvariant(s.SemanticUrl) ? 8 : 0;
                         score += storeId.EqualsInvariant(s.StoreId) ? 4 : 0;
                         score += language.Equals(s.LanguageCode) ? 2 : 0;
                         score += storeDefaultLanguage.EqualsInvariant(s.LanguageCode) ? 1 : 0;
+
                         return new { SeoRecord = s, Score = score };
                     })
                     .OrderByDescending(x => x.Score)

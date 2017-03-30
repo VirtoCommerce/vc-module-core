@@ -15,7 +15,7 @@ namespace VirtoCommerce.Tools.Test
             Languages = new List<string>(new[]
             {
                 "en-US",
-                "fr-FR"
+                "ru-RU",
             }),
             SeoLinksType = SeoLinksType.Collapsed,
         };
@@ -252,6 +252,7 @@ namespace VirtoCommerce.Tools.Test
             Languages = new List<string>(new[]
             {
                 "en-US",
+                "ru-RU",
             }),
             SeoLinksType = SeoLinksType.Collapsed,
         };
@@ -526,36 +527,6 @@ namespace VirtoCommerce.Tools.Test
 
             var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("virtual-parent2/product2", result);
-        }
-
-        [Fact]
-        public void When_CategoryHasNoCorrecpondingLanguageSeoInfo_Expect_SeoPathIsNull()
-        {
-            _store.SeoLinksType = SeoLinksType.Long;
-            var outlines = new List<Outline>
-            {
-                new Outline
-                {
-                    Items = new List<OutlineItem>
-                    {
-                        new OutlineItem
-                        {
-                            SeoObjectType = "Catalog"
-                        },
-                        new OutlineItem
-                        {
-                            SeoObjectType = "Category",
-                            SeoInfos = new List<SeoInfo>
-                            {
-                                new SeoInfo { StoreId = "Store1", LanguageCode = "en-US", SemanticUrl = "category1" }
-                            }
-                        }
-                    }
-                }
-            };
-
-            var result = outlines.GetSeoPath(_store, "fr-FR", null);
-            Assert.Equal(null, result);
         }
     }
 }
