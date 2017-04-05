@@ -35,7 +35,7 @@ namespace VirtoCommerce.CoreModule.Data.Observers
         public void OnError(Exception error)
         {
 
-        }
+        } 
 
         public void OnNext(MemberChangingEvent value)
         {
