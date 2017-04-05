@@ -15,6 +15,7 @@ namespace VirtoCommerce.Tools.Test
             Languages = new List<string>(new[]
             {
                 "en-US",
+                "ru-RU",
             }),
             SeoLinksType = SeoLinksType.Collapsed,
         };
@@ -251,6 +252,7 @@ namespace VirtoCommerce.Tools.Test
             Languages = new List<string>(new[]
             {
                 "en-US",
+                "ru-RU",
             }),
             SeoLinksType = SeoLinksType.Collapsed,
         };
