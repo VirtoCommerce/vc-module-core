@@ -86,6 +86,31 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         }
 
         /// <summary>
+        /// Get user details by user email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("user/email/{email}")]
+        [ResponseType(typeof(StorefrontUser))]
+        public async Task<IHttpActionResult> GetUserByEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest();
+            }
+
+            var user = await _securityService.FindByEmailAsync(email, UserDetails.Reduced);
+            if (user != null)
+            {
+                var result = user.ToWebModel();
+                result.AllowedStores = _storeService.GetUserAllowedStoreIds(result);
+                return Ok(result);
+            }
+            return Ok();
+        }
+
+        /// <summary>
         /// Get user details by external login provider
         /// </summary>
         /// <param name="loginProvider"></param>
