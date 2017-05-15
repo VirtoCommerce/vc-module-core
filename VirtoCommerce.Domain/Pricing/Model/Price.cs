@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using VirtoCommerce.Domain.Catalog.Model;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -30,21 +31,10 @@ namespace VirtoCommerce.Domain.Pricing.Model
 
 		public object Clone()
 		{
-			return new Price
-			{
-				CreatedBy = this.CreatedBy,
-				CreatedDate = this.CreatedDate,
-				ModifiedBy = this.ModifiedBy,
-				ModifiedDate = this.ModifiedDate,
-				PricelistId = this.PricelistId,
-				Currency = this.Currency,
-				ProductId = this.ProductId,
-                Pricelist = this.Pricelist,
-				Sale = this.Sale,
-				List = this.List,
-				MinQuantity = this.MinQuantity
-			};
-		}
+            var jObject = JObject.FromObject(this);
+            var result = jObject.ToObject(this.GetType());
+            return result;
+        }
 
 		#endregion
 	}

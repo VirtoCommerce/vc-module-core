@@ -43,6 +43,7 @@
     <Compile Include="..\ToolsCommonAssemblyInfo.cs">
       <Link>Properties\ToolsCommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="FrontMatterPermalink.cs" />
     <Compile Include="IUrlBuilder.cs" />
     <Compile Include="Models\Outline.cs" />
     <Compile Include="Models\OutlineItem.cs" />

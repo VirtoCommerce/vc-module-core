@@ -7,6 +7,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         LongText,
         Number,
 		DateTime,
-		Boolean
+		Boolean,
+        Integer
     }
 }
