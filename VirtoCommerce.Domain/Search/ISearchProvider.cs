@@ -4,9 +4,9 @@ namespace VirtoCommerce.Domain.Search
 {
     public interface ISearchProvider
     {
-        SearchResult Search(SearchQuery query);
-        IndexingResult Index(IList<IndexDocument> documents);
-        void Remove(IList<IndexDocument> documents);
-        void RemoveIndex(string documentType);
+        void DeleteIndex(string documentType);
+        IndexingResult Index(string documentType, IList<IndexDocument> documents);
+        SearchResult Search(string documentType, SearchQuery query);
+        void Remove(string documentType, IList<IndexDocument> documents);
     }
 }

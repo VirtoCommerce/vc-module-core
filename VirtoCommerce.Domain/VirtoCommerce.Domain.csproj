@@ -260,8 +260,6 @@
     <Compile Include="Search\BaseQuery.cs" />
     <Compile Include="Search\BaseSearchCriteria.cs" />
     <Compile Include="Search\BooleanQuery.cs" />
-    <Compile Include="Search\Document.cs" />
-    <Compile Include="Search\DocumentField.cs" />
     <Compile Include="Search\FilterQuery.cs" />
     <Compile Include="Search\IIndexDocumentBuilder.cs" />
     <Compile Include="Search\IIndexDocumentChangesProvider.cs" />
@@ -282,6 +280,8 @@
     <Compile Include="Search\RangeAggregationQueryValue.cs" />
     <Compile Include="Search\RangeFilter.cs" />
     <Compile Include="Search\RangeFilterValue.cs" />
+    <Compile Include="Search\SearchDocument.cs" />
+    <Compile Include="Search\SearchException.cs" />
     <Compile Include="Search\SearchQuery.cs" />
     <Compile Include="Search\SearchResult.cs" />
     <Compile Include="Search\SortingField.cs" />

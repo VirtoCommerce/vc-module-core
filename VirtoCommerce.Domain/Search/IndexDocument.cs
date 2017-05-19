@@ -1,18 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Search
 {
-    public class IndexDocument
+    public class IndexDocument : Entity
     {
-        public string DocumentType { get; set; }
-        public string Id { get; set; }
-        public IList<IndexDocumentField> Fields { get; set; }
-        public bool DoNotIndex { get; set; }
+        public IndexDocument(string id)
+        {
+            Id = id;
+        }
+
+        public IList<IndexDocumentField> Fields { get; set; } = new List<IndexDocumentField>();
 
         public void Merge(IndexDocument doc)
         {
             throw new NotImplementedException();
+        }
+
+        public void Add(IndexDocumentField field)
+        {
+            var existingField = Fields.FirstOrDefault(f => f.Name.Equals(field.Name, StringComparison.OrdinalIgnoreCase));
+
+            if (existingField != null)
+            {
+                existingField.Merge(field);
+            }
+            else
+            {
+                Fields.Add(field);
+            }
         }
     }
 }
