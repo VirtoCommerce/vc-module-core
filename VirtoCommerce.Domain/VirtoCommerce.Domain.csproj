@@ -88,6 +88,7 @@
     <Compile Include="Catalog\Model\Search\AggregationItem.cs" />
     <Compile Include="Catalog\Model\PropertyDisplayName.cs" />
     <Compile Include="Catalog\Model\Search\AggregationLabel.cs" />
+    <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
