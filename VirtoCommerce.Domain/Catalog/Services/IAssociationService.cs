@@ -9,8 +9,7 @@ namespace VirtoCommerce.Domain.Catalog.Services
 {
     public interface IAssociationService
     {
-        ProductAssociation GetByIds(string[] ids);
-        void SaveChanges(ProductAssociation[] associations);
-        void Delete(string[] ids);
+        void LoadAssociations(IHasAssociations[] owners);
+        void SaveChanges(IHasAssociations[] owners);
     }
 }
