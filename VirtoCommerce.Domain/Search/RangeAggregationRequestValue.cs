@@ -1,6 +1,6 @@
 ﻿namespace VirtoCommerce.Domain.Search
 {
-    public class RangeAggregationQueryValue
+    public class RangeAggregationRequestValue
     {
         public string Id { get; set; }
         public string Lower { get; set; }

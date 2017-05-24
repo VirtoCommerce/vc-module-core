@@ -2,9 +2,9 @@
 
 namespace VirtoCommerce.Domain.Search
 {
-    public class Aggregation
+    public class AggregationResponse
     {
         public string Id { get; set; }
-        public IList<AggregationValue> Values { get; set; }
+        public IList<AggregationResponseValue> Values { get; set; }
     }
 }

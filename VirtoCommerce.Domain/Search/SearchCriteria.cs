@@ -2,9 +2,9 @@
 
 namespace VirtoCommerce.Domain.Search
 {
-    public class BaseSearchCriteria
+    public class SearchCriteria
     {
-        public BaseSearchCriteria(string documentType)
+        public SearchCriteria(string documentType)
         {
             DocumentType = documentType;
         }

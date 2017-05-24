@@ -2,9 +2,9 @@
 
 namespace VirtoCommerce.Domain.Search
 {
-    public class RangeFilter : IFilter
+    public class TermFilter : IFilter
     {
         public string FieldName { get; set; }
-        public IList<RangeFilterValue> Values { get; set; }
+        public IList<string> Values { get; set; }
     }
 }
