@@ -1,5 +1,5 @@
 ﻿angular.module('virtoCommerce.coreModule.common')
-.controller('virtoCommerce.coreModule.common.coreAddressDetailController', ['$scope', 'virtoCommerce.coreModule.common.countries', 'platformWebApp.dialogService', 'platformWebApp.bladeNavigationService', function ($scope, countries, dialogService, bladeNavigationService) {
+.controller('virtoCommerce.coreModule.common.coreAddressDetailController', ['$scope', 'platformWebApp.common.countries', 'platformWebApp.dialogService', 'platformWebApp.bladeNavigationService', function ($scope, countries, dialogService, bladeNavigationService) {
     var blade = $scope.blade;
 
     $scope.addressTypes = ['Billing', 'Shipping', 'BillingAndShipping'];
