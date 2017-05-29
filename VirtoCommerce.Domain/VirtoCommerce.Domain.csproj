@@ -72,6 +72,7 @@
     <Compile Include="Cart\Model\ShoppingCart.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
+    <Compile Include="Catalog\Model\IHasAssociations.cs" />
     <Compile Include="Catalog\Model\Asset.cs" />
     <Compile Include="Catalog\Model\AvailabilityRule.cs" />
     <Compile Include="Catalog\Model\Catalog.cs" />
@@ -79,7 +80,10 @@
     <Compile Include="Catalog\Model\CatalogProduct.cs" />
     <Compile Include="Catalog\Model\Category.cs" />
     <Compile Include="Catalog\Model\CategoryLink.cs" />
+    <Compile Include="Catalog\Model\IHasAssets.cs" />
+    <Compile Include="Catalog\Model\IHasImages.cs" />
     <Compile Include="Catalog\Model\IHasOutlines.cs" />
+    <Compile Include="Catalog\Model\IHasProperties.cs" />
     <Compile Include="Catalog\Model\Outline.cs" />
     <Compile Include="Catalog\Model\CategoryResponseGroup.cs" />
     <Compile Include="Catalog\Model\EditorialReview.cs" />
@@ -88,6 +92,7 @@
     <Compile Include="Catalog\Model\Search\AggregationItem.cs" />
     <Compile Include="Catalog\Model\PropertyDisplayName.cs" />
     <Compile Include="Catalog\Model\Search\AggregationLabel.cs" />
+    <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
