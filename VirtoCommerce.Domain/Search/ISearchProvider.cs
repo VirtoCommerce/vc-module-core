@@ -7,6 +7,6 @@ namespace VirtoCommerce.Domain.Search
         void DeleteIndex(string documentType);
         IndexingResult Index(string documentType, IList<IndexDocument> documents);
         SearchResponse Search(string documentType, SearchRequest request);
-        void Remove(string documentType, IList<IndexDocument> documents);
+        IndexingResult Remove(string documentType, IList<IndexDocument> documents);
     }
 }
