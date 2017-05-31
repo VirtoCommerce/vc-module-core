@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package>
+    <metadata>
+        <id>$id$</id>
+        <version>2.23.0-rc1</version>
+        <title>$title$</title>
+        <authors>Artem Dudarev</authors>
+        <owners>VirtoCommerce</owners>
+        <licenseUrl>https://github.com/VirtoCommerce/vc-module-core/raw/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/VirtoCommerce/vc-module-core</projectUrl>
+        <iconUrl>https://github.com/VirtoCommerce/vc-module-core/raw/master/NuGet/icon.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Search provider tests</description>
+        <copyright>Copyright © VirtoCommerce 2011-2017</copyright>
+    </metadata>
+</package>
