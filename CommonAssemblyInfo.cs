@@ -1,6 +1,6 @@
-// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ï»¿// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // <copyright file="GlobalAssemblyInfo.cs" company="VirtoCommerce">
-//   Copyright © VirtoCommerce. All rights reserved.
+//   Copyright Â© VirtoCommerce. All rights reserved.
 // </copyright>
 // <summary>
 //   Virto Commerce
@@ -13,10 +13,10 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyCompany("VirtoCommerce")]
 [assembly: AssemblyProduct("Virto Commerce Core Module")]
-[assembly: AssemblyCopyright("Copyright © VirtoCommerce 2011-2016")]
+[assembly: AssemblyCopyright("Copyright Â© VirtoCommerce 2011-2017")]
 
-[assembly: AssemblyFileVersion("2.22.1.0")]
-[assembly: AssemblyVersion("2.22.1.0")]
+[assembly: AssemblyFileVersion("2.23.0.0")]
+[assembly: AssemblyVersion("2.23.0.0")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
