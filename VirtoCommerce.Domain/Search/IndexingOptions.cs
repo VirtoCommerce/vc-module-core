@@ -7,8 +7,9 @@ namespace VirtoCommerce.Domain.Search
     {
         public string DocumentType { get; set; }
         public bool RebuildIndex { get; set; }
+        public int BatchSize { get; set; }
         public IList<string> Ids { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

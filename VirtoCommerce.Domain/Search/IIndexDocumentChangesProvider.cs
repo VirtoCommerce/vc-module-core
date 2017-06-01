@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace VirtoCommerce.Domain.Search
 {
     public interface IIndexDocumentChangesProvider
     {
-        long GetTotalChangesCount(DateTime startDate, DateTime endDate);
-        IList<IndexDocumentChange> GetChanges(DateTime startDate, DateTime endDate, long skip, long take);
+        Task<long> GetTotalChangesCountAsync(DateTime? startDate, DateTime? endDate);
+        Task<IList<IndexDocumentChange>> GetChangesAsync(DateTime? startDate, DateTime? endDate, long skip, long take);
     }
 }
