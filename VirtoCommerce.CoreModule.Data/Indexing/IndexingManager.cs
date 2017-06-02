@@ -44,7 +44,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         }
 
 
-        private async Task DeleteIndexAsync(string documentType, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
+        protected virtual async Task DeleteIndexAsync(string documentType, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -53,7 +53,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             await _searchProvider.DeleteIndexAsync(documentType);
         }
 
-        private async Task ProcessConfigurationAsync(IndexingOptions options, IndexDocumentConfiguration configuration, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
+        protected virtual async Task ProcessConfigurationAsync(IndexingOptions options, IndexDocumentConfiguration configuration, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -98,7 +98,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             progressCallback?.Invoke(new IndexingProgress { DocumentType = documentType, Description = "Completed" });
         }
 
-        private static async Task<ProviderAndCount[]> GetChangesProvidersAndTotalCounts(IndexDocumentConfiguration configuration, DateTime? startDate, DateTime? endDate)
+        protected virtual async Task<ProviderAndCount[]> GetChangesProvidersAndTotalCounts(IndexDocumentConfiguration configuration, DateTime? startDate, DateTime? endDate)
         {
             var changesProviders = new List<IIndexDocumentChangesProvider> { configuration.DocumentSource.ChangesProvider };
             if (configuration.RelatedSources != null)
@@ -109,7 +109,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return await Task.WhenAll(changesProviders.Select(async p => new ProviderAndCount { Provider = p, TotalCount = await p.GetTotalChangesCountAsync(startDate, endDate) }));
         }
 
-        private static async Task<IList<IndexDocumentChange>> GetChangesAsync(IEnumerable<ProviderAndCount> providersAndCounts, DateTime? startDate, DateTime? endDate, long skip, long take, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocumentChange>> GetChangesAsync(IEnumerable<ProviderAndCount> providersAndCounts, DateTime? startDate, DateTime? endDate, long skip, long take, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -124,7 +124,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        private async Task<IndexingResult> ProcessChanges(string documentType, IEnumerable<IndexDocumentChange> changes, IIndexDocumentBuilder primaryDocumentBuilder, IList<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> ProcessChanges(string documentType, IEnumerable<IndexDocumentChange> changes, IIndexDocumentBuilder primaryDocumentBuilder, IList<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
         {
             var result = new IndexingResult();
 
@@ -151,7 +151,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        private static IList<string> GetIndexingErrors(IndexingResult indexingResult)
+        protected virtual IList<string> GetIndexingErrors(IndexingResult indexingResult)
         {
             var errors = indexingResult?.Items?
                 .Where(i => !i.Succeeded)
@@ -161,7 +161,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return errors?.Any() == true ? errors : null;
         }
 
-        private static IDictionary<IndexDocumentChangeType, string[]> GetLatestChangesForEachDocumentGroupedByChangeType(IEnumerable<IndexDocumentChange> changes)
+        protected virtual IDictionary<IndexDocumentChangeType, string[]> GetLatestChangesForEachDocumentGroupedByChangeType(IEnumerable<IndexDocumentChange> changes)
         {
             var result = changes
                 .GroupBy(c => c.DocumentId)
@@ -172,7 +172,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        private async Task<IndexingResult> ProcessDocuments(string documentType, IndexDocumentChangeType changeType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> ProcessDocuments(string documentType, IndexDocumentChangeType changeType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -190,7 +190,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        private async Task<IndexingResult> DeleteDocumentsAsync(string documentType, IEnumerable<string> documentIds, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> DeleteDocumentsAsync(string documentType, IEnumerable<string> documentIds, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -199,7 +199,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return response;
         }
 
-        private async Task<IndexingResult> IndexDocumentsAsync(string documentType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -208,7 +208,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return response;
         }
 
-        private async Task<IList<IndexDocument>> GetDocuments(IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocument>> GetDocuments(IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -221,7 +221,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return primaryDocuments;
         }
 
-        private async Task<IList<IndexDocument>> GetSecondaryDocuments(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocument>> GetSecondaryDocuments(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -232,7 +232,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        private void MergeDocuments(IEnumerable<IndexDocument> primaryDocuments, IList<IndexDocument> secondaryDocuments)
+        protected virtual void MergeDocuments(IEnumerable<IndexDocument> primaryDocuments, IList<IndexDocument> secondaryDocuments)
         {
             foreach (var primaryDocument in primaryDocuments)
             {
@@ -244,7 +244,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         }
 
 
-        private class ProviderAndCount
+        protected class ProviderAndCount
         {
             public IIndexDocumentChangesProvider Provider { get; set; }
             public long TotalCount { get; set; }
