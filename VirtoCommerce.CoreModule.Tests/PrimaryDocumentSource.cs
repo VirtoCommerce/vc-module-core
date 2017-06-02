@@ -7,18 +7,18 @@ namespace VirtoCommerce.CoreModule.Tests
     {
         protected override IndexDocument[] Documents { get; } =
         {
-            new IndexDocument("2"),
-            new IndexDocument("3"),
-            new IndexDocument(""),
+            new IndexDocument("bad1"),
+            new IndexDocument("good2"),
+            new IndexDocument("good3"),
         };
 
         protected override IndexDocumentChange[] Changes { get; } =
         {
-            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 1), DocumentId = "1", ChangeType = IndexDocumentChangeType.Modified },
-            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 2), DocumentId = "2", ChangeType = IndexDocumentChangeType.Modified },
-            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 3), DocumentId = "3", ChangeType = IndexDocumentChangeType.Modified },
-            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 3), DocumentId = "", ChangeType = IndexDocumentChangeType.Modified },
-            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 4), DocumentId = "1", ChangeType = IndexDocumentChangeType.Deleted },
+            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 1), DocumentId = "bad1", ChangeType = IndexDocumentChangeType.Modified },
+            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 2), DocumentId = "good1", ChangeType = IndexDocumentChangeType.Modified },
+            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 3), DocumentId = "good1", ChangeType = IndexDocumentChangeType.Deleted },
+            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 4), DocumentId = "good2", ChangeType = IndexDocumentChangeType.Modified },
+            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 5), DocumentId = "good3", ChangeType = IndexDocumentChangeType.Modified },
         };
     }
 }

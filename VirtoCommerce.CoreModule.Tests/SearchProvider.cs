@@ -15,17 +15,14 @@ namespace VirtoCommerce.CoreModule.Tests
 
         public Task<IndexingResult> IndexAsync(string documentType, IList<IndexDocument> documents)
         {
-            var result = new IndexingResult
-            {
-                Items = documents.Select(GetIndexingResult).ToArray()
-            };
-
+            var result = GetIndexingResult(documents);
             return Task.FromResult(result);
         }
 
         public Task<IndexingResult> RemoveAsync(string documentType, IList<IndexDocument> documents)
         {
-            throw new NotImplementedException();
+            var result = GetIndexingResult(documents);
+            return Task.FromResult(result);
         }
 
         public Task<SearchResponse> SearchAsync(string documentType, SearchRequest request)
@@ -34,15 +31,23 @@ namespace VirtoCommerce.CoreModule.Tests
         }
 
 
+        private static IndexingResult GetIndexingResult(IEnumerable<IndexDocument> documents)
+        {
+            return new IndexingResult
+            {
+                Items = documents.Select(GetIndexingResult).ToArray()
+            };
+        }
+
         private static IndexingResultItem GetIndexingResult(IndexDocument document)
         {
-            var error = string.IsNullOrEmpty(document.Id);
+            var error = document.Id.StartsWith("bad");
 
             return new IndexingResultItem
             {
                 Id = document.Id,
                 Succeeded = !error,
-                ErrorMessage = error ? "Document ID is empty" : null,
+                ErrorMessage = error ? "Search provider error" : null,
             };
         }
     }
