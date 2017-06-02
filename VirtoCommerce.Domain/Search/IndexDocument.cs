@@ -16,7 +16,10 @@ namespace VirtoCommerce.Domain.Search
 
         public void Merge(IndexDocument doc)
         {
-            throw new NotImplementedException();
+            foreach (var field in doc.Fields)
+            {
+                Add(field);
+            }
         }
 
         public void Add(IndexDocumentField field)

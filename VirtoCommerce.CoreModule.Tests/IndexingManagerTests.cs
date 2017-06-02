@@ -9,139 +9,165 @@ using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
+    [CLSCompliant(false)]
     [Trait("Category", "CI")]
     public class IndexingManagerTests
     {
-        private const string _documentType = "item";
+        public const string Rebuild = "rebuild";
+        public const string Update = "update";
+        public const string Primary = "primary";
+        public const string Secondary = "secondary";
+        public const string DocumentType = "item";
 
-        [Fact]
-        public async Task CanRebuildIndexWithPrimarySourceOnly()
+        [Theory]
+        [InlineData(Rebuild, 1, Primary)]
+        [InlineData(Rebuild, 3, Primary)]
+        [InlineData(Update, 1, Primary)]
+        [InlineData(Update, 3, Primary)]
+        [InlineData(Rebuild, 1, Primary, Secondary)]
+        [InlineData(Rebuild, 3, Primary, Secondary)]
+        [InlineData(Update, 1, Primary, Secondary)]
+        [InlineData(Update, 3, Primary, Secondary)]
+        public async Task CanIndex(string operation, int batchSize, params string[] sourceNames)
         {
-            var manager = GetIndexingManager();
+            var rebuild = operation == Rebuild;
+
+            var searchProvider = new SearchProvider();
+            var documentSources = GetDocumentSources(sourceNames);
+            var manager = GetIndexingManager(searchProvider, documentSources);
             var progress = new List<IndexingProgress>();
             var cancellationTokenSource = new CancellationTokenSource();
 
             var options = new IndexingOptions
             {
-                DocumentType = _documentType,
-                RebuildIndex = true,
-                BatchSize = 1,
+                DocumentType = DocumentType,
+                BatchSize = batchSize,
+                RebuildIndex = rebuild,
+                StartDate = rebuild ? null : (DateTime?)new DateTime(1, 1, 1),
+                EndDate = rebuild ? null : (DateTime?)new DateTime(1, 1, 9),
             };
 
             await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
 
-            Assert.Equal(9, progress.Count);
-            Assert.Equal("Deleting index", progress[0].Description);
-            Assert.Equal("Calculating documents count", progress[1].Description);
-            Assert.Equal("Processing", progress[2].Description);
-            Assert.Equal("Processed", progress[3].Description);
-            Assert.Equal("Processing", progress[4].Description);
-            Assert.Equal("Processed", progress[5].Description);
-            Assert.Equal("Processing", progress[6].Description);
-            Assert.Equal("Processed", progress[7].Description);
-            Assert.Equal("Completed", progress[8].Description);
+            var expectedBatchesCount = GetExpectedBatchesCount(rebuild, documentSources, batchSize);
+            var expectedProgressItemsCount = 1 + (rebuild ? 1 : 0) + expectedBatchesCount * 2 + 1;
 
-            var errors = progress.Where(p => p.Errors != null).SelectMany(p => p.Errors).ToList();
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("ID: bad1, Error: Search provider error", errors[0]);
+            Assert.Equal(expectedProgressItemsCount, progress.Count);
 
+            var i = 0;
 
-            // Do the same with batch size = 3
-            progress.Clear();
-            options.BatchSize = 3;
-
-            await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
-
-            Assert.Equal(5, progress.Count);
-            Assert.Equal("Deleting index", progress[0].Description);
-            Assert.Equal("Calculating documents count", progress[1].Description);
-            Assert.Equal("Processing", progress[2].Description);
-            Assert.Equal("Processed", progress[3].Description);
-            Assert.Equal("Completed", progress[4].Description);
-
-            errors = progress.Where(p => p.Errors != null).SelectMany(p => p.Errors).ToList();
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("ID: bad1, Error: Search provider error", errors[0]);
-        }
-
-        [Fact]
-        public async Task CanUpdateIndexWithPrimarySourceOnly()
-        {
-            var manager = GetIndexingManager();
-            var progress = new List<IndexingProgress>();
-            var cancellationTokenSource = new CancellationTokenSource();
-
-            var options = new IndexingOptions
+            if (rebuild)
             {
-                DocumentType = _documentType,
-                StartDate = new DateTime(1, 1, 1),
-                EndDate = new DateTime(1, 1, 9),
-                BatchSize = 1,
-            };
+                Assert.Equal("Deleting index", progress[i++].Description);
+            }
 
-            await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
+            Assert.Equal("Calculating documents count", progress[i++].Description);
 
-            Assert.Equal(12, progress.Count);
-            Assert.Equal("Calculating documents count", progress[0].Description);
-            Assert.Equal("Processing", progress[1].Description);
-            Assert.Equal("Processed", progress[2].Description);
-            Assert.Equal("Processing", progress[3].Description);
-            Assert.Equal("Processed", progress[4].Description);
-            Assert.Equal("Processing", progress[5].Description);
-            Assert.Equal("Processed", progress[6].Description);
-            Assert.Equal("Processing", progress[7].Description);
-            Assert.Equal("Processed", progress[8].Description);
-            Assert.Equal("Processing", progress[9].Description);
-            Assert.Equal("Processed", progress[10].Description);
-            Assert.Equal("Completed", progress[11].Description);
-
-            var errors = progress.Where(p => p.Errors != null).SelectMany(p => p.Errors).ToList();
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("ID: bad1, Error: Search provider error", errors[0]);
-
-
-            // Do the same with batch size = 3
-            progress.Clear();
-            options.BatchSize = 3;
-
-            await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
-
-            Assert.Equal(6, progress.Count);
-            Assert.Equal("Calculating documents count", progress[0].Description);
-            Assert.Equal("Processing", progress[1].Description);
-            Assert.Equal("Processed", progress[2].Description);
-            Assert.Equal("Processing", progress[3].Description);
-            Assert.Equal("Processed", progress[4].Description);
-            Assert.Equal("Completed", progress[5].Description);
-
-            errors = progress.Where(p => p.Errors != null).SelectMany(p => p.Errors).ToList();
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("ID: bad1, Error: Search provider error", errors[0]);
-        }
-
-
-        private static IIndexingManager GetIndexingManager()
-        {
-            return new IndexingManager(GetSearchProvider(), new[] { GetIndexDocumentConfiguration() });
-        }
-
-        private static ISearchProvider GetSearchProvider()
-        {
-            return new SearchProvider();
-        }
-
-        private static IndexDocumentConfiguration GetIndexDocumentConfiguration()
-        {
-            var primaryDocumentSource = new PrimaryDocumentSource();
-
-            return new IndexDocumentConfiguration
+            for (var batch = 0; batch < expectedBatchesCount; batch++)
             {
-                DocumentType = _documentType,
-                DocumentSource = new IndexDocumentSource
+                Assert.Equal("Processing", progress[i++].Description);
+                Assert.Equal("Processed", progress[i++].Description);
+            }
+
+            Assert.Equal("Completed", progress[i].Description);
+
+            ValidateErrors(progress);
+            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, sourceNames);
+        }
+
+
+        private static IList<DocumentSourceBase> GetDocumentSources(IEnumerable<string> names)
+        {
+            return names.Select(GetDocumentSource).ToArray();
+        }
+
+        private static DocumentSourceBase GetDocumentSource(string name)
+        {
+            switch (name)
+            {
+                case Primary:
+                    return new PrimaryDocumentSource();
+                case Secondary:
+                    return new SecondaryDocumentSource();
+            }
+
+            return null;
+        }
+
+        private static int GetExpectedBatchesCount(bool rebuild, IEnumerable<DocumentSourceBase> documentSources, int batchSize)
+        {
+            int result;
+
+            if (rebuild)
+            {
+                result = GetBatchesCount(documentSources?.FirstOrDefault()?.Documents.Count ?? 0, batchSize);
+            }
+            else
+            {
+                result = documentSources?.Max(s => GetBatchesCount(s?.Changes.Count ?? 0, batchSize)) ?? 0;
+            }
+
+            return result;
+        }
+
+        private static int GetBatchesCount(int itemsCount, int batchSize)
+        {
+            return (int)Math.Ceiling((decimal)itemsCount / batchSize);
+        }
+
+        private static void ValidateErrors(IEnumerable<IndexingProgress> progress)
+        {
+            var errors = progress
+                .Where(p => p.Errors != null)
+                .SelectMany(p => p.Errors)
+                .ToList();
+
+            Assert.Equal(1, errors.Count);
+            Assert.Equal("ID: bad1, Error: Search provider error", errors[0]);
+        }
+
+
+        private static void ValidateIndexedDocuments(ICollection<IndexDocument> documents, ICollection<string> expectedFieldNames)
+        {
+            Assert.Equal(2, documents.Count);
+
+            foreach (var document in documents)
+            {
+                Assert.NotNull(document.Fields);
+                Assert.Equal(expectedFieldNames.Count, document.Fields.Count);
+
+                foreach (var fieldName in expectedFieldNames)
                 {
-                    ChangesProvider = primaryDocumentSource,
-                    DocumentBuilder = primaryDocumentSource,
-                },
+                    var field = document.Fields.FirstOrDefault(f => f.Name == fieldName);
+
+                    Assert.NotNull(field);
+                    Assert.Equal(fieldName, field.Name);
+                    Assert.Equal(document.Id, field.Value);
+                }
+            }
+        }
+
+
+        private static IIndexingManager GetIndexingManager(ISearchProvider searchProvider, IList<DocumentSourceBase> documentSources)
+        {
+            var primaryDocumentSource = documentSources?.FirstOrDefault();
+
+            var configuration = new IndexDocumentConfiguration
+            {
+                DocumentType = DocumentType,
+                DocumentSource = CreateIndexDocumentSource(primaryDocumentSource),
+                RelatedSources = documentSources?.Skip(1).Select(CreateIndexDocumentSource).ToArray(),
+            };
+
+            return new IndexingManager(searchProvider, new[] { configuration });
+        }
+
+        private static IndexDocumentSource CreateIndexDocumentSource(DocumentSourceBase documentSource)
+        {
+            return new IndexDocumentSource
+            {
+                ChangesProvider = documentSource,
+                DocumentBuilder = documentSource,
             };
         }
     }

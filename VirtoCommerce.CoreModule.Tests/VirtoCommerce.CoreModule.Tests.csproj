@@ -85,6 +85,7 @@
     </Compile>
     <Compile Include="IndexingManagerTests.cs" />
     <Compile Include="DocumentSourceBase.cs" />
+    <Compile Include="SecondaryDocumentSource.cs" />
     <Compile Include="PrimaryDocumentSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchProvider.cs" />

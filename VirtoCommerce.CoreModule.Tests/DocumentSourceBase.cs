@@ -8,8 +8,8 @@ namespace VirtoCommerce.CoreModule.Tests
 {
     public abstract class DocumentSourceBase : IIndexDocumentChangesProvider, IIndexDocumentBuilder
     {
-        protected abstract IndexDocument[] Documents { get; }
-        protected abstract IndexDocumentChange[] Changes { get; }
+        public abstract IList<IndexDocument> Documents { get; }
+        public abstract IList<IndexDocumentChange> Changes { get; }
 
         public virtual Task<long> GetTotalChangesCountAsync(DateTime? startDate, DateTime? endDate)
         {
@@ -17,7 +17,7 @@ namespace VirtoCommerce.CoreModule.Tests
 
             if (startDate == null && endDate == null)
             {
-                result = Documents.Length;
+                result = Documents.Count;
             }
             else
             {
@@ -58,7 +58,14 @@ namespace VirtoCommerce.CoreModule.Tests
         }
 
 
-        public virtual IQueryable<IndexDocumentChange> GetChangesQuery(DateTime? startDate, DateTime? endDate)
+        protected static IndexDocument CreateDocument(string id, string fieldname)
+        {
+            var result = new IndexDocument(id);
+            result.Add(new IndexDocumentField(fieldname, id));
+            return result;
+        }
+
+        protected virtual IQueryable<IndexDocumentChange> GetChangesQuery(DateTime? startDate, DateTime? endDate)
         {
             var result = Changes.AsQueryable();
 

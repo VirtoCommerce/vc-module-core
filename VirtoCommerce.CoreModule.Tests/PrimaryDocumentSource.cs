@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Search;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
     public class PrimaryDocumentSource : DocumentSourceBase
     {
-        protected override IndexDocument[] Documents { get; } =
+        public override IList<IndexDocument> Documents { get; } = new[]
         {
-            new IndexDocument("bad1"),
-            new IndexDocument("good2"),
-            new IndexDocument("good3"),
+            CreateDocument("bad1", "primary"),
+            CreateDocument("good2", "primary"),
+            CreateDocument("good3", "primary"),
         };
 
-        protected override IndexDocumentChange[] Changes { get; } =
+        public override IList<IndexDocumentChange> Changes { get; } = new[]
         {
             new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 1), DocumentId = "bad1", ChangeType = IndexDocumentChangeType.Modified },
             new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 2), DocumentId = "good1", ChangeType = IndexDocumentChangeType.Modified },

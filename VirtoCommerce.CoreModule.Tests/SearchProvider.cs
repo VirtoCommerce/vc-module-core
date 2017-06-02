@@ -8,6 +8,8 @@ namespace VirtoCommerce.CoreModule.Tests
 {
     public class SearchProvider : ISearchProvider
     {
+        public IDictionary<string, IndexDocument> IndexedDocuments { get; } = new Dictionary<string, IndexDocument>();
+
         public Task DeleteIndexAsync(string documentType)
         {
             return Task.FromResult<object>(null);
@@ -15,12 +17,25 @@ namespace VirtoCommerce.CoreModule.Tests
 
         public Task<IndexingResult> IndexAsync(string documentType, IList<IndexDocument> documents)
         {
+            foreach (var document in documents.Where(d => d.Id.StartsWith("good")))
+            {
+                IndexedDocuments[document.Id] = document;
+            }
+
             var result = GetIndexingResult(documents);
             return Task.FromResult(result);
         }
 
         public Task<IndexingResult> RemoveAsync(string documentType, IList<IndexDocument> documents)
         {
+            foreach (var document in documents)
+            {
+                if (IndexedDocuments.ContainsKey(document.Id))
+                {
+                    IndexedDocuments.Remove(document.Id);
+                }
+            }
+
             var result = GetIndexingResult(documents);
             return Task.FromResult(result);
         }

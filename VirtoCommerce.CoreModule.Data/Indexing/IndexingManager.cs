@@ -15,13 +15,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
         public IndexingManager(ISearchProvider searchProvider, IndexDocumentConfiguration[] configs)
         {
-            if (searchProvider == null)
-                throw new ArgumentNullException(nameof(searchProvider));
-            if (configs == null)
-                throw new ArgumentNullException(nameof(configs));
-
-            _searchProvider = searchProvider;
-            _configs = configs;
+            _searchProvider = searchProvider ?? throw new ArgumentNullException(nameof(searchProvider));
+            _configs = configs ?? throw new ArgumentNullException(nameof(configs));
         }
 
         public virtual async Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
@@ -125,9 +120,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             var results = await Task.WhenAll(tasks);
 
-            var result = results.SelectMany(r => r)
-                .ToList();
-
+            var result = results.SelectMany(r => r).ToList();
             return result;
         }
 
@@ -220,9 +213,36 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             cancellationToken.ThrowIfCancellationRequested();
 
             var primaryDocuments = await primaryDocumentBuilder.GetDocumentsAsync(documentIds);
+            var primaryDocumentIds = primaryDocuments.Select(d => d.Id).ToArray();
+            var secondaryDocuments = await GetSecondaryDocuments(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
+
+            MergeDocuments(primaryDocuments, secondaryDocuments);
 
             return primaryDocuments;
         }
+
+        private async Task<IList<IndexDocument>> GetSecondaryDocuments(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            var tasks = secondaryDocumentBuilders.Select(p => p.GetDocumentsAsync(documentIds));
+            var results = await Task.WhenAll(tasks);
+
+            var result = results.SelectMany(r => r).ToList();
+            return result;
+        }
+
+        private void MergeDocuments(IEnumerable<IndexDocument> primaryDocuments, IList<IndexDocument> secondaryDocuments)
+        {
+            foreach (var primaryDocument in primaryDocuments)
+            {
+                foreach (var secondaryDocument in secondaryDocuments.Where(d => d.Id.EqualsInvariant(primaryDocument.Id)))
+                {
+                    primaryDocument.Merge(secondaryDocument);
+                }
+            }
+        }
+
 
         private class ProviderAndCount
         {
