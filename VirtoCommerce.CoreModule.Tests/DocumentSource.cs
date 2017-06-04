@@ -6,10 +6,16 @@ using VirtoCommerce.Domain.Search;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
-    public abstract class DocumentSourceBase : IIndexDocumentChangesProvider, IIndexDocumentBuilder
+    public class DocumentSource : IIndexDocumentChangesProvider, IIndexDocumentBuilder
     {
-        public abstract IList<IndexDocument> Documents { get; }
-        public abstract IList<IndexDocumentChange> Changes { get; }
+        public DocumentSource(string name)
+        {
+            Name = name;
+        }
+
+        public string Name { get; }
+        public IList<string> DocumentIds { get; set; }
+        public IList<IndexDocumentChange> Changes { get; set; }
 
         public virtual Task<long> GetTotalChangesCountAsync(DateTime? startDate, DateTime? endDate)
         {
@@ -17,7 +23,7 @@ namespace VirtoCommerce.CoreModule.Tests
 
             if (startDate == null && endDate == null)
             {
-                result = Documents.Count;
+                result = DocumentIds?.Count ?? 0;
             }
             else
             {
@@ -33,9 +39,9 @@ namespace VirtoCommerce.CoreModule.Tests
 
             if (startDate == null && endDate == null)
             {
-                result = Documents.Select(d => new IndexDocumentChange
+                result = DocumentIds.Select(id => new IndexDocumentChange
                 {
-                    DocumentId = d.Id,
+                    DocumentId = id,
                     ChangeType = IndexDocumentChangeType.Modified,
                     ChangeDate = DateTime.UtcNow
                 })
@@ -53,15 +59,16 @@ namespace VirtoCommerce.CoreModule.Tests
 
         public virtual Task<IList<IndexDocument>> GetDocumentsAsync(IList<string> documentIds)
         {
-            IList<IndexDocument> result = Documents.Where(d => documentIds.Contains(d.Id)).ToArray();
+            var validDocumentIds = DocumentIds?.Intersect(documentIds) ?? documentIds;
+            IList<IndexDocument> result = validDocumentIds.Select(id => CreateDocument(id, Name)).ToArray();
             return Task.FromResult(result);
         }
 
 
-        protected static IndexDocument CreateDocument(string id, string fieldname)
+        protected static IndexDocument CreateDocument(string id, string fieldName)
         {
             var result = new IndexDocument(id);
-            result.Add(new IndexDocumentField(fieldname, id));
+            result.Add(new IndexDocumentField(fieldName, id));
             return result;
         }
 

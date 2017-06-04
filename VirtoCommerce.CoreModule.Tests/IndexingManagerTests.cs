@@ -118,32 +118,60 @@ namespace VirtoCommerce.CoreModule.Tests
         }
 
 
-        private static IList<DocumentSourceBase> GetDocumentSources(IEnumerable<string> names)
+        private static IList<DocumentSource> GetDocumentSources(IEnumerable<string> names)
         {
             return names.Select(GetDocumentSource).ToArray();
         }
 
-        private static DocumentSourceBase GetDocumentSource(string name)
+        private static DocumentSource GetDocumentSource(string name)
         {
             switch (name)
             {
                 case Primary:
-                    return new PrimaryDocumentSource();
+                    return new DocumentSource(name)
+                    {
+                        DocumentIds = new[]
+                        {
+                            "bad1",
+                            "good2",
+                            "good3",
+                        },
+                        Changes = new[]
+                        {
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 1), DocumentId = "bad1", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 2), DocumentId = "good1", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 3), DocumentId = "good1", ChangeType = IndexDocumentChangeType.Deleted },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 4), DocumentId = "good2", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 5), DocumentId = "good3", ChangeType = IndexDocumentChangeType.Modified },
+                        }
+                    };
                 case Secondary:
-                    return new SecondaryDocumentSource();
+                    return new DocumentSource(name)
+                    {
+                        Changes = new[]
+                        {
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 2), DocumentId = "bad1", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 3), DocumentId = "good1", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 4), DocumentId = "good1", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 5), DocumentId = "good2", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 6), DocumentId = "good2", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 7), DocumentId = "good3", ChangeType = IndexDocumentChangeType.Modified },
+                            new IndexDocumentChange { ChangeDate = new DateTime(1, 1, 8), DocumentId = "good3", ChangeType = IndexDocumentChangeType.Modified },
+                        }
+                    };
             }
 
             return null;
         }
 
-        private static int GetExpectedBatchesCount(bool rebuild, IEnumerable<DocumentSourceBase> documentSources, int batchSize)
+        private static int GetExpectedBatchesCount(bool rebuild, IEnumerable<DocumentSource> documentSources, int batchSize)
         {
             int result;
 
             if (rebuild)
             {
                 // Use documents count from primary source
-                result = GetBatchesCount(documentSources?.FirstOrDefault()?.Documents.Count ?? 0, batchSize);
+                result = GetBatchesCount(documentSources?.FirstOrDefault()?.DocumentIds.Count ?? 0, batchSize);
             }
             else
             {
@@ -198,7 +226,7 @@ namespace VirtoCommerce.CoreModule.Tests
         }
 
 
-        private static IIndexingManager GetIndexingManager(ISearchProvider searchProvider, IList<DocumentSourceBase> documentSources)
+        private static IIndexingManager GetIndexingManager(ISearchProvider searchProvider, IList<DocumentSource> documentSources)
         {
             var primaryDocumentSource = documentSources?.FirstOrDefault();
 
@@ -212,7 +240,7 @@ namespace VirtoCommerce.CoreModule.Tests
             return new IndexingManager(searchProvider, new[] { configuration });
         }
 
-        private static IndexDocumentSource CreateIndexDocumentSource(DocumentSourceBase documentSource)
+        private static IndexDocumentSource CreateIndexDocumentSource(DocumentSource documentSource)
         {
             return new IndexDocumentSource
             {

@@ -84,9 +84,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="IndexingManagerTests.cs" />
-    <Compile Include="DocumentSourceBase.cs" />
-    <Compile Include="SecondaryDocumentSource.cs" />
-    <Compile Include="PrimaryDocumentSource.cs" />
+    <Compile Include="DocumentSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchProvider.cs" />
   </ItemGroup>
