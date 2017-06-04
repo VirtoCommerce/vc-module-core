@@ -28,7 +28,7 @@ namespace VirtoCommerce.CoreModule.Tests
         [InlineData(Rebuild, 3, Primary, Secondary)]
         [InlineData(Update, 1, Primary, Secondary)]
         [InlineData(Update, 3, Primary, Secondary)]
-        public async Task CanIndex(string operation, int batchSize, params string[] sourceNames)
+        public async Task CanIndexAllDocuments(string operation, int batchSize, params string[] sourceNames)
         {
             var rebuild = operation == Rebuild;
 
@@ -41,10 +41,10 @@ namespace VirtoCommerce.CoreModule.Tests
             var options = new IndexingOptions
             {
                 DocumentType = DocumentType,
-                BatchSize = batchSize,
-                RebuildIndex = rebuild,
+                DeleteExistingIndex = rebuild,
                 StartDate = rebuild ? null : (DateTime?)new DateTime(1, 1, 1),
                 EndDate = rebuild ? null : (DateTime?)new DateTime(1, 1, 9),
+                BatchSize = batchSize,
             };
 
             await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
@@ -61,7 +61,7 @@ namespace VirtoCommerce.CoreModule.Tests
                 Assert.Equal("Deleting index", progress[i++].Description);
             }
 
-            Assert.Equal("Calculating documents count", progress[i++].Description);
+            Assert.Equal("Calculating total count", progress[i++].Description);
 
             for (var batch = 0; batch < expectedBatchesCount; batch++)
             {
@@ -71,8 +71,50 @@ namespace VirtoCommerce.CoreModule.Tests
 
             Assert.Equal("Completed", progress[i].Description);
 
-            ValidateErrors(progress);
-            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, sourceNames);
+            ValidateErrors(progress, "bad1");
+            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, sourceNames, "good2", "good3");
+        }
+        [Theory]
+        [InlineData(1, Primary)]
+        [InlineData(3, Primary)]
+        [InlineData(1, Primary, Secondary)]
+        [InlineData(3, Primary, Secondary)]
+        public async Task CanIndexSpecificDocuments(int batchSize, params string[] sourceNames)
+        {
+            var searchProvider = new SearchProvider();
+            var documentSources = GetDocumentSources(sourceNames);
+            var manager = GetIndexingManager(searchProvider, documentSources);
+            var progress = new List<IndexingProgress>();
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            var options = new IndexingOptions
+            {
+                DocumentType = DocumentType,
+                DocumentIds = new[] { "bad1", "good3", "non-existent-id" },
+                BatchSize = batchSize,
+            };
+
+            await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
+
+            var expectedBatchesCount = GetBatchesCount(options.DocumentIds.Count, batchSize);
+            var expectedProgressItemsCount = 1 + expectedBatchesCount * 2 + 1;
+
+            Assert.Equal(expectedProgressItemsCount, progress.Count);
+
+            var i = 0;
+
+            Assert.Equal("Calculating total count", progress[i++].Description);
+
+            for (var batch = 0; batch < expectedBatchesCount; batch++)
+            {
+                Assert.Equal("Processing", progress[i++].Description);
+                Assert.Equal("Processed", progress[i++].Description);
+            }
+
+            Assert.Equal("Completed", progress[i].Description);
+
+            ValidateErrors(progress, "bad1");
+            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, sourceNames, "good3");
         }
 
 
@@ -100,10 +142,12 @@ namespace VirtoCommerce.CoreModule.Tests
 
             if (rebuild)
             {
+                // Use documents count from primary source
                 result = GetBatchesCount(documentSources?.FirstOrDefault()?.Documents.Count ?? 0, batchSize);
             }
             else
             {
+                // Calculate batches count for each source and return the maximum value
                 result = documentSources?.Max(s => GetBatchesCount(s?.Changes.Count ?? 0, batchSize)) ?? 0;
             }
 
@@ -115,24 +159,30 @@ namespace VirtoCommerce.CoreModule.Tests
             return (int)Math.Ceiling((decimal)itemsCount / batchSize);
         }
 
-        private static void ValidateErrors(IEnumerable<IndexingProgress> progress)
+        private static void ValidateErrors(IEnumerable<IndexingProgress> progress, params string[] expectdErrorDoucmentIds)
         {
             var errors = progress
                 .Where(p => p.Errors != null)
                 .SelectMany(p => p.Errors)
                 .ToList();
 
-            Assert.Equal(1, errors.Count);
-            Assert.Equal("ID: bad1, Error: Search provider error", errors[0]);
+            Assert.Equal(expectdErrorDoucmentIds.Length, errors.Count);
+
+            foreach (var doucmentId in expectdErrorDoucmentIds)
+            {
+                Assert.Equal($"ID: {doucmentId}, Error: Search provider error", errors[0]);
+            }
         }
 
 
-        private static void ValidateIndexedDocuments(ICollection<IndexDocument> documents, ICollection<string> expectedFieldNames)
+        private static void ValidateIndexedDocuments(ICollection<IndexDocument> documents, ICollection<string> expectedFieldNames, params string[] expectedDocumentIds)
         {
-            Assert.Equal(2, documents.Count);
+            Assert.Equal(expectedDocumentIds.Length, documents.Count);
 
             foreach (var document in documents)
             {
+                Assert.NotNull(document);
+                Assert.True(expectedDocumentIds.Contains(document.Id));
                 Assert.NotNull(document.Fields);
                 Assert.Equal(expectedFieldNames.Count, document.Fields.Count);
 

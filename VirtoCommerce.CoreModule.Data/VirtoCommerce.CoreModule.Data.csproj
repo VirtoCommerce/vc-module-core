@@ -87,6 +87,9 @@
     <Compile Include="Converters\CurrencyConverter.cs" />
     <Compile Include="Converters\SeoUrlKeywordConverter.cs" />
     <Compile Include="Converters\FulfillmentCenterConverter.cs" />
+    <Compile Include="Indexing\BatchIndexingOptions.cs" />
+    <Compile Include="Indexing\BatchIndexingResult.cs" />
+    <Compile Include="Indexing\ChangesProviderAndTotalCount.cs" />
     <Compile Include="Migrations\201504301238451_Initial.cs" />
     <Compile Include="Migrations\201504301238451_Initial.Designer.cs">
       <DependentUpon>201504301238451_Initial.cs</DependentUpon>

@@ -23,14 +23,11 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrEmpty(options.DocumentType))
-                throw new ArgumentNullException($"{nameof(options)}.{nameof(options.DocumentType)}");
+            ValidateOptions(options);
 
             var documentType = options.DocumentType;
 
-            if (options.RebuildIndex)
+            if (options.DeleteExistingIndex)
             {
                 await DeleteIndexAsync(documentType, progressCallback, cancellationToken);
             }
@@ -39,24 +36,60 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             foreach (var config in configs)
             {
-                await ProcessConfigurationAsync(options, config, progressCallback, cancellationToken);
+                await ProcessConfigurationAsync(config, options, progressCallback, cancellationToken);
             }
         }
 
+
+        protected virtual void ValidateOptions(IndexingOptions options)
+        {
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+            if (string.IsNullOrEmpty(options.DocumentType))
+                throw new ArgumentNullException($"{nameof(options)}.{nameof(options.DocumentType)}");
+            if (options.BatchSize < 1)
+                throw new ArgumentException(@"Batch size cannon be less than 1", $"{nameof(options)}.{nameof(options.BatchSize)}");
+        }
 
         protected virtual async Task DeleteIndexAsync(string documentType, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            progressCallback?.Invoke(new IndexingProgress { DocumentType = documentType, Description = "Deleting index" });
-
+            progressCallback?.Invoke(new IndexingProgress("Deleting index", documentType));
             await _searchProvider.DeleteIndexAsync(documentType);
         }
 
-        protected virtual async Task ProcessConfigurationAsync(IndexingOptions options, IndexDocumentConfiguration configuration, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
+        protected virtual async Task ProcessConfigurationAsync(IndexDocumentConfiguration configuration, IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            ValidateConfiguration(configuration);
+
+            var documentType = options.DocumentType;
+
+            progressCallback?.Invoke(new IndexingProgress("Calculating total count", documentType));
+            var batchOptions = await GetBatchOptionsAsync(configuration, options);
+
+            var processedCount = 0L;
+            var totalCount = batchOptions.TotalCount;
+
+            while (processedCount < totalCount)
+            {
+                progressCallback?.Invoke(new IndexingProgress("Processing", documentType, totalCount, processedCount));
+                var batchResult = await ProcessBatchAsync(batchOptions, cancellationToken);
+
+                processedCount += batchResult.ProcessedCount;
+                batchOptions.Skip += batchOptions.BatchSize;
+
+                var errors = GetIndexingErrors(batchResult.IndexingResult);
+                progressCallback?.Invoke(new IndexingProgress("Processed", documentType, totalCount, processedCount, errors));
+            }
+
+            progressCallback?.Invoke(new IndexingProgress("Completed", documentType));
+        }
+
+        protected virtual void ValidateConfiguration(IndexDocumentConfiguration configuration)
+        {
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
             if (string.IsNullOrEmpty(configuration.DocumentType))
@@ -67,38 +100,56 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}.{nameof(configuration.DocumentSource.ChangesProvider)}");
             if (configuration.DocumentSource.DocumentBuilder == null)
                 throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}.{nameof(configuration.DocumentSource.DocumentBuilder)}");
-
-            var primaryDocumentBuilder = configuration.DocumentSource.DocumentBuilder;
-            var secondaryDocumentBuilders = configuration.RelatedSources?.Where(s => s.DocumentBuilder != null).Select(s => s.DocumentBuilder).ToList();
-
-            var documentType = options.DocumentType;
-
-            progressCallback?.Invoke(new IndexingProgress { DocumentType = documentType, Description = "Calculating documents count" });
-
-            var providersAndCounts = await GetChangesProvidersAndTotalCounts(configuration, options.StartDate, options.EndDate);
-            var totalChangesCount = providersAndCounts.Sum(p => p.TotalCount);
-
-            var processedCount = 0L;
-            var skip = 0L;
-
-            while (processedCount < totalChangesCount)
-            {
-                progressCallback?.Invoke(new IndexingProgress { DocumentType = documentType, Description = "Processing", TotalCount = totalChangesCount, ProcessedCount = processedCount });
-
-                var changes = await GetChangesAsync(providersAndCounts, options.StartDate, options.EndDate, skip, options.BatchSize, cancellationToken);
-                var indexingResult = await ProcessChanges(documentType, changes, primaryDocumentBuilder, secondaryDocumentBuilders, cancellationToken);
-
-                skip += options.BatchSize;
-                processedCount += changes.Count;
-
-                var errors = GetIndexingErrors(indexingResult);
-                progressCallback?.Invoke(new IndexingProgress { DocumentType = documentType, Description = "Processed", TotalCount = totalChangesCount, ProcessedCount = processedCount, Errors = errors });
-            }
-
-            progressCallback?.Invoke(new IndexingProgress { DocumentType = documentType, Description = "Completed" });
         }
 
-        protected virtual async Task<ProviderAndCount[]> GetChangesProvidersAndTotalCounts(IndexDocumentConfiguration configuration, DateTime? startDate, DateTime? endDate)
+        private async Task<BatchIndexingOptions> GetBatchOptionsAsync(IndexDocumentConfiguration configuration, IndexingOptions options)
+        {
+            var result = new BatchIndexingOptions
+            {
+                DocumentType = options.DocumentType,
+                DocumentIds = options.DocumentIds,
+                StartDate = options.StartDate,
+                EndDate = options.EndDate,
+                BatchSize = options.BatchSize,
+
+                PrimaryDocumentBuilder = configuration.DocumentSource.DocumentBuilder,
+                SecondaryDocumentBuilders = configuration.RelatedSources?.Where(s => s.DocumentBuilder != null).Select(s => s.DocumentBuilder).ToList(),
+            };
+
+            if (options.DocumentIds != null)
+            {
+                result.TotalCount = options.DocumentIds.Count;
+            }
+            else
+            {
+                result.ChangesProvidersAndTotalCounts = await GetChangesProvidersAndTotalCountsAsync(configuration, options.StartDate, options.EndDate);
+                result.TotalCount = result.ChangesProvidersAndTotalCounts.Sum(p => p.TotalCount);
+            }
+
+            return result;
+        }
+
+        protected virtual async Task<BatchIndexingResult> ProcessBatchAsync(BatchIndexingOptions batchOptions, CancellationToken cancellationToken)
+        {
+            var result = new BatchIndexingResult();
+
+            if (batchOptions.DocumentIds != null)
+            {
+                var documentIds = batchOptions.DocumentIds.Skip((int)batchOptions.Skip).Take(batchOptions.BatchSize).ToList();
+                result.IndexingResult = await ProcessDocumentsAsync(IndexDocumentChangeType.Modified, documentIds, batchOptions, cancellationToken);
+                result.ProcessedCount += documentIds.Count;
+            }
+            else
+            {
+                var changes = await GetChangesAsync(batchOptions, cancellationToken);
+                result.IndexingResult = await ProcessChangesAsync(changes, batchOptions, cancellationToken);
+                result.ProcessedCount += changes.Count;
+            }
+
+            return result;
+        }
+
+        protected virtual async Task<ChangesProviderAndTotalCount[]> GetChangesProvidersAndTotalCountsAsync(IndexDocumentConfiguration configuration, DateTime? startDate, DateTime? endDate)
         {
             var changesProviders = new List<IIndexDocumentChangesProvider> { configuration.DocumentSource.ChangesProvider };
             if (configuration.RelatedSources != null)
@@ -106,17 +157,18 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 changesProviders.AddRange(configuration.RelatedSources.Where(s => s.ChangesProvider != null).Select(s => s.ChangesProvider));
             }
 
-            return await Task.WhenAll(changesProviders.Select(async p => new ProviderAndCount { Provider = p, TotalCount = await p.GetTotalChangesCountAsync(startDate, endDate) }));
+            var result = await Task.WhenAll(changesProviders.Select(async p => new ChangesProviderAndTotalCount { Provider = p, TotalCount = await p.GetTotalChangesCountAsync(startDate, endDate) }));
+            return result;
         }
 
-        protected virtual async Task<IList<IndexDocumentChange>> GetChangesAsync(IEnumerable<ProviderAndCount> providersAndCounts, DateTime? startDate, DateTime? endDate, long skip, long take, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocumentChange>> GetChangesAsync(BatchIndexingOptions batchOptions, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             // Request changes only from those providers that reported total count greater than the skip value
-            var tasks = providersAndCounts
-                .Where(p => skip < p.TotalCount)
-                .Select(p => p.Provider.GetChangesAsync(startDate, endDate, skip, take));
+            var tasks = batchOptions.ChangesProvidersAndTotalCounts
+                .Where(p => batchOptions.Skip < p.TotalCount)
+                .Select(p => p.Provider.GetChangesAsync(batchOptions.StartDate, batchOptions.EndDate, batchOptions.Skip, batchOptions.BatchSize));
 
             var results = await Task.WhenAll(tasks);
 
@@ -124,7 +176,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        protected virtual async Task<IndexingResult> ProcessChanges(string documentType, IEnumerable<IndexDocumentChange> changes, IIndexDocumentBuilder primaryDocumentBuilder, IList<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> ProcessChangesAsync(IEnumerable<IndexDocumentChange> changes, BatchIndexingOptions batchOptions, CancellationToken cancellationToken)
         {
             var result = new IndexingResult();
 
@@ -135,7 +187,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 var changeType = group.Key;
                 var documentIds = group.Value;
 
-                var groupResult = await ProcessDocuments(documentType, changeType, documentIds, primaryDocumentBuilder, secondaryDocumentBuilders, cancellationToken);
+                var groupResult = await ProcessDocumentsAsync(changeType, documentIds, batchOptions, cancellationToken);
 
                 if (groupResult?.Items != null)
                 {
@@ -172,7 +224,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        protected virtual async Task<IndexingResult> ProcessDocuments(string documentType, IndexDocumentChangeType changeType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> ProcessDocumentsAsync(IndexDocumentChangeType changeType, IList<string> documentIds, BatchIndexingOptions batchOptions, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -180,17 +232,17 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             if (changeType == IndexDocumentChangeType.Deleted)
             {
-                result = await DeleteDocumentsAsync(documentType, documentIds, cancellationToken);
+                result = await DeleteDocumentsAsync(batchOptions.DocumentType, documentIds, cancellationToken);
             }
             else if (changeType == IndexDocumentChangeType.Modified)
             {
-                result = await IndexDocumentsAsync(documentType, documentIds, primaryDocumentBuilder, secondaryDocumentBuilders, cancellationToken);
+                result = await IndexDocumentsAsync(batchOptions.DocumentType, documentIds, batchOptions.PrimaryDocumentBuilder, batchOptions.SecondaryDocumentBuilders, cancellationToken);
             }
 
             return result;
         }
 
-        protected virtual async Task<IndexingResult> DeleteDocumentsAsync(string documentType, IEnumerable<string> documentIds, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> DeleteDocumentsAsync(string documentType, IList<string> documentIds, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -203,25 +255,25 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var documents = await GetDocuments(documentIds, primaryDocumentBuilder, secondaryDocumentBuilders, cancellationToken);
+            var documents = await GetDocumentsAsync(documentIds, primaryDocumentBuilder, secondaryDocumentBuilders, cancellationToken);
             var response = await _searchProvider.IndexAsync(documentType, documents);
             return response;
         }
 
-        protected virtual async Task<IList<IndexDocument>> GetDocuments(IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocument>> GetDocumentsAsync(IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             var primaryDocuments = await primaryDocumentBuilder.GetDocumentsAsync(documentIds);
             var primaryDocumentIds = primaryDocuments.Select(d => d.Id).ToArray();
-            var secondaryDocuments = await GetSecondaryDocuments(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
+            var secondaryDocuments = await GetSecondaryDocumentsAsync(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
 
             MergeDocuments(primaryDocuments, secondaryDocuments);
 
             return primaryDocuments;
         }
 
-        protected virtual async Task<IList<IndexDocument>> GetSecondaryDocuments(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocument>> GetSecondaryDocumentsAsync(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -241,13 +293,6 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                     primaryDocument.Merge(secondaryDocument);
                 }
             }
-        }
-
-
-        protected class ProviderAndCount
-        {
-            public IIndexDocumentChangesProvider Provider { get; set; }
-            public long TotalCount { get; set; }
         }
     }
 }
