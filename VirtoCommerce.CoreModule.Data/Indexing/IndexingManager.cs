@@ -15,8 +15,13 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
         public IndexingManager(ISearchProvider searchProvider, IndexDocumentConfiguration[] configs)
         {
-            _searchProvider = searchProvider ?? throw new ArgumentNullException(nameof(searchProvider));
-            _configs = configs ?? throw new ArgumentNullException(nameof(configs));
+            if (searchProvider == null)
+                throw new ArgumentNullException(nameof(searchProvider));
+            if (configs == null)
+                throw new ArgumentNullException(nameof(configs));
+
+            _searchProvider = searchProvider;
+            _configs = configs;
         }
 
         public virtual async Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
