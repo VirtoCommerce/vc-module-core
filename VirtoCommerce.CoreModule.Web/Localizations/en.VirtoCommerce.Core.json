@@ -1,9 +1,12 @@
 ﻿{
     "core": {
         "commands": {
-            "apply-filter": "Save & apply"
+            "apply-filter": "Save & apply",
+            "rebuild-index": "Build Index"
         },
-        "main-menu-title": "Shopping carts",
+        "main-menu-title": {
+            "search-index":  "Search index" 
+        },
         "blades": {
             "address-list": {
                 "labels": {
@@ -159,7 +162,17 @@
                     "height": "Height",
                     "length": "Length"
                 }
-            }
+            },
+            "document-type-list": {
+                "title": "Document types",
+                "labels": {
+                    "document-type": "Document type",
+                    "indexed-docs-total": "Indexed count",
+                    "last-indexation-date": "Last indexed",
+                    "build-index": "Build index",
+                    "rebuild-index":  "Rebuild index" 
+                }
+            } 
         },
         "dialogs": {
             "address-delete": {
