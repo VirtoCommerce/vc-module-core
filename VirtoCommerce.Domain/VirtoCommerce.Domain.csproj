@@ -261,6 +261,7 @@
     <Compile Include="Search\AggregationResponse.cs" />
     <Compile Include="Search\AggregationResponseValue.cs" />
     <Compile Include="Search\AndFilter.cs" />
+    <Compile Include="Search\Constants.cs" />
     <Compile Include="Search\GeoDistanceFilter.cs" />
     <Compile Include="Search\GeoDistanceSortingField.cs" />
     <Compile Include="Search\GeoPoint.cs" />

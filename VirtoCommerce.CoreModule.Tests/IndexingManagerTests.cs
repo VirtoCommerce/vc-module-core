@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.Domain.Search;
+using VirtoCommerce.Platform.Core.Common;
 using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests
@@ -72,7 +73,9 @@ namespace VirtoCommerce.CoreModule.Tests
             Assert.Equal("Completed", progress[i].Description);
 
             ValidateErrors(progress, "bad1");
-            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, sourceNames, "good2", "good3");
+
+            var expectedFieldNames = new List<string>(sourceNames) { Constants.IndexationDateFieldName };
+            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, expectedFieldNames, "good2", "good3");
         }
         [Theory]
         [InlineData(1, Primary)]
@@ -114,7 +117,9 @@ namespace VirtoCommerce.CoreModule.Tests
             Assert.Equal("Completed", progress[i].Description);
 
             ValidateErrors(progress, "bad1");
-            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, sourceNames, "good3");
+
+            var expectedFieldNames = new List<string>(sourceNames) { Constants.IndexationDateFieldName };
+            ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, expectedFieldNames, "good3");
         }
 
 
@@ -219,8 +224,11 @@ namespace VirtoCommerce.CoreModule.Tests
                     var field = document.Fields.FirstOrDefault(f => f.Name == fieldName);
 
                     Assert.NotNull(field);
-                    Assert.Equal(fieldName, field.Name);
-                    Assert.Equal(document.Id, field.Value);
+
+                    if (!fieldName.EqualsInvariant(Constants.IndexationDateFieldName))
+                    {
+                        Assert.Equal(document.Id, field.Value);
+                    }
                 }
             }
         }

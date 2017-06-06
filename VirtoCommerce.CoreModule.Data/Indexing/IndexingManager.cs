@@ -297,6 +297,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 {
                     primaryDocument.Merge(secondaryDocument);
                 }
+
+                primaryDocument.Add(new IndexDocumentField(Constants.IndexationDateFieldName, DateTime.UtcNow));
             }
         }
     }
