@@ -345,6 +345,43 @@ namespace VirtoCommerce.CoreModule.Search.Tests
         }
 
         [Fact]
+        public virtual async Task CanFilterByBooleanTerm()
+        {
+            var provider = GetSearchProvider();
+
+
+            var request = new SearchRequest
+            {
+                Filter = new TermFilter
+                {
+                    FieldName = "HasMultiplePrices",
+                    Values = new[] { "tRue" } // Value should be case insensitive
+                },
+                Take = 10,
+            };
+
+            var response = await provider.SearchAsync(_documentType, request);
+
+            Assert.Equal(2, response.DocumentsCount);
+
+
+            request = new SearchRequest
+            {
+                Filter = new TermFilter
+                {
+                    FieldName = "HasMultiplePrices",
+                    Values = new[] { "fAlse" } // Value should be case insensitive
+                },
+                Take = 10,
+            };
+
+            response = await provider.SearchAsync(_documentType, request);
+
+            Assert.Equal(4, response.DocumentsCount);
+        }
+
+
+        [Fact]
         public virtual async Task CanFilterByRange()
         {
             var provider = GetSearchProvider();

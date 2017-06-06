@@ -68,6 +68,9 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 doc.Add(new IndexDocumentField($"Price_{price.Currency}", price.Amount) { IsRetrievable = true, IsFilterable = true, IsCollection = true });
             }
 
+            var hasMultiplePrices = prices.Length > 1;
+            doc.Add(new IndexDocumentField("HasMultiplePrices", hasMultiplePrices) { IsRetrievable = true, IsFilterable = true });
+
             // Adds extra fields to test mapping updates for indexer
             if (name2 != null)
             {
