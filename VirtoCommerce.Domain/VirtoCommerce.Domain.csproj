@@ -274,6 +274,7 @@
     <Compile Include="Search\IndexingProgress.cs" />
     <Compile Include="Search\IndexingResult.cs" />
     <Compile Include="Search\IndexingResultItem.cs" />
+    <Compile Include="Search\ISearchConnection.cs" />
     <Compile Include="Search\ISearchProvider.cs" />
     <Compile Include="Search\ISearchRequestBuilder.cs" />
     <Compile Include="Search\NotFilter.cs" />
@@ -282,6 +283,7 @@
     <Compile Include="Search\RangeAggregationRequestValue.cs" />
     <Compile Include="Search\RangeFilter.cs" />
     <Compile Include="Search\RangeFilterValue.cs" />
+    <Compile Include="Search\SearchConnection.cs" />
     <Compile Include="Search\SearchCriteria.cs" />
     <Compile Include="Search\SearchDocument.cs" />
     <Compile Include="Search\SearchException.cs" />
