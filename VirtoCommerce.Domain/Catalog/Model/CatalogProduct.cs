@@ -5,7 +5,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHaveDimension
+    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHaveDimension, IHasAssociations, IHasProperties, IHasImages, IHasAssets
     {
         /// <summary>
         /// SKU code
@@ -74,18 +74,37 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public int Priority { get; set; }
 
+        #region IHasProperties members
         public ICollection<Property> Properties { get; set; }
         public ICollection<PropertyValue> PropertyValues { get; set; }
+
+        #endregion
+        #region IHasImages members
         public ICollection<Image> Images { get; set; }
-        public ICollection<Asset> Assets { get; set; }
-        public ICollection<CategoryLink> Links { get; set; }
+        #endregion
+
+        #region IHasAssets members
+        public ICollection<Asset> Assets { get; set; } 
+        #endregion
+
+        #region ILinkSupport members
+        public ICollection<CategoryLink> Links { get; set; } 
+        #endregion
+
         public ICollection<CatalogProduct> Variations { get; set; }
         public string SeoObjectType { get { return GetType().Name; } }
         public ICollection<SeoInfo> SeoInfos { get; set; }
         public ICollection<EditorialReview> Reviews { get; set; }
-        public ICollection<ProductAssociation> Associations { get; set; }
+
+        #region IHasAssociations members
+        public ICollection<ProductAssociation> Associations { get; set; } 
+        #endregion
+
         public ICollection<Pricing.Model.Price> Prices { get; set; }
         public ICollection<Inventory.Model.InventoryInfo> Inventories { get; set; }
-        public ICollection<Outline> Outlines { get; set; }
+
+        #region IHasOutlines members
+        public ICollection<Outline> Outlines { get; set; } 
+        #endregion
     }
 }

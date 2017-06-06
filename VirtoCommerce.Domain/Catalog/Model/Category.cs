@@ -4,7 +4,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class Category : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines
+    public class Category : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHasImages, IHasProperties
     {
         public Category()
         {
@@ -30,12 +30,25 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public bool? IsActive { get; set; }
 
         public ICollection<Category> Children { get; set; }
+
+        #region IHasProperties members
         public ICollection<Property> Properties { get; set; }
         public ICollection<PropertyValue> PropertyValues { get; set; }
-        public ICollection<CategoryLink> Links { get; set; }
+        #endregion
+
+        #region ILinkSupport members
+        public ICollection<CategoryLink> Links { get; set; } 
+        #endregion
+
         public string SeoObjectType { get { return GetType().Name; } }
         public ICollection<SeoInfo> SeoInfos { get; set; }
+
+        #region IHasImages members
         public ICollection<Image> Images { get; set; }
-        public ICollection<Outline> Outlines { get; set; }
+        #endregion
+
+        #region IHasOutlines members
+        public ICollection<Outline> Outlines { get; set; } 
+        #endregion
     }
 }
