@@ -6,50 +6,45 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Hangfire;
-using Omu.ValueInjecter;
 using VirtoCommerce.CoreModule.Web.Model;
 using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Security;
-using VirtoCommerce.Platform.Core.Settings;
 
 namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 {
     [RoutePrefix("api/search/indexes")]
     public class SearchIndexationController : ApiController
     {
-        private static object _lock = new object();
-        private static Dictionary<string, CancellationTokenSource> _runningProcesses;
-        private readonly ISearchProvider _indexedSearchProvider;
+        private static readonly object _lockObject = new object();
+        private static readonly Dictionary<string, CancellationTokenSource> _runningProcesses = new Dictionary<string, CancellationTokenSource>();
+
+        private readonly IndexDocumentConfiguration[] _documentsConfigs;
+        private readonly ISearchProvider _searchProvider;
         private readonly IIndexingManager _indexingManager;
         private readonly IUserNameResolver _userNameResolver;
         private readonly IPushNotificationManager _pushNotifier;
-        private readonly IndexDocumentConfiguration[] _documentsConfigs;
 
-        public SearchIndexationController(IndexDocumentConfiguration[] documentsConfigs, ISearchProvider indexedSearchProvider, IIndexingManager indexingManager, IUserNameResolver userNameResolver, IPushNotificationManager pushNotifier)
+        public SearchIndexationController(IndexDocumentConfiguration[] documentsConfigs, ISearchProvider searchProvider, IIndexingManager indexingManager, IUserNameResolver userNameResolver, IPushNotificationManager pushNotifier)
         {
             _documentsConfigs = documentsConfigs;
-            _runningProcesses = new Dictionary<string, CancellationTokenSource>();
-            _userNameResolver = userNameResolver;
-            _indexedSearchProvider = indexedSearchProvider;
+            _searchProvider = searchProvider;
             _indexingManager = indexingManager;
+            _userNameResolver = userNameResolver;
             _pushNotifier = pushNotifier;
         }
 
-  
+
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IndexInfo[]))]
-        public async Task<IHttpActionResult> GetAllAvailIndexes()
+        public async Task<IHttpActionResult> GetAllIndexes()
         {
-            var result = new List<IndexInfo>();
-            foreach (var documentType in _documentsConfigs.Select(x => x.DocumentType).Distinct())
-            {
-                var indexInfo = await GetDocumentTypeIndexInfoAsync(documentType);
-                result.Add(indexInfo);
-            }
-            return Ok(result.ToArray());
+            var documentTypes = _documentsConfigs.Select(x => x.DocumentType).Distinct().ToList();
+            var tasks = documentTypes.Select(GetDocumentTypeIndexInfoAsync);
+            var result = await Task.WhenAll(tasks);
+            return Ok(result);
         }
 
         /// <summary>
@@ -69,7 +64,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                     Values = new[] { documentId },
                 },
             };
-            var result = await _indexedSearchProvider.SearchAsync(documentType, request);     
+            var result = await _searchProvider.SearchAsync(documentType, request);
             return Ok(result.Documents);
         }
 
@@ -97,7 +92,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 BatchSize = 50,
                 DocumentIds = documentsIds,
                 DocumentType = documentType,
-                StartDate = indexInfo.LastIndexationDate               
+                StartDate = indexInfo.LastIndexationDate
             };
 
             BackgroundJob.Enqueue(() => BackgroundIndex(indexingOptions, notification));
@@ -138,10 +133,14 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [Route("tasks/{taskId}/cancel")]
         public IHttpActionResult CancelIndexationProcess(string taskId)
         {
-            if(_runningProcesses.ContainsKey(taskId))
+            lock (_lockObject)
             {
-                _runningProcesses[taskId].Cancel();
+                if (_runningProcesses.ContainsKey(taskId))
+                {
+                    _runningProcesses[taskId].Cancel();
+                }
             }
+
             return Ok();
         }
 
@@ -159,16 +158,18 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 notification.ProcessedCount = x.ProcessedCount ?? 0;
                 _pushNotifier.Upsert(notification);
             };
-            var cancellationToken = new CancellationTokenSource();
 
-            lock (_lock)
+            var cancellationTokenSource = new CancellationTokenSource();
+
+            lock (_lockObject)
             {
-                _runningProcesses[notification.Id] = cancellationToken;
+                _runningProcesses[notification.Id] = cancellationTokenSource;
             }
 
             try
             {
-                _indexingManager.IndexAsync(options, progressCallback, cancellationToken.Token).Wait();
+                var cancellationToken = cancellationTokenSource.Token;
+                _indexingManager.IndexAsync(options, progressCallback, cancellationToken).Wait(cancellationToken);
             }
             catch (OperationCanceledException)
             {
@@ -190,19 +191,18 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         private async Task<IndexInfo> GetDocumentTypeIndexInfoAsync(string documentType)
         {
             var result = new IndexInfo(documentType);
-            var request = new SearchRequest
+
+            var searchRequest = new SearchRequest
             {
+                Sorting = new[] { new SortingField { FieldName = Constants.IndexationDateFieldName, IsDescending = true } },
                 Take = 1,
-                Sorting = new[]
-                        {
-                              new SortingField { FieldName = "IndexDate", IsDescending = true },
-                            },
             };
-            var searchResult = await _indexedSearchProvider.SearchAsync(documentType, request);
-            result.IndexedDocsTotal = searchResult.TotalCount;
-            if (searchResult.TotalCount > 0)
+            var searchResponse = await _searchProvider.SearchAsync(documentType, searchRequest);
+
+            result.IndexedDocsTotal = searchResponse.TotalCount;
+            if (searchResponse.TotalCount > 0)
             {
-                result.LastIndexationDate = Convert.ToDateTime(searchResult.Documents[0]["IndexDate"]);
+                result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][Constants.IndexationDateFieldName]);
             }
 
             return result;
