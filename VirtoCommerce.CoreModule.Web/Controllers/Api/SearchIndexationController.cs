@@ -42,7 +42,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public async Task<IHttpActionResult> GetAllIndexes()
         {
             var documentTypes = _documentsConfigs.Select(x => x.DocumentType).Distinct().ToList();
-            var tasks = documentTypes.Select(GetDocumentTypeIndexInfoAsync);
+            var tasks = documentTypes.Select(GetIndexInfoAsync);
             var result = await Task.WhenAll(tasks);
             return Ok(result);
         }
@@ -85,7 +85,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             };
             _pushNotifier.Upsert(notification);
 
-            var indexInfo = await GetDocumentTypeIndexInfoAsync(documentType);
+            var indexInfo = await GetIndexInfoAsync(documentType);
 
             var indexingOptions = new IndexingOptions
             {
@@ -188,21 +188,33 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             }
         }
 
-        private async Task<IndexInfo> GetDocumentTypeIndexInfoAsync(string documentType)
+        private async Task<IndexInfo> GetIndexInfoAsync(string documentType)
         {
             var result = new IndexInfo(documentType);
 
             var searchRequest = new SearchRequest
             {
-                Sorting = new[] { new SortingField { FieldName = Constants.IndexationDateFieldName, IsDescending = true } },
+                Sorting = new[]
+                {
+                    new SortingField { FieldName = Constants.IndexationDateFieldName, IsDescending = true }
+                },
                 Take = 1,
             };
-            var searchResponse = await _searchProvider.SearchAsync(documentType, searchRequest);
 
-            result.IndexedDocsTotal = searchResponse.TotalCount;
-            if (searchResponse.TotalCount > 0)
+            try
             {
-                result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][Constants.IndexationDateFieldName]);
+                var searchResponse = await _searchProvider.SearchAsync(documentType, searchRequest);
+
+                result.IndexedDocumentsCount = searchResponse.TotalCount;
+
+                if (searchResponse.Documents?.Any() == true)
+                {
+                    result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][Constants.IndexationDateFieldName]);
+                }
+            }
+            catch
+            {
+                // ignored
             }
 
             return result;
