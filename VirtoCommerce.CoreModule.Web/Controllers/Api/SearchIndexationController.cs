@@ -183,7 +183,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             finally
             {
                 notification.Finished = DateTime.UtcNow;
-                notification.Description = "Indexation finished" + (notification.Errors.Any() ? " with errors" : " successfully");
+                notification.Description = "Indexation finished" + (notification.Errors?.Any() == true ? " with errors" : " successfully");
                 _pushNotifier.Upsert(notification);
             }
         }
