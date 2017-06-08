@@ -177,7 +177,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             var results = await Task.WhenAll(tasks);
 
-            var result = results.SelectMany(r => r).ToList();
+            var result = results.Where(r => r != null).SelectMany(r => r).ToList();
             return result;
         }
 
@@ -285,17 +285,26 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             var tasks = secondaryDocumentBuilders.Select(p => p.GetDocumentsAsync(documentIds));
             var results = await Task.WhenAll(tasks);
 
-            var result = results.SelectMany(r => r).ToList();
+            var result = results.Where(r => r != null).SelectMany(r => r).ToList();
             return result;
         }
 
         protected virtual void MergeDocuments(IEnumerable<IndexDocument> primaryDocuments, IList<IndexDocument> secondaryDocuments)
         {
+            var secondaryDocumentGroups = secondaryDocuments
+                .GroupBy(d => d.Id)
+                .ToDictionary(g => g.Key, g => g, StringComparer.OrdinalIgnoreCase);
+
             foreach (var primaryDocument in primaryDocuments)
             {
-                foreach (var secondaryDocument in secondaryDocuments.Where(d => d.Id.EqualsInvariant(primaryDocument.Id)))
+                if (secondaryDocumentGroups.ContainsKey(primaryDocument.Id))
                 {
-                    primaryDocument.Merge(secondaryDocument);
+                    var secondaryDocumentGroup = secondaryDocumentGroups[primaryDocument.Id];
+
+                    foreach (var secondaryDocument in secondaryDocumentGroup)
+                    {
+                        primaryDocument.Merge(secondaryDocument);
+                    }
                 }
 
                 primaryDocument.Add(new IndexDocumentField(Constants.IndexationDateFieldName, DateTime.UtcNow) { IsRetrievable = true, IsFilterable = true });
