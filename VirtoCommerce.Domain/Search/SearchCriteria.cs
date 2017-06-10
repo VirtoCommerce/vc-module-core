@@ -2,14 +2,9 @@
 
 namespace VirtoCommerce.Domain.Search
 {
-    public class SearchCriteria
+    public abstract class SearchCriteria
     {
-        public SearchCriteria(string documentType)
-        {
-            DocumentType = documentType;
-        }
-
-        public virtual string DocumentType { get; }
+        public abstract string DocumentType { get; }
         public virtual IList<string> Ids { get; set; }
         public virtual IList<SortingField> Sorting { get; set; }
         public virtual int Skip { get; set; }
