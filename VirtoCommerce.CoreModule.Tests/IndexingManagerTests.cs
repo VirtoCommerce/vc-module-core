@@ -74,7 +74,7 @@ namespace VirtoCommerce.CoreModule.Tests
 
             ValidateErrors(progress, "bad1");
 
-            var expectedFieldNames = new List<string>(sourceNames) { Constants.IndexationDateFieldName };
+            var expectedFieldNames = new List<string>(sourceNames) { KnownDocumentFields.IndexationDate };
             ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, expectedFieldNames, "good2", "good3");
         }
         [Theory]
@@ -118,7 +118,7 @@ namespace VirtoCommerce.CoreModule.Tests
 
             ValidateErrors(progress, "bad1");
 
-            var expectedFieldNames = new List<string>(sourceNames) { Constants.IndexationDateFieldName };
+            var expectedFieldNames = new List<string>(sourceNames) { KnownDocumentFields.IndexationDate };
             ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, expectedFieldNames, "good3");
         }
 
@@ -225,7 +225,7 @@ namespace VirtoCommerce.CoreModule.Tests
 
                     Assert.NotNull(field);
 
-                    if (!fieldName.EqualsInvariant(Constants.IndexationDateFieldName))
+                    if (!fieldName.EqualsInvariant(KnownDocumentFields.IndexationDate))
                     {
                         Assert.Equal(document.Id, field.Value);
                     }

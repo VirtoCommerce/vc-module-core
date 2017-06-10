@@ -261,7 +261,6 @@
     <Compile Include="Search\AggregationResponse.cs" />
     <Compile Include="Search\AggregationResponseValue.cs" />
     <Compile Include="Search\AndFilter.cs" />
-    <Compile Include="Search\Constants.cs" />
     <Compile Include="Search\GeoDistanceFilter.cs" />
     <Compile Include="Search\GeoDistanceSortingField.cs" />
     <Compile Include="Search\GeoPoint.cs" />
@@ -283,6 +282,8 @@
     <Compile Include="Search\ISearchConnection.cs" />
     <Compile Include="Search\ISearchProvider.cs" />
     <Compile Include="Search\ISearchRequestBuilder.cs" />
+    <Compile Include="Search\KnownDocumentFields.cs" />
+    <Compile Include="Search\KnownDocumentTypes.cs" />
     <Compile Include="Search\NotFilter.cs" />
     <Compile Include="Search\OrFilter.cs" />
     <Compile Include="Search\RangeAggregationRequest.cs" />
@@ -322,7 +323,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="VirtoCommerce.Domain.nuspec" />
+    <None Include="VirtoCommerce.Domain.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

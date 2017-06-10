@@ -196,7 +196,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             {
                 Sorting = new[]
                 {
-                    new SortingField { FieldName = Constants.IndexationDateFieldName, IsDescending = true }
+                    new SortingField { FieldName = KnownDocumentFields.IndexationDate, IsDescending = true }
                 },
                 Take = 1,
             };
@@ -209,7 +209,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
                 if (searchResponse.Documents?.Any() == true)
                 {
-                    result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][Constants.IndexationDateFieldName]);
+                    result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][KnownDocumentFields.IndexationDate]);
                 }
             }
             catch

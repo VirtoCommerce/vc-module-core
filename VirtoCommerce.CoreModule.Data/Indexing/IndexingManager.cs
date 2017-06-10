@@ -307,7 +307,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                     }
                 }
 
-                primaryDocument.Add(new IndexDocumentField(Constants.IndexationDateFieldName, DateTime.UtcNow) { IsRetrievable = true, IsFilterable = true });
+                primaryDocument.Add(new IndexDocumentField(KnownDocumentFields.IndexationDate, DateTime.UtcNow) { IsRetrievable = true, IsFilterable = true });
             }
         }
     }
