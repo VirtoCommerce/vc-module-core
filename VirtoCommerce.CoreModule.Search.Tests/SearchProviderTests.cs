@@ -685,7 +685,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(1, GetAggregationValuesCount(response, "Color"));
             Assert.Equal(3, GetAggregationValueCount(response, "Color", "Red"));
@@ -708,7 +708,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(1, GetAggregationValuesCount(response, "Size"));
             Assert.Equal(2, GetAggregationValueCount(response, "Size", "10"));
@@ -733,7 +733,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(4, GetAggregationValuesCount(response, "Color"));
             Assert.Equal(3, GetAggregationValueCount(response, "Color", "Red"));
@@ -759,7 +759,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(5, GetAggregationValuesCount(response, "Size"));
             Assert.Equal(1, GetAggregationValueCount(response, "Size", "2"));
@@ -796,7 +796,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(2, GetAggregationValuesCount(response, "Color"));
             Assert.Equal(3, GetAggregationValueCount(response, "Color", "Red"));
@@ -824,7 +824,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(2, GetAggregationValuesCount(response, "Size"));
             Assert.Equal(1, GetAggregationValueCount(response, "Size", "3"));
@@ -904,13 +904,44 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(4, GetAggregationValuesCount(response, "Color"));
             Assert.Equal(3, GetAggregationValueCount(response, "Color", "Red"));
             Assert.Equal(1, GetAggregationValueCount(response, "Color", "Black"));
             Assert.Equal(1, GetAggregationValueCount(response, "Color", "Blue"));
             Assert.Equal(1, GetAggregationValueCount(response, "Color", "Silver"));
+        }
+
+        [Fact]
+        public async Task CanGetFacetWithFilterOnly()
+        {
+            var provider = GetSearchProvider();
+
+            var request = new SearchRequest
+            {
+                Aggregations = new AggregationRequest[]
+                {
+                    new TermAggregationRequest
+                    {
+                        Id = "Filtered-Aggregation",
+                        Filter = new TermFilter
+                        {
+                            FieldName = "Size",
+                            Values = new[] { "10" }
+                        },
+                    },
+                },
+                Take = 0,
+            };
+
+            var response = await provider.SearchAsync(_documentType, request);
+
+            Assert.Equal(0, response.DocumentsCount);
+            Assert.Equal(1, response.Aggregations?.Count);
+
+            Assert.Equal(1, GetAggregationValuesCount(response, "Filtered-Aggregation"));
+            Assert.Equal(2, GetAggregationValueCount(response, "Filtered-Aggregation", "Filtered-Aggregation"));
         }
 
         [Fact]
@@ -955,7 +986,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var response = await provider.SearchAsync(_documentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
-            Assert.Equal(1, response.Aggregations.Count);
+            Assert.Equal(1, response.Aggregations?.Count);
 
             Assert.Equal(2, GetAggregationValuesCount(response, "Color"));
             Assert.Equal(0, GetAggregationValueCount(response, "Color", "Red"));
