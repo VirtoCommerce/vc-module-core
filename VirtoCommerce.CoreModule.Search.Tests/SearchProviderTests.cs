@@ -8,7 +8,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
     [TestCaseOrderer(PriorityTestCaseOrderer.TypeName, PriorityTestCaseOrderer.AssembyName)]
     public abstract class SearchProviderTests : SearchProviderTestsBase
     {
-        private const string _documentType = "item";
+        public const string DocumentType = "item";
 
         [Fact, Priority(100)]
         public virtual async Task CanAddAndRemoveDocuments()
@@ -16,12 +16,12 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var provider = GetSearchProvider();
 
             // Delete index
-            await provider.DeleteIndexAsync(_documentType);
+            await provider.DeleteIndexAsync(DocumentType);
 
 
             // Create index and add documents
             var primaryDocuments = GetPrimaryDocuments();
-            var response = await provider.IndexAsync(_documentType, primaryDocuments);
+            var response = await provider.IndexAsync(DocumentType, primaryDocuments);
 
             Assert.NotNull(response);
             Assert.NotNull(response.Items);
@@ -31,7 +31,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
 
             // Update index with new fields and add more documents
             var secondaryDocuments = GetSecondaryDocuments();
-            response = await provider.IndexAsync(_documentType, secondaryDocuments);
+            response = await provider.IndexAsync(DocumentType, secondaryDocuments);
 
             Assert.NotNull(response);
             Assert.NotNull(response.Items);
@@ -40,7 +40,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
 
 
             // Remove some documents
-            response = await provider.RemoveAsync(_documentType, new[] { new IndexDocument("Item-7"), new IndexDocument("Item-8") });
+            response = await provider.RemoveAsync(DocumentType, new[] { new IndexDocument("Item-7"), new IndexDocument("Item-8") });
 
             Assert.NotNull(response);
             Assert.NotNull(response.Items);
@@ -59,7 +59,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 3,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
             Assert.Equal(6, response.TotalCount);
@@ -75,7 +75,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             var document = response?.Documents?.FirstOrDefault();
             Assert.NotNull(document);
@@ -101,7 +101,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 1,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(1, response.DocumentsCount);
 
@@ -115,7 +115,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 1,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(1, response.DocumentsCount);
 
@@ -134,7 +134,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 1,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(1, response.DocumentsCount);
 
@@ -160,7 +160,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(6, response.DocumentsCount);
 
@@ -184,7 +184,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(3, response.DocumentsCount);
 
@@ -196,7 +196,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
         }
@@ -215,7 +215,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
 
@@ -239,7 +239,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
 
@@ -259,7 +259,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
 
@@ -279,7 +279,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(5, response.DocumentsCount);
 
@@ -299,7 +299,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(5, response.DocumentsCount);
 
@@ -319,7 +319,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
 
@@ -339,7 +339,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
         }
@@ -360,7 +360,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
 
@@ -375,7 +375,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(4, response.DocumentsCount);
         }
@@ -400,7 +400,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
 
@@ -421,7 +421,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
         }
@@ -432,35 +432,35 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             var provider = GetSearchProvider();
 
             var criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", "2017-04-23T15:24:31.180Z", "2017-04-28T15:24:31.180Z", true, true) };
-            var response = await provider.SearchAsync(_documentType, criteria);
+            var response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(6, response.TotalCount);
 
             criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", "2017-04-23T15:24:31.180Z", "2017-04-28T15:24:31.180Z", false, true) };
-            response = await provider.SearchAsync(_documentType, criteria);
+            response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(5, response.TotalCount);
 
             criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", "2017-04-23T15:24:31.180Z", "2017-04-28T15:24:31.180Z", true, false) };
-            response = await provider.SearchAsync(_documentType, criteria);
+            response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(5, response.TotalCount);
 
             criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", "2017-04-23T15:24:31.180Z", "2017-04-28T15:24:31.180Z", false, false) };
-            response = await provider.SearchAsync(_documentType, criteria);
+            response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(4, response.TotalCount);
 
             criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", null, "2017-04-28T15:24:31.180Z", true, true) };
-            response = await provider.SearchAsync(_documentType, criteria);
+            response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(6, response.TotalCount);
 
             criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", null, "2017-04-28T15:24:31.180Z", true, false) };
-            response = await provider.SearchAsync(_documentType, criteria);
+            response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(5, response.TotalCount);
 
             criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", "2017-04-23T15:24:31.180Z", null, true, false) };
-            response = await provider.SearchAsync(_documentType, criteria);
+            response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(6, response.TotalCount);
 
             criteria = new SearchRequest { Take = 0, Filter = CreateRangeFilter("Date", "2017-04-23T15:24:31.180Z", null, false, false) };
-            response = await provider.SearchAsync(_documentType, criteria);
+            response = await provider.SearchAsync(DocumentType, criteria);
             Assert.Equal(5, response.TotalCount);
         }
 
@@ -480,7 +480,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
         }
@@ -508,7 +508,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(4, response.DocumentsCount);
 
@@ -530,7 +530,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            response = await provider.SearchAsync(_documentType, request);
+            response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
         }
@@ -570,7 +570,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(4, response.DocumentsCount);
         }
@@ -608,7 +608,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(4, response.DocumentsCount);
         }
@@ -663,7 +663,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(4, response.DocumentsCount);
         }
@@ -682,7 +682,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 0,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -705,7 +705,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 0,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -730,7 +730,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 0,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -756,7 +756,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 0,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -793,7 +793,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 0,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -821,7 +821,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 0,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -858,7 +858,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 }
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             var size0To5Count = GetAggregationValueCount(response, "Size", "0_to_5");
             Assert.Equal(3, size0To5Count);
@@ -901,7 +901,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -935,7 +935,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 0,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(0, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
@@ -983,7 +983,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Take = 10,
             };
 
-            var response = await provider.SearchAsync(_documentType, request);
+            var response = await provider.SearchAsync(DocumentType, request);
 
             Assert.Equal(2, response.DocumentsCount);
             Assert.Equal(1, response.Aggregations?.Count);
