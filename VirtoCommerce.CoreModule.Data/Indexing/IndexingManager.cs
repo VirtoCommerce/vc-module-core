@@ -79,7 +79,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             var totalCount = batchOptions.TotalCount;
 
             while (processedCount < totalCount)
-            {               
+            {
                 var batchResult = await ProcessBatchAsync(batchOptions, cancellationToken);
 
                 processedCount += batchResult.ProcessedCount;
@@ -271,23 +271,27 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             var primaryDocuments = await primaryDocumentBuilder.GetDocumentsAsync(documentIds);
             var primaryDocumentIds = primaryDocuments.Select(d => d.Id).ToArray();
-            if (!secondaryDocumentBuilders.IsNullOrEmpty())
+
+            if (secondaryDocumentBuilders != null)
             {
                 var secondaryDocuments = await GetSecondaryDocumentsAsync(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
 
                 MergeDocuments(primaryDocuments, secondaryDocuments);
             }
-            //add system fields
-            foreach(var document in primaryDocuments)
+
+            // Add system fields
+            foreach (var document in primaryDocuments)
             {
                 document.Add(new IndexDocumentField(KnownDocumentFields.IndexationDate, DateTime.UtcNow) { IsRetrievable = true, IsFilterable = true });
             }
+
             return primaryDocuments;
         }
 
         protected virtual async Task<IList<IndexDocument>> GetSecondaryDocumentsAsync(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
+
             var tasks = secondaryDocumentBuilders.Select(p => p.GetDocumentsAsync(documentIds));
             var results = await Task.WhenAll(tasks);
 

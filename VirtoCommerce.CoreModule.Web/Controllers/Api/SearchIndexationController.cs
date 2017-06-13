@@ -34,7 +34,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             _userNameResolver = userNameResolver;
             _pushNotifier = pushNotifier;
         }
-        
+
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IndexInfo[]))]
@@ -63,10 +63,11 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                     Values = new[] { documentId },
                 },
             };
+
             var result = await _searchProvider.SearchAsync(documentType, request);
             return Ok(result.Documents);
         }
-              
+
         /// <summary>
         /// Rund indexation process for specified options
         /// </summary>
@@ -80,16 +81,17 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             var notification = new IndexProgressPushNotification(_userNameResolver.GetCurrentUserName())
             {
                 Title = "Indexation process",
-                Description = $"Starting indexation..."
+                Description = "Starting indexation..."
             };
+
             _pushNotifier.Upsert(notification);
-          
+
             BackgroundJob.Enqueue(() => BackgroundIndex(options, notification));
 
             return Ok(notification);
         }
 
-      
+
         [HttpGet]
         [Route("tasks/{taskId}/cancel")]
         public IHttpActionResult CancelIndexationProcess(string taskId)

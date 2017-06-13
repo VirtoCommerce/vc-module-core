@@ -51,7 +51,7 @@ namespace VirtoCommerce.CoreModule.Tests
             await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
 
             var expectedBatchesCount = GetExpectedBatchesCount(rebuild, documentSources, batchSize);
-            var expectedProgressItemsCount = 1 + (rebuild ? 1 : 0) + expectedBatchesCount * 2 + 1;
+            var expectedProgressItemsCount = 1 + (rebuild ? 1 : 0) + expectedBatchesCount + 1;
 
             Assert.Equal(expectedProgressItemsCount, progress.Count);
 
@@ -59,18 +59,18 @@ namespace VirtoCommerce.CoreModule.Tests
 
             if (rebuild)
             {
-                Assert.Equal("Deleting index", progress[i++].Description);
+                Assert.Equal($"{DocumentType}: deleting index", progress[i++].Description);
             }
 
-            Assert.Equal("Calculating total count", progress[i++].Description);
+            Assert.Equal($"{DocumentType}: calculating total count", progress[i++].Description);
 
             for (var batch = 0; batch < expectedBatchesCount; batch++)
             {
-                Assert.Equal("Processing", progress[i++].Description);
-                Assert.Equal("Processed", progress[i++].Description);
+                var progressItem = progress[i++];
+                Assert.Equal($"{DocumentType}: {progressItem.ProcessedCount} of {progressItem.TotalCount} have been indexed", progressItem.Description);
             }
 
-            Assert.Equal("Completed", progress[i].Description);
+            Assert.Equal($"{DocumentType}: indexation finished", progress[i].Description);
 
             ValidateErrors(progress, "bad1");
 
@@ -100,21 +100,21 @@ namespace VirtoCommerce.CoreModule.Tests
             await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
 
             var expectedBatchesCount = GetBatchesCount(options.DocumentIds.Count, batchSize);
-            var expectedProgressItemsCount = 1 + expectedBatchesCount * 2 + 1;
+            var expectedProgressItemsCount = 1 + expectedBatchesCount + 1;
 
             Assert.Equal(expectedProgressItemsCount, progress.Count);
 
             var i = 0;
 
-            Assert.Equal("Calculating total count", progress[i++].Description);
+            Assert.Equal($"{DocumentType}: calculating total count", progress[i++].Description);
 
             for (var batch = 0; batch < expectedBatchesCount; batch++)
             {
-                Assert.Equal("Processing", progress[i++].Description);
-                Assert.Equal("Processed", progress[i++].Description);
+                var progressItem = progress[i++];
+                Assert.Equal($"{DocumentType}: {progressItem.ProcessedCount} of {progressItem.TotalCount} have been indexed", progressItem.Description);
             }
 
-            Assert.Equal("Completed", progress[i].Description);
+            Assert.Equal($"{DocumentType}: indexation finished", progress[i].Description);
 
             ValidateErrors(progress, "bad1");
 

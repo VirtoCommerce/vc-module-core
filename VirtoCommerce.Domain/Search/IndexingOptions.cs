@@ -5,15 +5,11 @@ namespace VirtoCommerce.Domain.Search
 {
     public class IndexingOptions
     {
-        public IndexingOptions()
-        {
-            BatchSize = 50;
-        }
         public string DocumentType { get; set; }
         public IList<string> DocumentIds { get; set; }
         public bool DeleteExistingIndex { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int BatchSize { get; set; }
+        public int BatchSize { get; set; } = 50;
     }
 }
