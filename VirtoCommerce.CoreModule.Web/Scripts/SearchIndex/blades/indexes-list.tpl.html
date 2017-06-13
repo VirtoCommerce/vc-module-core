@@ -1,7 +1,7 @@
 ﻿<div class="blade-static __bottom" ng-if="pageSettings.itemsPerPageCount < pageSettings.totalItems" ng-include="'pagerTemplate.html'"></div>
 <div class="blade-content __medium-wide">
     <div class="blade-inner">
-        <div class="inner-block" ng-init="setGridOptions({
+        <div class="inner-block" ng-init="setGridOptions('virtoCommerce.coreModule.searchIndex.indexes-list.grid', {
             data: 'blade.currentEntities',
             useExternalSorting: true,
             rowTemplate: 'documentType-list.row.html',
@@ -17,7 +17,7 @@
                 name: 'documentType',
                 displayName: 'core.blades.document-type-list.labels.document-type'
             }, {
-                name: 'indexedDocsTotal',
+                name: 'indexedDocumentsCount',
                 displayName: 'core.blades.document-type-list.labels.indexed-docs-total'
             }, {
                 name: 'lastIndexationDate',

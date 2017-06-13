@@ -60,7 +60,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            progressCallback?.Invoke(new IndexingProgress("Deleting index", documentType));
+            progressCallback?.Invoke(new IndexingProgress($"{documentType}: deleting index", documentType));
             await _searchProvider.DeleteIndexAsync(documentType);
         }
 
@@ -72,25 +72,25 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             var documentType = options.DocumentType;
 
-            progressCallback?.Invoke(new IndexingProgress("Calculating total count", documentType));
+            progressCallback?.Invoke(new IndexingProgress($"{documentType}: calculating total count", documentType));
             var batchOptions = await GetBatchOptionsAsync(configuration, options);
 
             var processedCount = 0L;
             var totalCount = batchOptions.TotalCount;
 
             while (processedCount < totalCount)
-            {
-                progressCallback?.Invoke(new IndexingProgress("Processing", documentType, totalCount, processedCount));
+            {               
                 var batchResult = await ProcessBatchAsync(batchOptions, cancellationToken);
 
                 processedCount += batchResult.ProcessedCount;
                 batchOptions.Skip += batchOptions.BatchSize;
 
                 var errors = GetIndexingErrors(batchResult.IndexingResult);
-                progressCallback?.Invoke(new IndexingProgress("Processed", documentType, totalCount, processedCount, errors));
+
+                progressCallback?.Invoke(new IndexingProgress($"{documentType}: {processedCount} of {totalCount} have been indexed", documentType, totalCount, processedCount, errors));
             }
 
-            progressCallback?.Invoke(new IndexingProgress("Completed", documentType));
+            progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType));
         }
 
         protected virtual void ValidateConfiguration(IndexDocumentConfiguration configuration)
@@ -271,17 +271,23 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             var primaryDocuments = await primaryDocumentBuilder.GetDocumentsAsync(documentIds);
             var primaryDocumentIds = primaryDocuments.Select(d => d.Id).ToArray();
-            var secondaryDocuments = await GetSecondaryDocumentsAsync(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
+            if (!secondaryDocumentBuilders.IsNullOrEmpty())
+            {
+                var secondaryDocuments = await GetSecondaryDocumentsAsync(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
 
-            MergeDocuments(primaryDocuments, secondaryDocuments);
-
+                MergeDocuments(primaryDocuments, secondaryDocuments);
+            }
+            //add system fields
+            foreach(var document in primaryDocuments)
+            {
+                document.Add(new IndexDocumentField(KnownDocumentFields.IndexationDate, DateTime.UtcNow) { IsRetrievable = true, IsFilterable = true });
+            }
             return primaryDocuments;
         }
 
         protected virtual async Task<IList<IndexDocument>> GetSecondaryDocumentsAsync(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-
             var tasks = secondaryDocumentBuilders.Select(p => p.GetDocumentsAsync(documentIds));
             var results = await Task.WhenAll(tasks);
 
@@ -306,8 +312,6 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                         primaryDocument.Merge(secondaryDocument);
                     }
                 }
-
-                primaryDocument.Add(new IndexDocumentField(KnownDocumentFields.IndexationDate, DateTime.UtcNow) { IsRetrievable = true, IsFilterable = true });
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
 using VirtoCommerce.Platform.Core.PushNotifications;
 
 namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
@@ -13,6 +14,8 @@ namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
         {
             Errors = new List<string>();
         }
+
+        [JsonProperty("documentType")]
         public string DocumentType { get; set; }
         /// <summary>
         /// Gets or sets the job finish date and time.
@@ -20,6 +23,7 @@ namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
         /// <value>
         /// The finished.
         /// </value>
+        [JsonProperty("finished")]
         public DateTime? Finished { get; set; }
         /// <summary>
         /// Gets or sets the total count of objects to process.
@@ -27,6 +31,7 @@ namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
         /// <value>
         /// The total count.
         /// </value>
+        [JsonProperty("totalCount")]
         public long TotalCount { get; set; }
         /// <summary>
         /// Gets or sets the count of processed objects.
@@ -34,6 +39,7 @@ namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
         /// <value>
         /// The processed count.
         /// </value>
+        [JsonProperty("processedCount")]
         public long ProcessedCount { get; set; }
         /// <summary>
         /// Gets or sets the count of errors during processing.
@@ -41,6 +47,7 @@ namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
         /// <value>
         /// The error count.
         /// </value>
+        [JsonProperty("errorCount")]
         public long ErrorCount { get; set; }
         /// <summary>
         /// Gets or sets the errors that has occurred during processing.
@@ -48,6 +55,7 @@ namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
         /// <value>
         /// The errors.
         /// </value>
+        [JsonProperty("errors")]
         public ICollection<string> Errors { get; set; }
     }
 }

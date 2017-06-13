@@ -7,8 +7,8 @@
                 id: 'searchIndex',
                 title: 'core.blades.document-type-list.title',
                 headIcon: 'fa fa-search',
-                controller: 'virtoCommerce.coreModule.searchIndex.documentTypeListController',
-                template: 'Modules/$(VirtoCommerce.Core)/Scripts/SearchIndex/blades/documentType-list.tpl.html',
+                controller: 'virtoCommerce.coreModule.searchIndex.indexesListController',
+                template: 'Modules/$(VirtoCommerce.Core)/Scripts/SearchIndex/blades/indexes-list.tpl.html',
                 isClosingDisabled: true
             };
             bladeNavigationService.showBlade(blade);

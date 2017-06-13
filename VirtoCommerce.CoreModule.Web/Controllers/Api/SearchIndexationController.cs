@@ -34,8 +34,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             _userNameResolver = userNameResolver;
             _pushNotifier = pushNotifier;
         }
-
-
+        
         [HttpGet]
         [Route("")]
         [ResponseType(typeof(IndexInfo[]))]
@@ -67,68 +66,30 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             var result = await _searchProvider.SearchAsync(documentType, request);
             return Ok(result.Documents);
         }
-
+              
         /// <summary>
-        /// Index specified document or all documents specified type
+        /// Rund indexation process for specified options
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("index/{documentType}")]
+        [Route("index")]
         [ResponseType(typeof(IndexProgressPushNotification))]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<IHttpActionResult> IndexDocuments([FromBody] string[] documentsIds, string documentType)
+        public IHttpActionResult IndexDocuments([FromBody] IndexingOptions[] options)
         {
             var notification = new IndexProgressPushNotification(_userNameResolver.GetCurrentUserName())
             {
                 Title = "Indexation process",
-                Description = documentType != null ? $"Starting {documentType} indexation" : "Starting full indexation"
+                Description = $"Starting indexation..."
             };
             _pushNotifier.Upsert(notification);
-
-            var indexInfo = await GetIndexInfoAsync(documentType);
-
-            var indexingOptions = new IndexingOptions
-            {
-                BatchSize = 50,
-                DocumentIds = documentsIds,
-                DocumentType = documentType,
-                StartDate = indexInfo.LastIndexationDate
-            };
-
-            BackgroundJob.Enqueue(() => BackgroundIndex(indexingOptions, notification));
+          
+            BackgroundJob.Enqueue(() => BackgroundIndex(options, notification));
 
             return Ok(notification);
         }
 
-        /// <summary>
-        /// Reindex specified document or all documents specified type
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("reindex/{documentType?}")]
-        [ResponseType(typeof(IndexProgressPushNotification))]
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public IHttpActionResult ReindexDocuments([FromBody] string[] documentsIds, string documentType = null)
-        {
-            var notification = new IndexProgressPushNotification(_userNameResolver.GetCurrentUserName())
-            {
-                Title = "Reindexation process",
-                Description = documentType != null ? "Starting reindex for " + documentType : "Starting full index rebuild"
-            };
-            _pushNotifier.Upsert(notification);
-            var indexingOptions = new IndexingOptions
-            {
-                BatchSize = 50,
-                DocumentIds = documentsIds,
-                DocumentType = documentType,
-                DeleteExistingIndex = true
-            };
-
-            BackgroundJob.Enqueue(() => BackgroundIndex(indexingOptions, notification));
-
-            return Ok(notification);
-        }
-
+      
         [HttpGet]
         [Route("tasks/{taskId}/cancel")]
         public IHttpActionResult CancelIndexationProcess(string taskId)
@@ -146,13 +107,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
         [ApiExplorerSettings(IgnoreApi = true)]
         // Only public methods can be invoked in the background. (Hangfire)
-        public void BackgroundIndex(IndexingOptions options, IndexProgressPushNotification notification)
+        public void BackgroundIndex(IndexingOptions[] options, IndexProgressPushNotification notification)
         {
             Action<IndexingProgress> progressCallback = x =>
             {
                 notification.DocumentType = x.DocumentType;
                 notification.Description = x.Description;
-                notification.Errors = x.Errors;
+                notification.Errors = x.Errors ?? notification.Errors;
                 notification.ErrorCount = x.ErrorsCount;
                 notification.TotalCount = x.TotalCount ?? 0;
                 notification.ProcessedCount = x.ProcessedCount ?? 0;
@@ -169,7 +130,10 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             try
             {
                 var cancellationToken = cancellationTokenSource.Token;
-                _indexingManager.IndexAsync(options, progressCallback, cancellationToken).Wait(cancellationToken);
+                foreach (var option in options)
+                {
+                    _indexingManager.IndexAsync(option, progressCallback, cancellationToken).Wait(cancellationToken);
+                }
             }
             catch (OperationCanceledException)
             {
@@ -209,7 +173,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
                 if (searchResponse.Documents?.Any() == true)
                 {
-                    result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][KnownDocumentFields.IndexationDate]);
+                    result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][KnownDocumentFields.IndexationDate.ToLowerInvariant()]);
                 }
             }
             catch
