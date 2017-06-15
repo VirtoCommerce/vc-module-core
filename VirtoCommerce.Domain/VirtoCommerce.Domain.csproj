@@ -281,6 +281,7 @@
     <Compile Include="Search\IndexingResult.cs" />
     <Compile Include="Search\IndexingResultItem.cs" />
     <Compile Include="Search\ISearchConnection.cs" />
+    <Compile Include="Search\ISearchPhraseParser.cs" />
     <Compile Include="Search\ISearchProvider.cs" />
     <Compile Include="Search\ISearchRequestBuilder.cs" />
     <Compile Include="Search\KnownDocumentFields.cs" />
@@ -295,6 +296,7 @@
     <Compile Include="Search\SearchCriteria.cs" />
     <Compile Include="Search\SearchDocument.cs" />
     <Compile Include="Search\SearchException.cs" />
+    <Compile Include="Search\SearchPhraseParseResult.cs" />
     <Compile Include="Search\SearchRequest.cs" />
     <Compile Include="Search\SearchResponse.cs" />
     <Compile Include="Search\SortingField.cs" />

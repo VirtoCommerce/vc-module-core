@@ -7,6 +7,7 @@ using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.CoreModule.Data.Observers;
 using VirtoCommerce.CoreModule.Data.Payment;
 using VirtoCommerce.CoreModule.Data.Repositories;
+using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
 using VirtoCommerce.CoreModule.Data.Services;
 using VirtoCommerce.CoreModule.Data.Shipping;
 using VirtoCommerce.CoreModule.Data.Tax;
@@ -82,6 +83,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             #region Search
 
+            _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
             _container.RegisterType<IIndexingManager, IndexingManager>();
 
             string connectionString = null;
