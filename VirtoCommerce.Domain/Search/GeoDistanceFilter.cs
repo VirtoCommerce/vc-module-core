@@ -13,5 +13,10 @@
         /// Max distance in kilometers
         /// </summary>
         public double Distance { get; set; }
+
+        public override string ToString()
+        {
+            return $"DISTANCE({FieldName}, {Location}, {Distance})";
+        }
     }
 }

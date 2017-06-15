@@ -1,5 +1,8 @@
-﻿namespace VirtoCommerce.Domain.Search
+﻿using System.Diagnostics;
+
+namespace VirtoCommerce.Domain.Search
 {
+    [DebuggerDisplay("{FieldName} {IsDescending ? \"desc\" : \"asc\"}")]
     public class SortingField
     {
         public string FieldName { get; set; }

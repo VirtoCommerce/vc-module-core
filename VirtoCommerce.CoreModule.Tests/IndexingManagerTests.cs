@@ -51,7 +51,7 @@ namespace VirtoCommerce.CoreModule.Tests
             await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
 
             var expectedBatchesCount = GetExpectedBatchesCount(rebuild, documentSources, batchSize);
-            var expectedProgressItemsCount = 1 + (rebuild ? 1 : 0) + expectedBatchesCount + 1;
+            var expectedProgressItemsCount = (rebuild ? 1 : 0) + 1 + expectedBatchesCount + 1;
 
             Assert.Equal(expectedProgressItemsCount, progress.Count);
 

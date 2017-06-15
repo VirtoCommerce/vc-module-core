@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace VirtoCommerce.Domain.Search
 {
+    [DebuggerDisplay("{DocumentType}: {Description}")]
     public class IndexingProgress
     {
         public IndexingProgress(string description, string documentType, long? totalCount = null, long? processedCount = null, IList<string> errors = null)
