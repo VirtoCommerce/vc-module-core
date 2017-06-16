@@ -1,5 +1,8 @@
-﻿namespace VirtoCommerce.Domain.Search
+﻿using System.Diagnostics;
+
+namespace VirtoCommerce.Domain.Search
 {
+    [DebuggerDisplay("{Id} {Succeeded} {ErrorMessage}")]
     public class IndexingResultItem
     {
         /// <summary>

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Search
 {
+    [DebuggerDisplay("{Name}: {string.Join(\", \", Values)}")]
     public class IndexDocumentField
     {
         public IndexDocumentField(string name, object value)

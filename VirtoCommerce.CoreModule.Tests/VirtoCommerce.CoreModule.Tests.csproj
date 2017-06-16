@@ -87,6 +87,7 @@
     <Compile Include="IndexingManagerTests.cs" />
     <Compile Include="DocumentSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchPhraseParserTests.cs" />
     <Compile Include="SearchProvider.cs" />
   </ItemGroup>
   <ItemGroup>

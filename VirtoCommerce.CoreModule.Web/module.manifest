@@ -115,6 +115,48 @@
                 <description>Fixed tax rate</description>
             </setting>
         </group>
+        <group name="Search|General">
+            <setting>
+                <name>VirtoCommerce.Search.SearchConnectionString</name>
+                <valueType>string</valueType>
+                <defaultValue>provider=Lucene;server=~/App_Data/Lucene;scope=default</defaultValue>
+                <title>Search configuration string (requires restart)</title>
+                <description>
+                    <![CDATA[ 
+                    provider=AzureSearch;server=ServiceName;key=AccessKey;scope=default
+                    provider=Elasticsearch;server=localhost:9200;scope=default
+                    provider=Lucene;server=~/App_Data/Lucene;scope=default
+                    ]]>
+                </description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.Search.ScheduleJobs</name>
+                <valueType>boolean</valueType>
+                <defaultValue>true</defaultValue>
+                <title>Schedule jobs (requires restart)</title>
+                <description>Enable or disable periodic search index builders</description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.Search.ScheduleJobsCronExpression</name>
+                <valueType>string</valueType>
+                <defaultValue>0/5 * * * *</defaultValue>
+                <title>Index jobs cron expression (requires restart)</title>
+                <description>
+                    <![CDATA[ 
+                    x minutes use "0/x * * * *"
+                    x hourse use "0 */x * * *" you can set minutes also "15 */x * * *"
+                    x days "0 0 */x * *"   
+                    ]]>
+                </description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.SearchApi.IndexPartitionSize</name>
+                <valueType>integer</valueType>
+                <defaultValue>100</defaultValue>
+                <title>The maximum items count per indexing partition</title>
+                <description>High value may will cause slow performance on machines with poor hardware</description>
+            </setting>
+        </group>
     </settings>
 
     <permissions>
