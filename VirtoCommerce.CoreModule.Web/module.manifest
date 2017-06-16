@@ -172,6 +172,7 @@
             <permission id="core:fulfillment:create" name="Create fulfillment center"/>
             <permission id="core:fulfillment:update" name="Update fulfillment center"/>
             <permission id="core:fulfillment:delete" name="Delete fulfillment center"/>
+            <permission id="core:search:index:rebuild" name="Rebuild Index" description="Allows to delete search index and build it again."/>
         </group>
     </permissions>
 </module>

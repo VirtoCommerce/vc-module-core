@@ -19,7 +19,7 @@
                     var options = _.map($scope.gridApi.selection.getSelectedRows(), function (x) {
                         return {
                             documentType: x.documentType,
-                            startDate: x.lastIndexationDate,
+                            startDate: doReindex ? null : x.lastIndexationDate,
                             deleteExistingIndex: doReindex
                         };
 
@@ -58,7 +58,7 @@
             executeMethod: function () {
                 $scope.rebuildIndex($scope.gridApi.selection.getSelectedRows());
             },
-            permission: 'VirtoCommerce.Search:Index:Rebuild'
+            permission: 'core:search:index:rebuild'
         }];
 
         // ui-grid

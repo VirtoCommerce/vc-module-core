@@ -200,6 +200,10 @@
     <Content Include="Scripts\common\directives\info-button.js" />
     <Content Include="Scripts\common\dynamicExpression\expression-tree.tpl.html" />
     <Content Include="Scripts\common\dynamicExpression\expression-directives.js" />
+    <Content Include="Scripts\SearchIndex\blades\index-detail.js" />
+    <Content Include="Scripts\SearchIndex\blades\index-detail.tpl.html" />
+    <Content Include="Scripts\SearchIndex\widgets\index-widget.js" />
+    <Content Include="Scripts\SearchIndex\widgets\index-widget.tpl.html" />
     <Content Include="Scripts\Currency\blades\currency-detail.js" />
     <Content Include="Scripts\Currency\blades\currency-detail.tpl.html" />
     <Content Include="Scripts\Currency\blades\currency-list.js" />

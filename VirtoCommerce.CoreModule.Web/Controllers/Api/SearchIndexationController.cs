@@ -111,14 +111,19 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         // Only public methods can be invoked in the background. (Hangfire)
         public void BackgroundIndex(IndexingOptions[] options, IndexProgressPushNotification notification)
         {
+            var totalCountMap = new Dictionary<string, long>();
+            var processedCountMap = new Dictionary<string, long>();
+
             Action<IndexingProgress> progressCallback = x =>
-            {
+            {              
                 notification.DocumentType = x.DocumentType;
                 notification.Description = x.Description;
                 notification.Errors = x.Errors ?? notification.Errors;
                 notification.ErrorCount = x.ErrorsCount;
                 notification.TotalCount = x.TotalCount ?? 0;
                 notification.ProcessedCount = x.ProcessedCount ?? 0;
+                totalCountMap[x.DocumentType] = x.TotalCount ?? 0;
+                processedCountMap[x.DocumentType] = x.ProcessedCount ?? 0;
                 _pushNotifier.Upsert(notification);
             };
 
@@ -149,6 +154,8 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             finally
             {
                 notification.Finished = DateTime.UtcNow;
+                notification.TotalCount = totalCountMap.Values.Sum();
+                notification.ProcessedCount = processedCountMap.Values.Sum();
                 notification.Description = "Indexation finished" + (notification.Errors?.Any() == true ? " with errors" : " successfully");
                 _pushNotifier.Upsert(notification);
             }

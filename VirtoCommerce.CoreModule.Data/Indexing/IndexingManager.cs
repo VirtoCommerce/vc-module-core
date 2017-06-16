@@ -90,7 +90,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 progressCallback?.Invoke(new IndexingProgress($"{documentType}: {processedCount} of {totalCount} have been indexed", documentType, totalCount, processedCount, errors));
             }
 
-            progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType));
+            progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType, totalCount, processedCount));
         }
 
         protected virtual void ValidateConfiguration(IndexDocumentConfiguration configuration)
