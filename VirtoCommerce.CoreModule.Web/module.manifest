@@ -3,7 +3,6 @@
     <id>VirtoCommerce.Core</id>
     <version>2.23.0</version>
     <platformVersion>2.12.0</platformVersion>
-
     <title>Commerce core module</title>
     <description>Common e-commerce domain functionality</description>
     <authors>
@@ -28,7 +27,12 @@
     <scripts>
         <directory virtualPath="$/Scripts" searchPattern="*.js" searchSubdirectories="true" />
     </scripts>
-
+    
+    <incompatibilities>
+        <module id="VirtoCommerce.SearchApi" version="1.0.0" />
+        <module id="VirtoCommerce.Search" version="2.0.0" />
+    </incompatibilities>
+    
     <settings>
         <group name="Commerce|General">
             <setting>
