@@ -86,6 +86,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
             _container.RegisterType<ISearchCriteriaPreprocessor, PhraseSearchCriteriaPreprocessor>(nameof(PhraseSearchCriteriaPreprocessor));
+            _container.RegisterType<ISearchCriteriaPreprocessor, IdsSearchCriteriaPreprocessor>(nameof(IdsSearchCriteriaPreprocessor));
 
             _container.RegisterType<IIndexingManager, IndexingManager>();
 
