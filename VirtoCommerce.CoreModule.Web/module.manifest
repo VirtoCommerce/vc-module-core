@@ -130,17 +130,17 @@
                 </description>
             </setting>
             <setting>
-                <name>VirtoCommerce.Search.ScheduleJobs</name>
+                <name>VirtoCommerce.Search.IndexingJobs.Enable</name>
                 <valueType>boolean</valueType>
                 <defaultValue>true</defaultValue>
-                <title>Schedule jobs (requires restart)</title>
+                <title>Schedule indexing jobs (requires restart)</title>
                 <description>Enable or disable periodic search index builders</description>
             </setting>
             <setting>
-                <name>VirtoCommerce.Search.ScheduleJobsCronExpression</name>
+                <name>VirtoCommerce.Search.IndexingJobs.CronExpression</name>
                 <valueType>string</valueType>
                 <defaultValue>0/5 * * * *</defaultValue>
-                <title>Index jobs cron expression (requires restart)</title>
+                <title>Indexing jobs cron expression (requires restart)</title>
                 <description>
                     <![CDATA[ 
                     x minutes use "0/x * * * *"

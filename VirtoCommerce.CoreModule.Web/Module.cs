@@ -168,11 +168,11 @@ namespace VirtoCommerce.CoreModule.Web
             #region Search
 
             // Enable or disable periodic search index builders
-            var scheduleJobs = settingsManager.GetValue("VirtoCommerce.Search.ScheduleJobs", true);
+            var scheduleJobs = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.Enable", true);
             if (scheduleJobs)
             {
-                var cronExpression = settingsManager.GetValue("VirtoCommerce.Search.ScheduleJobsCronExpression", "0/5 * * * *");
-                RecurringJob.AddOrUpdate<IndexingJobs>("IndexingJobs", x => x.Process(null, null), cronExpression);
+                var cronExpression = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.CronExpression", "0/5 * * * *");
+                RecurringJob.AddOrUpdate<IndexingJobs>("IndexingJobs", x => x.ProcessChanges(null), cronExpression);
             }
 
             #endregion
