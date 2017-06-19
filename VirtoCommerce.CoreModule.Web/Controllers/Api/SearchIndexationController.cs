@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Hangfire;
-using VirtoCommerce.CoreModule.Web.Model;
 using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.PushNotifications;
@@ -20,15 +19,15 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         private static readonly object _lockObject = new object();
         private static readonly Dictionary<string, CancellationTokenSource> _runningProcesses = new Dictionary<string, CancellationTokenSource>();
 
-        private readonly IndexDocumentConfiguration[] _documentsConfigs;
+        private readonly IndexDocumentConfiguration[] _documentConfigs;
         private readonly ISearchProvider _searchProvider;
         private readonly IIndexingManager _indexingManager;
         private readonly IUserNameResolver _userNameResolver;
         private readonly IPushNotificationManager _pushNotifier;
 
-        public SearchIndexationController(IndexDocumentConfiguration[] documentsConfigs, ISearchProvider searchProvider, IIndexingManager indexingManager, IUserNameResolver userNameResolver, IPushNotificationManager pushNotifier)
+        public SearchIndexationController(IndexDocumentConfiguration[] documentConfigs, ISearchProvider searchProvider, IIndexingManager indexingManager, IUserNameResolver userNameResolver, IPushNotificationManager pushNotifier)
         {
-            _documentsConfigs = documentsConfigs;
+            _documentConfigs = documentConfigs;
             _searchProvider = searchProvider;
             _indexingManager = indexingManager;
             _userNameResolver = userNameResolver;
@@ -37,12 +36,11 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IndexInfo[]))]
+        [ResponseType(typeof(IndexState[]))]
         public async Task<IHttpActionResult> GetAllIndexes()
         {
-            var documentTypes = _documentsConfigs.Select(x => x.DocumentType).Distinct().ToList();
-            var tasks = documentTypes.Select(GetIndexInfoAsync);
-            var result = await Task.WhenAll(tasks);
+            var documentTypes = _documentConfigs.Select(c => c.DocumentType).Distinct().ToList();
+            var result = await Task.WhenAll(documentTypes.Select(_indexingManager.GetIndexStateAsync));
             return Ok(result);
         }
 
@@ -115,7 +113,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             var processedCountMap = new Dictionary<string, long>();
 
             Action<IndexingProgress> progressCallback = x =>
-            {              
+            {
                 notification.DocumentType = x.DocumentType;
                 notification.Description = x.Description;
                 notification.Errors = x.Errors ?? notification.Errors;
@@ -159,38 +157,6 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 notification.Description = "Indexation finished" + (notification.Errors?.Any() == true ? " with errors" : " successfully");
                 _pushNotifier.Upsert(notification);
             }
-        }
-
-        private async Task<IndexInfo> GetIndexInfoAsync(string documentType)
-        {
-            var result = new IndexInfo(documentType);
-
-            var searchRequest = new SearchRequest
-            {
-                Sorting = new[]
-                {
-                    new SortingField { FieldName = KnownDocumentFields.IndexationDate, IsDescending = true }
-                },
-                Take = 1,
-            };
-
-            try
-            {
-                var searchResponse = await _searchProvider.SearchAsync(documentType, searchRequest);
-
-                result.IndexedDocumentsCount = searchResponse.TotalCount;
-
-                if (searchResponse.Documents?.Any() == true)
-                {
-                    result.LastIndexationDate = Convert.ToDateTime(searchResponse.Documents[0][KnownDocumentFields.IndexationDate.ToLowerInvariant()]);
-                }
-            }
-            catch
-            {
-                // ignored
-            }
-
-            return result;
         }
     }
 }

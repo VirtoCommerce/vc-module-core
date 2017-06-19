@@ -2,6 +2,7 @@
 using System.Configuration;
 using System.Linq;
 using System.Web.Http;
+using Hangfire;
 using Microsoft.Practices.Unity;
 using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.CoreModule.Data.Observers;
@@ -12,6 +13,7 @@ using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
 using VirtoCommerce.CoreModule.Data.Services;
 using VirtoCommerce.CoreModule.Data.Shipping;
 using VirtoCommerce.CoreModule.Data.Tax;
+using VirtoCommerce.CoreModule.Web.BackgroundJobs;
 using VirtoCommerce.CoreModule.Web.ExportImport;
 using VirtoCommerce.CoreModule.Web.JsonConverters;
 using VirtoCommerce.Domain.Commerce.Model;
@@ -115,12 +117,13 @@ namespace VirtoCommerce.CoreModule.Web
 
         public override void PostInitialize()
         {
-            var settingManager = _container.Resolve<ISettingsManager>();
+            var settingsManager = _container.Resolve<ISettingsManager>();
             var commerceService = _container.Resolve<ICommerceService>();
             var shippingService = _container.Resolve<IShippingMethodsService>();
             var taxService = _container.Resolve<ITaxService>();
             var paymentService = _container.Resolve<IPaymentMethodsService>();
-            var moduleSettings = settingManager.GetModuleSettings("VirtoCommerce.Core");
+            var moduleSettings = settingsManager.GetModuleSettings("VirtoCommerce.Core");
+
             taxService.RegisterTaxProvider(() => new FixedTaxRateProvider(moduleSettings.First(x => x.Name == "VirtoCommerce.Core.FixedTaxRateProvider.Rate"))
             {
                 Name = "fixed tax rate",
@@ -161,6 +164,18 @@ namespace VirtoCommerce.CoreModule.Web
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
+
+            #region Search
+
+            // Enable or disable periodic search index builders
+            var scheduleJobs = settingsManager.GetValue("VirtoCommerce.Search.ScheduleJobs", true);
+            if (scheduleJobs)
+            {
+                var cronExpression = settingsManager.GetValue("VirtoCommerce.Search.ScheduleJobsCronExpression", "0/5 * * * *");
+                RecurringJob.AddOrUpdate<IndexingJobs>("IndexingJobs", x => x.Process(null, null), cronExpression);
+            }
+
+            #endregion
         }
 
         #endregion

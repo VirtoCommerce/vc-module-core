@@ -150,11 +150,11 @@
                 </description>
             </setting>
             <setting>
-                <name>VirtoCommerce.SearchApi.IndexPartitionSize</name>
+                <name>VirtoCommerce.Search.IndexPartitionSize</name>
                 <valueType>integer</valueType>
-                <defaultValue>100</defaultValue>
+                <defaultValue>50</defaultValue>
                 <title>The maximum items count per indexing partition</title>
-                <description>High value may will cause slow performance on machines with poor hardware</description>
+                <description>High value may will cause slow performance</description>
             </setting>
         </group>
     </settings>

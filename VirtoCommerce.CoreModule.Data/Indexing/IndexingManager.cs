@@ -24,6 +24,36 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             _configs = configs;
         }
 
+        public virtual async Task<IndexState> GetIndexStateAsync(string documentType)
+        {
+            var result = new IndexState { DocumentType = documentType };
+
+            var searchRequest = new SearchRequest
+            {
+                Sorting = new[] { new SortingField { FieldName = KnownDocumentFields.IndexationDate, IsDescending = true } },
+                Take = 1,
+            };
+
+            try
+            {
+                var searchResponse = await _searchProvider.SearchAsync(documentType, searchRequest);
+
+                result.IndexedDocumentsCount = searchResponse.TotalCount;
+
+                if (searchResponse.Documents?.Any() == true)
+                {
+                    var indexationDate = searchResponse.Documents[0].FirstOrDefault(kvp => kvp.Key.EqualsInvariant(KnownDocumentFields.IndexationDate));
+                    result.LastIndexationDate = Convert.ToDateTime(indexationDate.Value);
+                }
+            }
+            catch
+            {
+                // ignored
+            }
+
+            return result;
+        }
+
         public virtual async Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();

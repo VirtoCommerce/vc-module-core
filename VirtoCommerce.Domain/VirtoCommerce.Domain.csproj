@@ -280,6 +280,7 @@
     <Compile Include="Search\IndexingProgress.cs" />
     <Compile Include="Search\IndexingResult.cs" />
     <Compile Include="Search\IndexingResultItem.cs" />
+    <Compile Include="Search\IndexState.cs" />
     <Compile Include="Search\ISearchConnection.cs" />
     <Compile Include="Search\ISearchCriteriaPreprocessor.cs" />
     <Compile Include="Search\ISearchPhraseParser.cs" />
