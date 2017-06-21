@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Commerce.Model.Search
 {
     public abstract class SearchCriteriaBase
     {
-        public SearchCriteriaBase()
-        {
-            Take = 20;
-        }
-
         public string ResponseGroup { get; set; }
 
         /// <summary>
@@ -42,17 +33,10 @@ namespace VirtoCommerce.Domain.Commerce.Model.Search
         /// </summary>
         public string Sort { get; set; }
 
-        public SortInfo[] SortInfos
-        {
-            get
-            {
-                return SortInfo.Parse(Sort).ToArray();
-            }
-        }
+        public SortInfo[] SortInfos => SortInfo.Parse(Sort).ToArray();
 
 
         public int Skip { get; set; }
-        public int Take { get; set; }
-
+        public int Take { get; set; } = 20;
     }
 }

@@ -140,8 +140,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommerceRepositoryImpl.cs" />
     <Compile Include="Repositories\ICommerceRepository.cs" />
-    <Compile Include="Search\IdsSearchCriteriaPreprocessor.cs" />
-    <Compile Include="Search\PhraseSearchCriteriaPreprocessor.cs" />
     <Compile Include="Search\SearchPhraseParsing\Antlr\SearchPhraseBaseListener.cs" />
     <Compile Include="Search\SearchPhraseParsing\Antlr\SearchPhraseLexer.cs" />
     <Compile Include="Search\SearchPhraseParsing\Antlr\SearchPhraseListener.cs" />

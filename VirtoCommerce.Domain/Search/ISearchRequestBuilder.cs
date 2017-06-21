@@ -1,8 +1,10 @@
-﻿namespace VirtoCommerce.Domain.Search
+﻿using VirtoCommerce.Domain.Commerce.Model.Search;
+
+namespace VirtoCommerce.Domain.Search
 {
     public interface ISearchRequestBuilder
     {
         string DocumentType { get; }
-        SearchRequest BuildRequest(SearchCriteria criteria);
+        SearchRequest BuildRequest(SearchCriteriaBase criteria);
     }
 }

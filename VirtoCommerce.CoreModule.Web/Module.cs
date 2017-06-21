@@ -8,7 +8,6 @@ using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.CoreModule.Data.Observers;
 using VirtoCommerce.CoreModule.Data.Payment;
 using VirtoCommerce.CoreModule.Data.Repositories;
-using VirtoCommerce.CoreModule.Data.Search;
 using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
 using VirtoCommerce.CoreModule.Data.Services;
 using VirtoCommerce.CoreModule.Data.Shipping;
@@ -87,8 +86,6 @@ namespace VirtoCommerce.CoreModule.Web
             #region Search
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
-            _container.RegisterType<ISearchCriteriaPreprocessor, PhraseSearchCriteriaPreprocessor>(nameof(PhraseSearchCriteriaPreprocessor));
-            _container.RegisterType<ISearchCriteriaPreprocessor, IdsSearchCriteriaPreprocessor>(nameof(IdsSearchCriteriaPreprocessor));
 
             _container.RegisterType<IIndexingManager, IndexingManager>();
 
