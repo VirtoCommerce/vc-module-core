@@ -91,6 +91,9 @@
     <Compile Include="Catalog\Model\Search\AggregationItem.cs" />
     <Compile Include="Catalog\Model\PropertyDisplayName.cs" />
     <Compile Include="Catalog\Model\Search\AggregationLabel.cs" />
+    <Compile Include="Catalog\Model\Search\CatalogSearchCriteriaBase.cs" />
+    <Compile Include="Catalog\Model\Search\CategorySearchCriteria.cs" />
+    <Compile Include="Catalog\Model\Search\ProductSearchCriteria.cs" />
     <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
@@ -127,6 +130,7 @@
     <Compile Include="Commerce\Model\ITaxable.cs" />
     <Compile Include="Commerce\Model\PackageType.cs" />
     <Compile Include="Commerce\Model\Search\GenericSearchResult.cs" />
+    <Compile Include="Commerce\Model\Search\NumericRange.cs" />
     <Compile Include="Commerce\Model\Search\SearchCriteriaBase.cs" />
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />

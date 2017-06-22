@@ -11,10 +11,10 @@ namespace VirtoCommerce.Domain.Commerce.Model.Search
         /// <summary>
         /// Search object type (CustomerOrder, Subscription etc)
         /// </summary>
-        public string ObjectType { get; set; }
+        public virtual string ObjectType { get; set; }
 
         private string[] _objectTypes;
-        public string[] ObjectTypes
+        public virtual string[] ObjectTypes
         {
             get
             {
@@ -35,11 +35,17 @@ namespace VirtoCommerce.Domain.Commerce.Model.Search
         public string SearchPhrase { get; set; }
 
         /// <summary>
+        /// Search phrase language 
+        /// </summary>
+        public string LanguageCode { get; set; }
+
+
+        /// <summary>
         /// Sorting expression property1:asc;property2:desc
         /// </summary>
         public string Sort { get; set; }
 
-        public SortInfo[] SortInfos => SortInfo.Parse(Sort).ToArray();
+        public virtual SortInfo[] SortInfos => SortInfo.Parse(Sort).ToArray();
 
 
         public int Skip { get; set; }
