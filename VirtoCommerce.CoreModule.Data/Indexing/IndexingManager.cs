@@ -42,19 +42,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
                 if (searchResponse.Documents?.Any() == true)
                 {
-                    var indexationDate = searchResponse.Documents[0].Where(kvp => kvp.Key.EqualsInvariant(KnownDocumentFields.IndexationDate)).Select(x => x.Value).FirstOrDefault();
-                    if (indexationDate != null)
-                    {
-                        long ticks;
-                        if (Int64.TryParse(indexationDate.ToString(), out ticks))
-                        {
-                            result.LastIndexationDate = new DateTime(ticks);
-                        }
-                        else
-                        {
-                            result.LastIndexationDate = Convert.ToDateTime(indexationDate);
-                        }
-                    }
+                    var indexationDate = searchResponse.Documents[0].FirstOrDefault(kvp => kvp.Key.EqualsInvariant(KnownDocumentFields.IndexationDate));
+                    result.LastIndexationDate = Convert.ToDateTime(indexationDate.Value);
                 }
             }
             catch
