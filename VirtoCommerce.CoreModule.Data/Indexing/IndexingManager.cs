@@ -8,6 +8,9 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Data.Indexing
 {
+    /// <summary>
+    /// Implement the functionality of indexing
+    /// </summary>
     public class IndexingManager : IIndexingManager
     {
         private readonly ISearchProvider _searchProvider;
@@ -66,10 +69,15 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         }
 
         public virtual async Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
+        {      
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+            if (string.IsNullOrEmpty(options.DocumentType))
+                throw new ArgumentNullException($"{nameof(options)}.{nameof(options.DocumentType)}");
+            if (options.BatchSize < 1)
+                throw new ArgumentException(@"Batch size cannon be less than 1", $"{nameof(options)}.{nameof(options.BatchSize)}");
 
-            ValidateOptions(options);
+            cancellationToken.ThrowIfCancellationRequested();
 
             var documentType = options.DocumentType;
 
@@ -84,19 +92,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             {
                 await ProcessConfigurationAsync(config, options, progressCallback, cancellationToken);
             }
-        }
-
-
-        protected virtual void ValidateOptions(IndexingOptions options)
-        {
-            if (options == null)
-                throw new ArgumentNullException(nameof(options));
-            if (string.IsNullOrEmpty(options.DocumentType))
-                throw new ArgumentNullException($"{nameof(options)}.{nameof(options.DocumentType)}");
-            if (options.BatchSize < 1)
-                throw new ArgumentException(@"Batch size cannon be less than 1", $"{nameof(options)}.{nameof(options.BatchSize)}");
-        }
-
+        }        
+      
         protected virtual async Task DeleteIndexAsync(string documentType, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -107,9 +104,18 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
         protected virtual async Task ProcessConfigurationAsync(IndexDocumentConfiguration configuration, IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
-            cancellationToken.ThrowIfCancellationRequested();
+            if (configuration == null)
+                throw new ArgumentNullException(nameof(configuration));
+            if (string.IsNullOrEmpty(configuration.DocumentType))
+                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentType)}");
+            if (configuration.DocumentSource == null)
+                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}");
+            if (configuration.DocumentSource.ChangesProvider == null)
+                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}.{nameof(configuration.DocumentSource.ChangesProvider)}");
+            if (configuration.DocumentSource.DocumentBuilder == null)
+                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}.{nameof(configuration.DocumentSource.DocumentBuilder)}");
 
-            ValidateConfiguration(configuration);
+            cancellationToken.ThrowIfCancellationRequested();
 
             var documentType = options.DocumentType;
 
@@ -132,21 +138,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             }
 
             progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType, totalCount, processedCount));
-        }
-
-        protected virtual void ValidateConfiguration(IndexDocumentConfiguration configuration)
-        {
-            if (configuration == null)
-                throw new ArgumentNullException(nameof(configuration));
-            if (string.IsNullOrEmpty(configuration.DocumentType))
-                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentType)}");
-            if (configuration.DocumentSource == null)
-                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}");
-            if (configuration.DocumentSource.ChangesProvider == null)
-                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}.{nameof(configuration.DocumentSource.ChangesProvider)}");
-            if (configuration.DocumentSource.DocumentBuilder == null)
-                throw new ArgumentNullException($"{nameof(configuration)}.{nameof(configuration.DocumentSource)}.{nameof(configuration.DocumentSource.DocumentBuilder)}");
-        }
+        }       
 
         private async Task<BatchIndexingOptions> GetBatchOptionsAsync(IndexDocumentConfiguration configuration, IndexingOptions options)
         {

@@ -13,5 +13,7 @@
         public const string PackageTypeCreate = "core:packageType:create",
          PackageTypeUpdate = "core:packageType:update",
          PackageTypeDelete = "core:packageType:delete";
+
+        public const string IndexRebuild = "core:search:index:rebuild";
     }
 }

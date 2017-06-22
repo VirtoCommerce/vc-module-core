@@ -7,9 +7,11 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Hangfire;
 using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
+using VirtoCommerce.CoreModule.Web.Security;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Security;
+using VirtoCommerce.Platform.Core.Web.Security;
 
 namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 {
@@ -74,6 +76,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [Route("index")]
         [ResponseType(typeof(IndexProgressPushNotification))]
         [ApiExplorerSettings(IgnoreApi = true)]
+        [CheckPermission(Permission = CommercePredefinedPermissions.IndexRebuild)]
         public IHttpActionResult IndexDocuments([FromBody] IndexingOptions[] options)
         {
             var notification = new IndexProgressPushNotification(_userNameResolver.GetCurrentUserName())
