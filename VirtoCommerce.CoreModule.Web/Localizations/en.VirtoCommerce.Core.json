@@ -185,7 +185,7 @@
                 "title": "Document types",
                 "labels": {
                     "document-type": "Document type",
-                    "indexed-docs-total": "Indexed count",
+                    "indexed-docs-total": "Docs count",
                     "last-indexation-date": "Last indexed",
                     "build-index": "Build index",
                     "rebuild-index": "Rebuild index"
