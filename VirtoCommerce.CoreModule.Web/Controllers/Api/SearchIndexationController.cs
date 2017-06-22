@@ -16,6 +16,7 @@ using VirtoCommerce.Platform.Core.Web.Security;
 namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 {
     [RoutePrefix("api/search/indexes")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class SearchIndexationController : ApiController
     {
         private static readonly object _lockObject = new object();
@@ -53,7 +54,6 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpGet]
         [Route("index/{documentType}/{documentId}")]
         [ResponseType(typeof(IndexDocument[]))]
-        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<IHttpActionResult> GetDocumentIndexAsync(string documentType, string documentId)
         {
             var request = new SearchRequest
@@ -75,7 +75,6 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPost]
         [Route("index")]
         [ResponseType(typeof(IndexProgressPushNotification))]
-        [ApiExplorerSettings(IgnoreApi = true)]
         [CheckPermission(Permission = CommercePredefinedPermissions.IndexRebuild)]
         public IHttpActionResult IndexDocuments([FromBody] IndexingOptions[] options)
         {
@@ -108,7 +107,6 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             return Ok();
         }
 
-        [ApiExplorerSettings(IgnoreApi = true)]
         // Only public methods can be invoked in the background. (Hangfire)
         public void BackgroundIndex(IndexingOptions[] options, IndexProgressPushNotification notification)
         {
