@@ -151,10 +151,18 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             }
             finally
             {
+
                 notification.Finished = DateTime.UtcNow;
                 notification.TotalCount = totalCountMap.Values.Sum();
                 notification.ProcessedCount = processedCountMap.Values.Sum();
-                notification.Description = "Indexation finished" + (notification.Errors?.Any() == true ? " with errors" : " successfully");
+                if (cancellationTokenSource.IsCancellationRequested)
+                {
+                    notification.Description = "Indexation canceled";
+                }
+                else
+                {
+                    notification.Description = "Indexation " + (notification.Errors?.Any() == true ? " with errors" : " successfully");
+                }
                 _pushNotifier.Upsert(notification);
             }
         }

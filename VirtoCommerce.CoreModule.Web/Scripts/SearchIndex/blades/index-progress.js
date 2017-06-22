@@ -15,7 +15,7 @@
         name: 'platform.commands.cancel',
         icon: 'fa fa-times',
         canExecuteMethod: function() {
-            return true;
+            return blade.notification && !blade.notification.finished;
         },
         executeMethod: function() {
             searchIndexationApi.cancel({ taskId: blade.notification.id });
