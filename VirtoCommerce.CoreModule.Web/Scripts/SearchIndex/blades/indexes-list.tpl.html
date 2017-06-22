@@ -18,10 +18,12 @@
                 displayName: 'core.blades.document-type-list.labels.document-type'
             }, {
                 name: 'indexedDocumentsCount',
-                displayName: 'core.blades.document-type-list.labels.indexed-docs-total'
+                displayName: 'core.blades.document-type-list.labels.indexed-docs-total',
+                cellTemplate: 'default-count.cell.html'
             }, {
                 name: 'lastIndexationDate',
-                displayName: 'core.blades.document-type-list.labels.last-indexation-date'
+                displayName: 'core.blades.document-type-list.labels.last-indexation-date',
+                cellTemplate: 'default-date.cell.html'
             }]})">
             <div class="table-wrapper" ng-if="blade.currentEntities.length">
                 <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-save-state ui-grid-selection ui-grid-resize-columns ui-grid-move-columns ui-grid-pinning ui-grid-height></div>
@@ -47,9 +49,17 @@
          ui-grid-cell
          context-menu="grid.appScope.contextMenuEntity = row.entity"></div>
 </script>
-
 <script type="text/ng-template" id="list-actions.cell.html">
     <div class="ui-grid-actions" left-click-menu="grid.appScope.contextMenuEntity = row.entity" data-target="prl_menu">
         <i class="fa context-menu"></i>
     </div>
 </script>
+<script type="text/ng-template" id="default-count.cell.html">
+    <div ng-if="COL_FIELD" class="ui-grid-cell-contents">{{ COL_FIELD }}</div>
+    <div ng-if="!COL_FIELD" class="ui-grid-cell-contents">N/A</div>
+</script>
+<script type="text/ng-template" id="default-date.cell.html">
+    <div ng-if="COL_FIELD" class="ui-grid-cell-contents"><span class="table-date" am-time-ago="COL_FIELD"></span></div>
+    <div ng-if="!COL_FIELD" class="ui-grid-cell-contents">N/A</div>
+</script>
+

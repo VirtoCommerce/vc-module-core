@@ -13,7 +13,7 @@
 
     blade.toolbarCommands = [{
         name: 'platform.commands.cancel',
-        icon: 'fa fa-cancel',
+        icon: 'fa fa-times',
         canExecuteMethod: function() {
             return true;
         },
