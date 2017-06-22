@@ -19,7 +19,6 @@
                     var options = _.map($scope.gridApi.selection.getSelectedRows(), function (x) {
                         return {
                             documentType: x.documentType,
-                            startDate: doReindex ? null : x.lastIndexationDate,
                             deleteExistingIndex: doReindex
                         };
 
