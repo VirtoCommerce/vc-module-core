@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Web", "VirtoCommerce.CoreModule.Web\VirtoCommerce.CoreModule.Web.csproj", "{47D7C89C-62A8-44EC-B544-F24E874192AC}"
 EndProject
@@ -9,6 +9,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.Domain", "VirtoCommerce.Domain\VirtoCommerce.Domain.csproj", "{67C58A78-DDEA-4FA3-A969-1CAB582918E4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Tests", "VirtoCommerce.CoreModule.Tests\VirtoCommerce.CoreModule.Tests.csproj", "{521E57F8-E304-44A6-8EC3-CA41663AE65E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Search.Tests", "VirtoCommerce.CoreModule.Search.Tests\VirtoCommerce.CoreModule.Search.Tests.csproj", "{BB4BFCDA-7B4C-4CF9-AB8A-5E27F39FCCBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{521E57F8-E304-44A6-8EC3-CA41663AE65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{521E57F8-E304-44A6-8EC3-CA41663AE65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{521E57F8-E304-44A6-8EC3-CA41663AE65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB4BFCDA-7B4C-4CF9-AB8A-5E27F39FCCBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB4BFCDA-7B4C-4CF9-AB8A-5E27F39FCCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB4BFCDA-7B4C-4CF9-AB8A-5E27F39FCCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB4BFCDA-7B4C-4CF9-AB8A-5E27F39FCCBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

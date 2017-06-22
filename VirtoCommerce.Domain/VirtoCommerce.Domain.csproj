@@ -51,9 +51,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.12.6.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.12.6\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.8.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.9-rc1\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +91,9 @@
     <Compile Include="Catalog\Model\Search\AggregationItem.cs" />
     <Compile Include="Catalog\Model\PropertyDisplayName.cs" />
     <Compile Include="Catalog\Model\Search\AggregationLabel.cs" />
+    <Compile Include="Catalog\Model\Search\CatalogSearchCriteriaBase.cs" />
+    <Compile Include="Catalog\Model\Search\CategorySearchCriteria.cs" />
+    <Compile Include="Catalog\Model\Search\ProductSearchCriteria.cs" />
     <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Commerce\Model\ITaxable.cs" />
     <Compile Include="Commerce\Model\PackageType.cs" />
     <Compile Include="Commerce\Model\Search\GenericSearchResult.cs" />
+    <Compile Include="Commerce\Model\Search\NumericRange.cs" />
     <Compile Include="Commerce\Model\Search\SearchCriteriaBase.cs" />
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
@@ -258,6 +261,51 @@
     <Compile Include="Quote\Model\TierPrice.cs" />
     <Compile Include="Quote\Services\IQuoteRequestService.cs" />
     <Compile Include="Quote\Services\IQuoteTotalsCalculator.cs" />
+    <Compile Include="Search\AggregationRequest.cs" />
+    <Compile Include="Search\AggregationResponse.cs" />
+    <Compile Include="Search\AggregationResponseValue.cs" />
+    <Compile Include="Search\AndFilter.cs" />
+    <Compile Include="Search\FilterExtensions.cs" />
+    <Compile Include="Search\GeoDistanceFilter.cs" />
+    <Compile Include="Search\GeoDistanceSortingField.cs" />
+    <Compile Include="Search\GeoPoint.cs" />
+    <Compile Include="Search\IdsFilter.cs" />
+    <Compile Include="Search\IFilter.cs" />
+    <Compile Include="Search\IIndexDocumentBuilder.cs" />
+    <Compile Include="Search\IIndexDocumentChangesProvider.cs" />
+    <Compile Include="Search\IIndexingManager.cs" />
+    <Compile Include="Search\IndexDocument.cs" />
+    <Compile Include="Search\IndexDocumentChange.cs" />
+    <Compile Include="Search\IndexDocumentChangeType.cs" />
+    <Compile Include="Search\IndexDocumentConfiguration.cs" />
+    <Compile Include="Search\IndexDocumentField.cs" />
+    <Compile Include="Search\IndexDocumentSource.cs" />
+    <Compile Include="Search\IndexingOptions.cs" />
+    <Compile Include="Search\IndexingProgress.cs" />
+    <Compile Include="Search\IndexingResult.cs" />
+    <Compile Include="Search\IndexingResultItem.cs" />
+    <Compile Include="Search\IndexState.cs" />
+    <Compile Include="Search\ISearchConnection.cs" />
+    <Compile Include="Search\ISearchPhraseParser.cs" />
+    <Compile Include="Search\ISearchProvider.cs" />
+    <Compile Include="Search\ISearchRequestBuilder.cs" />
+    <Compile Include="Search\KnownDocumentFields.cs" />
+    <Compile Include="Search\KnownDocumentTypes.cs" />
+    <Compile Include="Search\NotFilter.cs" />
+    <Compile Include="Search\OrFilter.cs" />
+    <Compile Include="Search\RangeAggregationRequest.cs" />
+    <Compile Include="Search\RangeAggregationRequestValue.cs" />
+    <Compile Include="Search\RangeFilter.cs" />
+    <Compile Include="Search\RangeFilterValue.cs" />
+    <Compile Include="Search\SearchConnection.cs" />
+    <Compile Include="Search\SearchDocument.cs" />
+    <Compile Include="Search\SearchException.cs" />
+    <Compile Include="Search\SearchPhraseParseResult.cs" />
+    <Compile Include="Search\SearchRequest.cs" />
+    <Compile Include="Search\SearchResponse.cs" />
+    <Compile Include="Search\SortingField.cs" />
+    <Compile Include="Search\TermAggregationRequest.cs" />
+    <Compile Include="Search\TermFilter.cs" />
     <Compile Include="Shipping\Model\ShippingEvaluationContext.cs" />
     <Compile Include="Shipping\Model\ShippingMethod.cs" />
     <Compile Include="Shipping\Model\ShippingRate.cs" />
@@ -282,7 +330,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="VirtoCommerce.Domain.nuspec" />
+    <None Include="VirtoCommerce.Domain.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

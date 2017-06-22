@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Commerce.Model.Search
 {
     public abstract class SearchCriteriaBase
     {
-        public SearchCriteriaBase()
-        {
-            Take = 20;
-        }
-
         public string ResponseGroup { get; set; }
 
         /// <summary>
         /// Search object type (CustomerOrder, Subscription etc)
         /// </summary>
-        public string ObjectType { get; set; }
+        public virtual string ObjectType { get; set; }
 
         private string[] _objectTypes;
-        public string[] ObjectTypes
+        public virtual string[] ObjectTypes
         {
             get
             {
@@ -37,22 +29,26 @@ namespace VirtoCommerce.Domain.Commerce.Model.Search
                 _objectTypes = value;
             }
         }
+
+        public IList<string> ObjectIds { get; set; }
+
+        public string SearchPhrase { get; set; }
+
+        /// <summary>
+        /// Search phrase language 
+        /// </summary>
+        public string LanguageCode { get; set; }
+
+
         /// <summary>
         /// Sorting expression property1:asc;property2:desc
         /// </summary>
         public string Sort { get; set; }
 
-        public SortInfo[] SortInfos
-        {
-            get
-            {
-                return SortInfo.Parse(Sort).ToArray();
-            }
-        }
+        public virtual SortInfo[] SortInfos => SortInfo.Parse(Sort).ToArray();
 
 
         public int Skip { get; set; }
-        public int Take { get; set; }
-
+        public int Take { get; set; } = 20;
     }
 }

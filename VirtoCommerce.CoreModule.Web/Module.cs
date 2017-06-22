@@ -1,26 +1,32 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
+using System.Web.Http;
+using Hangfire;
 using Microsoft.Practices.Unity;
+using VirtoCommerce.CoreModule.Data.Indexing;
+using VirtoCommerce.CoreModule.Data.Observers;
+using VirtoCommerce.CoreModule.Data.Payment;
 using VirtoCommerce.CoreModule.Data.Repositories;
+using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
+using VirtoCommerce.CoreModule.Data.Services;
 using VirtoCommerce.CoreModule.Data.Shipping;
+using VirtoCommerce.CoreModule.Data.Tax;
+using VirtoCommerce.CoreModule.Web.BackgroundJobs;
 using VirtoCommerce.CoreModule.Web.ExportImport;
+using VirtoCommerce.CoreModule.Web.JsonConverters;
+using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Commerce.Services;
+using VirtoCommerce.Domain.Customer.Events;
 using VirtoCommerce.Domain.Payment.Services;
+using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Domain.Shipping.Services;
+using VirtoCommerce.Domain.Tax.Services;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.Infrastructure;
 using VirtoCommerce.Platform.Data.Infrastructure.Interceptors;
-using VirtoCommerce.CoreModule.Data.Payment;
-using VirtoCommerce.CoreModule.Data.Services;
-using VirtoCommerce.Domain.Tax.Services;
-using VirtoCommerce.CoreModule.Data.Tax;
-using VirtoCommerce.Domain.Commerce.Model;
-using VirtoCommerce.CoreModule.Data.Observers;
-using VirtoCommerce.Domain.Customer.Events;
-using System.Web.Http;
-using VirtoCommerce.CoreModule.Web.JsonConverters;
 
 namespace VirtoCommerce.CoreModule.Web
 {
@@ -40,7 +46,7 @@ namespace VirtoCommerce.CoreModule.Web
         {
             using (var db = new CommerceRepositoryImpl(_connectionStringName, _container.Resolve<AuditableInterceptor>()))
             {
-                var initializer = new SetupDatabaseInitializer<CommerceRepositoryImpl, VirtoCommerce.CoreModule.Data.Migrations.Configuration>();
+                var initializer = new SetupDatabaseInitializer<CommerceRepositoryImpl, Data.Migrations.Configuration>();
                 initializer.InitializeDatabase(db);
             }
         }
@@ -56,7 +62,7 @@ namespace VirtoCommerce.CoreModule.Web
             #region Commerce
 
             _container.RegisterType<IСommerceRepository>(new InjectionFactory(c => new CommerceRepositoryImpl(_connectionStringName, new EntityPrimaryKeyGeneratorInterceptor(), _container.Resolve<AuditableInterceptor>())));
-            _container.RegisterType<ICommerceService, CommerceServiceImpl>();         
+            _container.RegisterType<ICommerceService, CommerceServiceImpl>();
 
             #endregion
 
@@ -77,16 +83,44 @@ namespace VirtoCommerce.CoreModule.Web
             //Registration welcome email notification.
             _container.RegisterType<IObserver<MemberChangingEvent>, RegistrationEmailObserver>("RegistrationEmailObserver");
 
+            #region Search
+
+            _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
+
+            _container.RegisterType<IIndexingManager, IndexingManager>();
+
+            string connectionString = null;
+
+            var configConnectionString = ConfigurationManager.ConnectionStrings["SearchConnectionString"];
+            if (configConnectionString != null)
+            {
+                connectionString = configConnectionString.ConnectionString;
+            }
+
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                var settingsManager = _container.Resolve<ISettingsManager>();
+                connectionString = settingsManager.GetValue("VirtoCommerce.Search.SearchConnectionString", string.Empty);
+            }
+
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                var searchConnection = new SearchConnection(connectionString);
+                _container.RegisterInstance<ISearchConnection>(searchConnection);
+            }
+
+            #endregion
         }
 
         public override void PostInitialize()
         {
-            var settingManager = _container.Resolve<ISettingsManager>();
+            var settingsManager = _container.Resolve<ISettingsManager>();
             var commerceService = _container.Resolve<ICommerceService>();
             var shippingService = _container.Resolve<IShippingMethodsService>();
             var taxService = _container.Resolve<ITaxService>();
             var paymentService = _container.Resolve<IPaymentMethodsService>();
-            var moduleSettings = settingManager.GetModuleSettings("VirtoCommerce.Core");
+            var moduleSettings = settingsManager.GetModuleSettings("VirtoCommerce.Core");
+
             taxService.RegisterTaxProvider(() => new FixedTaxRateProvider(moduleSettings.First(x => x.Name == "VirtoCommerce.Core.FixedTaxRateProvider.Rate"))
             {
                 Name = "fixed tax rate",
@@ -102,7 +136,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             });
 
-            paymentService.RegisterPaymentMethod(() => new DefaultManualPaymentMethod()
+            paymentService.RegisterPaymentMethod(() => new DefaultManualPaymentMethod
             {
                 IsActive = true,
                 Name = "Manual test payment method",
@@ -127,6 +161,18 @@ namespace VirtoCommerce.CoreModule.Web
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
+
+            #region Search
+
+            // Enable or disable periodic search index builders
+            var scheduleJobs = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.Enable", true);
+            if (scheduleJobs)
+            {
+                var cronExpression = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.CronExpression", "0/5 * * * *");
+                RecurringJob.AddOrUpdate<IndexingJobs>("IndexingJobs", x => x.ProcessChanges(null), cronExpression);
+            }
+
+            #endregion
         }
 
         #endregion
@@ -150,7 +196,7 @@ namespace VirtoCommerce.CoreModule.Web
             get
             {
                 var settingManager = _container.Resolve<ISettingsManager>();
-                return settingManager.GetValue("VirtoCommerce.Core.ExportImport.Description", String.Empty);
+                return settingManager.GetValue("VirtoCommerce.Core.ExportImport.Description", string.Empty);
             }
         }
 

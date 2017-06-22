@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <module>
     <id>VirtoCommerce.Core</id>
-    <version>2.22.2</version>
-    <platformVersion>2.12.0</platformVersion>
-
+    <version>2.23.0</version>
+    <platformVersion>2.13.0</platformVersion>
     <title>Commerce core module</title>
     <description>Common e-commerce domain functionality</description>
     <authors>
         <author>Virto Commerce</author>
+        <author>Artem Dudarev</author>
     </authors>
     <owners>
         <owner>Virto Commerce</owner>
@@ -15,7 +15,7 @@
     <projectUrl>https://virtocommerce.com/apps/extensions/virto-core-module</projectUrl>
     <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
     <releaseNotes>First version.</releaseNotes>
-    <copyright>Copyright © 2011-2016 Virto Commerce. All rights reserved</copyright>
+    <copyright>Copyright © 2011-2017 Virto Commerce. All rights reserved</copyright>
     <tags>security core</tags>
 
     <assemblyFile>VirtoCommerce.CoreModule.Web.dll</assemblyFile>
@@ -27,7 +27,12 @@
     <scripts>
         <directory virtualPath="$/Scripts" searchPattern="*.js" searchSubdirectories="true" />
     </scripts>
-
+    
+    <incompatibilities>
+        <module id="VirtoCommerce.SearchApi" version="1.0.0" />
+        <module id="VirtoCommerce.Search" version="2.0.0" />
+    </incompatibilities>
+    
     <settings>
         <group name="Commerce|General">
             <setting>
@@ -110,6 +115,48 @@
                 <description>Fixed tax rate</description>
             </setting>
         </group>
+        <group name="Search|General">
+            <setting>
+                <name>VirtoCommerce.Search.SearchConnectionString</name>
+                <valueType>string</valueType>
+                <defaultValue>provider=Lucene;server=~/App_Data/Lucene;scope=default</defaultValue>
+                <title>Search configuration string (requires restart)</title>
+                <description>
+                    <![CDATA[ 
+                    provider=AzureSearch;server=ServiceName;key=AccessKey;scope=default
+                    provider=Elasticsearch;server=localhost:9200;scope=default
+                    provider=Lucene;server=~/App_Data/Lucene;scope=default
+                    ]]>
+                </description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.Search.IndexingJobs.Enable</name>
+                <valueType>boolean</valueType>
+                <defaultValue>true</defaultValue>
+                <title>Schedule indexing jobs (requires restart)</title>
+                <description>Enable or disable periodic search index builders</description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.Search.IndexingJobs.CronExpression</name>
+                <valueType>string</valueType>
+                <defaultValue>0/5 * * * *</defaultValue>
+                <title>Indexing jobs cron expression (requires restart)</title>
+                <description>
+                    <![CDATA[ 
+                    x minutes use "0/x * * * *"
+                    x hourse use "0 */x * * *" you can set minutes also "15 */x * * *"
+                    x days "0 0 */x * *"   
+                    ]]>
+                </description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.Search.IndexPartitionSize</name>
+                <valueType>integer</valueType>
+                <defaultValue>50</defaultValue>
+                <title>The maximum items count per indexing partition</title>
+                <description>High value may will cause slow performance</description>
+            </setting>
+        </group>
     </settings>
 
     <permissions>
@@ -125,6 +172,7 @@
             <permission id="core:fulfillment:create" name="Create fulfillment center"/>
             <permission id="core:fulfillment:update" name="Update fulfillment center"/>
             <permission id="core:fulfillment:delete" name="Delete fulfillment center"/>
+            <permission id="core:search:index:rebuild" name="Rebuild Index" description="Allows to delete search index and build it again."/>
         </group>
     </permissions>
 </module>
