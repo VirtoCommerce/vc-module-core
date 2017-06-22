@@ -9,6 +9,7 @@ using Hangfire;
 using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
 using VirtoCommerce.CoreModule.Web.Security;
 using VirtoCommerce.Domain.Search;
+using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.PushNotifications;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Web.Security;
@@ -112,13 +113,15 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         {
             var totalCountMap = new Dictionary<string, long>();
             var processedCountMap = new Dictionary<string, long>();
-
             Action<IndexingProgress> progressCallback = x =>
             {
                 notification.DocumentType = x.DocumentType;
                 notification.Description = x.Description;
-                notification.Errors = x.Errors ?? notification.Errors;
-                notification.ErrorCount = x.ErrorsCount;
+                if (!x.Errors.IsNullOrEmpty())
+                {
+                    notification.Errors.AddRange(x.Errors);
+                    notification.ErrorCount = notification.Errors.Count();
+                }              
                 notification.TotalCount = x.TotalCount ?? 0;
                 notification.ProcessedCount = x.ProcessedCount ?? 0;
                 totalCountMap[x.DocumentType] = x.TotalCount ?? 0;
