@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Commerce.Model.Search
@@ -28,6 +29,11 @@ namespace VirtoCommerce.Domain.Commerce.Model.Search
                 _objectTypes = value;
             }
         }
+
+        public IList<string> ObjectIds { get; set; }
+
+        public string SearchPhrase { get; set; }
+
         /// <summary>
         /// Sorting expression property1:asc;property2:desc
         /// </summary>
