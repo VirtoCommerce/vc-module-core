@@ -2,7 +2,7 @@
 <module>
     <id>VirtoCommerce.Core</id>
     <version>2.23.0</version>
-    <platformVersion>2.13.0</platformVersion>
+    <platformVersion>2.13.9</platformVersion>
     <title>Commerce core module</title>
     <description>Common e-commerce domain functionality</description>
     <authors>
