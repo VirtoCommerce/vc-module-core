@@ -58,7 +58,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         }
 
         public virtual async Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
-        {      
+        {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
             if (string.IsNullOrEmpty(options.DocumentType))
@@ -81,8 +81,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             {
                 await ProcessConfigurationAsync(config, options, progressCallback, cancellationToken);
             }
-        }        
-      
+        }
+
         protected virtual async Task DeleteIndexAsync(string documentType, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -118,6 +118,12 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             {
                 var batchResult = await ProcessBatchAsync(batchOptions, cancellationToken);
 
+                // Avoid infinite loop
+                if (batchResult.ProcessedCount < 1)
+                {
+                    break;
+                }
+
                 processedCount += batchResult.ProcessedCount;
                 batchOptions.Skip += batchOptions.BatchSize;
 
@@ -127,7 +133,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             }
 
             progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType, totalCount, processedCount));
-        }       
+        }
 
         private async Task<BatchIndexingOptions> GetBatchOptionsAsync(IndexDocumentConfiguration configuration, IndexingOptions options)
         {
