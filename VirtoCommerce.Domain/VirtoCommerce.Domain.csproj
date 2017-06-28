@@ -274,6 +274,7 @@
     <Compile Include="Search\IFilter.cs" />
     <Compile Include="Search\IIndexDocumentBuilder.cs" />
     <Compile Include="Search\IIndexDocumentChangesProvider.cs" />
+    <Compile Include="Search\IIndexedSearchService.cs" />
     <Compile Include="Search\IIndexingManager.cs" />
     <Compile Include="Search\IndexDocument.cs" />
     <Compile Include="Search\IndexDocumentChange.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Search\IndexDocumentConfiguration.cs" />
     <Compile Include="Search\IndexDocumentField.cs" />
     <Compile Include="Search\IndexDocumentSource.cs" />
+    <Compile Include="Search\IndexedSearchServiceBase.cs" />
     <Compile Include="Search\IndexingOptions.cs" />
     <Compile Include="Search\IndexingProgress.cs" />
     <Compile Include="Search\IndexingResult.cs" />
