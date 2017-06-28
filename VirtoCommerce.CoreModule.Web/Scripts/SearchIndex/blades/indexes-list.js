@@ -16,12 +16,11 @@
             var dialog = {
                 id: "confirmRebuildIndex",
                 callback: function (doReindex) {
-                    var options = _.map($scope.gridApi.selection.getSelectedRows(), function (x) {
+                    var options = _.map(documentTypes, function (x) {
                         return {
                             documentType: x.documentType,
                             deleteExistingIndex: doReindex
                         };
-
                     });
                     searchIndexationApi.index(options, function openProgressBlade(data) {
                         // show indexing progress

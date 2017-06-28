@@ -186,6 +186,8 @@
                 "labels": {
                     "document-type": "Document type",
                     "indexed-docs-total": "Docs count",
+                    "provider": "Provider",
+                    "scope": "Scope",
                     "last-indexation-date": "Last indexed",
                     "build-index": "Build index",
                     "rebuild-index": "Rebuild index"
