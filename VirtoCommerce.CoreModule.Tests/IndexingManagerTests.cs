@@ -245,7 +245,7 @@ namespace VirtoCommerce.CoreModule.Tests
                 RelatedSources = documentSources?.Skip(1).Select(CreateIndexDocumentSource).ToArray(),
             };
 
-            return new IndexingManager(searchProvider, new[] { configuration });
+            return new IndexingManager(searchProvider, new[] { configuration }, new Moq.Mock<ISearchConnection>().Object);
         }
 
         private static IndexDocumentSource CreateIndexDocumentSource(DocumentSource documentSource)
