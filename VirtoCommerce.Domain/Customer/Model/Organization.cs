@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using VirtoCommerce.Domain.Commerce.Model;
-using VirtoCommerce.Platform.Core.Common;
-using VirtoCommerce.Platform.Core.DynamicProperties;
-
-namespace VirtoCommerce.Domain.Customer.Model
+﻿namespace VirtoCommerce.Domain.Customer.Model
 {
     public class Organization : Member
     {

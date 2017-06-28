@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
 
 namespace VirtoCommerce.Domain.Customer.Model
@@ -13,22 +9,27 @@ namespace VirtoCommerce.Domain.Customer.Model
         /// Vendor description
         /// </summary>
         public string Description { get; set; }
+
         /// <summary>
         /// Vendor site url
         /// </summary>
         public string SiteUrl { get; set; }
+
         /// <summary>
         /// Vendor logo url
         /// </summary>
         public string LogoUrl { get; set; }
+
         /// <summary>
         /// Vendor group
         /// </summary>
         public string GroupName { get; set; }
 
         #region ISeoSupport Members
-        public string SeoObjectType { get { return GetType().Name; } }
+
+        public string SeoObjectType => GetType().Name;
         public ICollection<SeoInfo> SeoInfos { get; set; }
+
         #endregion
     }
 }
