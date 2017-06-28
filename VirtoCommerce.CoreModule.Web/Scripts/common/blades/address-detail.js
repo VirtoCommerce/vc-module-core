@@ -83,7 +83,7 @@
 
     $scope.$watch('blade.currentEntity.countryCode', function (countryCode) {
         var country;
-        if (countryCode && (country = _.findWhere($scope.countries, { code: countryCode }))) {
+        if (countryCode && (country = _.findWhere($scope.countries, { id: countryCode }))) {
             blade.currentEntity.countryName = country.name;
         }
     });

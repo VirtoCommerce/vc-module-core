@@ -16,7 +16,7 @@
        icon: 'fa fa-recycle',
        index: 2,
        executeMethod: function (blade) {
-           searchIndexationApi.index([{ documentType: blade.documentType, documentIds: [blade.currentEntityId], deleteExistingIndex: true }], function openProgressBlade(data) {
+           searchIndexationApi.index([{ documentType: blade.documentType, documentIds: [blade.currentEntityId]}], function openProgressBlade(data) {
                // show indexing progress
                var newBlade = {
                    id: 'indexProgress',

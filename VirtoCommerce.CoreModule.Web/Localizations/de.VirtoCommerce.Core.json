@@ -175,6 +175,18 @@
                     "height": "Höhe",
                     "length": "Länge"
                 }
+            },
+            "document-type-list": {
+                "title": "Dokumenttypen",
+                "labels": {
+                    "document-type": "Dokumenttypen",
+                    "indexed-docs-total": "Dokumentenzähler",
+                    "provider": "Provider",
+                    "scope": "Scope",
+                    "last-indexation-date": "Zuletzt indiziert",
+                    "build-index": "Build index",
+                    "rebuild-index": "Rebuild index"
+                }
             }
         },
         "dialogs": {

@@ -15,21 +15,22 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
     {
         private readonly ISearchProvider _searchProvider;
         private readonly IndexDocumentConfiguration[] _configs;
-
-        public IndexingManager(ISearchProvider searchProvider, IndexDocumentConfiguration[] configs)
+        private readonly ISearchConnection _connection;
+        public IndexingManager(ISearchProvider searchProvider, IndexDocumentConfiguration[] configs, ISearchConnection connection)
         {
             if (searchProvider == null)
                 throw new ArgumentNullException(nameof(searchProvider));
             if (configs == null)
                 throw new ArgumentNullException(nameof(configs));
 
+            _connection = connection;
             _searchProvider = searchProvider;
             _configs = configs;
         }
 
         public virtual async Task<IndexState> GetIndexStateAsync(string documentType)
         {
-            var result = new IndexState { DocumentType = documentType };
+            var result = new IndexState { DocumentType = documentType, Provider = _connection.Provider, Scope = _connection.Scope };
 
             var searchRequest = new SearchRequest
             {
