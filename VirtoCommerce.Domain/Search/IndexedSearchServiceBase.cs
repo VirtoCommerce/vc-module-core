@@ -22,19 +22,12 @@ namespace VirtoCommerce.Domain.Search
 
         public virtual async Task<GenericSearchResult<TItem>> SearchAsync(TCriteria criteria)
         {
-            var result = AbstractTypeFactory<GenericSearchResult<TItem>>.TryCreateInstance();
-
             var requestBuilder = GetRequestBuilder(criteria);
             var request = requestBuilder?.BuildRequest(criteria);
 
             var response = await SearchProvider.SearchAsync(criteria.ObjectType, request);
 
-            if (response != null)
-            {
-                result.TotalCount = (int)response.TotalCount;
-                result.Results = ConvertDocuments(response.Documents, criteria);
-            }
-
+            var result = ConvertResponse(response, criteria);
             return result;
         }
 
@@ -47,6 +40,19 @@ namespace VirtoCommerce.Domain.Search
                 throw new InvalidOperationException($"No query builders found for document type '{criteria.ObjectType}'");
 
             return requestBuilder;
+        }
+
+        protected virtual GenericSearchResult<TItem> ConvertResponse(SearchResponse response, TCriteria criteria)
+        {
+            var result = AbstractTypeFactory<GenericSearchResult<TItem>>.TryCreateInstance();
+
+            if (response != null)
+            {
+                result.TotalCount = (int)response.TotalCount;
+                result.Results = ConvertDocuments(response.Documents, criteria);
+            }
+
+            return result;
         }
 
         protected virtual ICollection<TItem> ConvertDocuments(IList<SearchDocument> documents, TCriteria criteria)
