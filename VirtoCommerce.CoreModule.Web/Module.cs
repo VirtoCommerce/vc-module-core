@@ -86,22 +86,12 @@ namespace VirtoCommerce.CoreModule.Web
             #region Search
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
-
             _container.RegisterType<IIndexingManager, IndexingManager>();
 
-            string connectionString = null;
-
-            var configConnectionString = ConfigurationManager.ConnectionStrings["SearchConnectionString"];
-            if (configConnectionString != null)
-            {
-                connectionString = configConnectionString.ConnectionString;
-            }
-
-            if (string.IsNullOrEmpty(connectionString))
-            {
-                var settingsManager = _container.Resolve<ISettingsManager>();
-                connectionString = settingsManager.GetValue("VirtoCommerce.Search.SearchConnectionString", string.Empty);
-            }
+            string connectionString = ConfigurationManager.ConnectionStrings["SearchConnectionString"]?.ConnectionString;
+            
+            var settingsManager = _container.Resolve<ISettingsManager>();
+            connectionString = settingsManager.GetValue("VirtoCommerce.Search.SearchConnectionString", connectionString);
 
             if (!string.IsNullOrEmpty(connectionString))
             {
