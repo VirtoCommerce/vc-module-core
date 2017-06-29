@@ -151,7 +151,6 @@
     <Compile Include="Customer\Model\Note.cs" />
     <Compile Include="Customer\Model\Organization.cs" />
     <Compile Include="Customer\Model\PropertyValueType.cs" />
-    <Compile Include="Customer\Model\Search\MemberSearchCriteria.cs" />
     <Compile Include="Customer\Model\Search\MembersSearchCriteria.cs" />
     <Compile Include="Customer\Model\Vendor.cs" />
     <Compile Include="Customer\Services\IMemberIndexedSearchService.cs" />

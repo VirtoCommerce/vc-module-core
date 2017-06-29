@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Linq;
-using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Domain.Commerce.Model.Search;
+using VirtoCommerce.Domain.Search;
 
 namespace VirtoCommerce.Domain.Customer.Model
 {
     /// <summary>
-    /// represent common members search criteria. More specialized criteria should be derived for this type.
+    /// Represents common member search criteria. More specialized criteria should be derived for this type.
     /// </summary>
-    [Obsolete("Use VirtoCommerce.Domain.Customer.Model.Search.MemberSearchCriteria")]
-    public class MembersSearchCriteria
+    public class MembersSearchCriteria : SearchCriteriaBase
     {
-        public MembersSearchCriteria()
-        {
-            Take = 20;
-        }
+        public override string ObjectType { get; set; } = KnownDocumentTypes.Member;
+
         /// <summary>
         /// Search member type (Contact, Organization etc)
         /// </summary>
@@ -59,35 +56,23 @@ namespace VirtoCommerce.Domain.Customer.Model
         }
 
         /// <summary>
-        /// Word, part of word or phrase to search
-        /// </summary>
-        public string Keyword { get; set; }
-
-        /// <summary>
-        /// It used to limit search within an member (organization for example)
+        /// Search for child members of the given member (members of an organization, for example)
         /// </summary>
         public string MemberId { get; set; }
 
         /// <summary>
-        /// Deep search in  specified memberId  children members or in all if not memberId empty
+        /// Deep search for child members of the given MemberId or everything if MemberId is empty
         /// </summary>
         public bool DeepSearch { get; set; }
 
         /// <summary>
-        /// Sorting expression property1:asc;property2:desc
+        /// Word, part of word or phrase to search
         /// </summary>
-        public string Sort { get; set; }
-
-        public SortInfo[] SortInfos
+        [Obsolete("Use SearchPhrase")]
+        public string Keyword
         {
-            get
-            {
-                return SortInfo.Parse(Sort).ToArray();
-            }
+            get { return SearchPhrase; }
+            set { SearchPhrase = value; }
         }
-
-        public int Skip { get; set; }
-
-        public int Take { get; set; }
     }
 }
