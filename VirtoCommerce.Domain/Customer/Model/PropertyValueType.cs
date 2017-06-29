@@ -1,5 +1,8 @@
-﻿namespace VirtoCommerce.Domain.Customer.Model
+﻿using System;
+
+namespace VirtoCommerce.Domain.Customer.Model
 {
+    [Obsolete]
     public enum PropertyValueType
     {
         Boolean,
