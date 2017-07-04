@@ -298,20 +298,27 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var primaryDocuments = await primaryDocumentBuilder.GetDocumentsAsync(documentIds);
-            var primaryDocumentIds = primaryDocuments.Select(d => d.Id).ToArray();
+            var primaryDocuments = (await primaryDocumentBuilder.GetDocumentsAsync(documentIds))?.Where(d => d != null).ToList();
 
-            if (secondaryDocumentBuilders != null)
+            if (primaryDocuments?.Any() == true)
             {
-                var secondaryDocuments = await GetSecondaryDocumentsAsync(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
+                if (secondaryDocumentBuilders != null)
+                {
+                    var primaryDocumentIds = primaryDocuments.Select(d => d.Id).ToArray();
+                    var secondaryDocuments = await GetSecondaryDocumentsAsync(secondaryDocumentBuilders, primaryDocumentIds, cancellationToken);
 
-                MergeDocuments(primaryDocuments, secondaryDocuments);
-            }
+                    MergeDocuments(primaryDocuments, secondaryDocuments);
+                }
 
-            // Add system fields
-            foreach (var document in primaryDocuments)
-            {
-                document.Add(new IndexDocumentField(KnownDocumentFields.IndexationDate, DateTime.UtcNow) { IsRetrievable = true, IsFilterable = true });
+                // Add system fields
+                foreach (var document in primaryDocuments)
+                {
+                    document.Add(new IndexDocumentField(KnownDocumentFields.IndexationDate, DateTime.UtcNow)
+                    {
+                        IsRetrievable = true,
+                        IsFilterable = true
+                    });
+                }
             }
 
             return primaryDocuments;
@@ -324,25 +331,28 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             var tasks = secondaryDocumentBuilders.Select(p => p.GetDocumentsAsync(documentIds));
             var results = await Task.WhenAll(tasks);
 
-            var result = results.Where(r => r != null).SelectMany(r => r).ToList();
+            var result = results.Where(r => r != null).SelectMany(r => r.Where(d => d != null)).ToList();
             return result;
         }
 
-        protected virtual void MergeDocuments(IEnumerable<IndexDocument> primaryDocuments, IList<IndexDocument> secondaryDocuments)
+        protected virtual void MergeDocuments(IList<IndexDocument> primaryDocuments, IList<IndexDocument> secondaryDocuments)
         {
-            var secondaryDocumentGroups = secondaryDocuments
-                .GroupBy(d => d.Id)
-                .ToDictionary(g => g.Key, g => g, StringComparer.OrdinalIgnoreCase);
-
-            foreach (var primaryDocument in primaryDocuments)
+            if (primaryDocuments?.Any() == true && secondaryDocuments?.Any() == true)
             {
-                if (secondaryDocumentGroups.ContainsKey(primaryDocument.Id))
-                {
-                    var secondaryDocumentGroup = secondaryDocumentGroups[primaryDocument.Id];
+                var secondaryDocumentGroups = secondaryDocuments
+                    .GroupBy(d => d.Id)
+                    .ToDictionary(g => g.Key, g => g, StringComparer.OrdinalIgnoreCase);
 
-                    foreach (var secondaryDocument in secondaryDocumentGroup)
+                foreach (var primaryDocument in primaryDocuments)
+                {
+                    if (secondaryDocumentGroups.ContainsKey(primaryDocument.Id))
                     {
-                        primaryDocument.Merge(secondaryDocument);
+                        var secondaryDocumentGroup = secondaryDocumentGroups[primaryDocument.Id];
+
+                        foreach (var secondaryDocument in secondaryDocumentGroup)
+                        {
+                            primaryDocument.Merge(secondaryDocument);
+                        }
                     }
                 }
             }

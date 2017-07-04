@@ -1,7 +1,9 @@
 ﻿angular.module('virtoCommerce.coreModule.fulfillment')
 .controller('virtoCommerce.coreModule.fulfillment.fulfillmentCenterContactController', ['$scope', 'platformWebApp.bladeNavigationService', 'platformWebApp.common.countries', function ($scope, bladeNavigationService, countries) {
+    var blade = $scope.blade;
+
     $scope.saveChanges = function () {
-        angular.copy($scope.blade.currentEntity, $scope.blade.origEntity);
+        angular.copy(blade.currentEntity, blade.origEntity);
         $scope.bladeClose();
     };
 
@@ -14,15 +16,16 @@
     }
 
     $scope.blade.headIcon = 'fa-wrench';
-    
+
     $scope.$watch('blade.currentEntity.countryCode', function (countryCode) {
-        if (countryCode) {
-            $scope.blade.currentEntity.countryName = _.findWhere($scope.countries, { code: countryCode }).name;
+        var country;
+        if (countryCode && (country = _.findWhere($scope.countries, { id: countryCode }))) {
+            blade.currentEntity.countryName = country.name;
         }
     });
-
-    $scope.blade.isLoading = false;
-    $scope.blade.currentEntity = angular.copy($scope.blade.data);
-    $scope.blade.origEntity = $scope.blade.data;
+   
+    blade.isLoading = false;
+    blade.currentEntity = angular.copy(blade.data);
+    blade.origEntity = blade.data;
     $scope.countries = countries.query();
 }]);
