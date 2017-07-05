@@ -86,6 +86,7 @@
     <Compile Include="Catalog\Model\CategoryResponseGroup.cs" />
     <Compile Include="Catalog\Model\EditorialReview.cs" />
     <Compile Include="Catalog\Model\OutlineItem.cs" />
+    <Compile Include="Catalog\Model\PropertyValidationRule.cs" />
     <Compile Include="Catalog\Model\Search\Aggregation.cs" />
     <Compile Include="Catalog\Model\Search\AggregationItem.cs" />
     <Compile Include="Catalog\Model\PropertyDisplayName.cs" />
