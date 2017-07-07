@@ -92,7 +92,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #endregion
 
         public ICollection<CatalogProduct> Variations { get; set; }
-        public string SeoObjectType { get { return GetType().Name; } }
+        public virtual string SeoObjectType { get; } = typeof(CatalogProduct).Name;
         public ICollection<SeoInfo> SeoInfos { get; set; }
         public ICollection<EditorialReview> Reviews { get; set; }
 
