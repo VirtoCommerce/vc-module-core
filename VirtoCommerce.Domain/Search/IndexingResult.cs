@@ -3,6 +3,9 @@ using System.Diagnostics;
 
 namespace VirtoCommerce.Domain.Search
 {
+    /// <summary>
+    /// Describes the result of the indexing operation for a batch of documents
+    /// </summary>
     public class IndexingResult
     {
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]

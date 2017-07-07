@@ -2,6 +2,9 @@
 
 namespace VirtoCommerce.Domain.Search
 {
+    /// <summary>
+    /// Describes the result of the indexing operation for a single document
+    /// </summary>
     [DebuggerDisplay("{Id} {Succeeded} {ErrorMessage}")]
     public class IndexingResultItem
     {
@@ -16,7 +19,7 @@ namespace VirtoCommerce.Domain.Search
         public string Id { get; set; }
 
         /// <summary>
-        /// Gets the error message explaining why the indexing operation failed for the document identified by the ID; null if indexing succeeded.
+        /// Gets the error message explaining why the indexing operation failed for the document identified by the ID; null if indexing has succeeded.
         /// </summary>
         public string ErrorMessage { get; set; }
     }
