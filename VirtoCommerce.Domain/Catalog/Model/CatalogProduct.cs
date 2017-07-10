@@ -92,6 +92,9 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #endregion
 
         public ICollection<CatalogProduct> Variations { get; set; }
+        /// <summary>
+        /// Each derivative type should override this property tp use other object type in seo records 
+        /// </summary>
         public virtual string SeoObjectType { get; } = typeof(CatalogProduct).Name;
         public ICollection<SeoInfo> SeoInfos { get; set; }
         public ICollection<EditorialReview> Reviews { get; set; }
