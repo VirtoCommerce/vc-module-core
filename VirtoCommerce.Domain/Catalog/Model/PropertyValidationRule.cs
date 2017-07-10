@@ -4,34 +4,38 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class PropertyValidationRule : Entity, IInheritable, ICloneable
+    /// <summary>
+    /// Represents property validation rules definition
+    /// </summary>
+    public class PropertyValidationRule : Entity, ICloneable
     {
+        /// <summary>
+        /// Uniquie value flag constrain
+        /// </summary>
         public bool IsUnique { get; set; }
 
+        /// <summary>
+        /// Down chars count border or null if no defined
+        /// </summary>
         public int? CharCountMin { get; set; }
 
+        /// <summary>
+        /// Upper chars count border or null if no defined
+        /// </summary>
         public int? CharCountMax { get; set; }
-
+        /// <summary>
+        /// Custom regular expression
+        /// </summary>
         public string RegExp { get; set; }
 
         public string PropertyId { get; set; }
 
         public Property Property { get; set; }
 
-        public bool IsInherited { get; set; }
-
         public object Clone()
         {
-            var retVal = new PropertyValidationRule();
-            retVal.Id = Id;
-            retVal.IsUnique = IsUnique;
-            retVal.CharCountMin = CharCountMin;
-            retVal.CharCountMax = CharCountMax;
-            retVal.RegExp = RegExp;
-
-            retVal.PropertyId = PropertyId;
+            var retVal = base.MemberwiseClone() as PropertyValidationRule;
             retVal.Property = Property != null ? Property.Clone() as Property : null;
-
             return retVal;
         }
     }
