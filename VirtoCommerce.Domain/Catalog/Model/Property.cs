@@ -21,7 +21,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
 		public ICollection<PropertyAttribute> Attributes { get; set; }
 		public ICollection<PropertyDictionaryValue> DictionaryValues { get; set; }
 		public ICollection<PropertyDisplayName> DisplayNames { get; set; }
-
+        public ICollection<PropertyValidationRule> ValidationRules { get; set; }
 
         /// <summary>
         /// Because we not have a direct link between prop values and properties we should
@@ -64,6 +64,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
             retVal.Attributes = Attributes;
             retVal.DictionaryValues = DictionaryValues;
             retVal.DisplayNames = DisplayNames;
+            retVal.ValidationRules = ValidationRules;
 
             retVal.IsInherited = IsInherited;
 
