@@ -77,23 +77,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #region ICloneable members
         public object Clone()
         {
-            var retVal = new PropertyValue();
-            retVal.Id = Id;
-            retVal.CreatedBy = CreatedBy;
-            retVal.CreatedDate = CreatedDate;
-            retVal.ModifiedBy = ModifiedBy;
-            retVal.ModifiedDate = ModifiedDate;
-
-            retVal.PropertyId = PropertyId;
-            retVal.Property = Property != null ? Property.Clone() as Property : null;
-            retVal.PropertyName = PropertyName;
-            retVal.Alias = Alias;
-            retVal.ValueId = ValueId;
-            retVal.Value = Value;
-            retVal.ValueType = ValueType;
-            retVal.IsInherited = IsInherited;
-
-            return retVal;
+            return base.MemberwiseClone();
         }
         #endregion
     }

@@ -31,17 +31,6 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public Entity AssociatedObject { get; set; }
 
-        public string[] Tags { get; set; }
-
-        #region Obsolete properties
-        [Obsolete]
-        public string Description { get; set; }
-        [Obsolete]
-        public string Name { get; set; }
-        [Obsolete]
-        public string AssociatedProductId { get; set; }
-        [Obsolete]
-        public CatalogProduct AssociatedProduct { get; set; }
-        #endregion
+        public string[] Tags { get; set; }       
     }
 }

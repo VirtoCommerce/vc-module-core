@@ -96,7 +96,6 @@
     <Compile Include="Catalog\Model\Search\ProductSearchCriteria.cs" />
     <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
-    <Compile Include="Catalog\Services\IPropertyValueValidator.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
     <Compile Include="Commerce\Model\Currency.cs" />

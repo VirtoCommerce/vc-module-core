@@ -38,37 +38,10 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public bool IsInherited { get; set; }
         #endregion
 
-            #region ICloneable members
+        #region ICloneable members
         public object Clone()
         {
-            var retVal = new Property();
-            retVal.Id = Id;
-            retVal.CreatedBy = CreatedBy;
-            retVal.CreatedDate = CreatedDate;
-            retVal.ModifiedBy = ModifiedBy;
-            retVal.ModifiedDate = ModifiedDate;
-
-            retVal.CatalogId = CatalogId;
-            retVal.Catalog = Catalog;
-            retVal.CategoryId = CategoryId;
-            retVal.Category = Category;
-            retVal.Name = Name;
-            retVal.Required = Required;
-            retVal.Dictionary = Dictionary;
-            retVal.Multivalue = Multivalue;
-            retVal.Multilanguage = Multilanguage;
-            retVal.ValueType = ValueType;
-
-            retVal.Type = Type;
-            retVal.ValueType = ValueType;
-            retVal.Attributes = Attributes;
-            retVal.DictionaryValues = DictionaryValues;
-            retVal.DisplayNames = DisplayNames;
-            retVal.ValidationRules = ValidationRules;
-
-            retVal.IsInherited = IsInherited;
-
-            return retVal;
+            return base.MemberwiseClone();
         }
         #endregion
     }
