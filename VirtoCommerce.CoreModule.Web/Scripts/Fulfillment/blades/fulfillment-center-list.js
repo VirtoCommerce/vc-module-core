@@ -1,63 +1,71 @@
 ﻿angular.module('virtoCommerce.coreModule.fulfillment')
-.controller('virtoCommerce.coreModule.fulfillment.fulfillmentListController', ['$scope', 'virtoCommerce.coreModule.fulfillment.fulfillments', 'platformWebApp.bladeNavigationService',
-function ($scope, fulfillments, bladeNavigationService) {
-    var blade = $scope.blade;
-    
-    blade.refresh = function () {
-        blade.isLoading = true;
+    .controller('virtoCommerce.coreModule.fulfillment.fulfillmentListController', ['$scope', 'virtoCommerce.coreModule.fulfillment.fulfillments', 'platformWebApp.bladeNavigationService', 'platformWebApp.bladeUtils', 'uiGridConstants', 'platformWebApp.uiGridHelper',
+        function ($scope, fulfillments, bladeNavigationService, bladeUtils, uiGridConstants, uiGridHelper) {
+            $scope.uiGridConstants = uiGridConstants;
+            var blade = $scope.blade;
 
-        fulfillments.query({}, function (results) {
-            blade.isLoading = false;
-            blade.currentEntities = results;
-            
-            return results;
-        }, function (error) {
-            bladeNavigationService.setError('Error ' + error.status, blade);
-        });
-    };
+            blade.refresh = function () {
+                blade.isLoading = true;
 
-    function showDetailBlade(node, title) {
-        $scope.selectedNodeId = node.id;
+                fulfillments.query({}, function (results) {
+                    blade.isLoading = false;
+                    blade.currentEntities = results;
 
-        var newBlade = {
-            id: 'fulfillmentDetail',
-            currentEntityId: node.id,
-            currentEntity: node,
-            title: title,
-            subtitle: 'core.blades.fulfillment-center-detail.subtitle',
-            controller: 'virtoCommerce.coreModule.fulfillment.fulfillmentCenterDetailController',
-            template: 'Modules/$(VirtoCommerce.Core)/Scripts/fulfillment/blades/fulfillment-center-detail.tpl.html'
-        };
-        bladeNavigationService.showBlade(newBlade, blade);
-    };
+                    return results;
+                }, function (error) {
+                    bladeNavigationService.setError('Error ' + error.status, blade);
+                });
+            };
 
-    $scope.selectNode = function (node) {
-        showDetailBlade(node, node.name);
-    };
+            function showDetailBlade(node, title) {
+                $scope.selectedNodeId = node.id;
 
-    blade.headIcon = 'fa-wrench';
-    blade.toolbarCommands = [
-      {
-          name: "platform.commands.refresh", icon: 'fa fa-refresh',
-          executeMethod: blade.refresh,
-          canExecuteMethod: function () {
-              return true;
-          }
-      },
-        {
-            name: "platform.commands.add", icon: 'fa fa-plus',
-            executeMethod: function () {
-                showDetailBlade({ maxReleasesPerPickBatch: 20, pickDelay: 30 }, 'New Fulfillment center');
-            },
-            canExecuteMethod: function () {
-                return true;
-            },
-            permission: 'core:fulfillment:create'
-        }
-    ];
+                var newBlade = {
+                    id: 'fulfillmentDetail',
+                    currentEntityId: node.id,
+                    currentEntity: node,
+                    title: title,
+                    subtitle: 'core.blades.fulfillment-center-detail.subtitle',
+                    controller: 'virtoCommerce.coreModule.fulfillment.fulfillmentCenterDetailController',
+                    template: 'Modules/$(VirtoCommerce.Core)/Scripts/fulfillment/blades/fulfillment-center-detail.tpl.html'
+                };
+                bladeNavigationService.showBlade(newBlade, blade);
+            };
 
-    // actions on load
-    blade.title = 'core.blades.fulfillment-center-list.title',
-    blade.subtitle = 'core.blades.fulfillment-center-list.subtitle',
-    blade.refresh();
-}]);
+            blade.selectNode = function (node) {
+                showDetailBlade(node, node.name);
+            };
+
+            blade.headIcon = 'fa-wrench';
+            blade.toolbarCommands = [
+                {
+                    name: "platform.commands.refresh", icon: 'fa fa-refresh',
+                    executeMethod: blade.refresh,
+                    canExecuteMethod: function () {
+                        return true;
+                    }
+                },
+                {
+                    name: "platform.commands.add", icon: 'fa fa-plus',
+                    executeMethod: function () {
+                        showDetailBlade({ maxReleasesPerPickBatch: 20, pickDelay: 30 }, 'New Fulfillment center');
+                    },
+                    canExecuteMethod: function () {
+                        return true;
+                    },
+                    permission: 'core:fulfillment:create'
+                }
+            ];
+
+            // actions on load
+            blade.title = 'core.blades.fulfillment-center-list.title',
+                blade.subtitle = 'core.blades.fulfillment-center-list.subtitle',
+                blade.refresh();
+
+            $scope.setGridOptions = function (gridOptions) {
+                uiGridHelper.initialize($scope, gridOptions, function (gridApi) {
+                    uiGridHelper.bindRefreshOnSortChanged($scope);
+                });
+                bladeUtils.initializePagination($scope);
+            };
+        }]);

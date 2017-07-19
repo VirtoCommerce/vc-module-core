@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Payment.Model;
 using VirtoCommerce.Domain.Shipping.Model;
@@ -48,7 +47,13 @@ namespace VirtoCommerce.Domain.Store.Model
         public bool DisplayOutOfStock { get; set; }
 
         public FulfillmentCenter FulfillmentCenter { get; set; }
+
+        public ICollection<FulfillmentCenter> FulfillmentCenters { get; set; }
+
         public FulfillmentCenter ReturnsFulfillmentCenter { get; set; }
+
+        public ICollection<FulfillmentCenter> ReturnsFulfillmentCenters { get; set; }
+
         /// <summary>
         /// All store supported languages
         /// </summary>

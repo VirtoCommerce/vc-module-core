@@ -9,9 +9,9 @@
       }, 'moduleDetail');
 
       //Register fulfillmentCenterDetail widgets
-      widgetService.registerWidget({
-          controller: 'virtoCommerce.coreModule.fulfillment.fulfillmentCenterContactWidgetController',
-          template: 'Modules/$(VirtoCommerce.Core)/Scripts/fulfillment/widgets/fulfillmentCenterContactWidget.tpl.html'
-      }, 'fulfillmentCenterDetail');
+      //widgetService.registerWidget({
+      //    controller: 'virtoCommerce.coreModule.fulfillment.fulfillmentCenterContactWidgetController',
+      //    template: 'Modules/$(VirtoCommerce.Core)/Scripts/fulfillment/widgets/fulfillmentCenterContactWidget.tpl.html'
+      //}, 'fulfillmentCenterDetail');
   }])
 ;
