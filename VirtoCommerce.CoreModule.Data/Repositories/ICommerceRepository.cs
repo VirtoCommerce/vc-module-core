@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data;
+using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.CoreModule.Data.Model;
 
 namespace VirtoCommerce.CoreModule.Data.Repositories
 {
-    public interface IСommerceRepository : VirtoCommerce.Platform.Core.Common.IRepository
+    public interface IСommerceRepository : Platform.Core.Common.IRepository
     {
         IQueryable<FulfillmentCenter> FulfillmentCenters { get; }
         IQueryable<SeoUrlKeyword> SeoUrlKeywords { get; }
@@ -17,5 +15,7 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
 
         SeoUrlKeyword[] GetSeoByIds(string[] ids);
         SeoUrlKeyword[] GetObjectSeoUrlKeywords(string objectType, string objectId);
+
+        DbContextTransaction BeginTransaction(IsolationLevel serializable);
     }
 }
