@@ -4,13 +4,15 @@
             $scope.uiGridConstants = uiGridConstants;
             var blade = $scope.blade;
 
-            blade.refresh = function () {
+            blade.refresh = function (parentRefresh) {
                 blade.isLoading = true;
 
                 fulfillments.query({}, function (results) {
                     blade.isLoading = false;
                     blade.currentEntities = results;
-
+                    if (parentRefresh) {
+                        blade.parentBlade.refresh();
+                    }
                     return results;
                 }, function (error) {
                     bladeNavigationService.setError('Error ' + error.status, blade);

@@ -51,7 +51,7 @@
                     blade.title = data.displayName;
                     blade.currentEntityId = data.id;
                     initializeBlade(data);
-                    blade.parentBlade.refresh();
+                    blade.parentBlade.refresh(true);
                 }, function (error) {
                     bladeNavigationService.setError('Error: ' + error.status, blade);
                 });
@@ -94,7 +94,7 @@
 
                         fulfillments.remove({ ids: blade.currentEntityId }, function () {
                             $scope.bladeClose();
-                            blade.parentBlade.refresh();
+                            blade.parentBlade.refresh(true);
                         }, function (error) {
                             bladeNavigationService.setError('Error ' + error.status, blade);
                         });
