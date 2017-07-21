@@ -217,8 +217,6 @@
     <Content Include="Scripts\Currency\widgets\currencyWidget.tpl.html" />
     <Content Include="Scripts\Fulfillment\blades\fulfillment-center-contact.js" />
     <Content Include="Scripts\Fulfillment\blades\fulfillment-center-contact.tpl.html" />
-    <Content Include="Scripts\Fulfillment\widgets\fulfillmentCenterContactWidget.js" />
-    <Content Include="Scripts\Fulfillment\widgets\fulfillmentCenterContactWidget.tpl.html" />
     <Content Include="Scripts\SearchIndex\blades\indexes-list.js" />
     <Content Include="Scripts\SearchIndex\blades\indexes-list.tpl.html" />
     <Content Include="Scripts\SearchIndex\blades\index-progress.js" />
