@@ -73,8 +73,8 @@
                         if (remove) {
                             blade.isLoading = true;
                             fulfillments.remove({ ids: item.id }, function () {
-                                $scope.bladeClose();
-                                blade.parentBlade.refresh(true);
+                                blade.refresh(true);
+                                blade.isLoading = false;
                             }, function (error) {
                                 bladeNavigationService.setError('Error ' + error.status, blade);
                             });

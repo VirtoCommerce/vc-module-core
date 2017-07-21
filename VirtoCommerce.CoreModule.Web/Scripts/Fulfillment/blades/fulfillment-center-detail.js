@@ -43,6 +43,7 @@
             if (blade.currentEntityId) {
                 fulfillments.update(blade.currentEntity, function () {
                     blade.refresh(true);
+                    $scope.bladeClose();
                 }, function (error) {
                     bladeNavigationService.setError('Error: ' + error.status, blade);
                 });
@@ -51,6 +52,7 @@
                     blade.title = data.displayName;
                     blade.currentEntityId = data.id;
                     initializeBlade(data);
+                    $scope.bladeClose();
                     blade.parentBlade.refresh(true);
                 }, function (error) {
                     bladeNavigationService.setError('Error: ' + error.status, blade);
@@ -78,7 +80,7 @@
             {
                 name: "platform.commands.delete", icon: 'fa fa-trash-o',
                 executeMethod: deleteEntry,
-                canExecuteMethod: function () { return true; },
+                canExecuteMethod: function () { return blade.currentEntity.id != null && blade.currentEntity.id != undefined; },
                 permission: 'core:fulfillment:delete'
             }
         ];
