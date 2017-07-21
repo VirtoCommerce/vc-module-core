@@ -10,7 +10,7 @@
                 fulfillments.query({}, function (results) {
                     blade.isLoading = false;
                     blade.currentEntities = results;
-                    if (parentRefresh) {
+                    if (parentRefresh === true) {
                         blade.parentBlade.refresh();
                     }
                     return results;
