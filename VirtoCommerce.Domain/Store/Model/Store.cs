@@ -45,13 +45,21 @@ namespace VirtoCommerce.Domain.Store.Model
         public string Email { get; set; }
         public string AdminEmail { get; set; }
         public bool DisplayOutOfStock { get; set; }
-
+        /// <summary>
+        /// Primary (default) fulfillment center
+        /// </summary>
         public FulfillmentCenter FulfillmentCenter { get; set; }
-
+        /// <summary>
+        /// Alternate fulfillment centeres
+        /// </summary>
         public ICollection<FulfillmentCenter> FulfillmentCenters { get; set; }
-
+        /// <summary>
+        /// Primary (default) fulfillment center for order return
+        /// </summary>
         public FulfillmentCenter ReturnsFulfillmentCenter { get; set; }
-
+        /// <summary>
+        /// Alternate fulfillment centeres for order return
+        /// </summary>
         public ICollection<FulfillmentCenter> ReturnsFulfillmentCenters { get; set; }
 
         /// <summary>
