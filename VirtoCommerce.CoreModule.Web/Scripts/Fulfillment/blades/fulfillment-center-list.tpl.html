@@ -20,9 +20,12 @@
             }]
         })">
             <div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-save-state ui-grid-resize-columns ui-grid-move-columns ui-grid-pinning ui-grid-height></div>
-            <ul class="menu __context" role="menu" id="sto_menu">
+            <ul class="menu __context" role="menu" id="fc-sto_menu">
                 <li class="menu-item" ng-click='blade.selectNode(contextMenuEntity)'>
                     <i class="menu-ico fa fa-edit"></i> {{'platform.commands.manage' | translate}}
+                </li>
+                <li class="menu-item" ng-click='delete(contextMenuEntity)'>
+                    <i class="menu-ico fa fa-trash-o"></i> {{'platform.commands.delete' | translate}}
                 </li>
             </ul>
         </div>
@@ -38,11 +41,11 @@
          ui-grid-one-bind-id-grid="rowRenderIndex + '-' + col.uid + '-cell'"
          ui-grid-cell
          context-menu="grid.appScope.contextMenuEntity = row.entity"
-         data-target="sto_menu"></div>
+         data-target="fc-sto_menu"></div>
 </script>
 
 <script id="list-actions.cell.html" type="text/ng-template">
-    <div class="ui-grid-actions" left-click-menu="grid.appScope.contextMenuEntity = row.entity" data-target="sto_menu">
+    <div class="ui-grid-actions" left-click-menu="grid.appScope.contextMenuEntity = row.entity" data-target="fc-sto_menu">
         <i class="fa fa-ellipsis-v"></i>
     </div>
 </script>

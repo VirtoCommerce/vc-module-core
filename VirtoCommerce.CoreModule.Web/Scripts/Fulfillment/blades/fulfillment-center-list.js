@@ -1,6 +1,6 @@
 ﻿angular.module('virtoCommerce.coreModule.fulfillment')
-    .controller('virtoCommerce.coreModule.fulfillment.fulfillmentListController', ['$scope', 'virtoCommerce.coreModule.fulfillment.fulfillments', 'platformWebApp.bladeNavigationService', 'platformWebApp.bladeUtils', 'uiGridConstants', 'platformWebApp.uiGridHelper',
-        function ($scope, fulfillments, bladeNavigationService, bladeUtils, uiGridConstants, uiGridHelper) {
+    .controller('virtoCommerce.coreModule.fulfillment.fulfillmentListController', ['$scope', 'virtoCommerce.coreModule.fulfillment.fulfillments', 'platformWebApp.bladeNavigationService', 'platformWebApp.bladeUtils', 'uiGridConstants', 'platformWebApp.uiGridHelper', 'platformWebApp.dialogService',
+        function ($scope, fulfillments, bladeNavigationService, bladeUtils, uiGridConstants, uiGridHelper, dialogService) {
             $scope.uiGridConstants = uiGridConstants;
             var blade = $scope.blade;
 
@@ -63,6 +63,26 @@
             blade.title = 'core.blades.fulfillment-center-list.title',
                 blade.subtitle = 'core.blades.fulfillment-center-list.subtitle',
                 blade.refresh();
+
+            $scope.delete = function (item) {
+                var dialog = {
+                    id: "confirmDelete",
+                    title: "core.dialogs.fulfillment-delete.title",
+                    message: "core.dialogs.fulfillment-delete.message",
+                    callback: function (remove) {
+                        if (remove) {
+                            blade.isLoading = true;
+                            fulfillments.remove({ ids: item.id }, function () {
+                                $scope.bladeClose();
+                                blade.parentBlade.refresh(true);
+                            }, function (error) {
+                                bladeNavigationService.setError('Error ' + error.status, blade);
+                            });
+                        }
+                    }
+                }
+                dialogService.showConfirmationDialog(dialog);
+            }
 
             $scope.setGridOptions = function (gridOptions) {
                 uiGridHelper.initialize($scope, gridOptions, function (gridApi) {
