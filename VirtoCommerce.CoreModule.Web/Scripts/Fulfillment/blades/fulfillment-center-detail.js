@@ -9,7 +9,7 @@
 
             fulfillments.get({ _id: blade.currentEntityId }, function (data) {
                 initializeBlade(data);
-                if (parentRefresh) {
+                if (parentRefresh === true) {
                     blade.parentBlade.refresh();
                 }
             },
