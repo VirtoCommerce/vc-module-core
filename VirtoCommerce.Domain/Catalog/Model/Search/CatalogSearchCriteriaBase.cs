@@ -1,4 +1,5 @@
-﻿using VirtoCommerce.Domain.Commerce.Model.Search;
+﻿using System.Collections.Generic;
+using VirtoCommerce.Domain.Commerce.Model.Search;
 
 namespace VirtoCommerce.Domain.Catalog.Model.Search
 {
@@ -12,5 +13,15 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// CategoryId1/CategoryId2, no catalog should be included in the outline
         /// </summary>
         public string Outline { get; set; }
+
+        /// <summary>
+        /// CategoryId1/CategoryId2, no catalog should be included in the outline
+        /// </summary>
+        public IList<string> Outlines { get; set; }
+
+        /// <summary>
+        /// Term format: name:value1,value2
+        /// </summary>
+        public IList<string> Terms { get; set; }
     }
 }

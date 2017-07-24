@@ -9,8 +9,6 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
     {
         public override string ObjectType { get; set; } = KnownDocumentTypes.Product;
 
-        public string[] Terms { get; set; }
-
         public string Currency { get; set; }
 
         public string[] Pricelists { get; set; }
