@@ -150,21 +150,17 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.9\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.10\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Core.Web, Version=2.13.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.Web.2.13.9\lib\net461\VirtoCommerce.Platform.Core.Web.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="VirtoCommerce.Platform.Core.Web, Version=2.13.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.Web.2.13.10\lib\net461\VirtoCommerce.Platform.Core.Web.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.9\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.10\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data.Security, Version=2.13.9.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.Security.2.13.9\lib\net461\VirtoCommerce.Platform.Data.Security.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="VirtoCommerce.Platform.Data.Security, Version=2.13.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.Security.2.13.10\lib\net461\VirtoCommerce.Platform.Data.Security.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
