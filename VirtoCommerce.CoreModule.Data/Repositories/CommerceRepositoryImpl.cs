@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using System.Data.Entity;
+using System.Linq;
+using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.Platform.Data.Infrastructure;
 using VirtoCommerce.Platform.Data.Infrastructure.Interceptors;
-using VirtoCommerce.CoreModule.Data.Model;
 
 namespace VirtoCommerce.CoreModule.Data.Repositories
 {
@@ -73,6 +70,11 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
         public SeoUrlKeyword[] GetObjectSeoUrlKeywords(string objectType, string objectId)
         {
             return SeoUrlKeywords.Where(x => x.ObjectId == objectId && x.ObjectType == objectType).OrderBy(x => x.Language).ToArray();
+        }
+
+        public DbContextTransaction BeginTransaction(IsolationLevel level)
+        {
+            return Database.BeginTransaction(level);
         }
 
         #endregion

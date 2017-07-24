@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
+using System.Threading;
 using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.Domain.Common;
@@ -58,15 +59,29 @@ namespace VirtoCommerce.CoreModule.Data.Services
                         catch (System.Data.Entity.Infrastructure.DbUpdateException)
                         {
                             //This exception can happen due to deadlock so we can retry transaction several times
-                            initializedCounters = false;
+                            retryCount++;
+
                             if (retryCount >= maxTransactionRetries)
                             {
                                 throw;
                             }
+
+                            // Wait some time and try again
+                            Thread.Sleep(new Random().Next(200, 5000));
                         }
-                        finally
+                        catch (FaultException)
                         {
+                            // currently VirtoCommerce.Platform.Data.Infrastructure.ServiceBase.CommitChanges
+                            // throws only FaultException, so have to catch it too.
                             retryCount++;
+
+                            if (retryCount >= maxTransactionRetries)
+                            {
+                                throw;
+                            }
+
+                            // Wait some time and try again
+                            Thread.Sleep(new Random().Next(200, 5000));
                         }
                     }
 
@@ -85,6 +100,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
         {
             //Update Sequences in database
             using (var repository = _repositoryFactory())
+            using (var transaction = repository.BeginTransaction(System.Data.IsolationLevel.RepeatableRead))
             {
                 var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType.Equals(objectType, StringComparison.OrdinalIgnoreCase));
                 var originalModifiedDate = sequence != null ? sequence.ModifiedDate : null;
@@ -126,6 +142,8 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 sequence.Value = endCounter;
                 //sequence.LastModified = DateTime.UtcNow;
                 CommitChanges(repository);
+                //commit transaction
+                transaction.Commit();
             }
         }
 
