@@ -48,7 +48,7 @@ namespace VirtoCommerce.CoreModule.Data.Observers
                 {
                     var store = _storeService.GetById(storefrontAccount.StoreId);
 
-                    var notification = _notificationManager.GetNewNotification<RegistrationEmailNotification>(storefrontAccount.StoreId, "Store", contact.DefaultLanguage);
+                    var notification = _notificationManager.GetNewNotification<RegistrationEmailNotification>(storefrontAccount.StoreId, "Store", string.IsNullOrEmpty(contact.DefaultLanguage) ? store.DefaultLanguage : contact.DefaultLanguage);
                     notification.FirstName = contact.FirstName;
                     notification.LastName = contact.LastName;
                     notification.Login = storefrontAccount.UserName;
