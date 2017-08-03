@@ -22,6 +22,7 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public string Name { get; set; }
         public int Quantity { get; set; }
+        public int InStockQuantity { get; set; }
 
         public string FulfillmentLocationCode { get; set; }
         public string ShipmentMethodCode { get; set; }

@@ -15,7 +15,8 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		}
 		public string Code { get; set; }
 		public int Quantity { get; set; }
-		public decimal Price { get; set; }
+        public int InStockQuantity { get; set; }
+        public decimal Price { get; set; }
 		public decimal Discount { get; set; }
 		public string CatalogId { get; set; }
 		public string CategoryId { get; set; }
