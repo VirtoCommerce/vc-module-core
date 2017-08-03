@@ -11,6 +11,6 @@
         <iconUrl>https://github.com/VirtoCommerce/vc-module-core/raw/master/NuGet/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Search provider tests</description>
-        <copyright>Copyright © VirtoCommerce 2011-2017</copyright>
+        <copyright>Copyright © VirtoCommerce 2011-2017 </copyright>
     </metadata>
 </package>
