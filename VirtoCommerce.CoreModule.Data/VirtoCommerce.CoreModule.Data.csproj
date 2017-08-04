@@ -73,11 +73,11 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.13\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.14\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.13.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.13\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.14.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.14\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
