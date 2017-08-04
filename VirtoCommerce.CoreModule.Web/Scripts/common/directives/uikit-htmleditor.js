@@ -118,6 +118,8 @@
                 var date = new Date();
                 return 'image_' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay() + '_' + date.getHours() + '-' + date.getMinutes() + '-' + date.getSeconds();
             }
+
+            codeMirror.setValue(scope.ngModel || '');
         }
     }
 }]);
