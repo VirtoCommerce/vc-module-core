@@ -43,5 +43,15 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// </summary>
         /// <value>The end date.</value>
         public virtual DateTime? EndDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets a "white" list of aggregation keys that identify preconfigured aggregations, which SHOULD be calculated and returned with the search result.
+        /// </summary>
+        public IList<string> IncludeAggregations { get; set; }
+
+        /// <summary>
+        /// Gets or sets a "black" list of aggregation keys that identify preconfigured aggregations, which SHOULD NOT be calculated and returned with the search result.
+        /// </summary>
+        public IList<string> ExcludeAggregations { get; set; }
     }
 }
