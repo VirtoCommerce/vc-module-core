@@ -81,6 +81,7 @@
     <Compile Include="Catalog\Model\IHasImages.cs" />
     <Compile Include="Catalog\Model\IHasOutlines.cs" />
     <Compile Include="Catalog\Model\IHasProperties.cs" />
+    <Compile Include="Catalog\Model\IHasReferencedAssociations.cs" />
     <Compile Include="Catalog\Model\Outline.cs" />
     <Compile Include="Catalog\Model\CategoryResponseGroup.cs" />
     <Compile Include="Catalog\Model\EditorialReview.cs" />

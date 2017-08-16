@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
@@ -46,9 +46,13 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// With category outlines
         /// </summary>
         Outlines = 1 << 9,
+        /// <summary>
+        /// With product referenced associations
+        /// </summary>
+        ReferencedAssociations = 1 << 10,
 
         ItemSmall = ItemInfo | ItemAssets | ItemEditorialReviews | Seo,
-        ItemMedium = ItemSmall | ItemAssociations | ItemProperties,
+        ItemMedium = ItemSmall | ItemAssociations | ReferencedAssociations | ItemProperties,
         ItemLarge = ItemMedium | Variations | Links | Inventory | Outlines
     }
 }

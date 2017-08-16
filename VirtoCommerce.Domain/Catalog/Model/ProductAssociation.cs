@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-	public class ProductAssociation : ValueObject<ProductAssociation>
-	{
+    public class ProductAssociation : ValueObject<ProductAssociation>
+    {
         /// <summary>
         /// Association type (Accessories, Up-Sales, Cross-Sales, Related etc)
         /// </summary>
@@ -31,6 +26,12 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public Entity AssociatedObject { get; set; }
 
-        public string[] Tags { get; set; }       
+        public string ItemObjectId { get; set; }
+
+        public string ItemObjectType { get; set; }
+
+        public Entity ItemObject { get; set; }
+
+        public string[] Tags { get; set; }
     }
 }

@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHaveDimension, IHasAssociations, IHasProperties, IHasImages, IHasAssets
+    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHaveDimension, IHasAssociations, IHasReferencedAssociations, IHasProperties, IHasImages, IHasAssets
     {
         /// <summary>
         /// SKU code
@@ -47,7 +47,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public string MeasureUnit { get; set; }
         public decimal? Height { get; set; }
         public decimal? Length { get; set; }
-        public decimal? Width { get; set; } 
+        public decimal? Width { get; set; }
         #endregion
 
         public bool? EnableReview { get; set; }
@@ -84,11 +84,11 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #endregion
 
         #region IHasAssets members
-        public ICollection<Asset> Assets { get; set; } 
+        public ICollection<Asset> Assets { get; set; }
         #endregion
 
         #region ILinkSupport members
-        public ICollection<CategoryLink> Links { get; set; } 
+        public ICollection<CategoryLink> Links { get; set; }
         #endregion
 
         public ICollection<CatalogProduct> Variations { get; set; }
@@ -100,14 +100,16 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public ICollection<EditorialReview> Reviews { get; set; }
 
         #region IHasAssociations members
-        public ICollection<ProductAssociation> Associations { get; set; } 
+        public ICollection<ProductAssociation> Associations { get; set; }
         #endregion
+
+        public ICollection<ProductAssociation> ReferencedAssociations { get; set; }
 
         public ICollection<Pricing.Model.Price> Prices { get; set; }
         public ICollection<Inventory.Model.InventoryInfo> Inventories { get; set; }
 
         #region IHasOutlines members
-        public ICollection<Outline> Outlines { get; set; } 
+        public ICollection<Outline> Outlines { get; set; }
         #endregion
     }
 }
