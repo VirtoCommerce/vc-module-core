@@ -26,12 +26,6 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public Entity AssociatedObject { get; set; }
 
-        public string ItemObjectId { get; set; }
-
-        public string ItemObjectType { get; set; }
-
-        public Entity ItemObject { get; set; }
-
         public string[] Tags { get; set; }
     }
 }
