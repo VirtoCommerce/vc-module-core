@@ -6,8 +6,6 @@ namespace VirtoCommerce.Domain.Catalog.Services
     {
         void LoadAssociations(IHasAssociations[] owners);
 
-        void LoadReferencedAssociations(IHasAssociations[] owners);
-
         void SaveChanges(IHasAssociations[] owners);
     }
 }
