@@ -34,13 +34,13 @@ angular.module('virtoCommerce.coreModule.common', [])
             priority: 5
         }, {
             name: 'line1',
-            title: 'core.blades.address-detail.placeholders.address1',
+            title: 'core.blades.address-detail.labels.address1',
             valueType: 'ShortText',
             isRequired: true,
             priority: 6
         }, {
             name: 'line2',
-            title: 'core.blades.address-detail.placeholders.address2',
+            title: 'core.blades.address-detail.labels.address2',
             valueType: 'ShortText',
             priority: 7
         }, {
@@ -52,7 +52,7 @@ angular.module('virtoCommerce.coreModule.common', [])
         }, {
             name: 'email',
             title: 'core.blades.address-detail.labels.email',
-            valueType: 'ShortText',
+            valueType: 'Email',
             priority: 9
         }, {
             name: 'phone',

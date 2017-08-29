@@ -1,4 +1,4 @@
-<div class="blade-static __bottom" ng-include="'$(Platform)/Scripts/common/templates/ok-cancel.tpl.html'"></div>
+﻿<div class="blade-static __bottom" ng-include="'$(Platform)/Scripts/common/templates/ok-cancel.tpl.html'"></div>
 <div class="blade-content">
     <div class="blade-inner">
         <div class="inner-block">
@@ -29,5 +29,14 @@
                 <span ng-bind-html="x.name | highlight: $select.search"></span>
             </ui-select-choices>
         </ui-select>
+    </div>
+</script>
+<!--duplicates template from platform version after 2.13.15. Remove this after platform version dependency increases -->
+<script type="text/ng-template" id="dEmail.html">
+    <div class="form-input">
+        <input ng-required="currentEntity.isRequired"
+               ng-model="context.currentPropValues[0].value"
+               placeholder="Enter email"
+               type="email" />
     </div>
 </script>
