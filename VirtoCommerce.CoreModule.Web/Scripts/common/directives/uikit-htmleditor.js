@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.common')
+angular.module('virtoCommerce.coreModule.common')
 .directive('vcUkHtmleditor', [function () {
     return {
         restrict: 'A',
@@ -8,7 +8,7 @@
             fileUploader: '='
         },
         link: function (scope, element, attributes) {
-            var htmlEditor = UIkit.htmleditor(element, { mode: 'tab', maxsplitsize: 900, markdown: true });
+			var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 900, markdown: true });
             var codeMirror = htmlEditor.editor;
             htmlEditor.addButtons({
                 headerFirst: { label: 'H1', title: 'First level header' },
