@@ -8,7 +8,7 @@ angular.module('virtoCommerce.coreModule.common')
             fileUploader: '='
         },
         link: function (scope, element, attributes) {
-			var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 900, markdown: true });
+			var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true });
             var codeMirror = htmlEditor.editor;
             htmlEditor.addButtons({
                 headerFirst: { label: 'H1', title: 'First level header' },
