@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
 
 namespace VirtoCommerce.Domain.Search
 {
+    [Serializable]
     public class SearchException : ApplicationException
     {
         /// <summary>

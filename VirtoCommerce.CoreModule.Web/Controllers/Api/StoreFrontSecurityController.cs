@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -219,7 +219,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            string token = await _securityService.GeneratePasswordResetTokenAsync(userId);
+            var token = await _securityService.GeneratePasswordResetTokenAsync(userId);
 
             var uriBuilder = new UriBuilder(callbackUrl);
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
