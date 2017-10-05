@@ -1,4 +1,4 @@
-﻿// This indexing jobs implementation allows only one job to perform indexing.
+// This indexing jobs implementation allows only one job to perform indexing.
 // If some job is started successfully, all other jobs will terminate with "Indexation is already in progress" error until the first job is finished.
 // The synchronization is done by checking the static field _cancellationTokenSource. If it is not null, then some job is already running.
 // This scenario requires the platform and hangfire server to run in the same application.
@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Hangfire;
+using Microsoft.Practices.ObjectBuilder2;
 using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.Common;
@@ -27,13 +28,16 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         private readonly IIndexingManager _indexingManager;
         private readonly ISettingsManager _settingsManager;
         private readonly IndexProgressHandler _progressHandler;
+        private readonly IIndexingInterceptor[] _interceptors;
 
-        public IndexingJobs(IndexDocumentConfiguration[] documentsConfigs, IIndexingManager indexingManager, ISettingsManager settingsManager, IndexProgressHandler progressHandler)
+        public IndexingJobs(IndexDocumentConfiguration[] documentsConfigs, IIndexingManager indexingManager, ISettingsManager settingsManager,
+            IndexProgressHandler progressHandler, IIndexingInterceptor[] interceptors = null)
         {
             _documentsConfigs = documentsConfigs;
             _indexingManager = indexingManager;
             _settingsManager = settingsManager;
             _progressHandler = progressHandler;
+            _interceptors = interceptors;
         }
 
         // Enqueue a background job with single notification object for all given options
@@ -56,8 +60,10 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         // One-time job for manual indexation
         public async Task IndexAllDocumentsJob(string userName, string notificationId, IndexingOptions[] options)
         {
-            // Use single notification for all options (document types)
-            await IndexAsync(userName, notificationId, false, options, IndexAllDocumentsAsync);
+            await WithInterceptorsAsync(options, async o =>
+            {
+                await IndexAsync(userName, notificationId, false, o, IndexAllDocumentsAsync);
+            });
         }
 
         // Recurring job for automatic changes indexation.
@@ -65,14 +71,15 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         public async Task IndexChangesJob(string documentType)
         {
             var allOptions = GetAllIndexingOptions(documentType);
-
-            // Create different notification for each option (document type)
-            foreach (var options in allOptions)
+            await WithInterceptorsAsync(allOptions, async o =>
             {
-                await IndexAsync(null, null, true, new[] { options }, IndexChangesAsync);
-            }
+                // Create different notification for each option (document type)
+                foreach (var options in o)
+                {
+                    await IndexAsync(null, null, true, new[] { options }, IndexChangesAsync);
+                }
+            });
         }
-
 
         private async Task IndexAsync(string currentUserName, string notificationId, bool suppressInsignificantNotifications, IEnumerable<IndexingOptions> allOptions, Func<IndexingOptions, CancellationToken, Task> indexationFunc)
         {
@@ -138,6 +145,22 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
 
             // Save indexation date. It will be used as a start date for the next indexation
             SetLastIndexationDate(options.DocumentType, oldIndexationDate, newIndexationDate);
+        }
+
+        private async Task WithInterceptorsAsync(ICollection<IndexingOptions> options, Func<ICollection<IndexingOptions>, Task> action)
+        {
+            try
+            {
+                _interceptors?.ForEach(x => x.OnBegin(options.ToArray()));
+
+                await action(options);
+
+                _interceptors?.ForEach(x => x.OnEnd(options.ToArray()));
+            }
+            catch (Exception ex)
+            {
+                _interceptors?.ForEach(x => x.OnEnd(options.ToArray(), ex));
+            }
         }
 
         private static CancellationTokenSource StartIndexation()

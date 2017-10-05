@@ -271,6 +271,7 @@
     <Compile Include="Search\IFilter.cs" />
     <Compile Include="Search\IIndexDocumentBuilder.cs" />
     <Compile Include="Search\IIndexDocumentChangesProvider.cs" />
+    <Compile Include="Search\IIndexingInterceptor.cs" />
     <Compile Include="Search\IIndexingManager.cs" />
     <Compile Include="Search\IndexDocument.cs" />
     <Compile Include="Search\IndexDocumentChange.cs" />

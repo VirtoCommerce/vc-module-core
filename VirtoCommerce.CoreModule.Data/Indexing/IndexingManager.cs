@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -266,7 +266,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             if (changeType == IndexDocumentChangeType.Deleted)
             {
-                result = await DeleteDocumentsAsync(batchOptions.DocumentType, documentIds, cancellationToken);
+                result = await DeleteDocumentsAsync(batchOptions.DocumentType, documentIds.ToArray(), cancellationToken);
             }
             else if (changeType == IndexDocumentChangeType.Modified)
             {
@@ -276,13 +276,35 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        protected virtual async Task<IndexingResult> DeleteDocumentsAsync(string documentType, IList<string> documentIds, CancellationToken cancellationToken)
+        public virtual async Task<IndexingResult> DeleteDocumentsAsync(string documentType, string[] documentIds, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             var documents = documentIds.Select(id => new IndexDocument(id)).ToList();
             var response = await _searchProvider.RemoveAsync(documentType, documents);
             return response;
+        }
+
+        public virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, string[] documentIds,
+            CancellationToken cancellationToken)
+        {
+            var configs = _configs.Where(c => c.DocumentType.EqualsInvariant(documentType)).ToArray();
+            var result = new IndexingResult { Items = new List<IndexingResultItem>() };
+
+            foreach (var config in configs)
+            {
+                var secondaryDocBuilders = config.RelatedSources?
+                    .Where(s => s.DocumentBuilder != null)
+                    .Select(s => s.DocumentBuilder)
+                    .ToList();
+
+                var configResult = await IndexDocumentsAsync(documentType, documentIds,
+                    config.DocumentSource.DocumentBuilder, secondaryDocBuilders, cancellationToken);
+
+                result.Items.AddRange(configResult.Items ?? Enumerable.Empty<IndexingResultItem>());
+            }
+
+            return result;
         }
 
         protected virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
