@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Domain.Search.ChangeFeed;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.Settings;
 
 namespace VirtoCommerce.CoreModule.Data.Indexing
 {
@@ -17,10 +18,11 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         private readonly ISearchProvider _searchProvider;
         private readonly IndexDocumentConfiguration[] _configs;
         private readonly ISearchConnection _connection;
+        private readonly ISettingsManager _settingsManager;
         private readonly IIndexingWorker _backgroundWorker;
 
         public IndexingManager(ISearchProvider searchProvider, IndexDocumentConfiguration[] configs, ISearchConnection connection,
-            IIndexingWorker backgroundWorker = null)
+            ISettingsManager settingsManager = null, IIndexingWorker backgroundWorker = null)
         {
             if (searchProvider == null)
                 throw new ArgumentNullException(nameof(searchProvider));
@@ -30,6 +32,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             _connection = connection;
             _searchProvider = searchProvider;
             _configs = configs;
+            _settingsManager = settingsManager;
             _backgroundWorker = backgroundWorker;
         }
 
@@ -69,6 +72,9 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 throw new ArgumentNullException(nameof(options));
             if (string.IsNullOrEmpty(options.DocumentType))
                 throw new ArgumentNullException($"{nameof(options)}.{nameof(options.DocumentType)}");
+
+            if (options.BatchSize == null)
+                options.BatchSize = _settingsManager?.GetValue("VirtoCommerce.Search.IndexPartitionSize", 50) ?? 50;
             if (options.BatchSize < 1)
                 throw new ArgumentException(@"Batch size cannon be less than 1", $"{nameof(options)}.{nameof(options.BatchSize)}");
 
@@ -118,6 +124,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
         public virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, string[] documentIds)
         {
+            // Todo: reuse general indxex api?
             var configs = _configs.Where(c => c.DocumentType.EqualsInvariant(documentType)).ToArray();
             var result = new IndexingResult { Items = new List<IndexingResultItem>() };
 
@@ -274,7 +281,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 return new[]
                 {
                     new InMemoryIndexDocumentChangeFeed(options.DocumentIds.ToArray(),
-                        IndexDocumentChangeType.Modified, options.BatchSize)
+                        IndexDocumentChangeType.Modified, options.BatchSize.GetValueOrDefault(50))
                 };
             }
 
@@ -304,7 +311,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 }
             }
 
-            return await Task.WhenAll(factories.Select(x => x.CreateFeed(options.StartDate, options.EndDate, options.BatchSize)));
+            return await Task.WhenAll(factories.Select(x => x.CreateFeed(options.StartDate, options.EndDate,
+                options.BatchSize.GetValueOrDefault(50))));
         }
 
         protected virtual IList<string> GetIndexingErrors(IndexingResult indexingResult)
