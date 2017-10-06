@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Web.Http;
 using Hangfire;
@@ -87,6 +87,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
 
+            _container.RegisterType<IIndexingWorker, HangfireIndexingWorker>();
             _container.RegisterType<IIndexingManager, IndexingManager>();
 
             var searchConnectionString = ConnectionStringHelper.GetConnectionString("SearchConnectionString");

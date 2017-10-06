@@ -26,13 +26,29 @@ namespace VirtoCommerce.Domain.Search
         Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken);
 
         /// <summary>
+        /// Indexes a batch of documents through the queue.
+        /// </summary>
+        /// <param name="documentType">Document type to index.</param>
+        /// <param name="documentIds">Ids of documents to index.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        void QueueDocumentIndexation(string documentType, string[] documentIds);
+
+        /// <summary>
+        /// Deletes a batch of documents from the index through the queue
+        /// </summary>
+        /// <param name="documentType">Document type to delete.</param>
+        /// <param name="documentIds">Ids of documents to delete.</param>
+        /// <param name="cancellationToken">Token to cancel the operation.</param>
+        void QueueDocumentDeletion(string documentType, string[] documentIds);
+
+        /// <summary>
         /// Indexes a batch of documents immediately.
         /// </summary>
         /// <param name="documentType">Document type to index.</param>
         /// <param name="documentIds">Ids of documents to index.</param>
         /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>Result of indexing operation.</returns>
-        Task<IndexingResult> IndexDocumentsAsync(string documentType, string[] documentIds, CancellationToken cancellationToken);
+        Task<IndexingResult> IndexDocumentsAsync(string documentType, string[] documentIds);
 
         /// <summary>
         /// Deletes a batch of documents from the index immediately.
@@ -41,6 +57,6 @@ namespace VirtoCommerce.Domain.Search
         /// <param name="documentIds">Ids of documents to delete.</param>
         /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>Result of indexing operation.</returns>
-        Task<IndexingResult> DeleteDocumentsAsync(string documentType, string[] documentIds, CancellationToken cancellationToken);
+        Task<IndexingResult> DeleteDocumentsAsync(string documentType, string[] documentIds);
     }
 }

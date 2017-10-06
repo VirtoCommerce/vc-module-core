@@ -163,6 +163,7 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BackgroundJobs\IndexingJobs.cs" />
+    <Compile Include="BackgroundJobs\HangfireIndexingWorker.cs" />
     <Compile Include="BackgroundJobs\IndexProgressHandler.cs" />
     <Compile Include="Controllers\Api\SearchIndexationController.cs" />
     <Compile Include="Controllers\Api\CommerceController.cs" />

@@ -270,11 +270,14 @@
     <Compile Include="Search\IdsFilter.cs" />
     <Compile Include="Search\IFilter.cs" />
     <Compile Include="Search\IIndexDocumentBuilder.cs" />
+    <Compile Include="Search\ChangeFeed\IIndexDocumentChangeFeed.cs" />
+    <Compile Include="Search\ChangeFeed\IIndexDocumentChangeFeedFactory.cs" />
     <Compile Include="Search\IIndexDocumentChangesProvider.cs" />
     <Compile Include="Search\IIndexingInterceptor.cs" />
     <Compile Include="Search\IIndexingManager.cs" />
     <Compile Include="Search\IndexDocument.cs" />
     <Compile Include="Search\IndexDocumentChange.cs" />
+    <Compile Include="Search\ChangeFeed\IndexDocumentChangeFeedFactoryAdapter.cs" />
     <Compile Include="Search\IndexDocumentChangeType.cs" />
     <Compile Include="Search\IndexDocumentConfiguration.cs" />
     <Compile Include="Search\IndexDocumentField.cs" />
@@ -284,6 +287,7 @@
     <Compile Include="Search\IndexingResult.cs" />
     <Compile Include="Search\IndexingResultItem.cs" />
     <Compile Include="Search\IndexState.cs" />
+    <Compile Include="Search\ChangeFeed\InMemoryIndexDocumentChangeFeed.cs" />
     <Compile Include="Search\ISearchConnection.cs" />
     <Compile Include="Search\ISearchPhraseParser.cs" />
     <Compile Include="Search\ISearchProvider.cs" />
