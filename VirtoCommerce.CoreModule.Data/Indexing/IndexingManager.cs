@@ -214,7 +214,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 } 
             }
 
-            progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType, totalCount, processedCount));
+            progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType,
+                totalCount.GetValueOrDefault(processedCount), processedCount));
         }
 
         protected virtual async Task<IndexingResult> ProcessChangesAsync(IEnumerable<IndexDocumentChange> changes, BatchIndexingOptions batchOptions, CancellationToken cancellationToken)
