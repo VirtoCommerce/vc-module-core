@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model.Search;
 
 namespace VirtoCommerce.Domain.Catalog.Model.Search
@@ -23,5 +23,10 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Term format: name:value1,value2
         /// </summary>
         public IList<string> Terms { get; set; }
+
+        /// <summary>
+        /// Assigned groups for current user. Data format: user_groups:value1,value2
+        /// </summary>
+        public IList<string> UserGroups { get; set; }
     }
 }
