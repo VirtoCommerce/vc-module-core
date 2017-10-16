@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using VirtoCommerce.Platform.Core.Common;
 namespace VirtoCommerce.Domain.Marketing.Model
 {
     public class Coupon : AuditableEntity
-    {
+    {      
         /// <summary>
+        /// Restriction of total coupon usages
         /// 0 infinitive
         /// </summary>
-        public int MaxUsesNumber { get; set; }
+        public int MaxUsesNumber { get; set; }       
+
         public DateTime? ExpirationDate { get; set; }
         /// <summary>
         /// coupon code

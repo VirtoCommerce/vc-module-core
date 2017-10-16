@@ -1,18 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Common;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
     public class PromotionEvaluationContext : EvaluationContextBase
-	{
-		public PromotionEvaluationContext()
-		{
-			IsEveryone = true;
-			CartPromoEntries = new List<ProductPromoEntry>();
-			PromoEntries = new List<ProductPromoEntry>();
-		}
-
-
+	{	
 		public string[] RefusedGiftIds { get; set; }
 
 		public string StoreId { get; set; }
@@ -31,9 +23,10 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		/// </summary>
 		public bool IsFirstTimeBuyer { get; set; }
 
-		public bool IsEveryone { get; set; }
-		
-		public decimal CartTotal { get; set; }
+        public bool IsEveryone { get; set; } = true;
+
+        //Cart subtotal (incorrect property name cannot change for back compatibility reasons)
+        public decimal CartTotal { get; set; }
 
         /// <summary>
         /// Current shipment method
@@ -55,18 +48,39 @@ namespace VirtoCommerce.Domain.Marketing.Model
         /// Entered coupon
         /// </summary>
         public string Coupon { get; set; }
-		/// <summary>
-		/// List of product promo in cart
-		/// </summary>
-		public ICollection<ProductPromoEntry> CartPromoEntries { get; set; }
+        /// <summary>
+        /// Entered multiple coupons
+        /// </summary>
+        private ICollection<string> _coupons;
+        public ICollection<string> Coupons
+        {
+            get
+            {
+                if (_coupons == null && !string.IsNullOrEmpty(Coupon))
+                {
+                    _coupons = new List<string>() { Coupon };
+                }
+                return _coupons;
+            }
+            set
+            {
+                _coupons = value;
+            }
+        }
+        /// <summary>
+        /// List of product promo in cart
+        /// </summary>
+        public ICollection<ProductPromoEntry> CartPromoEntries { get; set; } = new List<ProductPromoEntry>();
 		/// <summary>
 		/// List of products for promo evaluation
 		/// </summary>
-		public ICollection<ProductPromoEntry> PromoEntries { get; set; }
+		public ICollection<ProductPromoEntry> PromoEntries { get; set; } = new List<ProductPromoEntry>();
 		/// <summary>
 		/// Single catalog product promo entry 
 		/// </summary>
 		public ProductPromoEntry PromoEntry { get; set; }
+
+
 
 	
 	}

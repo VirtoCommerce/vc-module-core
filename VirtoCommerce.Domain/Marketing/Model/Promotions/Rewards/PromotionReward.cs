@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
+using System;
+using VirtoCommerce.Domain.Common;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
-	public abstract class PromotionReward 
-	{
+    public abstract class PromotionReward : ValueObject
+    {
 		public PromotionReward()
 		{
 		}
@@ -20,7 +17,6 @@ namespace VirtoCommerce.Domain.Marketing.Model
 			Coupon = other.Coupon;
 			CouponMinOrderAmount = other.CouponMinOrderAmount;
 			Promotion = other.Promotion;
-			IsExclusive = other.IsExclusive;
 		}
 
 		/// <summary>
@@ -28,7 +24,7 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		/// </summary>
 		public bool IsValid { get; set; }
 		/// <summary>
-		/// Promo information. (user instructions, cuurent promo description)
+		/// Promo information. (user instructions, current promo description)
 		/// </summary>
 		public string Description { get; set; }
 		/// <summary>
@@ -48,13 +44,9 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		//Promotion 
 		public Promotion Promotion { get; set; }
 
+        [Obsolete]
 		public bool IsExclusive { get; set; }
 
-		public abstract PromotionReward Clone();
-
-		public override string ToString()
-		{
-			return String.Format("{0} of promotion {1} -  {2}", this.GetType().Name, Promotion != null ? Promotion.Id : "undef", IsValid ? "Valid" : "Invalid");
-		}
+		public abstract PromotionReward Clone();     
 	}
 }

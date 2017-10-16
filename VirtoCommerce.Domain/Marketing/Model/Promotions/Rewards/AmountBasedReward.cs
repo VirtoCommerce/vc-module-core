@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtoCommerce.Domain.Common;
 
 namespace VirtoCommerce.Domain.Marketing.Model
 {
@@ -26,7 +27,24 @@ namespace VirtoCommerce.Domain.Marketing.Model
 
 		public int Quantity { get; set; }
 
-		public decimal CalculateDiscountAmount(decimal price, int quantity = 1)
+        public virtual decimal GetRewardAmount(decimal price, int quantity)
+        {
+            var result = Amount;
+            if (AmountType == RewardAmountType.Relative)
+            {
+                result = price * Amount * 0.01m;
+            }
+            if (Quantity > 0)
+            {
+                //Need to allocate adjustment between given quantities
+                result = result * Math.Min(Quantity, quantity);
+                //TODO: need allocate more rightly between each quantities
+                result = result.Allocate(quantity).FirstOrDefault();
+            }
+            return result;
+        }
+
+        public decimal CalculateDiscountAmount(decimal price, int quantity = 1)
 		{
 			var retVal = Amount;
 			if (AmountType == RewardAmountType.Relative)
@@ -40,11 +58,5 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		{
 			return Math.Round(value, 2, MidpointRounding.AwayFromZero);
 		}
-
-		public override string ToString()
-		{
-			return String.Format(" {0} {1}{2}{3}", base.ToString(),  Amount,  AmountType == RewardAmountType.Absolute ? "$"  : "%", Quantity > 0 ? "for "+ Quantity + " pcs" : String.Empty);
-		}
-	
 	}
 }

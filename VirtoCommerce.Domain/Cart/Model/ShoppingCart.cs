@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -355,8 +355,27 @@ namespace VirtoCommerce.Domain.Cart.Model
         public ICollection<Address> Addresses { get; set; }
 		public ICollection<LineItem> Items { get; set; }
 		public ICollection<Payment> Payments { get; set; }
-		public ICollection<Shipment> Shipments { get; set; }		
-		public string Coupon { get; set; }
+		public ICollection<Shipment> Shipments { get; set; }
+        /// <summary>
+        /// Entered multiple coupons
+        /// </summary>
+        private ICollection<string> _coupons;
+        public ICollection<string> Coupons
+        {
+            get
+            {
+                if (_coupons == null && !string.IsNullOrEmpty(Coupon))
+                {
+                    _coupons = new List<string>() { Coupon };
+                }
+                return _coupons;
+            }
+            set
+            {
+                _coupons = value;
+            }
+        }
+        public string Coupon { get; set; }
 
         #region IHasDiscounts
         public ICollection<Discount> Discounts { get; set; } 
