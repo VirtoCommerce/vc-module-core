@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Linq;
+using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.Platform.Data.Infrastructure;
 using VirtoCommerce.Platform.Data.Infrastructure.Interceptors;
-using VirtoCommerce.CoreModule.Data.Model;
 
 namespace VirtoCommerce.CoreModule.Data.Repositories
 {
-    public class CommerceRepositoryImpl : EFRepositoryBase, IСommerceRepository
+    public class CommerceRepositoryImpl : EFRepositoryBase, ICommerceRepository
     {
         public CommerceRepositoryImpl()
         {
