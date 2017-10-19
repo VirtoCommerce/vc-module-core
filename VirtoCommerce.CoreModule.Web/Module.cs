@@ -61,7 +61,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             #region Commerce
 
-            _container.RegisterType<IСommerceRepository>(new InjectionFactory(c => new CommerceRepositoryImpl(_connectionString, new EntityPrimaryKeyGeneratorInterceptor(), _container.Resolve<AuditableInterceptor>())));
+            _container.RegisterType<ICommerceRepository>(new InjectionFactory(c => new CommerceRepositoryImpl(_connectionString, new EntityPrimaryKeyGeneratorInterceptor(), _container.Resolve<AuditableInterceptor>())));
             _container.RegisterType<ICommerceService, CommerceServiceImpl>();
 
             #endregion

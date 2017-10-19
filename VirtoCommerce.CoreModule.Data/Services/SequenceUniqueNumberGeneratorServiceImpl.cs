@@ -16,14 +16,14 @@ namespace VirtoCommerce.CoreModule.Data.Services
         //How many sequence items will be stored in-memory
         public const int SequenceReservationRange = 100;
 
-        private readonly Func<IСommerceRepository> _repositoryFactory;
+        private readonly Func<ICommerceRepository> _repositoryFactory;
         private static readonly object _sequenceLock = new object();
         private static readonly InMemorySequenceList _inMemorySequences = new InMemorySequenceList();
 
         #endregion
 
 
-        public SequenceUniqueNumberGeneratorServiceImpl(Func<IСommerceRepository> repositoryFactory)
+        public SequenceUniqueNumberGeneratorServiceImpl(Func<ICommerceRepository> repositoryFactory)
         {
             _repositoryFactory = repositoryFactory;
         }

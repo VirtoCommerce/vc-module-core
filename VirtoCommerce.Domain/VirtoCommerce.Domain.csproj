@@ -134,6 +134,7 @@
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
     <Compile Include="Commerce\Services\ISeoDuplicatesDetector.cs" />
+    <Compile Include="Common\MoneyExtensions.cs" />
     <Compile Include="Common\Expressions\ConditionExpressionTree.cs" />
     <Compile Include="Common\Expressions\DynamicExpression.cs" />
     <Compile Include="Common\EvaluationContextBase.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Common\IEvaluationContext.cs" />
     <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Services\ICommerceService.cs" />
+    <Compile Include="Common\ValueObject.cs" />
     <Compile Include="Customer\Model\Contact.cs" />
     <Compile Include="Customer\Model\Employee.cs" />
     <Compile Include="Customer\Model\Events\MemberChangingEvent.cs" />
