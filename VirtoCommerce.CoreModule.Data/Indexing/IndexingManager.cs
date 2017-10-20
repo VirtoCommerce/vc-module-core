@@ -96,11 +96,11 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             }
         }
 
-        public void QueueDocumentIndexation(string documentType, string[] documentIds)
+        public void QueueDocumentIndexation(string documentType, string[] documentIds, IndexingPriority priority = IndexingPriority.Default)
         {
             if (_backgroundWorker != null)
             {
-                _backgroundWorker.IndexDocuments(documentType, documentIds);
+                _backgroundWorker.IndexDocuments(documentType, documentIds, priority);
             }
             else
             {
@@ -109,11 +109,11 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             }
         }
 
-        public void QueueDocumentDeletion(string documentType, string[] documentIds)
+        public void QueueDocumentDeletion(string documentType, string[] documentIds, IndexingPriority priority = IndexingPriority.Default)
         {
             if (_backgroundWorker != null)
             {
-                _backgroundWorker.DeleteDocuments(documentType, documentIds);
+                _backgroundWorker.DeleteDocuments(documentType, documentIds, priority);
             }
             else
             {
@@ -201,7 +201,10 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                     }
                     else
                     {
-                        _backgroundWorker.IndexDocuments(configuration.DocumentType, batch.Select(x => x.DocumentId).ToArray());
+                        // We're executing a job to index all documents or the changes since a specific time.
+                        // Priority for this indexation work should be quite low.
+                        _backgroundWorker.IndexDocuments(configuration.DocumentType, batch.Select(x => x.DocumentId).ToArray(),
+                            IndexingPriority.Background);
                     }
                     processedCount += batch.Count;
 

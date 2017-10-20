@@ -32,7 +32,7 @@ namespace VirtoCommerce.CoreModule.Web
 {
     public class Module : ModuleBase, ISupportExportImportModule
     {
-        private static readonly string _connectionString = ConnectionStringHelper.GetConnectionString("VirtoCommerce");
+        private static readonly string _connectionString = ConfigurationHelper.GetConnectionStringValue("VirtoCommerce");
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container)
@@ -87,10 +87,15 @@ namespace VirtoCommerce.CoreModule.Web
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
 
-            _container.RegisterType<IIndexingWorker, HangfireIndexingWorker>();
+            // Allo scale out of indexation through background worker, if opted-in.
+            if (ConfigurationHelper.GetAppSettingsValue("VirtoCommerce:Search.ScaleOutIndexation", false))
+            {
+                _container.RegisterType<IIndexingWorker, HangfireIndexingWorker>();
+            }
+
             _container.RegisterType<IIndexingManager, IndexingManager>();
 
-            var searchConnectionString = ConnectionStringHelper.GetConnectionString("SearchConnectionString");
+            var searchConnectionString = ConfigurationHelper.GetConnectionStringValue("SearchConnectionString");
 
             if (string.IsNullOrEmpty(searchConnectionString))
             {

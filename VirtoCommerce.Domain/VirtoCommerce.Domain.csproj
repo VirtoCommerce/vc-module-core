@@ -285,6 +285,7 @@
     <Compile Include="Search\IndexDocumentField.cs" />
     <Compile Include="Search\IndexDocumentSource.cs" />
     <Compile Include="Search\IndexingOptions.cs" />
+    <Compile Include="Search\IndexingPriority.cs" />
     <Compile Include="Search\IndexingProgress.cs" />
     <Compile Include="Search\IndexingResult.cs" />
     <Compile Include="Search\IndexingResultItem.cs" />
