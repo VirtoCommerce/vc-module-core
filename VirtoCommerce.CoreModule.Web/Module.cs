@@ -87,10 +87,14 @@ namespace VirtoCommerce.CoreModule.Web
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
 
-            // Allo scale out of indexation through background worker, if opted-in.
+            // Allow scale out of indexation through background worker, if opted-in.
             if (ConfigurationHelper.GetAppSettingsValue("VirtoCommerce:Search.ScaleOutIndexation", false))
             {
                 _container.RegisterType<IIndexingWorker, HangfireIndexingWorker>();
+            }
+            else
+            {
+                _container.RegisterType<IIndexingWorker>(new InjectionFactory(c => null));
             }
 
             _container.RegisterType<IIndexingManager, IndexingManager>();
