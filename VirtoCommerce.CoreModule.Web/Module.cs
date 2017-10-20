@@ -90,7 +90,10 @@ namespace VirtoCommerce.CoreModule.Web
             // Allow scale out of indexation through background worker, if opted-in.
             if (ConfigurationHelper.GetAppSettingsValue("VirtoCommerce:Search.ScaleOutIndexation", false))
             {
-                _container.RegisterType<IIndexingWorker, HangfireIndexingWorker>();
+                _container.RegisterInstance<IIndexingWorker>(new HangfireIndexingWorker
+                {
+                    ThrottleQueueCount = ConfigurationHelper.GetAppSettingsValue("VirtoCommerce:Search.ThrottleQueueCount", 25)
+                });
             }
             else
             {
