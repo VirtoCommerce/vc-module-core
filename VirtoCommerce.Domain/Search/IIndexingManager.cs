@@ -1,5 +1,4 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace VirtoCommerce.Domain.Search
@@ -23,7 +22,7 @@ namespace VirtoCommerce.Domain.Search
         /// <param name="progressCallback"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken);
+        Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, Platform.Core.Common.ICancellationToken cancellationToken);
 
         /// <summary>
         /// Indexes a batch of documents through the queue.

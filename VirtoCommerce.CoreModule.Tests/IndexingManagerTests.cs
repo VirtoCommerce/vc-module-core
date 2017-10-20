@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.CoreModule.Data.Indexing;
+using VirtoCommerce.CoreModule.Web.BackgroundJobs;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.Common;
 using Xunit;
@@ -48,7 +49,7 @@ namespace VirtoCommerce.CoreModule.Tests
                 BatchSize = batchSize,
             };
 
-            await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
+            await manager.IndexAsync(options, p => progress.Add(p), new CancellationTokenWrapper(cancellationTokenSource.Token));
 
             var expectedBatchesCount = GetExpectedBatchesCount(rebuild, documentSources, batchSize);
             var expectedProgressItemsCount = (rebuild ? 1 : 0) + 1 + expectedBatchesCount + 1;
@@ -97,7 +98,7 @@ namespace VirtoCommerce.CoreModule.Tests
                 BatchSize = batchSize,
             };
 
-            await manager.IndexAsync(options, p => progress.Add(p), cancellationTokenSource.Token);
+            await manager.IndexAsync(options, p => progress.Add(p), new CancellationTokenWrapper(cancellationTokenSource.Token));
 
             var expectedBatchesCount = GetBatchesCount(options.DocumentIds.Count, batchSize);
             var expectedProgressItemsCount = 1 + expectedBatchesCount + 1;

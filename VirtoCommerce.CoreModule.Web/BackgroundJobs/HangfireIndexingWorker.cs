@@ -9,7 +9,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
 {
     /// <summary>
     /// Scales out indexation work through Hangfire.
-    /// Throttles queueing so that indexation job doesn't go way faster than action indexation work.
+    /// Throttles queueing so that indexation job doesn't go way faster than actual indexation work.
     /// </summary>
     public class HangfireIndexingWorker : IIndexingWorker
     {
@@ -22,7 +22,8 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         public void IndexDocuments(string documentType, string[] documentIds,
             IndexingPriority priority = IndexingPriority.Default)
         {
-            ThrottleByQueueCount(priority, ThrottleQueueCount);
+            if (priority != IndexingPriority.NearRealTime)
+                ThrottleByQueueCount(priority, ThrottleQueueCount);
 
             IndexingJobs.EnqueueIndexDocuments(documentType, documentIds, IndexingPriorityToJobPriority(priority));
         }
@@ -30,37 +31,22 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         public void DeleteDocuments(string documentType, string[] documentIds,
             IndexingPriority priority = IndexingPriority.Default)
         {
-            ThrottleByQueueCount(priority, ThrottleQueueCount);
+            if (priority != IndexingPriority.NearRealTime)
+                ThrottleByQueueCount(priority, ThrottleQueueCount);
 
             IndexingJobs.EnqueueDeleteDocuments(documentType, documentIds, IndexingPriorityToJobPriority(priority));
         }
 
         protected virtual void ThrottleByQueueCount(IndexingPriority priority, int maxQueueCount)
         {
-            string queue = null;
-            switch (priority)
-            {
-                case IndexingPriority.NearRealTime:
-                    queue = JobPriority.High;
-                    break;
-                case IndexingPriority.Background:
-                    queue = JobPriority.Low;
-                    break;
-                default:
-                    throw new ArgumentException($"Unkown priority: {priority}");
-            }
-
+            var queue = IndexingPriorityToJobPriority(priority);
             var monitoringApi = JobStorage.Current.GetMonitoringApi();
             long queued = 0;
             while (true)
             {
                 queued = monitoringApi.EnqueuedCount(queue);
                 if (queued <= maxQueueCount)
-                {
-                    // Check fetched and processing jobs as well.
-                    queued += monitoringApi.FetchedCount(queue);
-                    if (queued <= maxQueueCount) return;
-                }
+                    return;
 
                 Thread.Sleep(SleepTimeMs);
             } 

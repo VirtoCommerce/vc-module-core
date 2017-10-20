@@ -169,7 +169,7 @@ namespace VirtoCommerce.CoreModule.Web
             if (scheduleJobs)
             {
                 var cronExpression = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.CronExpression", "0/5 * * * *");
-                RecurringJob.AddOrUpdate<IndexingJobs>(j => j.IndexChangesJob(null), cronExpression);
+                RecurringJob.AddOrUpdate<IndexingJobs>(j => j.IndexChangesJob(null, JobCancellationToken.Null), cronExpression);
             }
 
             #endregion

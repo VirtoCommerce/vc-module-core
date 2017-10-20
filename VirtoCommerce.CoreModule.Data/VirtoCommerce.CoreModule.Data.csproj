@@ -90,7 +90,6 @@
     <Compile Include="Converters\FulfillmentCenterConverter.cs" />
     <Compile Include="Indexing\BatchIndexingOptions.cs" />
     <Compile Include="Indexing\BatchIndexingResult.cs" />
-    <Compile Include="Indexing\ChangesProviderAndTotalCount.cs" />
     <Compile Include="Indexing\IIndexingWorker.cs" />
     <Compile Include="Migrations\201504301238451_Initial.cs" />
     <Compile Include="Migrations\201504301238451_Initial.Designer.cs">

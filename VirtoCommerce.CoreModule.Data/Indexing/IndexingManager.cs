@@ -66,7 +66,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        public virtual async Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
+        public virtual async Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, ICancellationToken cancellationToken)
         {
             if (options == null)
                 throw new ArgumentNullException(nameof(options));
@@ -136,7 +136,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                     .ToList();
 
                 var configResult = await IndexDocumentsAsync(documentType, documentIds,
-                    config.DocumentSource.DocumentBuilder, secondaryDocBuilders, CancellationToken.None);
+                    config.DocumentSource.DocumentBuilder, secondaryDocBuilders,
+                    new CancellationTokenWrapper(CancellationToken.None));
 
                 result.Items.AddRange(configResult.Items ?? Enumerable.Empty<IndexingResultItem>());
             }
@@ -150,7 +151,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return await _searchProvider.RemoveAsync(documentType, documents);
         }
 
-        protected virtual async Task ProcessConfigurationAsync(IndexDocumentConfiguration configuration, IndexingOptions options, Action<IndexingProgress> progressCallback, CancellationToken cancellationToken)
+        protected virtual async Task ProcessConfigurationAsync(IndexDocumentConfiguration configuration, IndexingOptions options, Action<IndexingProgress> progressCallback, ICancellationToken cancellationToken)
         {
             if (configuration == null)
                 throw new ArgumentNullException(nameof(configuration));
@@ -221,7 +222,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 totalCount.GetValueOrDefault(processedCount), processedCount));
         }
 
-        protected virtual async Task<IndexingResult> ProcessChangesAsync(IEnumerable<IndexDocumentChange> changes, BatchIndexingOptions batchOptions, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> ProcessChangesAsync(IEnumerable<IndexDocumentChange> changes, BatchIndexingOptions batchOptions, ICancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -250,7 +251,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        protected virtual async Task<IndexingResult> ProcessDocumentsAsync(IndexDocumentChangeType changeType, IList<string> documentIds, BatchIndexingOptions batchOptions, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> ProcessDocumentsAsync(IndexDocumentChangeType changeType, IList<string> documentIds, BatchIndexingOptions batchOptions, ICancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -268,7 +269,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        protected virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, ICancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -340,7 +341,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return result;
         }
 
-        protected virtual async Task<IList<IndexDocument>> GetDocumentsAsync(IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocument>> GetDocumentsAsync(IList<string> documentIds, IIndexDocumentBuilder primaryDocumentBuilder, IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, ICancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -370,7 +371,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             return primaryDocuments;
         }
 
-        protected virtual async Task<IList<IndexDocument>> GetSecondaryDocumentsAsync(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, CancellationToken cancellationToken)
+        protected virtual async Task<IList<IndexDocument>> GetSecondaryDocumentsAsync(IEnumerable<IIndexDocumentBuilder> secondaryDocumentBuilders, IList<string> documentIds, ICancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
