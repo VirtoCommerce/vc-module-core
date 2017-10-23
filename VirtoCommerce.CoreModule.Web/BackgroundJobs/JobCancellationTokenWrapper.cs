@@ -4,6 +4,12 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
 {
+    /// <summary>
+    /// Implements cancellation abstraction for the job.
+    /// </summary>
+    /// <remarks>
+    /// This is needed to support job deletion. See remarks on ICancellationToken.
+    /// </remarks>
     public class JobCancellationTokenWrapper : ICancellationToken
     {
         public IJobCancellationToken JobCancellationToken { get; }
