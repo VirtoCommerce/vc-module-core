@@ -96,32 +96,6 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             }
         }
 
-        public void QueueDocumentIndexation(string documentType, string[] documentIds, IndexingPriority priority = IndexingPriority.Default)
-        {
-            if (_backgroundWorker != null)
-            {
-                _backgroundWorker.IndexDocuments(documentType, documentIds, priority);
-            }
-            else
-            {
-                // Fallback to synchronous index upates when there's no background worker.
-                IndexDocumentsAsync(documentType, documentIds).Wait();
-            }
-        }
-
-        public void QueueDocumentDeletion(string documentType, string[] documentIds, IndexingPriority priority = IndexingPriority.Default)
-        {
-            if (_backgroundWorker != null)
-            {
-                _backgroundWorker.DeleteDocuments(documentType, documentIds, priority);
-            }
-            else
-            {
-                // Fallback to synchronous index upates when there's no background worker.
-                DeleteDocumentsAsync(documentType, documentIds).Wait();
-            }
-        }
-
         public virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, string[] documentIds)
         {
             // Todo: reuse general indxex api?

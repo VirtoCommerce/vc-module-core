@@ -25,22 +25,6 @@ namespace VirtoCommerce.Domain.Search
         Task IndexAsync(IndexingOptions options, Action<IndexingProgress> progressCallback, Platform.Core.Common.ICancellationToken cancellationToken);
 
         /// <summary>
-        /// Indexes a batch of documents through the queue.
-        /// </summary>
-        /// <param name="documentType">Document type to index.</param>
-        /// <param name="documentIds">Ids of documents to index.</param>
-        /// <param name="priority">Priority for the indexation work.</param>
-        void QueueDocumentIndexation(string documentType, string[] documentIds, IndexingPriority priority = IndexingPriority.Default);
-
-        /// <summary>
-        /// Deletes a batch of documents from the index through the queue
-        /// </summary>
-        /// <param name="documentType">Document type to delete.</param>
-        /// <param name="documentIds">Ids of documents to delete.</param>
-        /// <param name="priority">Priority for the indexation work.</param>
-        void QueueDocumentDeletion(string documentType, string[] documentIds, IndexingPriority priority = IndexingPriority.Default);
-
-        /// <summary>
         /// Indexes a batch of documents immediately. Intended to be used by IndexingJobs.
         /// </summary>
         /// <param name="documentType">Document type to index.</param>
