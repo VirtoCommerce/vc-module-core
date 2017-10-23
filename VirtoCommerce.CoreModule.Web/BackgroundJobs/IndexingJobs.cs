@@ -209,7 +209,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
 
         #endregion
 
-        private async Task<bool> RunIndexJobAsync(string currentUserName, string notificationId, bool suppressInsignificantNotifications,
+        private Task<bool> RunIndexJobAsync(string currentUserName, string notificationId, bool suppressInsignificantNotifications,
             IEnumerable<IndexingOptions> allOptions, Func<IndexingOptions, ICancellationToken, Task> indexationFunc,
             IJobCancellationToken cancellationToken)
         {
@@ -217,6 +217,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             _progressHandler.Start(currentUserName, notificationId, suppressInsignificantNotifications);
 
             // Make sure only one indexation job can run in the cluster.
+            // CAUTION: locking mechanism assumes single threaded execution.
             IDisposable lck = null;
             try
             {
@@ -226,7 +227,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             {
                 // todo: Check wait in calling method
                 _progressHandler.AlreadyInProgress();
-                return false;
+                return Task.FromResult(false);
             }
 
             // Begin indexation
@@ -234,19 +235,20 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             {
                 foreach (var options in allOptions)
                 {
-                    await indexationFunc(options, new JobCancellationTokenWrapper(cancellationToken));
+                    indexationFunc(options, new JobCancellationTokenWrapper(cancellationToken)).Wait();
                 }
-                return true;
+
+                return Task.FromResult(true);
             }
             catch (OperationCanceledException)
             {
                 _progressHandler.Cancel();
-                return false;
+                return Task.FromResult(false);
             }
             catch (Exception ex)
             {
                 _progressHandler.Exception(ex);
-                return false;
+                return Task.FromResult(false);
             }
             finally
             {
