@@ -53,6 +53,8 @@ namespace VirtoCommerce.CoreModule.Web
 
         public override void Initialize()
         {
+            var settingsManager = _container.Resolve<ISettingsManager>();
+
             //#region Payment gateways manager
 
             //_container.RegisterType<IPaymentGatewayManager, InMemoryPaymentGatewayManagerImpl>(new ContainerControlledLifetimeManager());
@@ -88,11 +90,11 @@ namespace VirtoCommerce.CoreModule.Web
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
 
             // Allow scale out of indexation through background worker, if opted-in.
-            if (ConfigurationHelper.GetAppSettingsValue("VirtoCommerce:Search.ScaleOutIndexation", false))
+            if (settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.ScaleOut", false))
             {
                 _container.RegisterInstance<IIndexingWorker>(new HangfireIndexingWorker
                 {
-                    ThrottleQueueCount = ConfigurationHelper.GetAppSettingsValue("VirtoCommerce:Search.ThrottleQueueCount", 25)
+                    ThrottleQueueCount = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.MaxQueueSize", 25)
                 });
             }
             else
@@ -106,7 +108,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             if (string.IsNullOrEmpty(searchConnectionString))
             {
-                var settingsManager = _container.Resolve<ISettingsManager>();
+                settingsManager = _container.Resolve<ISettingsManager>();
                 searchConnectionString = settingsManager.GetValue("VirtoCommerce.Search.SearchConnectionString", string.Empty);
             }
 
