@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,9 +14,9 @@ namespace VirtoCommerce.CoreModule.Data.Services
 {
     public class CommerceServiceImpl : ServiceBase, ICommerceService
     {
-        private readonly Func<IСommerceRepository> _repositoryFactory;
+        private readonly Func<ICommerceRepository> _repositoryFactory;
 
-        public CommerceServiceImpl(Func<IСommerceRepository> repositoryFactory)
+        public CommerceServiceImpl(Func<ICommerceRepository> repositoryFactory)
         {
             _repositoryFactory = repositoryFactory;
         }

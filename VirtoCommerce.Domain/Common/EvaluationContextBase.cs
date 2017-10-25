@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,10 +57,10 @@ namespace VirtoCommerce.Domain.Common
 
 		public virtual string CurrentUrl { get; set; }
 
-		public virtual string ReferredUrl { get; set; }
-		#endregion
+		public virtual string ReferredUrl { get; set; }       
+        #endregion
 
-	
-	}
+
+    }
 
 }

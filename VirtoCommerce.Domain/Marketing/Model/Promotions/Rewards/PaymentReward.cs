@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,12 +25,6 @@ namespace VirtoCommerce.Domain.Marketing.Model
         public override PromotionReward Clone()
         {
             return new PaymentReward(this);
-        }
-
-
-        public override string ToString()
-        {
-            return String.Format("{0} {1}", base.ToString(), PaymentMethod);
         }
     }
 }

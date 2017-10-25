@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +9,9 @@ namespace VirtoCommerce.Domain.Marketing.Model
 
 	public class PromotionResult
 	{
-		public PromotionResult()
-		{
-			Rewards = new List<PromotionReward>();
-		}
+		public ICollection<PromotionReward> Rewards { get; } = new List<PromotionReward>();
 
-		public ICollection<PromotionReward> Rewards { get; private set; }
-
-		public T GetReward<T>() where T : PromotionReward
+        public T GetReward<T>() where T : PromotionReward
 		{
 			return Rewards.OfType<T>().Where(x => x.IsValid).FirstOrDefault();
 		}
