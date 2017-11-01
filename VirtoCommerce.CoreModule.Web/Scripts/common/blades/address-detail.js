@@ -1,35 +1,47 @@
-﻿angular.module('virtoCommerce.coreModule.common')
-.controller('virtoCommerce.coreModule.common.coreAddressDetailController', ['$scope', 'platformWebApp.common.countries', 'platformWebApp.dialogService', 'platformWebApp.bladeNavigationService', function ($scope, countries, dialogService, bladeNavigationService) {
+angular.module('virtoCommerce.coreModule.common')
+    .controller('virtoCommerce.coreModule.common.coreAddressDetailController', ['$scope', 'platformWebApp.common.countries', 'platformWebApp.dialogService', 'platformWebApp.metaFormsService', 'platformWebApp.bladeNavigationService', function ($scope, countries, dialogService, metaFormsService, bladeNavigationService) {
     var blade = $scope.blade;
 
-    $scope.addressTypes = ['Billing', 'Shipping', 'BillingAndShipping'];
-    function initializeBlade() {
+    blade.addressTypes = ['Billing', 'Shipping', 'BillingAndShipping'];
+    blade.metaFields = metaFormsService.getMetaFields('addressDetails');
+    blade.origEntity = blade.currentEntity;
+    blade.currentEntity = angular.copy(blade.origEntity);
+    blade.countries = countries.query();
 
-        if (blade.currentEntity.isNew) {
-            blade.currentEntity.addressType = $scope.addressTypes[1];
+    if (blade.currentEntity.isNew) {
+        blade.currentEntity.addressType = blade.addressTypes[1];
+    }
+
+    blade.toolbarCommands = [{
+        name: "platform.commands.reset", icon: 'fa fa-undo',
+        executeMethod: function () {
+            angular.copy(blade.origEntity, blade.currentEntity);
+        },
+        canExecuteMethod: isDirty
+    }, {
+        name: "platform.commands.delete", icon: 'fa fa-trash-o',
+        executeMethod: deleteEntry,
+        canExecuteMethod: function () {
+            return !blade.currentEntity.isNew;
         }
+    }];
 
-        blade.origEntity = blade.currentEntity;
-        blade.currentEntity = angular.copy(blade.origEntity);
-        blade.isLoading = false;
-    }
+    blade.isLoading = false;
 
-    function isDirty() {
-        return !angular.equals(blade.currentEntity, blade.origEntity);
-    }
+    blade.onClose = function (closeCallback) {
+        bladeNavigationService.showConfirmationIfNeeded(isDirty(), canSave(), blade, $scope.saveChanges, closeCallback, "core.dialogs.address-save.title", "core.dialogs.address-save.message");
+    };
 
-    function canSave() {
-        return isDirty() && $scope.isValid();
-    }
-
-    $scope.setForm = function (form) { $scope.formScope = form; };
-
-    $scope.cancelChanges = function () {
-        $scope.bladeClose();
-    }
+    $scope.setForm = function (form) {
+        $scope.formScope = form;
+    };
 
     $scope.isValid = function () {
         return $scope.formScope && $scope.formScope.$valid;
+    }
+
+    $scope.cancelChanges = function () {
+        $scope.bladeClose();
     }
 
     $scope.saveChanges = function () {
@@ -40,10 +52,20 @@
         $scope.bladeClose();
     };
 
-    blade.onClose = function (closeCallback) {
-        bladeNavigationService.showConfirmationIfNeeded(isDirty(), canSave(), blade, $scope.saveChanges, closeCallback, "core.dialogs.address-save.title", "core.dialogs.address-save.message");
-        
-    };
+    $scope.$watch('blade.currentEntity.countryCode', function (countryCode) {
+        var country;
+        if (countryCode && (country = _.findWhere(blade.countries, { id: countryCode }))) {
+            blade.currentEntity.countryName = country.name;
+        }
+    });
+
+    function isDirty() {
+        return !angular.equals(blade.currentEntity, blade.origEntity);
+    }
+
+    function canSave() {
+        return isDirty();
+    }
 
     function deleteEntry() {
         var dialog = {
@@ -61,35 +83,4 @@
         }
         dialogService.showConfirmationDialog(dialog);
     }
-
-    blade.headIcon = blade.parentBlade.headIcon;
-
-    blade.toolbarCommands = [
-        {
-            name: "platform.commands.reset", icon: 'fa fa-undo',
-            executeMethod: function () {
-                angular.copy(blade.origEntity, blade.currentEntity);
-            },
-            canExecuteMethod: isDirty
-        },
-        {
-            name: "platform.commands.delete", icon: 'fa fa-trash-o',
-            executeMethod: deleteEntry,
-            canExecuteMethod: function () {
-                return !blade.currentEntity.isNew;
-            }
-        }
-    ];
-
-    $scope.$watch('blade.currentEntity.countryCode', function (countryCode) {
-        var country;
-        if (countryCode && (country = _.findWhere($scope.countries, { id: countryCode }))) {
-            blade.currentEntity.countryName = country.name;
-        }
-    });
-
-
-    // on load
-    $scope.countries = countries.query();
-    initializeBlade();
 }]);
