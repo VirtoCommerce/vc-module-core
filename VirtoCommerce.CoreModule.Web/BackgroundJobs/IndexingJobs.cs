@@ -96,7 +96,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                         // This method is running as a job as well, so skip this job.
                         // Scale out background indexation jobs are scheduled as low.
                         await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low,
-                            x => x.Method != _manualIndexAllJobMethod);
+                            x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
                     }
                 }
                 finally
@@ -132,7 +132,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                         // This method is running as a job as well, so skip this job.
                         // Scale out background indexation jobs are scheduled as low.
                         await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low,
-                            x => x.Method != _indexChangesJobMethod);
+                            x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
                     }
                 }
                 finally
