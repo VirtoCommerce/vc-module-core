@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <module>
     <id>VirtoCommerce.Core</id>
-    <version>2.24.14</version>
-    <platformVersion>2.13.14</platformVersion>
+    <version>2.24.17</version>
+    <platformVersion>2.13.17</platformVersion>
     <title>Commerce core module</title>
     <description>Common e-commerce domain functionality</description>
     <authors>
@@ -161,7 +161,7 @@
                 <valueType>boolean</valueType>
                 <defaultValue>false</defaultValue>
                 <title>Enable scale out indexing (requires restart)</title>
-                <description>Scale out indexing paritions through job scheduler for parallel indexation</description>
+                <description>Scale out indexing partitions through job scheduler for parallel indexation</description>
             </setting>
             <setting>
                 <name>VirtoCommerce.Search.IndexingJobs.MaxQueueSize</name>

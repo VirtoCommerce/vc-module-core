@@ -98,7 +98,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
         public virtual async Task<IndexingResult> IndexDocumentsAsync(string documentType, string[] documentIds)
         {
-            // Todo: reuse general indxex api?
+            // Todo: reuse general index api?
             var configs = _configs.Where(c => c.DocumentType.EqualsInvariant(documentType)).ToArray();
             var result = new IndexingResult { Items = new List<IndexingResultItem>() };
 
