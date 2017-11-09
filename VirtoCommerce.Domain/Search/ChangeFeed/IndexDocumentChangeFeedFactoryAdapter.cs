@@ -46,10 +46,16 @@ namespace VirtoCommerce.Domain.Search.ChangeFeed
 
             public async Task<IReadOnlyCollection<IndexDocumentChange>> GetNextBatch()
             {
-                if (Skip >= TotalCount) return null;
+                if (Skip >= TotalCount)
+                {
+                    return await Task.FromResult<IReadOnlyCollection<IndexDocumentChange>>(null);
+                }
 
                 var changes = await Provider.GetChangesAsync(StartDate, EndDate, Skip, Take);
-                if (changes.Count == 0) return null;
+                if (changes.Count == 0)
+                {
+                    return await Task.FromResult<IReadOnlyCollection<IndexDocumentChange>>(null);
+                }
 
                 Skip += changes.Count;
 

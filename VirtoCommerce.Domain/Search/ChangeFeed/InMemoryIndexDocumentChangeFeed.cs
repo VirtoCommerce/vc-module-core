@@ -28,7 +28,10 @@ namespace VirtoCommerce.Domain.Search.ChangeFeed
         }
         public Task<IReadOnlyCollection<IndexDocumentChange>> GetNextBatch()
         {
-            if (Skip >= TotalCount) return null;
+            if (Skip >= TotalCount)
+            {
+                return Task.FromResult<IReadOnlyCollection<IndexDocumentChange>>(null);
+            }
 
             var changes = DocumentIds
                 .Skip((int) Skip)
