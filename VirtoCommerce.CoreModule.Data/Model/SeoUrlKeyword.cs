@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,8 +15,7 @@ namespace VirtoCommerce.CoreModule.Data.Model
 		public string Language { get; set; }
 
 		[StringLength(255)]
-		[Required]
-		[CustomValidation(typeof(SeoUrlKeyword), "ValidateKeywordUrl", ErrorMessage = @"Keyword can't contain $+;=%{}[]|\/@ ~#!^*&?:'<>, characters")]
+		[Required]		
         [Index("KeywordStoreId", Order = 1)]
         public string Keyword { get; set; }
 
@@ -49,24 +48,6 @@ namespace VirtoCommerce.CoreModule.Data.Model
 
 		[StringLength(255)]
 		public string ImageAltDescription { get; set; }
-
-		public static ValidationResult ValidateKeywordUrl(string value, ValidationContext context)
-		{
-			if (string.IsNullOrEmpty(value))
-			{
-				return new ValidationResult("Keyword can't be empty");
-			}
-
-			const string invalidKeywordCharacters = @"$+;=%{}[]|\/@ ~#!^*&?:'<>,";
-
-			if (value.IndexOfAny(invalidKeywordCharacters.ToCharArray()) > -1)
-			{
-				return new ValidationResult((@"Keyword must be valid URL"));
-			}
-			else
-			{
-				return ValidationResult.Success;
-			}
-		}
+		
 	}
 }
