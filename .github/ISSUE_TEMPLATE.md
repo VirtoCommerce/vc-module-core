@@ -3,7 +3,7 @@ Please provide detailed information about your issue, thank you!
 Version info: 
 - Browser version: 
 - Platform version: 
-- Storefront version: 
+- Module version: 
 
 ### Expected behavior
 
