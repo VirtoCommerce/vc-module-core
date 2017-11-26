@@ -53,5 +53,7 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Gets or sets a "black" list of aggregation keys that identify preconfigured aggregations, which SHOULD NOT be calculated and returned with the search result.
         /// </summary>
         public IList<string> ExcludeAggregations { get; set; }
+
+        public virtual string AssociationObjectId { get; set; }
     }
 }
