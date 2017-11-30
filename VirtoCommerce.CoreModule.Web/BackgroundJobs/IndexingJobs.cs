@@ -185,51 +185,57 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         // Make sure we wait for async methods to end, so that Hangfire retries if an exception occurs.
 
         [Queue(JobPriority.High)]
-        public Task IndexDocumentsHighPriorityAsync(string documentType, string[] documentIds)
+        public async Task IndexDocumentsHighPriorityAsync(string documentType, string[] documentIds)
         {
-            return documentIds.IsNullOrEmpty()
-                ? Task.CompletedTask
-                : _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.Normal)]
-        public Task IndexDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
+        public async Task IndexDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
         {
-            return documentIds.IsNullOrEmpty()
-                ? Task.CompletedTask
-                : _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.Low)]
-        public Task IndexDocumentsLowPriorityAsync(string documentType, string[] documentIds)
+        public async Task IndexDocumentsLowPriorityAsync(string documentType, string[] documentIds)
         {
-            return documentIds.IsNullOrEmpty()
-                ? Task.CompletedTask
-                : _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.High)]
-        public Task DeleteDocumentsHighPriorityAsync(string documentType, string[] documentIds)
+        public async Task DeleteDocumentsHighPriorityAsync(string documentType, string[] documentIds)
         {
-            return documentIds.IsNullOrEmpty()
-                ? Task.CompletedTask
-                : _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
         }
         
         [Queue(JobPriority.Normal)]
-        public Task DeleteDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
+        public async Task DeleteDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
         {
-            return documentIds.IsNullOrEmpty()
-                ? Task.CompletedTask
-                : _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.Low)]
-        public Task DeleteDocumentsLowPriorityAsync(string documentType, string[] documentIds)
+        public async Task DeleteDocumentsLowPriorityAsync(string documentType, string[] documentIds)
         {
-            return documentIds.IsNullOrEmpty()
-                ? Task.CompletedTask
-                : _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
         }
 
         #endregion
