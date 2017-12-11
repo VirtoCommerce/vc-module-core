@@ -150,13 +150,13 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             switch (priority)
             {
                 case JobPriority.High:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsHighPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsHighPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Normal:
-                    BackgroundJob.Enqueue<IIndexingManager>(x => x.IndexDocumentsAsync(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsNormalPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Low:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsLowPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsLowPriorityAsync(documentType, documentIds));
                     break;
                 default:
                     throw new ArgumentException($"Unkown priority: {priority}", nameof(priority));
@@ -168,13 +168,13 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             switch (priority)
             {
                 case JobPriority.High:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsHighPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsHighPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Normal:
-                    BackgroundJob.Enqueue<IIndexingManager>(x => x.DeleteDocumentsAsync(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsNormalPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Low:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsLowPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsLowPriorityAsync(documentType, documentIds));
                     break;
                 default:
                     throw new ArgumentException($"Unkown priority: {priority}", nameof(priority));
@@ -182,29 +182,60 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         }
 
         // Use hard-code methods to easily set queue for Hangfire.
+        // Make sure we wait for async methods to end, so that Hangfire retries if an exception occurs.
 
         [Queue(JobPriority.High)]
-        public void IndexDocumentsHighPrio(string documentType, string[] documentIds)
+        public async Task IndexDocumentsHighPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
+        }
+
+        [Queue(JobPriority.Normal)]
+        public async Task IndexDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
+        {
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.Low)]
-        public void IndexDocumentsLowPrio(string documentType, string[] documentIds)
+        public async Task IndexDocumentsLowPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.High)]
-        public void DeleteDocumentsHighPrio(string documentType, string[] documentIds)
+        public async Task DeleteDocumentsHighPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
+        }
+        
+        [Queue(JobPriority.Normal)]
+        public async Task DeleteDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
+        {
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.Low)]
-        public void DeleteDocumentsLowPrio(string documentType, string[] documentIds)
+        public async Task DeleteDocumentsLowPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
         }
 
         #endregion
