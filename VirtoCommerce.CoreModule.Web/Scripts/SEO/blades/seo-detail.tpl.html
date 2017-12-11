@@ -29,7 +29,8 @@
                         <ui-select ng-model="blade.currentEntity.languageCode">
                             <ui-select-match allow-clear placeholder="{{'core.blades.seo-detail.placeholders.language' | translate}}">{{$select.selected}}</ui-select-match>
                             <ui-select-choices repeat="x in blade.languages">
-                                <span class="flag flag-{{x.substr(3).toLowerCase()}}"></span>
+                                <span ng-if="x.length>2" class="flag flag-{{x.substr(3).toLowerCase()}}"></span>
+                                <span ng-if="x.length<=2" class="langCode">{{x.toUpperCase()}}</span>
                                 <span ng-bind-html="x"></span>
                             </ui-select-choices>
                         </ui-select>
