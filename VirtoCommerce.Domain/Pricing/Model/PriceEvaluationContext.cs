@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,8 @@ namespace VirtoCommerce.Domain.Pricing.Model
 		public string CatalogId { get; set; }
 		public string[] ProductIds { get; set; }
 		public string[] PricelistIds { get; set; }
-		public decimal Quantity { get; set; }
+	    public bool GetPricePerCurrencyByPriority { get; set; } = true;
+        public decimal Quantity { get; set; }
 		public string CustomerId { get; set; }
 		public string OrganizationId { get; set; }
 		public DateTime? CertainDate { get; set; }
