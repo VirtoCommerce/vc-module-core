@@ -69,6 +69,7 @@
     <Compile Include="Cart\Model\ShoppingCart.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
+    <Compile Include="Catalog\Model\GeoDistance.cs" />
     <Compile Include="Catalog\Model\IHasAssociations.cs" />
     <Compile Include="Catalog\Model\Asset.cs" />
     <Compile Include="Catalog\Model\AvailabilityRule.cs" />
