@@ -159,7 +159,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                     BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsLowPriorityAsync(documentType, documentIds));
                     break;
                 default:
-                    throw new ArgumentException($"Unkown priority: {priority}", nameof(priority));
+                    throw new ArgumentException($"Unknown priority: {priority}", nameof(priority));
             }
         }
 
@@ -177,7 +177,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                     BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsLowPriorityAsync(documentType, documentIds));
                     break;
                 default:
-                    throw new ArgumentException($"Unkown priority: {priority}", nameof(priority));
+                    throw new ArgumentException($"Unknown priority: {priority}", nameof(priority));
             }
         }
 
