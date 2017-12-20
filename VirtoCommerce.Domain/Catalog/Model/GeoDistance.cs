@@ -12,6 +12,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
     /// </summary>
     public class GeoDistance
     {
+        private static readonly string pattert = @"[-+]?([1-8]?\d(.\d+)?|90(.0+)?),\s*[-+]?(180(.0+)?|((1[0-7]\d)|([1-9]?\d))(.\d+)?)";
         private static readonly Regex _hasLocation = new Regex(@"\((?<location>[-+]?([1-8]?\d(.\d+)?|90(.0+)?),\s*[-+]?(180(.0+)?|((1[0-7]\d)|([1-9]?\d))(.\d+)?))\)", RegexOptions.Compiled);
 
         /// <summary>
@@ -79,6 +80,21 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public static bool HasGeoPoitnAtSortingString(string location)
         {
             return _hasLocation.IsMatch(location);
+        }
+
+        /// <summary>
+        /// Add custom validation rules
+        /// </summary>
+        /// <returns></returns>
+        public static List<PropertyValidationRule> GeoPointPropertyValidationRules()
+        {
+            List<PropertyValidationRule> validationRules = new List<PropertyValidationRule>
+            {
+                new PropertyValidationRule { RegExp = pattert }
+            };
+
+            return validationRules;
+
         }
     }
 }
