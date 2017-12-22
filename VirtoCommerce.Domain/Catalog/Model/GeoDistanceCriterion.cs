@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using VirtoCommerce.Domain.Search;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
     /// <summary>
     /// Geo point
     /// </summary>
-    public class GeoDistance
+    public class GeoDistanceCriterion
     {
         private static readonly string pattert = @"[-+]?([1-8]?\d(.\d+)?|90(.0+)?),\s*[-+]?(180(.0+)?|((1[0-7]\d)|([1-9]?\d))(.\d+)?)";
         private static readonly Regex _hasLocation = new Regex(@"\((?<location>[-+]?([1-8]?\d(.\d+)?|90(.0+)?),\s*[-+]?(180(.0+)?|((1[0-7]\d)|([1-9]?\d))(.\d+)?))\)", RegexOptions.Compiled);
@@ -18,11 +19,13 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// <summary>
         /// Property location name
         /// </summary>
-        public string LocationPropertyName { get; set; }
+        public string GeoPointPropertyName{ get; set; }
+
         /// <summary>
-        /// Gets or sets location 
+        /// Location
         /// </summary>
-        public string Location { get; set; }
+        public GeoPoint GeoPoint { get; set; }
+
         /// <summary>
         ///  Gets or sets distanse for search by location
         /// </summary>
@@ -33,9 +36,10 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         /// <param name="location">Location2(44.33,-33.88)</param>
         /// <returns>44.33,-33.88</returns>
-        public static string GeoLocation(string location)
+        public static GeoPoint GeoLocation(string location)
         {
             string _location = string.Empty;
+
             MatchCollection matches = _hasLocation.Matches(location);
 
             if (matches.Count == 1)
@@ -47,7 +51,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
                 }
             }
 
-            return _location;
+            return GeoPoint.Parse(_location);
         }
 
         /// <summary>

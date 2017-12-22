@@ -56,9 +56,9 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// </summary>
         public IList<string> ExcludeAggregations { get; set; }
         /// <summary>
-        /// Geo location search criteria
+        /// Geo distance criterion
         /// </summary>
-        public GeoDistance GeoSearch { get; set; }
+        public GeoDistanceCriterion GeoDistanceCriterion { get; set; }
 
         public override SortInfo[] SortInfos => SortParse(Sort).ToArray();
 
@@ -77,9 +77,9 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
             foreach (var sortInfoString in sortInfoStrings)
             {
                 //if sorting string contains location
-                if (GeoDistance.HasGeoPoitnAtSortingString(sortInfoString))
+                if (GeoDistanceCriterion.HasGeoPoitnAtSortingString(sortInfoString))
                 {
-                    var part = sortInfoString.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+                    var part = sortInfoString.Split(new[] {':'}, StringSplitOptions.RemoveEmptyEntries);
 
                     if (part.Any())
                     {
@@ -88,33 +88,25 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
                             SortColumn = part[0],
                             SortDirection = SortDirection.Ascending
                         };
+
                         if (part.Length > 1)
                         {
-                            sortInfo.SortDirection = part[1].StartsWith("desc", StringComparison.InvariantCultureIgnoreCase) ? SortDirection.Descending : SortDirection.Ascending;
+                            sortInfo.SortDirection =
+                                part[1].StartsWith("desc", StringComparison.InvariantCultureIgnoreCase)
+                                    ? SortDirection.Descending
+                                    : SortDirection.Ascending;
                         }
 
                         retVal.Add(sortInfo);
                     }
-                    continue;
                 }
-
-                var parts = sortInfoString.Split(new[] { ':', '-' }, StringSplitOptions.RemoveEmptyEntries);
-                if (parts.Any())
+                else
                 {
-                    var sortInfo = new SortInfo
-                    {
-                        SortColumn = parts[0],
-                        SortDirection = SortDirection.Ascending
-                    };
-                    if (parts.Length > 1)
-                    {
-                        sortInfo.SortDirection = parts[1].StartsWith("desc", StringComparison.InvariantCultureIgnoreCase) ? SortDirection.Descending : SortDirection.Ascending;
-                    }
-                    retVal.Add(sortInfo);
+                    retVal.AddRange(SortInfo.Parse(sortInfoString));
                 }
             }
-            return retVal;
 
+            return retVal;
         }
     }
 }
