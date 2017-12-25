@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,15 +12,10 @@ namespace VirtoCommerce.Domain.Catalog.Model
     /// <summary>
     /// Geo point
     /// </summary>
-    public class GeoDistanceCriterion
+    public class GeoDistanceCriterion : GeoCriterion
     {
         private static readonly string pattert = @"[-+]?([1-8]?\d(.\d+)?|90(.0+)?),\s*[-+]?(180(.0+)?|((1[0-7]\d)|([1-9]?\d))(.\d+)?)";
         private static readonly Regex _hasLocation = new Regex(@"\((?<location>[-+]?([1-8]?\d(.\d+)?|90(.0+)?),\s*[-+]?(180(.0+)?|((1[0-7]\d)|([1-9]?\d))(.\d+)?))\)", RegexOptions.Compiled);
-
-        /// <summary>
-        /// Property location name
-        /// </summary>
-        public string GeoPointPropertyName{ get; set; }
 
         /// <summary>
         /// Location
@@ -85,7 +81,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         {
             return _hasLocation.IsMatch(location);
         }
-
+        
         /// <summary>
         /// Add custom validation rules
         /// </summary>
@@ -94,7 +90,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         {
             List<PropertyValidationRule> validationRules = new List<PropertyValidationRule>
             {
-                new PropertyValidationRule { RegExp = pattert }
+                new PropertyValidationRule { RegExp = pattert, Property = new Property{ Name = "GeoPoint"}}
             };
 
             return validationRules;
