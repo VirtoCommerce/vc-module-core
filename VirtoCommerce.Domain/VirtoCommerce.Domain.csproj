@@ -69,8 +69,6 @@
     <Compile Include="Cart\Model\ShoppingCart.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
-    <Compile Include="Catalog\Model\GeoCriterion.cs" />
-    <Compile Include="Catalog\Model\GeoDistanceCriterion.cs" />
     <Compile Include="Catalog\Model\IHasAssociations.cs" />
     <Compile Include="Catalog\Model\Asset.cs" />
     <Compile Include="Catalog\Model\AvailabilityRule.cs" />
@@ -271,6 +269,7 @@
     <Compile Include="Search\GeoDistanceFilter.cs" />
     <Compile Include="Search\GeoDistanceSortingField.cs" />
     <Compile Include="Search\GeoPoint.cs" />
+    <Compile Include="Search\GeoSortInfo.cs" />
     <Compile Include="Search\IdsFilter.cs" />
     <Compile Include="Search\IFilter.cs" />
     <Compile Include="Search\IIndexDocumentBuilder.cs" />

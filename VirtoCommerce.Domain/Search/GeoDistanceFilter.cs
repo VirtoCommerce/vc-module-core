@@ -1,6 +1,8 @@
-﻿namespace VirtoCommerce.Domain.Search
+using VirtoCommerce.Domain.Common;
+
+namespace VirtoCommerce.Domain.Search
 {
-    public class GeoDistanceFilter : IFilter
+    public class GeoDistanceFilter : ValueObject, IFilter
     {
         public string FieldName { get; set; }
 
@@ -10,13 +12,9 @@
         public GeoPoint Location { get; set; }
 
         /// <summary>
-        /// Max distance in kilometers
+        ///  Gets or sets distance for search by location (radius) in any measure units (meters, kilometers etc)
         /// </summary>
         public double Distance { get; set; }
 
-        public override string ToString()
-        {
-            return $"DISTANCE({FieldName}, {Location}, {Distance})";
-        }
     }
 }

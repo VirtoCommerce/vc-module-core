@@ -55,58 +55,17 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Gets or sets a "black" list of aggregation keys that identify preconfigured aggregations, which SHOULD NOT be calculated and returned with the search result.
         /// </summary>
         public IList<string> ExcludeAggregations { get; set; }
-        /// <summary>
-        /// Geo distance criterion
-        /// </summary>
-        public GeoDistanceCriterion GeoDistanceCriterion { get; set; }
-
-        public override SortInfo[] SortInfos => SortParse(Sort).ToArray();
 
         /// <summary>
-        /// Parse string sort expression with true parse location 
+        /// Geo distance filter
         /// </summary>
-        /// <param name="sortExpr"></param>
-        /// <returns></returns>
-        private IEnumerable<SortInfo> SortParse(string sortExpr)
-        {
-            var retVal = new List<SortInfo>();
-            if (string.IsNullOrEmpty(sortExpr))
-                return retVal;
+        public GeoDistanceFilter GeoDistanceFilter { get; set; }
 
-            var sortInfoStrings = sortExpr.Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (var sortInfoString in sortInfoStrings)
-            {
-                //if sorting string contains location
-                if (GeoDistanceCriterion.HasGeoPoitnAtSortingString(sortInfoString))
-                {
-                    var part = sortInfoString.Split(new[] {':'}, StringSplitOptions.RemoveEmptyEntries);
+        /// <summary>
+        /// Override base SortInfo property to support GeoSortInfo sorting types
+        /// </summary>
+        public override SortInfo[] SortInfos => GeoSortInfo.TryParse(Sort).ToArray();
 
-                    if (part.Any())
-                    {
-                        var sortInfo = new SortInfo
-                        {
-                            SortColumn = part[0],
-                            SortDirection = SortDirection.Ascending
-                        };
-
-                        if (part.Length > 1)
-                        {
-                            sortInfo.SortDirection =
-                                part[1].StartsWith("desc", StringComparison.InvariantCultureIgnoreCase)
-                                    ? SortDirection.Descending
-                                    : SortDirection.Ascending;
-                        }
-
-                        retVal.Add(sortInfo);
-                    }
-                }
-                else
-                {
-                    retVal.AddRange(SortInfo.Parse(sortInfoString));
-                }
-            }
-
-            return retVal;
-        }
+        
     }
 }
