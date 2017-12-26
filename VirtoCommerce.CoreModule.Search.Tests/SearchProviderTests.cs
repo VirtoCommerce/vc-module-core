@@ -2,7 +2,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using VirtoCommerce.Domain.Search;
 using Xunit;
-
 namespace VirtoCommerce.CoreModule.Search.Tests
 {
     [TestCaseOrderer(PriorityTestCaseOrderer.TypeName, PriorityTestCaseOrderer.AssembyName)]
@@ -154,7 +153,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                     new GeoDistanceSortingField
                     {
                         FieldName = "Location",
-                        Location = GeoPoint.Parse("0, 14")
+                        Location = GeoPoint.TryParse("0, 14")
                     }
                 },
                 Take = 10,
@@ -505,7 +504,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
                 Filter = new GeoDistanceFilter
                 {
                     FieldName = "Location",
-                    Location = GeoPoint.Parse("0, 14"),
+                    Location = GeoPoint.TryParse("0, 14"),
                     Distance = 1110, // less than 10 degrees (1 degree at the equater is about 111 km)
                 },
                 Take = 10,
