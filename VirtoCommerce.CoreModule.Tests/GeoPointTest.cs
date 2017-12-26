@@ -38,18 +38,18 @@ namespace VirtoCommerce.CoreModule.Tests
             Assert.Equal(geoSortInfo, result[0]);
         }
 
-        [Fact]
-        public virtual void CanTryParsegeoPoint()
+        [CLSCompliant(false)]
+        [Theory]
+        [InlineData(22.33 , -22.33, "22.33, -22.33")]
+        [InlineData(22.33, 22.33, "22.33,    22.33")]
+        [InlineData(2.33, 2.33, "2.33,2.33")]
+        public virtual void CanTryParseGeoPoint( double lat, double lot, string location)
         {
-            var result1 = GeoPoint.Parse("54.7322, 20.5258 ");
-            var result2 = GeoPoint.Parse("34.05,-118.24");
+            var result = GeoPoint.Parse(location);
 
-            var geoPoint1 = new GeoPoint { Latitude = 54.7322, Longitude = 20.5258 };
-            var geoPoint2 = new GeoPoint { Latitude = 34.05, Longitude = -118.24 };
+            var geoPoint = new GeoPoint { Latitude = lat, Longitude = lot };
 
-            Assert.Equal(geoPoint1, result1);
-            Assert.Equal(geoPoint2, result2);
-
+            Assert.Equal(geoPoint, result);
         }
     }
 }
