@@ -4,7 +4,7 @@ angular.module('virtoCommerce.coreModule.searchIndex')
     $scope.loading = true;
 
     function refresh() {
-        searchApi.getDocIndex({ documentType: $scope.widget.documentType, documentId: blade.currentEntity.id }, function (data) {
+        searchApi.getDocIndex({ documentType: $scope.widget.documentType, documentId: blade.currentEntityId }, function (data) {
             if (_.any(data)) {
                 $scope.index = data[0];
                 $scope.indexDate = moment.utc($scope.index.indexationdate, 'YYYYMMDDHHmmss');
@@ -24,7 +24,7 @@ angular.module('virtoCommerce.coreModule.searchIndex')
     $scope.openBlade = function () {
         var newBlade = {
             id: 'detailChild',
-            currentEntityId: blade.currentEntity.id,
+            currentEntityId: blade.currentEntityId,
             currentEntity: blade.currentEntity,
             data: $scope.index,
             indexDate: $scope.indexDate,
