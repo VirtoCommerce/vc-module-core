@@ -13,7 +13,7 @@ namespace VirtoCommerce.Domain.Search
         public GeoPoint GeoPoint { get; set; }
 
         /// <summary>
-        /// [-|+]222.222,[+|-]222.222:[asc|desc]
+        /// sort_field_name([-/+]dd.ddd,[+/-]dd.ddd)
         /// </summary>
         /// <param name="sortExpr"></param>
         /// <returns></returns>
