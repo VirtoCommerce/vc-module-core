@@ -7,7 +7,7 @@ namespace VirtoCommerce.Domain.Search
 {
     public class GeoPoint : ValueObject
     {
-        public static readonly Regex Regexp = new Regex(@"(?<latitude>[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)),(?<longitude>\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?))", RegexOptions.Compiled);
+        public static readonly Regex Regexp = new Regex(@"^([-+]?(?:[1-8]?\d(?:\.\d{0,7})?|90(?:\.0{0,7})?)),\s*([-+]?(?:180(?:\.0{0,7})?|(?:(?:1[0-7]\d)|(?:[1-9]?\d))(?:\.\d{0,7})?))$", RegexOptions.Compiled);
 
         public GeoPoint()
             : this(0, 0)
@@ -71,12 +71,12 @@ namespace VirtoCommerce.Domain.Search
             GeoPoint result = null;
             var match = Regexp.Match(value);
 
-            if (match.Success && match.Groups.Count >= 3)
+            if (match.Success && match.Groups.Count == 3)
             {
                 result = new GeoPoint
                 {
-                    Latitude = double.Parse(match.Groups["latitude"].Value, NumberStyles.Float, CultureInfo.InvariantCulture),
-                    Longitude = double.Parse(match.Groups["longitude"].Value, NumberStyles.Float, CultureInfo.InvariantCulture),
+                    Latitude = double.Parse(match.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture),
+                    Longitude = double.Parse(match.Groups[2].Value, NumberStyles.Float, CultureInfo.InvariantCulture),
                 };
             }
             return result;

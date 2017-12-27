@@ -45,7 +45,7 @@ namespace VirtoCommerce.CoreModule.Tests
         [InlineData(90, -180, "90, -180")]
         [InlineData(-90.000, -180.0000, "-90.000, -180.0000")]
         [InlineData(90, 180, "+90, +180")]
-        [InlineData(47.1231231, 179.99999999, "47.1231231, 179.99999999")]
+        [InlineData(47.1231231, 179.9999999, "47.1231231, 179.9999999")]
         public virtual void CanTryParseGeoPoint( double lat, double lot, string point)
         {
             var result = GeoPoint.TryParse(point);
@@ -57,7 +57,6 @@ namespace VirtoCommerce.CoreModule.Tests
 
         [CLSCompliant(false)]
         [Theory]
-        [InlineData("-90., -180.")]
         [InlineData("+90.1, -100.111")]
         [InlineData("-91, 123.456")]
         [InlineData("045, 180")]
