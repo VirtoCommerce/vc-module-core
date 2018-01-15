@@ -170,6 +170,7 @@ namespace VirtoCommerce.CoreModule.Web
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
+            httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicAddressJsonConverter());
 
             #region Search
 
