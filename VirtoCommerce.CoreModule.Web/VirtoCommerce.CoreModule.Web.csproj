@@ -40,12 +40,13 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\VirtoCommerce.CoreModule.Web.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CacheManager.Core, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -170,7 +171,7 @@
     <Compile Include="Controllers\Api\CommerceController.cs" />
     <Compile Include="Controllers\Api\StorefrontSecurityController.cs" />
     <Compile Include="Converters\StorefrontUserConverter.cs" />
-    <Compile Include="JsonConverters\PolymorphicTaxJsonConverter.cs" />
+    <Compile Include="JsonConverters\PolymorphicJsonConverter.cs" />
     <Compile Include="Model\PushNotifcations\IndexProgressPushNotification.cs" />
     <Compile Include="Model\StorefrontUser.cs" />
     <Compile Include="Model\SignInResult.cs" />
