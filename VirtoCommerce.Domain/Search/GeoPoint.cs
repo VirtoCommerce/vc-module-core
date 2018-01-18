@@ -7,8 +7,7 @@ namespace VirtoCommerce.Domain.Search
 {
     public class GeoPoint : ValueObject
     {
-        public static readonly Regex Regexp = new Regex(@"^([-+]?(?:[1-8]?\d(?:\.\d{0,7})?|90(?:\.0{0,7})?)),\s*([-+]?(?:180(?:\.0{0,7})?|(?:(?:1[0-7]\d)|(?:[1-9]?\d))(?:\.\d{0,7})?))$", RegexOptions.Compiled);
-
+        public static readonly Regex Regexp = new Regex(@"^([-+]?(?:[1-8]?\d(?:\.\d+)?|90(?:\.0+)?)),\s*([-+]?(?:180(?:\.0+)?|(?:(?:1[0-7]\d)|(?:[1-9]?\d))(?:\.\d+)?))$", RegexOptions.Compiled);
         public GeoPoint()
             : this(0, 0)
         {
@@ -75,8 +74,8 @@ namespace VirtoCommerce.Domain.Search
             {
                 result = new GeoPoint
                 {
-                    Latitude = double.Parse(match.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture),
-                    Longitude = double.Parse(match.Groups[2].Value, NumberStyles.Float, CultureInfo.InvariantCulture),
+                    Latitude = Math.Round(double.Parse(match.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture), 7) ,
+                    Longitude = Math.Round(double.Parse(match.Groups[2].Value, NumberStyles.Float, CultureInfo.InvariantCulture), 7)
                 };
             }
             return result;
