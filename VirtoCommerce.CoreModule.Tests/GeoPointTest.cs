@@ -40,12 +40,14 @@ namespace VirtoCommerce.CoreModule.Tests
 
         [CLSCompliant(false)]
         [Theory]
-        [InlineData(90 , -127.554334, "+90.0, -127.554334")]
+        [InlineData(90, -127.554334, "+90.0, -127.554334")]
         [InlineData(45, 180, "45, 180")]
         [InlineData(90, -180, "90, -180")]
         [InlineData(-90.000, -180.0000, "-90.000, -180.0000")]
         [InlineData(90, 180, "+90, +180")]
         [InlineData(47.1231231, 179.9999999, "47.1231231, 179.9999999")]
+        [InlineData(78.7777778, 78.7777778, "78.7777777888, 78.7777777888")]
+        [InlineData(78.7777777, 78.7777777, "78.77777774444, 78.77777774444")]
         public virtual void CanTryParseGeoPoint( double lat, double lot, string point)
         {
             var result = GeoPoint.TryParse(point);
