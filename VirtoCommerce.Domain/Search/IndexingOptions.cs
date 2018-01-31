@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace VirtoCommerce.Domain.Search
@@ -10,6 +10,6 @@ namespace VirtoCommerce.Domain.Search
         public bool DeleteExistingIndex { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int BatchSize { get; set; } = 50;
+        public int? BatchSize { get; set; }
     }
 }

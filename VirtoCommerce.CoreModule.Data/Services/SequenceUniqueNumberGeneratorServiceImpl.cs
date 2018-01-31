@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Repositories;
@@ -15,15 +14,16 @@ namespace VirtoCommerce.CoreModule.Data.Services
 
         //How many sequence items will be stored in-memory
         public const int SequenceReservationRange = 100;
+        public const int DefaultSequenceStartValue = 1;
 
-        private readonly Func<IСommerceRepository> _repositoryFactory;
+        private readonly Func<ICommerceRepository> _repositoryFactory;
         private static readonly object _sequenceLock = new object();
         private static readonly InMemorySequenceList _inMemorySequences = new InMemorySequenceList();
 
         #endregion
 
 
-        public SequenceUniqueNumberGeneratorServiceImpl(Func<IСommerceRepository> repositoryFactory)
+        public SequenceUniqueNumberGeneratorServiceImpl(Func<ICommerceRepository> repositoryFactory)
         {
             _repositoryFactory = repositoryFactory;
         }
@@ -41,39 +41,19 @@ namespace VirtoCommerce.CoreModule.Data.Services
 
                 if (_inMemorySequences[numberTemplate].IsEmpty || _inMemorySequences[numberTemplate].HasExpired)
                 {
-                    var startCounter = 0;
-                    var endCounter = 0;
-
-                    var initializedCounters = false;
-                    var retryCount = 0;
                     const int maxTransactionRetries = 3;
 
-                    while (!initializedCounters && retryCount < maxTransactionRetries)
+                    for (var retryCount = 0; retryCount < maxTransactionRetries; retryCount++)
                     {
                         try
                         {
-                            InitCounters(numberTemplate, out startCounter, out endCounter);
-                            initializedCounters = true;
+                            InitCounters(numberTemplate, out var startCounter, out var endCounter);
+                            _inMemorySequences[numberTemplate].Pregenerate(startCounter, endCounter, numberTemplate);
+                            break;
                         }
                         catch (System.Data.Entity.Infrastructure.DbUpdateException)
                         {
-                            //This exception can happen due to deadlock so we can retry transaction several times
-                            initializedCounters = false;
-                            if (retryCount >= maxTransactionRetries)
-                            {
-                                throw;
-                            }
                         }
-                        finally
-                        {
-                            retryCount++;
-                        }
-                    }
-
-                    if (initializedCounters)
-                    {
-                        //Pregenerate
-                        _inMemorySequences[numberTemplate].Pregenerate(startCounter, endCounter, numberTemplate);
                     }
                 }
 
@@ -87,7 +67,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             using (var repository = _repositoryFactory())
             {
                 var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType.Equals(objectType, StringComparison.OrdinalIgnoreCase));
-                var originalModifiedDate = sequence != null ? sequence.ModifiedDate : null;
+                var originalModifiedDate = sequence?.ModifiedDate;
 
                 if (sequence != null)
                 {
@@ -95,7 +75,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 }
                 else
                 {
-                    sequence = new Sequence { ObjectType = objectType, Value = 0, ModifiedDate = DateTime.UtcNow };
+                    sequence = new Sequence { ObjectType = objectType, Value = DefaultSequenceStartValue, ModifiedDate = DateTime.UtcNow };
                     repository.Add(sequence);
                 }
 
@@ -109,7 +89,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 //Sequence in database has expired?
                 if (originalModifiedDate.HasValue && originalModifiedDate.Value.Date < DateTime.UtcNow.Date)
                 {
-                    startCounter = 0;
+                    startCounter = DefaultSequenceStartValue;
                 }
 
                 try
@@ -119,7 +99,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 catch (OverflowException)
                 {
                     //need to reset
-                    startCounter = 0;
+                    startCounter = DefaultSequenceStartValue;
                     endCounter = SequenceReservationRange;
                 }
 

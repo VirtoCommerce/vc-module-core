@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +14,7 @@ namespace VirtoCommerce.Domain.Marketing.Services
 	public class DefaultMarketingExtensionManagerImpl : IMarketingExtensionManager
 	{
 		private List<Promotion> _promotions = new List<Promotion>();
-
+       
 		#region InMemoryExtensionManagerImpl Members
 
 		public PromoDynamicExpressionTree PromotionDynamicExpressionTree { get; set; }
@@ -24,20 +24,20 @@ namespace VirtoCommerce.Domain.Marketing.Services
 		{
 			if (promotion == null)
 			{
-				throw new ArgumentNullException("promotion");
+				throw new ArgumentNullException(nameof(promotion));
 			}
 			if (_promotions.Any(x => x.Id == promotion.Id))
 			{
-				throw new OperationCanceledException(promotion.Id + " already registered");
+				throw new OperationCanceledException($"{promotion.Id} already registered");
 			}
 			_promotions.Add(promotion);
-		}
+		}     
 
-		public IEnumerable<Promotion> Promotions
+        public IEnumerable<Promotion> Promotions
 		{
 			get { return _promotions.AsReadOnly(); }
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <module>
     <id>VirtoCommerce.Core</id>
-    <version>2.24.11</version>
-    <platformVersion>2.13.14</platformVersion>
+    <version>2.24.24</version>
+    <platformVersion>2.13.17</platformVersion>
     <title>Commerce core module</title>
     <description>Common e-commerce domain functionality</description>
     <authors>
@@ -14,7 +14,7 @@
     </owners>
     <projectUrl>https://virtocommerce.com/apps/extensions/virto-core-module</projectUrl>
     <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
-    <releaseNotes>First version.</releaseNotes>
+    <releaseNotes></releaseNotes>
     <copyright>Copyright © 2011-2017 Virto Commerce. All rights reserved</copyright>
     <tags>security core</tags>
 
@@ -155,6 +155,20 @@
                 <defaultValue>50</defaultValue>
                 <title>The maximum items count per indexing partition</title>
                 <description>High value may will cause slow performance</description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.Search.IndexingJobs.ScaleOut</name>
+                <valueType>boolean</valueType>
+                <defaultValue>false</defaultValue>
+                <title>Enable scale out indexing (requires restart)</title>
+                <description>Scale out indexing partitions through job scheduler for parallel indexation</description>
+            </setting>
+            <setting>
+                <name>VirtoCommerce.Search.IndexingJobs.MaxQueueSize</name>
+                <valueType>integer</valueType>
+                <defaultValue>25</defaultValue>
+                <title>The maximum number queued indexing jobs (requires restart)</title>
+                <description>Limits indexation job progress to run too far ahead</description>
             </setting>
         </group>
     </settings>

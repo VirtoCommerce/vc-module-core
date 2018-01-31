@@ -49,8 +49,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.14.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.14\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.17.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.17\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +136,7 @@
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
     <Compile Include="Commerce\Services\ISeoDuplicatesDetector.cs" />
+    <Compile Include="Common\MoneyExtensions.cs" />
     <Compile Include="Common\Expressions\ConditionExpressionTree.cs" />
     <Compile Include="Common\Expressions\DynamicExpression.cs" />
     <Compile Include="Common\EvaluationContextBase.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Common\IEvaluationContext.cs" />
     <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Services\ICommerceService.cs" />
+    <Compile Include="Common\ValueObject.cs" />
     <Compile Include="Customer\Model\Contact.cs" />
     <Compile Include="Customer\Model\Employee.cs" />
     <Compile Include="Customer\Model\Events\MemberChangingEvent.cs" />
@@ -271,22 +273,29 @@
     <Compile Include="Search\GeoDistanceFilter.cs" />
     <Compile Include="Search\GeoDistanceSortingField.cs" />
     <Compile Include="Search\GeoPoint.cs" />
+    <Compile Include="Search\GeoSortInfo.cs" />
     <Compile Include="Search\IdsFilter.cs" />
     <Compile Include="Search\IFilter.cs" />
     <Compile Include="Search\IIndexDocumentBuilder.cs" />
+    <Compile Include="Search\ChangeFeed\IIndexDocumentChangeFeed.cs" />
+    <Compile Include="Search\ChangeFeed\IIndexDocumentChangeFeedFactory.cs" />
     <Compile Include="Search\IIndexDocumentChangesProvider.cs" />
+    <Compile Include="Search\IIndexingInterceptor.cs" />
     <Compile Include="Search\IIndexingManager.cs" />
     <Compile Include="Search\IndexDocument.cs" />
     <Compile Include="Search\IndexDocumentChange.cs" />
+    <Compile Include="Search\ChangeFeed\IndexDocumentChangeFeedFactoryAdapter.cs" />
     <Compile Include="Search\IndexDocumentChangeType.cs" />
     <Compile Include="Search\IndexDocumentConfiguration.cs" />
     <Compile Include="Search\IndexDocumentField.cs" />
     <Compile Include="Search\IndexDocumentSource.cs" />
     <Compile Include="Search\IndexingOptions.cs" />
+    <Compile Include="Search\IndexingPriority.cs" />
     <Compile Include="Search\IndexingProgress.cs" />
     <Compile Include="Search\IndexingResult.cs" />
     <Compile Include="Search\IndexingResultItem.cs" />
     <Compile Include="Search\IndexState.cs" />
+    <Compile Include="Search\ChangeFeed\InMemoryIndexDocumentChangeFeed.cs" />
     <Compile Include="Search\ISearchConnection.cs" />
     <Compile Include="Search\ISearchPhraseParser.cs" />
     <Compile Include="Search\ISearchProvider.cs" />

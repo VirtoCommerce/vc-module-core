@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Tax.Model;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -9,7 +10,7 @@ namespace VirtoCommerce.CoreModule.Web.JsonConverters
 {
     public class PolymorphicJsonConverter : JsonConverter
     {
-        private static Type[] _knowTypes = new[] { typeof(TaxEvaluationContext), typeof(TaxLine) };
+        private static Type[] _knowTypes = new[] { typeof(Address), typeof(TaxEvaluationContext), typeof(TaxLine) };
 
         public PolymorphicJsonConverter()
         {
@@ -28,6 +29,10 @@ namespace VirtoCommerce.CoreModule.Web.JsonConverters
             object retVal = null;
             var obj = JObject.Load(reader);
 
+            if (typeof(Address).IsAssignableFrom(objectType))
+            {
+                retVal = AbstractTypeFactory<Address>.TryCreateInstance();
+            }
             if (typeof(TaxEvaluationContext).IsAssignableFrom(objectType))
             {
                 retVal = AbstractTypeFactory<TaxEvaluationContext>.TryCreateInstance();

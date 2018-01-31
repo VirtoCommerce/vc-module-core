@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.seo')
+angular.module('virtoCommerce.coreModule.seo')
 .controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService', function ($scope, bladeNavigationService) {
     var blade = $scope.blade;
 
@@ -42,7 +42,7 @@
 
     $scope.semanticUrlValidator = function (value) {
         //var pattern = /^([a-zA-Z0-9\(\)_\-]+)*$/;
-        var pattern = /[$+;=%{}[\]|\\\/@ ~#!^*&?:'<>,]/;
+        var pattern = /[$+;=%{}[\]|@ ~#!^*&?:'<>,]/;
         return !pattern.test(value);
     };
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Web.Http;
 using Hangfire;
@@ -32,7 +32,7 @@ namespace VirtoCommerce.CoreModule.Web
 {
     public class Module : ModuleBase, ISupportExportImportModule
     {
-        private static readonly string _connectionString = ConnectionStringHelper.GetConnectionString("VirtoCommerce");
+        private static readonly string _connectionString = ConfigurationHelper.GetConnectionStringValue("VirtoCommerce");
         private readonly IUnityContainer _container;
 
         public Module(IUnityContainer container)
@@ -53,6 +53,8 @@ namespace VirtoCommerce.CoreModule.Web
 
         public override void Initialize()
         {
+            var settingsManager = _container.Resolve<ISettingsManager>();
+
             //#region Payment gateways manager
 
             //_container.RegisterType<IPaymentGatewayManager, InMemoryPaymentGatewayManagerImpl>(new ContainerControlledLifetimeManager());
@@ -61,7 +63,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             #region Commerce
 
-            _container.RegisterType<IСommerceRepository>(new InjectionFactory(c => new CommerceRepositoryImpl(_connectionString, new EntityPrimaryKeyGeneratorInterceptor(), _container.Resolve<AuditableInterceptor>())));
+            _container.RegisterType<ICommerceRepository>(new InjectionFactory(c => new CommerceRepositoryImpl(_connectionString, new EntityPrimaryKeyGeneratorInterceptor(), _container.Resolve<AuditableInterceptor>())));
             _container.RegisterType<ICommerceService, CommerceServiceImpl>();
 
             #endregion
@@ -87,13 +89,26 @@ namespace VirtoCommerce.CoreModule.Web
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
 
+            // Allow scale out of indexation through background worker, if opted-in.
+            if (settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.ScaleOut", false))
+            {
+                _container.RegisterInstance<IIndexingWorker>(new HangfireIndexingWorker
+                {
+                    ThrottleQueueCount = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.MaxQueueSize", 25)
+                });
+            }
+            else
+            {
+                _container.RegisterType<IIndexingWorker>(new InjectionFactory(c => null));
+            }
+
             _container.RegisterType<IIndexingManager, IndexingManager>();
 
-            var searchConnectionString = ConnectionStringHelper.GetConnectionString("SearchConnectionString");
+            var searchConnectionString = ConfigurationHelper.GetConnectionStringValue("SearchConnectionString");
 
             if (string.IsNullOrEmpty(searchConnectionString))
             {
-                var settingsManager = _container.Resolve<ISettingsManager>();
+                settingsManager = _container.Resolve<ISettingsManager>();
                 searchConnectionString = settingsManager.GetValue("VirtoCommerce.Search.SearchConnectionString", string.Empty);
             }
 
@@ -163,7 +178,7 @@ namespace VirtoCommerce.CoreModule.Web
             if (scheduleJobs)
             {
                 var cronExpression = settingsManager.GetValue("VirtoCommerce.Search.IndexingJobs.CronExpression", "0/5 * * * *");
-                RecurringJob.AddOrUpdate<IndexingJobs>(j => j.IndexChangesJob(null), cronExpression);
+                RecurringJob.AddOrUpdate<IndexingJobs>(j => j.IndexChangesJob(null, JobCancellationToken.Null), cronExpression);
             }
 
             #endregion

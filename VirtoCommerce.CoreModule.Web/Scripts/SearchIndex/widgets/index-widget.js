@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.searchIndex')
+angular.module('virtoCommerce.coreModule.searchIndex')
 .controller('virtoCommerce.coreModule.searchIndex.indexWidgetController', ['$scope', 'platformWebApp.bladeNavigationService', 'virtoCommerce.coreModule.searchIndex.searchIndexation', function ($scope, bladeNavigationService, searchApi) {
     var blade = $scope.blade;
     $scope.loading = true;

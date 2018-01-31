@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
@@ -49,7 +49,7 @@ namespace VirtoCommerce.CoreModule.Search.Tests
             doc.Add(new IndexDocumentField("Color", color) { IsRetrievable = true, IsFilterable = true });
             doc.Add(new IndexDocumentField("Size", size) { IsRetrievable = true, IsFilterable = true });
             doc.Add(new IndexDocumentField("Date", DateTime.Parse(date)) { IsRetrievable = true, IsFilterable = true });
-            doc.Add(new IndexDocumentField("Location", GeoPoint.Parse(location)) { IsRetrievable = true, IsFilterable = true });
+            doc.Add(new IndexDocumentField("Location", GeoPoint.TryParse(location)) { IsRetrievable = true, IsFilterable = true });
 
             doc.Add(new IndexDocumentField("Catalog", "Goods") { IsRetrievable = true, IsFilterable = true, IsCollection = true });
             doc.Add(new IndexDocumentField("Catalog", "Stuff") { IsRetrievable = true, IsFilterable = true, IsCollection = true });

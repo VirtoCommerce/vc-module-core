@@ -14,7 +14,7 @@ namespace VirtoCommerce.Domain.Search
 
         public IList<IndexDocumentField> Fields { get; set; } = new List<IndexDocumentField>();
 
-        public void Merge(IndexDocument doc)
+        public virtual void Merge(IndexDocument doc)
         {
             foreach (var field in doc.Fields)
             {
@@ -22,7 +22,7 @@ namespace VirtoCommerce.Domain.Search
             }
         }
 
-        public void Add(IndexDocumentField field)
+        public virtual void Add(IndexDocumentField field)
         {
             var existingField = Fields.FirstOrDefault(f => f.Name.Equals(field.Name, StringComparison.OrdinalIgnoreCase));
 
