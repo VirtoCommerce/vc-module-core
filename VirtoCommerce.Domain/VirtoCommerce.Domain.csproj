@@ -67,7 +67,6 @@
     <Compile Include="Cart\Model\ShipmentItem.cs" />
     <Compile Include="Cart\Model\ShipmentMethod.cs" />
     <Compile Include="Cart\Model\ShoppingCart.cs" />
-    <Compile Include="Cart\Services\DefaultShopingCartTotalsCalculator.cs" />
     <Compile Include="Cart\Services\IShopingCartTotalsCalculator.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
@@ -216,7 +215,6 @@
     <Compile Include="Order\Model\PaymentIn.cs" />
     <Compile Include="Order\Model\Search\CustomerOrderSearchCriteria.cs" />
     <Compile Include="Order\Model\Shipment.cs" />
-    <Compile Include="Order\Services\DefaultCustomerOrderTotalsCalculator.cs" />
     <Compile Include="Order\Services\ICustomerOrderService.cs" />
     <Compile Include="Order\Services\ICustomerOrderSearchService.cs" />
     <Compile Include="Order\Events\OrderChangeEvent.cs" />
