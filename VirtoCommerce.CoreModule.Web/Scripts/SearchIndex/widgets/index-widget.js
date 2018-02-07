@@ -3,7 +3,6 @@ angular.module('virtoCommerce.coreModule.searchIndex')
         var blade = $scope.blade;
         var momentFormat = "YYYYMMDDHHmmss";
         $scope.loading = true;
-
         function refresh() {
             searchApi.getDocIndex({ documentType: $scope.widget.documentType, documentId: blade.currentEntityId }, function (data) {
                 if (_.any(data)) {

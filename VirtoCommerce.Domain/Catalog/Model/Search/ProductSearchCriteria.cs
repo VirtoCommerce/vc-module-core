@@ -1,7 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model.Search;
 using VirtoCommerce.Domain.Search;
+using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model.Search
 {
@@ -53,5 +55,15 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Gets or sets a "black" list of aggregation keys that identify preconfigured aggregations, which SHOULD NOT be calculated and returned with the search result.
         /// </summary>
         public IList<string> ExcludeAggregations { get; set; }
+
+        /// <summary>
+        /// Geo distance filter
+        /// </summary>
+        public GeoDistanceFilter GeoDistanceFilter { get; set; }
+
+        /// <summary>
+        /// Override base SortInfo property to support GeoSortInfo sorting types
+        /// </summary>
+        public override SortInfo[] SortInfos => GeoSortInfo.TryParse(Sort).ToArray();
     }
 }
