@@ -92,9 +92,11 @@
     <Compile Include="Catalog\Model\Search\AggregationLabel.cs" />
     <Compile Include="Catalog\Model\Search\CatalogSearchCriteriaBase.cs" />
     <Compile Include="Catalog\Model\Search\CategorySearchCriteria.cs" />
+    <Compile Include="Catalog\Model\Search\ProductAssociationSearchCriteria.cs" />
     <Compile Include="Catalog\Model\Search\ProductSearchCriteria.cs" />
     <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
+    <Compile Include="Catalog\Services\IProductAssociationSearchService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
     <Compile Include="Commerce\Model\Currency.cs" />
