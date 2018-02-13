@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.AspNet.Identity;
 using VirtoCommerce.CoreModule.Web.Converters;
 using VirtoCommerce.CoreModule.Web.Model;
 using VirtoCommerce.Domain.Customer.Services;
@@ -24,14 +25,18 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         private readonly INotificationManager _notificationManager;
         private readonly IStoreService _storeService;
         private readonly IMemberService _memberService;
+        private readonly Func<ApplicationUserManager> _applicationUserManagerFactory;
 
-        public StorefrontSecurityController(ISecurityService securityService, Func<ApplicationSignInManager> signInManagerFactory, INotificationManager notificationManager, IStoreService storeService, IMemberService memberService)
+        public StorefrontSecurityController(ISecurityService securityService, Func<ApplicationSignInManager> signInManagerFactory,
+            INotificationManager notificationManager, IStoreService storeService, IMemberService memberService,
+            Func<ApplicationUserManager> applicationUserManagerFactory)
         {
             _securityService = securityService;
             _signInManagerFactory = signInManagerFactory;
             _notificationManager = notificationManager;
             _storeService = storeService;
             _memberService = memberService;
+            _applicationUserManagerFactory = applicationUserManagerFactory;
         }
 
         /// <summary>
@@ -138,6 +143,71 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         }
 
         /// <summary>
+        /// Confirm email address of user using token.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("user/confirm/email")]
+        [ResponseType(typeof(bool))]
+        public async Task<IHttpActionResult> ConfirmEmailAddress(string userName, string token)
+        {
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(token))
+            {
+                return BadRequest();
+            }
+
+            // Check if email has been confirmed before allowing sign in.
+            using (var userManager = _applicationUserManagerFactory())
+            {
+                var user = await userManager.FindByNameAsync(userName);
+                if (user == null) return BadRequest();
+
+                var result = userManager.ConfirmEmail(user.Id, token);
+
+                return Ok(result.Succeeded);
+            }
+        }
+
+        /// <summary>
+        /// Sign in with user name and password, if the user has confirmed his or her email address.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("user/signinconfirmed")]
+        [ResponseType(typeof(SignInResult))]
+        public async Task<IHttpActionResult> PasswordSignInIfEmailAddressConfirmed(string userName,
+            string password)
+        {
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
+            {
+                return BadRequest();
+            }
+
+            // Check if email has been confirmed before allowing sign in.
+            using (var userManager = _applicationUserManagerFactory())
+            {
+                var user = await userManager.FindByNameAsync(userName);
+                if (user == null) return BadRequest();
+
+                // Email address has been confirmed. Sign in as normal.
+                if (await userManager.IsEmailConfirmedAsync(user.Id))
+                    return await PasswordSignIn(userName, password);
+
+                // Email address hasn't been confirmed. 
+                var signInResult = new SignInResult
+                {
+                    EmailConfirmationRequired = true
+                };
+
+                return Ok(signInResult);
+            }
+        }
+
+        /// <summary>
         /// Sign in with user name and password
         /// </summary>
         /// <param name="userName"></param>
@@ -153,6 +223,12 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
+            var result = await PasswordSignInResult(userName, password);
+            return Ok(result);
+        }
+
+        private async Task<SignInResult> PasswordSignInResult(string userName, string password)
+        {
             using (var signInManager = _signInManagerFactory())
             {
                 var status = await signInManager.PasswordSignInAsync(userName, password, false, shouldLockout: true);
@@ -170,7 +246,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
                 }
 
-                return Ok(result);
+                return result;
             }
         }
 
@@ -233,7 +309,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             notification.Sender = store.Email;
             notification.IsActive = true;
 
-            var member = _memberService.GetByIds(new [] { userId }).FirstOrDefault();
+            var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
             if (member != null)
             {
                 var email = member.Emails.FirstOrDefault();
