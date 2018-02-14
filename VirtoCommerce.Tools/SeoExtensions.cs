@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.Tools.Models;
 
@@ -36,20 +36,36 @@ namespace VirtoCommerce.Tools
                     }
                     else if (store.SeoLinksType == SeoLinksType.Collapsed)
                     {
+                        // If there are more than 2 items and last item is a linked category, we cannot build the SEO path
                         var lastItem = outline.Items.Last();
+                        var lastItemIsALinkedCategory = outline.Items.Count > 2 && lastItem.SeoObjectType == "Category" && lastItem.HasVirtualParent == true;
 
-                        // If last item is a linked category, there is no SEO path
-                        if (lastItem.SeoObjectType != "Category" || lastItem.HasVirtualParent != true)
+                        if (!lastItemIsALinkedCategory)
                         {
-                            pathSegments.AddRange(outline.Items
-                                .Where(i => i.SeoObjectType != "Catalog" && i.HasVirtualParent != true)
-                                .Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, store.Id, store.DefaultLanguage, language)));
+                            var items = new List<OutlineItem>();
+                            OutlineItem parentItem = null;
 
-                            // Add product which is linked to a virtual category
-                            if (lastItem.SeoObjectType != "Catalog" && lastItem.SeoObjectType != "Category" && lastItem.HasVirtualParent == true)
+                            foreach (var item in outline.Items)
                             {
-                                pathSegments.Add(GetBestMatchingSeoKeyword(lastItem.SeoInfos, store.Id, store.DefaultLanguage, language));
+                                switch (item.SeoObjectType)
+                                {
+                                    case "Catalog":
+                                        break;
+                                    case "Category":
+                                        if (item.HasVirtualParent != true || parentItem?.SeoObjectType == "Catalog")
+                                        {
+                                            items.Add(item);
+                                        }
+                                        break;
+                                    default:
+                                        items.Add(item);
+                                        break;
+                                }
+
+                                parentItem = item;
                             }
+
+                            pathSegments.AddRange(items.Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, store.Id, store.DefaultLanguage, language)));
                         }
                     }
                     else
@@ -61,7 +77,7 @@ namespace VirtoCommerce.Tools
                         }
                     }
 
-                    if (pathSegments.All(s => s != null))
+                    if (pathSegments.Any() && pathSegments.All(s => s != null))
                     {
                         result = string.Join("/", pathSegments);
                     }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VirtoCommerce.Tools.Models;
 using Xunit;
 
@@ -239,6 +239,117 @@ namespace VirtoCommerce.Tools.Test
 
             var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("virtual-parent2/category2", result);
+        }
+
+        [Fact]
+        public void When_IsLinkedToCatalogRoot_Expect_KeepLinkedCategory()
+        {
+            var outlines = new List<Outline>
+            {
+                new Outline
+                {
+                    Items = new List<OutlineItem>
+                    {
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Catalog",
+                        },
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Category",
+                            HasVirtualParent = true,
+                            SeoInfos = new List<SeoInfo>
+                            {
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "en-US", SemanticUrl = "category1"},
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "ru-RU", SemanticUrl = "category2"},
+                            },
+                        },
+                    },
+                },
+            };
+
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
+            Assert.Equal("category2", result);
+        }
+
+        [Fact]
+        public void When_ParentIsLinkedToCatalogRoot_Expect_KeepLinkedCategory()
+        {
+            var outlines = new List<Outline>
+            {
+                new Outline
+                {
+                    Items = new List<OutlineItem>
+                    {
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Catalog",
+                        },
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Category",
+                            HasVirtualParent = true,
+                            SeoInfos = new List<SeoInfo>
+                            {
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "en-US", SemanticUrl = "physical-parent1"},
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "ru-RU", SemanticUrl = "physical-parent2"},
+                            }
+                        },
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Category",
+                            SeoInfos = new List<SeoInfo>
+                            {
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "en-US", SemanticUrl = "category1"},
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "ru-RU", SemanticUrl = "category2"},
+                            },
+                        },
+                    },
+                },
+            };
+
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
+            Assert.Equal("physical-parent2/category2", result);
+        }
+
+        [Fact]
+        public void When_LastItemHasVirtualParent_Expect_Null()
+        {
+            var outlines = new List<Outline>
+            {
+                new Outline
+                {
+                    Items = new List<OutlineItem>
+                    {
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Catalog",
+                        },
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Category",
+                            SeoInfos = new List<SeoInfo>
+                            {
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "en-US", SemanticUrl = "virtual-parent1"},
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "ru-RU", SemanticUrl = "virtual-parent2"},
+                            }
+                        },
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Category",
+                            HasVirtualParent = true,
+                            SeoInfos = new List<SeoInfo>
+                            {
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "en-US", SemanticUrl = "category1"},
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "ru-RU", SemanticUrl = "category2"},
+                            },
+                        },
+                    },
+                },
+            };
+
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
+            Assert.Null(result);
         }
     }
 
@@ -527,6 +638,37 @@ namespace VirtoCommerce.Tools.Test
 
             var result = outlines.GetSeoPath(_store, "ru-RU", null);
             Assert.Equal("virtual-parent2/product2", result);
+        }
+
+        [Fact]
+        public void When_ProductIsLinkedToCatalogRoot_Expect_KeepLinkedProduct()
+        {
+            var outlines = new List<Outline>
+            {
+                new Outline
+                {
+                    Items = new List<OutlineItem>
+                    {
+                        new OutlineItem
+                        {
+                            SeoObjectType = "Catalog",
+                        },
+                        new OutlineItem
+                        {
+                            SeoObjectType = "CatalogProduct",
+                            HasVirtualParent = true,
+                            SeoInfos = new List<SeoInfo>
+                            {
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "en-US", SemanticUrl = "product1"},
+                                new SeoInfo {StoreId = "Store1", LanguageCode = "ru-RU", SemanticUrl = "product2"},
+                            },
+                        },
+                    },
+                },
+            };
+
+            var result = outlines.GetSeoPath(_store, "ru-RU", null);
+            Assert.Equal("product2", result);
         }
     }
 }
