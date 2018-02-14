@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Web.Converters;
 using VirtoCommerce.CoreModule.Web.Model;
 using VirtoCommerce.Domain.Customer.Services;
@@ -21,14 +22,22 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
     {
         private readonly ISecurityService _securityService;
         private readonly Func<ApplicationSignInManager> _signInManagerFactory;
+        private readonly Func<ApplicationUserManager> _userManagerFactory;
         private readonly INotificationManager _notificationManager;
         private readonly IStoreService _storeService;
         private readonly IMemberService _memberService;
 
-        public StorefrontSecurityController(ISecurityService securityService, Func<ApplicationSignInManager> signInManagerFactory, INotificationManager notificationManager, IStoreService storeService, IMemberService memberService)
+        public StorefrontSecurityController(
+            ISecurityService securityService,
+            Func<ApplicationSignInManager> signInManagerFactory,
+            Func<ApplicationUserManager> userManagerFactory,
+            INotificationManager notificationManager,
+            IStoreService storeService,
+            IMemberService memberService)
         {
             _securityService = securityService;
             _signInManagerFactory = signInManagerFactory;
+            _userManagerFactory = userManagerFactory;
             _notificationManager = notificationManager;
             _storeService = storeService;
             _memberService = memberService;
@@ -233,7 +242,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             notification.Sender = store.Email;
             notification.IsActive = true;
 
-            var member = _memberService.GetByIds(new [] { userId }).FirstOrDefault();
+            var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
             if (member != null)
             {
                 var email = member.Emails.FirstOrDefault();
@@ -270,6 +279,57 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             return Ok(result);
         }
 
+        [HttpPost]
+        [Route("user/email/sendconfirmation")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> SendEmailConfirmation(string userId, string storeName, string language, string callbackUrl)
+        {
+            using (var userManager = _userManagerFactory())
+            {
+                var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
+                if (member != null)
+                {
+                    var store = _storeService.GetById(storeName);
 
+                    var uriBuilder = new UriBuilder(callbackUrl);
+                    var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(userId);
+                    query["code"] = token;
+                    uriBuilder.Query = query.ToString();
+
+                    var notification = _notificationManager.GetNewNotification<EmailConfirmationNotification>(storeName, "Store", language);
+                    var email = member.Emails.FirstOrDefault();
+                    if (!string.IsNullOrEmpty(email))
+                    {
+                        notification.Recipient = email;
+                    }
+                    notification.Url = uriBuilder.ToString();
+                    notification.Sender = store.Email;
+                    notification.IsActive = true;
+
+                    _notificationManager.ScheduleSendNotification(notification);
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpPost]
+        [Route("user/email/confirm")]
+        [ResponseType(typeof(SecurityResult))]
+        public async Task<IHttpActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(token))
+            {
+                return BadRequest();
+            }
+
+            using (var userManager = _userManagerFactory())
+            {
+                var result = await userManager.ConfirmEmailAsync(userId, token);
+
+                return Ok(result);
+            }
+        }
     }
 }
