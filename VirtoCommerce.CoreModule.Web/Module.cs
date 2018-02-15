@@ -4,6 +4,7 @@ using System.Web.Http;
 using Hangfire;
 using Microsoft.Practices.Unity;
 using VirtoCommerce.CoreModule.Data.Indexing;
+using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Data.Observers;
 using VirtoCommerce.CoreModule.Data.Payment;
 using VirtoCommerce.CoreModule.Data.Repositories;
@@ -14,6 +15,7 @@ using VirtoCommerce.CoreModule.Data.Tax;
 using VirtoCommerce.CoreModule.Web.BackgroundJobs;
 using VirtoCommerce.CoreModule.Web.ExportImport;
 using VirtoCommerce.CoreModule.Web.JsonConverters;
+using VirtoCommerce.CoreModule.Web.Resources;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Commerce.Services;
 using VirtoCommerce.Domain.Customer.Events;
@@ -24,6 +26,7 @@ using VirtoCommerce.Domain.Tax.Services;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
+using VirtoCommerce.Platform.Core.Notifications;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.Infrastructure;
 using VirtoCommerce.Platform.Data.Infrastructure.Interceptors;
@@ -129,6 +132,20 @@ namespace VirtoCommerce.CoreModule.Web
             var taxService = _container.Resolve<ITaxService>();
             var paymentService = _container.Resolve<IPaymentMethodsService>();
             var moduleSettings = settingsManager.GetModuleSettings("VirtoCommerce.Core");
+            var notificationManager = _container.Resolve<INotificationManager>();
+            var emailGateway = _container.Resolve<IEmailNotificationSendingGateway>();
+
+            notificationManager.RegisterNotificationType(() => new EmailConfirmationNotification(emailGateway)
+            {
+                DisplayName = "Email confirmation notification",
+                Description = "This e-mail notification is for confirmation a new registered user e-mail",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = EmailConfirmationResource.Subject,
+                    Body = EmailConfirmationResource.Body
+                }
+            });
 
             taxService.RegisterTaxProvider(() => new FixedTaxRateProvider(moduleSettings.First(x => x.Name == "VirtoCommerce.Core.FixedTaxRateProvider.Rate"))
             {
