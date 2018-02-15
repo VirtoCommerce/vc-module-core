@@ -36,36 +36,15 @@ namespace VirtoCommerce.Tools
                     }
                     else if (store.SeoLinksType == SeoLinksType.Collapsed)
                     {
-                        // If there are more than 2 items and last item is a linked category, we cannot build the SEO path
+                        // If last item is a linked category, we cannot build the SEO path
                         var lastItem = outline.Items.Last();
-                        var lastItemIsALinkedCategory = outline.Items.Count > 2 && lastItem.SeoObjectType == "Category" && lastItem.HasVirtualParent == true;
+                        var lastItemIsALinkedCategory = lastItem.SeoObjectType == "Category" && lastItem.HasVirtualParent == true;
 
                         if (!lastItemIsALinkedCategory)
                         {
-                            var items = new List<OutlineItem>();
-                            OutlineItem parentItem = null;
-
-                            foreach (var item in outline.Items)
-                            {
-                                switch (item.SeoObjectType)
-                                {
-                                    case "Catalog":
-                                        break;
-                                    case "Category":
-                                        if (item.HasVirtualParent != true || parentItem?.SeoObjectType == "Catalog")
-                                        {
-                                            items.Add(item);
-                                        }
-                                        break;
-                                    default:
-                                        items.Add(item);
-                                        break;
-                                }
-
-                                parentItem = item;
-                            }
-
-                            pathSegments.AddRange(items.Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, store.Id, store.DefaultLanguage, language)));
+                            pathSegments.AddRange(outline.Items
+                                .Where(i => i.SeoObjectType != "Catalog" && (i.SeoObjectType != "Category" || i.HasVirtualParent != true))
+                                .Select(i => GetBestMatchingSeoKeyword(i.SeoInfos, store.Id, store.DefaultLanguage, language)));
                         }
                     }
                     else

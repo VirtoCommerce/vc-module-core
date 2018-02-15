@@ -242,7 +242,7 @@ namespace VirtoCommerce.Tools.Test
         }
 
         [Fact]
-        public void When_IsLinkedToCatalogRoot_Expect_KeepLinkedCategory()
+        public void When_IsLinkedToCatalogRoot_Expect_Null()
         {
             var outlines = new List<Outline>
             {
@@ -269,11 +269,11 @@ namespace VirtoCommerce.Tools.Test
             };
 
             var result = outlines.GetSeoPath(_store, "ru-RU", null);
-            Assert.Equal("category2", result);
+            Assert.Null(result);
         }
 
         [Fact]
-        public void When_ParentIsLinkedToCatalogRoot_Expect_KeepLinkedCategory()
+        public void When_ParentIsLinkedToCatalogRoot_Expect_SkipLinkedPhysicalParent()
         {
             var outlines = new List<Outline>
             {
@@ -309,7 +309,7 @@ namespace VirtoCommerce.Tools.Test
             };
 
             var result = outlines.GetSeoPath(_store, "ru-RU", null);
-            Assert.Equal("physical-parent2/category2", result);
+            Assert.Equal("category2", result);
         }
 
         [Fact]
