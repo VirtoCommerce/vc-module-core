@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,13 +66,7 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public virtual decimal ListPrice { get; set; }
 
-        public decimal ListPriceWithTax
-        {
-            get
-            {
-                return ListPrice + ListPrice * TaxPercentRate;
-            }
-        }
+        public decimal ListPriceWithTax { get; set; }
 
         private decimal? _salePrice;
         public virtual decimal SalePrice
@@ -87,87 +81,33 @@ namespace VirtoCommerce.Domain.Cart.Model
             }
         }
 
-        public decimal SalePriceWithTax
-        {
-            get
-            {
-                return SalePrice + SalePrice * TaxPercentRate;
-            }
-        }
+        public decimal SalePriceWithTax { get; set; }
 
         /// <summary>
         /// Resulting price with discount for one unit
         /// </summary>
-		public virtual decimal PlacedPrice
-        {
-            get
-            {
-                return ListPrice - DiscountAmount;
-            }
-        }
-        public virtual decimal PlacedPriceWithTax
-        {
-            get
-            {
-                return PlacedPrice + PlacedPrice * TaxPercentRate;
-            }
-        }
+		public virtual decimal PlacedPrice { get; set; }
+        public virtual decimal PlacedPriceWithTax { get; set; }
 
-        public virtual decimal ExtendedPrice
-        {
-            get
-            {
-                return PlacedPrice * Quantity;
-            }
-        }
+        public virtual decimal ExtendedPrice { get; set; }
 
-        public virtual decimal ExtendedPriceWithTax
-        {
-            get
-            {
-                return PlacedPriceWithTax * Quantity;
-            }
-        }
+        public virtual decimal ExtendedPriceWithTax { get; set; }
 
         /// <summary>
         /// Gets the value of the single qty line item discount amount
         /// </summary>
         public virtual decimal DiscountAmount { get; set; }
 
-        public virtual decimal DiscountAmountWithTax
-        {
-            get
-            {
-                return DiscountAmount + DiscountAmount * TaxPercentRate;
-            }
-        }
+        public virtual decimal DiscountAmountWithTax { get; set; }
 
-        public decimal DiscountTotal
-        {
-            get
-            {
-                return DiscountAmount * Math.Max(1, Quantity);
-            }
-        }
+        public decimal DiscountTotal { get; set; }
 
-        public decimal DiscountTotalWithTax
-        {
-            get
-            {
-                return DiscountAmountWithTax * Math.Max(1, Quantity);
-            }
-        }
+        public decimal DiscountTotalWithTax { get; set; }
 
         //Any extra Fee 
         public virtual decimal Fee { get; set; }
 
-        public virtual decimal FeeWithTax
-        {
-            get
-            {
-                return Fee + Fee * TaxPercentRate;
-            }
-        }
+        public virtual decimal FeeWithTax { get; set; }
 
 
         #region IHasDiscounts
@@ -182,13 +122,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         public string TaxType { get; set; }
 
 
-        public decimal TaxTotal
-        {
-            get
-            {
-                return ExtendedPriceWithTax - ExtendedPrice + FeeWithTax - Fee;
-            }
-        }
+        public decimal TaxTotal { get; set; }
 
         public decimal TaxPercentRate { get; set; }
 
