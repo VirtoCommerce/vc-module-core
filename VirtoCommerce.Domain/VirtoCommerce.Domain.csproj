@@ -67,6 +67,7 @@
     <Compile Include="Cart\Model\ShipmentItem.cs" />
     <Compile Include="Cart\Model\ShipmentMethod.cs" />
     <Compile Include="Cart\Model\ShoppingCart.cs" />
+    <Compile Include="Cart\Services\IShopingCartTotalsCalculator.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
     <Compile Include="Catalog\Model\IHasAssociations.cs" />
@@ -92,9 +93,11 @@
     <Compile Include="Catalog\Model\Search\AggregationLabel.cs" />
     <Compile Include="Catalog\Model\Search\CatalogSearchCriteriaBase.cs" />
     <Compile Include="Catalog\Model\Search\CategorySearchCriteria.cs" />
+    <Compile Include="Catalog\Model\Search\ProductAssociationSearchCriteria.cs" />
     <Compile Include="Catalog\Model\Search\ProductSearchCriteria.cs" />
     <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
+    <Compile Include="Catalog\Services\IProductAssociationSearchService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
     <Compile Include="Commerce\Model\Currency.cs" />
@@ -217,6 +220,7 @@
     <Compile Include="Order\Services\ICustomerOrderService.cs" />
     <Compile Include="Order\Services\ICustomerOrderSearchService.cs" />
     <Compile Include="Order\Events\OrderChangeEvent.cs" />
+    <Compile Include="Order\Services\ICustomerOrderTotalsCalculator.cs" />
     <Compile Include="Payment\Model\BankCardInfo.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentEvaluationContext.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentResult.cs" />

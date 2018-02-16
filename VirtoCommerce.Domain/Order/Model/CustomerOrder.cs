@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
-using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Order.Model
@@ -68,350 +66,60 @@ namespace VirtoCommerce.Domain.Order.Model
         /// <summary>
         /// Grand order total
         /// </summary>
-        public virtual decimal Total
-        {
-            get
-            {
-                return SubTotal + ShippingSubTotal + TaxTotal + PaymentSubTotal + FeeTotal - DiscountTotal;
-            }
-        }
+        public virtual decimal Total { get; set; }
 
 
-        public virtual decimal SubTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal = Items.Sum(i => i.Price * i.Quantity);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal SubTotal { get; set; }
 
-        public virtual decimal SubTotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal = Items.Sum(i => i.PriceWithTax * i.Quantity);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal SubTotalWithTax { get; set; }
+        public virtual decimal SubTotalDiscount { get; set; }
 
-        public virtual decimal SubTotalDiscount
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal = Items.Sum(i => i.DiscountTotal);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal SubTotalDiscountWithTax { get; set; }
 
-        public virtual decimal SubTotalDiscountWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal = Items.Sum(i => i.DiscountTotalWithTax);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal SubTotalTaxTotal { get; set; }
 
-        public virtual decimal SubTotalTaxTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal = Items.Sum(i => i.TaxTotal);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal ShippingTotal { get; set; }
 
-        public virtual decimal ShippingTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal = Shipments.Sum(s => s.Total);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal ShippingTotalWithTax { get; set; }
 
-        public virtual decimal ShippingTotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal = Shipments.Sum(s => s.TotalWithTax);
-                }
-                return retVal;
-            }
-        }
-      
-        public virtual decimal ShippingSubTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal = Shipments.Sum(s => s.Price);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal ShippingSubTotal { get; set; }
 
-        public virtual decimal ShippingSubTotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal = Shipments.Sum(s => s.PriceWithTax);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal ShippingSubTotalWithTax { get; set; }
 
-        public virtual decimal ShippingDiscountTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal = Shipments.Sum(s => s.DiscountAmount);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal ShippingDiscountTotal { get; set; }
 
-        public virtual decimal ShippingDiscountTotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal = Shipments.Sum(s => s.DiscountAmountWithTax);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal ShippingDiscountTotalWithTax { get; set; }
 
-        public virtual decimal ShippingTaxTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal = Shipments.Sum(s => s.TaxTotal);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal ShippingTaxTotal { get; set; }
 
-        public virtual decimal PaymentTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal = InPayments.Sum(x => x.Total);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal PaymentTotal { get; set; }
 
-        public virtual decimal PaymentTotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal = InPayments.Sum(x => x.TotalWithTax);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal PaymentTotalWithTax { get; set; }
 
 
-        public virtual decimal PaymentSubTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal = InPayments.Sum(x => x.Price);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal PaymentSubTotal { get; set; }
 
-        public virtual decimal PaymentSubTotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal = InPayments.Sum(x => x.PriceWithTax);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal PaymentSubTotalWithTax { get; set; }
 
-        public virtual decimal PaymentDiscountTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal = InPayments.Sum(x => x.DiscountAmount);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal PaymentDiscountTotal { get; set; }
 
-        public virtual decimal PaymentDiscountTotalWithTax
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal = InPayments.Sum(x => x.DiscountAmountWithTax);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal PaymentDiscountTotalWithTax { get; set; }
 
-        public virtual decimal PaymentTaxTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal = InPayments.Sum(s => s.TaxTotal);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal PaymentTaxTotal { get; set; }
 
-        public virtual decimal DiscountTotal
-        {
-            get
-            {
-                var retVal = DiscountAmount;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal += Items.Sum(i => i.DiscountTotal);
-                }
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal += Shipments.Sum(s => s.DiscountAmount);
-                }
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal += InPayments.Sum(x => x.DiscountAmount);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal DiscountTotal { get; set; }
 
-        public virtual decimal DiscountTotalWithTax
-        {
-            get
-            {
-                var retVal = DiscountAmount;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal += Items.Sum(i => i.DiscountTotalWithTax);
-                }
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal += Shipments.Sum(s => s.DiscountAmountWithTax);
-                }
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal += InPayments.Sum(x => x.DiscountAmountWithTax);
-                }
-                return retVal;
-            }         
-        }
+        public virtual decimal DiscountTotalWithTax { get; set; }
 
 
         //Any extra Fee 
         public decimal Fee { get; set; }
 
-        public virtual decimal FeeWithTax
-        {
-            get
-            {
-                return Fee + Fee * TaxPercentRate;
-            }
-        }
+        public virtual decimal FeeWithTax { get; set; }
 
-        public virtual decimal FeeTotal
-        {
-            get
-            {
-                var retVal = Fee;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal += Items.Sum(i => i.Fee);
-                }
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal += Shipments.Sum(s => s.Fee);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal FeeTotal { get; set; }
 
-        public virtual decimal FeeTotalWithTax
-        {
-            get
-            {
-                var retVal = FeeWithTax;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal += Items.Sum(i => i.FeeWithTax);
-                }
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal += Shipments.Sum(s => s.FeeWithTax);
-                }
-                return retVal;
-            }
-        }
+        public virtual decimal FeeTotalWithTax { get; set; }
         #region ITaxable Members
 
         /// <summary>
@@ -419,26 +127,7 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public string TaxType { get; set; }
 
-        public virtual decimal TaxTotal
-        {
-            get
-            {
-                var retVal = 0m;
-                if (!Items.IsNullOrEmpty())
-                {
-                    retVal += Items.Sum(i => i.TaxTotal);
-                }
-                if (!Shipments.IsNullOrEmpty())
-                {
-                    retVal += Shipments.Sum(s => s.TaxTotal);
-                }
-                if (!InPayments.IsNullOrEmpty())
-                {
-                    retVal += InPayments.Sum(x => x.TaxTotal);
-                }
-                return retVal;
-            }        
-        }
+        public virtual decimal TaxTotal { get; set; }
 
         public decimal TaxPercentRate { get; set; }
 

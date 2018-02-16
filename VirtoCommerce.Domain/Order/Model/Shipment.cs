@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
@@ -57,49 +57,19 @@ namespace VirtoCommerce.Domain.Order.Model
         public Address DeliveryAddress { get; set; }
 
         public virtual decimal Price { get; set; }
-        public virtual decimal PriceWithTax
-        {
-            get
-            {
-                return Price + Price * TaxPercentRate;
-            }
-        }
+        public virtual decimal PriceWithTax { get; set; }
 
-        public virtual decimal Total
-        {
-            get
-            {
-                return Price + Fee - DiscountAmount;
-            }
-        }
+        public virtual decimal Total { get; set; }
 
-        public virtual decimal TotalWithTax
-        {
-            get
-            {
-                return PriceWithTax + FeeWithTax - DiscountAmountWithTax;
-            }
-        }
+        public virtual decimal TotalWithTax { get; set; }
 
         public virtual decimal DiscountAmount { get; set; }
-        public virtual decimal DiscountAmountWithTax
-        {
-            get
-            {
-                return DiscountAmount + DiscountAmount * TaxPercentRate;
-            }
-        }
+        public virtual decimal DiscountAmountWithTax { get; set; }
 
         //Any extra Fee 
         public virtual decimal Fee { get; set; }
 
-        public virtual decimal FeeWithTax
-        {
-            get
-            {
-                return Fee + Fee * TaxPercentRate;
-            }
-        }
+        public virtual decimal FeeWithTax { get; set; }
 
 
         #region ITaxable Members
@@ -109,13 +79,7 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public string TaxType { get; set; }
 
-        public decimal TaxTotal
-        {
-            get
-            {
-                return TotalWithTax - Total;
-            }
-        }
+        public decimal TaxTotal { get; set; }
 
         public decimal TaxPercentRate { get; set; }
 

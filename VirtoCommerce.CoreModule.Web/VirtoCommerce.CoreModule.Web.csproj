@@ -175,6 +175,11 @@
     <Compile Include="Model\PushNotifcations\IndexProgressPushNotification.cs" />
     <Compile Include="Model\StorefrontUser.cs" />
     <Compile Include="Model\SignInResult.cs" />
+    <Compile Include="Resources\EmailConfirmationResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmailConfirmationResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Security\CommercePredefinedPermissions.cs" />
     <Compile Include="ExportImport\CoreExportImport.cs" />
     <Compile Include="Module.cs" />
@@ -277,6 +282,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\EmailConfirmationResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EmailConfirmationResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
