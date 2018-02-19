@@ -49,6 +49,6 @@ namespace VirtoCommerce.Domain.Pricing.Model.Search
             }
         }
 
-        public DateTime? Modified { get; set; }
+        public DateTime? ModifiedSince { get; set; }
     }
 }
