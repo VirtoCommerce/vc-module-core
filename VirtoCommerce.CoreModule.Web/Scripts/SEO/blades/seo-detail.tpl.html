@@ -48,15 +48,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">{{'core.blades.seo-detail.labels.page-title' | translate}}</label>
+                    <label class="form-label">{{'core.blades.seo-detail.labels.page-title' | translate}}</label><label class="form-label-limit">{{titleMax}}</label>
                     <div class="form-input">
-                        <input ng-model="blade.currentEntity.pageTitle" class="form-control" placeholder="{{'core.blades.seo-detail.placeholders.page-title' | translate}}" />
+                        <input ng-model="blade.currentEntity.pageTitle" maxlength="255" class="form-control" placeholder="{{'core.blades.seo-detail.placeholders.page-title' | translate}}" />
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">{{'core.blades.seo-detail.labels.meta-description' | translate}}</label>
+                    <label class="form-label">{{'core.blades.seo-detail.labels.meta-description' | translate}}</label><label class="form-label-limit">{{metaDescriptionMax}}</label>
                     <div class="form-input">
-                        <textarea ng-model="blade.currentEntity.metaDescription" class="form-control" cols="30" rows="3" placeholder="{{'core.blades.seo-detail.placeholders.meta-description' | translate}}"></textarea>
+                        <textarea ng-model="blade.currentEntity.metaDescription" maxlength="1024" class="form-control" cols="30" rows="3" placeholder="{{'core.blades.seo-detail.placeholders.meta-description' | translate}}"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
