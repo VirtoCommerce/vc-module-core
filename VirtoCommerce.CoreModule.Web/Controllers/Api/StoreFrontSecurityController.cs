@@ -240,17 +240,8 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
             var store = _storeService.GetById(storeName);
             notification.Sender = store.Email;
+            notification.Recipient = await GetUserEmailAsync(userId);
             notification.IsActive = true;
-
-            var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
-            if (member != null)
-            {
-                var email = member.Emails.FirstOrDefault();
-                if (!string.IsNullOrEmpty(email))
-                {
-                    notification.Recipient = email;
-                }
-            }
 
             _notificationManager.ScheduleSendNotification(notification);
 
@@ -286,29 +277,21 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         {
             using (var userManager = _userManagerFactory())
             {
-                var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
-                if (member != null)
-                {
-                    var store = _storeService.GetById(storeName);
+                var store = _storeService.GetById(storeName);
 
-                    var uriBuilder = new UriBuilder(callbackUrl);
-                    var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-                    var token = await userManager.GenerateEmailConfirmationTokenAsync(userId);
-                    query["code"] = token;
-                    uriBuilder.Query = query.ToString();
+                var uriBuilder = new UriBuilder(callbackUrl);
+                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(userId);
+                query["code"] = token;
+                uriBuilder.Query = query.ToString();
 
-                    var notification = _notificationManager.GetNewNotification<EmailConfirmationNotification>(storeName, "Store", language);
-                    var email = member.Emails.FirstOrDefault();
-                    if (!string.IsNullOrEmpty(email))
-                    {
-                        notification.Recipient = email;
-                    }
-                    notification.Url = uriBuilder.ToString();
-                    notification.Sender = store.Email;
-                    notification.IsActive = true;
+                var notification = _notificationManager.GetNewNotification<EmailConfirmationNotification>(storeName, "Store", language);
+                notification.Url = uriBuilder.ToString();
+                notification.Recipient = await GetUserEmailAsync(userId);
+                notification.Sender = store.Email;
+                notification.IsActive = true;
 
-                    _notificationManager.ScheduleSendNotification(notification);
-                }
+                _notificationManager.ScheduleSendNotification(notification);
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -330,6 +313,35 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
                 return Ok(result);
             }
+        }
+
+        private async Task<string> GetUserEmailAsync(string userId)
+        {
+            string email = null;
+
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+            if (user != null)
+            {
+                if (!string.IsNullOrEmpty(user.MemberId))
+                {
+                    var contacts = _memberService.GetByIds(new[] { user.MemberId });
+                    var contact = contacts.FirstOrDefault();
+                    if (contact != null && contact.Emails != null && contact.Emails.Any())
+                    {
+                        email = contact.Emails.FirstOrDefault();
+                    }
+                }
+                else if (!string.IsNullOrEmpty(user.Email))
+                {
+                    email = user.Email;
+                }
+                else
+                {
+                    email = user.UserName;
+                }
+            }
+
+            return email;
         }
     }
 }
