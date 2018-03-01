@@ -8,6 +8,7 @@ using System.Web.Http.Description;
 using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Web.Converters;
 using VirtoCommerce.CoreModule.Web.Model;
+using VirtoCommerce.Domain.Customer.Model;
 using VirtoCommerce.Domain.Customer.Services;
 using VirtoCommerce.Domain.Store.Services;
 using VirtoCommerce.Platform.Core.Notifications;
@@ -318,29 +319,16 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         private async Task<string> GetUserEmailAsync(string userId)
         {
             string email = null;
-
             var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
             if (user != null)
             {
+                email = user.Email ?? user.UserName;
                 if (!string.IsNullOrEmpty(user.MemberId))
                 {
-                    var contacts = _memberService.GetByIds(new[] { user.MemberId });
-                    var contact = contacts.FirstOrDefault();
-                    if (contact != null && contact.Emails != null && contact.Emails.Any())
-                    {
-                        email = contact.Emails.FirstOrDefault();
-                    }
-                }
-                else if (!string.IsNullOrEmpty(user.Email))
-                {
-                    email = user.Email;
-                }
-                else
-                {
-                    email = user.UserName;
-                }
+                    var contact = _memberService.GetByIds(new[] { user.MemberId }).OfType<Contact>().FirstOrDefault();                   
+                    email = contact?.Emails?.FirstOrDefault() ?? email;
+                }    
             }
-
             return email;
         }
     }
