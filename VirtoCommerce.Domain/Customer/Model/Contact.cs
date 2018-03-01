@@ -20,7 +20,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         public string TaxPayerId { get; set; }
         public string PreferredDelivery { get; set; }
         public string PreferredCommunication { get; set; }
-        public byte[] Photo { get; set; }
+        public string PhotoUrl { get; set; }
 
         #region IHasSecurityAccounts Members
 
