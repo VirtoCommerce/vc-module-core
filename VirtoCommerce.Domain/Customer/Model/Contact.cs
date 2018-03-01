@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Security;
 
@@ -20,6 +20,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         public string TaxPayerId { get; set; }
         public string PreferredDelivery { get; set; }
         public string PreferredCommunication { get; set; }
+        public byte[] Photo { get; set; }
 
         #region IHasSecurityAccounts Members
 
