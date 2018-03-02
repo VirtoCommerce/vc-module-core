@@ -13,6 +13,9 @@ angular.module('virtoCommerce.coreModule.seo')
         $scope.bladeClose();
     };
 
+    $scope.titleMax = "max 255";
+    $scope.metaDescriptionMax = "max 1024";
+
     $scope.saveChanges = function () {
     	if (blade.isNew) {
     		if (!blade.seoContainerObject.seoInfos)
