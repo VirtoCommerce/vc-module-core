@@ -147,9 +147,10 @@
     <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Services\ICommerceService.cs" />
     <Compile Include="Common\ValueObject.cs" />
+    <Compile Include="Customer\Events\MemberChangedEvent.cs" />
     <Compile Include="Customer\Model\Contact.cs" />
     <Compile Include="Customer\Model\Employee.cs" />
-    <Compile Include="Customer\Model\Events\MemberChangingEvent.cs" />
+    <Compile Include="Customer\Events\MemberChangingEvent.cs" />
     <Compile Include="Customer\Model\Member.cs" />
     <Compile Include="Customer\Model\Note.cs" />
     <Compile Include="Customer\Model\Organization.cs" />
