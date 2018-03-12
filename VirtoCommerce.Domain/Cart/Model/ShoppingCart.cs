@@ -36,6 +36,11 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// </summary>
         public string ValidationType { get; set; }
 
+        /// <summary>
+        /// Represents a cart object type (Wishlist, Cart etc) for fitering purposes
+        /// </summary>
+        public string Type { get; set; }
+
         public decimal? VolumetricWeight { get; set; }
 
         //Grand  cart total
