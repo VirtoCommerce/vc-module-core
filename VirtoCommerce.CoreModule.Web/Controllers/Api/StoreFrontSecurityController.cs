@@ -331,5 +331,47 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             }
             return email;
         }
+
+        [HttpPost]
+        [Route("user/registration/invite")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> GenerateInviteToken(string userId, string storeName, string language, string callbackUrl)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(storeName) || string.IsNullOrEmpty(callbackUrl))
+            {
+                return BadRequest();
+            }
+
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+            var token = await _securityService.GeneratePasswordResetTokenAsync(userId);
+
+            var uriBuilder = new UriBuilder(callbackUrl);
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+
+            query["email"] = user?.Email;
+            query["code"] = token;
+            uriBuilder.Query = query.ToString();
+
+            var notification = _notificationManager.GetNewNotification<RegistrationInviteNotification>(storeName, "Store", language);
+            notification.Url = uriBuilder.ToString();
+
+            var store = _storeService.GetById(storeName);
+            notification.Sender = store.Email;
+            notification.IsActive = true;
+
+            var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
+            if (member != null)
+            {
+                var email = member.Emails.FirstOrDefault();
+                if (!string.IsNullOrEmpty(email))
+                {
+                    notification.Recipient = email;
+                }
+            }
+
+            _notificationManager.ScheduleSendNotification(notification);
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
     }
 }
