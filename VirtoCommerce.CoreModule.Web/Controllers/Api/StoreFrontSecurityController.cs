@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -331,5 +332,62 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             }
             return email;
         }
+
+        #region Lockout user
+
+        [HttpPost]
+        [Route("user/getlockoutenabled")]
+        [ResponseType(typeof(SignInResult))]
+        public async Task<IHttpActionResult> GetLockoutEnabled(string userName)
+        {
+            if (string.IsNullOrEmpty(userName))
+            {
+                return BadRequest();
+            }
+
+            var user = await _securityService.FindByNameAsync(userName, UserDetails.Reduced);
+
+            if (user == null)
+                return BadRequest();
+
+            using (ApplicationSignInManager signInManager = _signInManagerFactory())
+            {
+                var result = new SignInResult();
+                var userLockoutEnabled = await signInManager.UserManager.GetLockoutEnabledAsync(user.Id);
+
+                result.LockoutEnabled = userLockoutEnabled;
+
+                return Ok(result);
+            }
+        }
+
+        [HttpPost]
+        [Route("user/getlockoutenddate")]
+        [ResponseType(typeof(SignInResult))]
+        public async Task<IHttpActionResult> GetLockoutEndDate(string userName)
+        {
+            if (string.IsNullOrEmpty(userName))
+            {
+                return BadRequest();
+            }
+
+            var user = await _securityService.FindByNameAsync(userName, UserDetails.Reduced);
+
+            if (user == null)
+                return BadRequest();
+
+            using (ApplicationSignInManager signInManager = _signInManagerFactory())
+            {
+                var result = new SignInResult();
+                var lockoutTime = await signInManager.UserManager.GetLockoutEndDateAsync(user.Id);
+
+                result.IsLockedOut = lockoutTime >= DateTimeOffset.UtcNow;
+                result.LockoutEndDate = lockoutTime;
+
+                return Ok(result);
+            }
+        }
+        
+        #endregion
     }
 }
