@@ -7,7 +7,7 @@ using VirtoCommerce.Platform.Core.Notifications;
 
 namespace VirtoCommerce.CoreModule.Data.Notifications
 {
-    public class RegistrationByInviteNotification : EmailConfirmationNotification
+    public class RegistrationByInviteNotification : EmailNotification
     {
         public RegistrationByInviteNotification(IEmailNotificationSendingGateway gateway) : base(gateway)
         {
