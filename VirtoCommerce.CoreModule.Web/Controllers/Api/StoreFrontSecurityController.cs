@@ -340,9 +340,9 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// <param name="language"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("user/sendusername")]
+        [Route("user/remindusername")]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> SendUserNameNotification(string userId, string storeName, string language)
+        public async Task<IHttpActionResult> RemindUserNameNotification(string userId, string storeName, string language)
         {
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(storeName))
             {
@@ -354,7 +354,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             if(user == null)
                 return BadRequest();
 
-            var notification = _notificationManager.GetNewNotification<ForgotUserNameNotification>(storeName, "Store", language);
+            var notification = _notificationManager.GetNewNotification<RemindUserNameNotification>(storeName, "Store", language);
             notification.UserName = user.UserName;
 
             var store = _storeService.GetById(storeName);

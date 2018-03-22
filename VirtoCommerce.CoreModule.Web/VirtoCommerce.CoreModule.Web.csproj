@@ -175,10 +175,10 @@
     <Compile Include="Model\PushNotifcations\IndexProgressPushNotification.cs" />
     <Compile Include="Model\StorefrontUser.cs" />
     <Compile Include="Model\SignInResult.cs" />
-    <Compile Include="Resources\EmailConfirmationResource.Designer.cs">
+    <Compile Include="Resources\NotificationResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>EmailConfirmationResource.resx</DependentUpon>
+      <DependentUpon>NotificationResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Security\CommercePredefinedPermissions.cs" />
     <Compile Include="ExportImport\CoreExportImport.cs" />
@@ -283,9 +283,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\EmailConfirmationResource.resx">
+    <EmbeddedResource Include="Resources\NotificationResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>EmailConfirmationResource.Designer.cs</LastGenOutput>
+      <LastGenOutput>NotificationResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
