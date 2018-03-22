@@ -159,6 +159,18 @@ namespace VirtoCommerce.CoreModule.Web
                 }
             });
 
+            notificationManager.RegisterNotificationType(() => new RegistrationByInviteNotification(emailGateway)
+            {
+                DisplayName = "Registration by invite notification",
+                Description = "This notification is sent by email to a client upon registration by invite",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.RegistrationByInviteNotificationSubject,
+                    Body = NotificationResource.RegistrationByInviteNotificationBody
+                }
+            });
+
             taxService.RegisterTaxProvider(() => new FixedTaxRateProvider(moduleSettings.First(x => x.Name == "VirtoCommerce.Core.FixedTaxRateProvider.Rate"))
             {
                 Name = "fixed tax rate",

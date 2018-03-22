@@ -377,7 +377,12 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var token = await _securityService.GeneratePasswordResetTokenAsync(userId);
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+
+            if (user == null)
+                return BadRequest();
+
+            var token = await _securityService.GeneratePasswordResetTokenAsync(user.Id);
 
             var uriBuilder = new UriBuilder(callbackUrl);
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
@@ -385,17 +390,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             query["code"] = token;
             uriBuilder.Query = query.ToString();
 
-            var notification = _notificationManager.GetNewNotification<RegistrationInviteNotification>(storeName, "Store", language);
+            var notification = _notificationManager.GetNewNotification<RegistrationByInviteNotification>(storeName, "Store", language);
             notification.Url = uriBuilder.ToString();
 
             var store = _storeService.GetById(storeName);
             notification.Sender = store.Email;
+            notification.Recipient = user.Email ?? await GetUserEmailAsync(userId);
             notification.IsActive = true;
-
-            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
-
-            if (user?.Email != null)
-                notification.Recipient = user.Email;
 
             _notificationManager.ScheduleSendNotification(notification);
 

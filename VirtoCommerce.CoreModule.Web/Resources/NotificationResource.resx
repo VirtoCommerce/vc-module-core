@@ -123,6 +123,12 @@
   <data name="EmailConfirmationNotificationSubject" xml:space="preserve">
     <value>Email confirmation</value>
   </data>
+  <data name="RegistrationByInviteNotificationBody" xml:space="preserve">
+    <value>Please  to register by invite clicking &lt;a href="{{ invite_url }}"&gt; here&lt;/&gt;</value>
+  </data>
+  <data name="RegistrationByInviteNotificationSubject" xml:space="preserve">
+    <value>Registration by invite</value>
+  </data>
   <data name="RemindUserNameNotificationBody" xml:space="preserve">
     <value>Your user name - {{ user_name }}.</value>
   </data>
