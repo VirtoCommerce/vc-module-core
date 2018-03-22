@@ -117,10 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Body" xml:space="preserve">
+  <data name="EmailConfirmationNotificationBody" xml:space="preserve">
     <value>To complete your create account process please click this link: &lt;a href="{{ url }}"&gt;{{ url }}&lt;/a&gt;</value>
   </data>
-  <data name="Subject" xml:space="preserve">
+  <data name="EmailConfirmationNotificationSubject" xml:space="preserve">
     <value>Email confirmation</value>
+  </data>
+  <data name="RemindUserNameNotificationBody" xml:space="preserve">
+    <value>Your user name - {{ user_name }}.</value>
+  </data>
+  <data name="RemindUserNameNotificationSubject" xml:space="preserve">
+    <value>Remind user name</value>
   </data>
 </root>

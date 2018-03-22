@@ -332,6 +332,41 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             return email;
         }
 
+        /// <summary>
+        /// Send Forgot UserName notification for sign in
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="storeName"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("user/remindusername")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> RemindUserNameNotification(string userId, string storeName, string language)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(storeName))
+            {
+                return BadRequest();
+            }
+
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+
+            if(user == null)
+                return BadRequest();
+
+            var notification = _notificationManager.GetNewNotification<RemindUserNameNotification>(storeName, "Store", language);
+            notification.UserName = user.UserName;
+
+            var store = _storeService.GetById(storeName);
+            notification.Sender = store.Email;
+            notification.Recipient = user.Email ?? await GetUserEmailAsync(userId);
+            notification.IsActive = true;
+
+            _notificationManager.ScheduleSendNotification(notification);
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         [HttpPost]
         [Route("user/registration/invite")]
         [ResponseType(typeof(void))]

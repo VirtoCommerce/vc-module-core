@@ -22,14 +22,14 @@ namespace VirtoCommerce.CoreModule.Web.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class EmailConfirmationResource {
+    internal class NotificationResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EmailConfirmationResource() {
+        internal NotificationResource() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace VirtoCommerce.CoreModule.Web.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtoCommerce.CoreModule.Web.Resources.EmailConfirmationResource", typeof(EmailConfirmationResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtoCommerce.CoreModule.Web.Resources.NotificationResource", typeof(NotificationResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,18 +63,36 @@ namespace VirtoCommerce.CoreModule.Web.Resources {
         /// <summary>
         ///   Looks up a localized string similar to To complete your create account process please click this link: &lt;a href=&quot;{{ url }}&quot;&gt;{{ url }}&lt;/a&gt;.
         /// </summary>
-        internal static string Body {
+        internal static string EmailConfirmationNotificationBody {
             get {
-                return ResourceManager.GetString("Body", resourceCulture);
+                return ResourceManager.GetString("EmailConfirmationNotificationBody", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Email confirmation.
         /// </summary>
-        internal static string Subject {
+        internal static string EmailConfirmationNotificationSubject {
             get {
-                return ResourceManager.GetString("Subject", resourceCulture);
+                return ResourceManager.GetString("EmailConfirmationNotificationSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your user name - {{ user_name }}..
+        /// </summary>
+        internal static string RemindUserNameNotificationBody {
+            get {
+                return ResourceManager.GetString("RemindUserNameNotificationBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remind user name.
+        /// </summary>
+        internal static string RemindUserNameNotificationSubject {
+            get {
+                return ResourceManager.GetString("RemindUserNameNotificationSubject", resourceCulture);
             }
         }
     }
