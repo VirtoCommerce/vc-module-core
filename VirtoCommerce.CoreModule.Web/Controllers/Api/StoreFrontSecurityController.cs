@@ -399,7 +399,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             uriBuilder.Query = query.ToString();
 
             var notification = _notificationManager.GetNewNotification<RegistrationByInviteNotification>(storeName, "Store", language);
-            notification.Url = uriBuilder.ToString();
+            notification.InviteUrl = uriBuilder.ToString();
 
             var store = _storeService.GetById(storeName);
             notification.Sender = store.Email;
