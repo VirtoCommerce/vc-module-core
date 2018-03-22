@@ -333,7 +333,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         }
 
         /// <summary>
-        /// Send Forgot UserName notification for sign in
+        /// Remind  user name for sign in and send this notification
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="storeName"></param>
@@ -367,6 +367,14 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        /// <summary>
+        /// Generate invite token for registering by invite and send this notification
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="storeName"></param>
+        /// <param name="language"></param>
+        /// <param name="callbackUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("user/registration/invite")]
         [ResponseType(typeof(void))]
