@@ -15,5 +15,7 @@ namespace VirtoCommerce.CoreModule.Data.Notifications
 
         [NotificationParameter("Invite URL")]
         public string InviteUrl { get; set; }
+        [NotificationParameter("Custom message")]
+        public string Message { get; set; }
     }
 }
