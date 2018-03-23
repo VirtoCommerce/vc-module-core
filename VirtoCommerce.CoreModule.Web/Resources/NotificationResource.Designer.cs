@@ -79,6 +79,24 @@ namespace VirtoCommerce.CoreModule.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please  to register by invite clicking &lt;a href=&quot;{{ invite_url }}&quot;&gt;here&lt;/a&gt;.
+        /// </summary>
+        internal static string RegistrationInvitationNotificationBody {
+            get {
+                return ResourceManager.GetString("RegistrationInvitationNotificationBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registration by invite.
+        /// </summary>
+        internal static string RegistrationInvitationNotificationSubject {
+            get {
+                return ResourceManager.GetString("RegistrationInvitationNotificationSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your user name - {{ user_name }}..
         /// </summary>
         internal static string RemindUserNameNotificationBody {

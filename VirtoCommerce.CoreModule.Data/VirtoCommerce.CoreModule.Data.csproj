@@ -134,6 +134,7 @@
     <Compile Include="Model\SeoUrlKeyword.cs" />
     <Compile Include="Model\Sequence.cs" />
     <Compile Include="Notifications\EmailConfirmationNotification.cs" />
+    <Compile Include="Notifications\RegistrationInvitationNotification.cs" />
     <Compile Include="Notifications\RemindUserNameNotification.cs" />
     <Compile Include="Observers\RegistrationEmailObserver.cs" />
     <Compile Include="Payment\DefaultManualPaymentMethod.cs" />
