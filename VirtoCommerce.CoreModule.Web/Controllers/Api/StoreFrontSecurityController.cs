@@ -378,7 +378,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPost]
         [Route("user/registration/invite")]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> GenerateInviteToken(string userId, string storeName, string language, string callbackUrl)
+        public async Task<IHttpActionResult> SendRegistrationInvitation(string userId, string storeName, string language, string callbackUrl)
         {
             if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(storeName) || string.IsNullOrEmpty(callbackUrl))
             {
@@ -398,7 +398,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             query["code"] = token;
             uriBuilder.Query = query.ToString();
 
-            var notification = _notificationManager.GetNewNotification<RegistrationByInviteNotification>(storeName, "Store", language);
+            var notification = _notificationManager.GetNewNotification<RegistrationInvitationNotification>(storeName, "Store", language);
             notification.InviteUrl = uriBuilder.ToString();
 
             var store = _storeService.GetById(storeName);
