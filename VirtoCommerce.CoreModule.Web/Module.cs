@@ -142,8 +142,32 @@ namespace VirtoCommerce.CoreModule.Web
                 NotificationTemplate = new NotificationTemplate
                 {
                     Language = "en-US",
-                    Subject = EmailConfirmationResource.Subject,
-                    Body = EmailConfirmationResource.Body
+                    Subject = NotificationResource.EmailConfirmationNotificationSubject,
+                    Body = NotificationResource.EmailConfirmationNotificationBody
+                }
+            });
+
+            notificationManager.RegisterNotificationType(() => new RemindUserNameNotification(emailGateway)
+            {
+                DisplayName = "Remind user name notification",
+                Description = "This notification is sent by email to a client upon forgot user name request",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.RemindUserNameNotificationSubject,
+                    Body = NotificationResource.RemindUserNameNotificationBody
+                }
+            });
+
+            notificationManager.RegisterNotificationType(() => new RegistrationInvitationNotification(emailGateway)
+            {
+                DisplayName = "Registration by invite notification",
+                Description = "This notification is sent by email to a client upon registration by invite",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.RegistrationInvitationNotificationSubject,
+                    Body = NotificationResource.RegistrationInvitationNotificationBody
                 }
             });
 
