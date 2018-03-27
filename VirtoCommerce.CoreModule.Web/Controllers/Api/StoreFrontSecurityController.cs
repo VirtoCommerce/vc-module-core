@@ -59,7 +59,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();
@@ -84,7 +84,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByNameAsync(userName, UserDetails.Reduced);
+            var user = await _securityService.FindByNameAsync(userName, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();
@@ -110,7 +110,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByEmailAsync(email, UserDetails.Reduced);
+            var user = await _securityService.FindByEmailAsync(email, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();
@@ -136,7 +136,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByLoginAsync(loginProvider, providerKey, UserDetails.Reduced);
+            var user = await _securityService.FindByLoginAsync(loginProvider, providerKey, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();

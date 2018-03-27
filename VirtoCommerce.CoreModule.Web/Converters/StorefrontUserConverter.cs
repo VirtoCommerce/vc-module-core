@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,8 +20,7 @@ namespace VirtoCommerce.CoreModule.Web.Converters
             retVal.SecurityStamp = null;
             retVal.UserState = user.UserState;
             retVal.Logins = user.Logins;
-
-
+            retVal.Permissions = user.Permissions;
             return retVal;
 		}
 
