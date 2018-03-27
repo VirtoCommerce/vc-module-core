@@ -21,6 +21,7 @@ namespace VirtoCommerce.CoreModule.Web.Converters
             retVal.UserState = user.UserState;
             retVal.Logins = user.Logins;
             retVal.Permissions = user.Permissions;
+            retVal.Roles = user.Roles;
             return retVal;
 		}
 
