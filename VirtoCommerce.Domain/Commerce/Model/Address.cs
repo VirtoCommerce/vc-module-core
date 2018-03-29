@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,8 @@ namespace VirtoCommerce.Domain.Commerce.Model
 {
    public class Address : ValueObject<Address>
 	{
-		public AddressType AddressType { get; set; }
+	    public string Id { get; set; }
+	    public AddressType AddressType { get; set; }
 		public string Name { get; set; }
 		public string Organization { get; set; }
 		public string CountryCode { get; set; }
