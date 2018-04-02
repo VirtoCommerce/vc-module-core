@@ -1,5 +1,5 @@
 angular.module('virtoCommerce.coreModule.seo')
-.controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService', function ($scope, bladeNavigationService) {
+    .controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService', function ($scope, bladeNavigationService) {
     var blade = $scope.blade;
 
     function initializeBlade() {
@@ -13,8 +13,11 @@ angular.module('virtoCommerce.coreModule.seo')
         $scope.bladeClose();
     };
 
-    $scope.titleMax = "max 255";
-    $scope.metaDescriptionMax = "max 1024";
+    //vars for carsLeft directive
+    $scope.charsLeftToMax = 255;
+    $scope.maxlength = 255;
+
+    $scope.metaDescriptionMax = 1024;
 
     $scope.saveChanges = function () {
     	if (blade.isNew) {
