@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VirtoCommerce.Domain.Customer.Events;
 using VirtoCommerce.Domain.Customer.Model;
@@ -16,6 +14,7 @@ namespace VirtoCommerce.CoreModule.Data.Observers
     /// <summary>
     /// Send welcome registration email notification when storefront user registered
     /// </summary>
+    [Obsolete("Use RegistrationEmailMemberChangedEventHandler instead")]
     public class RegistrationEmailObserver : IObserver<MemberChangingEvent>
     {
         private readonly IStoreService _storeService;

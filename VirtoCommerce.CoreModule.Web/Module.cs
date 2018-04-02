@@ -23,6 +23,7 @@ using VirtoCommerce.Domain.Payment.Services;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Domain.Shipping.Services;
 using VirtoCommerce.Domain.Tax.Services;
+using VirtoCommerce.Platform.Core.Bus;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -57,6 +58,7 @@ namespace VirtoCommerce.CoreModule.Web
         public override void Initialize()
         {
             var settingsManager = _container.Resolve<ISettingsManager>();
+            var eventHandlerRegistrar = _container.Resolve<IHandlerRegistrar>();
 
             //#region Payment gateways manager
 
@@ -86,8 +88,12 @@ namespace VirtoCommerce.CoreModule.Web
             #endregion
 
             //Registration welcome email notification.
+            eventHandlerRegistrar.RegisterHandler<MemberChangedEvent>(async (message, token) => await _container.Resolve<RegistrationEmailMemberChangedEventHandler>().Handle(message));
+            #pragma warning disable 612, 618
+            //Backward compatibility, RegistrationEmailObserver observer
+            //TODO: Delete this line through several releases
             _container.RegisterType<IObserver<MemberChangingEvent>, RegistrationEmailObserver>("RegistrationEmailObserver");
-
+            #pragma warning restore 612, 618
             #region Search
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
