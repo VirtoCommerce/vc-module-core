@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using VirtoCommerce.Domain.Customer.Events;
 using VirtoCommerce.Domain.Customer.Model;
@@ -12,7 +9,7 @@ using VirtoCommerce.Platform.Core.Notifications;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Data.Notifications;
 
-namespace VirtoCommerce.CoreModule.Data.Observers
+namespace VirtoCommerce.CoreModule.Data.Handlers
 {
     /// <summary>
     /// Send welcome registration email notification when storefront user registered
@@ -30,14 +27,21 @@ namespace VirtoCommerce.CoreModule.Data.Observers
             _notificationManager = notificationManager;
         }
 
-        public async Task Handle(MemberChangedEvent message)
+        public virtual async Task Handle(MemberChangedEvent message)
         {
-            var newContacts = message.ChangedEntries.Where(x => x.EntryState == EntryState.Added).Select(x => x.NewEntry).OfType<Contact>();
+            var newContacts = message.ChangedEntries
+                .Where(x => x.EntryState == EntryState.Added)
+                .Select(x => x.NewEntry)
+                .OfType<Contact>()
+                .ToArray();
 
             if (!newContacts.IsNullOrEmpty())
             {
                 var usersSearchResult = await _securityService.SearchUsersAsync(new UserSearchRequest { MemberIds = newContacts.Select(x => x.Id).ToArray(), TakeCount = int.MaxValue });
-                var storefrontAccounts = usersSearchResult.Users.Where(x => x.UserType.EqualsInvariant(AccountType.Customer.ToString()));
+                var storefrontAccounts = usersSearchResult.Users
+                    .Where(x => x.UserType.EqualsInvariant(AccountType.Customer.ToString()))
+                    .ToArray();
+
                 if (!storefrontAccounts.IsNullOrEmpty())
                 {
                     foreach (var contact in newContacts)
