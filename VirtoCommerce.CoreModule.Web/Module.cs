@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Http;
 using Hangfire;
 using Microsoft.Practices.Unity;
+using VirtoCommerce.CoreModule.Data.Handlers;
 using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Data.Observers;
