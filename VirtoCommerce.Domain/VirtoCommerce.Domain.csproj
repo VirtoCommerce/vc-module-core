@@ -38,9 +38,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,8 +48,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.17\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.24.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.24\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +69,14 @@
     <Compile Include="Cart\Services\IShopingCartTotalsCalculator.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
+    <Compile Include="Catalog\Events\CategoryChangedEvent.cs" />
+    <Compile Include="Catalog\Events\CategoryChangingEvent.cs" />
+    <Compile Include="Catalog\Events\PropertyChangingEvent.cs" />
+    <Compile Include="Catalog\Events\PropertyChangedEvent.cs" />
+    <Compile Include="Catalog\Events\ProductChangedEvent.cs" />
+    <Compile Include="Catalog\Events\CatalogChangedEvent.cs" />
+    <Compile Include="Catalog\Events\ProductChangingEvent.cs" />
+    <Compile Include="Catalog\Events\CatalogChangingEvent.cs" />
     <Compile Include="Catalog\Model\IHasAssociations.cs" />
     <Compile Include="Catalog\Model\Asset.cs" />
     <Compile Include="Catalog\Model\AvailabilityRule.cs" />
@@ -137,6 +144,8 @@
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
     <Compile Include="Commerce\Services\ISeoDuplicatesDetector.cs" />
+    <Compile Include="Common\Events\GenericChangedEntry.cs" />
+    <Compile Include="Common\Events\GenericChangedEntryEvent.cs" />
     <Compile Include="Common\MoneyExtensions.cs" />
     <Compile Include="Common\Expressions\ConditionExpressionTree.cs" />
     <Compile Include="Common\Expressions\DynamicExpression.cs" />
@@ -147,9 +156,10 @@
     <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Services\ICommerceService.cs" />
     <Compile Include="Common\ValueObject.cs" />
+    <Compile Include="Customer\Events\MemberChangedEvent.cs" />
     <Compile Include="Customer\Model\Contact.cs" />
     <Compile Include="Customer\Model\Employee.cs" />
-    <Compile Include="Customer\Model\Events\MemberChangingEvent.cs" />
+    <Compile Include="Customer\Events\MemberChangingEvent.cs" />
     <Compile Include="Customer\Model\Member.cs" />
     <Compile Include="Customer\Model\Note.cs" />
     <Compile Include="Customer\Model\Organization.cs" />
@@ -241,6 +251,8 @@
     <Compile Include="Payment\Services\IPaymentMethodsService.cs" />
     <Compile Include="Payment\Services\PaymentMethodsServiceImpl.cs" />
     <Compile Include="Payment\Model\PaymentMethodType.cs" />
+    <Compile Include="Pricing\Events\PriceChangedEvent.cs" />
+    <Compile Include="Pricing\Events\PriceChangingEvent.cs" />
     <Compile Include="Pricing\Model\Price.cs" />
     <Compile Include="Pricing\Model\PriceEvaluationContext.cs" />
     <Compile Include="Pricing\Model\Pricelist.cs" />
@@ -338,9 +350,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="VirtoCommerce.Domain.nuspec">
       <SubType>Designer</SubType>
     </None>

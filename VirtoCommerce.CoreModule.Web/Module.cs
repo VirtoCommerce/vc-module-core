@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Http;
 using Hangfire;
 using Microsoft.Practices.Unity;
+using VirtoCommerce.CoreModule.Data.Handlers;
 using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Data.Observers;
@@ -23,6 +24,7 @@ using VirtoCommerce.Domain.Payment.Services;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Domain.Shipping.Services;
 using VirtoCommerce.Domain.Tax.Services;
+using VirtoCommerce.Platform.Core.Bus;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -57,6 +59,7 @@ namespace VirtoCommerce.CoreModule.Web
         public override void Initialize()
         {
             var settingsManager = _container.Resolve<ISettingsManager>();
+            var eventHandlerRegistrar = _container.Resolve<IHandlerRegistrar>();
 
             //#region Payment gateways manager
 
@@ -86,8 +89,12 @@ namespace VirtoCommerce.CoreModule.Web
             #endregion
 
             //Registration welcome email notification.
+            eventHandlerRegistrar.RegisterHandler<MemberChangedEvent>(async (message, token) => await _container.Resolve<RegistrationEmailMemberChangedEventHandler>().Handle(message));
+            #pragma warning disable 612, 618
+            //Backward compatibility, RegistrationEmailObserver observer
+            //TODO: Delete this line through several releases
             _container.RegisterType<IObserver<MemberChangingEvent>, RegistrationEmailObserver>("RegistrationEmailObserver");
-
+            #pragma warning restore 612, 618
             #region Search
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
@@ -142,8 +149,32 @@ namespace VirtoCommerce.CoreModule.Web
                 NotificationTemplate = new NotificationTemplate
                 {
                     Language = "en-US",
-                    Subject = EmailConfirmationResource.Subject,
-                    Body = EmailConfirmationResource.Body
+                    Subject = NotificationResource.EmailConfirmationNotificationSubject,
+                    Body = NotificationResource.EmailConfirmationNotificationBody
+                }
+            });
+
+            notificationManager.RegisterNotificationType(() => new RemindUserNameNotification(emailGateway)
+            {
+                DisplayName = "Remind user name notification",
+                Description = "This notification is sent by email to a client upon forgot user name request",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.RemindUserNameNotificationSubject,
+                    Body = NotificationResource.RemindUserNameNotificationBody
+                }
+            });
+
+            notificationManager.RegisterNotificationType(() => new RegistrationInvitationNotification(emailGateway)
+            {
+                DisplayName = "Registration by invite notification",
+                Description = "This notification is sent by email to a client upon registration by invite",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.RegistrationInvitationNotificationSubject,
+                    Body = NotificationResource.RegistrationInvitationNotificationBody
                 }
             });
 
