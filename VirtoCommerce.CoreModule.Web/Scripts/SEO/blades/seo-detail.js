@@ -14,10 +14,10 @@ angular.module('virtoCommerce.coreModule.seo')
     };
 
     //vars for carsLeft directive
-    $scope.charsLeftToMax = 255;
-    $scope.maxlength = 255;
-
-    $scope.metaDescriptionMax = 1024;
+    $scope.charsLeftTo255 = '';
+    $scope.maxlength255 = 255;
+    $scope.charsLeftTo1024 = '';
+    $scope.maxlength1024 = 1024;
 
     $scope.saveChanges = function () {
     	if (blade.isNew) {
