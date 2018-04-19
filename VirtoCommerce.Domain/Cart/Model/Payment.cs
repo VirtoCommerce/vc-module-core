@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class Payment : AuditableEntity, IHaveTaxDetalization, ITaxable, IHasDiscounts
+	public class Payment : AuditableEntity, IHaveTaxDetalization, ITaxable, IHasDiscounts, IHasDynamicProperties
     {
 		public string OuterId { get; set; }
 		public string Currency { get; set; }
@@ -52,6 +53,11 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public ICollection<TaxDetail> TaxDetails { get; set; }
 
+        #endregion
+
+        #region IHasDynamicProperties Members
+        public string ObjectType { get; set; }
+        public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
         #endregion
     }
 }
