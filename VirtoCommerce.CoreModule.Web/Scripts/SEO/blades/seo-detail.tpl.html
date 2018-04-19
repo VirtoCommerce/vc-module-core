@@ -50,13 +50,13 @@
                 <div class="form-group">
                     <label class="form-label">{{'core.blades.seo-detail.labels.page-title' | translate}}</label><span class="form-label-limit">{{charsLeftTo255}}</span>
                     <div class="form-input">
-                        <input ng-model="blade.currentEntity.pageTitle" ng-trim="false" chars-left-to-255 class="form-control" placeholder="{{'core.blades.seo-detail.placeholders.page-title' | translate}}" />
+                        <input ng-model="blade.currentEntity.pageTitle" ng-trim="false" chars-left-to-max class="form-control title" placeholder="{{'core.blades.seo-detail.placeholders.page-title' | translate}}" />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">{{'core.blades.seo-detail.labels.meta-description' | translate}}</label><span class="form-label-limit">{{charsLeftTo1024}}</span>
                     <div class="form-input">
-                        <textarea ng-model="blade.currentEntity.metaDescription" ng-trim="false" chars-left-to-1024 class="form-control" cols="30" rows="3" placeholder="{{'core.blades.seo-detail.placeholders.meta-description' | translate}}"></textarea>
+                        <textarea ng-model="blade.currentEntity.metaDescription" ng-trim="false" chars-left-to-max class="form-control description" cols="30" rows="3" placeholder="{{'core.blades.seo-detail.placeholders.meta-description' | translate}}"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
