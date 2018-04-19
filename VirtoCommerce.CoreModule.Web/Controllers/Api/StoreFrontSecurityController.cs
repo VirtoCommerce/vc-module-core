@@ -8,6 +8,7 @@ using System.Web.Http.Description;
 using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Web.Converters;
 using VirtoCommerce.CoreModule.Web.Model;
+using VirtoCommerce.Domain.Customer.Model;
 using VirtoCommerce.Domain.Customer.Services;
 using VirtoCommerce.Domain.Store.Services;
 using VirtoCommerce.Platform.Core.Notifications;
@@ -58,7 +59,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();
@@ -83,7 +84,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByNameAsync(userName, UserDetails.Reduced);
+            var user = await _securityService.FindByNameAsync(userName, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();
@@ -109,7 +110,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByEmailAsync(email, UserDetails.Reduced);
+            var user = await _securityService.FindByEmailAsync(email, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();
@@ -135,7 +136,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            var user = await _securityService.FindByLoginAsync(loginProvider, providerKey, UserDetails.Reduced);
+            var user = await _securityService.FindByLoginAsync(loginProvider, providerKey, UserDetails.Full);
             if (user != null)
             {
                 var result = user.ToWebModel();
@@ -240,17 +241,8 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
             var store = _storeService.GetById(storeName);
             notification.Sender = store.Email;
+            notification.Recipient = await GetUserEmailAsync(userId);
             notification.IsActive = true;
-
-            var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
-            if (member != null)
-            {
-                var email = member.Emails.FirstOrDefault();
-                if (!string.IsNullOrEmpty(email))
-                {
-                    notification.Recipient = email;
-                }
-            }
 
             _notificationManager.ScheduleSendNotification(notification);
 
@@ -286,29 +278,21 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         {
             using (var userManager = _userManagerFactory())
             {
-                var member = _memberService.GetByIds(new[] { userId }).FirstOrDefault();
-                if (member != null)
-                {
-                    var store = _storeService.GetById(storeName);
+                var store = _storeService.GetById(storeName);
 
-                    var uriBuilder = new UriBuilder(callbackUrl);
-                    var query = HttpUtility.ParseQueryString(uriBuilder.Query);
-                    var token = await userManager.GenerateEmailConfirmationTokenAsync(userId);
-                    query["code"] = token;
-                    uriBuilder.Query = query.ToString();
+                var uriBuilder = new UriBuilder(callbackUrl);
+                var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(userId);
+                query["code"] = token;
+                uriBuilder.Query = query.ToString();
 
-                    var notification = _notificationManager.GetNewNotification<EmailConfirmationNotification>(storeName, "Store", language);
-                    var email = member.Emails.FirstOrDefault();
-                    if (!string.IsNullOrEmpty(email))
-                    {
-                        notification.Recipient = email;
-                    }
-                    notification.Url = uriBuilder.ToString();
-                    notification.Sender = store.Email;
-                    notification.IsActive = true;
+                var notification = _notificationManager.GetNewNotification<EmailConfirmationNotification>(storeName, "Store", language);
+                notification.Url = uriBuilder.ToString();
+                notification.Recipient = await GetUserEmailAsync(userId);
+                notification.Sender = store.Email;
+                notification.IsActive = true;
 
-                    _notificationManager.ScheduleSendNotification(notification);
-                }
+                _notificationManager.ScheduleSendNotification(notification);
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -330,6 +314,101 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
                 return Ok(result);
             }
+        }
+
+        private async Task<string> GetUserEmailAsync(string userId)
+        {
+            string email = null;
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+            if (user != null)
+            {
+                email = user.Email ?? user.UserName;
+                if (!string.IsNullOrEmpty(user.MemberId))
+                {
+                    var contact = _memberService.GetByIds(new[] { user.MemberId }).OfType<Contact>().FirstOrDefault();                   
+                    email = contact?.Emails?.FirstOrDefault() ?? email;
+                }    
+            }
+            return email;
+        }
+
+        /// <summary>
+        /// Remind  user name for sign in and send this notification
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="storeName"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("user/remindusername")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> RemindUserNameNotification(string userId, string storeName, string language)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(storeName))
+            {
+                return BadRequest();
+            }
+
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+
+            if(user == null)
+                return BadRequest();
+
+            var notification = _notificationManager.GetNewNotification<RemindUserNameNotification>(storeName, "Store", language);
+            notification.UserName = user.UserName;
+
+            var store = _storeService.GetById(storeName);
+            notification.Sender = store.Email;
+            notification.Recipient = user.Email ?? await GetUserEmailAsync(userId);
+            notification.IsActive = true;
+
+            _notificationManager.ScheduleSendNotification(notification);
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        /// <summary>
+        /// Generate invite token for registering by invite and send this notification
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="storeName"></param>
+        /// <param name="language"></param>
+        /// <param name="callbackUrl"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("user/registration/invite")]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> SendRegistrationInvitation(string userId, string storeName, string language, string callbackUrl)
+        {
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(storeName) || string.IsNullOrEmpty(callbackUrl))
+            {
+                return BadRequest();
+            }
+
+            var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+
+            if (user == null)
+                return BadRequest();
+
+            var token = await _securityService.GeneratePasswordResetTokenAsync(user.Id);
+
+            var uriBuilder = new UriBuilder(callbackUrl);
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+
+            query["code"] = token;
+            uriBuilder.Query = query.ToString();
+
+            var notification = _notificationManager.GetNewNotification<RegistrationInvitationNotification>(storeName, "Store", language);
+            notification.InviteUrl = uriBuilder.ToString();
+
+            var store = _storeService.GetById(storeName);
+            notification.Sender = store.Email;
+            notification.Recipient = user.Email ?? await GetUserEmailAsync(userId);
+            notification.IsActive = true;
+
+            _notificationManager.ScheduleSendNotification(notification);
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

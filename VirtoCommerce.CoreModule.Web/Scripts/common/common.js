@@ -1,63 +1,68 @@
 angular.module('virtoCommerce.coreModule.common', [])
     .run(['platformWebApp.metaFormsService', function (metaFormsService) {
         metaFormsService.registerMetaFields('addressDetails', [{
+            name: 'name',
+            title: 'core.blades.address-detail.labels.name',
+            valueType: 'ShortText',
+            priority: 0
+        }, {
             name: 'addressType',
             templateUrl: 'addressTypeSelector.html',
-            priority: 0
+            priority: 1
         }, {
             name: 'firstName',
             title: 'core.blades.address-detail.labels.first-name',
             valueType: 'ShortText',
             isRequired: true,
-            priority: 1
+            priority: 2
         }, {
             name: 'lastName',
             title: 'core.blades.address-detail.labels.last-name',
             valueType: 'ShortText',
             isRequired: true,
-            priority: 2
+            priority: 3
         }, {
             name: 'countryCode',
             templateUrl: 'countrySelector.html',
-            priority: 3
+            priority: 4
         }, {
             name: 'regionName',
             title: 'core.blades.address-detail.labels.region',
             valueType: 'ShortText',
             isRequired: true,
-            priority: 4
+            priority: 5
         }, {
             name: 'city',
             title: 'core.blades.address-detail.labels.city',
             valueType: 'ShortText',
             isRequired: true,
-            priority: 5
+            priority: 6
         }, {
             name: 'line1',
             title: 'core.blades.address-detail.labels.address1',
             valueType: 'ShortText',
             isRequired: true,
-            priority: 6
+            priority: 7
         }, {
             name: 'line2',
             title: 'core.blades.address-detail.labels.address2',
             valueType: 'ShortText',
-            priority: 7
+            priority: 8
         }, {
             name: 'postalCode',
             title: 'core.blades.address-detail.labels.zip-code',
             valueType: 'ShortText',
             isRequired: true,
-            priority: 8
+            priority: 9
         }, {
             name: 'email',
             title: 'core.blades.address-detail.labels.email',
             valueType: 'Email',
-            priority: 9
+            priority: 10
         }, {
             name: 'phone',
             title: 'core.blades.address-detail.labels.phone',
             valueType: 'ShortText',
-            priority: 10
+            priority: 11
         }]);
     }]);

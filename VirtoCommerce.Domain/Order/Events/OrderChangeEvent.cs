@@ -1,24 +1,30 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using VirtoCommerce.Domain.Common.Events;
 using VirtoCommerce.Domain.Order.Model;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Order.Events
 {
-    public class OrderChangeEvent
+    public class OrderChangeEvent : GenericChangedEntryEvent<CustomerOrder>
     {
-        public OrderChangeEvent(EntryState state, CustomerOrder origOrder, CustomerOrder modifiedOrder)
+        [Obsolete]
+        public OrderChangeEvent(EntryState state, CustomerOrder oldOrder, CustomerOrder newOrder)
+           : this(new[] { new GenericChangedEntry<CustomerOrder>(newOrder, oldOrder, state) })
         {
-            ChangeState = state;
-            OrigOrder = origOrder;
-            ModifiedOrder = modifiedOrder;
         }
 
-        public EntryState ChangeState { get; set; }
-        public CustomerOrder OrigOrder { get; set; }
-        public CustomerOrder ModifiedOrder { get; set; }
+        public OrderChangeEvent(IEnumerable<GenericChangedEntry<CustomerOrder>> changedEntries)
+           : base(changedEntries)
+        {
+        }
+
+        [Obsolete]
+        public EntryState ChangeState => ChangedEntries.FirstOrDefault()?.EntryState ?? EntryState.Unchanged;
+        [Obsolete]
+        public CustomerOrder OrigOrder => ChangedEntries.FirstOrDefault()?.OldEntry;
+        [Obsolete]
+        public CustomerOrder ModifiedOrder => ChangedEntries.FirstOrDefault()?.NewEntry;
     }
 }
