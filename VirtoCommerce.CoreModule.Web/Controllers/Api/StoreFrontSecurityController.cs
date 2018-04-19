@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.AspNet.Identity;
 using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Web.Converters;
 using VirtoCommerce.CoreModule.Web.Model;
@@ -307,14 +308,24 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
             {
                 return BadRequest();
             }
-
+            var result = IdentityResult.Success;
             using (var userManager = _userManagerFactory())
             {
-                var result = await userManager.ConfirmEmailAsync(userId, token);
-
-                return Ok(result);
+                result = await userManager.ConfirmEmailAsync(userId, token);
             }
+
+            if (result.Succeeded)
+            {
+                var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
+                if (user != null)
+                {
+                    user.EmailConfirmed = true;
+                    await _securityService.UpdateAsync(user);
+                }
+            }
+            return Ok(result);
         }
+
 
         private async Task<string> GetUserEmailAsync(string userId)
         {
@@ -325,9 +336,9 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 email = user.Email ?? user.UserName;
                 if (!string.IsNullOrEmpty(user.MemberId))
                 {
-                    var contact = _memberService.GetByIds(new[] { user.MemberId }).OfType<Contact>().FirstOrDefault();                   
+                    var contact = _memberService.GetByIds(new[] { user.MemberId }).OfType<Contact>().FirstOrDefault();
                     email = contact?.Emails?.FirstOrDefault() ?? email;
-                }    
+                }
             }
             return email;
         }
@@ -351,7 +362,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
             var user = await _securityService.FindByIdAsync(userId, UserDetails.Reduced);
 
-            if(user == null)
+            if (user == null)
                 return BadRequest();
 
             var notification = _notificationManager.GetNewNotification<RemindUserNameNotification>(storeName, "Store", language);
