@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
+using coreModel = VirtoCommerce.Domain.Commerce.Model;
+using dataModel = VirtoCommerce.CoreModule.Data.Model;
 
 namespace VirtoCommerce.CoreModule.Data.Model
 {
@@ -30,6 +27,38 @@ namespace VirtoCommerce.CoreModule.Data.Model
 
         [StringLength(64)]
         public string CustomFormatting { get; set; }
+
+        public virtual coreModel.Currency ToModel(coreModel.Currency currency)
+        {
+            currency.Code = Code;
+            currency.Name = Name;
+            currency.IsPrimary = IsPrimary;
+            currency.ExchangeRate = ExchangeRate;
+            currency.Symbol = Symbol;
+            currency.CustomFormatting = CustomFormatting;         
+            return currency;
+        }
+
+        public virtual dataModel.Currency FromModel(coreModel.Currency currency)
+        {
+            Code = currency.Code;
+            Name = currency.Name;
+            IsPrimary = currency.IsPrimary;
+            ExchangeRate = currency.ExchangeRate;
+            Symbol = currency.Symbol;
+            CustomFormatting = currency.CustomFormatting;
+            return this;
+        }
+
+        public virtual void Patch(dataModel.Currency target)
+        {
+            target.Code = Code;
+            target.Name = Name;
+            target.IsPrimary = IsPrimary;
+            target.ExchangeRate = ExchangeRate;
+            target.Symbol = Symbol;
+            target.CustomFormatting = CustomFormatting;           
+        }
 
     }
 }

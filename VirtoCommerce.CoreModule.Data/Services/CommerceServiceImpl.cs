@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using VirtoCommerce.CoreModule.Data.Converters;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.Domain.Commerce.Services;
 using VirtoCommerce.Platform.Core.Common;
@@ -22,28 +21,31 @@ namespace VirtoCommerce.CoreModule.Data.Services
         }
   
         #region ICommerceService Members     
-
+        [Obsolete]
         public IEnumerable<coreModel.FulfillmentCenter> GetAllFulfillmentCenters()
         {
             using (var repository = _repositoryFactory())
             {
                 var result = repository.FulfillmentCenters
                     .ToArray()
-                    .Select(x => x.ToCoreModel())
+                    .Select(x => x.ToModel(AbstractTypeFactory<coreModel.FulfillmentCenter>.TryCreateInstance()))
                     .ToList();
 
                 return result;
             }
         }
-
+        [Obsolete]
         public coreModel.FulfillmentCenter UpsertFulfillmentCenter(coreModel.FulfillmentCenter center)
         {
             if (center == null)
-                throw new ArgumentNullException("center");
+            {
+                throw new ArgumentNullException(nameof(center));
+            }
 
+            var pkMap = new PrimaryKeyResolvingMap();
             using (var repository = _repositoryFactory())
             {
-                var sourceEntry = center.ToDataModel();
+                var sourceEntry = AbstractTypeFactory<dataModel.FulfillmentCenter>.TryCreateInstance().FromModel(center, pkMap);
                 var targetEntry = repository.FulfillmentCenters.FirstOrDefault(x => x.Id == center.Id);
 
                 if (targetEntry == null)
@@ -56,16 +58,17 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 }
 
                 CommitChanges(repository);
+                pkMap.ResolvePrimaryKeys();
 
                 var result = repository.FulfillmentCenters
                     .First(x => x.Id == sourceEntry.Id)
-                    .ToCoreModel();
+                    .ToModel(AbstractTypeFactory<coreModel.FulfillmentCenter>.TryCreateInstance());
 
                 return result;
             }
 
         }
-
+        [Obsolete]
         public void DeleteFulfillmentCenter(string[] ids)
         {
             using (var repository = _repositoryFactory())
@@ -88,7 +91,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 var seoInfos = repository.SeoUrlKeywords
                     .Where(x => objectIds.Contains(x.ObjectId))
                     .ToArray()
-                    .Select(x => x.ToCoreModel())
+                    .Select(x => x.ToModel(AbstractTypeFactory<coreModel.SeoInfo>.TryCreateInstance()))
                     .ToList();
 
                 foreach (var seoSupportObject in seoSupportObjects)
@@ -100,17 +103,19 @@ namespace VirtoCommerce.CoreModule.Data.Services
 
         public void UpsertSeoInfos(coreModel.SeoInfo[] seoinfos)
         {
+            var pkMap = new PrimaryKeyResolvingMap();
             using (var repository = _repositoryFactory())
             using (var changeTracker = GetChangeTracker(repository))
             {
                 var alreadyExistSeoInfos = repository.GetSeoByIds(seoinfos.Select(x => x.Id).ToArray());
                 var target = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(alreadyExistSeoInfos) };
-                var source = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(seoinfos.Select(x => x.ToDataModel())) };
+                var source = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(seoinfos.Select(x => AbstractTypeFactory<dataModel.SeoUrlKeyword>.TryCreateInstance().FromModel(x, pkMap))) };
 
                 changeTracker.Attach(target);
 
                 source.SeoInfos.Patch(target.SeoInfos, (sourceSeoUrlKeyword, targetSeoUrlKeyword) => sourceSeoUrlKeyword.Patch(targetSeoUrlKeyword));
                 repository.UnitOfWork.Commit();
+                pkMap.ResolvePrimaryKeys();
             }
         }
 
@@ -118,9 +123,9 @@ namespace VirtoCommerce.CoreModule.Data.Services
         {
             if (seoSupportObjects == null)
             {
-                throw new ArgumentNullException("seoSupportObjects");
+                throw new ArgumentNullException(nameof(seoSupportObjects));
             }
-
+            var pkMap = new PrimaryKeyResolvingMap();
             foreach (var seoObject in seoSupportObjects.Where(x => x.Id != null))
             {
                 var objectType = seoObject.SeoObjectType;
@@ -144,14 +149,15 @@ namespace VirtoCommerce.CoreModule.Data.Services
                     if (seoObject.SeoInfos != null)
                     {
                         var target = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(repository.GetObjectSeoUrlKeywords(objectType, seoObject.Id)) };
-                        var source = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(seoObject.SeoInfos.Select(x => x.ToDataModel())) };
+                        var source = new { SeoInfos = new ObservableCollection<dataModel.SeoUrlKeyword>(seoObject.SeoInfos.Select(x => AbstractTypeFactory<dataModel.SeoUrlKeyword>.TryCreateInstance().FromModel(x, pkMap))) };
 
                         changeTracker.Attach(target);
-
-                        source.SeoInfos.Patch(target.SeoInfos, new SeoUrlKeywordComparer(), (sourceSeoUrlKeyword, targetSeoUrlKeyword) => sourceSeoUrlKeyword.Patch(targetSeoUrlKeyword));
+                        var seoComparer = AnonymousComparer.Create((dataModel.SeoUrlKeyword x) => x.Id ?? string.Join(":", x.StoreId, x.ObjectId, x.ObjectType, x.Language));
+                        source.SeoInfos.Patch(target.SeoInfos, seoComparer, (sourceSeoUrlKeyword, targetSeoUrlKeyword) => sourceSeoUrlKeyword.Patch(targetSeoUrlKeyword));
                     }
 
                     CommitChanges(repository);
+                    pkMap.ResolvePrimaryKeys();
                 }
             }
         }
@@ -160,7 +166,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
         {
             if (seoSupportObject == null)
             {
-                throw new ArgumentNullException("seoSupportObjects");
+                throw new ArgumentNullException(nameof(seoSupportObject));
             }
 
             if (seoSupportObject.Id != null)
@@ -191,7 +197,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                                                     .Where(x => x.Count() > 1)
                                                     .SelectMany(x => x)
                                                     .ToArray();
-                retVal.AddRange(dublicateSeoRecords.Select(x => x.ToCoreModel()));
+                retVal.AddRange(dublicateSeoRecords.Select(x => x.ToModel(AbstractTypeFactory<coreModel.SeoInfo>.TryCreateInstance())));
             }
             return retVal;
         }
@@ -207,7 +213,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                     .Join(repository.SeoUrlKeywords, x => new { x.ObjectId, x.ObjectType }, y => new { y.ObjectId, y.ObjectType }, (x, y) => y)
                     .ToArray();
 
-                var result = query.Select(x => x.ToCoreModel()).ToList();
+                var result = query.Select(x => x.ToModel(AbstractTypeFactory<coreModel.SeoInfo>.TryCreateInstance())).ToList();
                 return result;
             }
         }
@@ -222,7 +228,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                     .OrderByDescending(x => x.IsPrimary)
                     .ThenBy(x => x.Code)
                     .ToArray()
-                    .Select(x => x.ToCoreModel())
+                    .Select(x => x.ToModel(AbstractTypeFactory<coreModel.Currency>.TryCreateInstance()))
                     .ToList();
 
                 return result;
@@ -232,8 +238,11 @@ namespace VirtoCommerce.CoreModule.Data.Services
         public void UpsertCurrencies(coreModel.Currency[] currencies)
         {
             if (currencies == null)
-                throw new ArgumentNullException("currencies");
+            {
+                throw new ArgumentNullException(nameof(currencies));
+            }
 
+            var pkMap = new PrimaryKeyResolvingMap();
             using (var repository = _repositoryFactory())
             {
                 //Ensure that only one Primary currency
@@ -249,7 +258,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
 
                 foreach (var currency in currencies)
                 {
-                    var sourceEntry = currency.ToDataModel();
+                    var sourceEntry = AbstractTypeFactory<dataModel.Currency>.TryCreateInstance().FromModel(currency);
                     var targetEntry = repository.Currencies.FirstOrDefault(x => x.Code == currency.Code);
 
                     if (targetEntry == null)
@@ -289,7 +298,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             using (var repository = _repositoryFactory())
             {
                 var result = repository.PackageTypes.OrderBy(x => x.Name).ToArray()
-                                                    .Select(x => x.ToCoreModel());
+                                                    .Select(x => x.ToModel(AbstractTypeFactory<coreModel.PackageType>.TryCreateInstance()));
                 return result;
             }
         }
@@ -297,13 +306,16 @@ namespace VirtoCommerce.CoreModule.Data.Services
         public void UpsertPackageTypes(coreModel.PackageType[] packageTypes)
         {
             if (packageTypes == null)
-                throw new ArgumentNullException("packageTypes");
+            {
+                throw new ArgumentNullException(nameof(packageTypes));
+            }
 
+            var pkMap = new PrimaryKeyResolvingMap();
             using (var repository = _repositoryFactory())
             {
                 foreach (var packageType in packageTypes)
                 {                   
-                    var sourceEntry = packageType.ToDataModel();
+                    var sourceEntry = AbstractTypeFactory<dataModel.PackageType>.TryCreateInstance().FromModel(packageType, pkMap);
                     var targetEntry = repository.PackageTypes.FirstOrDefault(x => x.Id == packageType.Id);               
                     if (targetEntry == null)
                     {
@@ -329,7 +341,6 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 CommitChanges(repository);
             }
         }
-
 
         #endregion
     }

@@ -6,7 +6,6 @@ using Microsoft.Practices.Unity;
 using VirtoCommerce.CoreModule.Data.Handlers;
 using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.CoreModule.Data.Notifications;
-using VirtoCommerce.CoreModule.Data.Observers;
 using VirtoCommerce.CoreModule.Data.Payment;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
@@ -90,11 +89,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             //Registration welcome email notification.
             eventHandlerRegistrar.RegisterHandler<MemberChangedEvent>(async (message, token) => await _container.Resolve<RegistrationEmailMemberChangedEventHandler>().Handle(message));
-            #pragma warning disable 612, 618
-            //Backward compatibility, RegistrationEmailObserver observer
-            //TODO: Delete this line through several releases
-            _container.RegisterType<IObserver<MemberChangingEvent>, RegistrationEmailObserver>("RegistrationEmailObserver");
-            #pragma warning restore 612, 618
+           
             #region Search
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
@@ -218,7 +213,7 @@ namespace VirtoCommerce.CoreModule.Web
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
-
+          
             #region Search
 
             // Enable or disable periodic search index builders
