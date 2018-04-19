@@ -73,7 +73,7 @@ namespace VirtoCommerce.CoreModule.Data.Model
 
         public virtual dataModel.FulfillmentCenter FromModel(coreModel.FulfillmentCenter center, PrimaryKeyResolvingMap pkMap)
         {
-            pkMap.AddPair(this, center);
+            pkMap.AddPair(center, this);
 
             City = center.City;
             CountryCode = center.CountryCode;
