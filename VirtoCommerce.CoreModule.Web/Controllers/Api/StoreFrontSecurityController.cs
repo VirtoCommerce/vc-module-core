@@ -308,12 +308,9 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
                 return BadRequest();
             }
 
-            using (var userManager = _userManagerFactory())
-            {
-                var result = await userManager.ConfirmEmailAsync(userId, token);
+            var securityResult = await _securityService.ConfirmUserEmailAsync(userId, token);
 
-                return Ok(result);
-            }
+            return Ok(securityResult);
         }
 
         private async Task<string> GetUserEmailAsync(string userId)
