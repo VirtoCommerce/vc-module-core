@@ -29,7 +29,6 @@
             "address-detail": {
                 "subtitle": "Adresse bearbeiten",
                 "labels": {
-                    "name": "Adressname",
                     "address-type": "Adresstyp",
                     "first-name": "Vorname",
                     "last-name": "Nachname",

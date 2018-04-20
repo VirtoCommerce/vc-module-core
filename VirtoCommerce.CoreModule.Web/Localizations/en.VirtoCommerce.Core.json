@@ -1,4 +1,4 @@
-{
+﻿{
     "core": {
         "commands": {
             "apply-filter": "Save & apply",
@@ -34,7 +34,6 @@
             "address-detail": {
                 "subtitle": "Edit address",
                 "labels": {
-                    "name":  "Address Name", 
                     "address-type": "Address type",
                     "first-name": "First name",
                     "last-name": "Last name",

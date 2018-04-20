@@ -216,7 +216,7 @@ namespace VirtoCommerce.CoreModule.Tests
             foreach (var document in documents)
             {
                 Assert.NotNull(document);
-                Assert.Contains(document.Id, expectedDocumentIds);
+                Assert.True(expectedDocumentIds.Contains(document.Id));
                 Assert.NotNull(document.Fields);
                 Assert.Equal(expectedFieldNames.Count, document.Fields.Count);
 
