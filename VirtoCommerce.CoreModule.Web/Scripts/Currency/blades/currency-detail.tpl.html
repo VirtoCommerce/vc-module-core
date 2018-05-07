@@ -1,4 +1,4 @@
-﻿<div class="blade-static __bottom" ng-include="'$(Platform)/Scripts/common/templates/create.tpl.html'" ng-if="blade.isNew"></div>
+<div class="blade-static __bottom" ng-include="'$(Platform)/Scripts/common/templates/create.tpl.html'" ng-if="blade.isNew"></div>
 <div class="blade-content">
     <div class="blade-inner">
         <div class="inner-block clearfix">
@@ -7,7 +7,7 @@
                     <div class="form-group" ng-init="setForm(formScope)">
                         <label class="form-label">{{ 'core.blades.currency-detail.labels.code' | translate }}</label>
                         <div class="form-input">
-                            <input ng-model="blade.currentEntity.code" required ng-disabled="!blade.isNew" placeholder="Enter currency code" />
+                            <input ng-model="blade.currentEntity.code" required ng-disabled="!blade.isNew" ng-maxlength="3" placeholder="Enter currency code" />
                         </div>
                         <div class="list-descr">The currency code. Use 3 letter ISO 4217 code, if it exists.</div>
                     </div>
