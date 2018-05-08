@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +10,8 @@ namespace VirtoCommerce.Domain.Commerce.Services
 	public interface ICommerceService
 	{
 		IEnumerable<FulfillmentCenter> GetAllFulfillmentCenters();
-        FulfillmentCenter UpsertFulfillmentCenter(FulfillmentCenter fullfilmentCenter);
-        void DeleteFulfillmentCenter(string[] ids);
+		FulfillmentCenter UpsertFulfillmentCenter(FulfillmentCenter fullfilmentCenter);
+		void DeleteFulfillmentCenter(string[] ids);
 
         IEnumerable<Currency> GetAllCurrencies();
         void UpsertCurrencies(Currency[] currencies);

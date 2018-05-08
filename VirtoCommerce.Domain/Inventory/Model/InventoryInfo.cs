@@ -1,22 +1,26 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Inventory.Model
 {
-    public class InventoryInfo : ValueObject, IAuditable
+	public class InventoryInfo : ValueObject<InventoryInfo>, IAuditable
 	{
-        #region IAuditable Members
-        public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-        public string ModifiedBy { get; set; }
-        #endregion
+		#region IAuditable Members
 
-        public string FulfillmentCenterId { get; set; }
-        public FulfillmentCenter FulfillmentCenter { get; set; }
+		public DateTime CreatedDate { get; set; }
+		public string CreatedBy { get; set; }
+		public DateTime? ModifiedDate { get; set; }
+		public string ModifiedBy { get; set; }
 
-        public string ProductId { get; set; }
+		#endregion
+
+		public string FulfillmentCenterId { get; set; }
+
+		public string ProductId { get; set; }
 
 		public long InStockQuantity { get; set; }
 		public long ReservedQuantity { get; set; }
@@ -29,26 +33,5 @@ namespace VirtoCommerce.Domain.Inventory.Model
 		public DateTime? PreorderAvailabilityDate { get; set; }
 		public DateTime? BackorderAvailabilityDate { get; set; }
 		public InventoryStatus Status { get; set; }
-
-
-        public virtual bool IsAvailableOn(DateTime date)
-        {
-            var result = AllowPreorder && (PreorderAvailabilityDate ?? DateTime.MinValue) <= date && PreorderQuantity > 0;
-            if(!result)
-            {
-                result = AllowBackorder && ( BackorderAvailabilityDate ?? DateTime.MaxValue) >= date && BackorderQuantity > 0;
-            }
-            if(!result)
-            {
-                result = Math.Max(0, InStockQuantity - ReservedQuantity) > 0;
-            }          
-            return result;
-        }
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return FulfillmentCenterId;
-            yield return ProductId;
-        }
-    }
+	}
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Payment.Model;
 using VirtoCommerce.Domain.Shipping.Model;
@@ -46,32 +45,21 @@ namespace VirtoCommerce.Domain.Store.Model
         public string Email { get; set; }
         public string AdminEmail { get; set; }
         public bool DisplayOutOfStock { get; set; }
-
         /// <summary>
-        /// Primary (default) fulfillment center id
+        /// Primary (default) fulfillment center
         /// </summary>
-        public string MainFulfillmentCenterId { get; set; }
+        public FulfillmentCenter FulfillmentCenter { get; set; }
         /// <summary>
-        /// Alternate fulfillment centers ids
+        /// Alternate fulfillment centeres
         /// </summary>
-        public ICollection<string> AdditionalFulfillmentCenterIds { get; set; }
+        public ICollection<FulfillmentCenter> FulfillmentCenters { get; set; }
         /// <summary>
         /// Primary (default) fulfillment center for order return
         /// </summary>
-        public string MainReturnsFulfillmentCenterId { get; set; }
+        public FulfillmentCenter ReturnsFulfillmentCenter { get; set; }
         /// <summary>
-        /// Alternate fulfillment centers for order return
+        /// Alternate fulfillment centeres for order return
         /// </summary>
-        public ICollection<string> ReturnsFulfillmentCenterIds { get; set; }
-
-     
-        [Obsolete]
-        public FulfillmentCenter FulfillmentCenter { get; set; }     
-        [Obsolete]
-        public ICollection<FulfillmentCenter> FulfillmentCenters { get; set; }     
-        [Obsolete]
-        public FulfillmentCenter ReturnsFulfillmentCenter { get; set; }       
-        [Obsolete]
         public ICollection<FulfillmentCenter> ReturnsFulfillmentCenters { get; set; }
 
         /// <summary>

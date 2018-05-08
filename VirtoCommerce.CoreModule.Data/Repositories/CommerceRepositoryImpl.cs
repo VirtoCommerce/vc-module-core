@@ -1,4 +1,3 @@
-using System;
 using System.Data.Entity;
 using System.Linq;
 using VirtoCommerce.CoreModule.Data.Model;
@@ -42,6 +41,7 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
         }
 
         #region IСommerceRepository Members
+
         public IQueryable<FulfillmentCenter> FulfillmentCenters
         {
             get { return GetAsQueryable<FulfillmentCenter>(); }

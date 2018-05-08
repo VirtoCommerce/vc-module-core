@@ -85,6 +85,10 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Converters\PackageTypeConverter.cs" />
+    <Compile Include="Converters\CurrencyConverter.cs" />
+    <Compile Include="Converters\SeoUrlKeywordConverter.cs" />
+    <Compile Include="Converters\FulfillmentCenterConverter.cs" />
     <Compile Include="Indexing\BatchIndexingOptions.cs" />
     <Compile Include="Indexing\BatchIndexingResult.cs" />
     <Compile Include="Indexing\IIndexingWorker.cs" />
@@ -124,10 +128,6 @@
     <Compile Include="Migrations\201606271126089_packageTypes.Designer.cs">
       <DependentUpon>201606271126089_packageTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804191411436_NewColumnsFulfillementCenter.cs" />
-    <Compile Include="Migrations\201804191411436_NewColumnsFulfillementCenter.Designer.cs">
-      <DependentUpon>201804191411436_NewColumnsFulfillementCenter.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Currency.cs" />
     <Compile Include="Model\FulfillmentCenter.cs" />
@@ -138,6 +138,7 @@
     <Compile Include="Notifications\RegistrationInvitationNotification.cs" />
     <Compile Include="Notifications\RemindUserNameNotification.cs" />
     <Compile Include="Handlers\RegistrationEmailMemberChangedEventHandler.cs" />
+    <Compile Include="Observers\RegistrationEmailObserver.cs" />
     <Compile Include="Payment\DefaultManualPaymentMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CommerceRepositoryImpl.cs" />
@@ -195,9 +196,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606271126089_packageTypes.resx">
       <DependentUpon>201606271126089_packageTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804191411436_NewColumnsFulfillementCenter.resx">
-      <DependentUpon>201804191411436_NewColumnsFulfillementCenter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

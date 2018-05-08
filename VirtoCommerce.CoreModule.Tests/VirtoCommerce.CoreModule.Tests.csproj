@@ -83,7 +83,6 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AddressTest.cs" />
     <Compile Include="GeoPointTest.cs" />
     <Compile Include="IndexingManagerTests.cs" />
     <Compile Include="DocumentSource.cs" />

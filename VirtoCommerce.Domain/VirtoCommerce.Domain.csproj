@@ -109,7 +109,6 @@
     <Compile Include="Commerce\Model\AddressType.cs" />
     <Compile Include="Commerce\Model\Currency.cs" />
     <Compile Include="Commerce\Model\Discount.cs" />
-    <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Model\IHasDiscounts.cs" />
     <Compile Include="Commerce\Model\IInheritable.cs" />
     <Compile Include="Commerce\Model\ILanguageSupport.cs" />
@@ -154,9 +153,7 @@
     <Compile Include="Common\Expressions\IConditionExpression.cs" />
     <Compile Include="Common\Expressions\IDynamicExpression.cs" />
     <Compile Include="Common\IEvaluationContext.cs" />
-    <Compile Include="Inventory\Events\InventoryChangedEvent.cs" />
-    <Compile Include="Inventory\Events\InventoryChangingEvent.cs" />
-    <Compile Include="Inventory\Model\FulfillmentCenter.cs" />
+    <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Services\ICommerceService.cs" />
     <Compile Include="Common\ValueObject.cs" />
     <Compile Include="Customer\Events\MemberChangedEvent.cs" />
@@ -171,13 +168,8 @@
     <Compile Include="Customer\Model\Vendor.cs" />
     <Compile Include="Customer\Services\IMemberSearchService.cs" />
     <Compile Include="Customer\Services\IMemberService.cs" />
-    <Compile Include="Inventory\Model\Search\FulfillmentCenterSearchCriteria.cs" />
     <Compile Include="Inventory\Model\InventoryInfo.cs" />
     <Compile Include="Inventory\Model\InventoryStatus.cs" />
-    <Compile Include="Inventory\Model\Search\InventorySearchCriteria.cs" />
-    <Compile Include="Inventory\Services\IFulfillmentCenterSearchService.cs" />
-    <Compile Include="Inventory\Services\IFulfillmentCenterService.cs" />
-    <Compile Include="Inventory\Services\IInventorySearchService.cs" />
     <Compile Include="Inventory\Services\IInventoryService.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentEvaluationContext.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentFolder.cs" />
@@ -221,9 +213,7 @@
     <Compile Include="Marketing\Services\IPromotionService.cs" />
     <Compile Include="Marketing\Services\IMarketingExtensionManager.cs" />
     <Compile Include="Marketing\Services\DefaultMarketingExtensionManagerImpl.cs" />
-    <Compile Include="Inventory\Events\FulfillmentCenterChangedEvent.cs" />
     <Compile Include="Order\Events\OrderChangedEvent.cs" />
-    <Compile Include="Order\Events\OrderChangeEvent.cs" />
     <Compile Include="Order\Model\CustomerOrder.cs" />
     <Compile Include="Commerce\Model\IHaveDimension.cs" />
     <Compile Include="Commerce\Model\IOperation.cs" />
@@ -239,7 +229,7 @@
     <Compile Include="Order\Model\Shipment.cs" />
     <Compile Include="Order\Services\ICustomerOrderService.cs" />
     <Compile Include="Order\Services\ICustomerOrderSearchService.cs" />
-    <Compile Include="Inventory\Events\FulfillmentCenterChangingEvent.cs" />
+    <Compile Include="Order\Events\OrderChangeEvent.cs" />
     <Compile Include="Order\Services\ICustomerOrderTotalsCalculator.cs" />
     <Compile Include="Payment\Model\BankCardInfo.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentEvaluationContext.cs" />

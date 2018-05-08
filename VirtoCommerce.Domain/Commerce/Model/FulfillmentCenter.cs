@@ -1,9 +1,12 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Commerce.Model
 {
-    //[Obsolete("Use  VirtoCommerce.Domain.Inventory.Model.FulfillmentCenter instead", false)]
 	public class FulfillmentCenter : Entity
 	{
 		public string Name { get; set; }
