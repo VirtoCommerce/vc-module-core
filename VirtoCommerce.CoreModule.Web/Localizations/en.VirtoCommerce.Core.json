@@ -72,9 +72,24 @@
                     "symbol": "Symbol",
                     "custom-formatting": "Currency custom formatting"
                 },
+                "descriptions": {
+                    "code": "The currency code. Use 3 letter ISO 4217 code, if it exists.",
+                    "name": "The name of the currency.",
+                    "is-primary": "Is this the primary currency? Only one currency can by primary.",
+                    "exchange-rate": "The exchange rate against the primary exchange rate currency",
+                    "symbol": "Short currency symbol",
+                    "custom-formatting": "Custom formatting to be applied to the currency value"
+                },
                 "placeholders": {
-                    "symbol": "Enter symbol or leave empty for culture default"
-                }
+                    "symbol": "Enter symbol or leave empty for default culture",
+                    "code": "Enter currency code",
+                    "name": "Enter currency name",
+                    "exchange-rate": "Enter exchange rate against the primary currency",
+                    "custom-formatting": "0,0.000"
+                },
+                "validation": {
+                    "maxlength": "Currency code must have only 3 symbols"
+                } 
             },
             "fulfillment-center-contact": {
                 "labels": {
