@@ -13,6 +13,8 @@ namespace VirtoCommerce.Domain.Cart.Model
     {
 		public string ShipmentMethodCode { get; set; }
         public string ShipmentMethodOption { get; set; }
+        public string FulfillmentCenterId { get; set; }
+        public string FulfillmentCenterName { get; set; }
         public string  WarehouseLocation { get; set; }
 
 		public string Currency { get; set; }
