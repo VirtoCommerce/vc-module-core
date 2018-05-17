@@ -40,8 +40,12 @@ namespace VirtoCommerce.Domain.Commerce.Model
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
-            //Return all properties except Key
-            return GetProperties().Where(x => !x.Name.EqualsInvariant(nameof(Key))).Select(x => x.GetValue(this)).Where(x => x != null);
+            var result = base.GetEqualityComponents();
+            if (!string.IsNullOrEmpty(Key))
+            {
+                result = new[] { Key };
+            }
+            return result;
         }
     }
 

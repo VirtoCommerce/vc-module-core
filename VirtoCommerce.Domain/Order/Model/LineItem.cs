@@ -84,6 +84,9 @@ namespace VirtoCommerce.Domain.Order.Model
         public bool? IsGift { get; set; }
         public string ShippingMethodCode { get; set; }
         public string FulfillmentLocationCode { get; set; }
+        public string FulfillmentCenterId { get; set; }
+        public string FulfillmentCenterName { get; set; }
+
 
         #region IHaveDimension Members
         public string WeightUnit { get; set; }

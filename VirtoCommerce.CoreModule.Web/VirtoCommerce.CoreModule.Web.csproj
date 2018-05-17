@@ -257,6 +257,7 @@
     <Content Include="Localizations\en.VirtoCommerce.Core.json" />
     <None Include="bower.json" />
     <Content Include="Localizations\de.VirtoCommerce.Core.json" />
+    <Content Include="Localizations\ru.VirtoCommerce.Core.json" />
     <None Include="package.json" />
     <None Include="packages.config" />
     <None Include="web.config">

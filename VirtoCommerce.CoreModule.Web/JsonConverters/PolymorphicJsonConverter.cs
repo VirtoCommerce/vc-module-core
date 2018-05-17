@@ -12,10 +12,6 @@ namespace VirtoCommerce.CoreModule.Web.JsonConverters
     {
         private static Type[] _knowTypes = new[] { typeof(Address), typeof(TaxEvaluationContext), typeof(TaxLine) };
 
-        public PolymorphicJsonConverter()
-        {
-        }
-
         public override bool CanWrite { get { return false; } }
         public override bool CanRead { get { return true; } }
 
@@ -26,24 +22,12 @@ namespace VirtoCommerce.CoreModule.Web.JsonConverters
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            object retVal = null;
-            var obj = JObject.Load(reader);
+            var tryCreateInstance = typeof(AbstractTypeFactory<>).MakeGenericType(objectType).GetMethods().FirstOrDefault(x => x.Name.EqualsInvariant("TryCreateInstance") && x.GetParameters().Length == 0);
+            var result = tryCreateInstance?.Invoke(null, null);
 
-            if (typeof(Address).IsAssignableFrom(objectType))
-            {
-                retVal = AbstractTypeFactory<Address>.TryCreateInstance();
-            }
-            if (typeof(TaxEvaluationContext).IsAssignableFrom(objectType))
-            {
-                retVal = AbstractTypeFactory<TaxEvaluationContext>.TryCreateInstance();
-            }
-            else if (typeof(TaxLine).IsAssignableFrom(objectType))
-            {
-                retVal = AbstractTypeFactory<TaxLine>.TryCreateInstance();
-            }
+            serializer.Populate(JObject.Load(reader).CreateReader(), result);
            
-            serializer.Populate(obj.CreateReader(), retVal);
-            return retVal;
+            return result;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
