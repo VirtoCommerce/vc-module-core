@@ -69,7 +69,7 @@ namespace VirtoCommerce.CoreModule.Data.Model
 
         public virtual dataModel.SeoUrlKeyword FromModel(coreModel.SeoInfo seoInfo, PrimaryKeyResolvingMap pkMap)
         {
-            pkMap.AddPair(this, seoInfo);
+            pkMap.AddPair(seoInfo, this);
 
             Id = seoInfo.Id;
             CreatedBy = seoInfo.CreatedBy;

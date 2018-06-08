@@ -19,6 +19,7 @@ using VirtoCommerce.Platform.Data.Security.Identity;
 
 namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 {
+    [Obsolete("This controller is deprecated, use platform API to work with security data instead")]
     [RoutePrefix("api/storefront/security")]
     public class StorefrontSecurityController : ApiController
     {

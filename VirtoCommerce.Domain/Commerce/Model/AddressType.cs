@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +11,7 @@ namespace VirtoCommerce.Domain.Commerce.Model
 	{
 		Billing = 1,
 		Shipping = 2,
+        Pickup = 4,
 		BillingAndShipping = Billing | Shipping
 	}
 }

@@ -31,7 +31,7 @@ namespace VirtoCommerce.CoreModule.Data.Model
 
         public virtual dataModel.PackageType FromModel(coreModel.PackageType packageType, PrimaryKeyResolvingMap pkMap)
         {
-            pkMap.AddPair(this, packageType);
+            pkMap.AddPair(packageType, this);
 
             Id = packageType.Id;
             Name = packageType.Name;
