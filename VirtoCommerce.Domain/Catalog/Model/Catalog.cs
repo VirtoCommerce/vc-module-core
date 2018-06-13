@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Common;
 using System.Linq;
+using System;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class Catalog : Entity, IHasProperties
+    public class Catalog : Entity, IHasProperties, ICloneable
     {
         public string Name { get; set; }
         public bool IsVirtual { get; set; }
@@ -22,9 +23,17 @@ namespace VirtoCommerce.Domain.Catalog.Model
         }
         public ICollection<CatalogLanguage> Languages { get; set; }
 
-        #region IHasProperties
+        #region IHasProperties members
         public ICollection<Property> Properties { get; set; }
-        public ICollection<PropertyValue> PropertyValues { get; set; } 
+        public ICollection<PropertyValue> PropertyValues { get; set; }
+        #endregion
+
+        #region ICloneable members
+        public object Clone()
+        {
+            var retVal = base.MemberwiseClone() as Catalog;
+            return retVal;
+        } 
         #endregion
     }
 }

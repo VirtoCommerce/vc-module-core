@@ -40,12 +40,13 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\VirtoCommerce.CoreModule.Web.xml</DocumentationFile>
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CacheManager.Core, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -61,15 +62,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Hangfire.Core, Version=1.6.14.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hangfire.Core.1.6.14\lib\net45\Hangfire.Core.dll</HintPath>
+    <Reference Include="Hangfire.Core, Version=1.6.17.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hangfire.Core.1.6.17\lib\net45\Hangfire.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -111,9 +110,8 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Omu.ValueInjecter, Version=2.3.3.0, Culture=neutral, PublicKeyToken=c7694541b0ac80e4, processorArchitecture=MSIL">
       <HintPath>..\packages\valueinjecter.2.3.3\lib\net35\Omu.ValueInjecter.dll</HintPath>
@@ -123,14 +121,17 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net46\StackExchange.Redis.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -139,23 +140,22 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.17\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.26.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.26\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Core.Web, Version=2.13.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.Web.2.13.17\lib\net461\VirtoCommerce.Platform.Core.Web.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core.Web, Version=2.13.26.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.Web.2.13.26\lib\net461\VirtoCommerce.Platform.Core.Web.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.17\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Data, Version=2.13.26.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.2.13.26\lib\net461\VirtoCommerce.Platform.Data.dll</HintPath>
     </Reference>
-    <Reference Include="VirtoCommerce.Platform.Data.Security, Version=2.13.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Data.Security.2.13.17\lib\net461\VirtoCommerce.Platform.Data.Security.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Data.Security, Version=2.13.26.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Data.Security.2.13.26\lib\net461\VirtoCommerce.Platform.Data.Security.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -170,10 +170,15 @@
     <Compile Include="Controllers\Api\CommerceController.cs" />
     <Compile Include="Controllers\Api\StorefrontSecurityController.cs" />
     <Compile Include="Converters\StorefrontUserConverter.cs" />
-    <Compile Include="JsonConverters\PolymorphicTaxJsonConverter.cs" />
+    <Compile Include="JsonConverters\PolymorphicJsonConverter.cs" />
     <Compile Include="Model\PushNotifcations\IndexProgressPushNotification.cs" />
     <Compile Include="Model\StorefrontUser.cs" />
     <Compile Include="Model\SignInResult.cs" />
+    <Compile Include="Resources\NotificationResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Security\CommercePredefinedPermissions.cs" />
     <Compile Include="ExportImport\CoreExportImport.cs" />
     <Compile Include="Module.cs" />
@@ -186,7 +191,9 @@
     <Content Include="Content\css\dynamic-expression.css" />
     <Content Include="Content\logoVC.png" />
     <None Include="gulpfile.js" />
-    <Content Include="module.manifest" />
+    <Content Include="module.manifest">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Scripts\allPackages.js" />
     <Content Include="Scripts\common\blades\address-list.js" />
     <Content Include="Scripts\common\blades\address-detail.js" />
@@ -198,6 +205,8 @@
     <Content Include="Scripts\common\dynamicExpression\expression-directives.js" />
     <Content Include="Scripts\SearchIndex\blades\index-detail.js" />
     <Content Include="Scripts\SearchIndex\blades\index-detail.tpl.html" />
+    <Content Include="Scripts\SearchIndex\notifications\historyIndex.tpl.html" />
+    <Content Include="Scripts\SearchIndex\notifications\menuIndex.tpl.html" />
     <Content Include="Scripts\SearchIndex\widgets\index-widget.js" />
     <Content Include="Scripts\SearchIndex\widgets\index-widget.tpl.html" />
     <Content Include="Scripts\Currency\blades\currency-detail.js" />
@@ -248,6 +257,7 @@
     <Content Include="Localizations\en.VirtoCommerce.Core.json" />
     <None Include="bower.json" />
     <Content Include="Localizations\de.VirtoCommerce.Core.json" />
+    <Content Include="Localizations\ru.VirtoCommerce.Core.json" />
     <None Include="package.json" />
     <None Include="packages.config" />
     <None Include="web.config">
@@ -274,6 +284,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\NotificationResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

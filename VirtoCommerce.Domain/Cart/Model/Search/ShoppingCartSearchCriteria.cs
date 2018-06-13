@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +15,8 @@ namespace VirtoCommerce.Domain.Cart.Model
         public string StoreId { get; set; }
         public string Currency { get; set; }
         public string Status { get; set; }
+        public string Type { get; set; }
+        public string[] CustomerIds { get; set; }
+        public string OrganizationId { get; set; }
     }
 }

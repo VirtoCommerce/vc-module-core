@@ -29,6 +29,7 @@
             "address-detail": {
                 "subtitle": "Adresse bearbeiten",
                 "labels": {
+                    "name": "Adressname",
                     "address-type": "Adresstyp",
                     "first-name": "Vorname",
                     "last-name": "Nachname",
@@ -74,8 +75,23 @@
                     "symbol": "Symbol",
                     "custom-formatting": "Benutzerdefinierte Formatierung"
                 },
+                "descriptions": {
+                    "code": "Der Währungscode. Verwenden Sie den 3-Buchstaben-ISO 4217-Code, falls vorhanden.",
+                    "name": "Der Name der Währung.",
+                    "is-primary": "Ist das die Hauptwährung? Nur eine Währung kann primär sein.",
+                    "exchange-rate": "Der Wechselkurs zur Primärwährung des Wechselkurses",
+                    "symbol": "Kurzes Währungssymbol",
+                    "custom-formatting": "Benutzerdefinierte Formatierung, die auf den Währungswert angewendet wird"
+                },
                 "placeholders": {
-                    "symbol": "Ein eigenes Symbol eingeben oder leer lassen um entsprechenden Standard zu verwenden."
+                    "symbol": "Ein eigenes Symbol eingeben oder leer lassen um entsprechenden Standard zu verwenden.",
+                    "code": "Währungscode eingeben",
+                    "name": "Geben Sie den Währungsnamen ein",
+                    "exchange-rate": "Geben Sie den Wechselkurs gegenüber der Hauptwährung ein",
+                    "custom-formatting": "0,0.000"
+                },
+                "validation": {
+                    "maxlength": "Der Währungscode darf nur 3 Symbole enthalten"
                 }
             },
             "fulfillment-center-contact": {

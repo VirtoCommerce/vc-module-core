@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
 using VirtoCommerce.Domain.Search;
 using Xunit;
@@ -7,7 +7,7 @@ namespace VirtoCommerce.CoreModule.Tests
 {
     [Trait("Category", "CI")]
     public class SearchPhraseParserTests
-    {
+    {    
         [Fact]
         public void TestKeywords()
         {
@@ -93,7 +93,7 @@ namespace VirtoCommerce.CoreModule.Tests
 
             value = filter.Values.First();
             Assert.NotNull(value);
-            Assert.Equal(null, value.Lower);
+            Assert.Null(value.Lower);
             Assert.Equal("10", value.Upper);
             Assert.False(value.IncludeLower);
             Assert.True(value.IncludeUpper);
@@ -116,7 +116,7 @@ namespace VirtoCommerce.CoreModule.Tests
             value = filter.Values.First();
             Assert.NotNull(value);
             Assert.Equal("10", value.Lower);
-            Assert.Equal(null, value.Upper);
+            Assert.Null(value.Upper);
             Assert.False(value.IncludeLower);
             Assert.True(value.IncludeUpper);
         }

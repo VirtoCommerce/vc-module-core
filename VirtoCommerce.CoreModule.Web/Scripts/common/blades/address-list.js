@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.common')
+angular.module('virtoCommerce.coreModule.common')
 .controller('virtoCommerce.coreModule.common.coreAddressListController', ['$timeout', '$scope', 'platformWebApp.bladeNavigationService', function ($timeout, $scope, bladeNavigationService) {
     var blade = $scope.blade;
     $scope.selectedItem = null;
@@ -42,7 +42,11 @@
     }
 
     $scope.getAddressName = function (address) {
-        return [address.countryCode, address.regionName, address.city, address.line1].join(", ");
+        if (address.name) {
+            return address.name;
+        } else {
+            return [address.countryCode, address.regionName, address.city, address.line1].join(", ");
+        }
     };
 
     blade.headIcon = blade.parentBlade.headIcon;

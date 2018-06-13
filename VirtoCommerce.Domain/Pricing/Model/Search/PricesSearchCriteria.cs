@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,5 +48,7 @@ namespace VirtoCommerce.Domain.Pricing.Model.Search
                 _productIds = value;
             }
         }
+
+        public DateTime? ModifiedSince { get; set; }
     }
 }
