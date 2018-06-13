@@ -5,8 +5,9 @@ options {
 }
 
 searchPhrase          : WS* phrase (WS phrase)* WS*;
-phrase                : keyword | attributeFilter | rangeFilter;
+phrase                : keyword | filters;
 keyword               : String;
+filters               : negation? (attributeFilter | rangeFilter);
 attributeFilter       : fieldName FD attributeFilterValue;
 rangeFilter           : fieldName FD rangeFilterValue;
 fieldName             : String;
@@ -19,6 +20,7 @@ lower                 : String;
 upper                 : String;
 string                : String;
 
+negation              : '!';
 FD                    : ':'; // Filter delimiter
 VD                    : ','; // Value delimiter
 RD                    : 'TO' | 'to'; // Range delimiter
@@ -26,7 +28,7 @@ RangeStart            : '[' | '(';
 RangeEnd              : ']' | ')';
 
 String                : SimpleString | QuotedString;
-fragment SimpleString : ~[":,[\]() \t]+;
+fragment SimpleString : ~[!":,[\]() \t]+;
 fragment QuotedString : ('"' (Esc | ~["\\])* '"');
 fragment Esc          : '\\' (["\\rnt]);
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing.Antlr;
@@ -19,49 +19,72 @@ namespace VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing
             Keywords.Add(Unescape(context.GetText()));
         }
 
-        public override void ExitAttributeFilter(Antlr.SearchPhraseParser.AttributeFilterContext context)
+        public override void ExitFilters(Antlr.SearchPhraseParser.FiltersContext context)
         {
-            base.ExitAttributeFilter(context);
+            base.ExitFilters(context);
 
-            var fieldNameContext = context.GetChild<Antlr.SearchPhraseParser.FieldNameContext>(0);
-            var attributeValueContext = context.GetChild<Antlr.SearchPhraseParser.AttributeFilterValueContext>(0);
+            var negationContext = context.GetChild<Antlr.SearchPhraseParser.NegationContext>(0);
+            var attributeFilterContext = context.GetChild<Antlr.SearchPhraseParser.AttributeFilterContext>(0);
+            var rangeFilterContext = context.GetChild<Antlr.SearchPhraseParser.RangeFilterContext>(0);
 
-            if (fieldNameContext != null && attributeValueContext != null)
+            IFilter filter = null;
+            if (attributeFilterContext != null)
             {
-                var values = attributeValueContext.children.OfType<Antlr.SearchPhraseParser.StringContext>().ToArray();
+                filter = GetTermFilter(attributeFilterContext);
+            }
+            else if (rangeFilterContext != null)
+            {
+                filter = GetRangeFilter(rangeFilterContext);
+            }
 
-                var filter = new TermFilter
+            if (filter != null)
+            {
+                if (negationContext != null)
                 {
-                    FieldName = Unescape(fieldNameContext.GetText()),
-                    Values = values.Select(v => Unescape(v.GetText())).ToArray(),
-                };
-
+                    filter = new NotFilter { ChildFilter = filter };
+                }
                 Filters.Add(filter);
             }
         }
 
-        public override void ExitRangeFilter(Antlr.SearchPhraseParser.RangeFilterContext context)
+        protected virtual TermFilter GetTermFilter(Antlr.SearchPhraseParser.AttributeFilterContext context)
         {
-            base.ExitRangeFilter(context);
+            var fieldNameContext = context.GetChild<Antlr.SearchPhraseParser.FieldNameContext>(0);
+            var attributeValueContext = context.GetChild<Antlr.SearchPhraseParser.AttributeFilterValueContext>(0);
 
+            if (fieldNameContext == null || attributeValueContext == null) return null;
+
+            var values = attributeValueContext.children.OfType<Antlr.SearchPhraseParser.StringContext>().ToArray();
+
+            var filter = new TermFilter
+            {
+                FieldName = Unescape(fieldNameContext.GetText()),
+                Values = values.Select(v => Unescape(v.GetText())).ToArray(),
+            };
+
+            return filter;
+
+        }
+
+        protected virtual RangeFilter GetRangeFilter(Antlr.SearchPhraseParser.RangeFilterContext context)
+        {
             var fieldNameContext = context.GetChild<Antlr.SearchPhraseParser.FieldNameContext>(0);
             var rangeValueContext = context.GetChild<Antlr.SearchPhraseParser.RangeFilterValueContext>(0);
 
-            if (fieldNameContext != null && rangeValueContext != null)
+            if (fieldNameContext == null || rangeValueContext == null) return null;
+
+            var values = rangeValueContext.children
+                .OfType<Antlr.SearchPhraseParser.RangeContext>()
+                .Select(GetRangeFilterValue)
+                .ToArray();
+
+            var filter = new RangeFilter
             {
-                var values = rangeValueContext.children
-                    .OfType<Antlr.SearchPhraseParser.RangeContext>()
-                    .Select(GetRangeFilterValue)
-                    .ToArray();
+                FieldName = Unescape(fieldNameContext.GetText()),
+                Values = values,
+            };
 
-                var filter = new RangeFilter
-                {
-                    FieldName = Unescape(fieldNameContext.GetText()),
-                    Values = values,
-                };
-
-                Filters.Add(filter);
-            }
+            return filter;
         }
 
         protected virtual RangeFilterValue GetRangeFilterValue(Antlr.SearchPhraseParser.RangeContext context)

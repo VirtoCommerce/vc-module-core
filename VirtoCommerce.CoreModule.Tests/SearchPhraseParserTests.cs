@@ -5,7 +5,7 @@ using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
-    [Trait("Category", "CI")]
+    [Trait("Category", "Unit")]
     public class SearchPhraseParserTests
     {    
         [Fact]
@@ -17,6 +17,22 @@ namespace VirtoCommerce.CoreModule.Tests
             Assert.NotNull(result);
             Assert.Equal("one two three", result.SearchPhrase);
             Assert.Empty(result.Filters);
+        }
+
+        [Fact]
+        public void TestNegationFilter()
+        {
+            var parser = Getparser();
+            var result = parser.Parse("!size:medium");
+
+            Assert.NotNull(result);
+            Assert.Equal(string.Empty, result.SearchPhrase);
+            Assert.NotNull(result.Filters);
+            Assert.Equal(1, result.Filters.Count);
+
+            var filter = result.Filters.First() as NotFilter;
+            Assert.NotNull(filter);
+            Assert.NotNull(filter.ChildFilter);
         }
 
         [Fact]
