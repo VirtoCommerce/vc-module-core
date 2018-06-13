@@ -28,5 +28,10 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Assigned groups for current user. Data format: user_groups:value1,value2
         /// </summary>
         public IList<string> UserGroups { get; set; }
+
+        /// <summary>
+        /// Enable fuzzy search, i.e. allow to search color:white even if color:wihte actually passed to criteria
+        /// </summary>
+        public bool IsFuzzySearch { get; set; }
     }
 }
