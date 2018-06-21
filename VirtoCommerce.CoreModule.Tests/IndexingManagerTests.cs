@@ -11,8 +11,7 @@ using Xunit;
 namespace VirtoCommerce.CoreModule.Tests
 {
     [CLSCompliant(false)]
-    //TODO: Need to check tests errors
-    //[Trait("Category", "CI")]
+    [Trait("Category", "Unit")]
     public class IndexingManagerTests
     {
         public const string Rebuild = "rebuild";

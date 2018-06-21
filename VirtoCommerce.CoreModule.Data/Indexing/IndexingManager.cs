@@ -144,8 +144,6 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             progressCallback?.Invoke(new IndexingProgress($"{documentType}: calculating total count", documentType));
 
-            var feeds = await GetChangeFeeds(configuration, options);
-
             var batchOptions = new BatchIndexingOptions
             {
                 DocumentType = options.DocumentType,
@@ -156,6 +154,8 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                     .ToList(),
             };
 
+            var feeds = await GetChangeFeeds(configuration, options);
+
             // Try to get total count to indicate progress. Some feeds don't have a total count.
             var totalCount = feeds.Any(x => x.TotalCount == null)
                 ? (long?)null
@@ -163,43 +163,52 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
 
             long processedCount = 0;
 
-            foreach (var feed in feeds)
+            var changes = await GetNextChangesAsync(feeds);
+            while (changes.Any())
             {
-                while (true)
+                IList<string> errors = null;
+
+                if (_backgroundWorker == null)
                 {
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    var batch = await feed.GetNextBatch();
-                    if (batch == null)
-                    {
-                        break;
-                    }
-
-                    IList<string> errors = null;
-
-                    if (_backgroundWorker == null)
-                    {
-                        var indexingResult = await ProcessChangesAsync(batch, batchOptions, cancellationToken);
-                        errors = GetIndexingErrors(indexingResult);
-                    }
-                    else
-                    {
-                        // We're executing a job to index all documents or the changes since a specific time.
-                        // Priority for this indexation work should be quite low.
-                        _backgroundWorker.IndexDocuments(configuration.DocumentType, batch.Select(x => x.DocumentId).ToArray(), IndexingPriority.Background);
-                    }
-
-                    processedCount += batch.Count;
-
-                    var description = totalCount != null
-                        ? $"{documentType}: {processedCount} of {totalCount} have been indexed"
-                        : $"{documentType}: {processedCount} have been indexed";
-
-                    progressCallback?.Invoke(new IndexingProgress(description, documentType, totalCount, processedCount, errors));
+                    var indexingResult = await ProcessChangesAsync(changes, batchOptions, cancellationToken);
+                    errors = GetIndexingErrors(indexingResult);
                 }
+                else
+                {
+                    // We're executing a job to index all documents or the changes since a specific time.
+                    // Priority for this indexation work should be quite low.
+                    var documentIds = changes
+                        .Select(x => x.DocumentId)
+                        .Distinct()
+                        .ToArray();
+
+                    _backgroundWorker.IndexDocuments(configuration.DocumentType, documentIds, IndexingPriority.Background);
+                }
+
+                processedCount += changes.Count;
+
+                var description = totalCount != null
+                    ? $"{documentType}: {processedCount} of {totalCount} have been indexed"
+                    : $"{documentType}: {processedCount} have been indexed";
+
+                progressCallback?.Invoke(new IndexingProgress(description, documentType, totalCount, processedCount, errors));
+
+                changes = await GetNextChangesAsync(feeds);
             }
 
             progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType, totalCount ?? processedCount, processedCount));
+        }
+
+        protected virtual async Task<IList<IndexDocumentChange>> GetNextChangesAsync(IList<IIndexDocumentChangeFeed> feeds)
+        {
+            var batches = await Task.WhenAll(feeds.Select(f => f.GetNextBatch()));
+
+            var changes = batches
+                .Where(b => b != null)
+                .SelectMany(b => b)
+                .ToList();
+
+            return changes;
         }
 
         protected virtual async Task<IndexingResult> ProcessChangesAsync(IEnumerable<IndexDocumentChange> changes, BatchIndexingOptions batchOptions, ICancellationToken cancellationToken)
