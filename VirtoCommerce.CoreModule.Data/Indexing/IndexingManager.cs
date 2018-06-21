@@ -150,22 +150,30 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             {
                 DocumentType = options.DocumentType,
                 PrimaryDocumentBuilder = configuration.DocumentSource.DocumentBuilder,
-                SecondaryDocumentBuilders = configuration.RelatedSources?.Where(s => s.DocumentBuilder != null).Select(s => s.DocumentBuilder).ToList(),
+                SecondaryDocumentBuilders = configuration.RelatedSources
+                    ?.Where(s => s.DocumentBuilder != null)
+                    .Select(s => s.DocumentBuilder)
+                    .ToList(),
             };
 
             // Try to get total count to indicate progress. Some feeds don't have a total count.
             var totalCount = feeds.Any(x => x.TotalCount == null)
-                ? (long?) null
-                : feeds.Sum(x => x.TotalCount.GetValueOrDefault());
+                ? (long?)null
+                : feeds.Sum(x => x.TotalCount ?? 0);
 
             long processedCount = 0;
+
             foreach (var feed in feeds)
             {
-                IReadOnlyCollection<IndexDocumentChange> batch = null;
-                while(true)
+                while (true)
                 {
-                    batch = await feed.GetNextBatch();
-                    if (batch == null) break;
+                    cancellationToken.ThrowIfCancellationRequested();
+
+                    var batch = await feed.GetNextBatch();
+                    if (batch == null)
+                    {
+                        break;
+                    }
 
                     IList<string> errors = null;
 
@@ -178,22 +186,20 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                     {
                         // We're executing a job to index all documents or the changes since a specific time.
                         // Priority for this indexation work should be quite low.
-                        _backgroundWorker.IndexDocuments(configuration.DocumentType, batch.Select(x => x.DocumentId).ToArray(),
-                            IndexingPriority.Background);
+                        _backgroundWorker.IndexDocuments(configuration.DocumentType, batch.Select(x => x.DocumentId).ToArray(), IndexingPriority.Background);
                     }
+
                     processedCount += batch.Count;
 
-                    if (totalCount.HasValue)
-                        progressCallback?.Invoke(new IndexingProgress($"{documentType}: {processedCount} of {totalCount} have been indexed", documentType, totalCount, processedCount, errors));
-                    else
-                        progressCallback?.Invoke(new IndexingProgress($"{documentType}: {processedCount} have been indexed", documentType, totalCount, processedCount, errors));
+                    var description = totalCount != null
+                        ? $"{documentType}: {processedCount} of {totalCount} have been indexed"
+                        : $"{documentType}: {processedCount} have been indexed";
 
-                    cancellationToken.ThrowIfCancellationRequested();
-                } 
+                    progressCallback?.Invoke(new IndexingProgress(description, documentType, totalCount, processedCount, errors));
+                }
             }
 
-            progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType,
-                totalCount.GetValueOrDefault(processedCount), processedCount));
+            progressCallback?.Invoke(new IndexingProgress($"{documentType}: indexation finished", documentType, totalCount ?? processedCount, processedCount));
         }
 
         protected virtual async Task<IndexingResult> ProcessChangesAsync(IEnumerable<IndexDocumentChange> changes, BatchIndexingOptions batchOptions, ICancellationToken cancellationToken)
@@ -257,17 +263,17 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             // Return in-memory change feed for specific set of document ids.
             if (options.DocumentIds != null)
             {
-                return new[]
+                return new IIndexDocumentChangeFeed[]
                 {
-                    new InMemoryIndexDocumentChangeFeed(options.DocumentIds.ToArray(),
-                        IndexDocumentChangeType.Modified, options.BatchSize.GetValueOrDefault(50))
+                    new InMemoryIndexDocumentChangeFeed(options.DocumentIds.ToArray(), IndexDocumentChangeType.Modified, options.BatchSize ?? 50)
                 };
             }
 
             // Support old ChangesProvider.
             if (configuration.DocumentSource.ChangeFeedFactory == null)
-                configuration.DocumentSource.ChangeFeedFactory
-                    = new IndexDocumentChangeFeedFactoryAdapter(configuration.DocumentSource.ChangesProvider);
+            {
+                configuration.DocumentSource.ChangeFeedFactory = new IndexDocumentChangeFeedFactoryAdapter(configuration.DocumentSource.ChangesProvider);
+            }
 
             var factories = new List<IIndexDocumentChangeFeedFactory>
             {
@@ -290,8 +296,7 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
                 }
             }
 
-            return await Task.WhenAll(factories.Select(x => x.CreateFeed(options.StartDate, options.EndDate,
-                options.BatchSize.GetValueOrDefault(50))));
+            return await Task.WhenAll(factories.Select(x => x.CreateFeed(options.StartDate, options.EndDate, options.BatchSize ?? 50)));
         }
 
         protected virtual IList<string> GetIndexingErrors(IndexingResult indexingResult)
@@ -319,7 +324,9 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var primaryDocuments = (await primaryDocumentBuilder.GetDocumentsAsync(documentIds))?.Where(d => d != null).ToList();
+            var primaryDocuments = (await primaryDocumentBuilder.GetDocumentsAsync(documentIds))
+                ?.Where(d => d != null)
+                .ToList();
 
             if (primaryDocuments?.Any() == true)
             {
@@ -352,7 +359,11 @@ namespace VirtoCommerce.CoreModule.Data.Indexing
             var tasks = secondaryDocumentBuilders.Select(p => p.GetDocumentsAsync(documentIds));
             var results = await Task.WhenAll(tasks);
 
-            var result = results.Where(r => r != null).SelectMany(r => r.Where(d => d != null)).ToList();
+            var result = results
+                .Where(r => r != null)
+                .SelectMany(r => r.Where(d => d != null))
+                .ToList();
+
             return result;
         }
 
