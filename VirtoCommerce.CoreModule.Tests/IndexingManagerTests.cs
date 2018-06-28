@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using VirtoCommerce.CoreModule.Data.Indexing;
-using VirtoCommerce.CoreModule.Web.BackgroundJobs;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.Common;
 using Xunit;
@@ -12,8 +11,7 @@ using Xunit;
 namespace VirtoCommerce.CoreModule.Tests
 {
     [CLSCompliant(false)]
-    //TODO: Need to check tests errors
-    //[Trait("Category", "CI")]
+    [Trait("Category", "Unit")]
     public class IndexingManagerTests
     {
         public const string Rebuild = "rebuild";
@@ -79,6 +77,7 @@ namespace VirtoCommerce.CoreModule.Tests
             var expectedFieldNames = new List<string>(sourceNames) { KnownDocumentFields.IndexationDate };
             ValidateIndexedDocuments(searchProvider.IndexedDocuments.Values, expectedFieldNames, "good2", "good3");
         }
+
         [Theory]
         [InlineData(1, Primary)]
         [InlineData(3, Primary)]

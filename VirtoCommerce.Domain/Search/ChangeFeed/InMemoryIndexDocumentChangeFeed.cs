@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace VirtoCommerce.Domain.Search.ChangeFeed
 {
     /// <summary>
-    /// Change feed for an specific set of documents.
+    /// Change feed for a specific set of documents.
     /// This allows us to build all indexation logic on top of a change feed.
     /// </summary>
     public class InMemoryIndexDocumentChangeFeed : IIndexDocumentChangeFeed
@@ -26,28 +26,32 @@ namespace VirtoCommerce.Domain.Search.ChangeFeed
             TotalCount = documentIds.Length;
             Take = take;
         }
+
         public Task<IReadOnlyCollection<IndexDocumentChange>> GetNextBatch()
         {
-            if (Skip >= TotalCount)
+            IReadOnlyCollection<IndexDocumentChange> result = null;
+
+            if (Skip < TotalCount)
             {
-                return Task.FromResult<IReadOnlyCollection<IndexDocumentChange>>(null);
+                var changes = DocumentIds
+                    .Skip((int)Skip)
+                    .Take((int)Take)
+                    .Select(x => new IndexDocumentChange
+                    {
+                        DocumentId = x,
+                        ChangeDate = DateTime.UtcNow,
+                        ChangeType = ChangeType
+                    })
+                    .ToList();
+
+                if (changes.Any())
+                {
+                    result = new ReadOnlyCollection<IndexDocumentChange>(changes);
+                    Skip += changes.Count;
+                }
             }
 
-            var changes = DocumentIds
-                .Skip((int) Skip)
-                .Take((int)Take)
-                .Select(x => new IndexDocumentChange
-                {
-                    DocumentId = x,
-                    ChangeDate = DateTime.UtcNow,
-                    ChangeType = ChangeType
-                })
-                .ToList();
-
-            Skip += changes.Count;
-
-            return Task.FromResult((IReadOnlyCollection<IndexDocumentChange>)
-                new ReadOnlyCollection<IndexDocumentChange>(changes));
+            return Task.FromResult(result);
         }
     }
 }
