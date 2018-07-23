@@ -24,8 +24,9 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		public RewardAmountType AmountType { get; set; }
 
 		public decimal Amount { get; set; }
+	    public decimal MaxLimit { get; set; }
 
-		public int Quantity { get; set; }
+        public int Quantity { get; set; }
 
         public virtual decimal GetRewardAmount(decimal price, int quantity)
         {
@@ -33,6 +34,8 @@ namespace VirtoCommerce.Domain.Marketing.Model
             if (AmountType == RewardAmountType.Relative)
             {
                 result = price * Amount * 0.01m;
+                if (MaxLimit > 0 && result > MaxLimit)
+                    result = MaxLimit;
             }
             if (Quantity > 0)
             {
