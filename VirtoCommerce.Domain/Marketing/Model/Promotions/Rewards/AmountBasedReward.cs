@@ -53,7 +53,12 @@ namespace VirtoCommerce.Domain.Marketing.Model
             var retVal = Amount;
             if (AmountType == RewardAmountType.Relative)
             {
-                retVal = Math.Floor(price * Amount) * Math.Min(quantity, Quantity == 0 ? quantity : Quantity);
+                var amount = Amount;
+                if (MaxLimit > 0)
+                {
+                    amount = Math.Min(MaxLimit, Amount);
+                }
+                retVal = Math.Floor(price * amount) * Math.Min(quantity, Quantity == 0 ? quantity : Quantity);
             }
             return FinanceRound(retVal);
         }
