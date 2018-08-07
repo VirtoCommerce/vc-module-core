@@ -8,7 +8,13 @@ namespace VirtoCommerce.Domain.Marketing.Model
         /// Restriction of total coupon usages
         /// 0 infinitive
         /// </summary>
-        public int MaxUsesNumber { get; set; }       
+        public int MaxUsesNumber { get; set; }
+
+        /// <summary>
+        /// Maximum number of uses per registered user
+        /// 0 infinitive
+        /// </summary>
+        public int MaxUsesPerUser { get; set; }       
 
         public DateTime? ExpirationDate { get; set; }
         /// <summary>
