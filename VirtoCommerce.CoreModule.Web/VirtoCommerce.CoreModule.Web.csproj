@@ -172,6 +172,7 @@
     <Compile Include="Converters\StorefrontUserConverter.cs" />
     <Compile Include="JsonConverters\PolymorphicJsonConverter.cs" />
     <Compile Include="Model\PushNotifcations\IndexProgressPushNotification.cs" />
+    <Compile Include="Model\SignInCredentials.cs" />
     <Compile Include="Model\StorefrontUser.cs" />
     <Compile Include="Model\SignInResult.cs" />
     <Compile Include="Resources\NotificationResource.Designer.cs">
