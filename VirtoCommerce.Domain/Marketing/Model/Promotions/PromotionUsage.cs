@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Marketing.Model
@@ -11,6 +11,9 @@ namespace VirtoCommerce.Domain.Marketing.Model
 
         public string CouponCode { get; set; }
         public string PromotionId { get; set; }
+
+        public string UserId { get; set; }
+        public string UserName { get; set; }
 
 	}
 }
