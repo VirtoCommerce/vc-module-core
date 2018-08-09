@@ -152,18 +152,15 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// <summary>
         /// Sign in with user name and password
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
+        /// <param name="credentials"></param>
         /// <returns></returns>
         [HttpPost]
         [Route("user/signin")]
         [ResponseType(typeof(SignInResult))]
-        public async Task<IHttpActionResult> PasswordSignIn(string userName, string password)
+        public async Task<IHttpActionResult> PasswordSignIn([FromBody]SignInCredentials credentials)
         {
-            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(password))
-            {
-                return BadRequest();
-            }
+            var userName = credentials?.Username;
+            var password = credentials?.Password;
 
             using (var signInManager = _signInManagerFactory())
             {
