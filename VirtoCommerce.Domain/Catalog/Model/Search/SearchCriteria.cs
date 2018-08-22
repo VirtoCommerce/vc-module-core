@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using VirtoCommerce.Domain.Commerce.Model.Search;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class SearchCriteria : SearchCriteriaBase
+    // Inheritance from SearchCriteriaBase is breaking changes here.
+    public class SearchCriteria : ValueObject
     {
         public SearchCriteria()
         {
@@ -17,7 +17,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         }
 
         public string StoreId { get; set; }
-        public new SearchResponseGroup ResponseGroup { get; set; }
+        public SearchResponseGroup ResponseGroup { get; set; }
         public string Keyword { get; set; }
 
         /// <summary>
@@ -68,10 +68,25 @@ namespace VirtoCommerce.Domain.Catalog.Model
 
         }
 
+        public string LanguageCode { get; set; }
+
         /// <summary>
         /// Product or category code
         /// </summary>
         public string Code { get; set; }
+
+        /// <summary>
+        /// Sorting expression property1:asc;property2:desc
+        /// </summary>
+        public string Sort { get; set; }
+
+        public SortInfo[] SortInfos
+        {
+            get
+            {
+                return SortInfo.Parse(Sort).ToArray();
+            }
+        }
 
         //Hides direct linked categories in virtual category displayed only linked category content without itself
         public bool HideDirectLinkedCategories { get; set; }
@@ -83,7 +98,12 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public string Currency { get; set; }
         public decimal? StartPrice { get; set; }
         public decimal? EndPrice { get; set; }
-        
+
+
+        public int Skip { get; set; }
+
+        public int Take { get; set; }
+
         /// <summary>
         /// All products have index date less that specified
         /// </summary>
