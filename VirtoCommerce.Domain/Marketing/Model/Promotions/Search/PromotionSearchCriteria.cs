@@ -1,4 +1,4 @@
-﻿using VirtoCommerce.Domain.Commerce.Model.Search;
+using VirtoCommerce.Domain.Commerce.Model.Search;
 
 namespace VirtoCommerce.Domain.Marketing.Model.Promotions.Search
 {
