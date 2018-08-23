@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Linq;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class SearchCriteria
+    // Inheritance from SearchCriteriaBase is breaking changes here.
+    public class SearchCriteria : ValueObject
     {
         public SearchCriteria()
         {
@@ -67,6 +67,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
             }
 
         }
+
         public string LanguageCode { get; set; }
 
         /// <summary>
@@ -97,6 +98,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public string Currency { get; set; }
         public decimal? StartPrice { get; set; }
         public decimal? EndPrice { get; set; }
+
 
         public int Skip { get; set; }
 

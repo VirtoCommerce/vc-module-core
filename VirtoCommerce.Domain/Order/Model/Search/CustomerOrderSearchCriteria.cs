@@ -98,7 +98,6 @@ namespace VirtoCommerce.Domain.Order.Model
         public string EmployeeId { get; set; }
         public string[] StoreIds { get; set; }
         public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }       
-
+        public DateTime? EndDate { get; set; }
     }
 }
