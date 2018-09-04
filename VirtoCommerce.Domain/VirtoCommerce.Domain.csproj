@@ -158,7 +158,6 @@
     <Compile Include="Inventory\Events\InventoryChangingEvent.cs" />
     <Compile Include="Inventory\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Services\ICommerceService.cs" />
-    <Compile Include="Common\ValueObject.cs" />
     <Compile Include="Customer\Events\MemberChangedEvent.cs" />
     <Compile Include="Customer\Model\Contact.cs" />
     <Compile Include="Customer\Model\Employee.cs" />

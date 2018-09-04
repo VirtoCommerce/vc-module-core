@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using VirtoCommerce.Domain.Common;
+using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Search
 {
@@ -58,7 +59,7 @@ namespace VirtoCommerce.Domain.Search
         public static GeoPoint Parse(string value)
         {
             var result = TryParse(value);
-            if(result == null)
+            if (result == null)
             {
                 throw new ArgumentException("", nameof(value));
             }
@@ -74,7 +75,7 @@ namespace VirtoCommerce.Domain.Search
             {
                 result = new GeoPoint
                 {
-                    Latitude = Math.Round(double.Parse(match.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture), 7) ,
+                    Latitude = Math.Round(double.Parse(match.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture), 7),
                     Longitude = Math.Round(double.Parse(match.Groups[2].Value, NumberStyles.Float, CultureInfo.InvariantCulture), 7)
                 };
             }
