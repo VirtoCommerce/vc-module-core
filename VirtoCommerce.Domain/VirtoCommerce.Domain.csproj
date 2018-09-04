@@ -154,6 +154,7 @@
     <Compile Include="Common\Expressions\IConditionExpression.cs" />
     <Compile Include="Common\Expressions\IDynamicExpression.cs" />
     <Compile Include="Common\IEvaluationContext.cs" />
+    <Compile Include="Common\ValueObject.cs" />
     <Compile Include="Inventory\Events\InventoryChangedEvent.cs" />
     <Compile Include="Inventory\Events\InventoryChangingEvent.cs" />
     <Compile Include="Inventory\Model\FulfillmentCenter.cs" />

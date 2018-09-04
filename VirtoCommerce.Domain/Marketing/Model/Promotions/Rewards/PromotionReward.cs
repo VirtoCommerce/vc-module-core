@@ -1,5 +1,4 @@
 using System;
-using VirtoCommerce.Domain.Common;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Marketing.Model

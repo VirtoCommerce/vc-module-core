@@ -2,7 +2,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Common.Events
 {
-    public class GenericChangedEntry<T> : ValueObject
+    public class GenericChangedEntry<T> : Platform.Core.Common.ValueObject
     {
         public GenericChangedEntry(T entry, EntryState state)
             : this(entry, entry, state)
