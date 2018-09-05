@@ -6,6 +6,6 @@ namespace VirtoCommerce.Domain.Catalog.Services
 {
     public interface IProductAssociationSearchService
     {
-        GenericSearchResult<CatalogProduct> SearchProductAssociations(ProductAssociationSearchCriteria criteria);
+        GenericSearchResult<ProductAssociation> SearchProductAssociations(ProductAssociationSearchCriteria criteria);
     }
 }
