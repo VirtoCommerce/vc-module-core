@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
             get
             {
                 var retVal = _value;
-                /// Return actual dictionary property value from property meta-information instead stored
+                // Return actual dictionary property value from property meta-information instead stored
                 if (Property != null && Property.Dictionary && Property.DictionaryValues != null && ValueId != null)
                 {
                     var dictValue = Property.DictionaryValues.FirstOrDefault(x => x.Id == ValueId);

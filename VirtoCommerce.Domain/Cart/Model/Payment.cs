@@ -1,14 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
+using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class Payment : AuditableEntity, IHaveTaxDetalization, ITaxable, IHasDiscounts
+	public class Payment : AuditableEntity, IHaveTaxDetalization, ITaxable, IHasDiscounts, IHasDynamicProperties
     {
 		public string OuterId { get; set; }
 		public string Currency { get; set; }
@@ -19,38 +20,14 @@ namespace VirtoCommerce.Domain.Cart.Model
 
 
         public virtual decimal Price { get; set; }
-        public virtual decimal PriceWithTax
-        {
-            get
-            {
-                return Price + Price * TaxPercentRate;
-            }
-        }
+        public virtual decimal PriceWithTax { get; set; }
 
-        public virtual decimal Total
-        {
-            get
-            {
-                return Price - DiscountAmount;
-            }
-        }
+        public virtual decimal Total { get; set; }
 
-        public virtual decimal TotalWithTax
-        {
-            get
-            {
-                return PriceWithTax - DiscountAmountWithTax;
-            }
-        }
+        public virtual decimal TotalWithTax { get; set; }
 
         public virtual decimal DiscountAmount { get; set; }
-        public virtual decimal DiscountAmountWithTax
-        {
-            get
-            {
-                return DiscountAmount + DiscountAmount * TaxPercentRate;
-            }
-        }
+        public virtual decimal DiscountAmountWithTax { get; set; }
 
 
         #region ITaxable Members
@@ -60,13 +37,7 @@ namespace VirtoCommerce.Domain.Cart.Model
         /// </summary>
         public string TaxType { get; set; }
 
-        public decimal TaxTotal
-        {
-            get
-            {
-                return TotalWithTax - Total;
-            }
-        }
+        public decimal TaxTotal { get; set; }
 
         public decimal TaxPercentRate { get; set; }
 
@@ -82,6 +53,11 @@ namespace VirtoCommerce.Domain.Cart.Model
 
         public ICollection<TaxDetail> TaxDetails { get; set; }
 
+        #endregion
+
+        #region IHasDynamicProperties Members
+        public string ObjectType { get; set; }
+        public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
         #endregion
     }
 }

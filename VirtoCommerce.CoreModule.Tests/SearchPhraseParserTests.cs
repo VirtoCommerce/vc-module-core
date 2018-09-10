@@ -1,13 +1,13 @@
-﻿using System.Linq;
+using System.Linq;
 using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
 using VirtoCommerce.Domain.Search;
 using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
-    [Trait("Category", "CI")]
+    [Trait("Category", "Unit")]
     public class SearchPhraseParserTests
-    {
+    {    
         [Fact]
         public void TestKeywords()
         {
@@ -17,6 +17,22 @@ namespace VirtoCommerce.CoreModule.Tests
             Assert.NotNull(result);
             Assert.Equal("one two three", result.SearchPhrase);
             Assert.Empty(result.Filters);
+        }
+
+        [Fact]
+        public void TestNegationFilter()
+        {
+            var parser = Getparser();
+            var result = parser.Parse("!size:medium");
+
+            Assert.NotNull(result);
+            Assert.Equal(string.Empty, result.SearchPhrase);
+            Assert.NotNull(result.Filters);
+            Assert.Equal(1, result.Filters.Count);
+
+            var filter = result.Filters.First() as NotFilter;
+            Assert.NotNull(filter);
+            Assert.NotNull(filter.ChildFilter);
         }
 
         [Fact]
@@ -93,7 +109,7 @@ namespace VirtoCommerce.CoreModule.Tests
 
             value = filter.Values.First();
             Assert.NotNull(value);
-            Assert.Equal(null, value.Lower);
+            Assert.Null(value.Lower);
             Assert.Equal("10", value.Upper);
             Assert.False(value.IncludeLower);
             Assert.True(value.IncludeUpper);
@@ -116,7 +132,7 @@ namespace VirtoCommerce.CoreModule.Tests
             value = filter.Values.First();
             Assert.NotNull(value);
             Assert.Equal("10", value.Lower);
-            Assert.Equal(null, value.Upper);
+            Assert.Null(value.Upper);
             Assert.False(value.IncludeLower);
             Assert.True(value.IncludeUpper);
         }

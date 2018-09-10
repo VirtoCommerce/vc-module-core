@@ -1,7 +1,7 @@
 // This indexing jobs implementation allows only one job to perform indexing.
 // If some job is started successfully, all other jobs will terminate with "Indexation is already in progress" error until the first job is finished.
 // The synchronization is done by using the Hangfire distributed lock infrastructure.
-// This supports scaled-out scenario's.
+// This supports scaled-out scenarios.
 //
 // This class also supports queueing index batches through the Hangfire job scheduler,
 // so that we can spread the indexation work over the entire web farm.
@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using Hangfire;
 using Hangfire.Common;
@@ -56,8 +55,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             var notification = IndexProgressHandler.CreateNotification(currentUserName, null);
 
             // Hangfire will set cancellation token.
-            BackgroundJob.Enqueue<IndexingJobs>(j =>
-                j.IndexAllDocumentsJob(currentUserName, notification.Id, options, JobCancellationToken.Null));
+            BackgroundJob.Enqueue<IndexingJobs>(j => j.IndexAllDocumentsJob(currentUserName, notification.Id, options, JobCancellationToken.Null));
 
             return notification;
         }
@@ -67,23 +65,23 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         {
             var processingJob = JobStorage.Current.GetMonitoringApi().ProcessingJobs(0, int.MaxValue)
                 .FirstOrDefault(x => x.Value.Job.Method == _indexChangesJobMethod || x.Value.Job.Method == _manualIndexAllJobMethod);
-            
-            if (string.IsNullOrEmpty(processingJob.Key)) return;
 
-            try
+            if (!string.IsNullOrEmpty(processingJob.Key))
             {
-                BackgroundJob.Delete(processingJob.Key);
-            }
-            catch
-            {
-                // Ignore concurrency exceptions, when somebody else cancelled it as well.
+                try
+                {
+                    BackgroundJob.Delete(processingJob.Key);
+                }
+                catch
+                {
+                    // Ignore concurrency exceptions, when somebody else cancelled it as well.
+                }
             }
         }
 
         // One-time job for manual indexation
         [Queue(JobPriority.Normal)]
-        public async Task IndexAllDocumentsJob(string userName, string notificationId, IndexingOptions[] options,
-            IJobCancellationToken cancellationToken)
+        public async Task IndexAllDocumentsJob(string userName, string notificationId, IndexingOptions[] options, IJobCancellationToken cancellationToken)
         {
             await WithInterceptorsAsync(options, async o =>
             {
@@ -95,8 +93,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                         // Wait for all indexing jobs to complete, before telling interceptors we're ready.
                         // This method is running as a job as well, so skip this job.
                         // Scale out background indexation jobs are scheduled as low.
-                        await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low,
-                            x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
+                        await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low, x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
                     }
                 }
                 finally
@@ -113,16 +110,17 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
         public async Task IndexChangesJob(string documentType, IJobCancellationToken cancellationToken)
         {
             var allOptions = GetAllIndexingOptions(documentType);
+
             await WithInterceptorsAsync(allOptions, async o =>
             {
                 try
                 {
                     // Create different notification for each option (document type)
                     var executed = true;
+
                     foreach (var options in o)
                     {
-                        executed = executed && await RunIndexJobAsync(null, null, true, new[] {options},
-                                       IndexChangesAsync, cancellationToken);
+                        executed = executed && await RunIndexJobAsync(null, null, true, new[] { options }, IndexChangesAsync, cancellationToken);
                     }
 
                     if (executed)
@@ -131,8 +129,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                         // Wait for all indexing jobs to complete, before telling interceptors we're ready.
                         // This method is running as a job as well, so skip this job.
                         // Scale out background indexation jobs are scheduled as low.
-                        await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low,
-                            x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
+                        await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low, x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
                     }
                 }
                 finally
@@ -150,16 +147,16 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             switch (priority)
             {
                 case JobPriority.High:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsHighPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsHighPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Normal:
-                    BackgroundJob.Enqueue<IIndexingManager>(x => x.IndexDocumentsAsync(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsNormalPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Low:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsLowPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.IndexDocumentsLowPriorityAsync(documentType, documentIds));
                     break;
                 default:
-                    throw new ArgumentException($"Unkown priority: {priority}", nameof(priority));
+                    throw new ArgumentException($@"Unknown priority: {priority}", nameof(priority));
             }
         }
 
@@ -168,93 +165,121 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             switch (priority)
             {
                 case JobPriority.High:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsHighPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsHighPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Normal:
-                    BackgroundJob.Enqueue<IIndexingManager>(x => x.DeleteDocumentsAsync(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsNormalPriorityAsync(documentType, documentIds));
                     break;
                 case JobPriority.Low:
-                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsLowPrio(documentType, documentIds));
+                    BackgroundJob.Enqueue<IndexingJobs>(x => x.DeleteDocumentsLowPriorityAsync(documentType, documentIds));
                     break;
                 default:
-                    throw new ArgumentException($"Unkown priority: {priority}", nameof(priority));
+                    throw new ArgumentException($@"Unknown priority: {priority}", nameof(priority));
             }
         }
 
         // Use hard-code methods to easily set queue for Hangfire.
+        // Make sure we wait for async methods to end, so that Hangfire retries if an exception occurs.
 
         [Queue(JobPriority.High)]
-        public void IndexDocumentsHighPrio(string documentType, string[] documentIds)
+        public async Task IndexDocumentsHighPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
+        }
+
+        [Queue(JobPriority.Normal)]
+        public async Task IndexDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
+        {
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.Low)]
-        public void IndexDocumentsLowPrio(string documentType, string[] documentIds)
+        public async Task IndexDocumentsLowPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.IndexDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.High)]
-        public void DeleteDocumentsHighPrio(string documentType, string[] documentIds)
+        public async Task DeleteDocumentsHighPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
+        }
+
+        [Queue(JobPriority.Normal)]
+        public async Task DeleteDocumentsNormalPriorityAsync(string documentType, string[] documentIds)
+        {
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
         }
 
         [Queue(JobPriority.Low)]
-        public void DeleteDocumentsLowPrio(string documentType, string[] documentIds)
+        public async Task DeleteDocumentsLowPriorityAsync(string documentType, string[] documentIds)
         {
-            _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            if (!documentIds.IsNullOrEmpty())
+            {
+                await _indexingManager.DeleteDocumentsAsync(documentType, documentIds);
+            }
         }
 
         #endregion
 
+        // TODO: Why this method is not async?
         private Task<bool> RunIndexJobAsync(string currentUserName, string notificationId, bool suppressInsignificantNotifications,
             IEnumerable<IndexingOptions> allOptions, Func<IndexingOptions, ICancellationToken, Task> indexationFunc,
             IJobCancellationToken cancellationToken)
         {
+            var success = false;
+
             // Reset progress handler to initial state
             _progressHandler.Start(currentUserName, notificationId, suppressInsignificantNotifications);
 
             // Make sure only one indexation job can run in the cluster.
             // CAUTION: locking mechanism assumes single threaded execution.
-            IDisposable lck = null;
             try
             {
-                lck = JobStorage.Current.GetConnection().AcquireDistributedLock("IndexationJob", TimeSpan.Zero);
+                using (JobStorage.Current.GetConnection().AcquireDistributedLock("IndexationJob", TimeSpan.Zero))
+                {
+                    // Begin indexation
+                    try
+                    {
+                        foreach (var options in allOptions)
+                        {
+                            indexationFunc(options, new JobCancellationTokenWrapper(cancellationToken)).Wait();
+                        }
+
+                        success = true;
+                    }
+                    catch (OperationCanceledException)
+                    {
+                        _progressHandler.Cancel();
+                    }
+                    catch (Exception ex)
+                    {
+                        _progressHandler.Exception(ex);
+                    }
+                }
             }
             catch
             {
-                // todo: Check wait in calling method
+                // TODO: Check wait in calling method
                 _progressHandler.AlreadyInProgress();
-                return Task.FromResult(false);
             }
 
-            // Begin indexation
-            try
-            {
-                foreach (var options in allOptions)
-                {
-                    indexationFunc(options, new JobCancellationTokenWrapper(cancellationToken)).Wait();
-                }
-
-                return Task.FromResult(true);
-            }
-            catch (OperationCanceledException)
-            {
-                _progressHandler.Cancel();
-                return Task.FromResult(false);
-            }
-            catch (Exception ex)
-            {
-                _progressHandler.Exception(ex);
-                return Task.FromResult(false);
-            }
-            finally
-            {
-                // Release the syncronization object.
-                lck.Dispose();
-            }
+            return Task.FromResult(success);
         }
 
         private async Task IndexAllDocumentsAsync(IndexingOptions options, ICancellationToken cancellationToken)
@@ -345,32 +370,34 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             return _settingsManager.GetValue("VirtoCommerce.Search.IndexPartitionSize", 50);
         }
 
-        private static async Task WaitForIndexationJobsToBeReadyAsync(string queue,
-            Func<Job, bool> jobPredicate, int maxQueueCount = 0)
+        private static async Task WaitForIndexationJobsToBeReadyAsync(string queue, Func<Job, bool> jobPredicate)
         {
             var monitoringApi = JobStorage.Current.GetMonitoringApi();
+
             while (true)
             {
                 var hasQueuedIndexingJobs = monitoringApi.Queues()
                     .FirstOrDefault(x => x.Name.Equals(queue, StringComparison.OrdinalIgnoreCase))
                     ?.FirstJobs
                     .Where(x => jobPredicate == null || jobPredicate(x.Value.Job))
-                    .Where(x => x.Value.Job.Method.DeclaringType == typeof(IndexingJobs))
-                    .Any();
+                    .Any(x => x.Value.Job.Method.DeclaringType == typeof(IndexingJobs));
+
                 if (!hasQueuedIndexingJobs.GetValueOrDefault())
                 {
                     var hasFetchedIndexingJobs = monitoringApi.FetchedJobs(queue, 0, int.MaxValue)
                         ?.Where(x => jobPredicate == null || jobPredicate(x.Value.Job))
-                        .Where(x => x.Value.Job.Method.DeclaringType == typeof(IndexingJobs))
-                        .Any();
+                        .Any(x => x.Value.Job.Method.DeclaringType == typeof(IndexingJobs));
+
                     if (!hasFetchedIndexingJobs.GetValueOrDefault())
                     {
                         var hasProcessingIndexingJobs = monitoringApi.ProcessingJobs(0, int.MaxValue)
                             ?.Where(x => jobPredicate == null || jobPredicate(x.Value.Job))
-                            .Where(x => x.Value.Job.Method.DeclaringType == typeof(IndexingJobs))
-                            .Any();
+                            .Any(x => x.Value.Job.Method.DeclaringType == typeof(IndexingJobs));
+
                         if (!hasProcessingIndexingJobs.GetValueOrDefault())
-                            return;
+                        {
+                            break;
+                        }
                     }
                 }
 

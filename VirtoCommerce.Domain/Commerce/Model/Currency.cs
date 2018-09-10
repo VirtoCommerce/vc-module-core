@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +7,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Commerce.Model
 {
-    public class Currency : ValueObject<Currency>
+    public class Currency : ValueObject
     {
         /// <summary>
         /// the currency code

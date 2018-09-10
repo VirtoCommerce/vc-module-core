@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +8,15 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Cart.Model
 {
-	public class ShipmentMethod : ValueObject<ShipmentMethod>, ITaxable
+    public class ShipmentMethod : ValueObject, ITaxable
     {
-		public string ShipmentMethodCode { get; set; }
-		public string OptionName { get; set; }
-		public string Name { get; set; }
-		public string LogoUrl { get; set; }
-		public string Currency { get; set; }
+        public string ShipmentMethodCode { get; set; }
+        public string OptionName { get; set; }
+        public string Name { get; set; }
+        public string LogoUrl { get; set; }
+        public string Currency { get; set; }
 
-		public decimal Price { get; set; }
+        public decimal Price { get; set; }
 
         public virtual decimal PriceWithTax
         {
@@ -25,7 +25,7 @@ namespace VirtoCommerce.Domain.Cart.Model
                 return Price + Price * TaxPercentRate;
             }
         }
-     
+
         public virtual decimal DiscountAmount { get; set; }
 
         public virtual decimal DiscountAmountWithTax

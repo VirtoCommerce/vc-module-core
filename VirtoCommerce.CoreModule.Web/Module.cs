@@ -3,8 +3,9 @@ using System.Linq;
 using System.Web.Http;
 using Hangfire;
 using Microsoft.Practices.Unity;
+using VirtoCommerce.CoreModule.Data.Handlers;
 using VirtoCommerce.CoreModule.Data.Indexing;
-using VirtoCommerce.CoreModule.Data.Observers;
+using VirtoCommerce.CoreModule.Data.Notifications;
 using VirtoCommerce.CoreModule.Data.Payment;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.CoreModule.Data.Search.SearchPhraseParsing;
@@ -14,6 +15,7 @@ using VirtoCommerce.CoreModule.Data.Tax;
 using VirtoCommerce.CoreModule.Web.BackgroundJobs;
 using VirtoCommerce.CoreModule.Web.ExportImport;
 using VirtoCommerce.CoreModule.Web.JsonConverters;
+using VirtoCommerce.CoreModule.Web.Resources;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Commerce.Services;
 using VirtoCommerce.Domain.Customer.Events;
@@ -21,9 +23,11 @@ using VirtoCommerce.Domain.Payment.Services;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Domain.Shipping.Services;
 using VirtoCommerce.Domain.Tax.Services;
+using VirtoCommerce.Platform.Core.Bus;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
+using VirtoCommerce.Platform.Core.Notifications;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.Infrastructure;
 using VirtoCommerce.Platform.Data.Infrastructure.Interceptors;
@@ -54,6 +58,7 @@ namespace VirtoCommerce.CoreModule.Web
         public override void Initialize()
         {
             var settingsManager = _container.Resolve<ISettingsManager>();
+            var eventHandlerRegistrar = _container.Resolve<IHandlerRegistrar>();
 
             //#region Payment gateways manager
 
@@ -83,8 +88,8 @@ namespace VirtoCommerce.CoreModule.Web
             #endregion
 
             //Registration welcome email notification.
-            _container.RegisterType<IObserver<MemberChangingEvent>, RegistrationEmailObserver>("RegistrationEmailObserver");
-
+            eventHandlerRegistrar.RegisterHandler<MemberChangedEvent>(async (message, token) => await _container.Resolve<RegistrationEmailMemberChangedEventHandler>().Handle(message));
+           
             #region Search
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
@@ -129,6 +134,44 @@ namespace VirtoCommerce.CoreModule.Web
             var taxService = _container.Resolve<ITaxService>();
             var paymentService = _container.Resolve<IPaymentMethodsService>();
             var moduleSettings = settingsManager.GetModuleSettings("VirtoCommerce.Core");
+            var notificationManager = _container.Resolve<INotificationManager>();
+            var emailGateway = _container.Resolve<IEmailNotificationSendingGateway>();
+
+            notificationManager.RegisterNotificationType(() => new EmailConfirmationNotification(emailGateway)
+            {
+                DisplayName = "Email confirmation notification",
+                Description = "This e-mail notification is for confirmation a new registered user e-mail",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.EmailConfirmationNotificationSubject,
+                    Body = NotificationResource.EmailConfirmationNotificationBody
+                }
+            });
+
+            notificationManager.RegisterNotificationType(() => new RemindUserNameNotification(emailGateway)
+            {
+                DisplayName = "Remind user name notification",
+                Description = "This notification is sent by email to a client upon forgot user name request",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.RemindUserNameNotificationSubject,
+                    Body = NotificationResource.RemindUserNameNotificationBody
+                }
+            });
+
+            notificationManager.RegisterNotificationType(() => new RegistrationInvitationNotification(emailGateway)
+            {
+                DisplayName = "Registration by invite notification",
+                Description = "This notification is sent by email to a client upon registration by invite",
+                NotificationTemplate = new NotificationTemplate
+                {
+                    Language = "en-US",
+                    Subject = NotificationResource.RegistrationInvitationNotificationSubject,
+                    Body = NotificationResource.RegistrationInvitationNotificationBody
+                }
+            });
 
             taxService.RegisterTaxProvider(() => new FixedTaxRateProvider(moduleSettings.First(x => x.Name == "VirtoCommerce.Core.FixedTaxRateProvider.Rate"))
             {
@@ -170,7 +213,7 @@ namespace VirtoCommerce.CoreModule.Web
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
-
+          
             #region Search
 
             // Enable or disable periodic search index builders

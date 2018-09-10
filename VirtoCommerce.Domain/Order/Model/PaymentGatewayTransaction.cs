@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +36,11 @@ namespace VirtoCommerce.Domain.Order.Model
         /// Gateway or VC response status code  
         /// </summary>
         public string ResponseCode { get; set; }
+
+        /// <summary>
+        /// RefundAmount is a real refund which get client
+        /// </summary>
+        public decimal? RefundAmount { get; set; }
 
         /// <summary>
         /// Gateway IP address

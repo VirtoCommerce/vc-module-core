@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Commerce.Model.Search
 {
-    public abstract class SearchCriteriaBase
+    public abstract class SearchCriteriaBase : ValueObject
     {
         public string ResponseGroup { get; set; }
 
@@ -46,7 +46,6 @@ namespace VirtoCommerce.Domain.Commerce.Model.Search
         public string Sort { get; set; }
 
         public virtual SortInfo[] SortInfos => SortInfo.Parse(Sort).ToArray();
-
 
         public int Skip { get; set; }
         public int Take { get; set; } = 20;

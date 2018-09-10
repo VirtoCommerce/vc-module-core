@@ -29,7 +29,6 @@ namespace VirtoCommerce.Domain.Search
         /// </summary>
         /// <param name="documentType">Document type to index.</param>
         /// <param name="documentIds">Ids of documents to index.</param>
-        /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>Result of indexing operation.</returns>
         Task<IndexingResult> IndexDocumentsAsync(string documentType, string[] documentIds);
 
@@ -38,7 +37,6 @@ namespace VirtoCommerce.Domain.Search
         /// </summary>
         /// <param name="documentType">Document type to delete.</param>
         /// <param name="documentIds">Ids of documents to delete.</param>
-        /// <param name="cancellationToken">Token to cancel the operation.</param>
         /// <returns>Result of indexing operation.</returns>
         Task<IndexingResult> DeleteDocumentsAsync(string documentType, string[] documentIds);
     }

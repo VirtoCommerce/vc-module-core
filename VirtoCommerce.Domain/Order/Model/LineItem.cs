@@ -1,8 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Domain.Catalog.Model;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
@@ -24,87 +21,33 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public decimal Price { get; set; }
 
-        public virtual decimal PriceWithTax
-        {
-            get
-            {
-                return Price + Price * TaxPercentRate;
-            }
-         }
+        public virtual decimal PriceWithTax { get; set; }
 
         /// <summary>
         /// Resulting price with discount for one unit
         /// </summary>
-        public virtual decimal PlacedPrice
-        {
-            get
-            {
-                return Price - DiscountAmount;
-            }
-        }
-        public virtual decimal PlacedPriceWithTax
-        {
-            get
-            {
-                return PlacedPrice + PlacedPrice * TaxPercentRate;
-            }
-        }
+        public virtual decimal PlacedPrice { get; set; }
+        public virtual decimal PlacedPriceWithTax { get; set; }
 
-        public virtual decimal ExtendedPrice
-        {
-            get
-            {
-                return PlacedPrice * Quantity;
-            }
-         }
+        public virtual decimal ExtendedPrice { get; set; }
 
-        public virtual decimal ExtendedPriceWithTax
-        {
-            get
-            {
-                return PlacedPriceWithTax * Quantity;
-            }
-        }
+        public virtual decimal ExtendedPriceWithTax { get; set; }
 
         /// <summary>
         /// Gets the value of the single qty line item discount amount
         /// </summary>
         public virtual decimal DiscountAmount { get; set; }
 
-        public virtual decimal DiscountAmountWithTax
-        {
-            get
-            {
-                return DiscountAmount + DiscountAmount * TaxPercentRate;
-            }
-        }
+        public virtual decimal DiscountAmountWithTax { get; set; }
 
-        public decimal DiscountTotal
-        {
-            get
-            {
-                return DiscountAmount * Math.Max(1, Quantity);
-            }
-        }
+        public decimal DiscountTotal { get; set; }
 
-        public decimal DiscountTotalWithTax
-        {
-            get
-            {
-                return DiscountAmountWithTax * Math.Max(1, Quantity);
-            }
-        }
+        public decimal DiscountTotalWithTax { get; set; }
 
         //Any extra Fee 
         public virtual decimal Fee { get; set; }
 
-        public virtual decimal FeeWithTax
-        {
-            get
-            {
-                return Fee + Fee * TaxPercentRate;
-            }
-        }
+        public virtual decimal FeeWithTax { get; set; }
         #region ITaxable Members
 
         /// <summary>
@@ -113,13 +56,7 @@ namespace VirtoCommerce.Domain.Order.Model
         public string TaxType { get; set; }
 
 
-        public decimal TaxTotal
-        {
-            get
-            {
-                return ExtendedPriceWithTax - ExtendedPrice + FeeWithTax - Fee;
-            }
-        }
+        public decimal TaxTotal { get; set; }
 
         public decimal TaxPercentRate { get; set; }
 
@@ -147,6 +84,9 @@ namespace VirtoCommerce.Domain.Order.Model
         public bool? IsGift { get; set; }
         public string ShippingMethodCode { get; set; }
         public string FulfillmentLocationCode { get; set; }
+        public string FulfillmentCenterId { get; set; }
+        public string FulfillmentCenterName { get; set; }
+
 
         #region IHaveDimension Members
         public string WeightUnit { get; set; }

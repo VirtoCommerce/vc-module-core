@@ -8,6 +8,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         Number,
 		DateTime,
 		Boolean,
-        Integer
+        Integer,
+        GeoPoint
     }
 }

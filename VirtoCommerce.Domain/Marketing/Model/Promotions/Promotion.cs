@@ -10,10 +10,12 @@ namespace VirtoCommerce.Domain.Marketing.Model
         public Promotion()
         {
             IsActive = true;
-            Id = Name = GetType().Name;
         }
 
         public string Store { get; set; }
+
+        public IList<string> StoreIds { get; set; }
+
         /// <summary>
         /// Promotion name
         /// </summary>

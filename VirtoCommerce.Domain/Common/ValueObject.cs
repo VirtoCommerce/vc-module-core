@@ -10,6 +10,7 @@ namespace VirtoCommerce.Domain.Common
     /// <summary>
     /// Alternative  ValueObject implementation.
     /// </summary>
+    [Obsolete("Use VirtoCommerce.Platform.Core.Common.ValueObject instead")]
     public abstract class ValueObject
     {
         private static readonly ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>> TypeProperties = new ConcurrentDictionary<Type, IReadOnlyCollection<PropertyInfo>>();

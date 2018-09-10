@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using VirtoCommerce.Domain.Commerce.Model.Search;
-using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class CustomerOrderSearchCriteria : SearchCriteriaBase
+    public class CustomerOrderSearchCriteria : SearchCriteriaBase
     {		     
 
         public string Keyword { get; set; }
@@ -98,11 +93,11 @@ namespace VirtoCommerce.Domain.Order.Model
         /// </summary>
         public string OperationId { get; set; }
 
+        public string OrganizationId { get; set; }
         public string CustomerId { get; set; }
         public string EmployeeId { get; set; }
         public string[] StoreIds { get; set; }
         public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }       
-
+        public DateTime? EndDate { get; set; }
     }
 }

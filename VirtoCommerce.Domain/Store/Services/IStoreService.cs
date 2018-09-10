@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Security;
 using coreModel = VirtoCommerce.Domain.Store.Model;
 namespace VirtoCommerce.Domain.Store.Services
@@ -15,7 +15,7 @@ namespace VirtoCommerce.Domain.Store.Services
         /// <summary>
         /// Returns list of stores ids which passed user can signIn
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         IEnumerable<string> GetUserAllowedStoreIds(ApplicationUserExtended user);
     }

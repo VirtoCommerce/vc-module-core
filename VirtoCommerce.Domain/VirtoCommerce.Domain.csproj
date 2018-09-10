@@ -38,9 +38,8 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,8 +48,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.17.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.17\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
+    <Reference Include="VirtoCommerce.Platform.Core, Version=2.13.26.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VirtoCommerce.Platform.Core.2.13.26\lib\net461\VirtoCommerce.Platform.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,8 +66,17 @@
     <Compile Include="Cart\Model\ShipmentItem.cs" />
     <Compile Include="Cart\Model\ShipmentMethod.cs" />
     <Compile Include="Cart\Model\ShoppingCart.cs" />
+    <Compile Include="Cart\Services\IShopingCartTotalsCalculator.cs" />
     <Compile Include="Cart\Services\IShoppingCartSearchService.cs" />
     <Compile Include="Cart\Services\IShoppingCartService.cs" />
+    <Compile Include="Catalog\Events\CategoryChangedEvent.cs" />
+    <Compile Include="Catalog\Events\CategoryChangingEvent.cs" />
+    <Compile Include="Catalog\Events\PropertyChangingEvent.cs" />
+    <Compile Include="Catalog\Events\PropertyChangedEvent.cs" />
+    <Compile Include="Catalog\Events\ProductChangedEvent.cs" />
+    <Compile Include="Catalog\Events\CatalogChangedEvent.cs" />
+    <Compile Include="Catalog\Events\ProductChangingEvent.cs" />
+    <Compile Include="Catalog\Events\CatalogChangingEvent.cs" />
     <Compile Include="Catalog\Model\IHasAssociations.cs" />
     <Compile Include="Catalog\Model\Asset.cs" />
     <Compile Include="Catalog\Model\AvailabilityRule.cs" />
@@ -92,13 +100,16 @@
     <Compile Include="Catalog\Model\Search\AggregationLabel.cs" />
     <Compile Include="Catalog\Model\Search\CatalogSearchCriteriaBase.cs" />
     <Compile Include="Catalog\Model\Search\CategorySearchCriteria.cs" />
+    <Compile Include="Catalog\Model\Search\ProductAssociationSearchCriteria.cs" />
     <Compile Include="Catalog\Model\Search\ProductSearchCriteria.cs" />
     <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
+    <Compile Include="Catalog\Services\IProductAssociationSearchService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
     <Compile Include="Commerce\Model\Currency.cs" />
     <Compile Include="Commerce\Model\Discount.cs" />
+    <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
     <Compile Include="Commerce\Model\IHasDiscounts.cs" />
     <Compile Include="Commerce\Model\IInheritable.cs" />
     <Compile Include="Commerce\Model\ILanguageSupport.cs" />
@@ -134,6 +145,8 @@
     <Compile Include="Commerce\Model\SeoInfo.cs" />
     <Compile Include="Commerce\Model\TaxDetail.cs" />
     <Compile Include="Commerce\Services\ISeoDuplicatesDetector.cs" />
+    <Compile Include="Common\Events\GenericChangedEntry.cs" />
+    <Compile Include="Common\Events\GenericChangedEntryEvent.cs" />
     <Compile Include="Common\MoneyExtensions.cs" />
     <Compile Include="Common\Expressions\ConditionExpressionTree.cs" />
     <Compile Include="Common\Expressions\DynamicExpression.cs" />
@@ -141,12 +154,15 @@
     <Compile Include="Common\Expressions\IConditionExpression.cs" />
     <Compile Include="Common\Expressions\IDynamicExpression.cs" />
     <Compile Include="Common\IEvaluationContext.cs" />
-    <Compile Include="Commerce\Model\FulfillmentCenter.cs" />
-    <Compile Include="Commerce\Services\ICommerceService.cs" />
     <Compile Include="Common\ValueObject.cs" />
+    <Compile Include="Inventory\Events\InventoryChangedEvent.cs" />
+    <Compile Include="Inventory\Events\InventoryChangingEvent.cs" />
+    <Compile Include="Inventory\Model\FulfillmentCenter.cs" />
+    <Compile Include="Commerce\Services\ICommerceService.cs" />
+    <Compile Include="Customer\Events\MemberChangedEvent.cs" />
     <Compile Include="Customer\Model\Contact.cs" />
     <Compile Include="Customer\Model\Employee.cs" />
-    <Compile Include="Customer\Model\Events\MemberChangingEvent.cs" />
+    <Compile Include="Customer\Events\MemberChangingEvent.cs" />
     <Compile Include="Customer\Model\Member.cs" />
     <Compile Include="Customer\Model\Note.cs" />
     <Compile Include="Customer\Model\Organization.cs" />
@@ -155,8 +171,13 @@
     <Compile Include="Customer\Model\Vendor.cs" />
     <Compile Include="Customer\Services\IMemberSearchService.cs" />
     <Compile Include="Customer\Services\IMemberService.cs" />
+    <Compile Include="Inventory\Model\Search\FulfillmentCenterSearchCriteria.cs" />
     <Compile Include="Inventory\Model\InventoryInfo.cs" />
     <Compile Include="Inventory\Model\InventoryStatus.cs" />
+    <Compile Include="Inventory\Model\Search\InventorySearchCriteria.cs" />
+    <Compile Include="Inventory\Services\IFulfillmentCenterSearchService.cs" />
+    <Compile Include="Inventory\Services\IFulfillmentCenterService.cs" />
+    <Compile Include="Inventory\Services\IInventorySearchService.cs" />
     <Compile Include="Inventory\Services\IInventoryService.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentEvaluationContext.cs" />
     <Compile Include="Marketing\Model\DynamicContent\DynamicContentFolder.cs" />
@@ -200,7 +221,9 @@
     <Compile Include="Marketing\Services\IPromotionService.cs" />
     <Compile Include="Marketing\Services\IMarketingExtensionManager.cs" />
     <Compile Include="Marketing\Services\DefaultMarketingExtensionManagerImpl.cs" />
+    <Compile Include="Inventory\Events\FulfillmentCenterChangedEvent.cs" />
     <Compile Include="Order\Events\OrderChangedEvent.cs" />
+    <Compile Include="Order\Events\OrderChangeEvent.cs" />
     <Compile Include="Order\Model\CustomerOrder.cs" />
     <Compile Include="Commerce\Model\IHaveDimension.cs" />
     <Compile Include="Commerce\Model\IOperation.cs" />
@@ -216,7 +239,8 @@
     <Compile Include="Order\Model\Shipment.cs" />
     <Compile Include="Order\Services\ICustomerOrderService.cs" />
     <Compile Include="Order\Services\ICustomerOrderSearchService.cs" />
-    <Compile Include="Order\Events\OrderChangeEvent.cs" />
+    <Compile Include="Inventory\Events\FulfillmentCenterChangingEvent.cs" />
+    <Compile Include="Order\Services\ICustomerOrderTotalsCalculator.cs" />
     <Compile Include="Payment\Model\BankCardInfo.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentEvaluationContext.cs" />
     <Compile Include="Payment\Model\CaptureProcessPaymentResult.cs" />
@@ -237,6 +261,8 @@
     <Compile Include="Payment\Services\IPaymentMethodsService.cs" />
     <Compile Include="Payment\Services\PaymentMethodsServiceImpl.cs" />
     <Compile Include="Payment\Model\PaymentMethodType.cs" />
+    <Compile Include="Pricing\Events\PriceChangedEvent.cs" />
+    <Compile Include="Pricing\Events\PriceChangingEvent.cs" />
     <Compile Include="Pricing\Model\Price.cs" />
     <Compile Include="Pricing\Model\PriceEvaluationContext.cs" />
     <Compile Include="Pricing\Model\Pricelist.cs" />
@@ -269,6 +295,7 @@
     <Compile Include="Search\GeoDistanceFilter.cs" />
     <Compile Include="Search\GeoDistanceSortingField.cs" />
     <Compile Include="Search\GeoPoint.cs" />
+    <Compile Include="Search\GeoSortInfo.cs" />
     <Compile Include="Search\IdsFilter.cs" />
     <Compile Include="Search\IFilter.cs" />
     <Compile Include="Search\IIndexDocumentBuilder.cs" />
@@ -333,9 +360,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="VirtoCommerce.Domain.nuspec">
       <SubType>Designer</SubType>
     </None>
