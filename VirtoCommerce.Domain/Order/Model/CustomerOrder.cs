@@ -15,6 +15,7 @@ namespace VirtoCommerce.Domain.Order.Model
         public string OrganizationName { get; set; }
         public string EmployeeId { get; set; }
         public string EmployeeName { get; set; }
+        public string OuterId { get; set; }
 
         /// <summary>
         /// The basis shopping cart id of which the order was created
