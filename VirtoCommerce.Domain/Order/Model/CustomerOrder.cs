@@ -15,6 +15,9 @@ namespace VirtoCommerce.Domain.Order.Model
         public string OrganizationName { get; set; }
         public string EmployeeId { get; set; }
         public string EmployeeName { get; set; }
+        /// <summary>
+        /// The order identifier in an external system.
+        /// </summary>
         public string OuterId { get; set; }
 
         /// <summary>
