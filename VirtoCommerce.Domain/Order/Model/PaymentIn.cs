@@ -8,9 +8,9 @@ using VirtoCommerce.Domain.Payment.Model;
 
 namespace VirtoCommerce.Domain.Order.Model
 {
-	public class PaymentIn : OrderOperation, IHaveTaxDetalization, ITaxable, IHasDiscounts
+    public class PaymentIn : OrderOperation, IHaveTaxDetalization, ITaxable, IHasDiscounts
     {
-		public string Purpose { get; set; }
+        public string Purpose { get; set; }
         /// <summary>
         /// Payment method (gateway) code
         /// </summary>
@@ -19,27 +19,30 @@ namespace VirtoCommerce.Domain.Order.Model
         /// Payment method contains additional payment method information
         /// </summary>
         public PaymentMethod PaymentMethod { get; set; }
-		public string OrganizationId { get; set; }
-		public string OrganizationName { get; set; }
+        public string OrganizationId { get; set; }
+        public string OrganizationName { get; set; }
 
-		public string CustomerId { get; set; }
-		public string CustomerName { get; set; }
+        public string CustomerId { get; set; }
+        public string CustomerName { get; set; }
 
-		public DateTime? IncomingDate { get; set; }
-		public string OuterId { get; set; }
-		public Address BillingAddress { get; set; }
+        public DateTime? IncomingDate { get; set; }
+        public string OuterId { get; set; }
+        public Address BillingAddress { get; set; }
 
-		public PaymentStatus PaymentStatus { get; set; }
-		public DateTime? AuthorizedDate { get; set; }
-		public DateTime? CapturedDate { get; set; }
-		public DateTime? VoidedDate { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }
+        public DateTime? AuthorizedDate { get; set; }
+        public DateTime? CapturedDate { get; set; }
+        public DateTime? VoidedDate { get; set; }
 
         public ProcessPaymentResult ProcessPaymentResult { get; set; }
 
-        //the self cost of the payment method
+        //The payment amount 
+        public virtual decimal Amount { get; set; }
+
+        //the self cost of the payment operation
         public virtual decimal Price { get; set; }
         public virtual decimal PriceWithTax { get; set; }
-
+        //the self total of the payment operation
         public virtual decimal Total { get; set; }
 
         public virtual decimal TotalWithTax { get; set; }
