@@ -51,6 +51,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// Returns for current value all dictionary values in all defined languages 
         /// </summary>
         /// <returns></returns>
+        [Obsolete]
         public IEnumerable<PropertyValue> TryGetAllLocalizedDictValues()
         {
             var retVal = new List<PropertyValue>();

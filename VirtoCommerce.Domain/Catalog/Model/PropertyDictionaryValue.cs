@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +10,12 @@ namespace VirtoCommerce.Domain.Catalog.Model
     /// Represent dictionary property values 
     /// </summary>
 	public class PropertyDictionaryValue : Entity
-	{
+    {
         /// <summary>
         /// Property identifier
         /// </summary>
 		public string PropertyId { get; set; }
-		public Property Property { get; set; }
+        public Property Property { get; set; }
         /// <summary>
         /// Alias for value used for group same dict values in different languages
         /// </summary>
@@ -24,6 +24,8 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// Language
         /// </summary>
 		public string LanguageCode { get; set; }
-		public string Value { get; set; }
-	}
+        public string Value { get; set; }
+        //The dictionary item identifier 
+        public string ValueId { get; set; }
+    }
 }
