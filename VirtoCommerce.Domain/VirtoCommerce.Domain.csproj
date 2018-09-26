@@ -93,6 +93,8 @@
     <Compile Include="Catalog\Model\CategoryResponseGroup.cs" />
     <Compile Include="Catalog\Model\EditorialReview.cs" />
     <Compile Include="Catalog\Model\OutlineItem.cs" />
+    <Compile Include="Catalog\Model\PropertyDictionaryItem.cs" />
+    <Compile Include="Catalog\Model\PropertyDictionaryItemLocalizedValue.cs" />
     <Compile Include="Catalog\Model\PropertyValidationRule.cs" />
     <Compile Include="Catalog\Model\Search\Aggregation.cs" />
     <Compile Include="Catalog\Model\Search\AggregationItem.cs" />
@@ -102,9 +104,12 @@
     <Compile Include="Catalog\Model\Search\CategorySearchCriteria.cs" />
     <Compile Include="Catalog\Model\Search\ProductAssociationSearchCriteria.cs" />
     <Compile Include="Catalog\Model\Search\ProductSearchCriteria.cs" />
+    <Compile Include="Catalog\Model\Search\PropertyDictionaryItemSearchCriteria.cs" />
     <Compile Include="Catalog\Services\IAssociationService.cs" />
     <Compile Include="Catalog\Services\IOutlineService.cs" />
     <Compile Include="Catalog\Services\IProductAssociationSearchService.cs" />
+    <Compile Include="Catalog\Services\IProperyDictionaryItemSearchService.cs" />
+    <Compile Include="Catalog\Services\IProperyDictionaryItemService.cs" />
     <Compile Include="Commerce\Model\Address.cs" />
     <Compile Include="Commerce\Model\AddressType.cs" />
     <Compile Include="Commerce\Model\Currency.cs" />

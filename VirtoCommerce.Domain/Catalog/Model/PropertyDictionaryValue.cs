@@ -9,7 +9,8 @@ namespace VirtoCommerce.Domain.Catalog.Model
     /// <summary>
     /// Represent dictionary property values 
     /// </summary>
-	public class PropertyDictionaryValue : Entity
+    [Obsolete("Replaced to PropertyDictionaryItem")]
+    public class PropertyDictionaryValue : Entity
     {
         /// <summary>
         /// Property identifier
