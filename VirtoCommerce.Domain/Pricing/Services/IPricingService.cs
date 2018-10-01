@@ -20,6 +20,8 @@ namespace VirtoCommerce.Domain.Pricing.Services
 
         IEnumerable<Pricelist> EvaluatePriceLists(PriceEvaluationContext evalContext);
         IEnumerable<Price> EvaluateProductPrices(PriceEvaluationContext evalContext);
-        IEnumerable<Price> GetChangedPricesBetween(DateTime? begin, DateTime? end, int skip, int take);
+
+        IEnumerable<Model.PriceCalendarChange> GetCalendarChanges(DateTime? lastEvaluationTimestamp,
+            DateTime? evaluationTimestamp, int skip, int take);
     }
 }

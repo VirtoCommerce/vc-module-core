@@ -264,6 +264,7 @@
     <Compile Include="Pricing\Events\PriceChangedEvent.cs" />
     <Compile Include="Pricing\Events\PriceChangingEvent.cs" />
     <Compile Include="Pricing\Model\Price.cs" />
+    <Compile Include="Pricing\Model\PriceCalendarChange.cs" />
     <Compile Include="Pricing\Model\PriceEvaluationContext.cs" />
     <Compile Include="Pricing\Model\Pricelist.cs" />
     <Compile Include="Pricing\Model\PricelistAssignment.cs" />
