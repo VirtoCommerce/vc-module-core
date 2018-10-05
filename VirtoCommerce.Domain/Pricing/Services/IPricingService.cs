@@ -22,6 +22,6 @@ namespace VirtoCommerce.Domain.Pricing.Services
         IEnumerable<Price> EvaluateProductPrices(PriceEvaluationContext evalContext);
 
         IEnumerable<Model.PriceCalendarChange> GetCalendarChanges(DateTime? lastEvaluationTimestamp,
-            DateTime? evaluationTimestamp, int skip, int take);
+            DateTime? evaluationTimestamp, int? skip, int? take);
     }
 }
