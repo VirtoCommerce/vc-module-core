@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,8 +18,10 @@ namespace VirtoCommerce.Domain.Pricing.Model
 		public decimal? Sale { get; set; }
 		public decimal List { get; set; }
 		public int MinQuantity { get; set; }
+	    public DateTime? StartDate { get; set; }
+	    public DateTime? EndDate { get; set; }
 
-		public decimal EffectiveValue
+        public decimal EffectiveValue
 		{
 			get
 			{

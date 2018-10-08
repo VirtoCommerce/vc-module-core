@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Pricing.Model;
 
 namespace VirtoCommerce.Domain.Pricing.Services
@@ -19,5 +20,8 @@ namespace VirtoCommerce.Domain.Pricing.Services
 
         IEnumerable<Pricelist> EvaluatePriceLists(PriceEvaluationContext evalContext);
         IEnumerable<Price> EvaluateProductPrices(PriceEvaluationContext evalContext);
+
+        IEnumerable<Model.PriceCalendarChange> GetCalendarChanges(DateTime? lastEvaluationTimestamp,
+            DateTime? evaluationTimestamp, int? skip, int? take);
     }
 }
