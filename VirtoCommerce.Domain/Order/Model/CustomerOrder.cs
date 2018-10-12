@@ -24,7 +24,7 @@ namespace VirtoCommerce.Domain.Order.Model
         /// The basis shopping cart id of which the order was created
         /// </summary>
         public string ShoppingCartId { get; set; }
-    
+
         /// <summary>
         /// Flag determines that the order is the prototype
         /// </summary>
@@ -37,12 +37,14 @@ namespace VirtoCommerce.Domain.Order.Model
         /// Identifier for subscription  associated with this order
         /// </summary>
         public string SubscriptionId { get; set; }
- 
-		public ICollection<Address> Addresses { get; set; }
-		public ICollection<PaymentIn> InPayments { get; set; }
 
-		public ICollection<LineItem> Items { get; set; }
-		public ICollection<Shipment> Shipments { get; set; }
+        public ICollection<Address> Addresses { get; set; } = new List<Address>();
+
+        public ICollection<PaymentIn> InPayments { get; set; } = new List<PaymentIn>();
+
+        public ICollection<LineItem> Items { get; set; } = new List<LineItem>();
+
+        public ICollection<Shipment> Shipments { get; set; } = new List<Shipment>();
 
 
         #region IHasDiscounts
@@ -55,15 +57,16 @@ namespace VirtoCommerce.Domain.Order.Model
         /// For instance, if the cart subtotal is $100, and $15 is the tax subtotal, a cart-wide discount of 10% will yield a total of $105 ($100 subtotal – $10 discount + $15 tax on the original $100).
         /// </summary>
 		public decimal DiscountAmount { get; set; }
-      
+
         #region ITaxDetailSupport Members
 
-        public ICollection<TaxDetail> TaxDetails { get; set; }
+        public ICollection<TaxDetail> TaxDetails { get; set; } = new List<TaxDetail>();
 
         #endregion
 
         #region ISupportSecurityScopes Members
-        public IEnumerable<string> Scopes { get; set; }
+
+        public IEnumerable<string> Scopes { get; set; } = new List<string>();
         #endregion
 
 
