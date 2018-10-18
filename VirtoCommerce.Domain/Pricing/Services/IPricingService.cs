@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Pricing.Model;
 
 namespace VirtoCommerce.Domain.Pricing.Services
