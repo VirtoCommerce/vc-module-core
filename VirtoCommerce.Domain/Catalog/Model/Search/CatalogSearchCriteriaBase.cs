@@ -33,5 +33,10 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Enable fuzzy search, i.e. allow to search color:white even if color:wihte actually passed to criteria
         /// </summary>
         public bool IsFuzzySearch { get; set; }
+
+        /// <summary>
+        /// Gets or sets the search provider specific raw search query; all other search criteria will be ignored
+        /// </summary>
+        public string RawQuery { get; set; }
     }
 }

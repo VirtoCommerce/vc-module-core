@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace VirtoCommerce.Domain.Search
 {
@@ -51,5 +51,10 @@ namespace VirtoCommerce.Domain.Search
         /// Gets or sets the maximum number of documents to return in search results
         /// </summary>
         public int Take { get; set; } = 20;
+
+        /// <summary>
+        /// Gets or sets the search provider specific raw search query; all other search criteria will be ignored
+        /// </summary>
+        public string RawQuery { get; set; }
     }
 }
