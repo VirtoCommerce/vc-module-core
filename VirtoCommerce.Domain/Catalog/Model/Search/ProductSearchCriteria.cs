@@ -11,6 +11,11 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
     {
         public override string ObjectType { get; set; } = KnownDocumentTypes.Product;
 
+        /// <summary>
+        /// Physical, Digital, etc.
+        /// </summary>
+        public string ProductType { get; set; }
+
         public string Currency { get; set; }
 
         public string[] Pricelists { get; set; }
