@@ -274,6 +274,7 @@
     <Compile Include="Pricing\Model\Search\PricingSearchCriteria.cs" />
     <Compile Include="Pricing\Model\Search\PricingSearchResult.cs" />
     <Compile Include="Pricing\Services\DefaultPricingExtensionManagerImpl.cs" />
+    <Compile Include="Pricing\Services\IPricingChangesService.cs" />
     <Compile Include="Pricing\Services\IPricingSearchService.cs" />
     <Compile Include="Pricing\Services\IPricingExtensionManager.cs" />
     <Compile Include="Pricing\Services\IPricingService.cs" />
