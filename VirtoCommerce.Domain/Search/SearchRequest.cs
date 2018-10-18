@@ -53,7 +53,7 @@ namespace VirtoCommerce.Domain.Search
         public int Take { get; set; } = 20;
 
         /// <summary>
-        /// Gets or sets the search provider specific raw search query; all other search criterias will be ignored
+        /// Gets or sets the search provider specific raw search query; all other search criteria will be ignored
         /// </summary>
         public string RawQuery { get; set; }
     }

@@ -35,7 +35,7 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         public bool IsFuzzySearch { get; set; }
 
         /// <summary>
-        /// Gets or sets the search provider specific raw search query; all other search criterias will be ignored
+        /// Gets or sets the search provider specific raw search query; all other search criteria will be ignored
         /// </summary>
         public string RawQuery { get; set; }
     }
