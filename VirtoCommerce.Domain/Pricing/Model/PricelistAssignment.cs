@@ -42,6 +42,8 @@ namespace VirtoCommerce.Domain.Pricing.Model
         /// <summary>
         /// Deserialized conditional expression  used to evaluate current assignment availability 
         /// </summary>
+        // TECHDEBT: [JsonIgnore] attribute here is a workaround to exclude this property from Swagger documentation.
+        //           This property causes NSwag to include lots of types including MethodImplAttributes, which leads to the invalid Swagger JSON.
         [JsonIgnore]
         public Func<IEvaluationContext, bool> Condition { get; set; }
 
