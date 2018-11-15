@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -31,7 +31,7 @@ namespace VirtoCommerce.CoreModule.Data.Tax
                 var settingRate = Settings.Where(x => x.Name == "VirtoCommerce.Core.FixedTaxRateProvider.Rate").FirstOrDefault();
                 if (settingRate != null)
                 {
-                    retVal = Decimal.Parse(settingRate.Value, CultureInfo.InvariantCulture);
+                    retVal = decimal.Parse(settingRate.Value, CultureInfo.InvariantCulture);
                 }
                 return retVal;
             }
@@ -54,6 +54,7 @@ namespace VirtoCommerce.CoreModule.Data.Tax
                 rate.Rate = line.Amount * Rate * 0.01m;
                 rate.Currency = taxEvalContext.Currency;
                 rate.TaxProvider = this;
+                rate.TaxProviderCode = Code;
                 rate.Line = line;
 
                 retVal.Add(rate);

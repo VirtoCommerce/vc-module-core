@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VirtoCommerce.Domain.Commerce.Model;
+using Newtonsoft.Json;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Tax.Model
@@ -14,6 +9,8 @@ namespace VirtoCommerce.Domain.Tax.Model
         public string Currency { get; set; }
 
         public TaxLine Line { get; set; }
+        [JsonIgnore]
         public TaxProvider TaxProvider { get; set; }
+        public string TaxProviderCode { get; set; }
     }
 }
