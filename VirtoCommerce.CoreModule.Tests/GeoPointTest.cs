@@ -10,6 +10,7 @@ using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
+    [Trait("Category", "CI")]
     public class GeoPointTest
     {
 
@@ -48,7 +49,7 @@ namespace VirtoCommerce.CoreModule.Tests
         [InlineData(47.1231231, 179.9999999, "47.1231231, 179.9999999")]
         [InlineData(78.7777778, 78.7777778, "78.7777777888, 78.7777777888")]
         [InlineData(78.7777777, 78.7777777, "78.77777774444, 78.77777774444")]
-        public virtual void CanTryParseGeoPoint( double lat, double lot, string point)
+        public virtual void CanTryParseGeoPoint(double lat, double lot, string point)
         {
             var result = GeoPoint.TryParse(point);
 

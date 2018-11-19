@@ -1,29 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Runtime.Serialization;
-
 namespace VirtoCommerce.Domain.Marketing.Model
 {
-	
-	public class CatalogItemAmountReward : AmountBasedReward
-	{
-		public CatalogItemAmountReward()
-		{
-		}
-		//Copy constructor
-		protected CatalogItemAmountReward(CatalogItemAmountReward other)
-			: base(other)
-		{
-			ProductId = other.ProductId;
-		}
 
-		public string ProductId { get; set; }
+    public class CatalogItemAmountReward : AmountBasedReward
+    {
+        public CatalogItemAmountReward()
+        {
+        }
+        //Copy constructor
+        protected CatalogItemAmountReward(CatalogItemAmountReward other)
+            : base(other)
+        {
+            ProductId = other.ProductId;
+            ConditionalProductId = other.ConditionalProductId;
+        }
 
-		public override PromotionReward Clone()
-		{
-			return new CatalogItemAmountReward(this);
-		}
-	}
+        /// <summary>
+        /// Target reward product
+        /// </summary>
+        public string ProductId { get; set; }
+        /// <summary>
+        /// Conditional product
+        /// For N items of entry ProductId  in every Y items of entry ConditionalProductId get %X off
+        /// </summary>
+        public string ConditionalProductId { get; set; }
+
+        public override PromotionReward Clone()
+        {
+            return new CatalogItemAmountReward(this);
+        }
+    }
 }

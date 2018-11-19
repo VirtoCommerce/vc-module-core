@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Domain.Common;
 
 namespace VirtoCommerce.Domain.Marketing.Model
@@ -20,52 +17,77 @@ namespace VirtoCommerce.Domain.Marketing.Model
             Amount = other.Amount;
             Quantity = other.Quantity;
             MaxLimit = other.MaxLimit;
+            ForNthQuantity = other.ForNthQuantity;
+            InEveryNthQuantity = other.InEveryNthQuantity;
         }
 
         public RewardAmountType AmountType { get; set; }
+        /// <summary>
+        /// Reward amount
+        /// </summary>
         public decimal Amount { get; set; }
+        /// <summary>
+        /// The max reward amount limit (Not to exceed $S)
+        /// </summary>
         public decimal MaxLimit { get; set; }
+        /// <summary>
+        /// The max  quantity limit (No more than Q items)
+        /// </summary>
         public int Quantity { get; set; }
 
+        //For N in every Y items
+        public int ForNthQuantity { get; set; }
+        public int InEveryNthQuantity { get; set; }
+
+        /// <summary>
+        ///  Get per item reward amount for given items quantity and price
+        /// </summary>
+        /// <param name="price">Price per item</param>
+        /// <param name="quantity">Total items quantity</param>
+        /// <returns></returns>
         public virtual decimal GetRewardAmount(decimal price, int quantity)
         {
-            var result = Amount;
-            if (AmountType == RewardAmountType.Relative)
+            if (price < 0)
             {
-                result = price * Amount * 0.01m;
-                if (MaxLimit > 0)
-                {
-                    result = Math.Min(MaxLimit, result);
-                }
+                throw new ArgumentNullException($"The {nameof(price)} cannot be negative");
             }
+            if (quantity < 0)
+            {
+                throw new ArgumentNullException($"The {nameof(quantity)} cannot be negative");
+            }
+
+            var workQuantity = quantity = Math.Max(1, quantity);
+            if (ForNthQuantity > 0 && InEveryNthQuantity > 0)
+            {
+                workQuantity = workQuantity / InEveryNthQuantity * ForNthQuantity;
+            }
+            workQuantity = Math.Max(1, workQuantity);
             if (Quantity > 0)
             {
-                //Need to allocate adjustment between given quantities
-                result = result * Math.Min(Quantity, quantity);
-                //TODO: need allocate more rightly between each quantities
-                result = result.Allocate(quantity).FirstOrDefault();
+                workQuantity = Math.Min(Quantity, workQuantity);
             }
+            var result = Amount * workQuantity;
+            if (AmountType == RewardAmountType.Relative)
+            {
+                result = price * Amount * 0.01m * workQuantity;
+            }
+            var totalCost = price * quantity;
+            //use total cost as MaxLimit if it explicitly not set
+            var workMaxLimit = MaxLimit > 0 ? MaxLimit : totalCost;
+            //Do not allow maxLimit be greater that total cost (to prevent reward amount be greater that price)
+            workMaxLimit = Math.Min(workMaxLimit, totalCost);
+            result = Math.Min(workMaxLimit, result);
+
+            //TODO: need allocate more rightly between  given quantities
+            result = result.Allocate(quantity).FirstOrDefault();
             return result;
         }
 
+
+        [Obsolete("Use GetRewardAmount instead")]
         public decimal CalculateDiscountAmount(decimal price, int quantity = 1)
         {
-            var retVal = Amount;
-            if (AmountType == RewardAmountType.Relative)
-            {
-                var amount = Amount;
-                if (MaxLimit > 0)
-                {
-                    amount = Math.Min(MaxLimit, Amount);
-                }
-                retVal = Math.Floor(price * amount) * Math.Min(quantity, Quantity == 0 ? quantity : Quantity);
-            }
-            return FinanceRound(retVal);
-        }
-
-        private static decimal FinanceRound(decimal value)
-        {
-            return Math.Round(value, 2, MidpointRounding.AwayFromZero);
+            return GetRewardAmount(price, quantity);
         }
     }
 }
