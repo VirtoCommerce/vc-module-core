@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
+using VirtoCommerce.Platform.Core.ChangeLog;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.DynamicProperties;
 
 namespace VirtoCommerce.Domain.Customer.Model
 {
-    public abstract class Member : AuditableEntity, IHasDynamicProperties
+    public abstract class Member : AuditableEntity, IHasDynamicProperties, IHasChangesHistory
     {
         protected Member()
         {
@@ -25,6 +26,10 @@ namespace VirtoCommerce.Domain.Customer.Model
         public string ObjectType { get; set; }
         public ICollection<DynamicObjectProperty> DynamicProperties { get; set; }
 
+        #endregion
+
+        #region IHasChangesHistory
+        public ICollection<OperationLog> OperationsLog { get; set; }
         #endregion
     }
 }
