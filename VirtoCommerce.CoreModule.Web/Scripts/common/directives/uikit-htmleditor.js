@@ -8,8 +8,12 @@ angular.module('virtoCommerce.coreModule.common')
             fileUploader: '='
         },
         link: function (scope, element, attributes) {
-			var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true });
+            var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true, enablescripts: false });
             var codeMirror = htmlEditor.editor;
+            //Besides inline scripts need to also eliminate inline event handlers on preview
+            htmlEditor.on('render', function () {
+                htmlEditor.replaceInPreview(/(?:<[^>]+\s)((on\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?)/ig, eventReplacer);
+            });
             htmlEditor.addButtons({
                 headerFirst: { label: 'H1', title: 'First level header' },
                 headerSecond: { label: 'H2', title: 'Second level header' }
@@ -80,6 +84,12 @@ angular.module('virtoCommerce.coreModule.common')
                 }
                 addActions(htmlEditor, codeMirror.getMode().name);
             });
+
+            function eventReplacer(match) {
+                if (match && match.matches && match.matches.length > 1) {
+                    return match.matches[0].replace(match.matches[1], '');
+                }
+            }
 
             function getCurrentEditorLine(editor, event) {
                 return editor.lineAtHeight(event.originalEvent.pageY);
