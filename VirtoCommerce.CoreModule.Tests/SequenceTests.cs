@@ -104,12 +104,9 @@ namespace VirtoCommerce.CoreModule.Tests
         private ICommerceRepository GetMockedRepository()
         {
             var mockRepository = new Mock<ICommerceRepository>();
-            var sampleData = new List<Sequence>();
-            mockRepository.Setup(x => x.Sequences).Returns(sampleData.AsQueryable());
-            mockRepository.Setup(x => x.Add(It.IsAny<Sequence>())).Callback((Sequence s) =>
-            {
-                sampleData.Add(s);
-            });
+            var sequenceCollection = new List<Sequence>();
+            mockRepository.Setup(x => x.Sequences).Returns(sequenceCollection.AsQueryable());
+            mockRepository.Setup(x => x.Add(It.IsAny<Sequence>())).Callback((Sequence s) => { sequenceCollection.Add(s); });
             var mockUnitOfWork = new Mock<IUnitOfWork>();
             mockRepository.Setup(x => x.UnitOfWork).Returns(() => mockUnitOfWork.Object);
             return mockRepository.Object;
