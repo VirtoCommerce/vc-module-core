@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Practices.Unity;
 using Moq;
 using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.CoreModule.Data.Services;
-using VirtoCommerce.Domain.Common;
 using VirtoCommerce.Platform.Core.Common;
 using Xunit;
 
@@ -17,24 +14,24 @@ namespace VirtoCommerce.CoreModule.Tests
 {
     public class SequenceTests
     {
-        private readonly IUnityContainer _unity = new UnityContainer();
         private static readonly int _reservationCount = 4;
         private static readonly int _sequenceCountInReservation = SequenceUniqueNumberGeneratorServiceImpl.SequenceReservationRange;
+        private static readonly string _sequenceTemplate = "{1}";
 
         public SequenceTests()
         {
-            PrepareContext();
         }
 
         [Fact]
         public void TestOrdersAreSequentialSingleThread()
         {
-            var generator = _unity.Resolve<ISequenceInvoker>();
+            var repositoryMocked = GetMockedRepository();
+            var generator = new SequenceUniqueNumberGeneratorServiceImpl(() => repositoryMocked);
 
             var sequences = new string[_reservationCount * _sequenceCountInReservation];
             for (var i = 0; i < sequences.Length; i++)
             {
-                sequences[i] = generator.GetNextValue();
+                sequences[i] = generator.GenerateNumber(_sequenceTemplate);
             }
 
             AssertSequences(_reservationCount, sequences);
@@ -43,6 +40,8 @@ namespace VirtoCommerce.CoreModule.Tests
         [Fact]
         public async Task TestOrdersAreSequentialMultipleThreads()
         {
+            var repositoryMocked = GetMockedRepository();
+
             var sequences = new ConcurrentQueue<string>();
             var tasks = new Task[_reservationCount];
             using (var countdownEvent = new CountdownEvent(_reservationCount))
@@ -51,7 +50,7 @@ namespace VirtoCommerce.CoreModule.Tests
                 {
                     tasks[i] = Task.Run(() =>
                     {
-                        var generator = _unity.Resolve<ISequenceInvoker>();
+                        var generator = new SequenceUniqueNumberGeneratorServiceImpl(() => repositoryMocked);
                         var oneSequenceArray = new string[_sequenceCountInReservation];
                         for (var j = 0; j < oneSequenceArray.Length; j++)
                         {
@@ -61,7 +60,7 @@ namespace VirtoCommerce.CoreModule.Tests
                                 countdownEvent.Signal();
                                 countdownEvent.Wait();
                             }
-                            sequences.Enqueue(generator.GetNextValue());
+                            sequences.Enqueue(generator.GenerateNumber(_sequenceTemplate));
                         }
                     });
                 }
@@ -86,21 +85,6 @@ namespace VirtoCommerce.CoreModule.Tests
             }
         }
 
-        #region Context creation
-
-        private void PrepareContext()
-        {
-            var repositoryMocked = GetMockedRepository();
-            InjectDependencies(repositoryMocked);
-        }
-
-        private void InjectDependencies(ICommerceRepository repositoryMocked)
-        {
-            _unity.RegisterInstance<Func<ICommerceRepository>>(() => repositoryMocked);
-            _unity.RegisterType<IUniqueNumberGenerator, SequenceUniqueNumberGeneratorServiceImpl>();
-            _unity.RegisterType<ISequenceInvoker, NumberSequenceInvoker>();
-        }
-
         private ICommerceRepository GetMockedRepository()
         {
             var mockRepository = new Mock<ICommerceRepository>();
@@ -111,33 +95,5 @@ namespace VirtoCommerce.CoreModule.Tests
             mockRepository.Setup(x => x.UnitOfWork).Returns(() => mockUnitOfWork.Object);
             return mockRepository.Object;
         }
-
-        #endregion
-
-        #region Inner classes used in test
-
-        interface ISequenceInvoker
-        {
-            string GetNextValue();
-        }
-
-        class NumberSequenceInvoker : ISequenceInvoker
-        {
-            private readonly IUniqueNumberGenerator _generator;
-
-#pragma warning disable S1144
-            public NumberSequenceInvoker(IUniqueNumberGenerator generator)
-            {
-                _generator = generator ?? throw new ArgumentNullException(nameof(generator));
-            }
-#pragma warning restore S1144
-
-            public string GetNextValue()
-            {
-                return _generator.GenerateNumber("{1}");
-            }
-        }
-
-        #endregion
     }
 }
