@@ -12,6 +12,7 @@ using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
+    [Trait("Category", "CI")]
     public class SequenceTests
     {
         private static readonly int _reservationCount = 4;
