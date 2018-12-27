@@ -22,6 +22,8 @@ namespace VirtoCommerce.CoreModule.Tests
         {
             get
             {
+
+
                 //For 2 out of 3 items with price $100.0 get %50 off  =  Get $9.99 discount per item
                 yield return new object[] { new CatalogItemAmountReward { Amount = 50.0m, AmountType = RewardAmountType.Relative, Quantity = 2 }, 100.0m, 3, 33.34m };
 
@@ -34,7 +36,8 @@ namespace VirtoCommerce.CoreModule.Tests
                 yield return new object[] { new CatalogItemAmountReward { Amount = 100.0m, AmountType = RewardAmountType.Absolute }, 0m, 0, 0m };
                 //For 1 item  with price $1.0 get $0 off  =  Get $0.0 discount per item 
                 yield return new object[] { new CatalogItemAmountReward { Amount = 0m, AmountType = RewardAmountType.Absolute }, 1.0m, 1, 0m };
-
+                //For 1 in every 3 items get %10 off = Get $0 discount per item for given 1 qty
+                yield return new object[] { new CatalogItemAmountReward { ForNthQuantity = 1, InEveryNthQuantity = 3, Amount = 10.0m, AmountType = RewardAmountType.Relative }, 9.99m, 1, 0m };
 
 
                 //For 10 items with price $9.99 get $10 off  =  Get $9.99 discount per item
@@ -45,6 +48,7 @@ namespace VirtoCommerce.CoreModule.Tests
                 yield return new object[] { new CatalogItemAmountReward { Amount = 50, AmountType = RewardAmountType.Relative }, 100.0m, 15, 50.0m };
                 //For 2 in every 3 items of entry  get %50 off limit 4 items not to exceed $150 = Get $15.0 discount per item
                 yield return new object[] { new CatalogItemAmountReward { ForNthQuantity = 2, InEveryNthQuantity = 3, MaxLimit = 150, Quantity = 4, Amount = 50, AmountType = RewardAmountType.Relative }, 100.0m, 10, 15.0m };
+
             }
         }
     }

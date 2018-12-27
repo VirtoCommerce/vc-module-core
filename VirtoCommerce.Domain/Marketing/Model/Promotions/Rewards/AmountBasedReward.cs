@@ -61,7 +61,6 @@ namespace VirtoCommerce.Domain.Marketing.Model
             {
                 workQuantity = workQuantity / InEveryNthQuantity * ForNthQuantity;
             }
-            workQuantity = Math.Max(1, workQuantity);
             if (Quantity > 0)
             {
                 workQuantity = Math.Min(Quantity, workQuantity);
