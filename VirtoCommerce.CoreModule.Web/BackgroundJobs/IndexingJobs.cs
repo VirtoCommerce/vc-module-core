@@ -319,7 +319,7 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             catch (Exception ex)
             {
                 _interceptors?.ForEach(x => x.OnEnd(options.ToArray(), ex));
-				throw;
+                throw;
             }
         }
 
