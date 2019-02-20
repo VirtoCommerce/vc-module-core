@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using VirtoCommerce.Domain.Pricing.Model;
+using VirtoCommerce.Domain.Pricing.Model.Search;
 
 namespace VirtoCommerce.Domain.Pricing.Services
 {
@@ -16,6 +17,7 @@ namespace VirtoCommerce.Domain.Pricing.Services
         void DeletePricelists(string[] ids);
         void DeletePrices(string[] ids);
         void DeletePricelistsAssignments(string[] ids);
+        void DeletePricelistsAssignmentsByFilter(PricelistAssignmentsSearchCriteria criteria);
 
         IEnumerable<Pricelist> EvaluatePriceLists(PriceEvaluationContext evalContext);
         IEnumerable<Price> EvaluateProductPrices(PriceEvaluationContext evalContext);
