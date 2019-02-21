@@ -175,11 +175,6 @@
     <Compile Include="Model\SignInCredentials.cs" />
     <Compile Include="Model\StorefrontUser.cs" />
     <Compile Include="Model\SignInResult.cs" />
-    <Compile Include="Resources\NotificationResource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NotificationResource.resx</DependentUpon>
-    </Compile>
     <Compile Include="Security\CommercePredefinedPermissions.cs" />
     <Compile Include="ExportImport\CoreExportImport.cs" />
     <Compile Include="Module.cs" />
@@ -285,12 +280,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\NotificationResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>NotificationResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
