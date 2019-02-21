@@ -15,7 +15,6 @@ using VirtoCommerce.CoreModule.Data.Tax;
 using VirtoCommerce.CoreModule.Web.BackgroundJobs;
 using VirtoCommerce.CoreModule.Web.ExportImport;
 using VirtoCommerce.CoreModule.Web.JsonConverters;
-using VirtoCommerce.CoreModule.Web.Resources;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Commerce.Services;
 using VirtoCommerce.Domain.Customer.Events;
@@ -136,6 +135,7 @@ namespace VirtoCommerce.CoreModule.Web
             var moduleSettings = settingsManager.GetModuleSettings("VirtoCommerce.Core");
             var notificationManager = _container.Resolve<INotificationManager>();
             var emailGateway = _container.Resolve<IEmailNotificationSendingGateway>();
+            var assembly = typeof(ICommerceRepository).Assembly;
 
             notificationManager.RegisterNotificationType(() => new EmailConfirmationNotification(emailGateway)
             {
@@ -144,8 +144,8 @@ namespace VirtoCommerce.CoreModule.Web
                 NotificationTemplate = new NotificationTemplate
                 {
                     Language = "en-US",
-                    Subject = NotificationResource.EmailConfirmationNotificationSubject,
-                    Body = NotificationResource.EmailConfirmationNotificationBody
+                    Body = assembly.GetManifestResourceStream("VirtoCommerce.CoreModule.Data.Notifications.Templates.EmailConfirmationNotificationTemplateBody.html").ReadToString(),
+                    Subject = assembly.GetManifestResourceStream("VirtoCommerce.CoreModule.Data.Notifications.Templates.EmailConfirmationNotificationTemplateSubject.html").ReadToString()
                 }
             });
 
@@ -156,8 +156,8 @@ namespace VirtoCommerce.CoreModule.Web
                 NotificationTemplate = new NotificationTemplate
                 {
                     Language = "en-US",
-                    Subject = NotificationResource.RemindUserNameNotificationSubject,
-                    Body = NotificationResource.RemindUserNameNotificationBody
+                    Body = assembly.GetManifestResourceStream("VirtoCommerce.CoreModule.Data.Notifications.Templates.RemindUserNameNotificationTemplateBody.html").ReadToString(),
+                    Subject = assembly.GetManifestResourceStream("VirtoCommerce.CoreModule.Data.Notifications.Templates.RemindUserNameNotificationTemplateSubject.html").ReadToString()
                 }
             });
 
@@ -168,8 +168,8 @@ namespace VirtoCommerce.CoreModule.Web
                 NotificationTemplate = new NotificationTemplate
                 {
                     Language = "en-US",
-                    Subject = NotificationResource.RegistrationInvitationNotificationSubject,
-                    Body = NotificationResource.RegistrationInvitationNotificationBody
+                    Body = assembly.GetManifestResourceStream("VirtoCommerce.CoreModule.Data.Notifications.Templates.RegistrationInvitationNotificationTemplateBody.html").ReadToString(),
+                    Subject = assembly.GetManifestResourceStream("VirtoCommerce.CoreModule.Data.Notifications.Templates.RegistrationInvitationNotificationTemplateSubject.html").ReadToString()
                 }
             });
 
