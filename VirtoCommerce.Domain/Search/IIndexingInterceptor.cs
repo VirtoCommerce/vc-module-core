@@ -12,6 +12,6 @@ namespace VirtoCommerce.Domain.Search
     {
         void OnBegin(IndexingOptions[] options);
 
-        void OnEnd(IndexingOptions[] options, Exception exception = null);
+        void OnEnd(IndexingOptions[] options, bool success, Exception exception = null);
     }
 }
