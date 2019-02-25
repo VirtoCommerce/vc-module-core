@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Customer.Model
 {
-    public class Contact : Member, IHasSecurityAccounts
+    public class Contact : Member, IHasSecurityAccounts, ICloneable
     {
         public string Salutation { get; set; }
         public string FullName { get; set; }
@@ -27,8 +28,24 @@ namespace VirtoCommerce.Domain.Customer.Model
         /// <summary>
         /// All security accounts associated with this contact
         /// </summary>
-        public ICollection<ApplicationUserExtended> SecurityAccounts { get; } = new List<ApplicationUserExtended>();
+        public ICollection<ApplicationUserExtended> SecurityAccounts { get; private set; } = new List<ApplicationUserExtended>();
 
         #endregion
+
+        public object Clone()
+        {
+            var clone = (Contact) MemberwiseClone();
+
+            if (Organizations != null)
+            {
+                clone.Organizations = new List<string>(Organizations);
+            }
+
+            clone.SecurityAccounts = SecurityAccounts
+                ?.Select(x => (ApplicationUserExtended) x.Clone())
+                .ToList();
+
+            return clone;
+        }
     }
 }
