@@ -8,7 +8,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         public string Title { get; set; }
         public string Body { get; set; }
 
-        public object Clone()
+        public virtual object Clone()
         {
             return MemberwiseClone();
         }

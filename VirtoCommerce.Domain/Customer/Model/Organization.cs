@@ -13,7 +13,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         public string OwnerId { get; set; }
         public string ParentId { get; set; }
 
-        public object Clone()
+        public virtual object Clone()
         {
             var clone = (Organization) MemberwiseClone();
 

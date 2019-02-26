@@ -32,7 +32,7 @@ namespace VirtoCommerce.Domain.Customer.Model
 
         #endregion
 
-        public object Clone()
+        public virtual object Clone()
         {
             var clone = (Contact) MemberwiseClone();
 
