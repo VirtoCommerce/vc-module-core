@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
 
 namespace VirtoCommerce.Domain.Customer.Model
@@ -31,5 +32,16 @@ namespace VirtoCommerce.Domain.Customer.Model
         public ICollection<SeoInfo> SeoInfos { get; set; }
 
         #endregion
+
+        public override object Clone()
+        {
+            var clone = (Vendor)base.Clone();
+
+            clone.SeoInfos = SeoInfos
+                ?.Select(x => (SeoInfo)x.Clone())
+                .ToList();
+
+            return clone;
+        }
     }
 }

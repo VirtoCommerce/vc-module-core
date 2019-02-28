@@ -5,7 +5,7 @@ using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Customer.Model
 {
-    public class Contact : Member, IHasSecurityAccounts, ICloneable
+    public class Contact : Member, IHasSecurityAccounts
     {
         public string Salutation { get; set; }
         public string FullName { get; set; }
@@ -32,14 +32,11 @@ namespace VirtoCommerce.Domain.Customer.Model
 
         #endregion
 
-        public virtual object Clone()
+        public override object Clone()
         {
-            var clone = (Contact) MemberwiseClone();
+            var clone = (Contact)base.Clone();
 
-            if (Organizations != null)
-            {
-                clone.Organizations = new List<string>(Organizations);
-            }
+            clone.Organizations = Organizations?.ToList();
 
             clone.SecurityAccounts = SecurityAccounts
                 ?.Select(x => (ApplicationUserExtended) x.Clone())

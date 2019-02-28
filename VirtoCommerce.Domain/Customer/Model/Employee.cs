@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Customer.Model
@@ -37,5 +38,18 @@ namespace VirtoCommerce.Domain.Customer.Model
         public ICollection<ApplicationUserExtended> SecurityAccounts { get; } = new List<ApplicationUserExtended>();
 
         #endregion
+
+        public override object Clone()
+        {
+            var clone = (Employee)base.Clone();
+
+            clone.Organizations = Organizations?.ToList();
+
+            clone.SecurityAccounts = SecurityAccounts
+                ?.Select(x => (ApplicationUserExtended) x.Clone())
+                .ToList();
+
+            return clone;
+        }
     }
 }
