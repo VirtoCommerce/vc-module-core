@@ -141,6 +141,12 @@ namespace VirtoCommerce.Domain.Order.Model
 
         public string LanguageCode { get; set; }
 
-        #endregion     
+        #endregion
+
+        #region Workflow
+
+        public string WorkflowId { get; set; }
+
+        #endregion
     }
 }
