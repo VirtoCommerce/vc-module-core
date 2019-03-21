@@ -19,7 +19,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
         {
             _repositoryFactory = repositoryFactory;
         }
-  
+
         #region ICommerceService Members     
         [Obsolete]
         public IEnumerable<coreModel.FulfillmentCenter> GetAllFulfillmentCenters()
@@ -162,6 +162,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             }
         }
 
+        [Obsolete]
         public void DeleteSeoForObject(coreModel.ISeoSupport seoSupportObject)
         {
             if (seoSupportObject == null)
@@ -173,7 +174,6 @@ namespace VirtoCommerce.CoreModule.Data.Services
             {
                 using (var repository = _repositoryFactory())
                 {
-
                     var objectType = seoSupportObject.SeoObjectType;
                     var objectId = seoSupportObject.Id;
                     var seoUrlKeywords = repository.GetObjectSeoUrlKeywords(objectType, objectId);
@@ -187,6 +187,32 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 }
             }
         }
+
+        public void DeleteSeoForObjects(coreModel.ISeoSupport[] seoSupportObjects)
+        {
+            if (seoSupportObjects == null)
+            {
+                throw new ArgumentNullException(nameof(seoSupportObjects));
+            }
+
+            foreach (var seoObject in seoSupportObjects.Where(x => x.Id != null))
+            {
+                using (var repository = _repositoryFactory())
+                {
+                    var objectType = seoObject.SeoObjectType;
+                    var objectId = seoObject.Id;
+                    var seoUrlKeywords = repository.GetObjectSeoUrlKeywords(objectType, objectId);
+
+                    foreach (var seoUrlKeyword in seoUrlKeywords)
+                    {
+                        repository.Remove(seoUrlKeyword);
+                    }
+
+                    CommitChanges(repository);
+                }
+            }
+        }
+
 
         public IEnumerable<coreModel.SeoInfo> GetAllSeoDuplicates()
         {
@@ -218,7 +244,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             }
         }
 
-     
+
 
         public IEnumerable<coreModel.Currency> GetAllCurrencies()
         {
@@ -314,9 +340,9 @@ namespace VirtoCommerce.CoreModule.Data.Services
             using (var repository = _repositoryFactory())
             {
                 foreach (var packageType in packageTypes)
-                {                   
+                {
                     var sourceEntry = AbstractTypeFactory<dataModel.PackageType>.TryCreateInstance().FromModel(packageType, pkMap);
-                    var targetEntry = repository.PackageTypes.FirstOrDefault(x => x.Id == packageType.Id);               
+                    var targetEntry = repository.PackageTypes.FirstOrDefault(x => x.Id == packageType.Id);
                     if (targetEntry == null)
                     {
                         repository.Add(sourceEntry);
@@ -335,7 +361,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             using (var repository = _repositoryFactory())
             {
                 foreach (var packageType in repository.PackageTypes.Where(x => ids.Contains(x.Id)))
-                {                
+                {
                     repository.Remove(packageType);
                 }
                 CommitChanges(repository);
