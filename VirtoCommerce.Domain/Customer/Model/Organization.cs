@@ -1,4 +1,6 @@
-﻿namespace VirtoCommerce.Domain.Customer.Model
+using System;
+
+namespace VirtoCommerce.Domain.Customer.Model
 {
     public class Organization : Member
     {
@@ -7,5 +9,11 @@
         public string OwnerId { get; set; }
         public string ParentId { get; set; }
 
+        public override object Clone()
+        {
+            var clone = (Organization)base.Clone();
+
+            return clone;
+        }
     }
 }

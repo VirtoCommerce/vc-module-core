@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Platform.Core.Security;
 
 namespace VirtoCommerce.Domain.Customer.Model
@@ -27,8 +28,21 @@ namespace VirtoCommerce.Domain.Customer.Model
         /// <summary>
         /// All security accounts associated with this contact
         /// </summary>
-        public ICollection<ApplicationUserExtended> SecurityAccounts { get; } = new List<ApplicationUserExtended>();
+        public ICollection<ApplicationUserExtended> SecurityAccounts { get; private set; } = new List<ApplicationUserExtended>();
 
         #endregion
+
+        public override object Clone()
+        {
+            var clone = (Contact)base.Clone();
+
+            clone.Organizations = Organizations?.ToList();
+
+            clone.SecurityAccounts = SecurityAccounts
+                ?.Select(x => (ApplicationUserExtended) x.Clone())
+                .ToList();
+
+            return clone;
+        }
     }
 }
