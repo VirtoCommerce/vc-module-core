@@ -35,7 +35,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         /// <summary>
         /// All security accounts associated with this employee
         /// </summary>
-        public ICollection<ApplicationUserExtended> SecurityAccounts { get; } = new List<ApplicationUserExtended>();
+        public ICollection<ApplicationUserExtended> SecurityAccounts { get; private set; } = new List<ApplicationUserExtended>();
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace VirtoCommerce.Domain.Customer.Model
             clone.Organizations = Organizations?.ToList();
 
             clone.SecurityAccounts = SecurityAccounts
-                ?.Select(x => (ApplicationUserExtended) x.Clone())
+                ?.Select(x => (ApplicationUserExtended)x.Clone())
                 .ToList();
 
             return clone;
