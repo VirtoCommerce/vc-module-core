@@ -35,7 +35,7 @@ namespace VirtoCommerce.Domain.Customer.Model
         /// <summary>
         /// All security accounts associated with this employee
         /// </summary>
-        public ICollection<ApplicationUserExtended> SecurityAccounts { get; } = new List<ApplicationUserExtended>();
+        public ICollection<ApplicationUserExtended> SecurityAccounts { get; protected set; } = new List<ApplicationUserExtended>();
 
         #endregion
 
