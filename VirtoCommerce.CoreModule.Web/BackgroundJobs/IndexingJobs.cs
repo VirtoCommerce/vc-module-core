@@ -87,14 +87,15 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             {
                 try
                 {
-                    if (await RunIndexJobAsync(userName, notificationId, false, o, IndexAllDocumentsAsync, cancellationToken))
-                    {
-                        // Indexation manager might re-use the jobs to scale out indexation.
-                        // Wait for all indexing jobs to complete, before telling interceptors we're ready.
-                        // This method is running as a job as well, so skip this job.
-                        // Scale out background indexation jobs are scheduled as low.
-                        await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low, x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
-                    }
+                    var success = await RunIndexJobAsync(userName, notificationId, false, o, IndexAllDocumentsAsync, cancellationToken);
+
+                    // Indexation manager might re-use the jobs to scale out indexation.
+                    // Wait for all indexing jobs to complete, before telling interceptors we're ready.
+                    // This method is running as a job as well, so skip this job.
+                    // Scale out background indexation jobs are scheduled as low.
+                    await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low, x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
+
+                    return success;
                 }
                 finally
                 {
@@ -116,21 +117,20 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                 try
                 {
                     // Create different notification for each option (document type)
-                    var executed = true;
+                    var success = true;
 
                     foreach (var options in o)
                     {
-                        executed = executed && await RunIndexJobAsync(null, null, true, new[] { options }, IndexChangesAsync, cancellationToken);
+                        success = success && await RunIndexJobAsync(null, null, true, new[] { options }, IndexChangesAsync, cancellationToken);
                     }
 
-                    if (executed)
-                    {
-                        // Indexation manager might re-use the jobs to scale out indexation.
-                        // Wait for all indexing jobs to complete, before telling interceptors we're ready.
-                        // This method is running as a job as well, so skip this job.
-                        // Scale out background indexation jobs are scheduled as low.
-                        await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low, x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
-                    }
+                    // Indexation manager might re-use the jobs to scale out indexation.
+                    // Wait for all indexing jobs to complete, before telling interceptors we're ready.
+                    // This method is running as a job as well, so skip this job.
+                    // Scale out background indexation jobs are scheduled as low.
+                    await WaitForIndexationJobsToBeReadyAsync(JobPriority.Low, x => x.Method != _manualIndexAllJobMethod && x.Method != _indexChangesJobMethod);
+
+                    return success;
                 }
                 finally
                 {
@@ -249,34 +249,44 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
 
             // Make sure only one indexation job can run in the cluster.
             // CAUTION: locking mechanism assumes single threaded execution.
+            IDisposable distributedLock = null;
             try
             {
-                using (JobStorage.Current.GetConnection().AcquireDistributedLock("IndexationJob", TimeSpan.Zero))
-                {
-                    // Begin indexation
-                    try
-                    {
-                        foreach (var options in allOptions)
-                        {
-                            indexationFunc(options, new JobCancellationTokenWrapper(cancellationToken)).Wait();
-                        }
-
-                        success = true;
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        _progressHandler.Cancel();
-                    }
-                    catch (Exception ex)
-                    {
-                        _progressHandler.Exception(ex);
-                    }
-                }
+                distributedLock = JobStorage.Current.GetConnection().AcquireDistributedLock("IndexationJob", TimeSpan.Zero);
             }
             catch
             {
                 // TODO: Check wait in calling method
                 _progressHandler.AlreadyInProgress();
+            }
+
+
+            if (distributedLock != null)
+            {
+                // Begin indexation
+                try
+                {
+                    foreach (var options in allOptions)
+                    {
+                        indexationFunc(options, new JobCancellationTokenWrapper(cancellationToken)).Wait();
+                    }
+
+                    success = true;
+                }
+                catch (OperationCanceledException)
+                {
+                    _progressHandler.Cancel();
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    _progressHandler.Exception(ex);
+                    throw;
+                }
+                finally
+                {
+                    distributedLock.Dispose();
+                }
             }
 
             return Task.FromResult(success);
@@ -306,19 +316,22 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
             SetLastIndexationDate(options.DocumentType, oldIndexationDate, newIndexationDate);
         }
 
-        private async Task WithInterceptorsAsync(ICollection<IndexingOptions> options, Func<ICollection<IndexingOptions>, Task> action)
+        private async Task<bool> WithInterceptorsAsync(ICollection<IndexingOptions> options, Func<ICollection<IndexingOptions>, Task<bool>> action)
         {
             try
             {
                 _interceptors?.ForEach(x => x.OnBegin(options.ToArray()));
 
-                await action(options);
+                var result = await action(options);
 
-                _interceptors?.ForEach(x => x.OnEnd(options.ToArray()));
+                _interceptors?.ForEach(x => x.OnEnd(options.ToArray(), result));
+
+                return result;
             }
             catch (Exception ex)
             {
-                _interceptors?.ForEach(x => x.OnEnd(options.ToArray(), ex));
+                _interceptors?.ForEach(x => x.OnEnd(options.ToArray(), false, ex));
+                throw;
             }
         }
 
