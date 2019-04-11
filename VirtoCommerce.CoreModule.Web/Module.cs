@@ -88,7 +88,7 @@ namespace VirtoCommerce.CoreModule.Web
 
             //Registration welcome email notification.
             eventHandlerRegistrar.RegisterHandler<MemberChangedEvent>(async (message, token) => await _container.Resolve<RegistrationEmailMemberChangedEventHandler>().Handle(message));
-           
+
             #region Search
 
             _container.RegisterType<ISearchPhraseParser, SearchPhraseParser>();
@@ -213,7 +213,7 @@ namespace VirtoCommerce.CoreModule.Web
             //Next lines allow to use polymorph types in API controller methods
             var httpConfiguration = _container.Resolve<HttpConfiguration>();
             httpConfiguration.Formatters.JsonFormatter.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
-          
+
             #region Search
 
             // Enable or disable periodic search index builders

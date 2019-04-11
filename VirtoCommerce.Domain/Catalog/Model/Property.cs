@@ -16,6 +16,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public bool Dictionary { get; set; }
         public bool Multivalue { get; set; }
         public bool Multilanguage { get; set; }
+        public bool Hidden { get; set; }
         public PropertyValueType ValueType { get; set; }
         public PropertyType Type { get; set; }
         public ICollection<PropertyAttribute> Attributes { get; set; }
