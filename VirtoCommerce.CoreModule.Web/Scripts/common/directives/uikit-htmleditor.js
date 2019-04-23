@@ -118,9 +118,11 @@ angular.module('virtoCommerce.coreModule.common')
                 if (editorMode === 'gfm') {
                     addAction(htmlEditor, 'headerFirst', '# $1');
                     addAction(htmlEditor, 'headerSecond', '## $1');
+                    htmlEditor.enableMarkdown();
                 } else if (editorMode === 'htmlmixed') {
                     addAction(htmlEditor, 'headerFirst', '<h1>$1</h1>');
                     addAction(htmlEditor, 'headerSecond', '<h2>$1</h2>');
+                    htmlEditor.disableMarkdown();
                 }
             }
 
