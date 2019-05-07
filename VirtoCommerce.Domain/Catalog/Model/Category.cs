@@ -66,6 +66,11 @@ namespace VirtoCommerce.Domain.Catalog.Model
                 Links = null;
             }
 
+            if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithParents))
+            {
+                Parents = null;
+            }
+
             if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithProperties))
             {
                 Properties = null;

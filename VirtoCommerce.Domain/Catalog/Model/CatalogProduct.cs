@@ -122,19 +122,24 @@ namespace VirtoCommerce.Domain.Catalog.Model
                 Assets = null;
             }
 
-            if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemProperties))
-            {
-                Properties = null;
-            }
-
             if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemAssociations))
             {
                 Associations = null;
             }
 
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.ReferencedAssociations))
+            {
+                ReferencedAssociations = null;
+            }
+
             if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemEditorialReviews))
             {
                 Reviews = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemProperties))
+            {
+                Properties = null;
             }
 
             if (!productResponseGroup.HasFlag(ItemResponseGroup.Links))
