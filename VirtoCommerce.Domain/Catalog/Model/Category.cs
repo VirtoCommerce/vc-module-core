@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -37,7 +37,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #endregion
 
         #region ILinkSupport members
-        public ICollection<CategoryLink> Links { get; set; } 
+        public ICollection<CategoryLink> Links { get; set; }
         #endregion
 
         public string SeoObjectType { get { return GetType().Name; } }
@@ -48,7 +48,38 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #endregion
 
         #region IHasOutlines members
-        public ICollection<Outline> Outlines { get; set; } 
+        public ICollection<Outline> Outlines { get; set; }
         #endregion
+
+        public virtual void ReduceDetails(string responseGroup)
+        {
+            //Reduce details according to response group
+            var categoryResponseGroup = EnumUtility.SafeParseFlags(responseGroup, CategoryResponseGroup.Full);
+
+            if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithImages))
+            {
+                Images = null;
+            }
+
+            if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithLinks))
+            {
+                Links = null;
+            }
+
+            if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithProperties))
+            {
+                Properties = null;
+            }
+
+            if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithOutlines))
+            {
+                Outlines = null;
+            }
+
+            if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithSeo))
+            {
+                SeoInfos = null;
+            }
+        }
     }
 }
