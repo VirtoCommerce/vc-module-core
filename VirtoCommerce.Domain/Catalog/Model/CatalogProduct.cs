@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -140,6 +139,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
             if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemProperties))
             {
                 Properties = null;
+                PropertyValues = null;
             }
 
             if (!productResponseGroup.HasFlag(ItemResponseGroup.Links))
@@ -160,20 +160,6 @@ namespace VirtoCommerce.Domain.Catalog.Model
             if (!productResponseGroup.HasFlag(ItemResponseGroup.Variations))
             {
                 Variations = null;
-            }
-
-            if (Variations != null)
-            {
-                //For nested variations leave only variation properties to decrease resulting JSON
-                foreach (var variation in Variations)
-                {
-                    if (variation.Properties != null)
-                    {
-                        variation.Properties = variation.Properties.Where(x => x.Type == PropertyType.Variation).ToList();
-                    }
-                    variation.Outlines = null;
-                    variation.Reviews = null;
-                }
             }
         }
     }

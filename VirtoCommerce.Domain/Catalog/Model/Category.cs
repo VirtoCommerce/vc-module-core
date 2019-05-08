@@ -74,6 +74,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
             if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithProperties))
             {
                 Properties = null;
+                PropertyValues = null;
             }
 
             if (!categoryResponseGroup.HasFlag(CategoryResponseGroup.WithOutlines))
