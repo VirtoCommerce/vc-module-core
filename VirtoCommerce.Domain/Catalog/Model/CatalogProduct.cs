@@ -111,5 +111,56 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #region IHasOutlines members
         public ICollection<Outline> Outlines { get; set; }
         #endregion
+
+        public virtual void ReduceDetails(string responseGroup)
+        {
+            var productResponseGroup = EnumUtility.SafeParseFlags(responseGroup, ItemResponseGroup.ItemLarge);
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemAssets))
+            {
+                Assets = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemAssociations))
+            {
+                Associations = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.ReferencedAssociations))
+            {
+                ReferencedAssociations = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemEditorialReviews))
+            {
+                Reviews = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.ItemProperties))
+            {
+                Properties = null;
+                PropertyValues = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.Links))
+            {
+                Links = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.Outlines))
+            {
+                Outlines = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.Seo))
+            {
+                SeoInfos = null;
+            }
+
+            if (!productResponseGroup.HasFlag(ItemResponseGroup.Variations))
+            {
+                Variations = null;
+            }
+        }
     }
 }
