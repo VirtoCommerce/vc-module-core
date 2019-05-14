@@ -213,8 +213,6 @@
     <Content Include="Scripts\Currency\resources\currencyApi.js" />
     <Content Include="Scripts\Currency\widgets\currencyWidget.js" />
     <Content Include="Scripts\Currency\widgets\currencyWidget.tpl.html" />
-    <Content Include="Scripts\Fulfillment\blades\fulfillment-center-contact.js" />
-    <Content Include="Scripts\Fulfillment\blades\fulfillment-center-contact.tpl.html" />
     <Content Include="Scripts\SearchIndex\blades\indexes-list.js" />
     <Content Include="Scripts\SearchIndex\blades\indexes-list.tpl.html" />
     <Content Include="Scripts\SearchIndex\blades\index-progress.js" />
@@ -239,14 +237,6 @@
     <Content Include="Scripts\SEO\widgets\seoWidget.js" />
     <Content Include="Scripts\SEO\widgets\seoWidget.tpl.html" />
     <Content Include="Scripts\virtoCommerce-core.js" />
-    <Content Include="Scripts\Fulfillment\resources\fulfillments.js" />
-    <Content Include="Scripts\Fulfillment\blades\fulfillment-center-list.js" />
-    <Content Include="Scripts\Fulfillment\blades\fulfillment-center-list.tpl.html" />
-    <Content Include="Scripts\Fulfillment\blades\fulfillment-center-detail.js" />
-    <Content Include="Scripts\Fulfillment\blades\fulfillment-center-detail.tpl.html" />
-    <Content Include="Scripts\Fulfillment\fulfillment.js" />
-    <Content Include="Scripts\Fulfillment\widgets\fulfillmentWidget.js" />
-    <Content Include="Scripts\Fulfillment\widgets\fulfillmentWidget.tpl.html" />
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
