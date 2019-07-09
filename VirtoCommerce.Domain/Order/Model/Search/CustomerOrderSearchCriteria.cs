@@ -4,7 +4,7 @@ using VirtoCommerce.Domain.Commerce.Model.Search;
 namespace VirtoCommerce.Domain.Order.Model
 {
     public class CustomerOrderSearchCriteria : SearchCriteriaBase
-    {		     
+    {
 
         public string Keyword { get; set; }
 
@@ -95,7 +95,24 @@ namespace VirtoCommerce.Domain.Order.Model
 
         public string OrganizationId { get; set; }
         public string CustomerId { get; set; }
-        public string[] CustomerIds { get; set; }
+
+        private string[] _customerIds;
+        public string[] CustomerIds
+        {
+            get
+            {
+                if (_customerIds == null && !string.IsNullOrEmpty(CustomerId))
+                {
+                    _customerIds = new[] { CustomerId };
+                }
+                return _customerIds;
+            }
+            set
+            {
+                _customerIds = value;
+            }
+        }
+
         public string EmployeeId { get; set; }
         public string[] StoreIds { get; set; }
         public DateTime? StartDate { get; set; }
