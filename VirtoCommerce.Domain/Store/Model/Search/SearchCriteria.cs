@@ -9,8 +9,9 @@ namespace VirtoCommerce.Domain.Store.Model
             Take = 20;
         }
 
-        public string[] StoreIds { get; set; }
-
         public string Keyword { get; set; }
+        public string[] StoreIds { get; set; }
+        public StoreState[] StoreStates { get; set; }
+        public string[] FulfillmentCenterIds { get; set; }
     }
 }
