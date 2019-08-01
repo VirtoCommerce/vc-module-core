@@ -1,8 +1,4 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Common;
 using VirtoCommerce.Platform.Core.Common;
@@ -11,11 +7,7 @@ namespace VirtoCommerce.Domain.Tax.Model
 {
     public class TaxEvaluationContext : Entity, IEvaluationContext
     {
-        public TaxEvaluationContext()
-        {
-            Lines = new List<TaxLine>();
-        }
-        public VirtoCommerce.Domain.Store.Model.Store Store { get; set; }
+        public Store.Model.Store Store { get; set; }
         public string Code { get; set; }
         public string Type { get; set; }
         
@@ -23,7 +15,7 @@ namespace VirtoCommerce.Domain.Tax.Model
         public Customer.Model.Organization Organization { get; set; }
         public Address Address { get; set; }
         public string Currency { get; set; }
-        public ICollection<TaxLine> Lines { get; set; }
 
+        public ICollection<TaxLine> Lines { get; set; } = new List<TaxLine>();
     }
 }

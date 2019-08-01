@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,11 @@ namespace VirtoCommerce.Domain.Tax.Model
     /// </summary>
     public class TaxLine : Entity
     {
+        /// <summary>
+        /// Item type name (shipment, lineItem, car etc)
+        /// </summary>
+        public string TypeName { get; set; }
+
         public string Code { get; set; }
         public string Name { get; set; }
         /// <summary>
