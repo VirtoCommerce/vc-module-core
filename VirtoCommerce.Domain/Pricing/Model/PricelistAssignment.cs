@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VirtoCommerce.Domain.Common;
 using VirtoCommerce.Platform.Core.Common;
@@ -12,13 +8,13 @@ namespace VirtoCommerce.Domain.Pricing.Model
     /// <summary>
     /// Used to assign pricelist to specific catalog by using conditional expression 
     /// </summary>
-	public class PricelistAssignment : AuditableEntity
-	{
-		public string CatalogId { get; set; }
+	public class PricelistAssignment : AuditableEntity, ICloneable
+    {
+        public string CatalogId { get; set; }
         public string PricelistId { get; set; }
         public Pricelist Pricelist { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         /// <summary>
         /// If two PricelistAssignments satisfies the conditions and rules, will use one with the greater priority
         /// </summary>
@@ -38,7 +34,7 @@ namespace VirtoCommerce.Domain.Pricing.Model
         /// <summary>
         /// Serialized condition expression visual tree used in UI
         /// </summary>
-		public string  PredicateVisualTreeSerialized { get; set; }
+		public string PredicateVisualTreeSerialized { get; set; }
         /// <summary>
         /// Deserialized conditional expression  used to evaluate current assignment availability 
         /// </summary>
@@ -51,5 +47,18 @@ namespace VirtoCommerce.Domain.Pricing.Model
         /// List of conditions and rules to define Prices Assignment is valid
         /// </summary>
         public ConditionExpressionTree DynamicExpression { get; set; }
+
+        #region ICloneable members
+        public virtual object Clone()
+        {
+            var result = MemberwiseClone() as PricelistAssignment;
+            if (Pricelist != null)
+            {
+                result.Pricelist = result.Pricelist.Clone() as Pricelist;
+            }
+            //TODO: Clone Conditions, DynamicExpression
+            return result;
+        }
+        #endregion
     }
 }
