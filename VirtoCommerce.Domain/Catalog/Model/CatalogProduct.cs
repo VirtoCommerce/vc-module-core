@@ -169,54 +169,19 @@ namespace VirtoCommerce.Domain.Catalog.Model
         {
             var result = MemberwiseClone() as CatalogProduct;
 
-            if (Properties != null)
-            {
-                result.Properties = new List<Property>(Properties.Select(x => x.Clone() as Property));
-            }
-            if (Images != null)
-            {
-                result.Images = new List<Image>(Images.Select(x => x.Clone() as Image));
-            }
-            if (Assets != null)
-            {
-                result.Assets = new List<Asset>(Assets.Select(x => x.Clone() as Asset));
-            }
-            if (Links != null)
-            {
-                result.Links = new List<CategoryLink>(Links.Select(x => x.Clone() as CategoryLink));
-            }
-            if (Variations != null)
-            {
-                result.Variations = new List<CatalogProduct>(Variations.Select(x => x.Clone() as CatalogProduct));
-            }
-            if (SeoInfos != null)
-            {
-                result.SeoInfos = new List<SeoInfo>(SeoInfos.Select(x => x.Clone() as SeoInfo));
-            }
-            if (Reviews != null)
-            {
-                result.Reviews = new List<EditorialReview>(Reviews.Select(x => x.Clone() as EditorialReview));
-            }
-            if (Associations != null)
-            {
-                result.Associations = new List<ProductAssociation>(Associations.Select(x => x.Clone() as ProductAssociation));
-            }
-            if (ReferencedAssociations != null)
-            {
-                result.ReferencedAssociations = new List<ProductAssociation>(ReferencedAssociations.Select(x => x.Clone() as ProductAssociation));
-            }
-            if (Prices != null)
-            {
-                result.Prices = new List<Pricing.Model.Price>(Prices.Select(x => x.Clone() as Pricing.Model.Price));
-            }
-            if (Inventories != null)
-            {
-                result.Inventories = new List<Inventory.Model.InventoryInfo>(Inventories.Select(x => x.Clone() as Inventory.Model.InventoryInfo));
-            }
-            if (Outlines != null)
-            {
-                result.Outlines = new List<Outline>(Outlines.Select(x => x.Clone() as Outline));
-            }
+            result.Properties = Properties?.Select(x => x.Clone() as Property).ToArray() ?? result.Properties;
+            result.Images = Images?.Select(x => x.Clone() as Image).ToArray() ?? result.Images;
+            result.Assets = Assets?.Select(x => x.Clone() as Asset).ToArray() ?? result.Assets;
+            result.Links = Links?.Select(x => x.Clone() as CategoryLink).ToArray() ?? result.Links;
+            result.Variations = Variations?.Select(x => x.Clone() as CatalogProduct).ToArray() ?? result.Variations;
+            result.SeoInfos = SeoInfos?.Select(x => x.Clone() as SeoInfo).ToArray() ?? result.SeoInfos;
+            result.Reviews = Reviews?.Select(x => x.Clone() as EditorialReview).ToArray() ?? result.Reviews;
+            result.Associations = Associations?.Select(x => x.Clone() as ProductAssociation).ToArray() ?? result.Associations;
+            result.ReferencedAssociations = ReferencedAssociations?.Select(x => x.Clone() as ProductAssociation).ToArray() ?? result.ReferencedAssociations;
+            result.Prices = Prices?.Select(x => x.Clone() as Pricing.Model.Price).ToArray() ?? result.Prices;
+            result.Inventories = Inventories?.Select(x => x.Clone() as Inventory.Model.InventoryInfo).ToArray() ?? result.Inventories;
+            result.Outlines = Outlines?.Select(x => x.Clone() as Outline).ToArray() ?? result.Outlines;
+
             return result;
         }
         #endregion
