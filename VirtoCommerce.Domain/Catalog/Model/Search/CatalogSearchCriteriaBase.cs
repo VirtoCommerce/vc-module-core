@@ -5,8 +5,6 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
 {
     public class CatalogSearchCriteriaBase : SearchCriteriaBase
     {
-        private string[] _catalogIds;
-
         public string StoreId { get; set; }
 
         public string CatalogId { get; set; }
@@ -40,18 +38,5 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Gets or sets the search provider specific raw search query; all other search criteria will be ignored
         /// </summary>
         public string RawQuery { get; set; }
-
-        public string[] CatalogIds
-        {
-            get
-            {
-                if (_catalogIds == null && !string.IsNullOrEmpty(CatalogId))
-                {
-                    _catalogIds = new[] { CatalogId };
-                }
-                return _catalogIds;
-            }
-            set => _catalogIds = value;
-        }
     }
 }

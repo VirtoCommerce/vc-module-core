@@ -70,9 +70,5 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Override base SortInfo property to support GeoSortInfo sorting types
         /// </summary>
         public override SortInfo[] SortInfos => GeoSortInfo.TryParse(Sort).ToArray();
-
-        public bool SearchInChildren { get; set; }
-
-        public string[] CategoryIds { get; set; }
     }
 }
