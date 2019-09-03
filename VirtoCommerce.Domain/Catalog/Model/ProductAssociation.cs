@@ -1,8 +1,9 @@
+using System;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class ProductAssociation : ValueObject
+    public class ProductAssociation : ValueObject, ICloneable
     {
         /// <summary>
         /// Association type (Accessories, Up-Sales, Cross-Sales, Related etc)
@@ -27,5 +28,14 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public Entity AssociatedObject { get; set; }
 
         public string[] Tags { get; set; }
+
+        #region ICloneable members
+
+        public virtual object Clone()
+        {
+            return MemberwiseClone() as ProductAssociation;
+        }
+
+        #endregion
     }
 }
