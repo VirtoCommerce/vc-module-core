@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class Category : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHasImages, IHasProperties
+    public class Category : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHasImages, IHasProperties, ICloneable
     {
         public Category()
         {
@@ -49,6 +50,14 @@ namespace VirtoCommerce.Domain.Catalog.Model
 
         #region IHasOutlines members
         public ICollection<Outline> Outlines { get; set; }
+        #endregion
+
+        #region ICloneable members
+        public object Clone()
+        {
+            var retVal = base.MemberwiseClone() as Category;
+            return retVal;
+        }
         #endregion
 
         public virtual void ReduceDetails(string responseGroup)
