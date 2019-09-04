@@ -170,6 +170,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
             var result = MemberwiseClone() as CatalogProduct;
 
             result.Properties = Properties?.Select(x => x.Clone() as Property).ToArray() ?? result.Properties;
+            result.PropertyValues = PropertyValues?.Select(x => x.Clone() as PropertyValue).ToArray() ?? result.PropertyValues;
             result.Images = Images?.Select(x => x.Clone() as Image).ToArray() ?? result.Images;
             result.Assets = Assets?.Select(x => x.Clone() as Asset).ToArray() ?? result.Assets;
             result.Links = Links?.Select(x => x.Clone() as CategoryLink).ToArray() ?? result.Links;
