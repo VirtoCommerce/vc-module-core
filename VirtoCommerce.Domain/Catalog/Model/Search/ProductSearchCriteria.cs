@@ -99,6 +99,5 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
             set => _categoriesIds = value;
         }
         public bool SearchInVariations { get; set; }
-        public bool SearchInChildren { get; set; }
     }
 }
