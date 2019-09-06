@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -53,10 +54,20 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #endregion
 
         #region ICloneable members
-        public object Clone()
+        public virtual object Clone()
         {
-            var retVal = base.MemberwiseClone() as Category;
-            return retVal;
+            var result = MemberwiseClone() as Category;
+
+            result.Catalog = Catalog?.Clone() as Catalog ?? result.Catalog;
+
+            result.Properties = Properties?.Select(x => x.Clone() as Property).ToList() ?? result.Properties;
+            result.PropertyValues = PropertyValues?.Select(x => x.Clone() as PropertyValue).ToList() ?? result.PropertyValues;
+            result.Links = Links?.Select(x => x.Clone() as CategoryLink).ToList() ?? result.Links;
+            result.SeoInfos = SeoInfos?.Select(x => x.Clone() as SeoInfo).ToList() ?? result.SeoInfos;
+            result.Images = Images?.Select(x => x.Clone() as Image).ToList() ?? result.Images;
+            result.Outlines = Outlines?.Select(x => x.Clone() as Outline).ToList() ?? result.Outlines;
+
+            return result;
         }
         #endregion
 

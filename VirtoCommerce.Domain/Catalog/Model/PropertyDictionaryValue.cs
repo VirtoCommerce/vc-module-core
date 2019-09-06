@@ -1,7 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
@@ -10,7 +7,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
     /// Represent dictionary property values 
     /// </summary>
     [Obsolete("Replaced to PropertyDictionaryItem")]
-    public class PropertyDictionaryValue : Entity
+    public class PropertyDictionaryValue : Entity, ICloneable
     {
         /// <summary>
         /// Property identifier
@@ -28,5 +25,12 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public string Value { get; set; }
         //The dictionary item identifier 
         public string ValueId { get; set; }
+
+        #region ICloneable members
+        public virtual object Clone()
+        {
+            return MemberwiseClone() as Property;
+        }
+        #endregion
     }
 }

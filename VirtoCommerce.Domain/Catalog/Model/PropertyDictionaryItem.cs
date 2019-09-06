@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
@@ -14,8 +15,11 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #region ICloneable members
         public object Clone()
         {
-            var retVal = MemberwiseClone() as PropertyDictionaryItem;
-            return retVal;
+            var result = MemberwiseClone() as PropertyDictionaryItem;
+
+            result.LocalizedValues = LocalizedValues?.Select(x => x.Clone() as PropertyDictionaryItemLocalizedValue).ToList() ?? result.LocalizedValues;
+
+            return result;
         }
         #endregion
     }
