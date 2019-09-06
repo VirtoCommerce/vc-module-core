@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using VirtoCommerce.Domain.Commerce.Model;
-using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-	public class PropertyDisplayName : ILanguageSupport
-	{
-		public string Name { get; set; }
-		public string LanguageCode { get; set; }
+    public class PropertyDisplayName : ILanguageSupport, ICloneable
+    {
+        public string Name { get; set; }
+        public string LanguageCode { get; set; }
 
-	}
+        #region ICloneable members
+        public virtual object Clone()
+        {
+            return MemberwiseClone() as PropertyDisplayName;
+        }
+        #endregion
+    }
 }
