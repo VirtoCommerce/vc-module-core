@@ -4,54 +4,50 @@
         <div class="inner-block clearfix">
             <form class="form" name="formScope">
                 <ul class="list __info" ng-init="setForm(formScope)">
-                    <div class="form-group" ng-init="setForm(formScope)">
-                        <label class="form-label">{{ 'core.blades.currency-detail.labels.code' | translate }}</label>
-                        <div class="form-input">
-                            <input ng-model="blade.currentEntity.code" name="currencyCode" required ng-disabled="!blade.isNew" ng-maxlength="3" placeholder="{{ 'core.blades.currency-detail.placeholders.code' | translate }}" />
-                        </div>
-                        <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.code' | translate }}</div>
-                        <div class="form-error" ng-show="formScope.currencyCode.$error.maxlength">{{ 'core.blades.currency-detail.validation.maxlength' | translate }}</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">{{ 'core.blades.currency-detail.labels.name' | translate }}</label>
-                        <div class="form-input">
-                            <input placeholder="{{ 'core.blades.currency-detail.placeholders.name' | translate }}" ng-model="blade.currentEntity.name" focus-on="" required />
-                        </div>
-                        <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.name' | translate }}</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">{{ 'core.blades.currency-detail.labels.is-primary' | translate }}</label>
-                        <div class="form-input">
-                            <label class="form-label __switch">
-                                <input type="checkbox" ng-model="blade.currentEntity.isPrimary" />
-                                <span class="switch"></span>
-                            </label>
-                        </div>
-                        <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.is-primary' | translate }}</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">{{ 'core.blades.currency-detail.labels.exchange-rate' | translate }}</label>
-                        <div class="form-input __number">
-                            <input placeholder="{{ 'core.blades.currency-detail.placeholders.exchange-rate' | translate }}" smart-float required num-type="float" fraction="4" ng-model="blade.currentEntity.exchangeRate" min="0.0001">
-                        </div>
-                        <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.exchange-rate' | translate }}</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">{{ 'core.blades.currency-detail.labels.symbol' | translate }}</label>
-                        <div class="form-input">
-                            <input placeholder="{{ 'core.blades.currency-detail.placeholders.symbol' | translate }}" ng-model="blade.currentEntity.symbol" />
-                        </div>
-                        <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.symbol' | translate }}</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">{{ 'core.blades.currency-detail.labels.custom-formatting' | translate }}</label>
-                        <div class="form-input">
-                            <input placeholder="{{ 'core.blades.currency-detail.placeholders.custom-formatting' | translate }}" ng-model="blade.currentEntity.customFormatting">
-                        </div>
-                        <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.custom-formatting' | translate }}</div>
-                    </div>
+
+                    <va-metaform registered-inputs="blade.metafields" blade="blade"></va-metaform>
                 </ul>
             </form>
         </div>
     </div>
 </div>
+<script type="text/ng-template" id="currencyDetail-code.html">
+    <div class="form-input">
+        <input ng-model="blade.currentEntity.code" name="currencyCode" required ng-disabled="!blade.isNew" ng-maxlength="3" placeholder="{{ 'core.blades.currency-detail.placeholders.code' | translate }}" />
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.code' | translate }}</div>
+    <div class="form-error" ng-show="formScope.currencyCode.$error.maxlength">{{ 'core.blades.currency-detail.validation.maxlength' | translate }}</div>
+</script>
+<script type="text/ng-template" id="currencyDetail-name.html">
+    <div class="form-input">
+        <input placeholder="{{ 'core.blades.currency-detail.placeholders.name' | translate }}" ng-model="blade.currentEntity.name" focus-on="" required />
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.name' | translate }}</div>
+</script>
+<script type="text/ng-template" id="currencyDetail-isPrimary.html">
+    <div class="form-input">
+        <label class="form-label __switch">
+            <input type="checkbox" ng-model="blade.currentEntity.isPrimary" />
+            <span class="switch"></span>
+        </label>
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.is-primary' | translate }}</div>
+</script>
+<script type="text/ng-template" id="currencyDetail-exchangeRate.html">
+    <div class="form-input __number">
+        <input placeholder="{{ 'core.blades.currency-detail.placeholders.exchange-rate' | translate }}" smart-float required num-type="float" fraction="4" ng-model="blade.currentEntity.exchangeRate" min="0.0001">
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.exchange-rate' | translate }}</div>
+</script>
+<script type="text/ng-template" id="currencyDetail-symbol.html">
+    <div class="form-input">
+        <input placeholder="{{ 'core.blades.currency-detail.placeholders.symbol' | translate }}" ng-model="blade.currentEntity.symbol" />
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.symbol' | translate }}</div>
+</script>
+<script type="text/ng-template" id="currencyDetail-customFormatting.html">
+    <div class="form-input">
+        <input placeholder="{{ 'core.blades.currency-detail.placeholders.custom-formatting' | translate }}" ng-model="blade.currentEntity.customFormatting">
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.custom-formatting' | translate }}</div>
+</script>
