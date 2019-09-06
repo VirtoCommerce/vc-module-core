@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
@@ -12,6 +12,8 @@ namespace VirtoCommerce.Domain.Catalog.Model
         }
 
         public int ProductsTotalCount { get; set; }
+        public int CatalogsTotalCount { get; set; }
+        public int CategoriesTotalCount { get; set; }
         /// <summary>
         /// Type used in search result and represent properties search result aggregation 
         /// </summary>
