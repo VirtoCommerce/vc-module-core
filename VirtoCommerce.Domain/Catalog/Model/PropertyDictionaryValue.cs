@@ -29,7 +29,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #region ICloneable members
         public virtual object Clone()
         {
-            return MemberwiseClone() as Property;
+            return MemberwiseClone() as PropertyDictionaryValue;
         }
         #endregion
     }
