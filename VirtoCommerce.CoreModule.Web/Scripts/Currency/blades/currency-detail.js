@@ -1,8 +1,15 @@
-﻿angular.module('virtoCommerce.coreModule.currency')
-.controller('virtoCommerce.coreModule.currency.currencyDetailController', ['$scope', 'platformWebApp.dialogService', 'platformWebApp.bladeNavigationService', 'virtoCommerce.coreModule.currency.currencyApi',
-    function ($scope, dialogService, bladeNavigationService, currencyApi) {
+angular.module('virtoCommerce.coreModule.currency')
+    .controller('virtoCommerce.coreModule.currency.currencyDetailController', [
+        '$scope',
+        'platformWebApp.dialogService',
+        'platformWebApp.bladeNavigationService',
+        'virtoCommerce.coreModule.currency.currencyApi',
+        'platformWebApp.metaFormsService',
+        function ($scope, dialogService, bladeNavigationService, currencyApi, metaFormsService) {
         var blade = $scope.blade;
         blade.updatePermission = 'core:currency:update';
+
+        blade.metafields = blade.metafields ? blade.metafields : metaFormsService.getMetaFields('currencyDetail');
 
         $scope.saveChanges = function () {
             blade.isLoading = true;
