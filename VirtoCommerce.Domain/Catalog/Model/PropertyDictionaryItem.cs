@@ -13,7 +13,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         public ICollection<PropertyDictionaryItemLocalizedValue> LocalizedValues { get; set; }
 
         #region ICloneable members
-        public object Clone()
+        public virtual object Clone()
         {
             var result = MemberwiseClone() as PropertyDictionaryItem;
 
