@@ -15,7 +15,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public ICollection<OutlineItem> Items { get; set; }
 
-        public object Clone()
+        public virtual object Clone()
         {
             var result = MemberwiseClone() as Outline;
             result.Items = Items?.Select(x => x.Clone() as OutlineItem).ToList();
