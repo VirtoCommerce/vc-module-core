@@ -1,10 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class Category : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHasImages, IHasProperties
+    public class Category : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHasImages, IHasProperties, ICloneable
     {
         public Category()
         {
@@ -49,6 +51,24 @@ namespace VirtoCommerce.Domain.Catalog.Model
 
         #region IHasOutlines members
         public ICollection<Outline> Outlines { get; set; }
+        #endregion
+
+        #region ICloneable members
+        public virtual object Clone()
+        {
+            var result = MemberwiseClone() as Category;
+
+            result.Catalog = Catalog?.Clone() as Catalog ?? result.Catalog;
+
+            result.Properties = Properties?.Select(x => x.Clone() as Property).ToList() ?? result.Properties;
+            result.PropertyValues = PropertyValues?.Select(x => x.Clone() as PropertyValue).ToList() ?? result.PropertyValues;
+            result.Links = Links?.Select(x => x.Clone() as CategoryLink).ToList() ?? result.Links;
+            result.SeoInfos = SeoInfos?.Select(x => x.Clone() as SeoInfo).ToList() ?? result.SeoInfos;
+            result.Images = Images?.Select(x => x.Clone() as Image).ToList() ?? result.Images;
+            result.Outlines = Outlines?.Select(x => x.Clone() as Outline).ToList() ?? result.Outlines;
+
+            return result;
+        }
         #endregion
 
         public virtual void ReduceDetails(string responseGroup)

@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
-    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHaveDimension, IHasAssociations, IHasProperties, IHasImages, IHasAssets
+    public class CatalogProduct : AuditableEntity, ILinkSupport, ISeoSupport, IHasOutlines, IHaveDimension, IHasAssociations, IHasProperties, IHasImages, IHasAssets, ICloneable
     {
         /// <summary>
         /// SKU code
@@ -162,5 +163,28 @@ namespace VirtoCommerce.Domain.Catalog.Model
                 Variations = null;
             }
         }
+
+        #region ICloneable members
+        public virtual object Clone()
+        {
+            var result = MemberwiseClone() as CatalogProduct;
+
+            result.Properties = Properties?.Select(x => x.Clone() as Property).ToArray() ?? result.Properties;
+            result.PropertyValues = PropertyValues?.Select(x => x.Clone() as PropertyValue).ToArray() ?? result.PropertyValues;
+            result.Images = Images?.Select(x => x.Clone() as Image).ToArray() ?? result.Images;
+            result.Assets = Assets?.Select(x => x.Clone() as Asset).ToArray() ?? result.Assets;
+            result.Links = Links?.Select(x => x.Clone() as CategoryLink).ToArray() ?? result.Links;
+            result.Variations = Variations?.Select(x => x.Clone() as CatalogProduct).ToArray() ?? result.Variations;
+            result.SeoInfos = SeoInfos?.Select(x => x.Clone() as SeoInfo).ToArray() ?? result.SeoInfos;
+            result.Reviews = Reviews?.Select(x => x.Clone() as EditorialReview).ToArray() ?? result.Reviews;
+            result.Associations = Associations?.Select(x => x.Clone() as ProductAssociation).ToArray() ?? result.Associations;
+            result.ReferencedAssociations = ReferencedAssociations?.Select(x => x.Clone() as ProductAssociation).ToArray() ?? result.ReferencedAssociations;
+            result.Prices = Prices?.Select(x => x.Clone() as Pricing.Model.Price).ToArray() ?? result.Prices;
+            result.Inventories = Inventories?.Select(x => x.Clone() as Inventory.Model.InventoryInfo).ToArray() ?? result.Inventories;
+            result.Outlines = Outlines?.Select(x => x.Clone() as Outline).ToArray() ?? result.Outlines;
+
+            return result;
+        }
+        #endregion
     }
 }

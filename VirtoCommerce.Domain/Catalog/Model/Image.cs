@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Platform.Core.Common;
-using System.Linq;
 
 namespace VirtoCommerce.Domain.Catalog.Model
 {
@@ -30,27 +30,16 @@ namespace VirtoCommerce.Domain.Catalog.Model
         #endregion
 
         #region ICloneable members
-        public object Clone()
-        {
-            var retVal = new Image();
-            retVal.Id = Id;
-            retVal.CreatedBy = CreatedBy;
-            retVal.CreatedDate = CreatedDate;
-            retVal.ModifiedBy = ModifiedBy;
-            retVal.ModifiedDate = ModifiedDate;
 
-            retVal.Name = Name;
-            retVal.Url = Url;
-            retVal.Group = Group;
-            retVal.SortOrder = SortOrder;
-            retVal.LanguageCode = LanguageCode;
-            retVal.IsInherited = IsInherited;
-            if (SeoInfos != null)
-            {
-                retVal.SeoInfos = SeoInfos.Select(x => x.Clone()).OfType<SeoInfo>().ToList();
-            }
-            return retVal;
+        public virtual object Clone()
+        {
+            var result = MemberwiseClone() as Image;
+
+            result.SeoInfos = SeoInfos?.Select(x => x.Clone() as SeoInfo).ToList() ?? result.SeoInfos;
+
+            return result;
         }
+
         #endregion
     }
 }
