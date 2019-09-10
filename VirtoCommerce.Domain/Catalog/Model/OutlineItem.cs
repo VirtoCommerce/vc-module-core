@@ -34,7 +34,7 @@ namespace VirtoCommerce.Domain.Catalog.Model
         /// </summary>
         public bool HasVirtualParent { get; set; }
 
-        public object Clone()
+        public virtual object Clone()
         {
             var result = MemberwiseClone() as OutlineItem;
             result.SeoInfos = SeoInfos?.Select(x => x.Clone() as SeoInfo).ToList();
