@@ -1,5 +1,4 @@
-﻿using System;
-using VirtoCommerce.Domain.Commerce.Model;
+using System;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.Domain.Catalog.Model
@@ -32,11 +31,13 @@ namespace VirtoCommerce.Domain.Catalog.Model
 
         public Property Property { get; set; }
 
-        public object Clone()
+        #region ICloneable members
+
+        public virtual object Clone()
         {
-            var retVal = base.MemberwiseClone() as PropertyValidationRule;
-            retVal.Property = Property != null ? Property.Clone() as Property : null;
-            return retVal;
+            return MemberwiseClone() as PropertyValidationRule;
         }
+
+        #endregion
     }
 }
