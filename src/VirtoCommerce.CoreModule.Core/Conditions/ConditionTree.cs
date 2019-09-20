@@ -76,10 +76,18 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
 
             if (prototype.AvailableChildren != null)
             {
+                if(AvailableChildren == null)
+                {
+                    AvailableChildren = new List<IConditionTree>();
+                }
                 mergeFromPrototype(prototype.AvailableChildren, AvailableChildren);
             }
             if (prototype.Children != null)
             {
+                if (Children == null)
+                {
+                    Children = new List<IConditionTree>();
+                }
                 mergeFromPrototype(prototype.Children, Children);              
             }
         }
