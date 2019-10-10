@@ -19,16 +19,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Tools.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Tools", "src\VirtoCommerce.Tools\VirtoCommerce.Tools.csproj", "{CB743D77-677F-4055-A1AD-BC0CA6FA4C43}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{DD5F7203-B728-4167-A104-0B35A0657DE0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DD5F7203-B728-4167-A104-0B35A0657DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD5F7203-B728-4167-A104-0B35A0657DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F4F6F3A-47BC-4A80-90BF-7086A80E6335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F4F6F3A-47BC-4A80-90BF-7086A80E6335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F4F6F3A-47BC-4A80-90BF-7086A80E6335}.Release|Any CPU.ActiveCfg = Release|Any CPU
