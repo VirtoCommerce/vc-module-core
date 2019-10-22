@@ -14,13 +14,12 @@ using System.Threading.Tasks;
 using Hangfire;
 using Hangfire.Common;
 using Microsoft.Practices.ObjectBuilder2;
-using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Core.Web.Jobs;
 
-namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
+namespace VirtoCommerce.CoreModule.Data.Indexing.BackgroundJobs
 {
     public sealed class IndexingJobs
     {
@@ -175,6 +174,33 @@ namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
                     break;
                 default:
                     throw new ArgumentException($@"Unknown priority: {priority}", nameof(priority));
+            }
+        }
+
+        public static void EnqueueIndexAndDeleteDocuments(IndexEntry[] indexEntries, string priority = JobPriority.Normal)
+        {
+            var groupIndexIds = indexEntries.Where(x => (x.EntryState == EntryState.Modified || x.EntryState == EntryState.Added) && x.Id != null)
+                                       .GroupBy(y => y.Type).ToArray();
+
+            if (!groupIndexIds.IsNullOrEmpty())
+            {
+                foreach (var item in groupIndexIds)
+                {
+                    EnqueueIndexDocuments(item.Key, item.Select(x => x.Id).Distinct().ToArray());
+                }
+
+            }
+
+            var groupDeleteIds = indexEntries.Where(x => x.EntryState == EntryState.Deleted && x.Id != null)
+                                       .GroupBy(y => y.Type).ToArray();
+
+            if (!groupDeleteIds.IsNullOrEmpty())
+            {
+                foreach (var item in groupDeleteIds)
+                {
+                    EnqueueDeleteDocuments(item.Key, item.Select(x => x.Id).Distinct().ToArray());
+                }
+
             }
         }
 
