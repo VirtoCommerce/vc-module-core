@@ -41,7 +41,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 
         [HttpGet]
         [Route("seoinfos/duplicates")]
-        public async Task<ActionResult<SeoInfo[]>> GetSeoDuplicates(string objectId, string objectType)
+        public async Task<ActionResult<SeoInfo[]>> GetSeoDuplicates([FromQuery] string objectId, [FromQuery] string objectType)
         {
             var result = await _seoDuplicateDetector.DetectSeoDuplicatesAsync(new TenantIdentity(objectId, objectType));
 
