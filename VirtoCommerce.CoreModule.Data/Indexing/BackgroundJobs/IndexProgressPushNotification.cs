@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Newtonsoft.Json;
 using VirtoCommerce.Platform.Core.PushNotifications;
 
-namespace VirtoCommerce.CoreModule.Web.Model.PushNotifcations
+namespace VirtoCommerce.CoreModule.Data.Indexing.BackgroundJobs
 {
     public class IndexProgressPushNotification : PushNotification
     {
