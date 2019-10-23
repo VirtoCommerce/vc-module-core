@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -15,7 +15,6 @@ using VirtoCommerce.Domain.Store.Services;
 using VirtoCommerce.Platform.Core.Web.Security;
 using coreModel = VirtoCommerce.Domain.Commerce.Model;
 using coreTaxModel = VirtoCommerce.Domain.Tax.Model;
-using webModel = VirtoCommerce.CoreModule.Web.Model;
 
 namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 {

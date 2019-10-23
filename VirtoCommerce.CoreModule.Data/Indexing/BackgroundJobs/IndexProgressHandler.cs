@@ -1,13 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Common.Logging;
-using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.PushNotifications;
 
-namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
+namespace VirtoCommerce.CoreModule.Data.Indexing.BackgroundJobs
 {
     public class IndexProgressHandler
     {

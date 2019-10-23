@@ -1,11 +1,10 @@
 using System;
 using System.Threading;
 using Hangfire;
-using VirtoCommerce.CoreModule.Data.Indexing;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.Web.Jobs;
 
-namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
+namespace VirtoCommerce.CoreModule.Data.Indexing.BackgroundJobs
 {
     /// <summary>
     /// Scales out indexation work through Hangfire.
