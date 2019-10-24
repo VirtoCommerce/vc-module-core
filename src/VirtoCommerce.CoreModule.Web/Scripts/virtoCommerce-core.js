@@ -7,8 +7,6 @@ if (AppDependencies != undefined) {
 angular.module(moduleName, [
     'virtoCommerce.coreModule.packageType',
     'virtoCommerce.coreModule.currency',
-    'virtoCommerce.coreModule.fulfillment',
-    'virtoCommerce.coreModule.searchIndex',
     'virtoCommerce.coreModule.seo',
     'virtoCommerce.coreModule.common'
 ])
