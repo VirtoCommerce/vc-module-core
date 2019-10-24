@@ -2,7 +2,7 @@ using System;
 using Hangfire;
 using VirtoCommerce.Platform.Core.Common;
 
-namespace VirtoCommerce.CoreModule.Data.Indexing.BackgroundJobs
+namespace VirtoCommerce.CoreModule.Web.BackgroundJobs
 {
     /// <summary>
     /// Implements cancellation abstraction for the job.
