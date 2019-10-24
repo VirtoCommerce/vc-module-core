@@ -1,8 +1,9 @@
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using VirtoCommerce.CoreModule.Data.Indexing.BackgroundJobs;
+using VirtoCommerce.CoreModule.Web.BackgroundJobs;
+using VirtoCommerce.CoreModule.Web.Model.PushNotifcations;
 using VirtoCommerce.CoreModule.Web.Security;
 using VirtoCommerce.Domain.Search;
 using VirtoCommerce.Platform.Core.PushNotifications;
