@@ -20,7 +20,7 @@
         <group>commerce</group>
     </groups>
     <projectUrl>https://virtocommerce.com/apps/extensions/virto-core-module</projectUrl>
-    <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/VirtoCommerce/vc-module-core/release/3.0.0/src/VirtoCommerce.CoreModule.Web/Content/logoVC.png</iconUrl>
     <releaseNotes></releaseNotes>
     <copyright>Copyright © 2011-2019 Virto Commerce. All rights reserved</copyright>
     <tags>security core</tags>
