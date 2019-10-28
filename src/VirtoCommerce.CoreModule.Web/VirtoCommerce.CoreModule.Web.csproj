@@ -41,5 +41,4 @@
       <ProjectReference Include="..\VirtoCommerce.CoreModule.Data\VirtoCommerce.CoreModule.Data.csproj" />
     </ItemGroup>
 
-
 </Project>
