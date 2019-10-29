@@ -17,10 +17,14 @@
 
     <ItemGroup>
         <Compile Remove="bower_components\**" />
+        <Compile Remove="dist\**" />
         <Compile Remove="node_modules\**" />
+        <Content Remove="dist\**" />
         <EmbeddedResource Remove="bower_components\**" />
+        <EmbeddedResource Remove="dist\**" />
         <EmbeddedResource Remove="node_modules\**" />
         <None Remove="bower_components\**" />
+        <None Remove="dist\**" />
         <None Remove="node_modules\**" />      
     </ItemGroup>
 
@@ -41,6 +45,10 @@
       <ProjectReference Include="..\..\..\..\vc-platform\src\VirtoCommerce.Platform.Data\VirtoCommerce.Platform.Data.csproj" />
       <ProjectReference Include="..\VirtoCommerce.CoreModule.Core\VirtoCommerce.CoreModule.Core.csproj" />
       <ProjectReference Include="..\VirtoCommerce.CoreModule.Data\VirtoCommerce.CoreModule.Data.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Properties\" />
     </ItemGroup>
 
 </Project>
