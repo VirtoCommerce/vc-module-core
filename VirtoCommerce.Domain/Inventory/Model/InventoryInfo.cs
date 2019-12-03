@@ -29,6 +29,7 @@ namespace VirtoCommerce.Domain.Inventory.Model
         public DateTime? PreorderAvailabilityDate { get; set; }
         public DateTime? BackorderAvailabilityDate { get; set; }
         public InventoryStatus Status { get; set; }
+        public string FulfillmentCenterName { get; set; }
 
 
         public virtual bool IsAvailableOn(DateTime date)
