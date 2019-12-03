@@ -176,6 +176,7 @@
     <Compile Include="Customer\Model\Vendor.cs" />
     <Compile Include="Customer\Services\IMemberSearchService.cs" />
     <Compile Include="Customer\Services\IMemberService.cs" />
+    <Compile Include="Inventory\Model\InventoryResponseGroup.cs" />
     <Compile Include="Inventory\Model\Search\FulfillmentCenterSearchCriteria.cs" />
     <Compile Include="Inventory\Model\InventoryInfo.cs" />
     <Compile Include="Inventory\Model\InventoryStatus.cs" />
