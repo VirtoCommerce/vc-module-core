@@ -2,8 +2,10 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.CoreModule.Core;
+using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Package;
 using VirtoCommerce.CoreModule.Core.Seo;
@@ -78,6 +80,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPost]
         [Route("currencies")]
         [Authorize(ModuleConstants.Security.Permissions.CurrencyCreate)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         public async Task<ActionResult> CreateCurrency([FromBody]Currency currency)
         {
             await _currencyService.SaveChangesAsync(new[] { currency });
@@ -91,6 +94,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPut]
         [Route("currencies")]
         [Authorize(ModuleConstants.Security.Permissions.CurrencyUpdate)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         public async Task<ActionResult> UpdateCurrency([FromBody]Currency currency)
         {
             await _currencyService.SaveChangesAsync(new[] { currency });
@@ -105,6 +109,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpDelete]
         [Route("currencies")]
         [Authorize(ModuleConstants.Security.Permissions.CurrencyDelete)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         public async Task<ActionResult> DeleteCurrencies([FromQuery] string[] codes)
         {
             await _currencyService.DeleteCurrenciesAsync(codes);
@@ -130,6 +135,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPut]
         [Route("packageTypes")]
         [Authorize(ModuleConstants.Security.Permissions.PackageTypeUpdate)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         public async Task<ActionResult> UpdatePackageType([FromBody]PackageType packageType)
         {
             await _packageTypesService.SaveChangesAsync(new[] { packageType });
@@ -143,6 +149,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpPost]
         [Route("packageTypes")]
         [Authorize(ModuleConstants.Security.Permissions.PackageTypeCreate)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         public async Task<ActionResult> CreatePackageType([FromBody]PackageType packageType)
         {
             await _packageTypesService.SaveChangesAsync(new[] { packageType });
@@ -156,9 +163,22 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [HttpDelete]
         [Route("packageTypes")]
         [Authorize(ModuleConstants.Security.Permissions.PackageTypeDelete)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
         public async Task<ActionResult> DeletePackageTypes([FromQuery] string[] ids)
         {
             await _packageTypesService.DeletePackageTypesAsync(ids);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Does nothing. Just a way to expose Address thru Swagger.
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Produces(typeof(Address))]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        public ActionResult ExposeAddress()
+        {
             return NoContent();
         }
     }
