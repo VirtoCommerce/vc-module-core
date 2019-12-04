@@ -171,15 +171,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         }
 
         /// <summary>
-        /// Does nothing. Just a way to expose Address thru Swagger.
+        /// Validate address (reserved for future)
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Produces(typeof(Address))]
-        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public ActionResult ExposeAddress()
+        public async Task<ActionResult<PackageType[]>> ValidateAddress([FromBody] Address address)
         {
-            return NoContent();
+            return Ok(true);
         }
     }
 }
