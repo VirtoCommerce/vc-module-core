@@ -171,13 +171,13 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         }
 
         /// <summary>
-        /// Validate address (reserved for future)
+        /// Validate address (reserved for future) and also required for expose Address in OpenAPI swagger docs
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<PackageType[]>> ValidateAddress([FromBody] Address address)
+        public ActionResult<bool> ValidateAddress([FromBody] Address address)
         {
-            return Ok(true);
+            return Ok(address != null);
         }
     }
 }
