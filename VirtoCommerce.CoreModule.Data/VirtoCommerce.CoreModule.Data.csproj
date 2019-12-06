@@ -128,6 +128,10 @@
     <Compile Include="Migrations\201804191411436_NewColumnsFulfillementCenter.Designer.cs">
       <DependentUpon>201804191411436_NewColumnsFulfillementCenter.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912061319556_AddSequenceRowVersion.cs" />
+    <Compile Include="Migrations\201912061319556_AddSequenceRowVersion.Designer.cs">
+      <DependentUpon>201912061319556_AddSequenceRowVersion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Currency.cs" />
     <Compile Include="Model\FulfillmentCenter.cs" />
@@ -213,6 +217,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912061319556_AddSequenceRowVersion.resx">
+      <DependentUpon>201912061319556_AddSequenceRowVersion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Notifications\Templates\EmailConfirmationNotificationTemplateBody.html" />
     <EmbeddedResource Include="Notifications\Templates\EmailConfirmationNotificationTemplateSubject.html" />
     <EmbeddedResource Include="Notifications\Templates\RegistrationInvitationNotificationTemplateBody.html" />
