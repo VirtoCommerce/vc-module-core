@@ -14,6 +14,7 @@ namespace VirtoCommerce.Domain.Inventory.Model
         #endregion
 
         public string FulfillmentCenterId { get; set; }
+        public string FulfillmentCenterName { get; set; }
         public FulfillmentCenter FulfillmentCenter { get; set; }
 
         public string ProductId { get; set; }
