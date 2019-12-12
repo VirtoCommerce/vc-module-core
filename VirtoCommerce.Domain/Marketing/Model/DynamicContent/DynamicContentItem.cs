@@ -11,6 +11,8 @@ namespace VirtoCommerce.Domain.Marketing.Model
         public string ContentType { get; set; }
         public string ImageUrl { get; set; }
         public int Priority { get; set; }
+        public string Outline => Folder?.Outline;
+        public string Path => Folder?.Path;
 
         #region IHasFolder Members
         public string FolderId { get; set; }
