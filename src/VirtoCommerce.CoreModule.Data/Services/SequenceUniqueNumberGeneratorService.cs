@@ -48,8 +48,9 @@ namespace VirtoCommerce.CoreModule.Data.Services
                             _inMemorySequences[numberTemplate].Pregenerate(startCounter, endCounter, numberTemplate);
                             break;
                         }
-                        catch (DbUpdateException)
+                        catch (Exception)
                         {
+                            // Catching base Exception as any db exception thrown as FaultException.
                         }
                     }
                 }
@@ -102,7 +103,6 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 }
 
                 sequence.Value = endCounter;
-                //sequence.LastModified = DateTime.UtcNow;
                 repository.UnitOfWork.Commit();
             }
         }
@@ -116,7 +116,6 @@ namespace VirtoCommerce.CoreModule.Data.Services
             public InMemorySequence(string type)
             {
                 _type = type;
-                _sequence = new Stack<string>();
             }
 
             public string ObjectType
