@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <Description>Common the e-commerce domain functionality</Description>
-        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>     
         <noWarn>1591</noWarn>
         <IsPackable>True</IsPackable>
