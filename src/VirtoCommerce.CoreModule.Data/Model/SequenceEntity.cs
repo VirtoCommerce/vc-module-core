@@ -13,5 +13,8 @@ namespace VirtoCommerce.CoreModule.Data.Model
         public int Value { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }
