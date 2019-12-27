@@ -64,7 +64,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             //Update Sequences in database
             using (var repository = _repositoryFactory())
             {
-                var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType.Equals(objectType, StringComparison.OrdinalIgnoreCase));
+                var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == objectType);
                 var originalModifiedDate = sequence?.ModifiedDate;
 
                 if (sequence != null)
@@ -82,7 +82,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 //TODO will check it
                 //Refresh data to make sure we have latest value in case another transaction was locked
                 //repository.Refresh(repository.Sequences);
-                sequence = repository.Sequences.Single(s => s.ObjectType.Equals(objectType, StringComparison.OrdinalIgnoreCase));
+                sequence = repository.Sequences.Single(s => s.ObjectType == objectType);
                 startCounter = sequence.Value;
 
                 //Sequence in database has expired?
