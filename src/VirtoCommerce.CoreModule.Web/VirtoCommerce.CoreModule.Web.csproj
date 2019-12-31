@@ -4,6 +4,7 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>      
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
+        <IsPackable>False</IsPackable>
         <noWarn>1591</noWarn>
         <OutputType>Library</OutputType>
     </PropertyGroup>
