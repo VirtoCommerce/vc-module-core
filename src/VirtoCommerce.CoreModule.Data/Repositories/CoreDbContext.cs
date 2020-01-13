@@ -23,11 +23,11 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
             modelBuilder.Entity<SequenceEntity>().ToTable("Sequence").HasKey(x => x.ObjectType);
 
             modelBuilder.Entity<CurrencyEntity>().ToTable("Currency").HasKey(x => x.Id);
-            modelBuilder.Entity<CurrencyEntity>().Property(x => x.Id).HasMaxLength(128);
+            modelBuilder.Entity<CurrencyEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
             modelBuilder.Entity<CurrencyEntity>().HasIndex(x => x.Code).HasName("IX_Code");
 
             modelBuilder.Entity<PackageTypeEntity>().ToTable("PackageType").HasKey(x => x.Id);
-            modelBuilder.Entity<PackageTypeEntity>().Property(x => x.Id).HasMaxLength(128);
+            modelBuilder.Entity<PackageTypeEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
 
             base.OnModelCreating(modelBuilder);
         }
