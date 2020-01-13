@@ -13,7 +13,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.0.0-rc2-0134" />
+      <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.0.0-rc2-0138" />
     </ItemGroup>
 
 </Project>
