@@ -81,8 +81,10 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		public ProductPromoEntry PromoEntry { get; set; }
 
 
-
-	
-	}
+        /// <summary>
+        /// True if cart contains a PaymentPlan
+        /// </summary>
+        public bool IsRecurring { get; set; }
+    }
 	
 }
