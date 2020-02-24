@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc;
 using VirtoCommerce.CoreModule.Core;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Currency;
+using VirtoCommerce.CoreModule.Core.NumberGenerators;
 using VirtoCommerce.CoreModule.Core.Package;
 using VirtoCommerce.CoreModule.Core.Seo;
+using VirtoCommerce.CoreModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
+using static VirtoCommerce.Platform.Core.PlatformConstants;
 
 namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 {
@@ -20,12 +23,17 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         private readonly IPackageTypesService _packageTypesService;
         private readonly ISeoDuplicatesDetector _seoDuplicateDetector;
         private readonly CompositeSeoBySlugResolver _seoBySlugResolverDecorator;
-        public CommerceController(ICurrencyService currencyService, IPackageTypesService packageTypesService, ISeoDuplicatesDetector seoDuplicateDetector, CompositeSeoBySlugResolver seoBySlugResolverDecorator)
+        private readonly INumberGeneratorService _numberGeneratorService;
+        private readonly INumberGeneratorRegistrar _numberGeneratorRegistrar;
+
+        public CommerceController(ICurrencyService currencyService, IPackageTypesService packageTypesService, ISeoDuplicatesDetector seoDuplicateDetector, CompositeSeoBySlugResolver seoBySlugResolverDecorator, INumberGeneratorService numberGeneratorService, INumberGeneratorRegistrar numberGeneratorRegistrar)
         {
             _currencyService = currencyService;
             _packageTypesService = packageTypesService;
             _seoDuplicateDetector = seoDuplicateDetector;
             _seoBySlugResolverDecorator = seoBySlugResolverDecorator;
+            _numberGeneratorService = numberGeneratorService;
+            _numberGeneratorRegistrar = numberGeneratorRegistrar;
         }
 
 
@@ -167,6 +175,45 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         public async Task<ActionResult> DeletePackageTypes([FromQuery] string[] ids)
         {
             await _packageTypesService.DeletePackageTypesAsync(ids);
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Return all number generators available for the tenant
+        /// </summary>
+        /// <param name="tenantId">The tenant to get the data for</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("numberGenerators")]
+        public async Task<ActionResult<NumberGeneratorDescriptor[]>> GetNumberGenerators(string tenantId)
+        {
+            // registered in code
+            var registeredItems = _numberGeneratorRegistrar.GetDescriptors().ToDictionary(x => x.TargetType);
+
+            // latest data from DB
+            var createdItems = await _numberGeneratorService.GetByTenantIdAsync(tenantId);
+            foreach (var createdItem in createdItems)
+            {
+                if (registeredItems.ContainsKey(createdItem.TargetType))
+                {
+                    registeredItems[createdItem.TargetType] = createdItem;
+                }
+            }
+
+            return Ok(registeredItems.Values);
+        }
+
+        /// <summary>
+        ///  Update existing or create a new NumberGeneratorDescriptor
+        /// </summary>
+        [HttpPut]
+        [Route("numberGenerators")]
+        [Authorize(Security.Permissions.SettingUpdate)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> UpdateNumberGenerator([FromBody]NumberGeneratorDescriptor item)
+        {
+            await _numberGeneratorService.SaveChangesAsync(new[] { item });
+
             return NoContent();
         }
 

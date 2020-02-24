@@ -11,12 +11,12 @@ using Microsoft.Extensions.Options;
 using VirtoCommerce.CoreModule.Core;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Conditions;
-using VirtoCommerce.CoreModule.Core.Conditions.Browse;
-using VirtoCommerce.CoreModule.Core.Conditions.GeoConditions;
 using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Package;
 using VirtoCommerce.CoreModule.Core.Seo;
+using VirtoCommerce.CoreModule.Core.Services;
 using VirtoCommerce.CoreModule.Data.Currency;
+using VirtoCommerce.CoreModule.Data.NumberGenerators;
 using VirtoCommerce.CoreModule.Data.Package;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.CoreModule.Data.Seo;
@@ -46,10 +46,13 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<Func<ICoreRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<ICoreRepository>());
             serviceCollection.AddTransient<ICurrencyService, CurrencyService>();
             serviceCollection.AddTransient<IPackageTypesService, PackageTypesService>();
-            //Can be overrided
+            //Can be overridden
             serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
             serviceCollection.AddTransient<CoreExportImport>();
             serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
+            serviceCollection.AddTransient<IUniqueNumberGenerator2, SqlSequenceNumberGenerator>();
+            serviceCollection.AddTransient<INumberGeneratorService, NumberGeneratorService>();
+            serviceCollection.AddTransient<INumberGeneratorRegistrar, NumberGeneratorRegistrar>();
 
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
         }
@@ -66,7 +69,7 @@ namespace VirtoCommerce.CoreModule.Web
             var mvcJsonOptions = appBuilder.ApplicationServices.GetService<IOptions<MvcNewtonsoftJsonOptions>>();
             mvcJsonOptions.Value.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
             mvcJsonOptions.Value.SerializerSettings.Converters.Add(new ConditionJsonConverter());
-            
+
             using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<CoreDbContext>();
