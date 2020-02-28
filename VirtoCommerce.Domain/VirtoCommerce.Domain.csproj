@@ -213,6 +213,7 @@
     <Compile Include="Marketing\Model\Promotions\Rewards\GiftReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\PaymentReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\PromotionReward.cs" />
+    <Compile Include="Marketing\Model\Promotions\Rewards\CatalogRecurringItemAmountReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\RewardAmountType.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\ShipmentReward.cs" />
     <Compile Include="Marketing\Model\Promotions\Rewards\SpecialOfferReward.cs" />
