@@ -24,6 +24,11 @@ namespace VirtoCommerce.Domain.Marketing.Model
 		public object Owner { get; set; }
 		public string Outline { get; set; }
 
+		/// <summary>
+		/// True if product or line item contains a PaymentPlan
+		/// </summary>
+		public bool IsRecurring { get; set; }
+
 		public ICollection<ProductPromoEntry> Variations { get; set; }
 
 		public Dictionary<string, string> Attributes { get; set; }
