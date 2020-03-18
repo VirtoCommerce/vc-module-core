@@ -38,5 +38,10 @@ namespace VirtoCommerce.Domain.Catalog.Model.Search
         /// Gets or sets the search provider specific raw search query; all other search criteria will be ignored
         /// </summary>
         public string RawQuery { get; set; }
+
+        /// <summary>
+        /// Enable a search result sorting by relevance. If sortInfo is empty default sorting value will be empty too. 
+        /// </summary>
+        public bool UseRelevanceSorting { get; set; }
     }
 }
