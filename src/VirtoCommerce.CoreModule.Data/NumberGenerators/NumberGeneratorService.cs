@@ -56,7 +56,8 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
                 {
                     foreach (var item in items)
                     {
-                        var originalEntity = repository.NumberGenerators.FirstOrDefault(x => x.TargetType.EqualsInvariant(item.TargetType) && x.TenantId.EqualsInvariant(item.TenantId));
+
+                        var originalEntity = repository.NumberGenerators.FirstOrDefault(x => x.TargetType == item.TargetType && x.TenantId == item.TenantId);
 
                         var modifiedEntity = AbstractTypeFactory<NumberGeneratorDescriptorEntity>.TryCreateInstance().FromModel(item);
 
