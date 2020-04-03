@@ -20,7 +20,7 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
 
             if (existDescriptor != null)
             {
-                throw new ArgumentException($"Descriptor '{descriptor.Template}', with TentantId: {descriptor.TenantId}, TargetType: {descriptor.TargetType} already exist");
+                throw new ArgumentException($"Descriptor '{descriptor.Template}' with TentantId: '{descriptor.TenantId}', TargetType: '{descriptor.TargetType}' already exists.");
             }
 
             await _numberGeneratorService.SaveChangesAsync(new[] { descriptor });
@@ -33,10 +33,9 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
 
             if (existDescriptor == null)
             {
-                throw new ArgumentException($"Descriptor '{descriptor.Template}', with TentantId: {descriptor.TenantId}, TargetType: {descriptor.TargetType} not exist yet");
+                throw new ArgumentException($"Descriptor '{descriptor.Template}' with TentantId: '{descriptor.TenantId}', TargetType: {descriptor.TargetType} is not registered yet.");
             }
 
-            descriptor.Id = existDescriptor.Id;
             await _numberGeneratorService.SaveChangesAsync(new[] { descriptor });
 
         }
