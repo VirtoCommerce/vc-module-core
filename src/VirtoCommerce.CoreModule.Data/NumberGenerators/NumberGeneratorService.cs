@@ -65,12 +65,12 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
                         {
                             repository.TrackModifiedAsAddedForNewChildEntities(originalEntity);
                             modifiedEntity?.Patch(originalEntity);
-                            repository.ResetSequence(item.Template, false, item.Start, item.Increment);
+                            repository.CreateOrUpdateSequence(item.Template, item.Start, item.Increment);
                         }
                         else
                         {
                             repository.Add(modifiedEntity);
-                            repository.ResetSequence(item.Template, false, item.Start, item.Increment);
+                            repository.CreateOrUpdateSequence(item.Template, item.Start, item.Increment);
                         }
                     }
 

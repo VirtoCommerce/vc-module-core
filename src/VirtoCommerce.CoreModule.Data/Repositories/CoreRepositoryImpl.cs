@@ -1,7 +1,7 @@
+using System;
 using System.Linq;
 using VirtoCommerce.CoreModule.Data.Currency;
 using VirtoCommerce.CoreModule.Data.Model;
-using VirtoCommerce.CoreModule.Data.NumberGenerators;
 using VirtoCommerce.CoreModule.Data.Package;
 using VirtoCommerce.Platform.Core.Domain;
 using VirtoCommerce.Platform.Data.Infrastructure;
@@ -22,14 +22,24 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
         public IQueryable<CurrencyEntity> Currencies => DbContext.Set<CurrencyEntity>();
         public IQueryable<PackageTypeEntity> PackageTypes => DbContext.Set<PackageTypeEntity>();
 
-        public int GetNextSequenceValue(string name)
+        public long GetNextSequenceValue(string name)
         {
             return DbContext.GetNextSequenceValue(name);
         }
 
-        public void ResetSequence(string name, bool doResetStartWith, int startWith = 1, int incrementBy = 1)
+        public void CreateOrUpdateSequence(string name, long startWith = 1, int incrementBy = 1)
         {
-            DbContext.ResetSequence(name, doResetStartWith, startWith, incrementBy);
+            DbContext.CreateOrUpdateSequence(name, startWith, incrementBy);
+        }
+
+        public void ResetSequenceForDescriptor(string id, DateTime? desiredResetDate)
+        {
+            DbContext.ResetSequenceForDescriptor(id, desiredResetDate);
+        }
+
+        public void DeleteSequence(string name)
+        {
+            DbContext.DeleteSequence(name);
         }
 
         #endregion
