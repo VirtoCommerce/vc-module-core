@@ -1,12 +1,12 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using VirtoCommerce.CoreModule.Core.NumberGenerators;
 using VirtoCommerce.Platform.Core.Common;
 
-namespace VirtoCommerce.CoreModule.Data.NumberGenerators
+namespace VirtoCommerce.CoreModule.Data.Model
 {
     public class NumberGeneratorDescriptorEntity : AuditableEntity
     {
-        [Required]
         [StringLength(64)]
         public string TargetType { get; set; }
 
@@ -14,12 +14,12 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
         [StringLength(64)]
         public string Template { get; set; }
 
-        [Required]
         [StringLength(128)]
         public string TenantId { get; set; }
         public bool IsActive { get; set; }
         public int Start { get; set; }
         public int Increment { get; set; }
+        public DateTime LastResetDate { get; set; }
 
         public virtual NumberGeneratorDescriptor ToModel(NumberGeneratorDescriptor item)
         {
@@ -35,6 +35,7 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
             item.IsActive = IsActive;
             item.Start = Start;
             item.Increment = Increment;
+            item.LastResetDate = LastResetDate;
             return item;
         }
 
@@ -52,6 +53,7 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
             IsActive = item.IsActive;
             Start = item.Start;
             Increment = item.Increment;
+            LastResetDate = item.LastResetDate;
 
             return this;
         }
@@ -62,6 +64,7 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
             item.IsActive = IsActive;
             item.Start = Start;
             item.Increment = Increment;
+            item.LastResetDate = LastResetDate;
         }
     }
 }

@@ -184,23 +184,12 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// <param name="tenantId">The tenant to get the data for</param>
         /// <returns></returns>
         [HttpGet]
-        [Route("numberGenerators")]
-        public async Task<ActionResult<NumberGeneratorDescriptor[]>> GetNumberGenerators(string tenantId)
+        [Route("numberGenerators/{tenantId?}")]
+        public async Task<ActionResult<NumberGeneratorDescriptor[]>> GetNumberGenerators([FromRoute] string tenantId)
         {
-            // registered in code
-            var registeredItems = _numberGeneratorRegistrar.GetDescriptors().ToDictionary(x => x.TargetType);
+            var result = await _numberGeneratorService.GetByTenantIdAsync(tenantId);
 
-            // latest data from DB
-            var createdItems = await _numberGeneratorService.GetByTenantIdAsync(tenantId);
-            foreach (var createdItem in createdItems)
-            {
-                if (registeredItems.ContainsKey(createdItem.TargetType))
-                {
-                    registeredItems[createdItem.TargetType] = createdItem;
-                }
-            }
-
-            return Ok(registeredItems.Values);
+            return Ok(result);
         }
 
         /// <summary>

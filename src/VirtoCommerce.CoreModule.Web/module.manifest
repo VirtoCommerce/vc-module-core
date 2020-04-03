@@ -2,7 +2,7 @@
 <module>
     <id>VirtoCommerce.Core</id>
     <version>3.0.0</version>
-    <version-tag>rc.4</version-tag>
+    <version-tag>rc.5</version-tag>
     <platformVersion>3.0.0</platformVersion>
     <title>Commerce core module</title>
     <description>Common e-commerce domain functionality</description>
@@ -16,7 +16,7 @@
     <owners>
         <owner>Virto Commerce</owner>
     </owners>
-	<groups>
+    <groups>
         <group>commerce</group>
     </groups>
     <projectUrl>https://virtocommerce.com/apps/extensions/virto-core-module</projectUrl>

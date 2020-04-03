@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using VirtoCommerce.CoreModule.Core.NumberGenerators;
 using VirtoCommerce.CoreModule.Core.Services;
+using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.Platform.Core.Caching;
 using VirtoCommerce.Platform.Core.Common;
@@ -49,15 +50,14 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
         {
             if (!items.IsNullOrEmpty())
             {
-                ValidateItems(items);
+                await ValidateItems(items);
 
                 using (var repository = _repositoryFactory())
                 {
-                    var newIds = items.Select(x => x.Id).ToArray();
-                    var existingEntities = await repository.NumberGenerators.Where(x => newIds.Contains(x.Id)).ToArrayAsync();
                     foreach (var item in items)
                     {
-                        var originalEntity = existingEntities.FirstOrDefault(x => x.Id.EqualsInvariant(item.Id));
+                        var originalEntity = repository.NumberGenerators.FirstOrDefault(x => x.TargetType.EqualsInvariant(item.TargetType) && x.TenantId.EqualsInvariant(item.TenantId));
+
                         var modifiedEntity = AbstractTypeFactory<NumberGeneratorDescriptorEntity>.TryCreateInstance().FromModel(item);
 
                         if (originalEntity != null)
@@ -80,12 +80,12 @@ namespace VirtoCommerce.CoreModule.Data.NumberGenerators
             }
         }
 
-        private void ValidateItems(NumberGeneratorDescriptor[] items)
+        private async Task ValidateItems(NumberGeneratorDescriptor[] items)
         {
             var validator = AbstractTypeFactory<NumberGeneratorDescriptorValidator>.TryCreateInstance();
             foreach (var item in items)
             {
-                validator.ValidateAndThrow(item);
+                await validator.ValidateAndThrowAsync(item);
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.NumberGenerators
@@ -10,5 +11,6 @@ namespace VirtoCommerce.CoreModule.Core.NumberGenerators
         public bool IsActive { get; set; }
         public int Start { get; set; }
         public int Increment { get; set; }
+        public DateTime LastResetDate { get; set; }
     }
 }

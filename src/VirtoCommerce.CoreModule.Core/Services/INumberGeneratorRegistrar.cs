@@ -1,12 +1,12 @@
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using VirtoCommerce.CoreModule.Core.NumberGenerators;
 
 namespace VirtoCommerce.CoreModule.Core.Services
 {
     public interface INumberGeneratorRegistrar
     {
-        //Dictionary<string, NumberGeneratorDescriptor> GetDescriptorsDictionary();
-        List<NumberGeneratorDescriptor> GetDescriptors();
-        void RegisterDescriptor(string operationType, NumberGeneratorDescriptor descriptor);
+        Task RegisterType(NumberGeneratorDescriptor descriptor);
+
+        Task OverrideType(NumberGeneratorDescriptor descriptor);
     }
 }

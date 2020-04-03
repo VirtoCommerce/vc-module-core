@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Services;
@@ -26,16 +25,16 @@ namespace VirtoCommerce.CoreModule.Data.Services
             if (descriptor == null)
             {
                 // get from INumberGeneratorRegistrar, save to db, and create sequence
-                descriptor = _numberGeneratorRegistrar.GetDescriptors().FirstOrDefault(x => x.TargetType == targetType);
+                descriptor = await _numberGeneratorService.GetAsync(tenantId, targetType);
                 if (descriptor == null)
                 {
                     throw new InvalidOperationException($"OperationType {targetType} not registered in INumberGeneratorRegistrar");
                 }
-                else
-                {
-                    descriptor.TenantId = tenantId;
-                    await _numberGeneratorService.SaveChangesAsync(new[] { descriptor });
-                }
+                //else
+                //{
+                //    descriptor.TenantId = tenantId;
+                //    await _numberGeneratorService.SaveChangesAsync(new[] { descriptor });
+                //}
             }
 
             using var repository = _repositoryFactory();
