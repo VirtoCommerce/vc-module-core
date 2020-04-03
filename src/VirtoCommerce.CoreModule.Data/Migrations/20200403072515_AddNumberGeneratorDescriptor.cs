@@ -22,7 +22,7 @@ namespace VirtoCommerce.CoreModule.Data.Migrations
                     IsActive = table.Column<bool>(nullable: false),
                     Start = table.Column<int>(nullable: false),
                     Increment = table.Column<int>(nullable: false),
-                    LastResetDate = table.Column<DateTime>(nullable: false)
+                    LastResetDate = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -92,7 +92,7 @@ namespace VirtoCommerce.CoreModule.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("LastResetDate")
+                    b.Property<DateTime?>("LastResetDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ModifiedBy")

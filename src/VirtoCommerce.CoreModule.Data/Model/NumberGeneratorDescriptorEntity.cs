@@ -19,7 +19,7 @@ namespace VirtoCommerce.CoreModule.Data.Model
         public bool IsActive { get; set; }
         public int Start { get; set; }
         public int Increment { get; set; }
-        public DateTime LastResetDate { get; set; }
+        public DateTime? LastResetDate { get; set; }
 
         public virtual NumberGeneratorDescriptor ToModel(NumberGeneratorDescriptor item)
         {
