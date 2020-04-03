@@ -52,7 +52,7 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
             serviceCollection.AddTransient<IUniqueNumberGenerator2, SqlSequenceNumberGenerator>();
             serviceCollection.AddTransient<INumberGeneratorService, NumberGeneratorService>();
-            serviceCollection.AddTransient<INumberGeneratorRegistrar, NumberGeneratorRegistrar>();
+            serviceCollection.AddSingleton<INumberGeneratorRegistrar, NumberGeneratorRegistrar>();
 
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
         }
