@@ -3,7 +3,7 @@ angular.module('virtoCommerce.coreModule.common')
     var blade = $scope.blade;
 
     blade.addressTypes = ['Billing', 'Shipping', 'BillingAndShipping'];
-    blade.metaFields = metaFormsService.getMetaFields('addressDetails');
+    blade.metaFields = blade.metaFields && blade.metaFields.length ? blade.metaFields : metaFormsService.getMetaFields('addressDetails');
     blade.origEntity = blade.currentEntity;
     blade.currentEntity = angular.copy(blade.origEntity);
     blade.countries = countries.query();
