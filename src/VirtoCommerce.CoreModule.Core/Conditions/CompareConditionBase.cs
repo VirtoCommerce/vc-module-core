@@ -52,5 +52,13 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             var decimalRightSecondOperand = Convert.ToDecimal(rightSecondOperand);
             return UseCompareCondition(decimalLeftOperand, decimalRightOperand, decimalRightSecondOperand);
         }
+
+        public virtual bool UseCompareCondition(double leftOperand, double rightOperand, double rightSecondOperand)
+        {
+            var decimalLeftOperand = Convert.ToDecimal(leftOperand);
+            var decimalRightOperand = Convert.ToDecimal(rightOperand);
+            var decimalRightSecondOperand = Convert.ToDecimal(rightSecondOperand);
+            return UseCompareCondition(decimalLeftOperand, decimalRightOperand, decimalRightSecondOperand);
+        }
     }
 }
