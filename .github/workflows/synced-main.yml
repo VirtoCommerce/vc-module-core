@@ -39,8 +39,9 @@ jobs:
       env:
         PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
       run: |
+        $repo = '${{ github.repository }}'.Substring(('${{ github.repository }}'.IndexOf('/')+1))
         $BRANCH='${{ github.ref }}'.Replace('refs/heads', '')
-        $CMD="dotnet sonarscanner begin /k:'VirtoCommerce_vc-module-order'"
+        $CMD="dotnet sonarscanner begin /k:'VirtoCommerce_$($repo)'"
         $CMD="$($CMD) /o:'virto-commerce'"
         $CMD="$($CMD) /d:sonar.cs.opencover.reportsPaths='$PWD/.tmp/coverage.xml'"
         $CMD="$($CMD) /d:sonar.host.url='https://sonarcloud.io'"
