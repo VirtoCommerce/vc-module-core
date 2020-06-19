@@ -4,13 +4,14 @@ angular.module('virtoCommerce.coreModule.common')
 
     blade.addressTypes = ['Billing', 'Shipping', 'BillingAndShipping'];
     blade.metaFields = blade.metaFields && blade.metaFields.length ? blade.metaFields : metaFormsService.getMetaFields('addressDetails');
+    if (blade.currentEntity.isNew) {
+        blade.currentEntity.addressType = blade.addressTypes[1];
+    }
     blade.origEntity = blade.currentEntity;
     blade.currentEntity = angular.copy(blade.origEntity);
     blade.countries = countries.query();
 
-    if (blade.currentEntity.isNew) {
-        blade.currentEntity.addressType = blade.addressTypes[1];
-    }
+   
 
     blade.toolbarCommands = [{
         name: "platform.commands.reset", icon: 'fa fa-undo',
