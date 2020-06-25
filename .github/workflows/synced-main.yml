@@ -85,7 +85,7 @@ jobs:
       run: |
         $file = Get-ChildItem -Path artifacts -Filter "*.zip" | Select-Object -First 1
         Write-Host "::set-output name=path::$($file.FullName)"
-        Write-Host "::set-output name=name::$($file.Name)"
+        Write-Host "::set-output name=name::$($file.BaseName)"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
