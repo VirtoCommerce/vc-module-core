@@ -28,9 +28,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install VirtoCommerce.GlobalTool
-      run: |
-        dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
-        mv Directory.Build.Props Directory.Build.props
+      run: dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
 
     - name: Install dotnet-sonarscanner
       run: dotnet tool install --global dotnet-sonarscanner
@@ -76,8 +74,10 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install VirtoCommerce.GlobalTool
-      run: dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
-
+      run: |
+        dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
+        mv Directory.Build.Props Directory.Build.props
+        
     - name: Build Package
       run: vc-build Compress -skip Test
     
