@@ -14,7 +14,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         workflow: synced-main.yml
       
-  build:    
+  unit-tests:    
     # The type of runner that the job will run on
     runs-on: windows-latest
     name: Unit Tests
@@ -62,9 +62,32 @@ jobs:
     - name: SonarCloud End
       if: ${{ env.SONAR_TOKEN != 0 }}
       run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      
+  build-package:    
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    name: Build Package
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Install VirtoCommerce.GlobalTool
+      run: dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
+
+    - name: Build Package
+      run: vc-build Compress -skip Test
+    
+    - name: Find Artifact Path
+      id: artifact-path
+      shell: pwsh
+      run: |
+        $file = Get-ChildItem -Path artifacts -Filter "*.zip" | Select-Object -First 1
+        Write-Host "::set-output name=path::$($file.FullName)"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
         # A file, directory or wildcard pattern that describes what to upload
-        path: artifacts/publish/  
+        path: ${{ steps.artifact-path.outputs.path }} 
