@@ -28,7 +28,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Install VirtoCommerce.GlobalTool
-      run: dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
+      run: |
+        dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
+        mv Directory.Build.Props Directory.Build.props
 
     - name: Install dotnet-sonarscanner
       run: dotnet tool install --global dotnet-sonarscanner
@@ -93,7 +95,7 @@ jobs:
         # Connection string
         connection-string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
         # Artifact name
-        name: ${{ steps.artifact-path.outputs.name }} 
+        name: .
         # Directory containing files to upload
         path: ${{ steps.artifact-path.outputs.path }}
         # Container name
