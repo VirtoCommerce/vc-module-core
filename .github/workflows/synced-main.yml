@@ -85,9 +85,10 @@ jobs:
       run: |
         $file = Get-ChildItem -Path artifacts -Filter "*.zip" | Select-Object -First 1
         Write-Host "::set-output name=path::$($file.FullName)"
+        Write-Host "::set-output name=name::$($file.Name)"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        # A file, directory or wildcard pattern that describes what to upload
         path: ${{ steps.artifact-path.outputs.path }} 
+        name: ${{ steps.artifact-path.outputs.name }} 
