@@ -14,7 +14,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
         workflow: synced-main.yml
       
-  unit-tests:    
+  build:    
     # The type of runner that the job will run on
     runs-on: windows-latest
     name: Unit Tests
@@ -62,3 +62,9 @@ jobs:
     - name: SonarCloud End
       if: ${{ env.SONAR_TOKEN != 0 }}
       run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        # A file, directory or wildcard pattern that describes what to upload
+        path: artifacts/publish/  
