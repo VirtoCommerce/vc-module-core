@@ -86,6 +86,20 @@ jobs:
         $file = Get-ChildItem -Path artifacts -Filter "*.zip" | Select-Object -First 1
         Write-Host "::set-output name=path::$($file.FullName)"
         Write-Host "::set-output name=name::$($file.BaseName)"
+        
+    - name: Upload a Build Artifact to Azure Blob Storage
+      uses: fixpoint/azblob-upload-artifact@v3.3
+      with:
+        # Connection string
+        connection-string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
+        # Artifact name
+        name: ${{ steps.artifact-path.outputs.name }} 
+        # Directory containing files to upload
+        path: ${{ steps.artifact-path.outputs.path }}
+        # Container name
+        container: artifacts # optional, default is github-action-artifacts
+        # Remove all blobs under the target blob (use "true" to enable this option)
+        cleanup: false # optional, default is false
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
