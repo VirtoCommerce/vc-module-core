@@ -94,7 +94,7 @@ jobs:
       run: |
         $file = Get-ChildItem -Path artifacts -Filter "*.zip" | Select-Object -First 1
         Write-Host "::set-output name=path::$($file.FullName)"
-        Write-Host "::set-output name=name::${{ steps.image.outputs.tag }}"
+        Write-Host "::set-output name=name::${{ github.repository }}_${{ steps.image.outputs.tag }}"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
@@ -124,7 +124,7 @@ jobs:
           # Artifact name
           name: .
           # Directory containing files to upload
-          path: ${{needs.build-package.outputs.path}}
+          path: ${{ needs.build-package.outputs.name }}.zip
           # Container name
           container: artifacts # optional, default is github-action-artifacts
           # Remove all blobs under the target blob (use "true" to enable this option)
