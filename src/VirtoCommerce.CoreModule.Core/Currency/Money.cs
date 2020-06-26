@@ -3,7 +3,6 @@ using System.Globalization;
 
 namespace VirtoCommerce.CoreModule.Core.Currency
 {
-    // TODO: Move to Core module
     public sealed class Money : IComparable<Money>, IEquatable<Money>, IComparable, ICloneable
     {
         public Money(Currency currency)
