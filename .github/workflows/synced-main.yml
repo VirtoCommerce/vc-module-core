@@ -80,6 +80,10 @@ jobs:
       run: |
         dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
         mv Directory.Build.Props Directory.Build.props
+
+    - name: Get Image Tag
+      uses: VirtoCommerce/vc-github-actions/get-image-tag@v1
+      id: image
         
     - name: Build Package
       run: vc-build Compress -skip Test
@@ -90,7 +94,7 @@ jobs:
       run: |
         $file = Get-ChildItem -Path artifacts -Filter "*.zip" | Select-Object -First 1
         Write-Host "::set-output name=path::$($file.FullName)"
-        Write-Host "::set-output name=name::$($file.BaseName)"
+        Write-Host "::set-output name=name::${{ steps.image.outputs.tag }}"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
@@ -125,3 +129,14 @@ jobs:
           container: artifacts # optional, default is github-action-artifacts
           # Remove all blobs under the target blob (use "true" to enable this option)
           cleanup: false # optional, default is false
+
+      - name: Add tag "ver.${{ steps.image.outputs.tag }}"
+        if: ${{ env.REPO_TOKEN != 0 && (github.ref == 'refs/heads/dev' || github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'testing')) }}
+        uses: tvdias/github-tagger@v0.0.2
+        env:
+          REPO_TOKEN: ${{secrets.REPO_TOKEN}}
+        with:
+          repo-token: ${{ secrets.REPO_TOKEN }}
+          tag: ver.${{ steps.image.outputs.tag }}
+          # optional commit sha to apply the tag to
+          commit-sha: ${{ steps.image.outputs.sha }}
