@@ -120,15 +120,23 @@ jobs:
           # Destination path
           path: ${{needs.build-package.outputs.path}}
 
+      - name: Set artifact name
+        shell: pwsh
+        id: artifact
+        run: |
+          Rename-Item ${{needs.build-package.outputs.path}} -NewName ${{needs.build-package.outputs.name}}
+          $dir = Split-Path '${{needs.build-package.outputs.path}}'
+          Write-Host "::set-output name=path::$($dir/${{needs.build-package.outputs.name}})"
+
       - name: Upload a Build Artifact to Azure Blob Storage
         uses: fixpoint/azblob-upload-artifact@v3.3
         with:
           # Connection string
           connection-string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
           # Artifact name
-          name: ${{ needs.build-package.outputs.name }}.zip
+          name: .
           # Directory containing files to upload
-          path: ${{ needs.build-package.outputs.path }}
+          path: ${{ steps.artifact.outputs.path }}
           # Container name
           container: artifacts # optional, default is github-action-artifacts
           # Remove all blobs under the target blob (use "true" to enable this option)
