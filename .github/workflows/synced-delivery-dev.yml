@@ -22,6 +22,8 @@ jobs:
 
     - name: setup-yq
       uses: chrisdickinson/setup-yq@v1.0.0
+      with:
+        yq-version: 2.10.1
 
     - name: Get Image Tag
       uses: VirtoCommerce/vc-github-actions/get-image-tag@master
