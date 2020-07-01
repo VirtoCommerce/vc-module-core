@@ -122,7 +122,7 @@ jobs:
           # Connection string
           connection-string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
           # Artifact name
-          name: .
+          name: ${{ steps.artifact-path.outputs.name }}
           # Directory containing files to upload
           path: ${{ needs.build-package.outputs.path }}
           # Container name

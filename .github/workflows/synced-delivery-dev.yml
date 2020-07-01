@@ -20,6 +20,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: setup-yq
+      uses: chrisdickinson/setup-yq@v1.0.0
+
     - name: Get Image Tag
       uses: VirtoCommerce/vc-github-actions/get-image-tag@master
       id: image
