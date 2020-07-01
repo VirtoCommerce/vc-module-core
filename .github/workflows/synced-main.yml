@@ -124,7 +124,7 @@ jobs:
           # Artifact name
           name: .
           # Directory containing files to upload
-          path: ${{ needs.build-package.outputs.name }}.zip
+          path: ${{ needs.build-package.outputs.path }}
           # Container name
           container: artifacts # optional, default is github-action-artifacts
           # Remove all blobs under the target blob (use "true" to enable this option)

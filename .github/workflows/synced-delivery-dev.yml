@@ -39,15 +39,17 @@ jobs:
         cd ${{ github.workspace }}
         git clone https://github.com/VirtoCommerce/vc-deploy-apps.git
         cd vc-deploy-apps/webstore-app/overlays/dev
-        
-        # TO DO: Remove before merge
-        git checkout feature/vp-3331-init-argo-cd-for-modules
 
         $json = Get-Content 'platform.json' | Out-String | ConvertFrom-Json
         $json.Modules | Where-Object Repository -Match ${{ github.repository }} | ForEach-Object { 
             $_.PackageUrl = "https://artifactsvirto.blob.core.windows.net/artifacts/$($_.Id)_${{ steps.image.outputs.tag }}.zip"
         }
         $json | ConvertTo-Json | Set-Content 'platform.json'
+
+        $hash = Get-FileHash 'platform.json'
+
+        yq w -i platform-deploy.yaml 'spec.template.spec.initContainers(name==init-platform).env(name==VC_PLATFORM_MODULES_CONFIG).value' `
+          "https://raw.githubusercontent.com/VirtoCommerce/vc-deploy-apps/master/webstore-app/overlays/dev/platform.json?$($hash.Hash)"
         
         git config user.email "github.actions@virtoway.com"
         git config user.name "GitHub Actions"
