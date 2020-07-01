@@ -126,21 +126,15 @@ jobs:
         run: |
           Rename-Item ${{needs.build-package.outputs.path}} -NewName ${{needs.build-package.outputs.name}}.zip
           $dir = Split-Path '${{needs.build-package.outputs.path}}'
-          Write-Host "::set-output name=path::$($dir)/${{needs.build-package.outputs.name}}.zip"
+          Write-Host "::set-output name=path::$($dir)"
 
       - name: Upload a Build Artifact to Azure Blob Storage
-        uses: fixpoint/azblob-upload-artifact@v3.3
+        uses: bacongobbler/azure-blob-storage-upload@v1.1.1
         with:
-          # Connection string
-          connection-string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
-          # Artifact name
-          name: .
-          # Directory containing files to upload
-          path: ${{ steps.artifact.outputs.path }}
-          # Container name
-          container: artifacts # optional, default is github-action-artifacts
-          # Remove all blobs under the target blob (use "true" to enable this option)
-          cleanup: false # optional, default is false
+          source_dir: 'public'
+          container_name: 'artifacts'
+          connection_string: ${{ secrets.ConnectionString }}
+          sync: false
 
       - name: Add tag "ver.${{ steps.image.outputs.tag }}"
         if: ${{ env.REPO_TOKEN != 0 && (github.ref == 'refs/heads/dev' || github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'testing')) }}
