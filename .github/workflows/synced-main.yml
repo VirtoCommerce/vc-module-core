@@ -131,7 +131,7 @@ jobs:
       - name: Upload a Build Artifact to Azure Blob Storage
         uses: bacongobbler/azure-blob-storage-upload@v1.1.1
         with:
-          source_dir: 'public'
+          source_dir: '${{ steps.artifact.outputs.path }}'
           container_name: 'artifacts'
           connection_string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
           sync: false
