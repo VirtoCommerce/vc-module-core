@@ -126,7 +126,7 @@ jobs:
         run: |
           Rename-Item ${{needs.build-package.outputs.path}} -NewName ${{needs.build-package.outputs.name}}
           $dir = Split-Path '${{needs.build-package.outputs.path}}'
-          Write-Host "::set-output name=path::$($dir/${{needs.build-package.outputs.name}})"
+          Write-Host "::set-output name=path::$($dir)/${{needs.build-package.outputs.name}}"
 
       - name: Upload a Build Artifact to Azure Blob Storage
         uses: fixpoint/azblob-upload-artifact@v3.3
