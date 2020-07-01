@@ -12,6 +12,14 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  cancel-previous-runs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: n1hility/cancel-previous-runs@v2
+      with: 
+        token: ${{ secrets.GITHUB_TOKEN }}
+        workflow: synced-delivery-dev.yml
+
   deploy:
     name: Deploy
     # The type of runner that the job will run on
