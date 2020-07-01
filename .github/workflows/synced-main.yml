@@ -133,7 +133,7 @@ jobs:
         with:
           source_dir: 'public'
           container_name: 'artifacts'
-          connection_string: ${{ secrets.ConnectionString }}
+          connection_string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
           sync: false
 
       - name: Add tag "ver.${{ steps.image.outputs.tag }}"
