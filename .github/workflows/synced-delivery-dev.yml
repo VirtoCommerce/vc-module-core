@@ -62,7 +62,7 @@ jobs:
         $hash = Get-FileHash 'modules.json'
 
         yq w -i platform-deploy.yaml 'spec.template.spec.initContainers(name==init-platform).env(name==VC_PLATFORM_MODULES_CONFIG).value' `
-          "https://raw.githubusercontent.com/VirtoCommerce/vc-deploy-apps/master/webstore-app/overlays/dev/platform.json?$($hash.Hash)"
+          "https://raw.githubusercontent.com/VirtoCommerce/vc-deploy-apps/master/webstore-app/overlays/dev/modules.json?$($hash.Hash)"
         
         git config user.email "github.actions@virtoway.com"
         git config user.name "GitHub Actions"
