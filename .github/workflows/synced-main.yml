@@ -84,7 +84,7 @@ jobs:
         mv Directory.Build.Props Directory.Build.props
 
     - name: Get Image Tag
-      uses: VirtoCommerce/vc-github-actions/get-image-tag@vp-3331
+      uses: VirtoCommerce/vc-github-actions/get-image-tag@v3
       id: image
         
     - name: Build Package

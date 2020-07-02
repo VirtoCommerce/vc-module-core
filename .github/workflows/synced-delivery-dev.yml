@@ -34,7 +34,7 @@ jobs:
         yq-version: 3.3.2
 
     - name: Get Image Tag
-      uses: VirtoCommerce/vc-github-actions/get-image-tag@master
+      uses: VirtoCommerce/vc-github-actions/get-image-tag@v3
       id: image
 
     - name: Start deployment
