@@ -101,6 +101,8 @@ jobs:
       with:
         path: ${{ steps.artifact-path.outputs.path }} 
         name: ${{ steps.artifact-path.outputs.name }} 
+        moduleId: ${{ steps.image.outputs.moduleId }}
+        tag: ${{ steps.image.outputs.tag }}
 
   publish:
     name: Publish image
@@ -109,7 +111,7 @@ jobs:
     needs: [build-package]
     steps:
       - uses: actions/checkout@v2
-      
+
       - name: Get Image Tag
         uses: VirtoCommerce/vc-github-actions/get-image-tag@vp-3331
         id: image
@@ -127,7 +129,7 @@ jobs:
         id: artifact
         run: |
           Get-ChildItem ${{needs.build-package.outputs.path}} | ForEach-Object {
-            Rename-Item $_ -NewName ${{needs.build-package.outputs.id}}_${{needs.build-package.outputs.tag}}.zip
+            Rename-Item $_ -NewName ${{needs.build-package.outputs.moduleId}}_${{needs.build-package.outputs.tag}}.zip
           }
 
       - name: Upload a Build Artifact to Azure Blob Storage
