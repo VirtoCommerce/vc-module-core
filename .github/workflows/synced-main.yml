@@ -130,8 +130,8 @@ jobs:
         uses: bacongobbler/azure-blob-storage-upload@v1.1.1
         with:
           source_dir: '${{needs.build-package.outputs.path}}'
-          container_name: 'artifacts'
-          connection_string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
+          container_name: 'packages'
+          connection_string: ${{ secrets.BLOB_CONNECTION_STRING }}
           sync: false
 
       - name: Add tag "ver.${{ steps.image.outputs.tag }}"
@@ -146,7 +146,6 @@ jobs:
           commit-sha: ${{ steps.image.outputs.sha }}
 
       - name: Set Build status Successful
-        if: failure()
         run: echo "::set-env name=BUILD_STATE::successful"
 
       - name: Set Build status Failed
