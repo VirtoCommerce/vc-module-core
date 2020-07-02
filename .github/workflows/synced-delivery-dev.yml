@@ -55,8 +55,7 @@ jobs:
 
         $json = Get-Content 'platform.json' | Out-String | ConvertFrom-Json
         $json.Modules | Where-Object Repository -Match ${{ github.repository }} | ForEach-Object { 
-            $artifactName = "$('${{ github.repository }}'.Replace('${{ github.repository_owner }}/', ''))_${{ steps.image.outputs.tag }}.zip"
-            $_.PackageUrl = "https://artifactsvirto.blob.core.windows.net/artifacts/$($artifactName)"
+            $_.PackageUrl = "https://artifactsvirto.blob.core.windows.net/artifacts/$($_.Id)_${{ steps.image.outputs.tag }}.zip"
         }
         $json | ConvertTo-Json | Set-Content 'platform.json'
 
