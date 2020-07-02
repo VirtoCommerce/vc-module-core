@@ -124,14 +124,14 @@ jobs:
         shell: pwsh
         id: artifact
         run: |
-          Rename-Item ${{needs.build-package.outputs.path}} -NewName ${{needs.build-package.outputs.name}}.zip
+          Rename-Item ${{needs.build-package.outputs.path}}/${{needs.build-package.outputs.name}}.zip -NewName ${{needs.build-package.outputs.name}}.zip
           $dir = Split-Path '${{needs.build-package.outputs.path}}'
           Write-Host "::set-output name=path::$($dir)"
 
       - name: Upload a Build Artifact to Azure Blob Storage
         uses: bacongobbler/azure-blob-storage-upload@v1.1.1
         with:
-          source_dir: '${{ steps.artifact.outputs.path }}'
+          source_dir: '${{needs.build-package.outputs.name}}'
           container_name: 'artifacts'
           connection_string: ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }}
           sync: false
