@@ -82,7 +82,7 @@ jobs:
         mv Directory.Build.Props Directory.Build.props
 
     - name: Get Image Tag
-      uses: VirtoCommerce/vc-github-actions/get-image-tag@master
+      uses: VirtoCommerce/vc-github-actions/get-image-tag@vp-3331
       id: image
         
     - name: Build Package
@@ -109,7 +109,7 @@ jobs:
     needs: [build-package]
     steps:
       - name: Get Image Tag
-        uses: VirtoCommerce/vc-github-actions/get-image-tag@master
+        uses: VirtoCommerce/vc-github-actions/get-image-tag@vp-3331
         id: image
 
       - name: Download a Build Artifact
