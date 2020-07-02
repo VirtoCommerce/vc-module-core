@@ -70,6 +70,8 @@ jobs:
     outputs:
         path: ${{ steps.artifact-path.outputs.path }} 
         name: ${{ steps.artifact-path.outputs.name }} 
+        moduleId: ${{ steps.image.outputs.moduleId }}
+        tag: ${{ steps.image.outputs.tag }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -100,9 +102,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: ${{ steps.artifact-path.outputs.path }} 
-        name: ${{ steps.artifact-path.outputs.name }} 
-        moduleId: ${{ steps.image.outputs.moduleId }}
-        tag: ${{ steps.image.outputs.tag }}
+        name: ${{ steps.artifact-path.outputs.name }}
 
   publish:
     name: Publish image
@@ -110,12 +110,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-package]
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Get Image Tag
-        uses: VirtoCommerce/vc-github-actions/get-image-tag@vp-3331
-        id: image
-
       - name: Download a Build Artifact
         uses: actions/download-artifact@v2
         with:
