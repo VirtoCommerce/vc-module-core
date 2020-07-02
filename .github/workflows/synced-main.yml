@@ -108,6 +108,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-package]
     steps:
+      - uses: actions/checkout@v2
+      
       - name: Get Image Tag
         uses: VirtoCommerce/vc-github-actions/get-image-tag@vp-3331
         id: image
