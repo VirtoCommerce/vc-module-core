@@ -53,13 +53,13 @@ jobs:
         git clone https://github.com/VirtoCommerce/vc-deploy-apps.git
         cd vc-deploy-apps/webstore-app/overlays/dev
 
-        $json = Get-Content 'platform.json' | Out-String | ConvertFrom-Json
-        $json.Modules | Where-Object Repository -Match ${{ github.repository }} | ForEach-Object { 
+        $json = Get-Content 'modules.json' | Out-String | ConvertFrom-Json
+        $json | Where-Object Repository -Match ${{ github.repository }} | ForEach-Object { 
             $_.PackageUrl = "https://artifactsvirto.blob.core.windows.net/artifacts/$($_.Id)_${{ steps.image.outputs.tag }}.zip"
         }
-        $json | ConvertTo-Json | Set-Content 'platform.json'
+        $json | ConvertTo-Json | Set-Content 'modules.json'
 
-        $hash = Get-FileHash 'platform.json'
+        $hash = Get-FileHash 'modules.json'
 
         yq w -i platform-deploy.yaml 'spec.template.spec.initContainers(name==init-platform).env(name==VC_PLATFORM_MODULES_CONFIG).value' `
           "https://raw.githubusercontent.com/VirtoCommerce/vc-deploy-apps/master/webstore-app/overlays/dev/platform.json?$($hash.Hash)"
