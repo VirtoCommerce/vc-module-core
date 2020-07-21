@@ -71,7 +71,7 @@ jobs:
         path: ${{ steps.artifact-path.outputs.path }} 
         name: ${{ steps.artifact-path.outputs.name }} 
         moduleId: ${{ steps.image.outputs.moduleId }}
-        tag: ${{ steps.image.outputs.tag }}
+        tag: ${{ steps.image.outputs.fullVersion }}
         sha: ${{ steps.image.outputs.sha }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
@@ -84,8 +84,8 @@ jobs:
         dotnet tool install --global VirtoCommerce.GlobalTool --version 1.0.0
         mv Directory.Build.Props Directory.Build.props
 
-    - name: Get Image Tag
-      uses: VirtoCommerce/vc-github-actions/get-image-tag@v3
+    - name: Get Image Version
+      uses: VirtoCommerce/vc-github-actions/get-image-version@v3.0.1
       id: image
         
     - name: Build Package
@@ -97,7 +97,7 @@ jobs:
       run: |
         $file = Get-ChildItem -Path artifacts -Filter "*.zip" | Select-Object -First 1
         Write-Host "::set-output name=path::$($file.FullName)"
-        Write-Host "::set-output name=name::$('${{ github.repository }}'.Replace('${{ github.repository_owner }}/', ''))_${{ steps.image.outputs.tag }}"
+        Write-Host "::set-output name=name::$('${{ github.repository }}'.Replace('${{ github.repository_owner }}/', ''))_${{ steps.image.outputs.fullVersion }}"
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2
@@ -134,6 +134,14 @@ jobs:
           container_name: 'packages'
           connection_string: ${{ secrets.BLOB_CONNECTION_STRING }}
           sync: false
+
+      - name: Invoke deploy to cd.govirto.com
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: Deploy
+          token: ${{ secrets.REPO_TOKEN }}
+          inputs: '{ "versionTag": "{{ steps.image.outputs.fullVersion }}" }'
+
 
       - name: Set Build status Successful
         run: echo "::set-env name=BUILD_STATE::successful"
