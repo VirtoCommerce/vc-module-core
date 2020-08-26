@@ -7,7 +7,7 @@ namespace VirtoCommerce.Tools
 {
     public class UrlBuilder : IUrlBuilder
     {
-        static readonly string[] alowedSchemes = { "http", "https" };
+        const string FILE_SCHEME = "file";
 
         public virtual string BuildStoreUrl(UrlBuilderContext context, string virtualPath)
         {
@@ -21,7 +21,7 @@ namespace VirtoCommerce.Tools
             // Don't process absolute URL
             Uri absoluteUri;
             
-            if (virtualPath != null && (!Uri.TryCreate(virtualPath, UriKind.Absolute, out absoluteUri) || !alowedSchemes.Contains(absoluteUri.Scheme)))
+            if (virtualPath != null && (!Uri.TryCreate(virtualPath, UriKind.Absolute, out absoluteUri) || absoluteUri.Scheme == FILE_SCHEME ))
             {
                 var builder = new StringBuilder("~");
 
