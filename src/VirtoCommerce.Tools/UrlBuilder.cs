@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Text;
 using VirtoCommerce.Tools.Models;
@@ -7,6 +7,8 @@ namespace VirtoCommerce.Tools
 {
     public class UrlBuilder : IUrlBuilder
     {
+        const string FILE_SCHEME = "file";
+
         public virtual string BuildStoreUrl(UrlBuilderContext context, string virtualPath)
         {
             return BuildStoreUrl(context, virtualPath, context?.CurrentStore, context?.CurrentLanguage);
@@ -18,7 +20,8 @@ namespace VirtoCommerce.Tools
 
             // Don't process absolute URL
             Uri absoluteUri;
-            if (virtualPath != null && !Uri.TryCreate(virtualPath, UriKind.Absolute, out absoluteUri))
+            
+            if (virtualPath != null && (!Uri.TryCreate(virtualPath, UriKind.Absolute, out absoluteUri) || absoluteUri.Scheme == FILE_SCHEME ))
             {
                 var builder = new StringBuilder("~");
 
