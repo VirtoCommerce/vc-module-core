@@ -24,7 +24,7 @@
     <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
     <releaseNotes>
     </releaseNotes>
-    <copyright>Copyright В© 2011-2020 Virto Commerce. All rights reserved</copyright>
+    <copyright>Copyright © 2011-2020 Virto Commerce. All rights reserved</copyright>
     <tags>security core</tags>
     <assemblyFile>VirtoCommerce.CoreModule.Web.dll</assemblyFile>
     <moduleType>VirtoCommerce.CoreModule.Web.Module, VirtoCommerce.CoreModule.Web</moduleType>
