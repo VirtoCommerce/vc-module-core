@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VirtoCommerce.Domain.Commerce.Model;
 using VirtoCommerce.Domain.Payment.Model;
 
@@ -10,11 +7,14 @@ namespace VirtoCommerce.Domain.Order.Model
 {
     public class PaymentIn : OrderOperation, IHaveTaxDetalization, ITaxable, IHasDiscounts
     {
+        public string OrderId { get; set; }
+        public string ShipmentId { get; set; }
+
         public string Purpose { get; set; }
         /// <summary>
         /// Payment method (gateway) code
         /// </summary>
-		public string GatewayCode { get; set; }
+        public string GatewayCode { get; set; }
         /// <summary>
         /// Payment method contains additional payment method information
         /// </summary>
