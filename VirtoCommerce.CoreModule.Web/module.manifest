@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <module>
     <id>VirtoCommerce.Core</id>
-    <version>2.25.34</version>
+    <version>2.25.35</version>
     <platformVersion>2.13.42</platformVersion>
     <title>Commerce core module</title>
     <description>Common e-commerce domain functionality</description>
@@ -15,7 +15,7 @@
     <projectUrl>https://virtocommerce.com/apps/extensions/virto-core-module</projectUrl>
     <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright © 2011-2019 Virto Commerce. All rights reserved</copyright>
+    <copyright>Copyright © 2011-2020 Virto Commerce. All rights reserved</copyright>
     <tags>security core</tags>
 
     <assemblyFile>VirtoCommerce.CoreModule.Web.dll</assemblyFile>
