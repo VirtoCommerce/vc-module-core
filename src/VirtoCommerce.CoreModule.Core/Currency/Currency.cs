@@ -133,8 +133,13 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             {
                 var cultureInfo = CultureInfo.GetCultureInfo(_language.CultureName);
                 NumberFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                var region = new RegionInfo(_language.CultureName);
-                EnglishName = region.CurrencyEnglishName;
+                EnglishName = cultureInfo.NumberFormat.CurrencySymbol;
+
+                if (!cultureInfo.IsNeutralCulture && cultureInfo != CultureInfo.InvariantCulture)
+                {
+                    var region = new RegionInfo(_language.CultureName);
+                    EnglishName = region.CurrencyEnglishName;
+                }
 
                 if (_code != null)
                 {
