@@ -16,7 +16,7 @@ namespace VirtoCommerce.CoreModule.Core.Common
             NativeName = culture.NativeName;
             if (culture != CultureInfo.InvariantCulture)
             {
-                var regionInfo = new RegionInfo(culture.LCID);
+                var regionInfo = new RegionInfo(cultureName);
                 TwoLetterRegionName = regionInfo.TwoLetterISORegionName;
                 ThreeLetterRegionName = regionInfo.ThreeLetterISORegionName;
             }
