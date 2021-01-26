@@ -64,7 +64,7 @@ angular.module('virtoCommerce.coreModule.currency')
         if (!blade.isNew)
             blade.toolbarCommands = [
                 {
-                    name: "platform.commands.save", icon: 'fa fa-save',
+                    name: "platform.commands.save", icon: 'fas fa-save',
                     executeMethod: $scope.saveChanges,
                     canExecuteMethod: canSave,
                     permission: blade.updatePermission
@@ -78,7 +78,7 @@ angular.module('virtoCommerce.coreModule.currency')
                     permission: blade.updatePermission
                 },
                 {
-                    name: "platform.commands.delete", icon: 'fa fa-trash-o',
+                    name: "platform.commands.delete", icon: 'fas fa-trash-alt',
                     executeMethod: deleteEntry,
                     canExecuteMethod: function () {
                         return !blade.origEntity.isPrimary;

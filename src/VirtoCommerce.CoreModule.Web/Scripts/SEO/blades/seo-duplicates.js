@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.seo')
+angular.module('virtoCommerce.coreModule.seo')
 .controller('virtoCommerce.coreModule.seo.seoDuplicatesController', ['$rootScope', '$scope', 'platformWebApp.bladeNavigationService', 'virtoCommerce.coreModule.seoApi', function ($rootScope, $scope, bladeNavigationService, seoApi) {
     var blade = $scope.blade;
     var anyValidSeoFound;
@@ -86,7 +86,7 @@
 
     blade.toolbarCommands = [
         {
-            name: "platform.commands.save", icon: 'fa fa-save',
+            name: "platform.commands.save", icon: 'fas fa-save',
             executeMethod: $scope.saveChanges,
             canExecuteMethod: canSave,
             permission: blade.updatePermission

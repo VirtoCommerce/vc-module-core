@@ -49,7 +49,7 @@ angular.module('virtoCommerce.coreModule.common')
 
     blade.toolbarCommands = [
         {
-            name: "platform.commands.add", icon: 'fa fa-plus',
+            name: "platform.commands.add", icon: 'fas fa-plus',
             executeMethod: function () {
                 $scope.openDetailBlade();
             },
