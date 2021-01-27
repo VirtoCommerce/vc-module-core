@@ -47,7 +47,7 @@ function ($scope, packageTypeApi, bladeNavigationService) {
       	}
       },
         {
-        	name: "platform.commands.add", icon: 'fa fa-plus',
+        	name: "platform.commands.add", icon: 'fas fa-plus',
         	executeMethod: function () {
         		blade.setSelectedId(null);
         		showDetailBlade({ isNew: true });
