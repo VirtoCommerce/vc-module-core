@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.seo')
+angular.module('virtoCommerce.coreModule.seo')
 .controller('virtoCommerce.coreModule.seo.seoListController', ['$scope', 'platformWebApp.uiGridHelper', 'virtoCommerce.storeModule.stores', 'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', function ($scope, uiGridHelper, stores, bladeNavigationService, dialogService) {
     var blade = $scope.blade;
     $scope.selectedNodeId = null; // need to initialize to null
@@ -110,7 +110,7 @@
         uiGridHelper.initialize($scope, gridOptions);
     };
 
-    blade.headIcon = 'fa-globe';
+    blade.headIcon = 'fa fa-globe';
     blade.subtitle = 'core.blades.seo-list.subtitle';
 
     blade.refresh(blade.seoContainerObject);
