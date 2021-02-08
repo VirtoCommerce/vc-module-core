@@ -79,7 +79,7 @@ angular.module('virtoCommerce.coreModule.seo')
         }
     ];
 
-    blade.headIcon = 'fa-globe';
+    blade.headIcon = 'fa fa-globe';
     blade.title = blade.isNew ? 'core.blades.seo-detail.title-new' : blade.data.semanticUrl;
     blade.subtitle = 'core.blades.seo-detail.subtitle';
 
