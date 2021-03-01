@@ -143,6 +143,7 @@
                     "url-keyword": "URL keyword",
                     "page-title": "Page title",
                     "meta-description": "Meta description",
+                    "meta-keywords": "Meta keywords",
                     "alternative-text": "Image alternative text"
                 },
                 "placeholders": {
@@ -151,6 +152,7 @@
                     "url-keyword": "Enter keyword",
                     "page-title": "Enter title",
                     "meta-description": "Enter description",
+                    "meta-keywords": "Enter keywords",
                     "alternative-text": "Enter text"
                 },
                 "validations": {
