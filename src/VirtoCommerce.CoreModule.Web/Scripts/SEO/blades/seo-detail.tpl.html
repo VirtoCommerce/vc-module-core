@@ -60,6 +60,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="form-label">{{'core.blades.seo-detail.labels.meta-keywords' | translate}}</label>
+                    <div class="form-input">
+                        <input ng-model="blade.currentEntity.metaKeywords" class="form-control" ng-maxlength="255" placeholder="{{'core.blades.seo-detail.placeholders.meta-keywords' | translate}}" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="form-label">{{'core.blades.seo-detail.labels.alternative-text' | translate}}</label>
                     <div class="form-input">
                         <input ng-model="blade.currentEntity.imageAltDescription" class="form-control" placeholder="{{'core.blades.seo-detail.placeholders.alternative-text' | translate}}" />
