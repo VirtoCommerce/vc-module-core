@@ -1,6 +1,5 @@
-using System.Linq;
+using System.Collections.Generic;
 using VirtoCommerce.CoreModule.Core.Common;
-using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.Conditions
 {
@@ -16,25 +15,44 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
         {
             var result = false;
 
-            if (Children.IsNullOrEmpty())
-            {
-                return true;
-            }
-
-            if (Children != null && Children.Any())
+            if (Children != null && Children.Count > 0)
             {
                 if (!Not)
                 {
-                    result = All ? Children.All(ch => ch.IsSatisfiedBy(context)) : Children.Any(ch => ch.IsSatisfiedBy(context));
+                    result = All ? AllSatisfied(Children, context) : AnySatisfied(Children, context);
                 }
                 else
                 {
-                    result = All ? !Children.All(ch => ch.IsSatisfiedBy(context)) : !Children.Any(ch => ch.IsSatisfiedBy(context));
+                    result = All ? !AllSatisfied(Children, context) : !AnySatisfied(Children, context);
                 }
 
+            }
+            else
+            {
+                result = true;
             }
 
             return result;
         }
+
+        private bool AnySatisfied(IList<IConditionTree> children, IEvaluationContext context)
+        {
+            foreach (var ch in children)
+            {
+                if (ch.IsSatisfiedBy(context)) return true;
+            }
+            return false;
+        }
+
+        private bool AllSatisfied(IList<IConditionTree> children, IEvaluationContext context)
+        {
+            foreach (var ch in children)
+            {
+                if (!ch.IsSatisfiedBy(context)) return false;
+            }
+            return true;
+        }
     }
+
+
 }
