@@ -20,7 +20,6 @@ using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.CoreModule.Data.Seo;
 using VirtoCommerce.CoreModule.Data.Services;
 using VirtoCommerce.CoreModule.Web.ExportImport;
-using VirtoCommerce.CoreModule.Web.JsonConverters;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 using VirtoCommerce.Platform.Core.Modularity;
@@ -64,7 +63,6 @@ namespace VirtoCommerce.CoreModule.Web
             permissionsProvider.RegisterPermissions(ModuleConstants.Security.Permissions.AllPermissions.Select(x => new Permission { GroupName = "Core", Name = x }).ToArray());
 
             var mvcJsonOptions = appBuilder.ApplicationServices.GetService<IOptions<MvcNewtonsoftJsonOptions>>();
-            mvcJsonOptions.Value.SerializerSettings.Converters.Add(new PolymorphicJsonConverter());
             mvcJsonOptions.Value.SerializerSettings.Converters.Add(new ConditionJsonConverter());
 
             using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
