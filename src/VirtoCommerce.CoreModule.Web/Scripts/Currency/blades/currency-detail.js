@@ -59,7 +59,7 @@ angular.module('virtoCommerce.coreModule.currency')
             return isDirty() && formScope && formScope.$valid;
         }
 
-        blade.headIcon = 'fa-money';
+        blade.headIcon = 'fa fa-money';
 
         if (!blade.isNew)
             blade.toolbarCommands = [

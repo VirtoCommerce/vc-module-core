@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.currency')
+angular.module('virtoCommerce.coreModule.currency')
 .controller('virtoCommerce.coreModule.currency.currencyListController', ['$scope', 'virtoCommerce.coreModule.currency.currencyApi', 'platformWebApp.bladeNavigationService',
 function ($scope, currencyApi, bladeNavigationService) {
     var blade = $scope.blade;
@@ -38,7 +38,7 @@ function ($scope, currencyApi, bladeNavigationService) {
         showDetailBlade({ data: node });
     };
 
-    blade.headIcon = 'fa-money';
+    blade.headIcon = 'fa fa-money';
     blade.toolbarCommands = [
       {
           name: "platform.commands.refresh", icon: 'fa fa-refresh',
