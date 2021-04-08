@@ -44,7 +44,7 @@ angular.module('virtoCommerce.coreModule.currency')
 
             blade.title = blade.isNew ? 'core.blades.currency-detail.new-title' : data.name;
             blade.subtitle = blade.isNew ? 'core.blades.currency-detail.new-subtitle' : 'core.blades.currency-detail.subtitle';
-        };
+        }
 
         var formScope;
         $scope.setForm = function (form) {
