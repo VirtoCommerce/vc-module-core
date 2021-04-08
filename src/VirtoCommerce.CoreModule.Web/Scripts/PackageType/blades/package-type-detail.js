@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.packageType')
+angular.module('virtoCommerce.coreModule.packageType')
 .controller('virtoCommerce.coreModule.packageType.packageTypeDetailController', ['$scope', 'platformWebApp.dialogService', 'platformWebApp.bladeNavigationService', 'virtoCommerce.coreModule.packageType.packageTypeApi', 'platformWebApp.settings',
     function ($scope, dialogService, bladeNavigationService, packageTypeApi, settings) {
     	var blade = $scope.blade;
@@ -64,7 +64,7 @@
     		return isDirty() && formScope && formScope.$valid;
     	}
 
-    	blade.headIcon = 'fa-money';
+    	blade.headIcon = 'fa fa-money';
 
     	if (!blade.isNew)
     		blade.toolbarCommands = [

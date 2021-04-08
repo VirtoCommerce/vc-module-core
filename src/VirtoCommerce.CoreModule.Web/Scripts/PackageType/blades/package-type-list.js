@@ -1,4 +1,4 @@
-﻿angular.module('virtoCommerce.coreModule.packageType')
+angular.module('virtoCommerce.coreModule.packageType')
 .controller('virtoCommerce.coreModule.packageType.packageTypeListController', ['$scope', 'virtoCommerce.coreModule.packageType.packageTypeApi', 'platformWebApp.bladeNavigationService',
 function ($scope, packageTypeApi, bladeNavigationService) {
 	var blade = $scope.blade;
@@ -37,7 +37,7 @@ function ($scope, packageTypeApi, bladeNavigationService) {
 		showDetailBlade({ data: node });
 	};
 
-	blade.headIcon = 'fa-square';
+	blade.headIcon = 'fa fa-square';
 	blade.toolbarCommands = [
       {
       	name: "platform.commands.refresh", icon: 'fa fa-refresh',
