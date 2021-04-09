@@ -31,7 +31,7 @@ function ($scope, currencyApi, bladeNavigationService) {
         };
         angular.extend(newBlade, bladeData);
         bladeNavigationService.showBlade(newBlade, blade);
-    };
+    }
 
     $scope.selectNode = function (node) {
         blade.setSelectedId(node.code);
@@ -61,7 +61,7 @@ function ($scope, currencyApi, bladeNavigationService) {
     ];
 
     // actions on load
-    blade.title = 'core.blades.currency-list.title',
-    blade.subtitle = 'core.blades.currency-list.subtitle',
+    blade.title = 'core.blades.currency-list.title';
+    blade.subtitle = 'core.blades.currency-list.subtitle';
     blade.refresh();
 }]);
