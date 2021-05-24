@@ -185,14 +185,14 @@
     <div class="form-input __mini __number">
         <input smart-float num-type="integer" required ng-model="element1.numItem">
     </div>free items of product
-    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName: 'select product' }}</a>
+    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select product' }}</a>
 </script>
 <script type="text/ng-template" id="expression-RewardItemGiftNumItem.html">
     Gift
     <div class="form-input __mini __number">
         <input smart-float num-type="integer" required ng-model="element1.quantity">
     </div>of product
-    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName: 'select product' }}</a> where:
+    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select product' }}</a> where:
     <table>
         <tr>
             <td>name is</td>
@@ -233,14 +233,14 @@
     <div class="form-input __mini">
         <input money required ng-model="element1.amount">
     </div>off for
-    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName: 'select product' }}</a>
+    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select product' }}</a>
 </script>
 <script type="text/ng-template" id="expression-RewardItemGetOfRel.html">
     Get
     <div class="form-input __mini __number">
         <input smart-float num-type="float" required ng-model="element1.amount">
     </div>% off
-    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName: 'select product' }}</a>
+    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select product' }}</a>
     not to exceed $
     <div class="form-input __mini">
         <input money required ng-model="element1.maxLimit">
@@ -255,7 +255,7 @@
     <div class="form-input __mini __number">
         <input smart-float num-type="integer" required ng-model="element1.numItem">
     </div>items of entry
-    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName: 'select entry' }}</a>
+    <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select entry' }}</a>
 </script>
 <script type="text/ng-template" id="expression-RewardItemGetOfRelForNum.html">
     Get
@@ -270,7 +270,7 @@
     </div>
     <div>
         items of entry
-        <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName: 'select entry' }}</a>
+        <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select entry' }}</a>
 
     </div>
 </script>
@@ -338,7 +338,7 @@
         <input smart-float num-type="integer" required ng-model="element1.inEveryNthQuantity">
     </div>
     items of entry
-    <a class="__link" ng-click="openItemSelectWizard(element1.product)">{{ element1.product && element1.product.productName ? element1.product.productName : 'select entry' }}</a>
+    <a class="__link" ng-click="openItemSelectWizard(element1.product)">{{ element1.product && element1.product.productName ? element1.product.productName + ' (' + element1.product.productCode + ')'  : 'select entry' }}</a>
     <div>
         Get
         <div class="form-input __mini __number">
@@ -360,13 +360,13 @@
         <input smart-float num-type="integer" required ng-model="element1.forNthQuantity">
     </div>
     of entry
-    <a class="__link" ng-click="openItemSelectWizard(element1.product)">{{ element1.product && element1.product.productName ? element1.product.productName : 'select entry' }}</a>
+    <a class="__link" ng-click="openItemSelectWizard(element1.product)">{{ element1.product && element1.product.productName ? element1.product.productName + ' (' + element1.product.productCode + ')' : 'select entry' }}</a>
     in every
     <div class="form-input __mini __number">
         <input smart-float num-type="integer" required ng-model="element1.inEveryNthQuantity">
     </div>
     items of entry
-    <a class="__link" ng-click="openItemSelectWizard(element1.conditionalProduct)">{{ element1.conditionalProduct && element1.conditionalProduct.productName ? element1.conditionalProduct.productName: 'select entry' }}</a>
+    <a class="__link" ng-click="openItemSelectWizard(element1.conditionalProduct)">{{ element1.conditionalProduct && element1.conditionalProduct.productName ? element1.conditionalProduct.productName + ' (' + element1.conditionalProduct.productCode + ')' : 'select entry' }}</a>
     <div>
         Get
         <div class="form-input __mini __number">
