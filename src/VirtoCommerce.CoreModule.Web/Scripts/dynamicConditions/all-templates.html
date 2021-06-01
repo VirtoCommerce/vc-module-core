@@ -466,9 +466,9 @@
     Browsing from country
     <div class="form-input" ng-controller="virtoCommerce.dynamicExpressions.conditionGeoCountryController">
         <ui-select ng-model="element1.value" required>
-            <ui-select-match placeholder="Select...">{{$select.selected.name}}</ui-select-match>
+            <ui-select-match placeholder="Select...">{{$select.selected.displayName}}</ui-select-match>
             <ui-select-choices repeat="x.id as x in countries | filter: $select.search ">
-                <span ng-bind-html="x.name | highlight: $select.search"></span>
+                <span ng-bind-html="x.displayName | highlight: $select.search"></span>
             </ui-select-choices>
         </ui-select>
     </div>
