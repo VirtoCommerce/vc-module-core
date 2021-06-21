@@ -1,7 +1,6 @@
 angular.module('virtoCommerce.coreModule.common', [])
     .run(['platformWebApp.metaFormsService', function (metaFormsService) {
         metaFormsService.registerMetaFields('addressDetails', [{
-            name: 'addressType',
             templateUrl: 'addressTypeSelector.html',
             priority: 0
         }, {
@@ -17,14 +16,10 @@ angular.module('virtoCommerce.coreModule.common', [])
             isRequired: true,
             priority: 2
         }, {
-            name: 'countryCode',
             templateUrl: 'countrySelector.html',
             priority: 3
         }, {
-            name: 'regionName',
-            title: 'core.blades.address-detail.labels.region',
-            valueType: 'ShortText',
-            isRequired: true,
+            templateUrl: 'countryRegionSelector.html',
             priority: 4
         }, {
             name: 'city',
