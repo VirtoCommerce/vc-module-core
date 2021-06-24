@@ -3,7 +3,7 @@
   <id>VirtoCommerce.Core</id>
   <version>3.18.0</version>
   <version-tag />
-  <platformVersion>3.66.0-alpha.11984</platformVersion>
+  <platformVersion>3.66.0</platformVersion>
   <title>Commerce core module</title>
   <description>Common e-commerce domain functionality</description>
   <authors>
