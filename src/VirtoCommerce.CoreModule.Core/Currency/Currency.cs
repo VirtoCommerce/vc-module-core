@@ -15,7 +15,6 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         private static IDictionary<string, string> _isoCurrencySymbolDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase).WithDefaultValue(null);
         private Language _language;
         private string _code;
-        private IMoneyRoundingPolicy _moneyRoundingPolicy;
 
         static Currency()
         {
@@ -33,11 +32,10 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             }
         }
 
-        public Currency(Language language, string code, string name, string symbol, decimal exchangeRate, IMoneyRoundingPolicy moneyRoundingPolicy)
+        public Currency(Language language, string code, string name, string symbol, decimal exchangeRate)
              : this(language, code)
         {
             ExchangeRate = exchangeRate;
-            _moneyRoundingPolicy = moneyRoundingPolicy;
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -117,14 +115,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         /// </summary>
         public string CustomFormatting { get; set; }
 
-        public IMoneyRoundingPolicy RoundingPolicy
-        {
-            get => _moneyRoundingPolicy;
-            set
-            {
-                _moneyRoundingPolicy = value;
-            }
-        }
+        public IMoneyRoundingPolicy RoundingPolicy { get; set; }
 
         public RoundingType RoundingType { get; set; } = RoundingType.Rounding001;
         public MidpointRounding MidpointRounding { get; set; } = MidpointRounding.AwayFromZero;
