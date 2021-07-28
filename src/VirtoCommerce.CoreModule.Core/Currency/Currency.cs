@@ -15,6 +15,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         private static IDictionary<string, string> _isoCurrencySymbolDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase).WithDefaultValue(null);
         private Language _language;
         private string _code;
+        private IMoneyRoundingPolicy _moneyRoundingPolicy;
 
         static Currency()
         {
@@ -32,10 +33,11 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             }
         }
 
-        public Currency(Language language, string code, string name, string symbol, decimal exchangeRate)
+        public Currency(Language language, string code, string name, string symbol, decimal exchangeRate, IMoneyRoundingPolicy moneyRoundingPolicy)
              : this(language, code)
         {
             ExchangeRate = exchangeRate;
+            _moneyRoundingPolicy = moneyRoundingPolicy;
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -60,9 +62,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         public Currency()
             : this(Language.InvariantLanguage, null)
         {
-
         }
-
 
         /// <summary>
         /// Currency code may be used ISO 4217.
@@ -87,7 +87,6 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             }
         }
 
-
         public string EnglishName { get; set; }
 
         [JsonIgnore]
@@ -97,14 +96,17 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         ///  name of the currency
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Flag specifies that this is the primary currency
         /// </summary>
         public bool IsPrimary { get; set; }
+
         /// <summary>
         /// The exchange rate against the primary exchange rate of the currency.
         /// </summary>
         public decimal ExchangeRate { get; set; }
+
         /// <summary>
         /// Currency symbol
         /// </summary>
@@ -115,6 +117,17 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         /// </summary>
         public string CustomFormatting { get; set; }
 
+        public IMoneyRoundingPolicy RoundingPolicy
+        {
+            get => _moneyRoundingPolicy;
+            set
+            {
+                _moneyRoundingPolicy = value;
+            }
+        }
+
+        public RoundingType RoundingType { get; set; } = RoundingType.Rounding001;
+        public MidpointRounding MidpointRounding { get; set; } = MidpointRounding.AwayFromZero;
 
         protected override IEnumerable<object> GetEqualityComponents()
         {

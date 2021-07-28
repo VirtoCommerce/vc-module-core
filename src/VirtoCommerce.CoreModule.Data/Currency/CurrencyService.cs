@@ -17,12 +17,14 @@ namespace VirtoCommerce.CoreModule.Data.Currency
         private readonly Func<ICoreRepository> _repositoryFactory;
         private readonly IEventPublisher _eventPublisher;
         private readonly IPlatformMemoryCache _platformMemoryCache;
+        private readonly IMoneyRoundingPolicy _moneyRoundingPolicy;
 
-        public CurrencyService(Func<ICoreRepository> repositoryFactory, IEventPublisher eventPublisher, IPlatformMemoryCache platformMemoryCache)
+        public CurrencyService(Func<ICoreRepository> repositoryFactory, IEventPublisher eventPublisher, IPlatformMemoryCache platformMemoryCache, IMoneyRoundingPolicy moneyRoundingPolicy)
         {
             _repositoryFactory = repositoryFactory;
             _eventPublisher = eventPublisher;
             _platformMemoryCache = platformMemoryCache;
+            _moneyRoundingPolicy = moneyRoundingPolicy;
         }
 
         public async Task<IEnumerable<Core.Currency.Currency>> GetAllCurrenciesAsync()
