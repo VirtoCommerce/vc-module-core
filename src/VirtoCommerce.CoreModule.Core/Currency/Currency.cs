@@ -115,6 +115,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         /// </summary>
         public string CustomFormatting { get; set; }
 
+        [JsonIgnore]
         public IMoneyRoundingPolicy RoundingPolicy { get; set; }
 
         public RoundingType RoundingType { get; set; } = RoundingType.Rounding001;

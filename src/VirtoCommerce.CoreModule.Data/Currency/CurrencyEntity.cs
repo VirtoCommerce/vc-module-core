@@ -63,6 +63,8 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             target.ExchangeRate = ExchangeRate;
             target.Symbol = Symbol;
             target.CustomFormatting = CustomFormatting;
+            target.MidpointRounding = MidpointRounding;
+            target.RoundingType = RoundingType;
         }
 
     }
