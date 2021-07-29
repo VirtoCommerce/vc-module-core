@@ -36,7 +36,12 @@ namespace VirtoCommerce.CoreModule.Data.Currency
                 using (var repository = _repositoryFactory())
                 {
                     var currencyEntities = await repository.Currencies.OrderByDescending(x => x.IsPrimary).ThenBy(x => x.Code).ToArrayAsync();
-                    var result = currencyEntities.Select(x => x.ToModel(AbstractTypeFactory<Core.Currency.Currency>.TryCreateInstance())).ToList();
+                    var result = currencyEntities.Select(x =>
+                    {
+                        var currency = x.ToModel(AbstractTypeFactory<Core.Currency.Currency>.TryCreateInstance());
+                        currency.RoundingPolicy = _moneyRoundingPolicy;
+                        return currency;
+                    }).ToList();
 
                     return result;
                 }
