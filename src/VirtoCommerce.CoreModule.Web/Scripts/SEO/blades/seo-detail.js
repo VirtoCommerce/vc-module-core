@@ -1,5 +1,5 @@
 angular.module('virtoCommerce.coreModule.seo')
-.controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService', function ($scope, bladeNavigationService) {
+.controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService',, 'platformWebApp.metaFormsService', function ($scope, bladeNavigationService, metaFormsService) {
     var blade = $scope.blade;
 
     function initializeBlade() {
@@ -7,6 +7,8 @@ angular.module('virtoCommerce.coreModule.seo')
         blade.currentEntity = angular.copy(blade.origEntity);
         blade.isLoading = false;
     };
+
+    blade.metaFields = metaFormsService.getMetaFields("seoDetails");
 
     $scope.cancelChanges = function () {
         angular.copy(blade.origEntity, blade.currentEntity);
