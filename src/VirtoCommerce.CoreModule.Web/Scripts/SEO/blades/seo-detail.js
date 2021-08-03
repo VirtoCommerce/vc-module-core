@@ -1,5 +1,5 @@
 angular.module('virtoCommerce.coreModule.seo')
-.controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService',, 'platformWebApp.metaFormsService', function ($scope, bladeNavigationService, metaFormsService) {
+.controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService', 'platformWebApp.metaFormsService', function ($scope, bladeNavigationService, metaFormsService) {
     var blade = $scope.blade;
 
     function initializeBlade() {
