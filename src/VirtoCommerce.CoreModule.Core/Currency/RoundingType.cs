@@ -1,3 +1,5 @@
+using System;
+
 namespace VirtoCommerce.CoreModule.Core.Currency
 {
     //Cash rounding (details: https://en.wikipedia.org/wiki/Cash_rounding)

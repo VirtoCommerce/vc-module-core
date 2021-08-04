@@ -51,3 +51,26 @@
     </div>
     <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.custom-formatting' | translate }}</div>
 </script>
+<script type="text/ng-template" id="currencyDetail-midpointRounding.html">
+    <div class="form-input">
+        <ui-select ng-model="blade.currentEntity.midpointRounding">
+            <ui-select-match placeholder="{{ 'core.blades.currency-detail.placeholders.midpoint-rounding' | translate }}">{{$select.selected}}</ui-select-match>
+            <ui-select-choices repeat="x as x in blade.midpointRoundings">
+                <span ng-bind-html="x"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.midpoint-rounding' | translate }}</div>
+</script>
+<script type="text/ng-template" id="currencyDetail-roundingType.html">
+    <div class="form-input">
+        <ui-select ng-model="blade.currentEntity.roundingType">
+            <ui-select-match placeholder="{{ 'core.blades.currency-detail.placeholders.rounding-type' | translate }}">{{$select.selected}}</ui-select-match>
+            <ui-select-choices repeat="x as x in blade.roundingTypes">
+                <span ng-bind-html="x"></span>
+            </ui-select-choices>
+        </ui-select>
+    </div>
+    <div class="list-descr">{{ 'core.blades.currency-detail.descriptions.rounding-type' | translate }}</div>
+</script>
+

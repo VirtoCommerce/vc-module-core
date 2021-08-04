@@ -2,6 +2,8 @@ using System;
 
 namespace VirtoCommerce.CoreModule.Core.Currency
 {
+    // TODO: Reduce the cognitive complexity
+    // https://github.com/grandnode/grandnode2/blob/master/src/Business/Grand.Business.Catalog/Extensions/RoundingHelper.cs#L44
     public class DefaultMoneyRoundingPolicy : IMoneyRoundingPolicy
     {
         public decimal RoundMoney(decimal amount, Currency currency)
@@ -13,13 +15,14 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         /// Round
         /// </summary>
         /// <param name="value">Value to round</param>
+        /// <param name="decimals">Number of digits in fractional part</param>
         /// <param name="roundingType">The rounding type</param>
+        /// <param name="midpointRounding">Specifies how mathematical rounding methods should process a number that is midway between two numbers</param>
         /// <returns>Rounded value</returns>
-        protected decimal Round(decimal value, int doubles, RoundingType roundingType, MidpointRounding midpointRounding)
+        protected decimal Round(decimal value, int decimals, RoundingType roundingType, MidpointRounding midpointRounding)
         {
-
             //default round (Rounding001)
-            var result = Math.Round(value, doubles, midpointRounding);
+            var result = Math.Round(value, decimals, midpointRounding);
             var fractionPart = (result - Math.Truncate(result)) * 10;
 
             //cash rounding not needed

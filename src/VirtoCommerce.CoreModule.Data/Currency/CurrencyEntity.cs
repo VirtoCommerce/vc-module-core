@@ -37,8 +37,8 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             currency.ExchangeRate = ExchangeRate;
             currency.Symbol = Symbol;
             currency.CustomFormatting = CustomFormatting;
-            currency.MidpointRounding = EnumUtility.SafeParseFlags(MidpointRounding, System.MidpointRounding.AwayFromZero);
-            currency.RoundingType = EnumUtility.SafeParseFlags(RoundingType, Core.Currency.RoundingType.Rounding001);
+            currency.MidpointRounding = EnumUtility.SafeParse(MidpointRounding, System.MidpointRounding.AwayFromZero);
+            currency.RoundingType = EnumUtility.SafeParse(RoundingType, Core.Currency.RoundingType.Rounding001);
             return currency;
         }
 
