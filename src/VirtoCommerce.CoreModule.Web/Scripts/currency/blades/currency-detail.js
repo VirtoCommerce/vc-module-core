@@ -11,6 +11,24 @@ angular.module('virtoCommerce.coreModule.currency')
 
         blade.metafields = blade.metafields ? blade.metafields : metaFormsService.getMetaFields('currencyDetail');
 
+        blade.roundingTypes = [
+            'Rounding001',
+            'Rounding005Up',
+            'Rounding005Down',
+            'Rounding01Up',
+            'Rounding01Down',
+            'Rounding05',
+            'Rounding1',
+            'Rounding1Up'
+        ];
+        blade.midpointRoundings = [
+            'ToEven',
+            'AwayFromZero',
+            'ToZero',
+            'ToNegativeInfinity',
+            'ToPositiveInfinity'
+        ];
+
         $scope.saveChanges = function () {
             blade.isLoading = true;
 
@@ -37,7 +55,7 @@ angular.module('virtoCommerce.coreModule.currency')
 
         function initializeBlade(data) {
             if (blade.isNew) data = { exchangeRate: 1.00 };
-
+            
             blade.currentEntity = angular.copy(data);
             blade.origEntity = data;
             blade.isLoading = false;

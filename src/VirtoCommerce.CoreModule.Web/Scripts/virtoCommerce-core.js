@@ -43,6 +43,16 @@ angular.module(moduleName, [
                 name: 'customFormatting',
                 title: 'core.blades.currency-detail.labels.custom-formatting',
                 templateUrl: 'currencyDetail-customFormatting.html'
+            },
+            {
+                name: 'midpointRounding',
+                title: 'core.blades.currency-detail.labels.midpoint-rounding',
+                templateUrl: 'currencyDetail-midpointRounding.html'
+            },
+            {
+                name: 'roundingType',
+                title: 'core.blades.currency-detail.labels.rounding-type',
+                templateUrl: 'currencyDetail-roundingType.html'
             }
         ]);
 }]);
