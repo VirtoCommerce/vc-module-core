@@ -37,8 +37,8 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             currency.ExchangeRate = ExchangeRate;
             currency.Symbol = Symbol;
             currency.CustomFormatting = CustomFormatting;
-            currency.MidpointRounding = EnumUtility.SafeParse(MidpointRounding, System.MidpointRounding.AwayFromZero);
-            currency.RoundingType = EnumUtility.SafeParse(RoundingType, Core.Currency.RoundingType.Rounding001);
+            currency.MidpointRounding = MidpointRounding;
+            currency.RoundingType = RoundingType;
             return currency;
         }
 
@@ -57,7 +57,7 @@ namespace VirtoCommerce.CoreModule.Data.Currency
 
         public virtual void Patch(CurrencyEntity target)
         {
-            target.Code = Code;
+            target.Code = Code; 
             target.Name = Name;
             target.IsPrimary = IsPrimary;
             target.ExchangeRate = ExchangeRate;

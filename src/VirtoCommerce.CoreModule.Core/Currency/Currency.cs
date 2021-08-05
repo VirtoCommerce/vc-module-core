@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.Platform.Core.Common;
+using MidpointRoundingEnum = System.MidpointRounding;
+using RoundingTypeEnum = VirtoCommerce.CoreModule.Core.Enums.RoundingType;
 
 namespace VirtoCommerce.CoreModule.Core.Currency
 {
@@ -118,8 +120,21 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         [JsonIgnore]
         public IMoneyRoundingPolicy RoundingPolicy { get; set; }
 
-        public RoundingType RoundingType { get; set; } = RoundingType.Rounding001;
-        public MidpointRounding MidpointRounding { get; set; } = MidpointRounding.AwayFromZero;
+        private RoundingTypeEnum _roundingType = RoundingTypeEnum.Rounding001;
+
+        public string RoundingType
+        {
+            get { return _roundingType.ToString(); }
+            set { _roundingType = EnumUtility.SafeParse(value, RoundingTypeEnum.Rounding001); }
+        }
+
+        private MidpointRoundingEnum _midpointRounding = MidpointRoundingEnum.AwayFromZero;
+
+        public string MidpointRounding
+        {
+            get { return _midpointRounding.ToString(); }
+            set { _midpointRounding = EnumUtility.SafeParse(value, MidpointRoundingEnum.AwayFromZero); }
+        }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {

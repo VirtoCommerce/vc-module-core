@@ -1,4 +1,6 @@
 using System;
+using VirtoCommerce.CoreModule.Core.Enums;
+using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.Currency
 {
@@ -8,7 +10,9 @@ namespace VirtoCommerce.CoreModule.Core.Currency
     {
         public decimal RoundMoney(decimal amount, Currency currency)
         {
-            return Round(amount, currency.NumberFormat.NumberDecimalDigits, currency.RoundingType, currency.MidpointRounding);
+            var roundingType = EnumUtility.SafeParse(currency.RoundingType, RoundingType.Rounding001);
+            var midpointRounding = EnumUtility.SafeParse(currency.MidpointRounding, MidpointRounding.AwayFromZero);
+            return Round(amount, currency.NumberFormat.NumberDecimalDigits, roundingType, midpointRounding);
         }
 
         /// <summary>

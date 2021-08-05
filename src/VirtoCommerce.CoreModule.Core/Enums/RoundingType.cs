@@ -1,4 +1,4 @@
-namespace VirtoCommerce.CoreModule.Core.Currency
+namespace VirtoCommerce.CoreModule.Core.Enums
 {
     //Cash rounding (details: https://en.wikipedia.org/wiki/Cash_rounding)
     public enum RoundingType
