@@ -24,6 +24,10 @@ namespace VirtoCommerce.CoreModule.Data.Currency
 
         [StringLength(64)]
         public string CustomFormatting { get; set; }
+        [StringLength(16)]
+        public string MidpointRounding { get; set; }
+        [StringLength(16)]
+        public string RoundingType { get; set; }
 
         public virtual Core.Currency.Currency ToModel(Core.Currency.Currency currency)
         {
@@ -33,6 +37,8 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             currency.ExchangeRate = ExchangeRate;
             currency.Symbol = Symbol;
             currency.CustomFormatting = CustomFormatting;
+            currency.MidpointRounding = MidpointRounding;
+            currency.RoundingType = RoundingType;
             return currency;
         }
 
@@ -44,17 +50,21 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             ExchangeRate = currency.ExchangeRate;
             Symbol = currency.Symbol;
             CustomFormatting = currency.CustomFormatting;
+            MidpointRounding = currency.MidpointRounding.ToString();
+            RoundingType = currency.RoundingType.ToString();
             return this;
         }
 
         public virtual void Patch(CurrencyEntity target)
         {
-            target.Code = Code;
+            target.Code = Code; 
             target.Name = Name;
             target.IsPrimary = IsPrimary;
             target.ExchangeRate = ExchangeRate;
             target.Symbol = Symbol;
             target.CustomFormatting = CustomFormatting;
+            target.MidpointRounding = MidpointRounding;
+            target.RoundingType = RoundingType;
         }
 
     }

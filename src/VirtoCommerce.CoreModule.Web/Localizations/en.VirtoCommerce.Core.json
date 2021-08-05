@@ -71,7 +71,9 @@
           "is-primary": "Is primary",
           "exchange-rate": "Exchange rate",
           "symbol": "Symbol",
-          "custom-formatting": "Currency custom formatting"
+          "custom-formatting": "Currency custom formatting",
+          "midpoint-rounding": "Midpoint Rounding",
+          "rounding-type": "Rounding Type"
         },
         "descriptions": {
           "code": "The currency code. Use 3 letter ISO 4217 code, if it exists.",
@@ -79,7 +81,9 @@
           "is-primary": "Is this the primary currency? Only one currency can by primary.",
           "exchange-rate": "The exchange rate against the primary exchange rate currency",
           "symbol": "Short currency symbol",
-          "custom-formatting": "Custom formatting to be applied to the currency value"
+          "custom-formatting": "Custom formatting to be applied to the currency value",
+          "midpoint-rounding": "Specifies how mathematical rounding methods should process a number that is midway between two numbers",
+          "rounding-type": "Enumerates rounding"
         },
         "placeholders": {
           "symbol": "Enter symbol or leave empty for default culture",

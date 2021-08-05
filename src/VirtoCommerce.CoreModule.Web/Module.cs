@@ -51,6 +51,9 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
 
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
+
+            // Money rounding
+            serviceCollection.AddTransient<IMoneyRoundingPolicy, DefaultMoneyRoundingPolicy>();
         }
 
         public void PostInitialize(IApplicationBuilder appBuilder)

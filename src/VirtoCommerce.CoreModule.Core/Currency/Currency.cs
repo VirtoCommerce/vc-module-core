@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.Platform.Core.Common;
+using MidpointRoundingEnum = System.MidpointRounding;
+using RoundingTypeEnum = VirtoCommerce.CoreModule.Core.Enums.RoundingType;
 
 namespace VirtoCommerce.CoreModule.Core.Currency
 {
@@ -60,9 +62,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         public Currency()
             : this(Language.InvariantLanguage, null)
         {
-
         }
-
 
         /// <summary>
         /// Currency code may be used ISO 4217.
@@ -87,7 +87,6 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             }
         }
 
-
         public string EnglishName { get; set; }
 
         [JsonIgnore]
@@ -97,14 +96,17 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         ///  name of the currency
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
         /// Flag specifies that this is the primary currency
         /// </summary>
         public bool IsPrimary { get; set; }
+
         /// <summary>
         /// The exchange rate against the primary exchange rate of the currency.
         /// </summary>
         public decimal ExchangeRate { get; set; }
+
         /// <summary>
         /// Currency symbol
         /// </summary>
@@ -115,6 +117,24 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         /// </summary>
         public string CustomFormatting { get; set; }
 
+        [JsonIgnore]
+        public IMoneyRoundingPolicy RoundingPolicy { get; set; }
+
+        private RoundingTypeEnum _roundingType = RoundingTypeEnum.Rounding001;
+
+        public string RoundingType
+        {
+            get { return _roundingType.ToString(); }
+            set { _roundingType = EnumUtility.SafeParse(value, RoundingTypeEnum.Rounding001); }
+        }
+
+        private MidpointRoundingEnum _midpointRounding = MidpointRoundingEnum.AwayFromZero;
+
+        public string MidpointRounding
+        {
+            get { return _midpointRounding.ToString(); }
+            set { _midpointRounding = EnumUtility.SafeParse(value, MidpointRoundingEnum.AwayFromZero); }
+        }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {

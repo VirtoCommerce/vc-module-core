@@ -32,7 +32,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         /// of the associated currency using MidpointRounding.AwayFromZero.
         /// </summary>
         /// <returns>A decimal with the amount rounded to the significant number of decimal digits.</returns>
-        public decimal Amount => decimal.Round(InternalAmount, DecimalDigits, MidpointRounding.AwayFromZero);
+        public decimal Amount => Currency.RoundingPolicy.RoundMoney(InternalAmount, Currency);
 
         /// <summary>
         /// Truncates the amount to the number of significant decimal digits
