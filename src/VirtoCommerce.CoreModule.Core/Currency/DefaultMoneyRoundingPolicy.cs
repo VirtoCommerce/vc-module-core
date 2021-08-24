@@ -58,9 +58,10 @@ namespace VirtoCommerce.CoreModule.Core.Currency
 
                     if (roundingType == RoundingType.Rounding01Down && fractionPart == 5)
                         fractionPart = -5;
-                    else
-                        fractionPart = fractionPart < 5 ? fractionPart * -1 : 10 - fractionPart;
-
+                    else if (roundingType == RoundingType.Rounding01Up)
+                        fractionPart = 10 - fractionPart;
+                    else if (roundingType == RoundingType.Rounding01Down)
+                        fractionPart = fractionPart * -1;
                     result += fractionPart / 100;
                     break;
                 //rounding with 0.50 intervals
@@ -81,6 +82,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
                         result = fractionPart < 50 ? Math.Truncate(result) : Math.Truncate(result) + 1;
 
                     break;
+
                 case RoundingType.Rounding001:
                 default:
                     break;

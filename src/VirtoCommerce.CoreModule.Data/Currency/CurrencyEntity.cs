@@ -24,7 +24,7 @@ namespace VirtoCommerce.CoreModule.Data.Currency
 
         [StringLength(64)]
         public string CustomFormatting { get; set; }
-        [StringLength(16)]
+        [StringLength(18)]
         public string MidpointRounding { get; set; }
         [StringLength(16)]
         public string RoundingType { get; set; }
