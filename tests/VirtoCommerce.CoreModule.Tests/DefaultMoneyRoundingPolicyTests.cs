@@ -44,8 +44,11 @@ namespace VirtoCommerce.CoreModule.Tests
                 new object[] { 1.105m, 1.1m, RoundingType.Rounding01Down, MidpointRounding.AwayFromZero},
                 new object[] { 1.599m, 1.6m, RoundingType.Rounding01Down, MidpointRounding.AwayFromZero},
                 new object[] { 1.999m, 2m, RoundingType.Rounding01Down, MidpointRounding.AwayFromZero},
+                new object[] { 78.36m, 78.3m, RoundingType.Rounding01Down, MidpointRounding.AwayFromZero},
 
                 new object[] { 1.09m, 1.1m, RoundingType.Rounding01Up, MidpointRounding.AwayFromZero},
+                new object[] { 26.12m, 26.2m, RoundingType.Rounding01Up, MidpointRounding.AwayFromZero},
+
 
                 new object[] { 1.04m, 1m, RoundingType.Rounding05, MidpointRounding.AwayFromZero},
                 new object[] { 1.400009m, 1.5m, RoundingType.Rounding05, MidpointRounding.AwayFromZero},
