@@ -27,7 +27,8 @@ namespace VirtoCommerce.CoreModule.Tests
                 PostalCode = "PostalCode",
                 RegionId = "RegionId",
                 RegionName = "RegionName",
-                Zip = "Zip"
+                Zip = "Zip",
+                OuterId = "OuterId"
             };
             var address2 = address1.Clone() as Address;
 
