@@ -5,7 +5,7 @@ using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.Common
 {
-    public class Address : ValueObject
+    public class Address : ValueObject, IHasOuterId
     {
         public AddressType AddressType { get; set; }
         public string Key { get; set; }
@@ -25,6 +25,7 @@ namespace VirtoCommerce.CoreModule.Core.Common
         public string LastName { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public string OuterId { get; set; }
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
