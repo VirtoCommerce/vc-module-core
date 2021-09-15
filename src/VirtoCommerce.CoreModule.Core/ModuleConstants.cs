@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using VirtoCommerce.Platform.Core.Settings;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VirtoCommerce.CoreModule.Core
 {
+    [ExcludeFromCodeCoverage]
     public class ModuleConstants
     {
         public static class Security
