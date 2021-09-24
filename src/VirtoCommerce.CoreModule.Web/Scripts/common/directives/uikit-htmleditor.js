@@ -6,8 +6,8 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
             ngModel: '=',
             fileUploader: '='
         },
-        link: function (scope, element, attributes) {
-            var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true, enablescripts: false });
+        link: function (scope, element) {
+            var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true, enablescripts: false, iframe: true });
             var codeMirror = htmlEditor.editor;
             //Besides inline scripts need to also eliminate inline event handlers on preview
             htmlEditor.on('render', function () {
