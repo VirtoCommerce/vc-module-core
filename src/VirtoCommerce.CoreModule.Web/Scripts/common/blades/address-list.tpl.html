@@ -9,7 +9,7 @@
                             <td>
                                 <span class="list-t">{{getAddressName(address) | limitTo:50}}</span>
                                 <span class="list-descr">{{address.addressType}}</span>
-                            <td ng-if="address.defaultAddress">
+                            <td ng-if="address.isDefault">
                                 <span class="table-statusDefault">Default</span>
                             </td>
                         </tr>

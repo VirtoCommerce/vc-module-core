@@ -37,8 +37,8 @@ angular.module('virtoCommerce.coreModule.common')
                 },
                 searchDefaultAddress: function (addressType) {
                     blade.currentEntities.find((defAddress, i) => {
-                        if (defAddress.addressType === addressType && defAddress.defaultAddress) {
-                            blade.currentEntities[i].defaultAddress = false;
+                        if (defAddress.addressType === addressType && defAddress.isDefault) {
+                            blade.currentEntities[i].isDefault = false;
                             return true;
                         }
                     });

@@ -108,13 +108,13 @@ angular.module('virtoCommerce.coreModule.common')
                 name: "core.commands.default", icon: 'fas fa-flag',
                 executeMethod: function () {
                     blade.searchDefaultAddress(blade.currentEntity.addressType);
-                    blade.currentEntity.defaultAddress = true;
+                    blade.currentEntity.isDefault = true;
                 },
                 canExecuteMethod: function () {
                     if (blade.currentEntity.addressType === 'BillingAndShipping' || blade.numberOfAddresses())
                         return false;
                     else
-                        return !blade.currentEntity.defaultAddress;
+                        return !blade.currentEntity.isDefault;
                 },
                 meta: "default"
             }
