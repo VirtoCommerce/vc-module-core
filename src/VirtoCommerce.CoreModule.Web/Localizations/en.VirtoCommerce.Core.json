@@ -2,7 +2,8 @@
   "core": {
     "commands": {
       "apply-filter": "Save & apply",
-      "rebuild-index": "Build Index"
+      "rebuild-index": "Build Index",
+      "default": "Make default"
     },
     "main-menu-title": {
       "search-index": "Search index"
