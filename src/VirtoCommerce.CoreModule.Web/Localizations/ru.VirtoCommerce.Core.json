@@ -1,9 +1,10 @@
 {
     "core": {
-        "commands": {
-            "apply-filter": "Сохранить & применить",
-            "rebuild-index": "Построение Индексов"
-        },
+      "commands": {
+        "apply-filter": "Сохранить & применить",
+        "rebuild-index": "Построение Индексов",
+        "default": "Использовать по умолчанию"
+      },
         "main-menu-title": {
             "search-index":  "Поисковый индекс" 
         },

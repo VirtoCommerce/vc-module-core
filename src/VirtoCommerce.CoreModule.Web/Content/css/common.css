@@ -1,4 +1,4 @@
-﻿/* widget for statistics */
+/* widget for statistics */
 .list.__stats {
     height: 100%;
     line-height: 1.2;
@@ -28,3 +28,40 @@
         font-weight: 500;
         margin: 0 0 0 10px;
     }
+
+.table-statusDefault {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 4px;
+    width: 50px;
+    height: 17px;
+    top: calc(50% - 17px/2);
+    background: #FBFDFE;
+    border: 1px solid #BDD1DF;
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 20px;
+    text-align: center;
+    color: #465769;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin-left: 25px;
+}
+
+.list-head {
+    font-size: 22px;
+    line-height: 2;
+    background: none;
+    color: #333;
+    padding: 4px 0;
+    position: inherit;
+    text-align: left;
+    -webkit-box-shadow: inherit;
+    box-shadow: inherit;
+}

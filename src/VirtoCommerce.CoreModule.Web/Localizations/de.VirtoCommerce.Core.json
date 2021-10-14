@@ -1,8 +1,9 @@
 {
     "core": {
-        "commands": {
-            "rebuild-index": "Suchindex erstellen"
-        },
+      "commands": {
+        "rebuild-index": "Suchindex erstellen",
+        "default": "Standardmäßig verwenden"
+      },
         "blades": {
             "index-progress": {
                 "labels": {
