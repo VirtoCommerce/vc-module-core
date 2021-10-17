@@ -77,48 +77,19 @@ angular.module('virtoCommerce.coreModule.common')
             blade.currentEntity.regionId = newId;
         });
 
-        blade.toolbarCommands = [
-            {
-                name: "platform.commands.save", icon: 'fas fa-save',
-                executeMethod: function () {
-                    if (blade.confirmChangesFn) {
-                        blade.confirmChangesFn(blade.currentEntity);
-                    }
-                    angular.copy(blade.currentEntity, blade.origEntity);
-                    $scope.bladeClose();
-                },
-                canExecuteMethod: canSave,
-                permission: blade.updatePermission
+        blade.toolbarCommands = [{
+            name: "platform.commands.reset", icon: 'fa fa-undo',
+            executeMethod: function () {
+                angular.copy(blade.origEntity, blade.currentEntity);
             },
-            {
-                name: "platform.commands.reset", icon: 'fa fa-undo',
-                executeMethod: function () {
-                    angular.copy(blade.origEntity, blade.currentEntity);
-                },
-                canExecuteMethod: isDirty
-            },
-            {
-                name: "platform.commands.delete", icon: 'fas fa-trash-alt',
-                executeMethod: deleteEntry,
-                canExecuteMethod: function () {
-                    return !blade.currentEntity.isNew;
-                }
-            },
-            {
-                name: "core.commands.default", icon: 'fas fa-flag',
-                executeMethod: function () {
-                    blade.searchDefaultAddress(blade.currentEntity.addressType);
-                    blade.currentEntity.isDefault = true;
-                },
-                canExecuteMethod: function () {
-                    if (blade.currentEntity.addressType === 'BillingAndShipping' || blade.numberOfAddresses())
-                        return false;
-                    else
-                        return !blade.currentEntity.isDefault;
-                },
-                meta: "default"
+            canExecuteMethod: isDirty
+        }, {
+            name: "platform.commands.delete", icon: 'fas fa-trash-alt',
+            executeMethod: deleteEntry,
+            canExecuteMethod: function () {
+                return !blade.currentEntity.isNew;
             }
-        ];
+        }];
 
         blade.isLoading = false;
 
@@ -132,6 +103,18 @@ angular.module('virtoCommerce.coreModule.common')
 
         $scope.isValid = function () {
             return $scope.formScope && $scope.formScope.$valid;
+        };
+
+        $scope.cancelChanges = function () {
+            $scope.bladeClose();
+        };
+
+        $scope.saveChanges = function () {
+            if (blade.confirmChangesFn) {
+                blade.confirmChangesFn(blade.currentEntity);
+            }
+            angular.copy(blade.currentEntity, blade.origEntity);
+            $scope.bladeClose();
         };
 
         function isDirty() {
