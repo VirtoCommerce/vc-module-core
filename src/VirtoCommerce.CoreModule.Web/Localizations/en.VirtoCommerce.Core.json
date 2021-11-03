@@ -189,9 +189,9 @@
           "name": "Package type name",
           "name-description": "will be used for identification",
           "name-placeholder": "Enter package type name",
-          "measureUnit": "Measure unit",
-          "measureUnit-description": "will be used as primary measure unit for sizes",
-          "measureUnit-placeholder": "Choose measure unit or define new",
+          "measureUnit": "Units of length",
+          "measureUnit-description": "Primary units of measurement for sizes",
+          "measureUnit-placeholder": "Choose units of measurement or define new",
           "width": "Width",
           "height": "Height",
           "length": "Length"
