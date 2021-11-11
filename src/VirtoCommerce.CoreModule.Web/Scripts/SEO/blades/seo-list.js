@@ -99,7 +99,7 @@ angular.module('virtoCommerce.coreModule.seo')
           name: "platform.commands.delete", icon: 'fas fa-trash-alt',
           executeMethod: function () { deleteList($scope.gridApi.selection.getSelectedRows()); },
           canExecuteMethod: function () {
-              return $scope.gridApi && _.any($scope.gridApi.selection.getSelectedRows());
+              return $scope.gridApi && _.any($scope.gridApi.selection.getSelectedRows()) && _.any(blade.seoContainerObject.seoInfos);
           },
           permission: blade.updatePermission
       }
