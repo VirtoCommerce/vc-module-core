@@ -59,8 +59,18 @@ angular.module('virtoCommerce.coreModule.common')
             return results;
         };
 
-        function addRegion(regions, name) {
-            regions.unshift({ name: name, displayName: name });
+        function addRegion(regionArray, name) {
+            var canInclude = true;
+            _.each(regionArray, function (region) {
+                if (name.includes(region.name)) {
+                    region.name = name;
+                    region.displayName = name;
+                    canInclude = false;
+                }
+            });
+            if (canInclude) {
+                regionArray.unshift({ name: name, displayName: name });
+            }
         }
 
         $scope.$watch('blade.currentEntity.regionName', function (regionName, old) {
