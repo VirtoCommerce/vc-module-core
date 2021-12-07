@@ -29,7 +29,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             }
             else if (CompareCondition.EqualsInvariant(ConditionOperation.Between))
             {
-                result = leftOperand > rightOperand && leftOperand <= rightSecondOperand;
+                result = leftOperand >= rightOperand && leftOperand <= rightSecondOperand;
             }
             else if (CompareCondition.EqualsInvariant(ConditionOperation.AtLeast) || CompareCondition.EqualsInvariant(ConditionOperation.IsGreaterThanOrEqual))
             {
