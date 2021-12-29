@@ -1,13 +1,13 @@
-﻿angular.module('virtoCommerce.coreModule.common')
+angular.module('virtoCommerce.coreModule.common')
     .run(
         ['$http', '$compile', 'virtoCommerce.coreModule.common.dynamicExpressionService', function ($http, $compile, dynamicExpressionService) {
 
             //Register PROMOTION expressions
             dynamicExpressionService.registerExpression({
                 id: 'BlockCustomerCondition',
-                newChildLabel: '+ add user group',
+                newChildLabel: 'Add user group',
                 getValidationError: function () {
-                    return (this.children && this.children.length) ? undefined : 'Promotion requires at least one eligibility';
+                    return (this.children && this.children.length) ? undefined : 'Your promotion must have at least one eligibility criterion';
                 }
             });
             dynamicExpressionService.registerExpression({
@@ -16,15 +16,15 @@
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionIsFirstTimeBuyer',
-                displayName: 'First time buyer'
+                displayName: 'First time customers'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionIsRegisteredUser',
-                displayName: 'Registered user'
+                displayName: 'Registered users'
             });
             dynamicExpressionService.registerExpression({
                 id: 'UserGroupsContainsCondition',
-                displayName: 'User groups contains []'
+                displayName: 'User group contains...'
             });
 
             var availableExcludings = [
@@ -37,204 +37,204 @@
             ];
             dynamicExpressionService.registerExpression({
                 id: 'ExcludingCategoryCondition',
-                displayName: 'Items of category'
+                displayName: 'Items out of category'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ExcludingProductCondition',
-                displayName: 'Items of entry'
+                displayName: 'Product items'
             });
 
             dynamicExpressionService.registerExpression({
                 id: 'BlockCatalogCondition',
-                newChildLabel: '+ add condition'
+                newChildLabel: 'Add condition'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionEntryIs',
                 // templateURL: 'expression-ConditionEntryIs.html',
                 // controller: 'conditionEntryIsController'
-                displayName: 'Product is []'
+                displayName: 'Product is...'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionCurrencyIs',
-                displayName: 'Currency is []'
+                displayName: 'Currency is...'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionCodeContains',
-                displayName: 'Product code contains []'
+                displayName: 'Product code contains...'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionCategoryIs',
-                displayName: 'Category is []',
+                displayName: 'Category is...',
                 availableChildren: availableExcludings,
-                newChildLabel: '+ excluding'
+                newChildLabel: 'Excluding'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionInStockQuantity',
-                displayName: 'InStock quantity is []'
+                displayName: 'In stock quantity is...'
             });
 
             dynamicExpressionService.registerExpression({
                 id: 'BlockCartCondition',
-                newChildLabel: '+ add condition'
+                newChildLabel: 'Add condition'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionCartSubtotalLeast',
-                displayName: 'Cart subtotal is []',
+                displayName: 'Cart subtotal is...',
                 availableChildren: availableExcludings,
-                newChildLabel: '+ excluding'
+                newChildLabel: 'Excluding'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionAtNumItemsInCart',
-                displayName: '[] [] items are in shopping cart',
+                displayName: 'Number of items in the shopping cart',
                 availableChildren: availableExcludings,
-                newChildLabel: '+ excluding'
+                newChildLabel: 'Excluding'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionAtNumItemsInCategoryAreInCart',
-                displayName: '[] [] items of category are in shopping cart',
+                displayName: 'Number of items out of a category in the shopping cart',
                 availableChildren: availableExcludings,
-                newChildLabel: '+ excluding'
+                newChildLabel: 'Excluding'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionAtNumItemsOfEntryAreInCart',
-                displayName: '[] [] items of entry are in shopping cart'
+                displayName: 'Number of specific product items in the shopping cart'
             });
             dynamicExpressionService.registerExpression({
                 id: 'BlockReward',
-                newChildLabel: '+ add effect',
+                newChildLabel: 'Add reward',
                 getValidationError: function () {
-                    return (this.children && this.children.length) ? undefined : 'Promotion requires at least one reward';
+                    return (this.children && this.children.length) ? undefined : 'Your promotion must have at least one reward';
                 }
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardCartGetOfAbsSubtotal',
-                displayName: 'Get $[] off cart subtotal'
+                displayName: '$... off cart subtotal'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardCartGetOfRelSubtotal',
-                displayName: 'Get [] % off cart subtotal not to exceed $ []'
+                displayName: '...% off cart subtotal, no more than $...'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemGetFreeNumItemOfProduct',
-                displayName: 'Get [] free items of product []'
+                displayName: '... free items of ... product'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemGiftNumItem',
-                displayName: 'Gift [] of product []'
+                displayName: '... items of ... product as a gift'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemGetOfAbs',
-                displayName: 'Get $[] off'
+                displayName: '$... off'
             });
 
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemGetOfRel',
-                displayName: 'Get [] % off [] not to exceed $ []'
+                displayName: '...% off for product ..., no more than $...'
             });
 
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemGetOfAbsForNum',
-                displayName: 'Get $[] off [] items of entry []'
+                displayName: '$... off for ... specific product items'
                 //availableChildren: availableExcludings,
                 //newChildLabel: '+ excluding'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemGetOfRelForNum',
-                displayName: 'Get [] % off [] items of entry [] not to exceed $ []'
+                displayName: '...% off for ... specific product items, no more than $...'
                 //availableChildren: availableExcludings,
                 //newChildLabel: '+ excluding'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardShippingGetOfAbsShippingMethod',
-                displayName: 'Get $[] off shipping []'
+                displayName: '$... off for shipping at ...'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardShippingGetOfRelShippingMethod',
-                displayName: 'Get [] % off shipping [] not to exceed $ []'
+                displayName: '% off for shipping at ..., no more than $...'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardPaymentGetOfAbs',
-                displayName: 'Get $[] off payment method []'
+                displayName: '$... off for using ... payment method'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardPaymentGetOfRel',
-                displayName: 'Get [] % off payment method [] not to exceed $ []'
+                displayName: '...% off for using ... payment method, no more than $...'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemForEveryNumInGetOfRel',
-                displayName: 'For [] in every [] items of entry [] get [] % off…'
+                displayName: '...% off for ... of every ... specific product items'
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemForEveryNumOtherItemInGetOfRel',
-                displayName: 'For [] items of entry [] in every [] items of entry [] get [] % off…'
+                displayName: '...% off for ... items of ... entry of every ... items out of ... entry'
             });
 
             //Register COMMON expressions
-            var groupNames = ['Browse behavior', 'Shopper profile', 'Shopping cart', 'Geo location'];
+            var groupNames = ['Browse behavior', 'Shopper profile', 'Shopping cart', 'Location'];
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[0],
                 id: 'ConditionStoreSearchedPhrase',
-                displayName: 'Shopper searched for phrase [] in store'
+                displayName: 'Shopper searched for ... in the store'
             });
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[0],
                 id: 'ConditionLanguageIs',
-                displayName: 'Current language is []'
+                displayName: 'Current language is ...'
             });
 
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[1],
                 id: 'ConditionAgeIs',
-                displayName: 'Shopper age is []'
+                displayName: 'Shopper age is ...'
             });
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[1],
                 id: 'ConditionGenderIs',
-                displayName: 'Shopper gender is []'
+                displayName: 'Shopper gender is ...'
             });
 
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[3],
                 id: 'ConditionGeoTimeZone',
-                displayName: 'Browsing from a time zone -/+ offset from UTC []'
+                displayName: 'Time zone'
             });
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[3],
                 id: 'ConditionGeoZipCode',
-                displayName: 'Browsing from zip/postal code []'
+                displayName: 'Zip/postal code'
             });
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[3],
                 id: 'ConditionGeoCity',
-                displayName: 'Browsing from city []'
+                displayName: 'City'
             });
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[3],
                 id: 'ConditionGeoCountry',
-                displayName: 'Browsing from country []'
+                displayName: 'Country'
             });
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[3],
                 id: 'ConditionGeoState',
-                displayName: 'Browsing from state []'
+                displayName: 'State/province'
             });
 
             //Register CONTENT PUBLISHING expressions
             dynamicExpressionService.registerExpression({
                 id: 'BlockContentCondition',
-                newChildLabel: '+ add condition'
+                newChildLabel: 'Add condition'
             });
 
             //Register PRICELIST ASSIGNMENT expressions
             dynamicExpressionService.registerExpression({
                 id: 'BlockPricingCondition',
-                newChildLabel: '+ add condition'
+                newChildLabel: 'Add condition'
             });
 
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[1],
                 id: 'UserGroupsContainsCondition',
-                displayName: 'User groups contains []'
+                displayName: 'User groups contains ...'
             });
 
             $http.get('Modules/$(VirtoCommerce.Core)/Scripts/dynamicConditions/all-templates.html').then(function (response) {
@@ -280,16 +280,16 @@
             var retVal;
 
             switch (input) {
-                case 'IsMatching': retVal = 'matching'; break;
-                case 'IsNotMatching': retVal = 'not matching'; break;
+                case 'IsMatching': retVal = 'exactly'; break;
+                case 'IsNotMatching': retVal = 'anything but'; break;
                 case 'IsGreaterThan': retVal = 'greater than'; break;
                 case 'IsGreaterThanOrEqual': retVal = 'greater than or equals'; break;
                 case 'IsLessThan': retVal = 'less than'; break;
                 case 'IsLessThanOrEqual': retVal = 'less than or equals'; break;
-                case 'Contains': retVal = 'containing'; break;
-                case 'NotContains': retVal = 'not containing'; break;
-                case 'Matching': retVal = 'matching'; break;
-                case 'NotMatching': retVal = 'not matching'; break;
+                case 'Contains': retVal = 'contains'; break;
+                case 'NotContains': retVal = 'does not contain'; break;
+                case 'Matching': retVal = 'exactly'; break;
+                case 'NotMatching': retVal = 'anything but'; break;
                 case 'Exactly': retVal = 'exactly'; break;
                 case 'AtLeast': retVal = 'at least'; break;
                 case 'Between': retVal = 'between'; break;
