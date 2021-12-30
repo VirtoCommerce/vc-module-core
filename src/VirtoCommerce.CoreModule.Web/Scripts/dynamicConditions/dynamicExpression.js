@@ -37,7 +37,7 @@ angular.module('virtoCommerce.coreModule.common')
             ];
             dynamicExpressionService.registerExpression({
                 id: 'ExcludingCategoryCondition',
-                displayName: 'Items out of category'
+                displayName: 'Items from a specific category'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ExcludingProductCondition',
@@ -52,7 +52,7 @@ angular.module('virtoCommerce.coreModule.common')
                 id: 'ConditionEntryIs',
                 // templateURL: 'expression-ConditionEntryIs.html',
                 // controller: 'conditionEntryIsController'
-                displayName: 'Product is...'
+                displayName: 'Specific product'
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionCurrencyIs',
@@ -64,7 +64,7 @@ angular.module('virtoCommerce.coreModule.common')
             });
             dynamicExpressionService.registerExpression({
                 id: 'ConditionCategoryIs',
-                displayName: 'Category is...',
+                displayName: 'Specific category',
                 availableChildren: availableExcludings,
                 newChildLabel: 'Excluding'
             });
@@ -166,7 +166,7 @@ angular.module('virtoCommerce.coreModule.common')
             });
             dynamicExpressionService.registerExpression({
                 id: 'RewardItemForEveryNumOtherItemInGetOfRel',
-                displayName: '...% off for ... items of ... entry of every ... items out of ... entry'
+                displayName: '...% off for ... items of a specific product per every ... items of another product'
             });
 
             //Register COMMON expressions
@@ -179,7 +179,7 @@ angular.module('virtoCommerce.coreModule.common')
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[0],
                 id: 'ConditionLanguageIs',
-                displayName: 'Current language is ...'
+                displayName: 'User language is set to...'
             });
 
             dynamicExpressionService.registerExpression({
@@ -234,7 +234,7 @@ angular.module('virtoCommerce.coreModule.common')
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[1],
                 id: 'UserGroupsContainsCondition',
-                displayName: 'User groups contains ...'
+                displayName: 'User group contains ...'
             });
 
             $http.get('Modules/$(VirtoCommerce.Core)/Scripts/dynamicConditions/all-templates.html').then(function (response) {
