@@ -319,7 +319,7 @@
         <input money required ng-model="element1.amount">
     </div>
     <div class="long-reward-expression">
-    % off for usinng this payment method:
+    % off for using this payment method:
     <a class="__link" left-click-menu data-target="pshp_menu{{$index}}">{{element1.paymentMethod ? element1.paymentMethod : 'select payment method'}}</a>
     <ul class="menu __context" role="menu" id="pshp_menu{{$index}}" ng-controller="virtoCommerce.dynamicExpressions.paymentMethodRewardController">
         <li class="menu-item" ng-click='element1.paymentMethod=x.id?x.code:x.id' ng-repeat="x in paymentMethods">{{x.code}}</li>
@@ -350,7 +350,7 @@
         <div class="form-input __mini __number">
             <input smart-float num-type="integer" ng-model="element1.itemLimit">
         </div>
-        and no more than $
+        <br>and no more than $
         <div class="form-input __mini">
             <input money required ng-model="element1.maxLimit">
         </div>
@@ -378,7 +378,7 @@
         <div class="form-input __mini __number">
             <input smart-float num-type="integer" ng-model="element1.itemLimit">
         </div>
-        and no more than $
+        <br>and no more than $
         <div class="form-input __mini">
             <input money required ng-model="element1.maxLimit">
         </div>
@@ -386,12 +386,10 @@
 </script>
 
 <script type="text/ng-template" id="expression-ExcludingCategoryCondition.html">
-    items of category
-    <a class="__link" ng-click="openCategorySelectWizard(element)">{{element.categoryId?element.categoryName || element.categoryId: 'select category' }}</a>
-</script>
+    items from <a class="__link" ng-click="openCategorySelectWizard(element)">{{element.categoryId?element.categoryName || element.categoryId: 'select category' }}</a> category
+    </script>
 <script type="text/ng-template" id="expression-ExcludingProductCondition.html">
-    items of entry
-    <a class="__link" ng-click="openItemSelectWizard(element)">{{element.productName?element.productName + ' (' + element.productCode + ')' : 'select entry' }}</a>
+   <a class="__link" ng-click="openItemSelectWizard(element)">{{element.productName?element.productName + ' (' + element.productCode + ')' : 'select product' }}</a> items
 </script>
 <script type="text/ng-template" id="expression-UserGroupsContainsCondition.html">
     User groups contains
@@ -418,7 +416,7 @@
 
 <!--COMMON, SHARED-->
 <script type="text/ng-template" id="expression-ConditionGeoTimeZone.html">
-    Browsing from a time zone
+    Browsing from a time zone that is
     <a class="__link" left-click-menu data-target="compareCondition_menu{{element1.id}}">{{element1.compareCondition | compareConditionToText}}</a>
     <div class="form-group" ng-controller="virtoCommerce.dynamicExpressions.conditionGeoTimeZoneController">
         <ui-select ng-model="element1.value">
@@ -438,20 +436,20 @@
     </ul>
 </script>
 <script type="text/ng-template" id="expression-ConditionGeoZipCode.html">
-    Browsing from a location with ZIP/postal code
+    Browsing from a location with ZIP/postal code that
     <a class="__link" left-click-menu data-target="matchString_menu{{element1.id}}">{{element1.matchCondition | compareConditionToText}}</a>
     <div class="form-input __mini">
         <input required class="form-control" ng-model="element1.value" />
     </div>
     <ul class="menu __context" role="menu" id="matchString_menu{{element1.id}}">
-        <li class="menu-item" ng-click='element1.matchCondition="Contains";'>containing</li>
-        <li class="menu-item" ng-click='element1.matchCondition="NotContains";'>not containing</li>
-        <li class="menu-item" ng-click='element1.matchCondition="Matching";'> being exactly</li>
-        <li class="menu-item" ng-click='element1.matchCondition="NotMatching";'>being anything but</li>
+        <li class="menu-item" ng-click='element1.matchCondition="Contains";'>contains</li>
+        <li class="menu-item" ng-click='element1.matchCondition="NotContains";'>does not contain</li>
+        <li class="menu-item" ng-click='element1.matchCondition="Matching";'>is exactly</li>
+        <li class="menu-item" ng-click='element1.matchCondition="NotMatching";'>is anything but</li>
     </ul>
 </script>
 <script type="text/ng-template" id="expression-ConditionGeoCity.html">
-    Browsing from a city that
+    Browsing from this city:
     <div class="form-input __mini">
         <input required class="form-control" ng-model="element1.value" />
     </div>
