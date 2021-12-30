@@ -31,7 +31,7 @@
     </ul>
 </script>
 <script type="text/ng-template" id="expression-ConditionEntryIs.html">
-    Selected products:
+   Product:
     <a ng-if="element1.productIds" class="__link" ng-click="openItemSelectWizard(element1, true)">
         {{
             element1.productIds.length > 1
@@ -53,7 +53,7 @@
     </div>
 </script>
 <script type="text/ng-template" id="expression-ConditionCategoryIs.html">
-    Category is
+    Category:
     <a class="__link" ng-click="openCategorySelectWizard(element1)">{{element1.categoryName?element1.categoryName: 'select category' }}</a>
 </script>
 <script type="text/ng-template" id="expression-ConditionInStockQuantity.html">   
@@ -436,16 +436,16 @@
     </ul>
 </script>
 <script type="text/ng-template" id="expression-ConditionGeoZipCode.html">
-    Browsing from a location with ZIP/postal code that
+    Browsing from a location with ZIP/postal code:
     <a class="__link" left-click-menu data-target="matchString_menu{{element1.id}}">{{element1.matchCondition | compareConditionToText}}</a>
     <div class="form-input __mini">
         <input required class="form-control" ng-model="element1.value" />
     </div>
     <ul class="menu __context" role="menu" id="matchString_menu{{element1.id}}">
-        <li class="menu-item" ng-click='element1.matchCondition="Contains";'>contains</li>
-        <li class="menu-item" ng-click='element1.matchCondition="NotContains";'>does not contain</li>
-        <li class="menu-item" ng-click='element1.matchCondition="Matching";'>is exactly</li>
-        <li class="menu-item" ng-click='element1.matchCondition="NotMatching";'>is anything but</li>
+        <li class="menu-item" ng-click='element1.matchCondition="Contains";'>containing</li>
+        <li class="menu-item" ng-click='element1.matchCondition="NotContains";'>not containing</li>
+        <li class="menu-item" ng-click='element1.matchCondition="Matching";'>being exactly</li>
+        <li class="menu-item" ng-click='element1.matchCondition="NotMatching";'>being anything but</li>
     </ul>
 </script>
 <script type="text/ng-template" id="expression-ConditionGeoCity.html">
@@ -485,16 +485,16 @@
 </script>
 
 <script type="text/ng-template" id="expression-ConditionStoreSearchedPhrase.html">
-    Shopper searched a phrase that
+    Shopper searched for a phrase:
     <a class="__link" left-click-menu data-target="matchString_menu{{element1.id}}">{{element1.matchCondition | compareConditionToText}}</a>
     <div class="form-input __mini">
         <input required class="form-control" ng-model="element1.value" />
     </div>
     <ul class="menu __context" role="menu" id="matchString_menu{{element1.id}}">
-        <li class="menu-item" ng-click='element1.matchCondition="Contains";'>contains</li>
-        <li class="menu-item" ng-click='element1.matchCondition="NotContains";'>does not contain</li>
-        <li class="menu-item" ng-click='element1.matchCondition="Matching";'>is exactly</li>
-        <li class="menu-item" ng-click='element1.matchCondition="NotMatching";'>is anything but</li>
+        <li class="menu-item" ng-click='element1.matchCondition="Contains";'>containing</li>
+        <li class="menu-item" ng-click='element1.matchCondition="NotContains";'>not containing</li>
+        <li class="menu-item" ng-click='element1.matchCondition="Matching";'>being exactly</li>
+        <li class="menu-item" ng-click='element1.matchCondition="NotMatching";'>being anything but</li>
     </ul>
 </script>
 <script type="text/ng-template" id="expression-ConditionLanguageIs.html">
