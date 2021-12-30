@@ -286,8 +286,8 @@ angular.module('virtoCommerce.coreModule.common')
                 case 'IsGreaterThanOrEqual': retVal = 'greater than or equals'; break;
                 case 'IsLessThan': retVal = 'less than'; break;
                 case 'IsLessThanOrEqual': retVal = 'less than or equals'; break;
-                case 'Contains': retVal = 'contains'; break;
-                case 'NotContains': retVal = 'does not contain'; break;
+                case 'Contains': retVal = 'containing'; break;
+                case 'NotContains': retVal = 'not containing'; break;
                 case 'Matching': retVal = 'exactly'; break;
                 case 'NotMatching': retVal = 'anything but'; break;
                 case 'Exactly': retVal = 'exactly'; break;
