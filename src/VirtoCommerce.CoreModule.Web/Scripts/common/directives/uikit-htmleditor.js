@@ -4,7 +4,8 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
         require: 'ngModel',
         scope: {
             ngModel: '=',
-            fileUploader: '='
+            fileUploader: '=',
+            id: '@'
         },
         link: function (scope, element) {
             var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true, enablescripts: false, iframe: true });
@@ -71,6 +72,10 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
             });
 
             scope.$on('resetContent', function (event, arg) {
+                if (arg.id && arg.id !== scope.id) {
+                    return;
+                }
+
                 codeMirror.setValue(arg.body || '');
             });
 
