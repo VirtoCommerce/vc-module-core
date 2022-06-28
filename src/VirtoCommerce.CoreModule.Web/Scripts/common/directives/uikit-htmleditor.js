@@ -41,7 +41,9 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
                 scope.fileUploader.addToQueue(event.originalEvent.dataTransfer.files);
             });
             codeMirrorElement.on('paste', function (event) {
-                var imageClipboardItem = _.find(event.originalEvent.clipboardData.items, function (i) { return i.type.indexOf('image') !== -1 && i.kind === 'file' });
+                var imageClipboardItem = _.find(event.originalEvent.clipboardData.items, function(i) {
+                     return i.type.indexOf('image') !== -1 && i.kind === 'file'
+                });
                 if (imageClipboardItem) {
                     var blob = imageClipboardItem.getAsFile();
                     var filename = buildFileName() + '.png';
@@ -58,14 +60,13 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
                 if (codeMirror.getLineTokens(currentEditorLine)) {
                     position.line++;
                 }
-                for (var i = 0; i < arg.items.length; i++) {
-                    var file = arg.items[i];
+                for (const file of arg.items) {
                     position.line++;
                     var editorMode = codeMirror.getMode();
                     if (editorMode.name === 'gfm') {
-                        codeMirror.replaceRange('![' + file.name + '](' + file.url + ')\n\n', position);
+                        codeMirror.replaceRange(`![${file.name}](${file.url})\n\n`, position);
                     } else if (editorMode.name === 'htmlmixed') {
-                        codeMirror.replaceRange('<img alt="' + file.name + '" src="' + file.url + '" />\n\n', position);
+                        codeMirror.replaceRange(`<img alt="${file.name}" src="${file.url}" />\n\n`, position);
                     }
                 }
                 resetEditorLinesStyle(codeMirror);
@@ -92,6 +93,8 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
             function eventReplacer(match) {
                 if (match && match.matches && match.matches.length > 1) {
                     return match.matches[0].replace(match.matches[1], '');
+                } else {
+                    return undefined;
                 }
             }
 
@@ -112,8 +115,8 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
 
             function addAction(htmlEditor, name, replace, mode) {
                 htmlEditor.off('action.' + name).on('action.' + name, function () {
-                    if (htmlEditor.getCursorMode() == 'html' || htmlEditor.getCursorMode() == 'markdown') {
-                        htmlEditor[mode == 'replaceLine' || 'replaceSelection'](replace);
+                    if (htmlEditor.getCursorMode() === 'html' || htmlEditor.getCursorMode() === 'markdown') {
+                        htmlEditor[mode === 'replaceLine' || 'replaceSelection'](replace);
                     }
                 });
             }
@@ -132,7 +135,7 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
 
             function buildFileName() {
                 var date = new Date();
-                return 'image_' + date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDay() + '_' + date.getHours() + '-' + date.getMinutes() + '-' + date.getSeconds();
+                return `image_${date.getFullYear()}-${(date.getMonth() + 1)}-${date.getDay()}_${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}`;
             }
 
             codeMirror.setValue(scope.ngModel || '');
