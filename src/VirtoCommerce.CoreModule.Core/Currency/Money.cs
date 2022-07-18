@@ -52,7 +52,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
 
         public string FormattedAmountWithoutPoint => ToString(false, true);
 
-        public string FormattedAmountWithoutCurrency => ToString(false, true);
+        public string FormattedAmountWithoutCurrency => ToString(true, false);
 
         public string FormattedAmountWithoutPointAndCurrency => ToString(false, false);
 
