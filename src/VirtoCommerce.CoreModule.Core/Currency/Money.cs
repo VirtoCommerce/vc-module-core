@@ -48,12 +48,24 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             }
         }
 
+        /// <example>
+        /// $777.77
+        /// </example>
         public string FormattedAmount => ToString(true, true);
 
+        /// <example>
+        /// $777
+        /// </example>
         public string FormattedAmountWithoutPoint => ToString(false, true);
 
-        public string FormattedAmountWithoutCurrency => ToString(false, true);
+        /// <example>
+        /// 777.77
+        /// </example>
+        public string FormattedAmountWithoutCurrency => ToString(true, false);
 
+        /// <example>
+        /// 777
+        /// </example>
         public string FormattedAmountWithoutPointAndCurrency => ToString(false, false);
 
         public Currency Currency { get; }
