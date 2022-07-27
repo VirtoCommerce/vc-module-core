@@ -27,6 +27,7 @@ namespace VirtoCommerce.CoreModule.Core.Common
         public string Email { get; set; }
         public string OuterId { get; set; }
         public bool IsDefault { get; set; }
+        public string Description { get; set; }
         
         protected override IEnumerable<object> GetEqualityComponents()
         {
