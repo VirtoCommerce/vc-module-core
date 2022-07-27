@@ -46,7 +46,8 @@
                     "address2": "Адресная строка 2",
                     "zip-code": "Почтовый индекс",
                     "email": "Электронная почта",
-                    "phone": "Телефон"
+                    "phone": "Телефон",
+                    "description": "Описание"
                 },
                 "placeholders": {
                     "address-type": "Выбрать...",

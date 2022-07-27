@@ -54,5 +54,10 @@ angular.module('virtoCommerce.coreModule.common', [])
             title: 'core.blades.address-detail.labels.phone',
             valueType: 'ShortText',
             priority: 10
+        }, {
+            name: 'description',
+            title: 'core.blades.address-detail.labels.description',
+            valueType: 'textarea',
+            priority: 11
         }]);
     }]);
