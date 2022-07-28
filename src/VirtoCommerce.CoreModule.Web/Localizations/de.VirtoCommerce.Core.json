@@ -40,7 +40,8 @@
                     "address": "Adresse",
                     "zip-code": "PLZ",
                     "email": "E-Mail",
-                    "phone": "Telefon"
+                    "phone": "Telefon",
+                    "description": "Description"
                 },
                 "placeholders": {
                     "address-type": "Wählen Sie aus...",
