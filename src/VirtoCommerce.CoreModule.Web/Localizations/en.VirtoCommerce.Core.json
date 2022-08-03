@@ -46,7 +46,8 @@
           "address2": "Address line 2",
           "zip-code": "ZIP code",
           "email": "Email",
-          "phone": "Phone"
+          "phone": "Phone",
+          "description": "Description"
         },
         "placeholders": {
           "address-type": "Please select...",
