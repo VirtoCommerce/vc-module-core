@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Package;
-using VirtoCommerce.CoreModule.Core.Seo;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
 
@@ -127,7 +126,7 @@ namespace VirtoCommerce.CoreModule.Web.ExportImport
                                     await _currencyService.SaveChangesAsync(currencies.ToArray());
                                     currencies.Clear();
 
-                                    progressInfo.Description = $"{ currencyCount } Currencies imported";
+                                    progressInfo.Description = $"{currencyCount} Currencies imported";
 
                                     progressCallback(progressInfo);
                                 }
@@ -162,7 +161,7 @@ namespace VirtoCommerce.CoreModule.Web.ExportImport
                                     await _packageTypesService.SaveChangesAsync(packageTypes.ToArray());
                                     packageTypes.Clear();
 
-                                    progressInfo.Description = $"{ packageTypeCount } Package Types imported";
+                                    progressInfo.Description = $"{packageTypeCount} Package Types imported";
 
                                     progressCallback(progressInfo);
                                 }

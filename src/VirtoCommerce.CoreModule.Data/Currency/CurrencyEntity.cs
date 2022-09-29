@@ -57,7 +57,7 @@ namespace VirtoCommerce.CoreModule.Data.Currency
 
         public virtual void Patch(CurrencyEntity target)
         {
-            target.Code = Code; 
+            target.Code = Code;
             target.Name = Name;
             target.IsPrimary = IsPrimary;
             target.ExchangeRate = ExchangeRate;

@@ -1,7 +1,5 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Conditions;
 using VirtoCommerce.CoreModule.Core.Conditions.GeoConditions;
@@ -35,9 +33,9 @@ namespace VirtoCommerce.CoreModule.Tests
         }
     }
 
-    public class SomeContext: EvaluationContextBase
+    public class SomeContext : EvaluationContextBase
     {
-        
+
     }
 
     public class TimeZoneTestData : IEnumerable<object[]>

@@ -36,7 +36,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         /// <returns></returns>
         [HttpPut]
         [Route("seoinfos/batchupdate")]
-        public Task<ActionResult> BatchUpdateSeoInfos([FromBody]SeoInfo[] seoInfos)
+        public Task<ActionResult> BatchUpdateSeoInfos([FromBody] SeoInfo[] seoInfos)
         {
             throw new NotImplementedException();
         }
@@ -81,7 +81,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [Route("currencies")]
         [Authorize(ModuleConstants.Security.Permissions.CurrencyCreate)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> CreateCurrency([FromBody]Currency currency)
+        public async Task<ActionResult> CreateCurrency([FromBody] Currency currency)
         {
             await _currencyService.SaveChangesAsync(new[] { currency });
             return NoContent();
@@ -95,7 +95,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [Route("currencies")]
         [Authorize(ModuleConstants.Security.Permissions.CurrencyUpdate)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> UpdateCurrency([FromBody]Currency currency)
+        public async Task<ActionResult> UpdateCurrency([FromBody] Currency currency)
         {
             await _currencyService.SaveChangesAsync(new[] { currency });
             return NoContent();
@@ -136,7 +136,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [Route("packageTypes")]
         [Authorize(ModuleConstants.Security.Permissions.PackageTypeUpdate)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> UpdatePackageType([FromBody]PackageType packageType)
+        public async Task<ActionResult> UpdatePackageType([FromBody] PackageType packageType)
         {
             await _packageTypesService.SaveChangesAsync(new[] { packageType });
             return NoContent();
@@ -150,7 +150,7 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
         [Route("packageTypes")]
         [Authorize(ModuleConstants.Security.Permissions.PackageTypeCreate)]
         [ProducesResponseType(typeof(void), StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> CreatePackageType([FromBody]PackageType packageType)
+        public async Task<ActionResult> CreatePackageType([FromBody] PackageType packageType)
         {
             await _packageTypesService.SaveChangesAsync(new[] { packageType });
             return NoContent();

@@ -20,8 +20,8 @@ namespace VirtoCommerce.Tools
 
             // Don't process absolute URL
             Uri absoluteUri;
-            
-            if (virtualPath != null && (!Uri.TryCreate(virtualPath, UriKind.Absolute, out absoluteUri) || absoluteUri.Scheme == FILE_SCHEME ))
+
+            if (virtualPath != null && (!Uri.TryCreate(virtualPath, UriKind.Absolute, out absoluteUri) || absoluteUri.Scheme == FILE_SCHEME))
             {
                 var builder = new StringBuilder("~");
 
