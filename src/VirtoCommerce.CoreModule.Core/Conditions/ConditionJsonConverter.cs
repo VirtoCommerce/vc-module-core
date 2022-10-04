@@ -69,6 +69,6 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
 
             serializer.Populate(obj.CreateReader(), result);
             return result;
-        }       
+        }
     }
 }
