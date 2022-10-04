@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.Platform.Core.Common;
@@ -28,7 +27,7 @@ namespace VirtoCommerce.CoreModule.Core.Common
         public string OuterId { get; set; }
         public bool IsDefault { get; set; }
         public string Description { get; set; }
-        
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             var result = base.GetEqualityComponents();

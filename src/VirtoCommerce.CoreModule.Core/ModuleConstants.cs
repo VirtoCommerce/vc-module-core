@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using VirtoCommerce.Platform.Core.Settings;
 using System.Diagnostics.CodeAnalysis;
+using VirtoCommerce.Platform.Core.Settings;
 
 namespace VirtoCommerce.CoreModule.Core
 {
