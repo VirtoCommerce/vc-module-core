@@ -34,13 +34,30 @@ namespace VirtoCommerce.CoreModule.Web
         public ManifestModuleInfo ModuleInfo { get; set; }
         private IApplicationBuilder _appBuilder;
 
+        public string DatabaseProvider { get; set; }
+
         public void Initialize(IServiceCollection serviceCollection)
         {
             serviceCollection.AddDbContext<CoreDbContext>((provider, options) =>
             {
                 var configuration = provider.GetRequiredService<IConfiguration>();
-                options.UseSqlServer(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"));
+                this.DatabaseProvider = configuration.GetValue("DatabaseProvider", "SqlServer");
+
+
+                switch (this.DatabaseProvider)
+                {
+                    case "MySql":
+                        options.UseMySql(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"), new MySqlServerVersion(new Version(5, 7)), x => x.MigrationsAssembly("VirtoCommerce.CoreModule.Data.MySql"));
+                        break;
+                    case "PostgreSql":
+                        options.UseNpgsql(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"), x => x.MigrationsAssembly("VirtoCommerce.CoreModule.Data.PostgreSql"));
+                        break;
+                    default:
+                        options.UseSqlServer(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"));
+                        break;
+                }
             });
+
             serviceCollection.AddTransient<ICoreRepository, CoreRepositoryImpl>();
             serviceCollection.AddTransient<Func<ICoreRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<ICoreRepository>());
             serviceCollection.AddTransient<ICurrencyService, CurrencyService>();
@@ -71,7 +88,9 @@ namespace VirtoCommerce.CoreModule.Web
             using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<CoreDbContext>();
-                dbContext.Database.MigrateIfNotApplied(MigrationName.GetUpdateV2MigrationName(ModuleInfo.Id));
+                if(this.DatabaseProvider == "SqlServer")
+                    dbContext.Database.MigrateIfNotApplied(MigrationName.GetUpdateV2MigrationName(ModuleInfo.Id));
+
                 dbContext.Database.EnsureCreated();
                 dbContext.Database.Migrate();
             }

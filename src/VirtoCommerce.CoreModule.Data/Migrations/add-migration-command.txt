@@ -1,0 +1,3 @@
+Add-Migration Initial -Context VirtoCommerce.CoreModule.Data.Repositories.CoreDbContext  -Verbose -OutputDir Migrations -Project VirtoCommerce.CoreModule.Data -StartupProject VirtoCommerce.CoreModule.Data -Debug -Args SqlServer
+Add-Migration Initial -Context VirtoCommerce.CoreModule.Data.Repositories.CoreDbContext  -Verbose -OutputDir Migrations -Project VirtoCommerce.CoreModule.Data.PostgreSql -StartupProject VirtoCommerce.CoreModule.Data -Debug -Args PostgreSql
+Add-Migration Initial -Context VirtoCommerce.CoreModule.Data.Repositories.CoreDbContext  -Verbose -OutputDir Migrations -Project VirtoCommerce.CoreModule.Data.MySql -StartupProject VirtoCommerce.CoreModule.Data -Debug -Args MySql
