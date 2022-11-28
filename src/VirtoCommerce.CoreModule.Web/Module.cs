@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -26,34 +25,37 @@ using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.Extensions;
+using VirtoCommerce.CoreModule.Data.PostgreSql;
+using VirtoCommerce.CoreModule.Data.MySql;
+using VirtoCommerce.CoreModule.Data.SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 namespace VirtoCommerce.CoreModule.Web
 {
-    public class Module : IModule, IExportSupport, IImportSupport
+    public class Module : IModule, IExportSupport, IImportSupport, IHasConfiguration
     {
         public ManifestModuleInfo ModuleInfo { get; set; }
         private IApplicationBuilder _appBuilder;
-
-        public string DatabaseProvider { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         public void Initialize(IServiceCollection serviceCollection)
         {
             serviceCollection.AddDbContext<CoreDbContext>((provider, options) =>
             {
-                var configuration = provider.GetRequiredService<IConfiguration>();
-                this.DatabaseProvider = configuration.GetValue("DatabaseProvider", "SqlServer");
+                var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
+                var connectionString = Configuration.GetConnectionString(ModuleInfo.Id) ?? Configuration.GetConnectionString("VirtoCommerce");
 
-
-                switch (this.DatabaseProvider)
+                switch (databaseProvider)
                 {
                     case "MySql":
-                        options.UseMySql(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"), new MySqlServerVersion(new Version(5, 7)), x => x.MigrationsAssembly("VirtoCommerce.CoreModule.Data.MySql"));
+                        options.UseMySql(connectionString);
                         break;
                     case "PostgreSql":
-                        options.UseNpgsql(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"), x => x.MigrationsAssembly("VirtoCommerce.CoreModule.Data.PostgreSql"));
+                        options.UsePostgreSql(connectionString);
                         break;
                     default:
-                        options.UseSqlServer(configuration.GetConnectionString(ModuleInfo.Id) ?? configuration.GetConnectionString("VirtoCommerce"));
+                        //TODO: need to use different method signature since UseSqlServer also presents in Microsoft.EntityFrameworkCore namespace
+                        options.UseSqlServer(connectionString);
                         break;
                 }
             });
@@ -87,10 +89,12 @@ namespace VirtoCommerce.CoreModule.Web
 
             using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
             {
+                var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<CoreDbContext>();
-                if(this.DatabaseProvider == "SqlServer")
+                if (databaseProvider == "SqlServer")
+                {
                     dbContext.Database.MigrateIfNotApplied(MigrationName.GetUpdateV2MigrationName(ModuleInfo.Id));
-
+                }
                 dbContext.Database.EnsureCreated();
                 dbContext.Database.Migrate();
             }

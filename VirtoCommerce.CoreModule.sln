@@ -19,9 +19,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Tools.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Tools", "src\VirtoCommerce.Tools\VirtoCommerce.Tools.csproj", "{CB743D77-677F-4055-A1AD-BC0CA6FA4C43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Data.MySql", "src\VirtoCommerce.CoreModule.Data.MySql\VirtoCommerce.CoreModule.Data.MySql.csproj", "{9696246E-1323-455E-AC7E-00E63B4D7ECA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.CoreModule.Data.MySql", "src\VirtoCommerce.CoreModule.Data.MySql\VirtoCommerce.CoreModule.Data.MySql.csproj", "{9696246E-1323-455E-AC7E-00E63B4D7ECA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Data.PostgreSql", "src\VirtoCommerce.CoreModule.Data.PostgreSql\VirtoCommerce.CoreModule.Data.PostgreSql.csproj", "{AAB102D5-C597-4091-8C00-28B7CD4EBE57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.CoreModule.Data.PostgreSql", "src\VirtoCommerce.CoreModule.Data.PostgreSql\VirtoCommerce.CoreModule.Data.PostgreSql.csproj", "{AAB102D5-C597-4091-8C00-28B7CD4EBE57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.CoreModule.Data.SqlServer", "src\VirtoCommerce.CoreModule.Data.SqlServer\VirtoCommerce.CoreModule.Data.SqlServer.csproj", "{99BE06E1-592C-47DA-B040-93D6CFE0B891}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{AAB102D5-C597-4091-8C00-28B7CD4EBE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAB102D5-C597-4091-8C00-28B7CD4EBE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAB102D5-C597-4091-8C00-28B7CD4EBE57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99BE06E1-592C-47DA-B040-93D6CFE0B891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99BE06E1-592C-47DA-B040-93D6CFE0B891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99BE06E1-592C-47DA-B040-93D6CFE0B891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99BE06E1-592C-47DA-B040-93D6CFE0B891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{CB743D77-677F-4055-A1AD-BC0CA6FA4C43} = {708132D7-2BC6-47A6-9DDE-62CE99299AA8}
 		{9696246E-1323-455E-AC7E-00E63B4D7ECA} = {708132D7-2BC6-47A6-9DDE-62CE99299AA8}
 		{AAB102D5-C597-4091-8C00-28B7CD4EBE57} = {708132D7-2BC6-47A6-9DDE-62CE99299AA8}
+		{99BE06E1-592C-47DA-B040-93D6CFE0B891} = {708132D7-2BC6-47A6-9DDE-62CE99299AA8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F43BE99F-B551-4076-AA7A-27570AFAB42E}

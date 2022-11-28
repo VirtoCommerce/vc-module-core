@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace VirtoCommerce.CoreModule.Data.Migrations
+namespace VirtoCommerce.CoreModule.Data.SqlServer.Migrations
 {
     public partial class roundingpolicy : Migration
     {

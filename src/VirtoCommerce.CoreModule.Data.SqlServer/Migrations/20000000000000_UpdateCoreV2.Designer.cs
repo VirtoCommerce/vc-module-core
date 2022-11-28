@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using VirtoCommerce.CoreModule.Data.Repositories;
 
-namespace VirtoCommerce.CoreModule.Data.Migrations
+namespace VirtoCommerce.CoreModule.Data.SqlServer.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
     [Migration("20000000000000_UpdateCoreV2")]
