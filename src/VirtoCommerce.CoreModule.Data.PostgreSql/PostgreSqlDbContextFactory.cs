@@ -14,7 +14,7 @@ namespace VirtoCommerce.CoreModule.Data.PostgreSql
         public CoreDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<CoreDbContext>();
-            var connectionString = args.Any() ? args[0] : "User ID = postgres; Password = password; Host = localhost; Port = 5432; Database = virtocommerce;";
+            var connectionString = args.Any() ? args[0] : "User ID = postgres; Password = password; Host = localhost; Port = 5432; Database = virtocommerce3;";
 
             builder.UseNpgsql(
                 connectionString,

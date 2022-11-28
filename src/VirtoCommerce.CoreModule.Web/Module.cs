@@ -48,14 +48,13 @@ namespace VirtoCommerce.CoreModule.Web
                 switch (databaseProvider)
                 {
                     case "MySql":
-                        options.UseMySql(connectionString);
+                        options.UseMySqlDatabase(connectionString);
                         break;
                     case "PostgreSql":
-                        options.UsePostgreSql(connectionString);
+                        options.UsePostgreSqlDatabase(connectionString);
                         break;
                     default:
-                        //TODO: need to use different method signature since UseSqlServer also presents in Microsoft.EntityFrameworkCore namespace
-                        options.UseSqlServer(connectionString);
+                        options.UseSqlServerDatabase(connectionString);
                         break;
                 }
             });

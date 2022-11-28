@@ -14,16 +14,25 @@ namespace VirtoCommerce.CoreModule.Data.MySql
         public CoreDbContext CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<CoreDbContext>();
-            var connectionString = args.Any() ? args[0] : throw new InvalidOperationException("Please specify a connection string. E.g. dotnet ef database update -- \"Server=localhost;Port=3306;Database=virtocommerce;User=root;Password=password\"");
+            var connectionString = args.Any() ? args[0] : "server=localhost;user=root;password=virto;database=VirtoCommerce3;";
             var serverVersion = args.Length >= 2 ? args[1] : null;
 
             builder.UseMySql(
                 connectionString,
-                serverVersion != null ? ServerVersion.Parse(serverVersion) : ServerVersion.AutoDetect(connectionString),
+                ResolveServerVersion(serverVersion, connectionString),
                 db => db
                     .MigrationsAssembly(typeof(MySqlDbContextFactory).Assembly.GetName().Name));
 
             return new CoreDbContext(builder.Options);
+        }
+
+        private static ServerVersion ResolveServerVersion(string? serverVersion, string connectionString)
+        {
+            if (serverVersion == "AutoDetect")
+                return ServerVersion.AutoDetect(connectionString);
+            else if (serverVersion != null)
+                return ServerVersion.Parse(serverVersion);
+            return new MySqlServerVersion(new Version(5, 7));
         }
     }
 }

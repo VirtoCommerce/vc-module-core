@@ -7,7 +7,7 @@ namespace VirtoCommerce.CoreModule.Data.PostgreSql
         /// <summary>
         /// Configures the context to use PostgreSql.
         /// </summary>
-        public static DbContextOptionsBuilder UsePostgreSql(this DbContextOptionsBuilder builder, string connectionString) =>
+        public static DbContextOptionsBuilder UsePostgreSqlDatabase(this DbContextOptionsBuilder builder, string connectionString) =>
             builder.UseNpgsql(connectionString, db => db
                 .MigrationsAssembly(typeof(PostgreSqlDbContextFactory).Assembly.GetName().Name));
     }

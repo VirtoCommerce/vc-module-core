@@ -7,7 +7,7 @@ namespace VirtoCommerce.CoreModule.Data.MySql
         /// <summary>
         /// Configures the context to use PostgreSql.
         /// </summary>
-        public static DbContextOptionsBuilder UseMySql(this DbContextOptionsBuilder builder, string connectionString) =>
+        public static DbContextOptionsBuilder UseMySqlDatabase(this DbContextOptionsBuilder builder, string connectionString) =>
             builder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString), db => db
                 .MigrationsAssembly(typeof(MySqlDbContextFactory).Assembly.GetName().Name));
     }
