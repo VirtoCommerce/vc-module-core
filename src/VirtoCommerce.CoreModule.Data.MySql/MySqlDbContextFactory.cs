@@ -29,9 +29,13 @@ namespace VirtoCommerce.CoreModule.Data.MySql
         private static ServerVersion ResolveServerVersion(string? serverVersion, string connectionString)
         {
             if (serverVersion == "AutoDetect")
+            {
                 return ServerVersion.AutoDetect(connectionString);
+            }
             else if (serverVersion != null)
+            {
                 return ServerVersion.Parse(serverVersion);
+            }
             return new MySqlServerVersion(new Version(5, 7));
         }
     }
