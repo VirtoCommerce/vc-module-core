@@ -43,7 +43,8 @@ namespace VirtoCommerce.CoreModule.Data.MySql.Migrations
                         .HasColumnType("varchar(64)");
 
                     b.Property<decimal>("ExchangeRate")
-                        .HasColumnType("Money(65,30)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<bool>("IsPrimary")
                         .HasColumnType("tinyint(1)");

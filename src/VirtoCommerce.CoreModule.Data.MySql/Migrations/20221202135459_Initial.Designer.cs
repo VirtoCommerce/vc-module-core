@@ -11,7 +11,7 @@ using VirtoCommerce.CoreModule.Data.Repositories;
 namespace VirtoCommerce.CoreModule.Data.MySql.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
-    [Migration("20221125143037_Initial")]
+    [Migration("20221202135459_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,7 +45,8 @@ namespace VirtoCommerce.CoreModule.Data.MySql.Migrations
                         .HasColumnType("varchar(64)");
 
                     b.Property<decimal>("ExchangeRate")
-                        .HasColumnType("Money(65,30)");
+                        .HasPrecision(18, 4)
+                        .HasColumnType("decimal(18,4)");
 
                     b.Property<bool>("IsPrimary")
                         .HasColumnType("tinyint(1)");

@@ -24,7 +24,7 @@ namespace VirtoCommerce.CoreModule.Data.MySql.Migrations
                     Name = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsPrimary = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ExchangeRate = table.Column<decimal>(type: "Money(65,30)", nullable: false),
+                    ExchangeRate = table.Column<decimal>(type: "decimal(18,4)", precision: 18, scale: 4, nullable: false),
                     Symbol = table.Column<string>(type: "varchar(16)", maxLength: 16, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CustomFormatting = table.Column<string>(type: "varchar(64)", maxLength: 64, nullable: true)
