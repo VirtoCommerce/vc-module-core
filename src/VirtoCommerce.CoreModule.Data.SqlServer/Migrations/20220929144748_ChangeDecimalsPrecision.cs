@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace VirtoCommerce.CoreModule.Data.Migrations
+namespace VirtoCommerce.CoreModule.Data.SqlServer.Migrations
 {
     public partial class ChangeDecimalsPrecision : Migration
     {

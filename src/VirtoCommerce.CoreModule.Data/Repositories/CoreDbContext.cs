@@ -1,5 +1,7 @@
+using System.Reflection;
 using EntityFrameworkCore.Triggers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using VirtoCommerce.CoreModule.Data.Currency;
 using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Package;
@@ -34,6 +36,21 @@ namespace VirtoCommerce.CoreModule.Data.Repositories
             modelBuilder.Entity<PackageTypeEntity>().Property(x => x.Width).HasPrecision(18, 4);
 
             base.OnModelCreating(modelBuilder);
+
+            // Allows configuration for an entity type for different database types.
+            // Applies configuration from all <see cref="IEntityTypeConfiguration{TEntity}" in VirtoCommerce.CoreModule.Data.XXX project. /> 
+            switch (this.Database.ProviderName)
+            {
+                case "Pomelo.EntityFrameworkCore.MySql":
+                    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.CoreModule.Data.MySql"));
+                    break;
+                case "Npgsql.EntityFrameworkCore.PostgreSQL":
+                    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.CoreModule.Data.PostgreSql"));
+                    break;
+                case "Microsoft.EntityFrameworkCore.SqlServer":
+                    modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("VirtoCommerce.CoreModule.Data.SqlServer"));
+                    break;
+            }
         }
     }
 #pragma warning restore S109
