@@ -318,7 +318,7 @@
   },
   "module": {
     "VirtoCommerce.Core": {
-      "description": "Export or import fulfillment centers"
+      "description": "Export or import currencies, package types"
     }
   }
 }
