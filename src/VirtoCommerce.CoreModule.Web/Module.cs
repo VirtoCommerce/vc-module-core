@@ -1,9 +1,9 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -14,10 +14,13 @@ using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Package;
 using VirtoCommerce.CoreModule.Core.Seo;
 using VirtoCommerce.CoreModule.Data.Currency;
+using VirtoCommerce.CoreModule.Data.MySql;
 using VirtoCommerce.CoreModule.Data.Package;
+using VirtoCommerce.CoreModule.Data.PostgreSql;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.CoreModule.Data.Seo;
 using VirtoCommerce.CoreModule.Data.Services;
+using VirtoCommerce.CoreModule.Data.SqlServer;
 using VirtoCommerce.CoreModule.Web.ExportImport;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
@@ -25,17 +28,14 @@ using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.Extensions;
-using VirtoCommerce.CoreModule.Data.PostgreSql;
-using VirtoCommerce.CoreModule.Data.MySql;
-using VirtoCommerce.CoreModule.Data.SqlServer;
-using Microsoft.EntityFrameworkCore;
 
 namespace VirtoCommerce.CoreModule.Web
 {
     public class Module : IModule, IExportSupport, IImportSupport, IHasConfiguration
     {
-        public ManifestModuleInfo ModuleInfo { get; set; }
         private IApplicationBuilder _appBuilder;
+
+        public ManifestModuleInfo ModuleInfo { get; set; }
         public IConfiguration Configuration { get; set; }
 
         public void Initialize(IServiceCollection serviceCollection)
@@ -80,8 +80,8 @@ namespace VirtoCommerce.CoreModule.Web
             var settingsRegistrar = appBuilder.ApplicationServices.GetRequiredService<ISettingsRegistrar>();
             settingsRegistrar.RegisterSettings(ModuleConstants.Settings.AllSettings, ModuleInfo.Id);
 
-            var permissionsProvider = appBuilder.ApplicationServices.GetRequiredService<IPermissionsRegistrar>();
-            permissionsProvider.RegisterPermissions(ModuleConstants.Security.Permissions.AllPermissions.Select(x => new Permission { GroupName = "Core", Name = x }).ToArray());
+            var permissionsRegistrar = appBuilder.ApplicationServices.GetRequiredService<IPermissionsRegistrar>();
+            permissionsRegistrar.RegisterPermissions(ModuleInfo.Id, "Core", ModuleConstants.Security.Permissions.AllPermissions);
 
             var mvcJsonOptions = appBuilder.ApplicationServices.GetService<IOptions<MvcNewtonsoftJsonOptions>>();
             mvcJsonOptions.Value.SerializerSettings.Converters.Add(new ConditionJsonConverter());
@@ -115,4 +115,3 @@ namespace VirtoCommerce.CoreModule.Web
         }
     }
 }
-
