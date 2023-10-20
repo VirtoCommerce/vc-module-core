@@ -29,7 +29,6 @@ angular.module('virtoCommerce.coreModule.packageType')
 
     	function initializeBlade(data) {
     		if (blade.isNew) data = { };
-    		$scope.measureUnits = settings.getValues({ id: 'VirtoCommerce.Core.General.MeasureUnits' });
 
     		blade.currentEntity = angular.copy(data);
     		blade.origEntity = data;
@@ -37,18 +36,6 @@ angular.module('virtoCommerce.coreModule.packageType')
 
     		blade.title = blade.isNew ? 'core.blades.package-type-detail.new-title' : data.name;
     		blade.subtitle = blade.isNew ? 'core.blades.package-type-detail.new-subtitle' : 'core.blades.package-type-detail.subtitle';
-    	};
-
-    	$scope.openMeasureUnitsDictionarySettingManagement = function (setting) {
-    		var newBlade = {
-    			id: 'settingDetailChild',
-    			currentEntityId: 'VirtoCommerce.Core.General.MeasureUnits',
-    			parentRefresh: function (data) { $scope.measureUnits = data; },
-    			isApiSave: true,
-    			controller: 'platformWebApp.settingDictionaryController',
-    			template: '$(Platform)/Scripts/app/settings/blades/setting-dictionary.tpl.html'
-    		};
-    		bladeNavigationService.showBlade(newBlade, blade);
     	};
 
     	var formScope;
