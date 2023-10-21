@@ -299,10 +299,6 @@
       "description": "Единицы размера доступные для товаров",
       "title": "Единицы размера"
     },
-    "VirtoCommerce.Core.General.Languages": {
-      "description": "Список доступных языков",
-      "title": "Языки"
-    },
     "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
       "description": "Фиксированная стоимость за наземную доставку",
       "title": "Стоимость за наземную доставку"

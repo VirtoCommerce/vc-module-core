@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using VirtoCommerce.Platform.Core.Settings;
@@ -41,6 +42,7 @@ namespace VirtoCommerce.CoreModule.Core
                     ValueType = SettingValueType.ShortText,
                     DefaultValue = "gram",
                     IsDictionary = true,
+                    IsLocalizable = true,
                     AllowedValues = new[] { "gram", "ounce", "pound" }
                 };
 
@@ -51,9 +53,11 @@ namespace VirtoCommerce.CoreModule.Core
                     ValueType = SettingValueType.ShortText,
                     DefaultValue = "mm",
                     IsDictionary = true,
+                    IsLocalizable = true,
                     AllowedValues = new[] { "m", "mm", "ft", "in" }
                 };
 
+                [Obsolete("Use PlatformConstants.Settings.General.Languages", DiagnosticId = "VC0005", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
                 public static SettingDescriptor Languages = new SettingDescriptor
                 {
                     Name = "VirtoCommerce.Core.General.Languages",
@@ -79,7 +83,6 @@ namespace VirtoCommerce.CoreModule.Core
                         yield return TaxTypes;
                         yield return WeightUnits;
                         yield return MeasureUnits;
-                        yield return Languages;
                         yield return FixedTaxRateProviderRate;
                     }
                 }
@@ -94,6 +97,4 @@ namespace VirtoCommerce.CoreModule.Core
             }
         }
     }
-
-
 }
