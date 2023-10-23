@@ -11,7 +11,8 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
             var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true, enablescripts: false, iframe: true });
             var codeMirror = htmlEditor.editor;
             //Besides inline scripts need to also eliminate inline event handlers on preview
-            htmlEditor.on('render', function () {
+            htmlEditor.on('render', function (event, uiEditor) {
+                uiEditor.currentvalue = uiEditor.currentvalue.replace(/<(script|style)\b[^<]*(?:(?!<\/(script|style))<[^<]*)*<\/(script|style)[>\s]/img, '');
                 htmlEditor.replaceInPreview(/(?:<[^>]+\s)((on\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?)/ig, eventReplacer);
             });
             htmlEditor.addButtons({
