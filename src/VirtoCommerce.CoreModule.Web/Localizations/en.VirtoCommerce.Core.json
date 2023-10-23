@@ -299,10 +299,6 @@
       "description": "Available measurement units for size of physical goods",
       "title": "Size measurement units"
     },
-    "VirtoCommerce.Core.General.Languages": {
-      "description": "List of available languages",
-      "title": "Languages"
-    },
     "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
       "description": "Fixed land shipping fee",
       "title": "Land shipping fee"
