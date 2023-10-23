@@ -20,6 +20,23 @@ angular.module('virtoCommerce.coreModule.common')
             //    source: '='
             //},
             link: function ($scope, $element, $attrs) {
+                $scope.toggle = function ($event) {
+                    var elem = $event.target;
+                    var childUlElement = $(elem).find("ul");
+                    if (childUlElement.length > 0) {
+                        var iconElement = $(elem).find("i");
+                        if (iconElement.hasClass("fa-caret-down")) {
+                            iconElement.removeClass("fa-caret-down");
+                            iconElement.addClass("fa-caret-right");
+                        }
+                        else {
+                            iconElement.removeClass("fa-caret-right");
+                            iconElement.addClass("fa-caret-down");
+                        }
+                        childUlElement.toggle();
+                        $event.stopPropagation();
+                    }
+                };
                 $scope.addChild = function (chosenMenuElement, parentBlock) {
                     if (!parentBlock.children) {
                         parentBlock.children = [];
