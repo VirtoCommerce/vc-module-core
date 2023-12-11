@@ -13,6 +13,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     <PackageReference Include="TimeZoneConverter" Version="6.1.0" />
-    <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.800.0-alpha.12824-net8" />
+    <PackageReference Include="VirtoCommerce.Platform.Core" Version="3.800.0-alpha.12831-net8" />
   </ItemGroup>
 </Project>
