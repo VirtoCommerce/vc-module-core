@@ -161,9 +161,10 @@ namespace VirtoCommerce.CoreModule.Core.Currency
                     EnglishName = region.CurrencyEnglishName;
                 }
 
-                if (_code != null)
+                string symbol;
+                if (_code != null && _isoCurrencySymbolDict.TryGetValue(_code, out symbol) && symbol != null)
                 {
-                    Symbol = _isoCurrencySymbolDict[_code] ?? "N/A";
+                    Symbol = symbol;
                     NumberFormat.CurrencySymbol = Symbol;
                 }
             }
