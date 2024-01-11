@@ -11,7 +11,7 @@ namespace VirtoCommerce.CoreModule.Data.SqlServer.Migrations
 {
     [DbContext(typeof(CoreDbContext))]
     [Migration("20210728124419_roundingpolicy")]
-    partial class roundingpolicy
+    partial class RoundingPolicy
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -5,11 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using VirtoCommerce.CoreModule.Data.Currency;
 using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Package;
+using VirtoCommerce.Platform.Data.Infrastructure;
 
 namespace VirtoCommerce.CoreModule.Data.Repositories
 {
 #pragma warning disable S109
-    public class CoreDbContext : DbContextWithTriggers
+    public class CoreDbContext : DbContextBase
     {
         public CoreDbContext(DbContextOptions<CoreDbContext> options)
             : base(options)

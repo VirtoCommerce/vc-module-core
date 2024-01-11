@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VirtoCommerce.CoreModule.Data.SqlServer.Migrations
 {
-    public partial class roundingpolicy : Migration
+    public partial class RoundingPolicy : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
