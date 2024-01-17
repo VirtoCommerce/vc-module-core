@@ -77,20 +77,20 @@
                     "symbol": "Symbol",
                     "custom-formatting": "Benutzerdefinierte Formatierung"
                 },
-                "descriptions": {
-                    "code": "Der Währungscode. Verwenden Sie den 3-Buchstaben-ISO 4217-Code, falls vorhanden.",
-                    "name": "Der Name der Währung.",
-                    "is-primary": "Ist das die Hauptwährung? Nur eine Währung kann primär sein.",
-                    "exchange-rate": "Der Wechselkurs zur Primärwährung des Wechselkurses",
-                    "symbol": "Kurzes Währungssymbol",
-                    "custom-formatting": "Benutzerdefinierte Formatierung, die auf den Währungswert angewendet wird"
-                },
+              "descriptions": {
+                "code": "Der Währungscode. Verwenden Sie den 3-Buchstaben-ISO 4217-Code, falls vorhanden.",
+                "name": "Der Name der Währung.",
+                "is-primary": "Ist das die Hauptwährung? Nur eine Währung kann primär sein.",
+                "exchange-rate": "Der Wechselkurs zur Primärwährung des Wechselkurses",
+                "symbol": "Kurzes Währungssymbol",
+                "custom-formatting": "Kann jeder gültige Standardbezeichner für numerische Formate sein, z sowie jede Kombination von benutzerdefinierten numerischen Formatspezifizierern."
+              },
                 "placeholders": {
                     "symbol": "Ein eigenes Symbol eingeben oder leer lassen um entsprechenden Standard zu verwenden.",
                     "code": "Währungscode eingeben",
                     "name": "Geben Sie den Währungsnamen ein",
                     "exchange-rate": "Geben Sie den Wechselkurs gegenüber der Hauptwährung ein",
-                    "custom-formatting": "0,0.000"
+                    "custom-formatting": "Bitte geben Sie ein Format an oder lassen Sie es als Standard leer"
                 },
                 "validation": {
                     "maxlength": "Der Währungscode darf nur 3 Symbole enthalten"
