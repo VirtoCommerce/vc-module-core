@@ -83,7 +83,7 @@
           "is-primary": "Enable this option to make this currency your default one. Note: Only one currency may be set as default.",
           "exchange-rate": "Please provide the exchange rate against your default currency.",
           "symbol": "Please provide a sign for this currency.",
-          "custom-formatting": "You can apply custom formatting to the currency value.",
+          "custom-formatting": "Can be any valid standard numeric format specifier, as well as any combination of custom numeric format specifiers.",
           "midpoint-rounding": "Please select an appropriate midpoint rounding method.",
           "rounding-type": "Please select an appropriate rounding type."
         },
@@ -92,7 +92,9 @@
           "code": "Please provide currency code...",
           "name": "Please provide currency name...",
           "exchange-rate": "Please provide the exchange rate against your default currency...",
-          "custom-formatting": "0.0.000"
+          "custom-formatting": "Please provide a format or leave blank for default",
+          "midpoint-rounding": "Select midpoint rounding policy",
+          "rounding-type": "Select rounding policy"
         },
         "validation": {
           "maxlength": "The currency code must consist of 3 alphabetic characters"
