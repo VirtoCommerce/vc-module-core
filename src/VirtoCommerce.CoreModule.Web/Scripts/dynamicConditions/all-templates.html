@@ -392,9 +392,20 @@
    <a class="__link" ng-click="openItemSelectWizard(element)">{{element.productName?element.productName + ' (' + element.productCode + ')' : 'select product' }}</a> items
 </script>
 <script type="text/ng-template" id="expression-UserGroupsContainsCondition.html">
-    User groups contains
+    User group contains
     <div class="form-input">
         <input required class="form-control" ng-model="element1.group" placeholder="Enter group" />
+    </div>
+</script>
+<script type="text/ng-template" id="expression-UserGroupIsCondition.html">
+    User group is
+    <div class="form-input">
+        <ui-select multiple ng-model="element1.groups" ng-controller="virtoCommerce.dynamicExpressions.conditionUserGroupsController">
+            <ui-select-match placeholder="{{'customer.blades.contact-detail.placeholders.groups' | translate}}">{{$item|json}}</ui-select-match>
+            <ui-select-choices repeat="x in groups | filter: $select.search">
+                <span ng-bind-html="x | highlight: $select.search"></span>
+            </ui-select-choices>
+        </ui-select>
     </div>
 </script>
 <!--DYNAMIC CONTENT PUBLISHING-->
