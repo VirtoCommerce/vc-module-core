@@ -26,6 +26,10 @@ angular.module('virtoCommerce.coreModule.common')
                 id: 'UserGroupsContainsCondition',
                 displayName: 'User group contains...'
             });
+            dynamicExpressionService.registerExpression({
+                id: 'UserGroupIsCondition',
+                displayName: 'User group is...'
+            });
 
             var availableExcludings = [
                 {
@@ -250,6 +254,9 @@ angular.module('virtoCommerce.coreModule.common')
     }])
     .controller('virtoCommerce.dynamicExpressions.conditionGeoTimeZoneController', ['$scope', 'platformWebApp.common.timeZones', function ($scope, timeZones) {
         $scope.timeZones = timeZones.query();
+    }])
+    .controller('virtoCommerce.dynamicExpressions.conditionUserGroupsController', ['$scope', 'platformWebApp.settings', function ($scope, settings) {
+        $scope.groups = settings.getValues({ id: 'Customer.MemberGroups' });
     }])
     .controller('virtoCommerce.dynamicExpressions.shippingMethodRewardController', ['$scope', function ($scope) {
         function initialize(storeIds) {
