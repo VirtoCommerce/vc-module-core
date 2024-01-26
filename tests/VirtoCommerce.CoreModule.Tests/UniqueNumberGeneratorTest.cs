@@ -53,6 +53,8 @@ namespace VirtoCommerce.CoreModule.Tests
         [InlineData("CO{0:yyMMdd}-{1:D5}@None", "CO240126-00778")]
         [InlineData("CO{0:yyMMdd}-{1:D5}@None:1", "CO240126-00778")]
         [InlineData("CO{0:yyMMdd}-{1:D5}@None:1:1", "CO240126-00778")]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None:1:10", "CO240126-00787")]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None:1:100", "CO240126-00877")]
         public void GenerateNumber_ShouldGenerateUniqueNumbersWithDifferentParameters(string template, string expected)
         {
             var objectType = template.Contains("@") ? template.Substring(0, template.IndexOf("@")) : template;
