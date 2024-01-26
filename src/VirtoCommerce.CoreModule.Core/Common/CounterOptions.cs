@@ -1,7 +1,7 @@
 namespace VirtoCommerce.CoreModule.Core.Common
 {
     /// <summary>
-    /// Represents options for Counter Options for ITenantUniqueNumberGenerator.
+    /// Represents counter options for ITenantUniqueNumberGenerator.
     /// </summary>
     public class CounterOptions
     {
