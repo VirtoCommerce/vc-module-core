@@ -1,16 +1,6 @@
 namespace VirtoCommerce.CoreModule.Core.Common
 {
     /// <summary>
-    /// Represents options for unique number generation.
-    /// </summary>
-    public class UniqueNumberGeneratorOptions
-    {
-        public ResetCounterType ResetCounterType { get; set; }
-        public int StartCounterFrom { get; set; } = 1;
-        public int CounterIncrement { get; set; } = 1;
-    }
-
-    /// <summary>
     /// Represents interface for unique number generation for tenant.
     /// </summary>
     public interface ITenantUniqueNumberGenerator
@@ -18,10 +8,18 @@ namespace VirtoCommerce.CoreModule.Core.Common
         /// <summary>
         /// Generates unique number using given template with resetCounterType for tentantId.
         /// </summary>
-        /// <param name="tentantId"></param>
+        /// <param name="tenantId"></param>
         /// <param name="numberTemplate"></param>
-        /// <param name="options"></param>
+        /// <param name="counterOptions"></param>
         /// <returns></returns>
-        string GenerateNumber(string tentantId, string numberTemplate, UniqueNumberGeneratorOptions options);
+        string GenerateNumber(string tenantId, string numberTemplate, CounterOptions counterOptions);
+
+        /// <summary>
+        /// Generates unique number using given template for tentantId.
+        /// </summary>
+        /// <param name="tenantId"></param>
+        /// <param name="numberTemplate"></param>
+        /// <returns></returns>
+        string GenerateNumber(string tenantId, string numberTemplate);
     }
 }

@@ -187,7 +187,30 @@ namespace VirtoCommerce.CoreModule.Tests
 
             // Act
             var generatedNumber = numberGeneratorService.GenerateNumber(tenantId, template,
-                new UniqueNumberGeneratorOptions { ResetCounterType = resetCounterType });
+                new CounterOptions { ResetCounterType = resetCounterType });
+
+            // Assert
+            Assert.Equal(expected, generatedNumber);
+        }
+
+        [Theory]
+        [MemberData(nameof(ResetCounterCases))]
+        public void GenerateNumber_ResetCounter_LoadSettingsFromTemplate(DateTime lastResetDate, DateTime currentDate, ResetCounterType resetCounterType, string expected)
+        {
+            var tenantId = "TEST";
+            var template = "{1:D5}";
+
+            // Arrange
+            var sequenceEntity = new SequenceEntity { ObjectType = $"{tenantId}/{template}", Value = 777, ModifiedDate = lastResetDate };
+
+            var repositoryFactoryMock = CreateRepositoryMock(sequenceEntity);
+
+            var numberGeneratorService = new CustomDateSequenceUniqueNumberGeneratorService(
+                repositoryFactoryMock.Object,
+                currentDate);
+
+            // Act
+            var generatedNumber = numberGeneratorService.GenerateNumber(tenantId, $"{template}@{resetCounterType}");
 
             // Assert
             Assert.Equal(expected, generatedNumber);

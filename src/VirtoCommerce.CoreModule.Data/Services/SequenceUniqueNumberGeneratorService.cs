@@ -72,17 +72,33 @@ namespace VirtoCommerce.CoreModule.Data.Services
         }
 
         /// <summary>
-        /// Generates unique number using given template and options for tentantId.
+        /// Generates unique number using given template.
         /// </summary>
-        /// <param name="tentantId"></param>
+        /// <param name="numberTemplate">The number template. Pass the format to be used in string.Format function. Passable parameters: 0 - date (the UTC time of number generation); 1 - the sequence number.</param>
+        /// <returns></returns>
+        public virtual string GenerateNumber(string tenantId, string numberTemplate)
+        {
+            ArgumentNullException.ThrowIfNull(tenantId);
+            ArgumentNullException.ThrowIfNull(numberTemplate);
+
+            string resolvedNumberTemplate;
+            var templateOptions = ResolveTemplateOptionsFromTemplate(numberTemplate, out resolvedNumberTemplate);
+
+            return GenerateNumber(tenantId, resolvedNumberTemplate, templateOptions);
+        }
+
+        /// <summary>
+        /// Generates unique number using given template and options for tenantId.
+        /// </summary>
+        /// <param name="tenantId"></param>
         /// <param name="numberTemplate"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public virtual string GenerateNumber(string tentantId, string numberTemplate, UniqueNumberGeneratorOptions options)
+        public virtual string GenerateNumber(string tenantId, string numberTemplate, CounterOptions counterOptions)
         {
-            ArgumentNullException.ThrowIfNull(tentantId);
+            ArgumentNullException.ThrowIfNull(tenantId);
             ArgumentNullException.ThrowIfNull(numberTemplate);
-            ArgumentNullException.ThrowIfNull(options);
+            ArgumentNullException.ThrowIfNull(counterOptions);
 
             var retryPolicy = ConfigureRetryPolicy();
 
@@ -91,13 +107,13 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 var currentDate = DateTime.Now;
                 var counter = 0;
 
-                retryPolicy.Execute(() => counter = RequestNextCounter(tentantId, numberTemplate, options));
+                retryPolicy.Execute(() => counter = RequestNextCounter(tenantId, numberTemplate, counterOptions));
 
-                return string.Format(numberTemplate, currentDate, counter, tentantId);
+                return string.Format(numberTemplate, currentDate, counter, tenantId);
             }
         }
 
-        protected virtual UniqueNumberGeneratorOptions ResolveTemplateOptionsFromTemplate(string numberTemplate, out string resolvedNumberTemplate)
+        protected virtual CounterOptions ResolveTemplateOptionsFromTemplate(string numberTemplate, out string resolvedNumberTemplate)
         {
             var match = Regex.Match(numberTemplate, @"(?<Template>[^@]+)@(?<ResetCounterType>None|Daily|Weekly|Monthly|Yearly)(:(?<StartCounterFrom>\d+))?(:(?<CounterIncrement>\d+))?", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
 
@@ -105,7 +121,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             {
                 resolvedNumberTemplate = match.Groups["Template"].Value;
 
-                return new UniqueNumberGeneratorOptions
+                return new CounterOptions
                 {
                     ResetCounterType = Enum.Parse<ResetCounterType>(match.Groups["ResetCounterType"].Value),
                     StartCounterFrom = string.IsNullOrEmpty(match.Groups["StartCounterFrom"].Value) ? 1 : int.Parse(match.Groups["StartCounterFrom"].Value),
@@ -115,13 +131,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             else
             {
                 resolvedNumberTemplate = numberTemplate;
-
-                return new UniqueNumberGeneratorOptions
-                {
-                    ResetCounterType = ResetCounterType.Daily,
-                    StartCounterFrom = 1,
-                    CounterIncrement = 1,
-                };
+                return new CounterOptions();
             }
         }
 
@@ -141,9 +151,9 @@ namespace VirtoCommerce.CoreModule.Data.Services
         /// </summary>
         /// <param name="tenantId"></param>
         /// <param name="numberTemplate"></param>
-        /// <param name="resetCounterType"></param>
+        /// <param name="counterOptions"></param>
         /// <returns></returns>
-        protected virtual int RequestNextCounter(string tenantId, string numberTemplate, UniqueNumberGeneratorOptions options)
+        protected virtual int RequestNextCounter(string tenantId, string numberTemplate, CounterOptions counterOptions)
         {
             var objectType = string.IsNullOrEmpty(tenantId) ? numberTemplate : $"{tenantId}/{numberTemplate}";
 
@@ -154,13 +164,13 @@ namespace VirtoCommerce.CoreModule.Data.Services
             {
                 var lastResetDate = sequence.ModifiedDate ?? GetCurrentUtcDate();
 
-                if (ShouldResetCounter(lastResetDate, options.ResetCounterType))
+                if (ShouldResetCounter(lastResetDate, counterOptions.ResetCounterType))
                 {
-                    sequence.Value = options.StartCounterFrom;
+                    sequence.Value = counterOptions.StartCounterFrom;
                 }
                 else
                 {
-                    sequence.Value += options.CounterIncrement;
+                    sequence.Value += counterOptions.CounterIncrement;
                 }
 
                 sequence.ModifiedDate = GetCurrentUtcDate();
@@ -170,7 +180,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 sequence = new SequenceEntity
                 {
                     ObjectType = numberTemplate,
-                    Value = options.StartCounterFrom,
+                    Value = counterOptions.StartCounterFrom,
                     ModifiedDate = GetCurrentUtcDate()
                 };
                 repository.Add(sequence);
