@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using Polly;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Repositories;
@@ -9,15 +10,8 @@ namespace VirtoCommerce.CoreModule.Data.Services
 {
     public class SequenceUniqueNumberGeneratorService : IUniqueNumberGenerator
     {
-
-        //How many sequence items will be stored in-memory
-        public const int SequenceReservationRange = 100;
-        public const int DefaultSequenceStartValue = 1;
-
+        private readonly object _lock = new object();
         private readonly Func<ICoreRepository> _repositoryFactory;
-        private static readonly object _sequenceLock = new object();
-        private static readonly InMemorySequenceList _inMemorySequences = new InMemorySequenceList();
-
 
         public SequenceUniqueNumberGeneratorService(Func<ICoreRepository> repositoryFactory)
         {
@@ -31,145 +25,38 @@ namespace VirtoCommerce.CoreModule.Data.Services
         /// <returns></returns>
         public string GenerateNumber(string numberTemplate)
         {
-            lock (_sequenceLock)
+            var retryPolicy = Policy.Handle<DbUpdateConcurrencyException>().WaitAndRetry(retryCount: 10, _ => TimeSpan.FromMilliseconds(5));
+
+            lock (_lock)
             {
-                _inMemorySequences[numberTemplate] = _inMemorySequences[numberTemplate] ?? new InMemorySequence(numberTemplate);
+                var currentDate = DateTime.Now; // {0}
 
-                if (_inMemorySequences[numberTemplate].IsEmpty || _inMemorySequences[numberTemplate].HasExpired)
-                {
-                    const int maxTransactionRetries = 3;
+                int counter = 0;
+                retryPolicy.Execute(() => counter = RequestNextCounter(numberTemplate));
 
-                    for (var retryCount = 0; retryCount < maxTransactionRetries; retryCount++)
-                    {
-                        try
-                        {
-                            InitCounters(numberTemplate, out var startCounter, out var endCounter);
-                            _inMemorySequences[numberTemplate].Pregenerate(startCounter, endCounter, numberTemplate);
-                            break;
-                        }
-                        catch (Exception)
-                        {
-                            // Catching base Exception as any db exception thrown as FaultException.
-                        }
-                    }
-                }
-
-                return string.Format(_inMemorySequences[numberTemplate].Next());
+                return string.Format(numberTemplate, currentDate, counter);
             }
         }
 
-        private void InitCounters(string objectType, out int startCounter, out int endCounter)
+        protected virtual int RequestNextCounter(string numberTemplate)
         {
-            //Update Sequences in database
-            using (var repository = _repositoryFactory())
+            using var repository = _repositoryFactory();
+            var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == numberTemplate);
+
+            if (sequence != null)
             {
-                var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == objectType);
-                var originalModifiedDate = sequence?.ModifiedDate;
-
-                if (sequence != null)
-                {
-                    sequence.ModifiedDate = DateTime.UtcNow;
-                }
-                else
-                {
-                    sequence = new SequenceEntity { ObjectType = objectType, Value = DefaultSequenceStartValue, ModifiedDate = DateTime.UtcNow };
-                    repository.Add(sequence);
-                }
-
-
-                repository.UnitOfWork.Commit();
-                //TODO will check it
-                //Refresh data to make sure we have latest value in case another transaction was locked
-                //repository.Refresh(repository.Sequences);
-                sequence = repository.Sequences.Single(s => s.ObjectType == objectType);
-                startCounter = sequence.Value;
-
-                //Sequence in database has expired?
-                if (originalModifiedDate.HasValue && originalModifiedDate.Value.Date < DateTime.UtcNow.Date)
-                {
-                    startCounter = DefaultSequenceStartValue;
-                }
-
-                try
-                {
-                    endCounter = checked(startCounter + SequenceReservationRange);
-                }
-                catch (OverflowException)
-                {
-                    //need to reset
-                    startCounter = DefaultSequenceStartValue;
-                    endCounter = SequenceReservationRange;
-                }
-
-                sequence.Value = endCounter;
-                repository.UnitOfWork.Commit();
+                sequence.ModifiedDate = DateTime.UtcNow;
+                sequence.Value += 1;
             }
-        }
-
-        private class InMemorySequence
-        {
-            private readonly string _type;
-            private Stack<string> _sequence = new Stack<string>();
-            private DateTime? _lastGenerationDateTime;
-
-            public InMemorySequence(string type)
+            else
             {
-                _type = type;
+                sequence = new SequenceEntity { ObjectType = numberTemplate, Value = 1, ModifiedDate = DateTime.UtcNow };
+                repository.Add(sequence);
             }
 
-            public string ObjectType
-            {
-                get { return _type; }
-            }
+            repository.UnitOfWork.Commit();
 
-            public bool HasExpired
-            {
-                get { return _lastGenerationDateTime.HasValue && _lastGenerationDateTime.Value.Date < DateTime.UtcNow.Date; }
-            }
-
-            public bool IsEmpty
-            {
-                get { return _sequence.Count == 0; }
-            }
-
-            public string Next()
-            {
-                return _sequence.Pop();
-            }
-
-            public void Pregenerate(int startCount, int endCount, string numberTemplate)
-            {
-                _lastGenerationDateTime = DateTime.UtcNow;
-                var generatedItems = new Stack<string>();
-                for (var index = startCount; index < endCount; index++)
-                {
-                    generatedItems.Push(string.Format(numberTemplate, _lastGenerationDateTime.Value, index));
-                }
-
-                //This revereses the sequence
-                _sequence = new Stack<string>(generatedItems);
-            }
-        }
-
-        private class InMemorySequenceList : List<InMemorySequence>
-        {
-            public InMemorySequence this[string type]
-            {
-                get
-                {
-                    return this.FirstOrDefault(i => i.ObjectType.Equals(type, StringComparison.OrdinalIgnoreCase));
-                }
-                set
-                {
-                    var exitingItem = this[type];
-
-                    if (exitingItem != null)
-                    {
-                        Remove(exitingItem);
-                    }
-                    Add(value);
-                }
-            }
+            return sequence.Value;
         }
     }
 }
