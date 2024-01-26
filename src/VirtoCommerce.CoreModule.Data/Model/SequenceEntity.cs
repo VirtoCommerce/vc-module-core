@@ -16,7 +16,5 @@ namespace VirtoCommerce.CoreModule.Data.Model
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
-
-        //public DateTime? LastResetDate { get; set; }
     }
 }

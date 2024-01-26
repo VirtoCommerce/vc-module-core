@@ -47,13 +47,17 @@ namespace VirtoCommerce.CoreModule.Tests
         }
 
         [Theory]
-        [InlineData("{1}", "2")]
-        [InlineData("PO-{1:D5}", "PO-00002")]
-        [InlineData("CO{0:yyMMdd}-{1:D5}", "CO240126-00002")]
+        [InlineData("{1}", "778")]
+        [InlineData("PO-{1:D5}", "PO-00778")]
+        [InlineData("CO{0:yyMMdd}-{1:D5}", "CO240126-00778")]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None", "CO240126-00778")]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None:1", "CO240126-00778")]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None:1:1", "CO240126-00778")]
         public void GenerateNumber_ShouldGenerateUniqueNumbersWithDifferentParameters(string template, string expected)
         {
+            var objectType = template.Contains("@") ? template.Substring(0, template.IndexOf("@")) : template;
             // Arrange
-            var sequenceEntity = new SequenceEntity { ObjectType = template, Value = 1, ModifiedDate = DateTime.UtcNow };
+            var sequenceEntity = new SequenceEntity { ObjectType = objectType, Value = 777, ModifiedDate = DateTime.UtcNow };
 
             var repositoryFactoryMock = CreateRepositoryMock(sequenceEntity);
 
@@ -173,7 +177,7 @@ namespace VirtoCommerce.CoreModule.Tests
             var template = "{1:D5}";
 
             // Arrange
-            var sequenceEntity = new SequenceEntity { ObjectType = template, Value = 777, ModifiedDate = lastResetDate };
+            var sequenceEntity = new SequenceEntity { ObjectType = $"{tenantId}/{template}", Value = 777, ModifiedDate = lastResetDate };
 
             var repositoryFactoryMock = CreateRepositoryMock(sequenceEntity);
 

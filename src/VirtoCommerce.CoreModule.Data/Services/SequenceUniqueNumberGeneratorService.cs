@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Polly;
@@ -11,11 +12,26 @@ using VirtoCommerce.CoreModule.Data.Repositories;
 namespace VirtoCommerce.CoreModule.Data.Services
 {
     /// <summary>
-    /// Represents implementation of unique number generator using database sequences.
-    /// Generates unique number using given template, e.g., GenerateNumber("Order{0:yyMMdd}-{1:D5}");
+    /// Represents unique number generator using database storage.
+    /// It generates an unique number using given template, e.g., "PO{0:yyMMdd}-{1:D5}" where
+    /// 
     /// {0} - date (the UTC time of number generation)
     /// {1} - the sequence number
     /// {2} - tenantId
+    /// 
+    /// Also, it supports counter options after @:
+    /// <numberTemplate> or <number_template>@<reset_counter_type>:<start_counter_from>:<counter_increment>
+    /// 
+    /// reset_counter_type - can be one of this value: None, Daily, Weekly, Monthly, Yearly. Default value: Daily
+    /// start_counter_from - positive integer value. Default value: 1
+    /// counter_increment - positive integer value. Default value: 1
+    ///
+    /// Examples:
+    /// PO{1:D5}
+    /// PO{0:yyMMdd}-{1:D5}
+    /// PO{0:yyMMdd}-{1:D5}@Daily
+    /// PO{0:yyMMdd}-{1:D5}@Weekly:1:10
+    /// PO{0:yyMMdd}-{1:D5}@None:1:1
     /// </summary>
     public class SequenceUniqueNumberGeneratorService : IUniqueNumberGenerator, ITenantUniqueNumberGenerator
     {
@@ -32,24 +48,27 @@ namespace VirtoCommerce.CoreModule.Data.Services
         public SequenceUniqueNumberGeneratorService(Func<ICoreRepository> repositoryFactory,
             IOptions<SequenceNumberGeneratorOptions> options)
         {
+            ArgumentNullException.ThrowIfNull(repositoryFactory);
+            ArgumentNullException.ThrowIfNull(options);
+
             _repositoryFactory = repositoryFactory;
             _options = options.Value;
         }
 
         /// <summary>
-        /// Generates unique number using given template, e.g., GenerateNumber("Order{0:yyMMdd}-{1:D5}");
+        /// Generates unique number using given template.
         /// </summary>
         /// <param name="numberTemplate">The number template. Pass the format to be used in string.Format function. Passable parameters: 0 - date (the UTC time of number generation); 1 - the sequence number.</param>
         /// <returns></returns>
-        public string GenerateNumber(string numberTemplate)
+        public virtual string GenerateNumber(string numberTemplate)
         {
-            return GenerateNumber(string.Empty, numberTemplate,
-                new UniqueNumberGeneratorOptions
-                {
-                    ResetCounterType = ResetCounterType.Daily,
-                    CounterIncrement = 1,
-                    StartCounterFrom = 1
-                });
+            ArgumentNullException.ThrowIfNull(numberTemplate);
+
+
+            string resolvedNumberTemplate;
+            var templateOptions = ResolveTemplateOptionsFromTemplate(numberTemplate, out resolvedNumberTemplate);
+
+            return GenerateNumber(string.Empty, resolvedNumberTemplate, templateOptions);
         }
 
         /// <summary>
@@ -59,8 +78,12 @@ namespace VirtoCommerce.CoreModule.Data.Services
         /// <param name="numberTemplate"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public string GenerateNumber(string tentantId, string numberTemplate, UniqueNumberGeneratorOptions options)
+        public virtual string GenerateNumber(string tentantId, string numberTemplate, UniqueNumberGeneratorOptions options)
         {
+            ArgumentNullException.ThrowIfNull(tentantId);
+            ArgumentNullException.ThrowIfNull(numberTemplate);
+            ArgumentNullException.ThrowIfNull(options);
+
             var retryPolicy = ConfigureRetryPolicy();
 
             lock (_lock)
@@ -71,6 +94,34 @@ namespace VirtoCommerce.CoreModule.Data.Services
                 retryPolicy.Execute(() => counter = RequestNextCounter(tentantId, numberTemplate, options));
 
                 return string.Format(numberTemplate, currentDate, counter, tentantId);
+            }
+        }
+
+        protected virtual UniqueNumberGeneratorOptions ResolveTemplateOptionsFromTemplate(string numberTemplate, out string resolvedNumberTemplate)
+        {
+            var match = Regex.Match(numberTemplate, @"(?<Template>[^@]+)@(?<ResetCounterType>None|Daily|Weekly|Monthly|Yearly)(:(?<StartCounterFrom>\d+))?(:(?<CounterIncrement>\d+))?", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
+
+            if (match.Success)
+            {
+                resolvedNumberTemplate = match.Groups["Template"].Value;
+
+                return new UniqueNumberGeneratorOptions
+                {
+                    ResetCounterType = Enum.Parse<ResetCounterType>(match.Groups["ResetCounterType"].Value),
+                    StartCounterFrom = string.IsNullOrEmpty(match.Groups["StartCounterFrom"].Value) ? 1 : int.Parse(match.Groups["StartCounterFrom"].Value),
+                    CounterIncrement = string.IsNullOrEmpty(match.Groups["CounterIncrement"].Value) ? 1 : int.Parse(match.Groups["CounterIncrement"].Value),
+                };
+            }
+            else
+            {
+                resolvedNumberTemplate = numberTemplate;
+
+                return new UniqueNumberGeneratorOptions
+                {
+                    ResetCounterType = ResetCounterType.Daily,
+                    StartCounterFrom = 1,
+                    CounterIncrement = 1,
+                };
             }
         }
 
@@ -94,8 +145,10 @@ namespace VirtoCommerce.CoreModule.Data.Services
         /// <returns></returns>
         protected virtual int RequestNextCounter(string tenantId, string numberTemplate, UniqueNumberGeneratorOptions options)
         {
+            var objectType = string.IsNullOrEmpty(tenantId) ? numberTemplate : $"{tenantId}/{numberTemplate}";
+
             using var repository = _repositoryFactory();
-            var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == numberTemplate);
+            var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == objectType);
 
             if (sequence != null)
             {
