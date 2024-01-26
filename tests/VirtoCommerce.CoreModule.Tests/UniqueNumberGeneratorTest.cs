@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Moq;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Data.Model;
@@ -16,7 +17,7 @@ namespace VirtoCommerce.CoreModule.Tests
         public DateTime CurrentUtcDate { get; set; }
 
         public CustomDateSequenceUniqueNumberGeneratorService(Func<ICoreRepository> repositoryFactory,
-            DateTime currentUtcDate) : base(repositoryFactory)
+            DateTime currentUtcDate) : base(repositoryFactory, Options.Create(new SequenceNumberGeneratorOptions()))
         {
             CurrentUtcDate = currentUtcDate;
         }
@@ -38,7 +39,8 @@ namespace VirtoCommerce.CoreModule.Tests
             var optionsBuilder = new DbContextOptionsBuilder<CoreDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
-            var generator = new SequenceUniqueNumberGeneratorService(() => new CoreRepositoryImpl(new CoreDbContext(optionsBuilder.Options)));
+            var generator = new SequenceUniqueNumberGeneratorService(() => new CoreRepositoryImpl(new CoreDbContext(optionsBuilder.Options)),
+                Options.Create(new SequenceNumberGeneratorOptions()));
 
             var number = generator.GenerateNumber("PO{0:yyMMdd}-{1:D5}");
             Assert.NotNull(number);
@@ -192,7 +194,6 @@ namespace VirtoCommerce.CoreModule.Tests
             var repositoryMock = new Mock<ICoreRepository>();
             repositoryMock.Setup(r => r.Sequences).Returns((new SequenceEntity[] { sequenceEntity }).AsQueryable());
             repositoryMock.Setup(r => r.UnitOfWork).Returns((new Mock<IUnitOfWork>()).Object);
-
 
             var repositoryFactoryMock = new Mock<Func<ICoreRepository>>();
             repositoryFactoryMock.Setup(f => f()).Returns(repositoryMock.Object);

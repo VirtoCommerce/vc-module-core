@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Polly;
 using Polly.Retry;
 using VirtoCommerce.CoreModule.Core.Common;
@@ -21,13 +22,18 @@ namespace VirtoCommerce.CoreModule.Data.Services
         private readonly object _lock = new object();
         private readonly Func<ICoreRepository> _repositoryFactory;
 
+        private readonly SequenceNumberGeneratorOptions _options;
+
         /// <summary>
         /// Creates new instance of SequenceUniqueNumberGeneratorService.
         /// </summary>
         /// <param name="repositoryFactory"></param>
-        public SequenceUniqueNumberGeneratorService(Func<ICoreRepository> repositoryFactory)
+        /// <param name="options"></param>
+        public SequenceUniqueNumberGeneratorService(Func<ICoreRepository> repositoryFactory,
+            IOptions<SequenceNumberGeneratorOptions> options)
         {
             _repositoryFactory = repositoryFactory;
+            _options = options.Value;
         }
 
         /// <summary>
@@ -76,7 +82,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
         {
             return Policy.Handle<DbUpdateConcurrencyException>()
                 .Or<InvalidOperationException>()
-                .WaitAndRetry(retryCount: 15, _ => TimeSpan.FromMilliseconds(5));
+                .WaitAndRetry(retryCount: _options.RetryCount, _ => TimeSpan.FromMilliseconds(_options.RetryDelay));
         }
 
         /// <summary>
