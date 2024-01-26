@@ -59,6 +59,8 @@ namespace VirtoCommerce.CoreModule.Web
                 }
             });
 
+            serviceCollection.AddOptions<SequenceNumberGeneratorOptions>().Bind(Configuration.GetSection("VirtoCommerce:SequenceNumberGenerator")).ValidateDataAnnotations();
+
             serviceCollection.AddTransient<ICoreRepository, CoreRepositoryImpl>();
             serviceCollection.AddTransient<Func<ICoreRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<ICoreRepository>());
             serviceCollection.AddTransient<ICurrencyService, CurrencyService>();
@@ -67,13 +69,12 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
             serviceCollection.AddTransient<CoreExportImport>();
             serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
+            serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
 
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
 
             // Money rounding
             serviceCollection.AddTransient<IMoneyRoundingPolicy, DefaultMoneyRoundingPolicy>();
-
-            serviceCollection.AddOptions<SequenceNumberGeneratorOptions>().Bind(Configuration.GetSection("VirtoCommerce:SequenceNumberGenerator")).ValidateDataAnnotations();
         }
 
         public void PostInitialize(IApplicationBuilder appBuilder)
