@@ -9,10 +9,9 @@ namespace VirtoCommerce.CoreModule.Core.Common
         /// Generates unique number using given template with resetCounterType for tentantId.
         /// </summary>
         /// <param name="tenantId"></param>
-        /// <param name="numberTemplate"></param>
         /// <param name="counterOptions"></param>
         /// <returns></returns>
-        string GenerateNumber(string tenantId, string numberTemplate, CounterOptions counterOptions);
+        string GenerateNumber(string tenantId, CounterOptions counterOptions);
 
         /// <summary>
         /// Generates unique number using given template for tentantId.

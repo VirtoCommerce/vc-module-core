@@ -6,6 +6,7 @@ using VirtoCommerce.CoreModule.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Data.Services
 {
+    [Obsolete("Use SequenceNumberGeneratorService", DiagnosticId = "VC0008", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
     public class TimeBasedNumberGenerator : IUniqueNumberGenerator
     {
 

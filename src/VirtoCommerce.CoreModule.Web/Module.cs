@@ -68,8 +68,8 @@ namespace VirtoCommerce.CoreModule.Web
             //Can be overridden
             serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
             serviceCollection.AddTransient<CoreExportImport>();
-            serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
-            serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
+            serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceNumberGeneratorService>();
+            serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceNumberGeneratorService>();
 
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
 

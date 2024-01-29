@@ -1,234 +1,175 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Polly;
-using Polly.Retry;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Data.Model;
 using VirtoCommerce.CoreModule.Data.Repositories;
 
 namespace VirtoCommerce.CoreModule.Data.Services
 {
-    /// <summary>
-    /// Represents unique number generator using database storage.
-    /// It generates an unique number using given template, e.g., "PO{0:yyMMdd}-{1:D5}" where
-    /// 
-    /// {0} - date (the UTC time of number generation)
-    /// {1} - the sequence number
-    /// {2} - tenantId
-    /// 
-    /// Also, it supports counter options after @:
-    /// <numberTemplate> or <number_template>@<reset_counter_type>:<start_counter_from>:<counter_increment>
-    /// 
-    /// reset_counter_type - can be one of this value: None, Daily, Weekly, Monthly, Yearly. Default value: Daily
-    /// start_counter_from - positive integer value. Default value: 1
-    /// counter_increment - positive integer value. Default value: 1
-    ///
-    /// Examples:
-    /// PO{1:D5}
-    /// PO{0:yyMMdd}-{1:D5}
-    /// PO{0:yyMMdd}-{1:D5}@Daily
-    /// PO{0:yyMMdd}-{1:D5}@Weekly:1:10
-    /// PO{0:yyMMdd}-{1:D5}@None:1:1
-    /// </summary>
-    public class SequenceUniqueNumberGeneratorService : IUniqueNumberGenerator, ITenantUniqueNumberGenerator
+    [Obsolete("Use SequenceNumberGeneratorService", DiagnosticId = "VC0008", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
+    public class SequenceUniqueNumberGeneratorService : IUniqueNumberGenerator
     {
-        private readonly object _lock = new object();
+
+        //How many sequence items will be stored in-memory
+        public const int SequenceReservationRange = 100;
+        public const int DefaultSequenceStartValue = 1;
+
         private readonly Func<ICoreRepository> _repositoryFactory;
+        private static readonly object _sequenceLock = new object();
+        private static readonly InMemorySequenceList _inMemorySequences = new InMemorySequenceList();
 
-        private readonly SequenceNumberGeneratorOptions _options;
 
-        /// <summary>
-        /// Creates new instance of SequenceUniqueNumberGeneratorService.
-        /// </summary>
-        /// <param name="repositoryFactory"></param>
-        /// <param name="options"></param>
-        public SequenceUniqueNumberGeneratorService(Func<ICoreRepository> repositoryFactory,
-            IOptions<SequenceNumberGeneratorOptions> options)
+        public SequenceUniqueNumberGeneratorService(Func<ICoreRepository> repositoryFactory)
         {
-            ArgumentNullException.ThrowIfNull(repositoryFactory);
-            ArgumentNullException.ThrowIfNull(options);
-
             _repositoryFactory = repositoryFactory;
-            _options = options.Value;
         }
 
         /// <summary>
-        /// Generates unique number using given template.
+        /// Generates unique number using given template, e.g., GenerateNumber("Order{0:yyMMdd}-{1:D5}");
         /// </summary>
         /// <param name="numberTemplate">The number template. Pass the format to be used in string.Format function. Passable parameters: 0 - date (the UTC time of number generation); 1 - the sequence number.</param>
         /// <returns></returns>
-        public virtual string GenerateNumber(string numberTemplate)
+        public string GenerateNumber(string numberTemplate)
         {
-            ArgumentNullException.ThrowIfNull(numberTemplate);
-
-
-            string resolvedNumberTemplate;
-            var templateOptions = ResolveTemplateOptionsFromTemplate(numberTemplate, out resolvedNumberTemplate);
-
-            return GenerateNumber(string.Empty, resolvedNumberTemplate, templateOptions);
-        }
-
-        /// <summary>
-        /// Generates unique number using given template.
-        /// </summary>
-        /// <param name="numberTemplate">The number template. Pass the format to be used in string.Format function. Passable parameters: 0 - date (the UTC time of number generation); 1 - the sequence number.</param>
-        /// <returns></returns>
-        public virtual string GenerateNumber(string tenantId, string numberTemplate)
-        {
-            ArgumentNullException.ThrowIfNull(tenantId);
-            ArgumentNullException.ThrowIfNull(numberTemplate);
-
-            string resolvedNumberTemplate;
-            var templateOptions = ResolveTemplateOptionsFromTemplate(numberTemplate, out resolvedNumberTemplate);
-
-            return GenerateNumber(tenantId, resolvedNumberTemplate, templateOptions);
-        }
-
-        /// <summary>
-        /// Generates unique number using given template and options for tenantId.
-        /// </summary>
-        /// <param name="tenantId"></param>
-        /// <param name="numberTemplate"></param>
-        /// <param name="options"></param>
-        /// <returns></returns>
-        public virtual string GenerateNumber(string tenantId, string numberTemplate, CounterOptions counterOptions)
-        {
-            ArgumentNullException.ThrowIfNull(tenantId);
-            ArgumentNullException.ThrowIfNull(numberTemplate);
-            ArgumentNullException.ThrowIfNull(counterOptions);
-
-            var retryPolicy = ConfigureRetryPolicy();
-
-            lock (_lock)
+            lock (_sequenceLock)
             {
-                var currentDate = DateTime.Now;
-                var counter = 0;
+                _inMemorySequences[numberTemplate] = _inMemorySequences[numberTemplate] ?? new InMemorySequence(numberTemplate);
 
-                retryPolicy.Execute(() => counter = RequestNextCounter(tenantId, numberTemplate, counterOptions));
-
-                return string.Format(numberTemplate, currentDate, counter, tenantId);
-            }
-        }
-
-        protected virtual CounterOptions ResolveTemplateOptionsFromTemplate(string numberTemplate, out string resolvedNumberTemplate)
-        {
-            var match = Regex.Match(numberTemplate, @"(?<Template>[^@]+)@(?<ResetCounterType>None|Daily|Weekly|Monthly|Yearly)(:(?<StartCounterFrom>\d+))?(:(?<CounterIncrement>\d+))?", RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.IgnoreCase);
-
-            if (match.Success)
-            {
-                resolvedNumberTemplate = match.Groups["Template"].Value;
-
-                return new CounterOptions
+                if (_inMemorySequences[numberTemplate].IsEmpty || _inMemorySequences[numberTemplate].HasExpired)
                 {
-                    ResetCounterType = Enum.Parse<ResetCounterType>(match.Groups["ResetCounterType"].Value),
-                    StartCounterFrom = string.IsNullOrEmpty(match.Groups["StartCounterFrom"].Value) ? 1 : int.Parse(match.Groups["StartCounterFrom"].Value),
-                    CounterIncrement = string.IsNullOrEmpty(match.Groups["CounterIncrement"].Value) ? 1 : int.Parse(match.Groups["CounterIncrement"].Value),
-                };
-            }
-            else
-            {
-                resolvedNumberTemplate = numberTemplate;
-                return new CounterOptions();
+                    const int maxTransactionRetries = 3;
+
+                    for (var retryCount = 0; retryCount < maxTransactionRetries; retryCount++)
+                    {
+                        try
+                        {
+                            InitCounters(numberTemplate, out var startCounter, out var endCounter);
+                            _inMemorySequences[numberTemplate].Pregenerate(startCounter, endCounter, numberTemplate);
+                            break;
+                        }
+                        catch (Exception)
+                        {
+                            // Catching base Exception as any db exception thrown as FaultException.
+                        }
+                    }
+                }
+
+                return string.Format(_inMemorySequences[numberTemplate].Next());
             }
         }
 
-        /// <summary>
-        /// Configures retry policy for database operations.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual RetryPolicy ConfigureRetryPolicy()
+        private void InitCounters(string objectType, out int startCounter, out int endCounter)
         {
-            return Policy.Handle<DbUpdateConcurrencyException>()
-                .Or<InvalidOperationException>()
-                .WaitAndRetry(retryCount: _options.RetryCount, _ => TimeSpan.FromMilliseconds(_options.RetryDelay));
-        }
-
-        /// <summary>
-        /// Requests next counter for given number template.
-        /// </summary>
-        /// <param name="tenantId"></param>
-        /// <param name="numberTemplate"></param>
-        /// <param name="counterOptions"></param>
-        /// <returns></returns>
-        protected virtual int RequestNextCounter(string tenantId, string numberTemplate, CounterOptions counterOptions)
-        {
-            var objectType = string.IsNullOrEmpty(tenantId) ? numberTemplate : $"{tenantId}/{numberTemplate}";
-
-            using var repository = _repositoryFactory();
-            var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == objectType);
-
-            if (sequence != null)
+            //Update Sequences in database
+            using (var repository = _repositoryFactory())
             {
-                var lastResetDate = sequence.ModifiedDate ?? GetCurrentUtcDate();
+                var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == objectType);
+                var originalModifiedDate = sequence?.ModifiedDate;
 
-                if (ShouldResetCounter(lastResetDate, counterOptions.ResetCounterType))
+                if (sequence != null)
                 {
-                    sequence.Value = counterOptions.StartCounterFrom;
+                    sequence.ModifiedDate = DateTime.UtcNow;
                 }
                 else
                 {
-                    sequence.Value += counterOptions.CounterIncrement;
+                    sequence = new SequenceEntity { ObjectType = objectType, Value = DefaultSequenceStartValue, ModifiedDate = DateTime.UtcNow };
+                    repository.Add(sequence);
                 }
 
-                sequence.ModifiedDate = GetCurrentUtcDate();
-            }
-            else
-            {
-                sequence = new SequenceEntity
+
+                repository.UnitOfWork.Commit();
+                //Refresh data to make sure we have latest value in case another transaction was locked
+                //repository.Refresh(repository.Sequences);
+                sequence = repository.Sequences.Single(s => s.ObjectType == objectType);
+                startCounter = sequence.Value;
+
+                //Sequence in database has expired?
+                if (originalModifiedDate.HasValue && originalModifiedDate.Value.Date < DateTime.UtcNow.Date)
                 {
-                    ObjectType = numberTemplate,
-                    Value = counterOptions.StartCounterFrom,
-                    ModifiedDate = GetCurrentUtcDate()
-                };
-                repository.Add(sequence);
+                    startCounter = DefaultSequenceStartValue;
+                }
+
+                try
+                {
+                    endCounter = checked(startCounter + SequenceReservationRange);
+                }
+                catch (OverflowException)
+                {
+                    //need to reset
+                    startCounter = DefaultSequenceStartValue;
+                    endCounter = SequenceReservationRange;
+                }
+
+                sequence.Value = endCounter;
+                repository.UnitOfWork.Commit();
             }
-
-            repository.UnitOfWork.Commit();
-
-            return sequence.Value;
         }
 
-        /// <summary>
-        /// Returns true if counter should be reset.
-        /// </summary>
-        /// <param name="lastResetDate"></param>
-        /// <param name="resetCounterType"></param>
-        /// <returns></returns>
-        protected virtual bool ShouldResetCounter(DateTime lastResetDate, ResetCounterType resetCounterType)
+        private class InMemorySequence
         {
-            var currentUtcDate = GetCurrentUtcDate();
+            private readonly string _type;
+            private Stack<string> _sequence = new Stack<string>();
+            private DateTime? _lastGenerationDateTime;
 
-            switch (resetCounterType)
+            public InMemorySequence(string type)
             {
-                case ResetCounterType.Daily:
-                    return currentUtcDate.Date > lastResetDate.Date;
-                case ResetCounterType.Weekly:
-                    // Reset every Monday
-                    int daysUntilTargetDay = ((int)DayOfWeek.Monday - (int)lastResetDate.DayOfWeek + 7) % 7;
-                    var nextMondayDate = lastResetDate.Date.AddDays(daysUntilTargetDay);
-                    return currentUtcDate >= nextMondayDate;
-                case ResetCounterType.Monthly:
-                    // Reset on first day of the month
-                    return currentUtcDate.Month > lastResetDate.Month || currentUtcDate.Year > lastResetDate.Year;
-                case ResetCounterType.Yearly:
-                    // Reset on first day of the year 
-                    return currentUtcDate.Year > lastResetDate.Year;
-                case ResetCounterType.None:
-                default:
-                    return false;
+                _type = type;
+            }
+
+            public string ObjectType
+            {
+                get { return _type; }
+            }
+
+            public bool HasExpired
+            {
+                get { return _lastGenerationDateTime.HasValue && _lastGenerationDateTime.Value.Date < DateTime.UtcNow.Date; }
+            }
+
+            public bool IsEmpty
+            {
+                get { return _sequence.Count == 0; }
+            }
+
+            public string Next()
+            {
+                return _sequence.Pop();
+            }
+
+            public void Pregenerate(int startCount, int endCount, string numberTemplate)
+            {
+                _lastGenerationDateTime = DateTime.UtcNow;
+                var generatedItems = new Stack<string>();
+                for (var index = startCount; index < endCount; index++)
+                {
+                    generatedItems.Push(string.Format(numberTemplate, _lastGenerationDateTime.Value, index));
+                }
+
+                //This revereses the sequence
+                _sequence = new Stack<string>(generatedItems);
             }
         }
 
-        /// <summary>
-        /// Returns current UTC date. Allows to override for testing purposes.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual DateTime GetCurrentUtcDate()
+        private class InMemorySequenceList : List<InMemorySequence>
         {
-            return DateTime.UtcNow;
+            public InMemorySequence this[string type]
+            {
+                get
+                {
+                    return this.FirstOrDefault(i => i.ObjectType.Equals(type, StringComparison.OrdinalIgnoreCase));
+                }
+                set
+                {
+                    var exitingItem = this[type];
+
+                    if (exitingItem != null)
+                    {
+                        Remove(exitingItem);
+                    }
+                    Add(value);
+                }
+            }
         }
     }
 }

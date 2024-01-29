@@ -12,7 +12,7 @@ using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests
 {
-    public class CustomDateSequenceUniqueNumberGeneratorService : SequenceUniqueNumberGeneratorService
+    public class CustomDateSequenceUniqueNumberGeneratorService : SequenceNumberGeneratorService
     {
         public DateTime CurrentUtcDate { get; set; }
 
@@ -28,7 +28,7 @@ namespace VirtoCommerce.CoreModule.Tests
         }
     }
 
-    public class UniqueNumberGeneratorTest
+    public class NumberGeneratorTest
     {
         [Fact]
         [Trait("Category", "IntegrationTest")]
@@ -39,11 +39,42 @@ namespace VirtoCommerce.CoreModule.Tests
             var optionsBuilder = new DbContextOptionsBuilder<CoreDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
-            var generator = new SequenceUniqueNumberGeneratorService(() => new CoreRepositoryImpl(new CoreDbContext(optionsBuilder.Options)),
+            var generator = new SequenceNumberGeneratorService(() => new CoreRepositoryImpl(new CoreDbContext(optionsBuilder.Options)),
                 Options.Create(new SequenceNumberGeneratorOptions()));
 
             var number = generator.GenerateNumber("PO{0:yyMMdd}-{1:D5}");
             Assert.NotNull(number);
+        }
+
+        [Theory]
+        [InlineData("{1}", "{1}", ResetCounterType.Daily, 1, 1)]
+        [InlineData("PO-{1:D5}", "PO-{1:D5}", ResetCounterType.Daily, 1, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Daily, 1, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.None, 1, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Daily", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Daily, 1, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Weekly", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Weekly, 1, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Monthly", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Monthly, 1, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Yearly", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Yearly, 1, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None:5", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.None, 5, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Daily:55", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Daily, 55, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Weekly:555", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Weekly, 555, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Monthly:5555", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Monthly, 5555, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Yearly:55555", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Yearly, 55555, 1)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@None:5:8", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.None, 5, 8)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Daily:55:88", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Daily, 55, 88)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Weekly:555:888", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Weekly, 555, 888)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Monthly:5555:8888", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Monthly, 5555, 8888)]
+        [InlineData("CO{0:yyMMdd}-{1:D5}@Yearly:55555:88888", "CO{0:yyMMdd}-{1:D5}", ResetCounterType.Yearly, 55555, 88888)]
+        public void GenerateNumber_ShouldParseCounterOptionsWithDifferentParameters(string template,
+            string numberTemplate, ResetCounterType resetCounterType, int startCounterFrom, int counterIncrement)
+        {
+            var counterOptions = CounterOptions.Parse(template);
+
+            // Assert
+            Assert.Equal(numberTemplate, counterOptions.NumberTemplate);
+            Assert.Equal(resetCounterType, counterOptions.ResetCounterType);
+            Assert.Equal(startCounterFrom, counterOptions.StartCounterFrom);
+            Assert.Equal(counterIncrement, counterOptions.CounterIncrement);
         }
 
         [Theory]
@@ -188,8 +219,13 @@ namespace VirtoCommerce.CoreModule.Tests
                 currentDate);
 
             // Act
-            var generatedNumber = numberGeneratorService.GenerateNumber(tenantId, template,
-                new CounterOptions { ResetCounterType = resetCounterType });
+            var generatedNumber = numberGeneratorService.GenerateNumber(
+                tenantId,
+                new CounterOptions
+                {
+                    NumberTemplate = template,
+                    ResetCounterType = resetCounterType
+                });
 
             // Assert
             Assert.Equal(expected, generatedNumber);
