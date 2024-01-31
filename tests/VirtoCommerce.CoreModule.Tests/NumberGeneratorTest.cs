@@ -88,7 +88,7 @@ namespace VirtoCommerce.CoreModule.Tests
         [InlineData("CO{0:yyMMdd}-{1:D5}@None:1:100", "CO240126-00877")]
         public void GenerateNumber_ShouldGenerateUniqueNumbersWithDifferentParameters(string template, string expected)
         {
-            var objectType = template.Contains("@") ? template.Substring(0, template.IndexOf("@")) : template;
+            var objectType = template.Contains('@') ? template.Substring(0, template.IndexOf('@')) : template;
             // Arrange
             var sequenceEntity = new SequenceEntity { ObjectType = objectType, Value = 777, ModifiedDate = DateTime.UtcNow };
 
