@@ -1,4 +1,5 @@
 using System.Reflection;
+using EntityFrameworkCore.Triggers;
 using Microsoft.EntityFrameworkCore;
 using VirtoCommerce.CoreModule.Data.Currency;
 using VirtoCommerce.CoreModule.Data.Model;
