@@ -7,6 +7,7 @@ using VirtoCommerce.CoreModule.Data.Repositories;
 
 namespace VirtoCommerce.CoreModule.Data.Services
 {
+    [Obsolete("Use SequenceNumberGeneratorService", DiagnosticId = "VC0008", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
     public class SequenceUniqueNumberGeneratorService : IUniqueNumberGenerator
     {
 
@@ -78,7 +79,6 @@ namespace VirtoCommerce.CoreModule.Data.Services
 
 
                 repository.UnitOfWork.Commit();
-                //TODO will check it
                 //Refresh data to make sure we have latest value in case another transaction was locked
                 //repository.Refresh(repository.Sequences);
                 sequence = repository.Sequences.Single(s => s.ObjectType == objectType);
