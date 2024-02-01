@@ -59,6 +59,8 @@ namespace VirtoCommerce.CoreModule.Web
                 }
             });
 
+            serviceCollection.AddOptions<SequenceNumberGeneratorOptions>().Bind(Configuration.GetSection("VirtoCommerce:SequenceNumberGenerator")).ValidateDataAnnotations();
+
             serviceCollection.AddTransient<ICoreRepository, CoreRepositoryImpl>();
             serviceCollection.AddTransient<Func<ICoreRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<ICoreRepository>());
             serviceCollection.AddTransient<ICurrencyService, CurrencyService>();
@@ -66,7 +68,8 @@ namespace VirtoCommerce.CoreModule.Web
             //Can be overridden
             serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
             serviceCollection.AddTransient<CoreExportImport>();
-            serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceUniqueNumberGeneratorService>();
+            serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceNumberGeneratorService>();
+            serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceNumberGeneratorService>();
 
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
 
@@ -103,15 +106,15 @@ namespace VirtoCommerce.CoreModule.Web
             // Method intentionally left empty.
         }
 
-        public async Task ExportAsync(Stream outStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback, ICancellationToken cancellationToken)
+        public Task ExportAsync(Stream outStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback, ICancellationToken cancellationToken)
         {
-            await _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ExportAsync(outStream, options, progressCallback, cancellationToken);
+            return _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ExportAsync(outStream, options, progressCallback, cancellationToken);
         }
 
-        public async Task ImportAsync(Stream inputStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
+        public Task ImportAsync(Stream inputStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
             ICancellationToken cancellationToken)
         {
-            await _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ImportAsync(inputStream, options, progressCallback, cancellationToken);
+            return _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ImportAsync(inputStream, options, progressCallback, cancellationToken);
         }
     }
 }
