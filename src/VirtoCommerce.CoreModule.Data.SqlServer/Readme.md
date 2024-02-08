@@ -7,7 +7,7 @@ Add-Migration Initial -Context VirtoCommerce.CoreModule.Data.Repositories.CoreDb
 ### Entity Framework Core Commands
 ```
 
-dotnet tool install --global dotnet-ef --version 6.*
+dotnet tool install --global dotnet-ef --version 8.0.0
 ```
 
 **Generate Migrations**
