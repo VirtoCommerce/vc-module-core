@@ -40,7 +40,7 @@
           "first-name": "First name",
           "last-name": "Last name",
           "country": "Country",
-          "region": "State/Province",
+          "region": "Region",
           "city": "City",
           "address1": "Address line 1",
           "address2": "Address line 2",
@@ -103,7 +103,7 @@
       "fulfillment-center-contact": {
         "labels": {
           "country": "Country",
-          "region": "State/Province",
+          "region": "Region",
           "city": "City",
           "address": "Address",
           "zip-code": "ZIP code",
