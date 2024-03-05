@@ -220,7 +220,7 @@ angular.module('virtoCommerce.coreModule.common')
             dynamicExpressionService.registerExpression({
                 groupName: groupNames[3],
                 id: 'ConditionGeoState',
-                displayName: 'State/province'
+                displayName: 'Region/state/province'
             });
 
             //Register CONTENT PUBLISHING expressions
