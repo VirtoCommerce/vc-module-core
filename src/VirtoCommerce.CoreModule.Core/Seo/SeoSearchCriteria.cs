@@ -6,6 +6,6 @@ namespace VirtoCommerce.CoreModule.Core.Seo
     {
         public string Slug { get; set; }
         public string StoreId { get; set; }
-        public string RelativeUrl { get; set; }
+        public string Permalink { get; set; }
     }
 }
