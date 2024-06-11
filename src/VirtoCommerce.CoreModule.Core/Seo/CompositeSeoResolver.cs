@@ -15,7 +15,6 @@ public class CompositeSeoResolver : ISeoResolver
         _seoBySlugResolver = seoBySlugResolver;
     }
 
-    #region ISeoResolver members
     public async Task<IList<SeoInfo>> FindSeoAsync(SeoSearchCriteria criteria)
     {
         var tasks = _resolvers.Select(x => x.FindSeoAsync(criteria)).ToArray();
@@ -23,6 +22,5 @@ public class CompositeSeoResolver : ISeoResolver
         var fallbackResults = await _seoBySlugResolver.FindSeoBySlugAsync(criteria.Slug);
         return result.Union(fallbackResults).ToList();
     }
-    #endregion
 }
 
