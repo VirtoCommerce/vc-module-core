@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace VirtoCommerce.CoreModule.Core.Seo;
 
 public interface ISeoResolver
 {
-    Task<SeoInfo[]> FindSeoAsync(SeoSearchCriteria criteria);
+    Task<IList<SeoInfo>> FindSeoAsync(SeoSearchCriteria criteria);
 }
