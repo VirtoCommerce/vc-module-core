@@ -72,6 +72,7 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceNumberGeneratorService>();
 
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
+            serviceCollection.AddTransient<CompositeSeoResolver>();
 
             // Money rounding
             serviceCollection.AddTransient<IMoneyRoundingPolicy, DefaultMoneyRoundingPolicy>();
