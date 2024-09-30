@@ -10,10 +10,9 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.8" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
-    <PackageReference Include="Serialize.Linq" Version="3.0.148" />
-    <PackageReference Include="VirtoCommerce.Platform.Data" Version="3.825.0" />
+    <PackageReference Include="VirtoCommerce.Platform.Data" Version="3.853.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.CoreModule.Core\VirtoCommerce.CoreModule.Core.csproj" />
