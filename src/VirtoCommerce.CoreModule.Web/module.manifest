@@ -13,7 +13,7 @@
   <owners>
     <owner>Virto Commerce</owner>
   </owners>
-  <projectUrl>https://virtocommerce.com/apps/extensions/virto-core-module</projectUrl>
+  <projectUrl>https://github.com/VirtoCommerce/vc-module-core</projectUrl>
   <iconUrl>Modules/$(VirtoCommerce.Core)/Content/logoVC.png</iconUrl>
   <requireLicenseAcceptance>false</requireLicenseAcceptance>
   <releaseNotes />
