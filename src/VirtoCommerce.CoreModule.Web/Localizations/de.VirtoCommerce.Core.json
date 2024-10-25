@@ -1,277 +1,322 @@
 {
-    "core": {
-      "commands": {
-        "rebuild-index": "Suchindex erstellen",
-        "default": "Standardmäßig verwenden"
-      },
-        "blades": {
-            "index-progress": {
-                "labels": {
-                    "start": "Starten",
-                    "end": "Ende",
-                    "errors": "Fehler"
-                }
-            },
-            "index-detail": {
-                "title": "Suchindex",
-                "title-new": "Suchindex fehlt",
-                "subtitle": "Details zum Suchindex",
-                "labels": {
-                    "no-index": "Suchindex nicht gefunden",
-                    "build-date": "Letzte Indexierung",
-                    "content": "Suchindexinhalt"
-                }
-            },
-            "address-list": {
-                "labels": {
-                    "no-addresses": "Noch keine Adressen"
-                }
-            },
-            "address-detail": {
-                "subtitle": "Adresse bearbeiten",
-                "labels": {
-                    "name": "Adressname",
-                    "address-type": "Adresstyp",
-                    "first-name": "Vorname",
-                    "last-name": "Nachname",
-                    "country": "Land",
-                    "region": "Region",
-                    "city": "Stadt",
-                    "address": "Adresse",
-                    "zip-code": "PLZ",
-                    "email": "E-Mail",
-                    "phone": "Telefon",
-                    "description": "Description"
-                },
-                "placeholders": {
-                    "address-type": "Wählen Sie aus...",
-                    "first-name": "Wert eingeben",
-                    "last-name": "Wert eingeben",
-                    "country": "Wählen Sie aus...",
-                    "region": "Region eingeben",
-                    "city": "Stadt eingeben",
-                    "address1": "Adresszeile 1 eingeben",
-                    "address2": "Adresszeile 2 eingeben",
-                    "zip-code": "Postleitzahl eingeben",
-                    "email": "Wert eingeben",
-                    "phone": "Telefonnummer eingeben"
-                }
-            },
-            "currency-list": {
-                "title": "Währungen",
-                "subtitle": "System Währungen verwalten",
-                "labels": {
-                    "exchange-rate": "Wechselkurs:",
-                    "no-currencies": "Keine Währungen"
-                }
-            },
-            "currency-detail": {
-                "new-title": "Neue Währung",
-                "new-subtitle": "Einzelheiten zu Währung eingeben",
-                "subtitle": "Bearbeiten Sie die Details zu Währung",
-                "labels": {
-                    "code": "Code",
-                    "name": "Name",
-                    "is-primary": "Ist Primär",
-                    "exchange-rate": "Wechselkurs",
-                    "symbol": "Symbol",
-                    "custom-formatting": "Benutzerdefinierte Formatierung"
-                },
-              "descriptions": {
-                "code": "Der Währungscode. Verwenden Sie den 3-Buchstaben-ISO 4217-Code, falls vorhanden.",
-                "name": "Der Name der Währung.",
-                "is-primary": "Ist das die Hauptwährung? Nur eine Währung kann primär sein.",
-                "exchange-rate": "Der Wechselkurs zur Primärwährung des Wechselkurses",
-                "symbol": "Kurzes Währungssymbol",
-                "custom-formatting": "Kann jeder gültige Standardbezeichner für numerische Formate sein, z sowie jede Kombination von benutzerdefinierten numerischen Formatspezifizierern."
-              },
-                "placeholders": {
-                    "symbol": "Ein eigenes Symbol eingeben oder leer lassen um entsprechenden Standard zu verwenden.",
-                    "code": "Währungscode eingeben",
-                    "name": "Geben Sie den Währungsnamen ein",
-                    "exchange-rate": "Geben Sie den Wechselkurs gegenüber der Hauptwährung ein",
-                    "custom-formatting": "Bitte geben Sie ein Format an oder lassen Sie es als Standard leer"
-                },
-                "validation": {
-                    "maxlength": "Der Währungscode darf nur 3 Symbole enthalten"
-                }
-            },
-            "fulfillment-center-contact": {
-                "labels": {
-                    "country": "Land",
-                    "region": "Region",
-                    "city": "Stadt",
-                    "address": "Adresse",
-                    "zip-code": "PLZ",
-                    "phone": "Telefon"
-                },
-                "placeholders": {
-                    "country": "Wählen Sie aus...",
-                    "region": "Region eingeben",
-                    "city": "Stadt eingeben",
-                    "address1": "Adresszeile 1 eingeben",
-                    "address2": "Adresszeile 2 eingeben",
-                    "zip-code": "Postleitzahl eingeben",
-                    "phone": "Telefonnummer eingeben"
-                }
-            },
-            "fulfillment-center-detail": {
-                "subtitle": "Erfüllungszentrum bearbeiten",
-                "labels": {
-                    "name": "Name",
-                    "description": "Beschreibung",
-                    "max-releases": "Max. Freigaben pro Selektion",
-                    "pick-delay": "Verzögerung wählen"
-                }
-            },
-            "fulfillment-center-list": {
-                "title": "Erfüllungszentrum",
-                "subtitle": "Erfüllungszentrum verwalten"
-            },
-            "seo-list": {
-                "subtitle": "Verwalten der SEO-Eigenschaften",
-                "labels": {
-                    "duplicates-found": "Es gibt {{count}} widersprüchliche Semantische URLs!",
-                    "resolve-duplicates": "Konflikte lösen",
-                    "language-code": "Sprache",
-                    "container": "Speichern",
-                    "semanticUrl": "Semantische URL"
-                }
-            },
-            "seo-detail": {
-                "title-new": "Neue SEO",
-                "subtitle": "SEO Details",
-                "labels": {
-                    "is-active": "Ist aktiv",
-                    "store": "Store",
-                    "language": "Sprache",
-                    "url-keyword": "URL",
-                    "page-title": "Seitentitel (Meta Title)",
-                    "meta-description": "Beschreibung (Meta Description)",
-                    "alternative-text": "Alternativer Text (alt)"
-                },
-                "placeholders": {
-                    "store": "Store wählen",
-                    "language": "Sprache wählen",
-                    "url-keyword": "Stichwort eingeben",
-                    "page-title": "Titel eingeben",
-                    "meta-description": "Beschreibung eingeben",
-                    "alternative-text": "Text eingeben"
-                },
-                "validations": {
-                    "url-keyword-required": "Erforderlich",
-                    "url-keyword-invalid": "Ungültige URL-Zeichen",
-                    "url-keyword-duplicate": "Doppelte URL gefunden"
-                }
-            },
-            "seo-duplicates": {
-                "subtitle": "SEO Konflikte",
-                "labels": {
-                    "semanticUrl": "Semantische URL",
-                    "container": "Speichern"
-                }
-            },
-            "package-type-list": {
-                "title": "Vordefinierte Paketgröße Abmessungen",
-                "subtitle": "Verwalten von Systempaketypen",
-                "labels": {
-                    "no-packages": "Keine vordefinierten Pakete"
-                }
-            },
-            "package-type-detail": {
-                "new-title": "Neue Package Typ",
-                "new-subtitle": "Paketgröße Werte eingeben",
-                "subtitle": "Paketgröße details bearbeiten",
-                "labels": {
-                    "name": "Pakettypname",
-                    "name-description": "Wird zur Identifizierung verwendet werden",
-                    "name-placeholder": "Package Type Name eingeben",
-                    "measureUnit": "Maßeinheit",
-                    "measureUnit-description": "Wird als primäre Maßeinheit für Größen verwendet",
-                    "measureUnit-placeholder": "Wählen Sie Maßeinheit oder definieren Sie erneut",
-                    "width": "Breite",
-                    "height": "Höhe",
-                    "length": "Länge"
-                }
-            },
-            "document-type-list": {
-                "title": "Dokumenttypen",
-                "labels": {
-                    "document-type": "Dokumenttypen",
-                    "indexed-docs-total": "Dokumentenzähler",
-                    "provider": "Provider",
-                    "scope": "Scope",
-                    "last-indexation-date": "Zuletzt indiziert",
-                    "build-index": "Build index",
-                    "rebuild-index": "Rebuild index"
-                }
-            }
-        },
-        "dialogs": {
-            "reindex": {
-                "title": "Suchindex durchsuchen",
-                "msg1": "Wählen Sie aus, wie Sie den Suchindex aktualisieren möchten. Optionen:",
-                "msg2": "Update: Update durch Indizierung von fehlenden oder veralteten Daten.",
-                "msg3": "Löschen + aufbauen",
-                "index": "Neuaufbau: Der aktuelle Suchindex wird gelöscht und von Grund auf neu gebaut. Beachten Sie, dass es KEINE SUCHERGEBNISSE GIBT, bis der Aufbauprozess beendet ist.",
-                "reindex": "Löschen + aufbauen"
-            },
-            "address-delete": {
-                "title": "Bestätigung löschen",
-                "message": "Sind Sie sicher, dass Sie diese Adresse löschen möchten?"
-            },
-            "address-save": {
-                "title": "Änderungen speichern",
-                "message": "Die Adresse wurde geändert. Möchten Sie die Änderungen speichern?"
-            },
-            "currency-delete": {
-                "title": "Bestätigung löschen",
-                "message": "Sind Sie sicher, dass Sie diese Währung löschen wollen?"
-            },
-            "currency-save": {
-                "title": "Änderungen speichern",
-                "message": "Die Währung wurde geändert. Möchten Sie die Änderungen speichern?"
-            },
-            "fulfillment-delete": {
-                "title": "Bestätigung löschen",
-                "message": "Sind Sie sicher, dass Sie diesem Erfüllungszentrumzu löschen wollen?"
-            },
-            "fulfillments-save": {
-                "title": "Änderungen speichern",
-                "message": "Die erfüllungen wurden geändert. Möchten Sie die Änderungen speichern?"
-            },
-            "seo-save": {
-                "title": "Änderungen speichern",
-                "message": "Die SEO-Informationen wurde geändert. Möchten Sie die Änderungen speichern?"
-            },
-            "package-type-save": {
-                "title": "Änderungen speichern",
-                "message": "Die Package Type Informationen wurde geändert. Möchten Sie die Änderungen speichern?"
-            },
-            "package-type-delete": {
-                "title": "Bestätigung löschen",
-                "message": "Sind Sie sicher, dass Sie dieses Pakettyp löschen wollen?"
-            }
-        },
-        "widgets": {
-            "index": {
-                "index-ok": "Suchindex erstellt am <span am-time-ago='indexDate'></span>",
-                "index-old": "Suchindex veraltet. Index wurde zuletzt um <span bin - Zeit - vor='indexDate'> aktualisiert",
-                "no-index": "Suchindex fehlt"
-            },
-            "currency": {
-                "title": "Währungen"
-            },
-            "fulfillmentCenterContact": {
-                "blade-subtitle": "Kontakt Informationen",
-                "title": "Kontakt Informationen"
-            },
-            "fulfillment": {
-                "title": "Erfüllungszentrum"
-            },
-            "seo": {
-                "title": "SEO"
-            }
+  "core": {
+    "commands": {
+      "apply-filter": "Speichern und anwenden",
+      "rebuild-index": "Index erstellen",
+      "default": "Als Standard festlegen"
+    },
+    "main-menu-title": {
+      "search-index": "Suchindex"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "Start",
+          "end": "Ende",
+          "errors": "Fehler",
+          "stats": "{{ processedCount }} von {{ totalCount }} Datensätzen indexiert"
         }
+      },
+      "index-detail": {
+        "title": "Suchindex",
+        "title-new": "Suchindex fehlt",
+        "subtitle": "Suchindex-Details",
+        "labels": {
+          "no-index": "Keine Daten",
+          "build-date": "Zuletzt indexiert",
+          "content": "Indexinhalt"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "Noch keine Adressen"
+        }
+      },
+      "address-detail": {
+        "subtitle": "Adresse bearbeiten",
+        "labels": {
+          "name": "Adressname",
+          "address-type": "Adresstyp",
+          "first-name": "Vorname",
+          "last-name": "Nachname",
+          "country": "Land",
+          "region": "Region",
+          "city": "Stadt",
+          "address1": "Adresszeile 1",
+          "address2": "Adresszeile 2",
+          "zip-code": "Postleitzahl",
+          "email": "E-Mail",
+          "phone": "Telefon",
+          "description": "Beschreibung"
+        },
+        "placeholders": {
+          "address-type": "Auswählen...",
+          "country": "Auswählen...",
+          "region": "Auswählen..."
+        }
+      },
+      "currency-list": {
+        "title": "Währungen",
+        "subtitle": "Währungen verwalten",
+        "labels": {
+          "exchange-rate": "Wechselkurs:",
+          "no-currencies": "Keine Währungen"
+        }
+      },
+      "currency-detail": {
+        "new-title": "Neue Währung",
+        "new-subtitle": "Währungsdetails eingeben",
+        "subtitle": "Währungsdetails bearbeiten",
+        "labels": {
+          "code": "Code",
+          "name": "Name",
+          "is-primary": "Als Standard festlegen",
+          "exchange-rate": "Wechselkurs",
+          "symbol": "Zeichen",
+          "custom-formatting": "Benutzerdefinierte Formatierung",
+          "midpoint-rounding": "Rundung zur Mitte",
+          "rounding-type": "Rundungstyp"
+        },
+        "descriptions": {
+          "code": "Geben Sie einen 3-stelligen ISO 4217-Code an, falls zutreffend",
+          "name": "Geben Sie einen Namen für diese Währung an",
+          "is-primary": "Aktivieren Sie diese Option, um diese Währung als Standard festzulegen. Hinweis: Nur eine Währung kann als Standard festgelegt werden",
+          "exchange-rate": "Geben Sie den Wechselkurs gegenüber Ihrer Standardwährung an",
+          "symbol": "Geben Sie ein Zeichen für diese Währung an",
+          "custom-formatting": "Kann ein beliebiger gültiger Standard-Zahlenformatbezeichner sowie eine beliebige Kombination von benutzerdefinierten Zahlenformatbezeichnern sein",
+          "midpoint-rounding": "Wählen Sie eine geeignete Methode zur Rundung zur Mitte",
+          "rounding-type": "Wählen Sie einen geeigneten Rundungstyp."
+        },
+        "placeholders": {
+          "symbol": "Geben Sie ein Zeichen an oder lassen Sie es für die Standardkultur leer",
+          "code": "Währungscode angeben...",
+          "name": "Währungsname angeben...",
+          "exchange-rate": "Geben Sie den Wechselkurs gegenüber Ihrer Standardwährung an...",
+          "custom-formatting": "Geben Sie ein Format an oder lassen Sie es für den Standard leer",
+          "midpoint-rounding": "Rundungsrichtlinie zur Mitte auswählen",
+          "rounding-type": "Rundungsrichtlinie auswählen"
+        },
+        "validation": {
+          "maxlength": "Der Währungscode muss aus 3 alphabetischen Zeichen bestehen"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "Land",
+          "region": "Region",
+          "city": "Stadt",
+          "address": "Adresse",
+          "zip-code": "Postleitzahl",
+          "phone": "Telefon"
+        },
+        "placeholders": {
+          "country": "Auswählen...",
+          "region": "Bundesland oder Provinz eingeben...",
+          "city": "Stadt eingeben...",
+          "address1": "Adresszeile 1 eingeben...",
+          "address2": "Adresszeile 2 eingeben...",
+          "zip-code": "Postleitzahl angeben...",
+          "phone": "Telefonnummer eingeben..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "Fulfillment-Center bearbeiten",
+        "labels": {
+          "name": "Name",
+          "description": "Beschreibung",
+          "max-releases": "Maximale Anzahl von Freigaben im ausgewählten Batch",
+          "pick-delay": "Paket-Verzögerung"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "Fulfillment-Center",
+        "subtitle": "Fulfillment-Center verwalten"
+      },
+      "seo-list": {
+        "subtitle": "SEO verwalten",
+        "labels": {
+          "duplicates-found": "Warnung: Es gibt {{count}} widersprüchliche semantische URLs!",
+          "resolve-duplicates": "Konflikte lösen",
+          "language-code": "Sprache",
+          "container": "Shop",
+          "semanticUrl": "Semantische URL"
+        }
+      },
+      "seo-detail": {
+        "title-new": "Neues SEO",
+        "subtitle": "SEO-Details",
+        "labels": {
+          "is-active": "Aktiv",
+          "store": "Shop",
+          "language": "Sprache",
+          "url-keyword": "URL-Slug",
+          "page-title": "Seitentitel",
+          "meta-description": "Meta-Beschreibung",
+          "meta-keywords": "Meta-Schlüsselwörter",
+          "alternative-text": "Alternativer Bildtext"
+        },
+        "placeholders": {
+          "store": "Shop auswählen...",
+          "language": "Sprache auswählen...",
+          "url-keyword": "URL-Slug angeben...",
+          "page-title": "Titel angeben...",
+          "meta-description": "Beschreibung angeben...",
+          "meta-keywords": "Schlüsselwörter angeben...",
+          "alternative-text": "Alternativen Text angeben..."
+        },
+        "validations": {
+          "url-keyword-required": "Dieses Feld ist erforderlich",
+          "url-keyword-invalid": "Die URL enthält ungültige Zeichen",
+          "url-keyword-duplicate": "Doppelte URL erkannt"
+        }
+      },
+      "seo-duplicates": {
+        "subtitle": "SEO-Konflikte",
+        "labels": {
+          "semanticUrl": "Semantische URL",
+          "container": "Shop"
+        }
+      },
+      "package-type-list": {
+        "title": "Vordefinierte Paketgröße",
+        "subtitle": "System-Pakettypen verwalten",
+        "labels": {
+          "no-packages": "Keine vordefinierten Pakete"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "Neuer Pakettyp",
+        "new-subtitle": "Paketgrößenwerte eingeben",
+        "subtitle": "Paketgrößendetails bearbeiten",
+        "labels": {
+          "name": "Pakettyp-Name",
+          "name-description": "Geben Sie einen eindeutigen Pakettyp-Namen an",
+          "name-placeholder": "Pakettyp-Namen eingeben",
+          "measureUnit": "Größenmaßeinheit",
+          "measureUnit-description": "Standard-Maßeinheit für die Größe",
+          "measureUnit-placeholder": "Wählen Sie eine anwendbare Maßeinheit aus oder fügen Sie eine neue hinzu",
+          "width": "Breite",
+          "height": "Höhe",
+          "length": "Länge"
+        }
+      },
+      "document-type-list": {
+        "title": "Datensatztypen",
+        "labels": {
+          "document-type": "Datensatztyp",
+          "indexed-docs-total": "Datensatzanzahl",
+          "provider": "Anbieter",
+          "scope": "Bereich",
+          "last-indexation-date": "Zuletzt indexiert",
+          "build-index": "Index erstellen",
+          "rebuild-index": "Index neu erstellen"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "Suchindex erstellen",
+        "msg1": "Wählen Sie aus, wie Sie den Suchindex aktualisieren möchten:",
+        "msg2": "Erstellen: Alle Daten ohne Neuaufbau indexieren",
+        "msg3": "Löschen und erstellen: Den vorhandenen Suchindex löschen und einen neuen von Grund auf erstellen. Hinweis: Bis zum Abschluss des Erstellungsprozesses sind keine Suchergebnisse verfügbar",
+        "index": "Erstellen",
+        "reindex": "Löschen und erstellen"
+      },
+      "address-delete": {
+        "title": "Löschen bestätigen",
+        "message": "Sind Sie sicher, dass Sie diese Adresse löschen möchten?"
+      },
+      "address-save": {
+        "title": "Änderungen speichern",
+        "message": "Die Adresse wurde geändert. Möchten Sie die Änderungen speichern?"
+      },
+      "currency-delete": {
+        "title": "Löschen bestätigen",
+        "message": "Sind Sie sicher, dass Sie diese Währung löschen möchten?"
+      },
+      "currency-save": {
+        "title": "Änderungen speichern",
+        "message": "Die Währung wurde geändert. Möchten Sie die Änderungen speichern?"
+      },
+      "fulfillment-delete": {
+        "title": "Löschen bestätigen",
+        "message": "Sind Sie sicher, dass Sie dieses Fulfillment-Center löschen möchten?"
+      },
+      "fulfillments-save": {
+        "title": "Änderungen speichern",
+        "message": "Das Fulfillment-Center wurde geändert. Möchten Sie die Änderungen speichern?"
+      },
+      "seo-save": {
+        "title": "Änderungen speichern",
+        "message": "Die SEO-Informationen wurden geändert. Möchten Sie die Änderungen speichern?"
+      },
+      "package-type-save": {
+        "title": "Änderungen speichern",
+        "message": "Die Pakettyp-Informationen wurden geändert. Möchten Sie die Änderungen speichern?"
+      },
+      "package-type-delete": {
+        "title": "Löschen bestätigen",
+        "message": "Sind Sie sicher, dass Sie diesen Pakettyp löschen möchten?"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "Indexiert <span am-time-ago='indexDate'></span>",
+        "index-old": "Dieser Index ist veraltet, da er <span am-time-ago='indexDate'> erstellt wurde",
+        "no-index": "Suchindex fehlt"
+      },
+      "currency": {
+        "title": "Währungen"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "Kontaktdetails",
+        "title": "Kontaktdetails"
+      },
+      "fulfillment": {
+        "title": "Fulfillment-Center"
+      },
+      "seo": {
+        "title": "SEO"
+      }
     }
+  },
+  "permissions": {
+    "core:packageType:create": "Pakettyp-Daten erstellen",
+    "core:packageType:update": "Pakettyp-Daten aktualisieren",
+    "core:packageType:delete": "Pakettyp-Daten löschen",
+    "core:currency:create": "Währungsdaten erstellen",
+    "core:currency:update": "Währungsdaten aktualisieren",
+    "core:currency:delete": "Währungsdaten löschen"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "Verfügbare Steuerarten",
+      "title": "Steuerarten"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "Verfügbare Gewichtseinheiten für physische Waren",
+      "title": "Gewichtseinheiten"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "Verfügbare Maßeinheiten für die Größe physischer Waren",
+      "title": "Größenmaßeinheiten"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "Feste Landversandgebühr",
+      "title": "Landversandgebühr"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "Feste Luftversandgebühr",
+      "title": "Luftversandgebühr"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "Fester Steuersatz",
+      "title": "Fester Steuersatz in Prozent"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "Währungen, Pakettypen exportieren oder importieren"
+    }
+  }
 }
