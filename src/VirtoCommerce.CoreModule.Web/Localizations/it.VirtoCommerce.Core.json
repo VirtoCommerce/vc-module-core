@@ -1,0 +1,322 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "Salva e applica",
+      "rebuild-index": "Costruisci indice",
+      "default": "Imposta come predefinito"
+    },
+    "main-menu-title": {
+      "search-index": "Indice di ricerca"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "Inizio",
+          "end": "Fine",
+          "errors": "Errori",
+          "stats": "Indicizzati {{ processedCount }} su {{ totalCount }} record"
+        }
+      },
+      "index-detail": {
+        "title": "Indice di ricerca",
+        "title-new": "Indice di ricerca mancante",
+        "subtitle": "Dettagli dell'indice di ricerca",
+        "labels": {
+          "no-index": "Nessun dato",
+          "build-date": "Ultima indicizzazione",
+          "content": "Contenuto dell'indice"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "Nessun indirizzo ancora"
+        }
+      },
+      "address-detail": {
+        "subtitle": "Modifica indirizzo",
+        "labels": {
+          "name": "Nome dell'indirizzo",
+          "address-type": "Tipo di indirizzo",
+          "first-name": "Nome",
+          "last-name": "Cognome",
+          "country": "Paese",
+          "region": "Regione",
+          "city": "Città",
+          "address1": "Indirizzo riga 1",
+          "address2": "Indirizzo riga 2",
+          "zip-code": "Codice postale",
+          "email": "Email",
+          "phone": "Telefono",
+          "description": "Descrizione"
+        },
+        "placeholders": {
+          "address-type": "Seleziona...",
+          "country": "Seleziona...",
+          "region": "Seleziona..."
+        }
+      },
+      "currency-list": {
+        "title": "Valute",
+        "subtitle": "Gestione delle valute",
+        "labels": {
+          "exchange-rate": "Tasso di cambio:",
+          "no-currencies": "Nessuna valuta"
+        }
+      },
+      "currency-detail": {
+        "new-title": "Nuova valuta",
+        "new-subtitle": "Inserisci i dettagli della valuta",
+        "subtitle": "Modifica dettagli della valuta",
+        "labels": {
+          "code": "Codice",
+          "name": "Nome",
+          "is-primary": "Imposta come predefinita",
+          "exchange-rate": "Tasso di cambio",
+          "symbol": "Simbolo",
+          "custom-formatting": "Formattazione personalizzata",
+          "midpoint-rounding": "Arrotondamento al punto medio",
+          "rounding-type": "Tipo di arrotondamento"
+        },
+        "descriptions": {
+          "code": "Fornisci un codice ISO 4217 a 3 lettere, se applicabile",
+          "name": "Fornisci un nome per questa valuta",
+          "is-primary": "Attiva questa opzione per impostare questa valuta come predefinita. Nota: Solo una valuta può essere impostata come predefinita",
+          "exchange-rate": "Fornisci il tasso di cambio rispetto alla tua valuta predefinita",
+          "symbol": "Fornisci un simbolo per questa valuta",
+          "custom-formatting": "Può essere qualsiasi specificatore di formato numerico standard valido, così come qualsiasi combinazione di specificatori di formato numerico personalizzati",
+          "midpoint-rounding": "Seleziona un metodo appropriato di arrotondamento al punto medio",
+          "rounding-type": "Seleziona un tipo di arrotondamento appropriato"
+        },
+        "placeholders": {
+          "symbol": "Fornisci un simbolo o lascia vuoto per la cultura predefinita",
+          "code": "Fornisci il codice della valuta...",
+          "name": "Fornisci il nome della valuta...",
+          "exchange-rate": "Fornisci il tasso di cambio rispetto alla tua valuta predefinita...",
+          "custom-formatting": "Fornisci un formato o lascia vuoto per il valore predefinito",
+          "midpoint-rounding": "Seleziona la politica di arrotondamento al punto medio",
+          "rounding-type": "Seleziona la politica di arrotondamento"
+        },
+        "validation": {
+          "maxlength": "Il codice della valuta deve essere composto da 3 caratteri alfabetici"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "Paese",
+          "region": "Regione",
+          "city": "Città",
+          "address": "Indirizzo",
+          "zip-code": "Codice postale",
+          "phone": "Telefono"
+        },
+        "placeholders": {
+          "country": "Seleziona...",
+          "region": "Inserisci stato o provincia...",
+          "city": "Inserisci città...",
+          "address1": "Inserisci indirizzo riga 1...",
+          "address2": "Inserisci indirizzo riga 2...",
+          "zip-code": "Fornisci codice postale...",
+          "phone": "Inserisci numero di telefono..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "Modifica del centro di evasione ordini",
+        "labels": {
+          "name": "Nome",
+          "description": "Descrizione",
+          "max-releases": "Numero massimo di rilasci nel lotto selezionato",
+          "pick-delay": "Ritardo di prelievo"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "Centri di evasione ordini",
+        "subtitle": "Gestione dei centri di evasione ordini"
+      },
+      "seo-list": {
+        "subtitle": "Gestisci SEO",
+        "labels": {
+          "duplicates-found": "Attenzione: Ci sono {{count}} URL semantici in conflitto!",
+          "resolve-duplicates": "Risolvi conflitti",
+          "language-code": "Lingua",
+          "container": "Negozio",
+          "semanticUrl": "URL semantico"
+        }
+      },
+      "seo-detail": {
+        "title-new": "Nuovo SEO",
+        "subtitle": "Dettagli SEO",
+        "labels": {
+          "is-active": "Attivo",
+          "store": "Negozio",
+          "language": "Lingua",
+          "url-keyword": "Slug URL",
+          "page-title": "Titolo della pagina",
+          "meta-description": "Meta descrizione",
+          "meta-keywords": "Meta parole chiave",
+          "alternative-text": "Testo alternativo dell'immagine"
+        },
+        "placeholders": {
+          "store": "Seleziona negozio...",
+          "language": "Seleziona lingua...",
+          "url-keyword": "Fornisci slug URL...",
+          "page-title": "Fornisci titolo...",
+          "meta-description": "Fornisci descrizione...",
+          "meta-keywords": "Fornisci parole chiave...",
+          "alternative-text": "Fornisci testo alternativo..."
+        },
+        "validations": {
+          "url-keyword-required": "Questo campo è obbligatorio",
+          "url-keyword-invalid": "L'URL contiene caratteri non validi",
+          "url-keyword-duplicate": "URL duplicato rilevato"
+        }
+      },
+      "seo-duplicates": {
+        "subtitle": "Conflitti SEO",
+        "labels": {
+          "semanticUrl": "URL semantico",
+          "container": "Negozio"
+        }
+      },
+      "package-type-list": {
+        "title": "Dimensione del pacco predefinita",
+        "subtitle": "Gestisci i tipi di pacco del sistema",
+        "labels": {
+          "no-packages": "Nessun pacco predefinito"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "Nuovo tipo di pacco",
+        "new-subtitle": "Inserisci i valori delle dimensioni del pacco",
+        "subtitle": "Modifica dettagli delle dimensioni del pacco",
+        "labels": {
+          "name": "Nome del tipo di pacco",
+          "name-description": "Fornisci un nome univoco per il tipo di pacco",
+          "name-placeholder": "Inserisci il nome del tipo di pacco",
+          "measureUnit": "Unità di misura della dimensione",
+          "measureUnit-description": "Unità di misura predefinita per la dimensione",
+          "measureUnit-placeholder": "Seleziona un'unità di misura applicabile o aggiungine una nuova",
+          "width": "Larghezza",
+          "height": "Altezza",
+          "length": "Lunghezza"
+        }
+      },
+      "document-type-list": {
+        "title": "Tipi di record",
+        "labels": {
+          "document-type": "Tipo di record",
+          "indexed-docs-total": "Conteggio record",
+          "provider": "Fornitore",
+          "scope": "Ambito",
+          "last-indexation-date": "Ultima indicizzazione",
+          "build-index": "Costruisci indice",
+          "rebuild-index": "Ricostruisci indice"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "Costruisci indice di ricerca",
+        "msg1": "Scegli come vuoi aggiornare l'indice di ricerca:",
+        "msg2": "Costruisci: Indicizza tutti i dati senza ricreare",
+        "msg3": "Elimina e costruisci: Elimina l'indice di ricerca esistente e costruiscine uno nuovo da zero. Nota: Nessun risultato di ricerca sarà disponibile fino al completamento del processo di costruzione",
+        "index": "Costruisci",
+        "reindex": "Elimina e costruisci"
+      },
+      "address-delete": {
+        "title": "Conferma eliminazione",
+        "message": "Sei sicuro di voler eliminare questo indirizzo?"
+      },
+      "address-save": {
+        "title": "Salva modifiche",
+        "message": "L'indirizzo è stato modificato. Vuoi salvare le modifiche?"
+      },
+      "currency-delete": {
+        "title": "Conferma eliminazione",
+        "message": "Sei sicuro di voler eliminare questa valuta?"
+      },
+      "currency-save": {
+        "title": "Salva modifiche",
+        "message": "La valuta è stata modificata. Vuoi salvare le modifiche?"
+      },
+      "fulfillment-delete": {
+        "title": "Conferma eliminazione",
+        "message": "Sei sicuro di voler eliminare questo centro di evasione ordini?"
+      },
+      "fulfillments-save": {
+        "title": "Salva modifiche",
+        "message": "Il centro di evasione ordini è stato modificato. Vuoi salvare le modifiche?"
+      },
+      "seo-save": {
+        "title": "Salva modifiche",
+        "message": "Le informazioni SEO sono state modificate. Vuoi salvare le modifiche?"
+      },
+      "package-type-save": {
+        "title": "Salva modifiche",
+        "message": "Le informazioni sul tipo di pacco sono state modificate. Vuoi salvare le modifiche?"
+      },
+      "package-type-delete": {
+        "title": "Conferma eliminazione",
+        "message": "Sei sicuro di voler eliminare questo tipo di pacco?"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "Indicizzato <span am-time-ago='indexDate'></span>",
+        "index-old": "Questo indice è obsoleto, poiché è stato costruito <span am-time-ago='indexDate'>",
+        "no-index": "Indice di ricerca mancante"
+      },
+      "currency": {
+        "title": "Valute"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "Dettagli di contatto",
+        "title": "Dettagli di contatto"
+      },
+      "fulfillment": {
+        "title": "Centri di evasione ordini"
+      },
+      "seo": {
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "Crea dati del tipo di pacco",
+    "core:packageType:update": "Aggiorna dati del tipo di pacco",
+    "core:packageType:delete": "Elimina dati del tipo di pacco",
+    "core:currency:create": "Crea dati della valuta",
+    "core:currency:update": "Aggiorna dati della valuta",
+    "core:currency:delete": "Elimina dati della valuta"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "Tipi di tasse disponibili",
+      "title": "Tipi di tasse"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "Unità di peso disponibili per i beni fisici",
+      "title": "Unità di peso"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "Unità di misura disponibili per la dimensione dei beni fisici",
+      "title": "Unità di misura della dimensione"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "Tariffa fissa di spedizione via terra",
+      "title": "Tariffa di spedizione via terra"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "Tariffa fissa di spedizione aerea",
+      "title": "Tariffa di spedizione aerea"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "Aliquota fiscale fissa",
+      "title": "Percentuale di aliquota fiscale fissa"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "Esporta o importa valute, tipi di pacco"
+    }
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "Zapisz i zastosuj",
+      "rebuild-index": "Zbuduj indeks",
+      "default": "Ustaw jako domyślne"
+    },
+    "main-menu-title": {
+      "search-index": "Indeks wyszukiwania"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "Start",
+          "end": "Koniec",
+          "errors": "Błędy",
+          "stats": "Zindeksowano {{ processedCount }} z {{ totalCount }} rekordów"
+        }
+      },
+      "index-detail": {
+        "title": "Indeks wyszukiwania",
+        "title-new": "Brak indeksu wyszukiwania",
+        "subtitle": "Szczegóły indeksu wyszukiwania",
+        "labels": {
+          "no-index": "Brak danych",
+          "build-date": "Ostatnio zindeksowano",
+          "content": "Zawartość indeksu"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "Brak adresów"
+        }
+      },
+      "address-detail": {
+        "subtitle": "Edytuj adres",
+        "labels": {
+          "name": "Nazwa adresu",
+          "address-type": "Typ adresu",
+          "first-name": "Imię",
+          "last-name": "Nazwisko",
+          "country": "Kraj",
+          "region": "Region",
+          "city": "Miasto",
+          "address1": "Adres linia 1",
+          "address2": "Adres linia 2",
+          "zip-code": "Kod pocztowy",
+          "email": "E-mail",
+          "phone": "Telefon",
+          "description": "Opis"
+        },
+        "placeholders": {
+          "address-type": "Wybierz...",
+          "country": "Wybierz...",
+          "region": "Wybierz..."
+        }
+      },
+      "currency-list": {
+        "title": "Waluty",
+        "subtitle": "Zarządzanie walutami",
+        "labels": {
+          "exchange-rate": "Kurs wymiany:",
+          "no-currencies": "Brak walut"
+        }
+      },
+      "currency-detail": {
+        "new-title": "Nowa waluta",
+        "new-subtitle": "Wprowadź szczegóły waluty",
+        "subtitle": "Edytuj szczegóły waluty",
+        "labels": {
+          "code": "Kod",
+          "name": "Nazwa",
+          "is-primary": "Ustaw jako domyślną",
+          "exchange-rate": "Kurs wymiany",
+          "symbol": "Symbol",
+          "custom-formatting": "Niestandardowe formatowanie",
+          "midpoint-rounding": "Zaokrąglanie do środka",
+          "rounding-type": "Typ zaokrąglania"
+        },
+        "descriptions": {
+          "code": "Podaj 3-literowy kod ISO 4217, jeśli ma zastosowanie",
+          "name": "Podaj nazwę dla tej waluty",
+          "is-primary": "Włącz tę opcję, aby ustawić tę walutę jako domyślną. Uwaga: Tylko jedna waluta może być ustawiona jako domyślna",
+          "exchange-rate": "Podaj kurs wymiany w stosunku do twojej domyślnej waluty",
+          "symbol": "Podaj symbol dla tej waluty",
+          "custom-formatting": "Może być dowolnym prawidłowym standardowym specyfikatorem formatu liczbowego, a także dowolną kombinacją niestandardowych specyfikatorów formatu liczbowego",
+          "midpoint-rounding": "Wybierz odpowiednią metodę zaokrąglania do środka",
+          "rounding-type": "Wybierz odpowiedni typ zaokrąglania"
+        },
+        "placeholders": {
+          "symbol": "Podaj symbol lub pozostaw puste dla domyślnej kultury",
+          "code": "Podaj kod waluty...",
+          "name": "Podaj nazwę waluty...",
+          "exchange-rate": "Podaj kurs wymiany w stosunku do twojej domyślnej waluty...",
+          "custom-formatting": "Podaj format lub pozostaw puste dla wartości domyślnej",
+          "midpoint-rounding": "Wybierz politykę zaokrąglania do środka",
+          "rounding-type": "Wybierz politykę zaokrąglania"
+        },
+        "validation": {
+          "maxlength": "Kod waluty musi składać się z 3 znaków alfabetycznych"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "Kraj",
+          "region": "Region",
+          "city": "Miasto",
+          "address": "Adres",
+          "zip-code": "Kod pocztowy",
+          "phone": "Telefon"
+        },
+        "placeholders": {
+          "country": "Wybierz...",
+          "region": "Wprowadź stan lub prowincję...",
+          "city": "Wprowadź miasto...",
+          "address1": "Wprowadź adres linia 1...",
+          "address2": "Wprowadź adres linia 2...",
+          "zip-code": "Podaj kod pocztowy...",
+          "phone": "Wprowadź numer telefonu..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "Edycja centrum realizacji zamówień",
+        "labels": {
+          "name": "Nazwa",
+          "description": "Opis",
+          "max-releases": "Maksymalna liczba wydań w wybranej partii",
+          "pick-delay": "Opóźnienie kompletacji"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "Centra realizacji zamówień",
+        "subtitle": "Zarządzanie centrami realizacji zamówień"
+      },
+      "seo-list": {
+        "subtitle": "Zarządzaj SEO",
+        "labels": {
+          "duplicates-found": "Uwaga: Istnieje {{count}} konfliktowych semantycznych URL-i!",
+          "resolve-duplicates": "Rozwiąż konflikty",
+          "language-code": "Język",
+          "container": "Sklep",
+          "semanticUrl": "Semantyczny URL"
+        }
+      },
+      "seo-detail": {
+        "title-new": "Nowe SEO",
+        "subtitle": "Szczegóły SEO",
+        "labels": {
+          "is-active": "Aktywne",
+          "store": "Sklep",
+          "language": "Język",
+          "url-keyword": "Slug URL",
+          "page-title": "Tytuł strony",
+          "meta-description": "Meta opis",
+          "meta-keywords": "Meta słowa kluczowe",
+          "alternative-text": "Tekst alternatywny obrazu"
+        },
+        "placeholders": {
+          "store": "Wybierz sklep...",
+          "language": "Wybierz język...",
+          "url-keyword": "Podaj slug URL...",
+          "page-title": "Podaj tytuł...",
+          "meta-description": "Podaj opis...",
+          "meta-keywords": "Podaj słowa kluczowe...",
+          "alternative-text": "Podaj tekst alternatywny..."
+        },
+        "validations": {
+          "url-keyword-required": "To pole jest wymagane",
+          "url-keyword-invalid": "URL zawiera nieprawidłowe znaki",
+          "url-keyword-duplicate": "Wykryto zduplikowany URL"
+        }
+      },
+      "seo-duplicates": {
+        "subtitle": "Konflikty SEO",
+        "labels": {
+          "semanticUrl": "Semantyczny URL",
+          "container": "Sklep"
+        }
+      },
+      "package-type-list": {
+        "title": "Predefiniowany rozmiar paczki",
+        "subtitle": "Zarządzaj typami paczek systemu",
+        "labels": {
+          "no-packages": "Brak predefiniowanych paczek"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "Nowy typ paczki",
+        "new-subtitle": "Wprowadź wartości rozmiaru paczki",
+        "subtitle": "Edytuj szczegóły rozmiaru paczki",
+        "labels": {
+          "name": "Nazwa typu paczki",
+          "name-description": "Podaj unikalną nazwę dla typu paczki",
+          "name-placeholder": "Wprowadź nazwę typu paczki",
+          "measureUnit": "Jednostka miary rozmiaru",
+          "measureUnit-description": "Domyślna jednostka miary dla rozmiaru",
+          "measureUnit-placeholder": "Wybierz odpowiednią jednostkę miary lub dodaj nową",
+          "width": "Szerokość",
+          "height": "Wysokość",
+          "length": "Długość"
+        }
+      },
+      "document-type-list": {
+        "title": "Typy rekordów",
+        "labels": {
+          "document-type": "Typ rekordu",
+          "indexed-docs-total": "Liczba rekordów",
+          "provider": "Dostawca",
+          "scope": "Zakres",
+          "last-indexation-date": "Ostatnia indeksacja",
+          "build-index": "Zbuduj indeks",
+          "rebuild-index": "Przebuduj indeks"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "Zbuduj indeks wyszukiwania",
+        "msg1": "Wybierz, jak chcesz zaktualizować indeks wyszukiwania:",
+        "msg2": "Zbuduj: Zindeksuj wszystkie dane bez odtwarzania",
+        "msg3": "Usuń i zbuduj: Usuń istniejący indeks wyszukiwania i zbuduj nowy od podstaw. Uwaga: Żadne wyniki wyszukiwania nie będą dostępne, dopóki proces budowania nie zostanie zakończony",
+        "index": "Zbuduj",
+        "reindex": "Usuń i zbuduj"
+      },
+      "address-delete": {
+        "title": "Potwierdź usunięcie",
+        "message": "Czy na pewno chcesz usunąć ten adres?"
+      },
+      "address-save": {
+        "title": "Zapisz zmiany",
+        "message": "Adres został zmodyfikowany. Czy chcesz zapisać zmiany?"
+      },
+      "currency-delete": {
+        "title": "Potwierdź usunięcie",
+        "message": "Czy na pewno chcesz usunąć tę walutę?"
+      },
+      "currency-save": {
+        "title": "Zapisz zmiany",
+        "message": "Waluta została zmodyfikowana. Czy chcesz zapisać zmiany?"
+      },
+      "fulfillment-delete": {
+        "title": "Potwierdź usunięcie",
+        "message": "Czy na pewno chcesz usunąć to centrum realizacji zamówień?"
+      },
+      "fulfillments-save": {
+        "title": "Zapisz zmiany",
+        "message": "Centrum realizacji zamówień zostało zmodyfikowane. Czy chcesz zapisać zmiany?"
+      },
+      "seo-save": {
+        "title": "Zapisz zmiany",
+        "message": "Informacje SEO zostały zmodyfikowane. Czy chcesz zapisać zmiany?"
+      },
+      "package-type-save": {
+        "title": "Zapisz zmiany",
+        "message": "Informacje o typie paczki zostały zmodyfikowane. Czy chcesz zapisać zmiany?"
+      },
+      "package-type-delete": {
+        "title": "Potwierdź usunięcie",
+        "message": "Czy na pewno chcesz usunąć ten typ paczki?"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "Zindeksowano <span am-time-ago='indexDate'></span>",
+        "index-old": "Ten indeks jest nieaktualny, ponieważ został zbudowany <span am-time-ago='indexDate'>",
+        "no-index": "Brak indeksu wyszukiwania"
+      },
+      "currency": {
+        "title": "Waluty"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "Szczegóły kontaktu",
+        "title": "Szczegóły kontaktu"
+      },
+      "fulfillment": {
+        "title": "Centra realizacji zamówień"
+      },
+      "seo": {
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "Twórz dane typu paczki",
+    "core:packageType:update": "Aktualizuj dane typu paczki",
+    "core:packageType:delete": "Usuń dane typu paczki",
+    "core:currency:create": "Twórz dane waluty",
+    "core:currency:update": "Aktualizuj dane waluty",
+    "core:currency:delete": "Usuń dane waluty"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "Dostępne typy podatków",
+      "title": "Typy podatków"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "Dostępne jednostki wagi dla towarów fizycznych",
+      "title": "Jednostki wagi"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "Dostępne jednostki miary dla rozmiaru towarów fizycznych",
+      "title": "Jednostki miary rozmiaru"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "Stała opłata za wysyłkę lądową",
+      "title": "Opłata za wysyłkę lądową"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "Stała opłata za wysyłkę lotniczą",
+      "title": "Opłata za wysyłkę lotniczą"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "Stała stawka podatkowa",
+      "title": "Procent stałej stawki podatkowej"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "Eksportuj lub importuj waluty, typy paczek"
+    }
+  }
+}
