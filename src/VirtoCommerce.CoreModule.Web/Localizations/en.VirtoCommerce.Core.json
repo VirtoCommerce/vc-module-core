@@ -2,11 +2,11 @@
   "core": {
     "commands": {
       "apply-filter": "Save and apply",
-      "rebuild-index": "Build Index",
+      "rebuild-index": "Build index",
       "default": "Make default"
     },
     "main-menu-title": {
-      "search-index": "Search Index"
+      "search-index": "Search index"
     },
     "blades": {
       "index-progress": {
@@ -18,7 +18,7 @@
         }
       },
       "index-detail": {
-        "title": "Search Index",
+        "title": "Search index",
         "title-new": "Search index missing",
         "subtitle": "Search index details",
         "labels": {
@@ -50,9 +50,9 @@
           "description": "Description"
         },
         "placeholders": {
-          "address-type": "Please select...",
-          "country": "Please select...",
-          "region": "Please select..."
+          "address-type": "Select...",
+          "country": "Select...",
+          "region": "Select..."
         }
       },
       "currency-list": {
@@ -78,21 +78,21 @@
           "rounding-type": "Rounding type"
         },
         "descriptions": {
-          "code": "Please provide a 3-letter ISO 4217 code, if applicable.",
-          "name": "Please provide a name for this currency.",
-          "is-primary": "Enable this option to make this currency your default one. Note: Only one currency may be set as default.",
-          "exchange-rate": "Please provide the exchange rate against your default currency.",
-          "symbol": "Please provide a sign for this currency.",
-          "custom-formatting": "Can be any valid standard numeric format specifier, as well as any combination of custom numeric format specifiers.",
-          "midpoint-rounding": "Please select an appropriate midpoint rounding method.",
-          "rounding-type": "Please select an appropriate rounding type."
+          "code": "Provide a 3-letter ISO 4217 code, if applicable",
+          "name": "Provide a name for this currency",
+          "is-primary": "Enable this option to set this currency as default. Note: Only one currency may be set as default",
+          "exchange-rate": "Provide the exchange rate against your default currency",
+          "symbol": "Provide a sign for this currency",
+          "custom-formatting": "Can be any valid standard numeric format specifier, as well as any combination of custom numeric format specifiers",
+          "midpoint-rounding": "Select an appropriate midpoint rounding method",
+          "rounding-type": "Select an appropriate rounding type."
         },
         "placeholders": {
-          "symbol": "Please provide a sign or leave blank for default culture",
-          "code": "Please provide currency code...",
-          "name": "Please provide currency name...",
-          "exchange-rate": "Please provide the exchange rate against your default currency...",
-          "custom-formatting": "Please provide a format or leave blank for default",
+          "symbol": "Provide a sign or leave blank for default culture",
+          "code": "Provide currency code...",
+          "name": "Provide currency name...",
+          "exchange-rate": "Provide the exchange rate against your default currency...",
+          "custom-formatting": "Provide a format or leave blank for default",
           "midpoint-rounding": "Select midpoint rounding policy",
           "rounding-type": "Select rounding policy"
         },
@@ -111,12 +111,12 @@
         },
         "placeholders": {
           "country": "Select...",
-          "region": "Please enter state or province...",
-          "city": "Please enter city...",
-          "address1": "Please enter address line 1...",
-          "address2": "Please enter address line 2...",
-          "zip-code": "Please provide ZIP or postal code...",
-          "phone": "Please enter phone number..."
+          "region": "Enter state or province...",
+          "city": "Enter city...",
+          "address1": "Enter address line 1...",
+          "address2": "Enter address line 2...",
+          "zip-code": "Provide ZIP or postal code...",
+          "phone": "Enter phone number..."
         }
       },
       "fulfillment-center-detail": {
@@ -129,7 +129,7 @@
         }
       },
       "fulfillment-center-list": {
-        "title": "Fulfillment Centers",
+        "title": "Fulfillment centers",
         "subtitle": "Managing fulfillment centers"
       },
       "seo-list": {
@@ -156,13 +156,13 @@
           "alternative-text": "Image alternative text"
         },
         "placeholders": {
-          "store": "Please select store...",
-          "language": "Please select language...",
-          "url-keyword": "Please provide URL slug...",
-          "page-title": "Please provide title...",
-          "meta-description": "Please provide description...",
-          "meta-keywords": "Please provide keywords...",
-          "alternative-text": "Please provide alt text..."
+          "store": "Select store...",
+          "language": "Select language...",
+          "url-keyword": "Provide URL slug...",
+          "page-title": "Provide title...",
+          "meta-description": "Provide description...",
+          "meta-keywords": "Provide keywords...",
+          "alternative-text": "Provide alt text..."
         },
         "validations": {
           "url-keyword-required": "This field is required",
@@ -190,7 +190,7 @@
         "subtitle": "Edit package size details",
         "labels": {
           "name": "Package type name",
-          "name-description": "Please provide a unique package type name.",
+          "name-description": "Provide a unique package type name",
           "name-placeholder": "Enter package type name",
           "measureUnit": "Size measurement unit",
           "measureUnit-description": "Default measurement unit for size",
@@ -215,15 +215,15 @@
     },
     "dialogs": {
       "reindex": {
-        "title": "Build Search Index",
-        "msg1": "Please choose how you want to update the search index:",
-        "msg2": "Build: Index all data without recreating.",
-        "msg3": "Delete and build: Delete the existing search index and build a new one from scratch. Note: No search results will be available until the build process is over.",
+        "title": "Build search index",
+        "msg1": "Choose how you want to update the search index:",
+        "msg2": "Build: Index all data without recreating",
+        "msg3": "Delete and build: Delete the existing search index and build a new one from scratch. Note: No search results will be available until the build process is over",
         "index": "Build",
         "reindex": "Delete and build"
       },
       "address-delete": {
-        "title": "Confirm Delete",
+        "title": "Confirm delete",
         "message": "Are you sure you want to delete this address?"
       },
       "address-save": {
@@ -231,7 +231,7 @@
         "message": "The address has been modified. Do you want to save changes?"
       },
       "currency-delete": {
-        "title": "Confirm Delete",
+        "title": "Confirm delete",
         "message": "Are you sure you want to delete this currency?"
       },
       "currency-save": {
@@ -239,7 +239,7 @@
         "message": "The currency has been modified. Do you want to save changes?"
       },
       "fulfillment-delete": {
-        "title": "Confirm Delete",
+        "title": "Confirm delete",
         "message": "Are you sure you want to delete this fulfillment center?"
       },
       "fulfillments-save": {
@@ -255,7 +255,7 @@
         "message": "The package type information has been modified. Do you want to save changes?"
       },
       "package-type-delete": {
-        "title": "Confirm Delete",
+        "title": "Confirm delete",
         "message": "Are you sure you want to delete this package type?"
       }
     },

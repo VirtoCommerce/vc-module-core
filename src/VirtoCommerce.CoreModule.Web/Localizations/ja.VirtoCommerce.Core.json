@@ -1,0 +1,322 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "保存して適用",
+      "rebuild-index": "インデックスを構築",
+      "default": "デフォルトに設定"
+    },
+    "main-menu-title": {
+      "search-index": "検索インデックス"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "開始",
+          "end": "終了",
+          "errors": "エラー",
+          "stats": "{{ totalCount }} レコード中 {{ processedCount }} をインデックス化"
+        }
+      },
+      "index-detail": {
+        "title": "検索インデックス",
+        "title-new": "検索インデックスがありません",
+        "subtitle": "検索インデックスの詳細",
+        "labels": {
+          "no-index": "データなし",
+          "build-date": "最終インデックス化",
+          "content": "インデックスの内容"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "まだ住所がありません"
+        }
+      },
+      "address-detail": {
+        "subtitle": "住所を編集",
+        "labels": {
+          "name": "住所名",
+          "address-type": "住所タイプ",
+          "first-name": "名",
+          "last-name": "姓",
+          "country": "国",
+          "region": "地域",
+          "city": "市区町村",
+          "address1": "住所1",
+          "address2": "住所2",
+          "zip-code": "郵便番号",
+          "email": "メールアドレス",
+          "phone": "電話番号",
+          "description": "説明"
+        },
+        "placeholders": {
+          "address-type": "選択...",
+          "country": "選択...",
+          "region": "選択..."
+        }
+      },
+      "currency-list": {
+        "title": "通貨",
+        "subtitle": "通貨管理",
+        "labels": {
+          "exchange-rate": "為替レート：",
+          "no-currencies": "通貨なし"
+        }
+      },
+      "currency-detail": {
+        "new-title": "新しい通貨",
+        "new-subtitle": "通貨の詳細を入力",
+        "subtitle": "通貨の詳細を編集",
+        "labels": {
+          "code": "コード",
+          "name": "名前",
+          "is-primary": "デフォルトに設定",
+          "exchange-rate": "為替レート",
+          "symbol": "記号",
+          "custom-formatting": "カスタムフォーマット",
+          "midpoint-rounding": "中間点の丸め",
+          "rounding-type": "丸めタイプ"
+        },
+        "descriptions": {
+          "code": "該当する場合は3文字のISO 4217コードを提供してください",
+          "name": "この通貨の名前を提供してください",
+          "is-primary": "この通貨をデフォルトに設定するにはこのオプションを有効にしてください。注：デフォルトに設定できる通貨は1つだけです",
+          "exchange-rate": "デフォルト通貨に対する為替レートを提供してください",
+          "symbol": "この通貨の記号を提供してください",
+          "custom-formatting": "有効な標準数値フォーマット指定子、およびカスタム数値フォーマット指定子の任意の組み合わせが可能です",
+          "midpoint-rounding": "適切な中間点の丸め方法を選択してください",
+          "rounding-type": "適切な丸めタイプを選択してください"
+        },
+        "placeholders": {
+          "symbol": "記号を提供するか、デフォルトのカルチャーを使用する場合は空白のままにしてください",
+          "code": "通貨コードを提供...",
+          "name": "通貨名を提供...",
+          "exchange-rate": "デフォルト通貨に対する為替レートを提供...",
+          "custom-formatting": "フォーマットを提供するか、デフォルト値を使用する場合は空白のままにしてください",
+          "midpoint-rounding": "中間点の丸めポリシーを選択",
+          "rounding-type": "丸めポリシーを選択"
+        },
+        "validation": {
+          "maxlength": "通貨コードは3文字のアルファベットである必要があります"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "国",
+          "region": "地域",
+          "city": "市区町村",
+          "address": "住所",
+          "zip-code": "郵便番号",
+          "phone": "電話番号"
+        },
+        "placeholders": {
+          "country": "選択...",
+          "region": "州または県を入力...",
+          "city": "市区町村を入力...",
+          "address1": "住所1を入力...",
+          "address2": "住所2を入力...",
+          "zip-code": "郵便番号を提供...",
+          "phone": "電話番号を入力..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "フルフィルメントセンターの編集",
+        "labels": {
+          "name": "名前",
+          "description": "説明",
+          "max-releases": "選択したバッチでの最大リリース数",
+          "pick-delay": "ピック遅延"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "フルフィルメントセンター",
+        "subtitle": "フルフィルメントセンターの管理"
+      },
+      "seo-list": {
+        "subtitle": "SEOの管理",
+        "labels": {
+          "duplicates-found": "注意：{{count}}件の競合するセマンティックURLがあります！",
+          "resolve-duplicates": "競合を解決",
+          "language-code": "言語",
+          "container": "ストア",
+          "semanticUrl": "セマンティックURL"
+        }
+      },
+      "seo-detail": {
+        "title-new": "新しいSEO",
+        "subtitle": "SEOの詳細",
+        "labels": {
+          "is-active": "アクティブ",
+          "store": "ストア",
+          "language": "言語",
+          "url-keyword": "URLスラッグ",
+          "page-title": "ページタイトル",
+          "meta-description": "メタ説明",
+          "meta-keywords": "メタキーワード",
+          "alternative-text": "画像の代替テキスト"
+        },
+        "placeholders": {
+          "store": "ストアを選択...",
+          "language": "言語を選択...",
+          "url-keyword": "URLスラッグを提供...",
+          "page-title": "タイトルを提供...",
+          "meta-description": "説明を提供...",
+          "meta-keywords": "キーワードを提供...",
+          "alternative-text": "代替テキストを提供..."
+        },
+        "validations": {
+          "url-keyword-required": "このフィールドは必須です",
+          "url-keyword-invalid": "URLに無効な文字が含まれています",
+          "url-keyword-duplicate": "重複するURLが検出されました"
+        }
+      },
+      "seo-duplicates": {
+        "subtitle": "SEOの競合",
+        "labels": {
+          "semanticUrl": "セマンティックURL",
+          "container": "ストア"
+        }
+      },
+      "package-type-list": {
+        "title": "事前定義されたパッケージサイズ",
+        "subtitle": "システムパッケージタイプの管理",
+        "labels": {
+          "no-packages": "事前定義されたパッケージはありません"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "新しいパッケージタイプ",
+        "new-subtitle": "パッケージサイズの値を入力",
+        "subtitle": "パッケージサイズの詳細を編集",
+        "labels": {
+          "name": "パッケージタイプ名",
+          "name-description": "パッケージタイプの一意の名前を提供してください",
+          "name-placeholder": "パッケージタイプ名を入力",
+          "measureUnit": "サイズの測定単位",
+          "measureUnit-description": "サイズのデフォルト測定単位",
+          "measureUnit-placeholder": "適用可能な測定単位を選択するか新しい単位を追加",
+          "width": "幅",
+          "height": "高さ",
+          "length": "長さ"
+        }
+      },
+      "document-type-list": {
+        "title": "レコードタイプ",
+        "labels": {
+          "document-type": "レコードタイプ",
+          "indexed-docs-total": "レコード数",
+          "provider": "プロバイダー",
+          "scope": "スコープ",
+          "last-indexation-date": "最終インデックス化",
+          "build-index": "インデックスを構築",
+          "rebuild-index": "インデックスを再構築"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "検索インデックスを構築",
+        "msg1": "検索インデックスの更新方法を選択してください：",
+        "msg2": "構築：再作成せずにすべてのデータをインデックス化",
+        "msg3": "削除して構築：既存の検索インデックスを削除し、新しいインデックスをゼロから構築します。注意：構築プロセスが完了するまで検索結果は利用できません",
+        "index": "構築",
+        "reindex": "削除して構築"
+      },
+      "address-delete": {
+        "title": "削除の確認",
+        "message": "この住所を削除してもよろしいですか？"
+      },
+      "address-save": {
+        "title": "変更を保存",
+        "message": "住所が変更されました。変更を保存しますか？"
+      },
+      "currency-delete": {
+        "title": "削除の確認",
+        "message": "この通貨を削除してもよろしいですか？"
+      },
+      "currency-save": {
+        "title": "変更を保存",
+        "message": "通貨が変更されました。変更を保存しますか？"
+      },
+      "fulfillment-delete": {
+        "title": "削除の確認",
+        "message": "このフルフィルメントセンターを削除してもよろしいですか？"
+      },
+      "fulfillments-save": {
+        "title": "変更を保存",
+        "message": "フルフィルメントセンターが変更されました。変更を保存しますか？"
+      },
+      "seo-save": {
+        "title": "変更を保存",
+        "message": "SEO情報が変更されました。変更を保存しますか？"
+      },
+      "package-type-save": {
+        "title": "変更を保存",
+        "message": "パッケージタイプ情報が変更されました。変更を保存しますか？"
+      },
+      "package-type-delete": {
+        "title": "削除の確認",
+        "message": "このパッケージタイプを削除してもよろしいですか？"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "<span am-time-ago='indexDate'></span>にインデックス化されました",
+        "index-old": "このインデックスは古くなっています。<span am-time-ago='indexDate'>に構築されました",
+        "no-index": "検索インデックスがありません"
+      },
+      "currency": {
+        "title": "通貨"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "連絡先詳細",
+        "title": "連絡先詳細"
+      },
+      "fulfillment": {
+        "title": "フルフィルメントセンター"
+      },
+      "seo": {
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "パッケージタイプデータを作成",
+    "core:packageType:update": "パッケージタイプデータを更新",
+    "core:packageType:delete": "パッケージタイプデータを削除",
+    "core:currency:create": "通貨データを作成",
+    "core:currency:update": "通貨データを更新",
+    "core:currency:delete": "通貨データを削除"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "利用可能な税種",
+      "title": "税種"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "物理的な商品に利用可能な重量単位",
+      "title": "重量単位"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "物理的な商品のサイズに利用可能な測定単位",
+      "title": "サイズ測定単位"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "固定陸上配送料",
+      "title": "陸上配送料"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "固定航空配送料",
+      "title": "航空配送料"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "固定税率",
+      "title": "固定税率パーセンテージ"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "通貨、パッケージタイプをエクスポートまたはインポート"
+    }
+  }
+}
