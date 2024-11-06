@@ -1,0 +1,322 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "保存并应用",
+      "rebuild-index": "构建索引",
+      "default": "设为默认"
+    },
+    "main-menu-title": {
+      "search-index": "搜索索引"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "开始",
+          "end": "结束",
+          "errors": "错误",
+          "stats": "已索引 {{ processedCount }} 条，共 {{ totalCount }} 条记录"
+        }
+      },
+      "index-detail": {
+        "title": "搜索索引",
+        "title-new": "缺少搜索索引",
+        "subtitle": "搜索索引详情",
+        "labels": {
+          "no-index": "无数据",
+          "build-date": "上次索引时间",
+          "content": "索引内容"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "暂无地址"
+        }
+      },
+      "address-detail": {
+        "subtitle": "编辑地址",
+        "labels": {
+          "name": "地址名称",
+          "address-type": "地址类型",
+          "first-name": "名",
+          "last-name": "姓",
+          "country": "国家",
+          "region": "地区",
+          "city": "城市",
+          "address1": "地址行1",
+          "address2": "地址行2",
+          "zip-code": "邮政编码",
+          "email": "电子邮件",
+          "phone": "电话",
+          "description": "描述"
+        },
+        "placeholders": {
+          "address-type": "选择...",
+          "country": "选择...",
+          "region": "选择..."
+        }
+      },
+      "currency-list": {
+        "title": "货币",
+        "subtitle": "管理货币",
+        "labels": {
+          "exchange-rate": "汇率：",
+          "no-currencies": "无货币"
+        }
+      },
+      "currency-detail": {
+        "new-title": "新货币",
+        "new-subtitle": "输入货币详情",
+        "subtitle": "编辑货币详情",
+        "labels": {
+          "code": "代码",
+          "name": "名称",
+          "is-primary": "设为默认",
+          "exchange-rate": "汇率",
+          "symbol": "符号",
+          "custom-formatting": "自定义格式",
+          "midpoint-rounding": "中点舍入",
+          "rounding-type": "舍入类型"
+        },
+        "descriptions": {
+          "code": "提供3字母ISO 4217代码（如适用）",
+          "name": "为此货币提供名称",
+          "is-primary": "启用此选项将此货币设为默认。注意：只能将一种货币设为默认",
+          "exchange-rate": "提供相对于默认货币的汇率",
+          "symbol": "为此货币提供符号",
+          "custom-formatting": "可以是任何有效的标准数字格式说明符，以及任何自定义数字格式说明符的组合",
+          "midpoint-rounding": "选择适当的中点舍入方法",
+          "rounding-type": "选择适当的舍入类型"
+        },
+        "placeholders": {
+          "symbol": "提供符号或留空以使用默认区域设置",
+          "code": "提供货币代码...",
+          "name": "提供货币名称...",
+          "exchange-rate": "提供相对于默认货币的汇率...",
+          "custom-formatting": "提供格式或留空以使用默认值",
+          "midpoint-rounding": "选择中点舍入策略",
+          "rounding-type": "选择舍入策略"
+        },
+        "validation": {
+          "maxlength": "货币代码必须为3个字母字符"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "国家",
+          "region": "地区",
+          "city": "城市",
+          "address": "地址",
+          "zip-code": "邮政编码",
+          "phone": "电话"
+        },
+        "placeholders": {
+          "country": "选择...",
+          "region": "输入州或省...",
+          "city": "输入城市...",
+          "address1": "输入地址行1...",
+          "address2": "输入地址行2...",
+          "zip-code": "提供邮政编码...",
+          "phone": "输入电话号码..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "编辑履行中心",
+        "labels": {
+          "name": "名称",
+          "description": "描述",
+          "max-releases": "所选批次中的最大发布数",
+          "pick-delay": "拣货延迟"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "履行中心",
+        "subtitle": "管理履行中心"
+      },
+      "seo-list": {
+        "subtitle": "管理SEO",
+        "labels": {
+          "duplicates-found": "注意：存在 {{count}} 个冲突的语义URL！",
+          "resolve-duplicates": "解决冲突",
+          "language-code": "语言",
+          "container": "商店",
+          "semanticUrl": "语义URL"
+        }
+      },
+      "seo-detail": {
+        "title-new": "新建SEO",
+        "subtitle": "SEO详情",
+        "labels": {
+          "is-active": "活跃",
+          "store": "商店",
+          "language": "语言",
+          "url-keyword": "URL别名",
+          "page-title": "页面标题",
+          "meta-description": "元描述",
+          "meta-keywords": "元关键词",
+          "alternative-text": "图片替代文本"
+        },
+        "placeholders": {
+          "store": "选择商店...",
+          "language": "选择语言...",
+          "url-keyword": "提供URL别名...",
+          "page-title": "提供标题...",
+          "meta-description": "提供描述...",
+          "meta-keywords": "提供关键词...",
+          "alternative-text": "提供替代文本..."
+        },
+        "validations": {
+          "url-keyword-required": "此字段为必填项",
+          "url-keyword-invalid": "URL包含无效字符",
+          "url-keyword-duplicate": "检测到重复的URL"
+        }
+      },
+      "seo-duplicates": {
+        "subtitle": "SEO冲突",
+        "labels": {
+          "semanticUrl": "语义URL",
+          "container": "商店"
+        }
+      },
+      "package-type-list": {
+        "title": "预定义包装尺寸",
+        "subtitle": "管理系统包装类型",
+        "labels": {
+          "no-packages": "无预定义包装"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "新包装类型",
+        "new-subtitle": "输入包装尺寸值",
+        "subtitle": "编辑包装尺寸详情",
+        "labels": {
+          "name": "包装类型名称",
+          "name-description": "为包装类型提供唯一名称",
+          "name-placeholder": "输入包装类型名称",
+          "measureUnit": "尺寸测量单位",
+          "measureUnit-description": "尺寸的默认测量单位",
+          "measureUnit-placeholder": "选择适用的测量单位或添加新单位",
+          "width": "宽度",
+          "height": "高度",
+          "length": "长度"
+        }
+      },
+      "document-type-list": {
+        "title": "记录类型",
+        "labels": {
+          "document-type": "记录类型",
+          "indexed-docs-total": "记录数",
+          "provider": "提供者",
+          "scope": "范围",
+          "last-indexation-date": "上次索引时间",
+          "build-index": "构建索引",
+          "rebuild-index": "重建索引"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "构建搜索索引",
+        "msg1": "选择如何更新搜索索引：",
+        "msg2": "构建：索引所有数据而不重新创建",
+        "msg3": "删除并构建：删除现有搜索索引并从头开始构建新索引。注意：在构建过程完成之前，将无法使用任何搜索结果",
+        "index": "构建",
+        "reindex": "删除并构建"
+      },
+      "address-delete": {
+        "title": "确认删除",
+        "message": "您确定要删除此地址吗？"
+      },
+      "address-save": {
+        "title": "保存更改",
+        "message": "地址已被修改。您想保存更改吗？"
+      },
+      "currency-delete": {
+        "title": "确认删除",
+        "message": "您确定要删除此货币吗？"
+      },
+      "currency-save": {
+        "title": "保存更改",
+        "message": "货币已被修改。您想保存更改吗？"
+      },
+      "fulfillment-delete": {
+        "title": "确认删除",
+        "message": "您确定要删除此履行中心吗？"
+      },
+      "fulfillments-save": {
+        "title": "保存更改",
+        "message": "履行中心已被修改。您想保存更改吗？"
+      },
+      "seo-save": {
+        "title": "保存更改",
+        "message": "SEO信息已被修改。您想保存更改吗？"
+      },
+      "package-type-save": {
+        "title": "保存更改",
+        "message": "包装类型信息已被修改。您想保存更改吗？"
+      },
+      "package-type-delete": {
+        "title": "确认删除",
+        "message": "您确定要删除此包装类型吗？"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "已索引 <span am-time-ago='indexDate'></span>",
+        "index-old": "此索引已过时，因为它是在 <span am-time-ago='indexDate'> 构建的",
+        "no-index": "缺少搜索索引"
+      },
+      "currency": {
+        "title": "货币"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "联系详情",
+        "title": "联系详情"
+      },
+      "fulfillment": {
+        "title": "履行中心"
+      },
+      "seo": {
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "创建包装类型数据",
+    "core:packageType:update": "更新包装类型数据",
+    "core:packageType:delete": "删除包装类型数据",
+    "core:currency:create": "创建货币数据",
+    "core:currency:update": "更新货币数据",
+    "core:currency:delete": "删除货币数据"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "可用税种",
+      "title": "税种"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "实物商品可用的重量单位",
+      "title": "重量单位"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "实物商品尺寸可用的测量单位",
+      "title": "尺寸测量单位"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "固定陆运运费",
+      "title": "陆运运费"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "固定空运运费",
+      "title": "空运运费"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "固定税率",
+      "title": "固定税率百分比"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "导出或导入货币、包装类型"
+    }
+  }
+}
