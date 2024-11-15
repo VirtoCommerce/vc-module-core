@@ -119,8 +119,8 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         public static Money operator *(Money first, Money second)
             => new Money(first.InternalAmount * second.ConvertTo(first.Currency).InternalAmount, first.Currency);
 
-        public static Money operator /(Money first, Money second)
-            => new Money(first.InternalAmount / second.ConvertTo(first.Currency).InternalAmount, first.Currency);
+        public static decimal operator /(Money first, Money second)
+            => first.InternalAmount / second.ConvertTo(first.Currency).InternalAmount;
 
         public static bool operator ==(Money money, long value) => !(money is null) && money.InternalAmount == value;
 
