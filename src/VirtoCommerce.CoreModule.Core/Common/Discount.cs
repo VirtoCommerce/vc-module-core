@@ -11,6 +11,7 @@ namespace VirtoCommerce.CoreModule.Core.Common
         public virtual decimal DiscountAmountWithTax { get; set; }
         public string Coupon { get; set; }
         public string Description { get; set; }
+        public string Name { get; set; }
 
         #region ICloneable members
 
