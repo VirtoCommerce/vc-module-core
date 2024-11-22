@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Enums;
 using Xunit;
@@ -14,7 +15,7 @@ namespace VirtoCommerce.CoreModule.Tests
         {
             // Arrange
             var roundPolicy = new DefaultMoneyRoundingPolicy();
-            var currency = new Currency();
+            var currency = new Currency(new Language("en-US"), code: null);
             currency.RoundingType = roundingType.ToString();
             currency.MidpointRounding = midpointRounding.ToString();
 
