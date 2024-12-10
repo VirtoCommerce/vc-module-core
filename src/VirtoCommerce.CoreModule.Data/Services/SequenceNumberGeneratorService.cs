@@ -141,7 +141,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
         /// <returns></returns>
         protected virtual int RequestNextCounter(string tenantId, CounterOptions counterOptions)
         {
-            var sequenceKey = string.IsNullOrEmpty(tenantId) ? counterOptions.NumberTemplate : $"{tenantId}/{counterOptions.NumberTemplate}";
+            var sequenceKey = GetSequenceKey(tenantId, counterOptions);
 
             using var repository = _repositoryFactory();
             var sequence = repository.Sequences.SingleOrDefault(s => s.ObjectType == sequenceKey);
@@ -177,6 +177,18 @@ namespace VirtoCommerce.CoreModule.Data.Services
             return sequence.Value;
         }
 
+        protected virtual string GetSequenceKey(string tenantId, CounterOptions counterOptions)
+        {
+            if(_options.UseGlobalTenantId)
+            {
+                tenantId = "__GlobalTenant";
+            }
+
+            return string.IsNullOrEmpty(tenantId) ?
+                counterOptions.NumberTemplate :
+                $"{tenantId}/{counterOptions.NumberTemplate}";
+        }
+
         /// <summary>
         /// Returns true if counter should be reset.
         /// </summary>
@@ -193,7 +205,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
                     return currentUtcDate.Date > lastResetDate.Date;
                 case ResetCounterType.Weekly:
                     // Reset every Monday
-                    int daysUntilTargetDay = ((int)DayOfWeek.Monday - (int)lastResetDate.DayOfWeek + 7) % 7;
+                    var daysUntilTargetDay = ((int)DayOfWeek.Monday - (int)lastResetDate.DayOfWeek + 7) % 7;
                     var nextMondayDate = lastResetDate.Date.AddDays(daysUntilTargetDay);
                     return currentUtcDate >= nextMondayDate;
                 case ResetCounterType.Monthly:
