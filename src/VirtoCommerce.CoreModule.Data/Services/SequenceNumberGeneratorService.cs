@@ -179,14 +179,12 @@ namespace VirtoCommerce.CoreModule.Data.Services
 
         protected virtual string GetSequenceKey(string tenantId, CounterOptions counterOptions)
         {
-            if(_options.UseGlobalTenantId)
+            if(_options.UseGlobalTenantId || string.IsNullOrEmpty(tenantId))
             {
-                tenantId = "__GlobalTenant";
+                return counterOptions.NumberTemplate;
             }
 
-            return string.IsNullOrEmpty(tenantId) ?
-                counterOptions.NumberTemplate :
-                $"{tenantId}/{counterOptions.NumberTemplate}";
+            return $"{tenantId}/{counterOptions.NumberTemplate}";
         }
 
         /// <summary>
