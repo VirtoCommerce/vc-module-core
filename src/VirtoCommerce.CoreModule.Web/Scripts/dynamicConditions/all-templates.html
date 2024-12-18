@@ -246,8 +246,8 @@
     <div class="form-input __mini">
         <input money required ng-model="element1.maxLimit">
     </div>
-    , <a class="__link" left-click-menu data-target="trueFalse_menu{{element1.id}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
-    <ul class="menu __context" role="menu" id="trueFalse_menu{{element1.id}}">
+    , <a class="__link" left-click-menu data-target="trueFalse_menu_{{element1.$$hashKey}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
+    <ul class="menu __context" role="menu" id="trueFalse_menu_{{element1.$$hashKey}}">
         <li class="menu-item" ng-click='element1.roundAmountPerItem=true;'>round</li>
         <li class="menu-item" ng-click='element1.roundAmountPerItem=false;'>don't round</li>
     </ul>
@@ -262,8 +262,8 @@
         <input smart-float num-type="integer" required ng-model="element1.numItem">
     </div>items of this product:
     <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select product' }}</a>
-    , <a class="__link" left-click-menu data-target="trueFalse_menu{{element1.id}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
-    <ul class="menu __context" role="menu" id="trueFalse_menu{{element1.id}}">
+    , <a class="__link" left-click-menu data-target="trueFalse_menu_{{element1.$$hashKey}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
+    <ul class="menu __context" role="menu" id="trueFalse_menu_{{element1.$$hashKey}}">
         <li class="menu-item" ng-click='element1.roundAmountPerItem=true;'>round</li>
         <li class="menu-item" ng-click='element1.roundAmountPerItem=false;'>don't round</li>
     </ul>
@@ -283,8 +283,8 @@
         items of this product:
         <a class="__link" ng-click="openItemSelectWizard(element1)">{{element1.productName?element1.productName + ' (' + element1.productCode + ')' : 'select product' }}</a>
     </div>
-    , <a class="__link" left-click-menu data-target="trueFalse_menu{{element1.id}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
-    <ul class="menu __context" role="menu" id="trueFalse_menu{{element1.id}}">
+    , <a class="__link" left-click-menu data-target="trueFalse_menu_{{element1.$$hashKey}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
+    <ul class="menu __context" role="menu" id="trueFalse_menu_{{element1.$$hashKey}}">
         <li class="menu-item" ng-click='element1.roundAmountPerItem=true;'>round</li>
         <li class="menu-item" ng-click='element1.roundAmountPerItem=false;'>don't round</li>
     </ul>
@@ -369,8 +369,8 @@
             <input money required ng-model="element1.maxLimit">
         </div>
     </div>
-    , <a class="__link" left-click-menu data-target="trueFalse_menu{{element1.id}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
-    <ul class="menu __context" role="menu" id="trueFalse_menu{{element1.id}}">
+    , <a class="__link" left-click-menu data-target="trueFalse_menu_{{element1.$$hashKey}}">{{ element1.roundAmountPerItem | boolToValue:'round':"don't round"}}</a>
+    <ul class="menu __context" role="menu" id="trueFalse_menu_{{element1.$$hashKey}}">
         <li class="menu-item" ng-click='element1.roundAmountPerItem=true;'>round</li>
         <li class="menu-item" ng-click='element1.roundAmountPerItem=false;'>don't round</li>
     </ul>
