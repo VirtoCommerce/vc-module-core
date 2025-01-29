@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.CoreModule.Core.Seo;
+using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.Outlines
 {
@@ -33,7 +34,7 @@ namespace VirtoCommerce.CoreModule.Core.Outlines
         /// </summary>
         public string Name { get; set; }
 
-        public IDictionary<string, string> LocalizedName { get; set; }
+        public LocalizedString LocalizedName { get; set; }
 
         /// <summary>
         /// True when this object is linked to the virtual parent.
@@ -49,7 +50,7 @@ namespace VirtoCommerce.CoreModule.Core.Outlines
         {
             var result = MemberwiseClone() as OutlineItem;
             result.SeoInfos = SeoInfos?.Select(x => x.Clone() as SeoInfo).ToList();
-            result.LocalizedName = LocalizedName?.ToDictionary(x => x.Key, x => x.Value);
+            result.LocalizedName = LocalizedName?.Clone() as LocalizedString;
             return result;
         }
     }
