@@ -26,7 +26,7 @@ public class CompositeSeoResolver : ISeoResolver
         }
 
         var fallbackResults = await _seoBySlugResolver.FindSeoBySlugAsync(criteria.Slug);
-        return fallbackResults.ToList();
+        return fallbackResults;
     }
 }
 
