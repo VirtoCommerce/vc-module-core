@@ -18,9 +18,15 @@ public class CompositeSeoResolver : ISeoResolver
     public async Task<IList<SeoInfo>> FindSeoAsync(SeoSearchCriteria criteria)
     {
         var tasks = _resolvers.Select(x => x.FindSeoAsync(criteria)).ToArray();
-        var result = (await Task.WhenAll(tasks)).SelectMany(x => x).Where(x => x.ObjectId != null && x.ObjectType != null).Distinct();
+        var result = (await Task.WhenAll(tasks)).SelectMany(x => x).Where(x => x.ObjectId != null && x.ObjectType != null).Distinct().ToList();
+
+        if (result.Count > 0)
+        {
+            return result;
+        }
+
         var fallbackResults = await _seoBySlugResolver.FindSeoBySlugAsync(criteria.Slug);
-        return result.Union(fallbackResults).ToList();
+        return fallbackResults;
     }
 }
 
