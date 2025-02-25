@@ -20,29 +20,39 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
         public virtual IList<IConditionTree> AvailableChildren { get; set; } = new List<IConditionTree>();
         public virtual IList<IConditionTree> Children { get; set; } = new List<IConditionTree>();
 
+        public ConditionTree WithAvailableChildren(params IConditionTree[] availableChildren)
+        {
+            ArgumentNullException.ThrowIfNull(availableChildren);
+            AvailableChildren.AddRange(availableChildren);
+            return this;
+        }
+
+        [Obsolete("Use WithAvailableChildren()", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
         public ConditionTree WithAvailConditions(params IConditionTree[] availConditions)
         {
-            if (availConditions == null)
-            {
-                throw new ArgumentNullException(nameof(availConditions));
-            }
+            ArgumentNullException.ThrowIfNull(availConditions);
             AvailableChildren.AddRange(availConditions);
             return this;
         }
 
+        public ConditionTree WithChildren(params IConditionTree[] children)
+        {
+            ArgumentNullException.ThrowIfNull(children);
+            Children.AddRange(children);
+            return this;
+        }
+
+        [Obsolete("Use WithChildren()", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
         public ConditionTree WithChildrens(params IConditionTree[] childrenCondition)
         {
-            if (childrenCondition == null)
-            {
-                throw new ArgumentNullException(nameof(childrenCondition));
-            }
+            ArgumentNullException.ThrowIfNull(childrenCondition);
             Children.AddRange(childrenCondition);
             return this;
         }
 
         public override object Clone()
         {
-            var result = base.Clone() as ConditionTree;
+            var result = (ConditionTree)base.Clone();
             result.Children = Children?.Select(x => x.Clone() as IConditionTree).ToList();
             result.AvailableChildren = AvailableChildren?.Select(x => x.Clone() as IConditionTree).ToList();
             return result;
@@ -50,17 +60,14 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
 
         public virtual void MergeFromPrototype(IConditionTree prototype)
         {
-            if (prototype == null)
-            {
-                throw new ArgumentNullException(nameof(prototype));
-            }
+            ArgumentNullException.ThrowIfNull(prototype);
 
             void mergeFromPrototype(IEnumerable<IConditionTree> sourceList, ICollection<IConditionTree> targetList)
             {
                 foreach (var source in sourceList)
                 {
-                    var existTargets = targetList.Where(x => x.Id.EqualsInvariant(source.Id));
-                    if (existTargets.Any())
+                    var existTargets = targetList.Where(x => x.Id.EqualsInvariant(source.Id)).ToList();
+                    if (existTargets.Count > 0)
                     {
                         foreach (var target in existTargets)
                         {
@@ -76,18 +83,13 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
 
             if (prototype.AvailableChildren != null)
             {
-                if (AvailableChildren == null)
-                {
-                    AvailableChildren = new List<IConditionTree>();
-                }
+                AvailableChildren ??= new List<IConditionTree>();
                 mergeFromPrototype(prototype.AvailableChildren, AvailableChildren);
             }
+
             if (prototype.Children != null)
             {
-                if (Children == null)
-                {
-                    Children = new List<IConditionTree>();
-                }
+                Children ??= new List<IConditionTree>();
                 mergeFromPrototype(prototype.Children, Children);
             }
         }
