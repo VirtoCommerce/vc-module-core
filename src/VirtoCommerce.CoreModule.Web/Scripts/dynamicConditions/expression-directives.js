@@ -22,6 +22,9 @@ angular.module('virtoCommerce.coreModule.common')
             link: function ($scope, $element, $attrs) {
                 $scope.toggle = function ($event) {
                     var elem = $event.target;
+                    if (elem.tagName === 'I') {
+                        elem = elem.parentElement;
+                    }
                     var childUlElement = $(elem).find("ul");
                     if (childUlElement.length > 0) {
                         var iconElement = $(elem).find("i");
