@@ -23,7 +23,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
         public ConditionTree WithAvailableChildren(params IConditionTree[] availableChildren)
         {
             ArgumentNullException.ThrowIfNull(availableChildren);
-            AvailableChildren.AddRange(availableChildren);
+            AvailableChildren.AddRange(availableChildren.Where(c => c != null));
             return this;
         }
 
@@ -31,14 +31,14 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
         public ConditionTree WithAvailConditions(params IConditionTree[] availConditions)
         {
             ArgumentNullException.ThrowIfNull(availConditions);
-            AvailableChildren.AddRange(availConditions);
+            AvailableChildren.AddRange(availConditions.Where(c => c != null));
             return this;
         }
 
         public ConditionTree WithChildren(params IConditionTree[] children)
         {
             ArgumentNullException.ThrowIfNull(children);
-            Children.AddRange(children);
+            Children.AddRange(children.Where(c => c != null));
             return this;
         }
 
@@ -46,7 +46,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
         public ConditionTree WithChildrens(params IConditionTree[] childrenCondition)
         {
             ArgumentNullException.ThrowIfNull(childrenCondition);
-            Children.AddRange(childrenCondition);
+            Children.AddRange(childrenCondition.Where(c => c != null));
             return this;
         }
 
