@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using VirtoCommerce.CoreModule.Core.Common;
-using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.Conditions
 {
@@ -26,7 +25,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             {
                 throw new ArgumentNullException(nameof(availConditions));
             }
-            AvailableChildren.AddRange(availConditions);
+            AvailableChildren.AddRange(availConditions.Where(c => c != null));
             return this;
         }
 
@@ -36,7 +35,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             {
                 throw new ArgumentNullException(nameof(childrenCondition));
             }
-            Children.AddRange(childrenCondition);
+            Children.AddRange(childrenCondition.Where(c => c != null));
             return this;
         }
 
