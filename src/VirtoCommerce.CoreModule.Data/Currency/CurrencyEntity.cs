@@ -41,7 +41,7 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             currency.CustomFormatting = CustomFormatting;
             currency.MidpointRounding = MidpointRounding;
             currency.RoundingType = RoundingType;
-            currency.DecimalDigits = currency.DecimalDigits;
+            currency.DecimalDigits = DecimalDigits;
             return currency;
         }
 
