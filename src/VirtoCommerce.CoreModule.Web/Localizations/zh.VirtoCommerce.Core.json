@@ -73,6 +73,7 @@
           "is-primary": "设为默认",
           "exchange-rate": "汇率",
           "symbol": "符号",
+          "decimalDigits": "小数位数",
           "custom-formatting": "自定义格式",
           "midpoint-rounding": "中点舍入",
           "rounding-type": "舍入类型"

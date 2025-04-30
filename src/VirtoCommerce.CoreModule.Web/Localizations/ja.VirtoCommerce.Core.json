@@ -73,6 +73,7 @@
           "is-primary": "デフォルトに設定",
           "exchange-rate": "為替レート",
           "symbol": "記号",
+          "decimalDigits": "小数桁数",
           "custom-formatting": "カスタムフォーマット",
           "midpoint-rounding": "中間点の丸め",
           "rounding-type": "丸めタイプ"
