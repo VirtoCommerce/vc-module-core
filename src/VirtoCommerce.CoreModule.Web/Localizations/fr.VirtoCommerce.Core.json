@@ -73,6 +73,7 @@
           "is-primary": "Définir par défaut",
           "exchange-rate": "Taux de change",
           "symbol": "Symbole",
+          "decimalDigits": "Chiffres décimaux",
           "custom-formatting": "Formatage personnalisé",
           "midpoint-rounding": "Arrondi médian",
           "rounding-type": "Type d'arrondi"

@@ -73,6 +73,7 @@
           "is-primary": "Establecer como predeterminada",
           "exchange-rate": "Tipo de cambio",
           "symbol": "Símbolo",
+          "decimalDigits": "Dígitos decimales",
           "custom-formatting": "Formato personalizado",
           "midpoint-rounding": "Redondeo al punto medio",
           "rounding-type": "Tipo de redondeo"
