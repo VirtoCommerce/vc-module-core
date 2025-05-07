@@ -171,14 +171,13 @@ namespace VirtoCommerce.CoreModule.Core.Currency
                 if (Symbol != null)
                 {
                     NumberFormat.CurrencySymbol = Symbol;
-                    NumberFormat.CurrencyDecimalDigits = DecimalDigits;
                 }
             }
             else
             {
                 NumberFormat = CultureInfo.InvariantCulture.NumberFormat.Clone() as NumberFormatInfo;
-                NumberFormat.CurrencyDecimalDigits = DecimalDigits;
             }
+            NumberFormat.CurrencyDecimalDigits = DecimalDigits;
         }
     }
 }
