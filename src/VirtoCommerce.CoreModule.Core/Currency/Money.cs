@@ -74,7 +74,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         /// Gets the number of decimal digits for the associated currency.
         /// </summary>
         /// <returns>An int containing the number of decimal digits.</returns>
-        public int DecimalDigits => Currency.NumberFormat.CurrencyDecimalDigits;
+        public int DecimalDigits => Currency.DecimalDigits;
 
         public static bool operator ==(Money first, Money second)
         {

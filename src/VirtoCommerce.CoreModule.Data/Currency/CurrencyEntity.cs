@@ -29,6 +29,8 @@ namespace VirtoCommerce.CoreModule.Data.Currency
         [StringLength(16)]
         public string RoundingType { get; set; }
 
+        public int DecimalDigits { get; set; } = 2;
+
         public virtual Core.Currency.Currency ToModel(Core.Currency.Currency currency)
         {
             currency.Code = Code;
@@ -39,6 +41,7 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             currency.CustomFormatting = CustomFormatting;
             currency.MidpointRounding = MidpointRounding;
             currency.RoundingType = RoundingType;
+            currency.DecimalDigits = DecimalDigits;
             return currency;
         }
 
@@ -52,6 +55,7 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             CustomFormatting = currency.CustomFormatting;
             MidpointRounding = currency.MidpointRounding.ToString();
             RoundingType = currency.RoundingType.ToString();
+            DecimalDigits = currency.DecimalDigits;
             return this;
         }
 
@@ -65,6 +69,7 @@ namespace VirtoCommerce.CoreModule.Data.Currency
             target.CustomFormatting = CustomFormatting;
             target.MidpointRounding = MidpointRounding;
             target.RoundingType = RoundingType;
+            target.DecimalDigits = DecimalDigits;
         }
 
     }

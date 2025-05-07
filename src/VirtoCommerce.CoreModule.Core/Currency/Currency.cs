@@ -136,6 +136,8 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             set { _midpointRounding = EnumUtility.SafeParse(value, MidpointRoundingEnum.AwayFromZero); }
         }
 
+        public int DecimalDigits { get; set; } = 2;
+
         protected override IEnumerable<object> GetEqualityComponents()
         {
             yield return Code;
@@ -172,6 +174,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             {
                 NumberFormat = CultureInfo.InvariantCulture.NumberFormat.Clone() as NumberFormatInfo;
             }
+            NumberFormat.CurrencyDecimalDigits = DecimalDigits;
         }
     }
 }
