@@ -73,6 +73,7 @@
           "is-primary": "Установить по умолчанию",
           "exchange-rate": "Обменный курс",
           "symbol": "Знак",
+          "decimalDigits": "Десятичные знаки",
           "custom-formatting": "Пользовательское форматирование",
           "midpoint-rounding": "Округление по среднему значению",
           "rounding-type": "Тип округления"

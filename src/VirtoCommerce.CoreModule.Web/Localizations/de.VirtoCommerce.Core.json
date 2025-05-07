@@ -73,6 +73,7 @@
           "is-primary": "Als Standard festlegen",
           "exchange-rate": "Wechselkurs",
           "symbol": "Zeichen",
+          "decimalDigits": "Dezimalstellen",
           "custom-formatting": "Benutzerdefinierte Formatierung",
           "midpoint-rounding": "Rundung zur Mitte",
           "rounding-type": "Rundungstyp"

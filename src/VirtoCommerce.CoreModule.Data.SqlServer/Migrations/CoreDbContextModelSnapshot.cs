@@ -17,10 +17,10 @@ namespace VirtoCommerce.CoreModule.Data.SqlServer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("VirtoCommerce.CoreModule.Data.Currency.CurrencyEntity", b =>
                 {
@@ -44,6 +44,10 @@ namespace VirtoCommerce.CoreModule.Data.SqlServer.Migrations
                     b.Property<string>("CustomFormatting")
                         .HasMaxLength(64)
                         .HasColumnType("nvarchar(64)");
+
+                    b.Property<int>("DecimalDigits")
+                        .HasColumnType("int")
+                        .HasDefaultValue(2);
 
                     b.Property<decimal>("ExchangeRate")
                         .HasColumnType("Money");

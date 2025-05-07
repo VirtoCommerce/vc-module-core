@@ -73,6 +73,7 @@
           "is-primary": "Make default",
           "exchange-rate": "Exchange rate",
           "symbol": "Sign",
+          "decimalDigits": "Decimal digits",
           "custom-formatting": "Custom formatting",
           "midpoint-rounding": "Midpoint rounding",
           "rounding-type": "Rounding type"
