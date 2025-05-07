@@ -54,7 +54,7 @@ angular.module('virtoCommerce.coreModule.currency')
         };
 
         function initializeBlade(data) {
-            if (blade.isNew) data = { exchangeRate: 1.00 };
+            if (blade.isNew) data = { exchangeRate: 1.00, decimalDigits: 2 };
             
             blade.currentEntity = angular.copy(data);
             blade.origEntity = data;

@@ -75,6 +75,7 @@
                     "is-primary": "Ist Primär",
                     "exchange-rate": "Wechselkurs",
                     "symbol": "Symbol",
+                    "decimalDigits": "Dezimalstellen",
                     "custom-formatting": "Benutzerdefinierte Formatierung"
                 },
               "descriptions": {

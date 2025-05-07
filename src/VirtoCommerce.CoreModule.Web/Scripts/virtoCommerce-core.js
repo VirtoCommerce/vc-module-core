@@ -40,6 +40,11 @@ angular.module(moduleName, [
                 templateUrl: 'currencyDetail-symbol.html'
             },
             {
+                name: 'decimalDigits',
+                title: 'core.blades.currency-detail.labels.decimalDigits',
+                valueType: 'Integer'
+            },
+            {
                 name: 'customFormatting',
                 title: 'core.blades.currency-detail.labels.custom-formatting',
                 templateUrl: 'currencyDetail-customFormatting.html'

@@ -12,7 +12,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
         {
             var roundingType = EnumUtility.SafeParse(currency.RoundingType, RoundingType.Rounding001);
             var midpointRounding = EnumUtility.SafeParse(currency.MidpointRounding, MidpointRounding.AwayFromZero);
-            return Round(amount, currency.NumberFormat.NumberDecimalDigits, roundingType, midpointRounding);
+            return Round(amount, currency.DecimalDigits, roundingType, midpointRounding);
         }
 
         /// <summary>
