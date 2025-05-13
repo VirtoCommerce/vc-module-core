@@ -9,6 +9,7 @@ namespace VirtoCommerce.CoreModule.Core.Outlines
     /// <summary>
     /// Represents one outline element: catalog, category or product.
     /// </summary>
+    [Obsolete("Class is deprecated.", DiagnosticId = "VC0011", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
     public class OutlineItem : ISeoSupport, ICloneable
     {
         #region ISeoSupport Members

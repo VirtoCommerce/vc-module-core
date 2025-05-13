@@ -8,6 +8,7 @@ namespace VirtoCommerce.CoreModule.Core.Outlines
     /// Represents the path from the catalog to one of the child objects (product or category):
     /// catalog/parent-category1/.../parent-categoryN/object
     /// </summary>
+    [Obsolete("Class is deprecated.", DiagnosticId = "VC0011", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
     public class Outline : ICloneable
     {
         /// <summary>
