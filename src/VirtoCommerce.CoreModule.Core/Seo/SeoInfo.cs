@@ -4,7 +4,7 @@ using VirtoCommerce.Platform.Core.Domain;
 
 namespace VirtoCommerce.CoreModule.Core.Seo
 {
-    [Obsolete("Class is deprecated, please use SEO module instead.", DiagnosticId = "VC0011", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
+    [Obsolete("Class is deprecated, please use SEO module instead.", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
     public class SeoInfo : AuditableEntity, IHasLanguage, ICloneable
     {
         public SeoInfo()

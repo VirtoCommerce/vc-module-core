@@ -70,11 +70,11 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceNumberGeneratorService>();
             serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceNumberGeneratorService>();
 
-#pragma warning disable VC0011
+#pragma warning disable VC0010
             serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
             serviceCollection.AddTransient<CompositeSeoResolver>();
-#pragma warning restore VC0011
+#pragma warning restore VC0010
 
             // Money rounding
             serviceCollection.AddTransient<IMoneyRoundingPolicy, DefaultMoneyRoundingPolicy>();
