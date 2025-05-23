@@ -66,7 +66,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             {
                 foreach (var source in sourceList)
                 {
-                    var existTargets = targetList.Where(x => x.Id.EqualsInvariant(source.Id)).ToList();
+                    var existTargets = targetList.Where(x => x.Id.EqualsIgnoreCase(source.Id)).ToList();
                     if (existTargets.Count > 0)
                     {
                         foreach (var target in existTargets)

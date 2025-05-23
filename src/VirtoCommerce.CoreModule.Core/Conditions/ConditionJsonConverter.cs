@@ -58,7 +58,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             }
             else
             {
-                var tryCreateInstance = typeof(AbstractTypeFactory<>).MakeGenericType(objectType).GetMethods().FirstOrDefault(x => x.Name.EqualsInvariant("TryCreateInstance") && x.GetParameters().Length == 0);
+                var tryCreateInstance = typeof(AbstractTypeFactory<>).MakeGenericType(objectType).GetMethods().FirstOrDefault(x => x.Name.EqualsIgnoreCase("TryCreateInstance") && x.GetParameters().Length == 0);
                 result = tryCreateInstance?.Invoke(null, null);
             }
 
