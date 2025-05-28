@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.Platform.Core.Common;
@@ -21,7 +20,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
                 if (result)
                 {
                     result = evaluationContextBase.UserGroups
-                        .Any(x => Groups.Any(group => string.Equals(x, group, StringComparison.InvariantCultureIgnoreCase)));
+                        .Any(x => Groups.Any(x.EqualsIgnoreCase));
                 }
             }
 

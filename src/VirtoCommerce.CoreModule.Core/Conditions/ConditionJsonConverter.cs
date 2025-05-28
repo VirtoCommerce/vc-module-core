@@ -45,7 +45,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
         {
             var obj = JObject.Load(reader);
             var type = objectType.Name;
-            var pt = obj.GetValue("Id", StringComparison.InvariantCultureIgnoreCase);
+            var pt = obj.GetValue("Id", StringComparison.OrdinalIgnoreCase);
             if (pt != null)
             {
                 type = pt.Value<string>();

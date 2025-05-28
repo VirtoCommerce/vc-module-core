@@ -1,3 +1,4 @@
+using System;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.Conditions
@@ -17,11 +18,11 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             bool result;
             if (MatchCondition.EqualsIgnoreCase(ConditionOperation.Contains))
             {
-                result = leftOperand.ToLowerInvariant().Contains(Value.ToLowerInvariant());
+                result = leftOperand.Contains(Value, StringComparison.OrdinalIgnoreCase);
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.Matching))
             {
-                result = leftOperand.ToLowerInvariant().Equals(Value.ToLowerInvariant());
+                result = leftOperand.EqualsIgnoreCase(Value);
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.ContainsCase))
             {
@@ -33,11 +34,11 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotContains))
             {
-                result = !leftOperand.ToLowerInvariant().Contains(Value.ToLowerInvariant());
+                result = !leftOperand.Contains(Value, StringComparison.OrdinalIgnoreCase);
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotMatching))
             {
-                result = !leftOperand.ToLowerInvariant().Equals(Value.ToLowerInvariant());
+                result = !leftOperand.EqualsIgnoreCase(Value);
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotContainsCase))
             {
