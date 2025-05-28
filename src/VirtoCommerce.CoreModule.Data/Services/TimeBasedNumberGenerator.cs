@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using VirtoCommerce.CoreModule.Core.Common;
+using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Data.Services
 {
@@ -118,7 +119,7 @@ namespace VirtoCommerce.CoreModule.Data.Services
             {
                 get
                 {
-                    return this.FirstOrDefault(i => i.ObjectType.Equals(type, StringComparison.OrdinalIgnoreCase));
+                    return this.FirstOrDefault(i => i.ObjectType.EqualsIgnoreCase(type));
                 }
                 set
                 {
