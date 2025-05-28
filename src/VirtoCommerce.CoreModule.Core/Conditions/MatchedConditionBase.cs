@@ -1,4 +1,3 @@
-using System;
 using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Core.Conditions
@@ -18,7 +17,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             bool result;
             if (MatchCondition.EqualsIgnoreCase(ConditionOperation.Contains))
             {
-                result = leftOperand.Contains(Value, StringComparison.OrdinalIgnoreCase);
+                result = leftOperand.ContainsIgnoreCase(Value);
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.Matching))
             {
@@ -34,7 +33,7 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotContains))
             {
-                result = !leftOperand.Contains(Value, StringComparison.OrdinalIgnoreCase);
+                result = !leftOperand.ContainsIgnoreCase(Value);
             }
             else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotMatching))
             {

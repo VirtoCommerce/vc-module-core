@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VirtoCommerce.CoreModule.Core.Seo;
 
-[Obsolete("Use VirtoCommerce.Seo.Core.Services.CompositeSeoResolver", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
+[Obsolete("Use VirtoCommerce.Seo.Core.Services.ICompositeSeoResolver", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
 public class CompositeSeoResolver : ISeoResolver
 {
     private readonly IEnumerable<ISeoResolver> _resolvers;
