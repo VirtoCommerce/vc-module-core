@@ -34,6 +34,7 @@ jobs:
     with:
       fullKey: ${{ needs.build.outputs.packageFullKey }}
       forceGithub: false
+      forceBlob: true
     secrets:
       envPAT: ${{ secrets.GITHUB_TOKEN }}
       nugetKey: ${{ secrets.NUGET_KEY }}
