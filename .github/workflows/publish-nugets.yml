@@ -38,4 +38,4 @@ jobs:
     secrets:
       envPAT: ${{ secrets.GITHUB_TOKEN }}
       nugetKey: ${{ secrets.NUGET_KEY }}
-      BLOB_SAS: ${{ secrets.BLOB_TOKEN }}
+      BLOB_TOKEN: ${{ secrets.BLOB_TOKEN }}
