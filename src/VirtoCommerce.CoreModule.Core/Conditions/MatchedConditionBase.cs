@@ -15,31 +15,31 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             }
 
             bool result;
-            if (MatchCondition.EqualsInvariant(ConditionOperation.Contains))
+            if (MatchCondition.EqualsIgnoreCase(ConditionOperation.Contains))
             {
-                result = leftOperand.ToLowerInvariant().Contains(Value.ToLowerInvariant());
+                result = leftOperand.ContainsIgnoreCase(Value);
             }
-            else if (MatchCondition.EqualsInvariant(ConditionOperation.Matching))
+            else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.Matching))
             {
-                result = leftOperand.ToLowerInvariant().Equals(Value.ToLowerInvariant());
+                result = leftOperand.EqualsIgnoreCase(Value);
             }
-            else if (MatchCondition.EqualsInvariant(ConditionOperation.ContainsCase))
+            else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.ContainsCase))
             {
                 result = leftOperand.Contains(Value);
             }
-            else if (MatchCondition.EqualsInvariant(ConditionOperation.MatchingCase))
+            else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.MatchingCase))
             {
                 result = leftOperand.Equals(Value);
             }
-            else if (MatchCondition.EqualsInvariant(ConditionOperation.NotContains))
+            else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotContains))
             {
-                result = !leftOperand.ToLowerInvariant().Contains(Value.ToLowerInvariant());
+                result = !leftOperand.ContainsIgnoreCase(Value);
             }
-            else if (MatchCondition.EqualsInvariant(ConditionOperation.NotMatching))
+            else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotMatching))
             {
-                result = !leftOperand.ToLowerInvariant().Equals(Value.ToLowerInvariant());
+                result = !leftOperand.EqualsIgnoreCase(Value);
             }
-            else if (MatchCondition.EqualsInvariant(ConditionOperation.NotContainsCase))
+            else if (MatchCondition.EqualsIgnoreCase(ConditionOperation.NotContainsCase))
             {
                 result = !leftOperand.Contains(Value);
             }

@@ -11,31 +11,31 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
         {
             bool result;
 
-            if (CompareCondition.EqualsInvariant(ConditionOperation.IsMatching) || CompareCondition.EqualsInvariant(ConditionOperation.Exactly))
+            if (CompareCondition.EqualsIgnoreCase(ConditionOperation.IsMatching) || CompareCondition.EqualsIgnoreCase(ConditionOperation.Exactly))
             {
                 result = leftOperand == rightOperand;
             }
-            else if (CompareCondition.EqualsInvariant(ConditionOperation.IsNotMatching))
+            else if (CompareCondition.EqualsIgnoreCase(ConditionOperation.IsNotMatching))
             {
                 result = leftOperand != rightOperand;
             }
-            else if (CompareCondition.EqualsInvariant(ConditionOperation.IsGreaterThan))
+            else if (CompareCondition.EqualsIgnoreCase(ConditionOperation.IsGreaterThan))
             {
                 result = leftOperand > rightOperand;
             }
-            else if (CompareCondition.EqualsInvariant(ConditionOperation.IsLessThan))
+            else if (CompareCondition.EqualsIgnoreCase(ConditionOperation.IsLessThan))
             {
                 result = leftOperand < rightOperand;
             }
-            else if (CompareCondition.EqualsInvariant(ConditionOperation.Between))
+            else if (CompareCondition.EqualsIgnoreCase(ConditionOperation.Between))
             {
                 result = leftOperand >= rightOperand && leftOperand <= rightSecondOperand;
             }
-            else if (CompareCondition.EqualsInvariant(ConditionOperation.AtLeast) || CompareCondition.EqualsInvariant(ConditionOperation.IsGreaterThanOrEqual))
+            else if (CompareCondition.EqualsIgnoreCase(ConditionOperation.AtLeast) || CompareCondition.EqualsIgnoreCase(ConditionOperation.IsGreaterThanOrEqual))
             {
                 result = leftOperand >= rightOperand;
             }
-            else if (CompareCondition.EqualsInvariant(ConditionOperation.IsLessThanOrEqual))
+            else if (CompareCondition.EqualsIgnoreCase(ConditionOperation.IsLessThanOrEqual))
             {
                 result = leftOperand <= rightOperand;
             }
