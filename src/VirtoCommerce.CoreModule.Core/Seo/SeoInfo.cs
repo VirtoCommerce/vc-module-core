@@ -4,6 +4,7 @@ using VirtoCommerce.Platform.Core.Domain;
 
 namespace VirtoCommerce.CoreModule.Core.Seo
 {
+    [Obsolete("Use VirtoCommerce.Seo.Core.Models.SeoInfo", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
     public class SeoInfo : AuditableEntity, IHasLanguage, ICloneable
     {
         public SeoInfo()

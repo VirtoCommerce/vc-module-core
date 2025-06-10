@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -8,8 +7,6 @@ using VirtoCommerce.CoreModule.Core;
 using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Package;
-using VirtoCommerce.CoreModule.Core.Seo;
-using VirtoCommerce.Platform.Core.Common;
 
 namespace VirtoCommerce.CoreModule.Web.Controllers.Api
 {
@@ -18,48 +15,10 @@ namespace VirtoCommerce.CoreModule.Web.Controllers.Api
     {
         private readonly ICurrencyService _currencyService;
         private readonly IPackageTypesService _packageTypesService;
-        private readonly ISeoDuplicatesDetector _seoDuplicateDetector;
-        private readonly CompositeSeoBySlugResolver _seoBySlugResolverDecorator;
-        public CommerceController(ICurrencyService currencyService, IPackageTypesService packageTypesService, ISeoDuplicatesDetector seoDuplicateDetector, CompositeSeoBySlugResolver seoBySlugResolverDecorator)
+        public CommerceController(ICurrencyService currencyService, IPackageTypesService packageTypesService)
         {
             _currencyService = currencyService;
             _packageTypesService = packageTypesService;
-            _seoDuplicateDetector = seoDuplicateDetector;
-            _seoBySlugResolverDecorator = seoBySlugResolverDecorator;
-        }
-
-
-        /// <summary>
-        /// Batch create or update seo infos
-        /// </summary>
-        /// <param name="seoInfos"></param>
-        /// <returns></returns>
-        [HttpPut]
-        [Route("seoinfos/batchupdate")]
-        public Task<ActionResult> BatchUpdateSeoInfos([FromBody] SeoInfo[] seoInfos)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        [Route("seoinfos/duplicates")]
-        public async Task<ActionResult<SeoInfo[]>> GetSeoDuplicates([FromQuery] string objectId, [FromQuery] string objectType)
-        {
-            var result = await _seoDuplicateDetector.DetectSeoDuplicatesAsync(new TenantIdentity(objectId, objectType));
-
-            return Ok(result.ToArray());
-        }
-
-        /// <summary>
-        /// Find all SEO records for object by slug 
-        /// </summary>
-        /// <param name="slug">slug</param>
-        [HttpGet]
-        [Route("seoinfos/{slug}")]
-        public async Task<ActionResult<SeoInfo[]>> GetSeoInfoBySlug(string slug)
-        {
-            var retVal = await _seoBySlugResolverDecorator.FindSeoBySlugAsync(slug);
-            return Ok(retVal.ToArray());
         }
 
         /// <summary>

@@ -66,13 +66,15 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<ICurrencyService, CurrencyService>();
             serviceCollection.AddTransient<IPackageTypesService, PackageTypesService>();
             //Can be overridden
-            serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
             serviceCollection.AddTransient<CoreExportImport>();
             serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceNumberGeneratorService>();
             serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceNumberGeneratorService>();
 
+#pragma warning disable VC0010 // Type or member is obsolete
+            serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
             serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
             serviceCollection.AddTransient<CompositeSeoResolver>();
+#pragma warning restore VC0010 // Type or member is obsolete
 
             // Money rounding
             serviceCollection.AddTransient<IMoneyRoundingPolicy, DefaultMoneyRoundingPolicy>();
