@@ -1,6 +1,6 @@
 angular.module('virtoCommerce.coreModule.common')
     .run(
-        ['$http', '$compile', 'virtoCommerce.coreModule.common.dynamicExpressionService', function ($http, $compile, dynamicExpressionService) {
+        ['platformWebApp.dynamicTemplateService', 'virtoCommerce.coreModule.common.dynamicExpressionService', function (dynamicTemplateService, dynamicExpressionService) {
             const browseBehavior = 'Browse behavior';
             const shopperProfile = 'Shopper profile';
             const location = 'Location';
@@ -70,10 +70,7 @@ angular.module('virtoCommerce.coreModule.common')
                 newChildLabel: 'Add condition'
             });
 
-            $http.get('Modules/$(VirtoCommerce.Core)/Scripts/dynamicConditions/all-templates.html').then(function (response) {
-                // compile the response, which will put stuff into the cache
-                $compile(response.data);
-            });
+            dynamicTemplateService.ensureTemplateLoaded('Modules/$(VirtoCommerce.Core)/Scripts/dynamicConditions/all-templates.html');
         }])
     .controller('virtoCommerce.dynamicExpressions.conditionLanguageIsController', ['$scope', 'platformWebApp.settings', function ($scope, settings) {
         $scope.availableLanguages = settings.getValues({ id: 'VirtoCommerce.Core.General.Languages' });
