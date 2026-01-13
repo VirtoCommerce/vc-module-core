@@ -1,9 +1,7 @@
 angular.module('virtoCommerce.coreModule.seo')
-.controller('virtoCommerce.coreModule.seo.seoListController', ['$scope', 'platformWebApp.uiGridHelper', 'virtoCommerce.storeModule.stores', 'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', function ($scope, uiGridHelper, stores, bladeNavigationService, dialogService) {
+.controller('virtoCommerce.coreModule.seo.seoListController', ['$scope', 'platformWebApp.uiGridHelper', 'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', function ($scope, uiGridHelper, bladeNavigationService, dialogService) {
     var blade = $scope.blade;
     $scope.selectedNodeId = null; // need to initialize to null
-
-    var storesPromise = blade.fixedStoreId ? null : stores.query().$promise;
 
     blade.refresh = function (seoContainerObject) {
         if (seoContainerObject) {
@@ -26,13 +24,9 @@ angular.module('virtoCommerce.coreModule.seo')
 
         if (blade.fixedStoreId) {
             newBlade.stores = [blade.seoContainerObject];
-            bladeNavigationService.showBlade(newBlade, blade);
-        } else {
-            storesPromise.then(function (promiseData) {
-                newBlade.stores = promiseData;
-                bladeNavigationService.showBlade(newBlade, blade);
-            });
         }
+
+        bladeNavigationService.showBlade(newBlade, blade);
     };
 
     blade.selectNode = openDetailsBlade;
@@ -51,15 +45,8 @@ angular.module('virtoCommerce.coreModule.seo')
             template: 'Modules/$(VirtoCommerce.Core)/Scripts/SEO/blades/seo-detail.tpl.html'
         };
 
-        if (blade.fixedStoreId) {
-            newBlade.fixedStoreId = blade.fixedStoreId;
-            bladeNavigationService.showBlade(newBlade, blade);
-        } else {
-            storesPromise.then(function (promiseData) {
-                newBlade.stores = promiseData;
-                bladeNavigationService.showBlade(newBlade, blade);
-            });
-        }
+        newBlade.fixedStoreId = blade.fixedStoreId;
+        bladeNavigationService.showBlade(newBlade, blade);
     }
 
     $scope.delete = function (data) {
