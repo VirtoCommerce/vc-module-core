@@ -15,12 +15,10 @@
                 <div class="form-group" ng-if="!blade.fixedStoreId">
                     <label class="form-label">{{'core.blades.seo-detail.labels.store' | translate}}</label>
                     <div class="form-input">
-                        <ui-select ng-model="blade.currentEntity.storeId">
-                            <ui-select-match allow-clear placeholder="{{'core.blades.seo-detail.placeholders.store' | translate}}">{{$select.selected.name}}</ui-select-match>
-                            <ui-select-choices repeat="store.id as store in blade.stores | filter: { name: $select.search }">
-                                <span ng-bind-html="store.name | highlight: $select.search"></span>
-                            </ui-select-choices>
-                        </ui-select>
+                        <ui-scroll-drop-down data="storeDataSource(criteria)"
+                                             placeholder="'core.blades.seo-detail.placeholders.store'"
+                                             ng-model="blade.currentEntity.storeId">
+                        </ui-scroll-drop-down>
                     </div>
                 </div>
                 <div class="form-group">
