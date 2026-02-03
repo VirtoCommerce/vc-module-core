@@ -5,24 +5,78 @@
 [![CI status](https://github.com/VirtoCommerce/vc-module-core/workflows/Module%20CI/badge.svg?branch=dev)](https://github.com/VirtoCommerce/vc-module-core/actions?query=workflow%3A"Module+CI") [![Quality gate](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-core&metric=alert_status&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-core) [![Reliability rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-core&metric=reliability_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-core) [![Security rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-core&metric=security_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-core) [![Sqale rating](https://sonarcloud.io/api/project_badges/measure?project=VirtoCommerce_vc-module-core&metric=sqale_rating&branch=dev)](https://sonarcloud.io/dashboard?id=VirtoCommerce_vc-module-core)
 
 ## Overview
-Represents common eCommerce domain model and base abstractions, which can be used and implemented in derived modules.
-It also exposes some common eCommerce APIs for frontend security, SEO, fulfilment, payments and tax evaluation.
+Virto Commerce Core module provides **shared commerce domain models**, **cross-cutting abstractions**, and **core operational services** used by other Virto Commerce modules.
 
-## Installation
-Installing the module:
-* Automatically: in VC Manager go to Configuration -> Modules -> Commerce core module -> Install
-* Manually: download module zip package from <a href="https://github.com/VirtoCommerce/vc-module-core/releases" target="_blank">vc-module-core/releases</a>. In VC Manager go to Configuration -> Modules -> Advanced -> upload module package -> Install.
+It is the foundation for common functionality such as currencies, package types, SEO abstractions, conditions infrastructure, money rounding policies, and unique number generation.
 
-## Settings
-* **VirtoCommerce.Core.General.TaxTypes** -  manually defined tax categories which can be assigned to eligible objects (category, product, etc.)
-* **VirtoCommerce.Core.General.WeightUnits** - mass units available for physical goods weighting
-* **VirtoCommerce.Core.General.Languages** - supported  languages (culture names) (en-US, ru-RU, etc.)
-* **VirtoCommerce.Core.FixedRateShippingMethod.Rate** - amount (rate) for “Fixed rate” shipping method
-* **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - percentage (rate) for “Fixed rate” tax provider
+## Key Features
+- **Common commerce domain models**: shared types for money/currency, tax, addresses, outlines, SEO.
+- **Currency management API**: list/create/update/delete currencies.
+- **Package types management API**: list/create/update/delete package types.
+- **Money rounding**: default rounding policy with an extension point to override it via DI.
+- **Unique number generator**: sequence-based generator with configurable retry policy and counter reset rules.
+- **Conditions engine foundation**: condition tree types, JSON converter, and a set of built-in conditions (geo, language, URL, etc.).
+- **Multi-database support**: EF Core database provider selection (SQL Server / PostgreSQL / MySQL).
+- **Export/Import support**: integrates with platform export/import pipeline for module data.
+- **Back office assets**: scripts/templates and localization resources for admin UI scenarios.
+
+## Configuration
+
+### Sequence number generator options
+The unique number generator binds options from `VirtoCommerce:SequenceNumberGenerator`:
+
+```json
+{
+  "VirtoCommerce": {
+    "SequenceNumberGenerator": {
+      "RetryCount": 15,
+      "RetryDelay": 5,
+      "UseGlobalTenantId": false
+    }
+  }
+}
+```
+
+Notes:
+- `RetryDelay` is applied by the default implementation as a delay **in milliseconds** between retries.
+
+### Platform settings
+The module exposes operational settings via the Virto Commerce settings system:
+- **VirtoCommerce.Core.General.TaxTypes** - manually defined tax categories which can be assigned to eligible objects (category, product, etc.)
+- **VirtoCommerce.Core.General.WeightUnits** - mass units available for physical goods weighting
+- **VirtoCommerce.Core.General.MeasureUnits** - measure units (dimensions) for physical goods
+- **VirtoCommerce.Core.FixedTaxRateProvider.Rate** - percentage (rate) for “Fixed rate” tax provider
+
+### Permissions
+Admin APIs are secured by module permissions:
+- `core:currency:create`, `core:currency:update`, `core:currency:delete`
+- `core:packageType:create`, `core:packageType:update`, `core:packageType:delete`
+
+### Project Structure
+```text
+vc-module-core/
+├── src/
+│   ├── VirtoCommerce.CoreModule.Core/            # Domain models, abstractions, settings, permissions
+│   ├── VirtoCommerce.CoreModule.Data/            # EF Core repositories/entities/services
+│   ├── VirtoCommerce.CoreModule.Data.SqlServer/  # SQL Server provider wiring/migrations
+│   ├── VirtoCommerce.CoreModule.Data.PostgreSql/ # PostgreSQL provider wiring/migrations
+│   ├── VirtoCommerce.CoreModule.Data.MySql/      # MySQL provider wiring/migrations
+│   ├── VirtoCommerce.CoreModule.Web/             # Module bootstrap, Web API, back office assets & localization
+│   └── VirtoCommerce.Tools/                      # Shared tooling utilities (used across platform/modules)
+└── tests/
+    ├── VirtoCommerce.CoreModule.Tests/           # Core module tests
+    └── VirtoCommerce.Tools.Tests/                # Tools tests
+```
+
+### Key Components
+- **`ICurrencyService` / `CurrencyService`**: currency management operations used by API and other modules.
+- **`IPackageTypesService` / `PackageTypesService`**: package type management operations.
+- **`IMoneyRoundingPolicy`**: extension point for money rounding strategy (default: `DefaultMoneyRoundingPolicy`).
+- **`IUniqueNumberGenerator` / `ITenantUniqueNumberGenerator`**: sequence-based unique number generator services.
 
 ## References
 * Home: https://virtocommerce.com
-* Documantation: https://docs.virtocommerce.org
+* Documentation: https://docs.virtocommerce.org
 * Community: https://www.virtocommerce.org
 
 ## License
