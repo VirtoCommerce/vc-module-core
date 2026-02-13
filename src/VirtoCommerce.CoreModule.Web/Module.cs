@@ -14,10 +14,13 @@ using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Package;
 using VirtoCommerce.CoreModule.Core.Seo;
 using VirtoCommerce.CoreModule.Data.Currency;
+using VirtoCommerce.CoreModule.Data.MySql;
 using VirtoCommerce.CoreModule.Data.Package;
+using VirtoCommerce.CoreModule.Data.PostgreSql;
 using VirtoCommerce.CoreModule.Data.Repositories;
 using VirtoCommerce.CoreModule.Data.Seo;
 using VirtoCommerce.CoreModule.Data.Services;
+using VirtoCommerce.CoreModule.Data.SqlServer;
 using VirtoCommerce.CoreModule.Web.ExportImport;
 using VirtoCommerce.Platform.Core.Common;
 using VirtoCommerce.Platform.Core.ExportImport;
@@ -25,11 +28,8 @@ using VirtoCommerce.Platform.Core.Modularity;
 using VirtoCommerce.Platform.Core.Security;
 using VirtoCommerce.Platform.Core.Settings;
 using VirtoCommerce.Platform.Data.Extensions;
-using VirtoCommerce.Platform.Data.MySql;
 using VirtoCommerce.Platform.Data.MySql.Extensions;
-using VirtoCommerce.Platform.Data.PostgreSql;
 using VirtoCommerce.Platform.Data.PostgreSql.Extensions;
-using VirtoCommerce.Platform.Data.SqlServer;
 using VirtoCommerce.Platform.Data.SqlServer.Extensions;
 
 namespace VirtoCommerce.CoreModule.Web
