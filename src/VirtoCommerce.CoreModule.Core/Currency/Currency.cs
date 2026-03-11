@@ -15,6 +15,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
     public class Currency : ValueObject
     {
         private static IDictionary<string, string> _isoCurrencySymbolDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase).WithDefaultValue(null);
+        private static IDictionary<string, string> _isoCurrencyEnglishNameDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase).WithDefaultValue(null);
         private Language _language;
         private string _code;
 
@@ -26,6 +27,7 @@ namespace VirtoCommerce.CoreModule.Core.Currency
                 {
                     var ri = new RegionInfo(ci.LCID);
                     _isoCurrencySymbolDict[ri.ISOCurrencySymbol] = ri.CurrencySymbol;
+                    _isoCurrencyEnglishNameDict[ri.ISOCurrencySymbol] = ri.CurrencyEnglishName;
                 }
                 catch (Exception)
                 {
@@ -155,12 +157,15 @@ namespace VirtoCommerce.CoreModule.Core.Currency
             {
                 var cultureInfo = CultureInfo.GetCultureInfo(_language.CultureName);
                 NumberFormat = (NumberFormatInfo)cultureInfo.NumberFormat.Clone();
-                EnglishName = cultureInfo.NumberFormat.CurrencySymbol;
 
-                if (!cultureInfo.IsNeutralCulture && cultureInfo != CultureInfo.InvariantCulture)
+                if (_code != null && _isoCurrencyEnglishNameDict.TryGetValue(_code, out var englishName) && englishName != null)
                 {
-                    var region = new RegionInfo(_language.CultureName);
-                    EnglishName = region.CurrencyEnglishName;
+                    EnglishName = englishName;
+                }
+                else
+                {
+                    // Added fallback for virtual currency like points
+                    EnglishName = string.Empty;
                 }
 
                 string symbol;
