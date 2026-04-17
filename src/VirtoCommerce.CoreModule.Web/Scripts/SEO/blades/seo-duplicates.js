@@ -1,3 +1,4 @@
+// Obsolete-VC0014: Moved to VirtoCommerce.Seo module (virtoCommerce.seo.seoDuplicatesController)
 angular.module('virtoCommerce.coreModule.seo')
 .controller('virtoCommerce.coreModule.seo.seoDuplicatesController', ['$rootScope', '$scope', 'platformWebApp.bladeNavigationService', 'virtoCommerce.coreModule.seoApi', function ($rootScope, $scope, bladeNavigationService, seoApi) {
     var blade = $scope.blade;

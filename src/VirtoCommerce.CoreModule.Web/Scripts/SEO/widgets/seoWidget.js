@@ -1,4 +1,5 @@
-﻿angular.module('virtoCommerce.coreModule.seo')
+﻿// Obsolete-VC0014: Moved to VirtoCommerce.Seo module (virtoCommerce.seo.seoWidgetController)
+angular.module('virtoCommerce.coreModule.seo')
 .controller('virtoCommerce.coreModule.seo.seoWidgetController', ['$scope', 'platformWebApp.bladeNavigationService', 'virtoCommerce.coreModule.seoApi', function ($scope, bladeNavigationService, seoApi) {
     var blade = $scope.blade;
     var promise;

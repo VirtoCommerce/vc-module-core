@@ -10,8 +10,8 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.1" />
-    <PackageReference Include="VirtoCommerce.Platform.Data" Version="3.1002.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.5" />
+    <PackageReference Include="VirtoCommerce.Platform.Data" Version="3.1016.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.CoreModule.Core\VirtoCommerce.CoreModule.Core.csproj" />

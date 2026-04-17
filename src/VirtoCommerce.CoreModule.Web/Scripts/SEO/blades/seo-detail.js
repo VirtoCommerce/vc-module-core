@@ -1,3 +1,4 @@
+// Obsolete-VC0014: Moved to VirtoCommerce.Seo module (virtoCommerce.seo.seoDetailController)
 angular.module('virtoCommerce.coreModule.seo')
     .controller('virtoCommerce.coreModule.seo.seoDetailController', ['$scope', 'platformWebApp.bladeNavigationService', 'platformWebApp.metaFormsService', 'virtoCommerce.storeModule.stores', function ($scope, bladeNavigationService, metaFormsService, storesApi) {
     var blade = $scope.blade;

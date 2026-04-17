@@ -134,6 +134,7 @@
         "subtitle": "Zarządzanie centrami realizacji zamówień"
       },
       "seo-list": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-list).",
         "subtitle": "Zarządzaj SEO",
         "labels": {
           "duplicates-found": "Uwaga: Istnieje {{count}} konfliktowych semantycznych URL-i!",
@@ -144,6 +145,7 @@
         }
       },
       "seo-detail": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-detail).",
         "title-new": "Nowe SEO",
         "subtitle": "Szczegóły SEO",
         "labels": {
@@ -172,6 +174,7 @@
         }
       },
       "seo-duplicates": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-duplicates).",
         "subtitle": "Konflikty SEO",
         "labels": {
           "semanticUrl": "Semantyczny URL",
@@ -248,6 +251,7 @@
         "message": "Centrum realizacji zamówień zostało zmodyfikowane. Czy chcesz zapisać zmiany?"
       },
       "seo-save": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.dialogs.seo-save).",
         "title": "Zapisz zmiany",
         "message": "Informacje SEO zostały zmodyfikowane. Czy chcesz zapisać zmiany?"
       },
@@ -277,6 +281,7 @@
         "title": "Centra realizacji zamówień"
       },
       "seo": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.widgets.seo).",
         "title": "SEO"
       }
     }
