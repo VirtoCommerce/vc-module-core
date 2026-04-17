@@ -1,3 +1,4 @@
+// Obsolete-VC0014: Moved to VirtoCommerce.Seo module (virtoCommerce.seo.seoListController)
 angular.module('virtoCommerce.coreModule.seo')
 .controller('virtoCommerce.coreModule.seo.seoListController', ['$scope', 'platformWebApp.uiGridHelper', 'platformWebApp.bladeNavigationService', 'platformWebApp.dialogService', function ($scope, uiGridHelper, bladeNavigationService, dialogService) {
     var blade = $scope.blade;

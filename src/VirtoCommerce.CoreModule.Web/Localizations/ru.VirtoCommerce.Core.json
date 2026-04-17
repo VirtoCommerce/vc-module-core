@@ -134,6 +134,7 @@
         "subtitle": "Управление центрами выполнения заказов"
       },
       "seo-list": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-list).",
         "subtitle": "Управление SEO",
         "labels": {
           "duplicates-found": "Внимание! Найдено {{count}} конфликтующих семантических URL!",
@@ -144,6 +145,7 @@
         }
       },
       "seo-detail": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-detail).",
         "title-new": "Новое SEO",
         "subtitle": "Информация о SEO",
         "labels": {
@@ -172,6 +174,7 @@
         }
       },
       "seo-duplicates": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-duplicates).",
         "subtitle": "Конфликты SEO",
         "labels": {
           "semanticUrl": "Семантический URL",
@@ -248,6 +251,7 @@
         "message": "Центр выполнения заказов был изменен. Хотите сохранить изменения?"
       },
       "seo-save": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.dialogs.seo-save).",
         "title": "Сохранить изменения",
         "message": "Информация SEO была изменена. Хотите сохранить изменения?"
       },
@@ -277,6 +281,7 @@
         "title": "Центры выполнения заказов"
       },
       "seo": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.widgets.seo).",
         "title": "SEO"
       }
     }
