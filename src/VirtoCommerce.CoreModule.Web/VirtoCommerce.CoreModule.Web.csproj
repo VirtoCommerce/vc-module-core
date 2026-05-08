@@ -4,7 +4,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <!--<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>-->
     <IsPackable>False</IsPackable>
-    <noWarn>1591;NU1608</noWarn>
+    <noWarn>1591</noWarn>
     <OutputType>Library</OutputType>
   </PropertyGroup>
   <ItemGroup>
