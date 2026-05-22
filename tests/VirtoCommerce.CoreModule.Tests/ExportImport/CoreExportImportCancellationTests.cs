@@ -13,7 +13,6 @@ using Xunit;
 
 namespace VirtoCommerce.CoreModule.Tests.ExportImport
 {
-    [Trait("Category", "Unit")]
     public class CoreExportImportCancellationTests
     {
         private readonly Mock<ICurrencyService> _currencyServiceMock;
@@ -39,9 +38,11 @@ namespace VirtoCommerce.CoreModule.Tests.ExportImport
         [Fact]
         public async Task ExportAsync_PreCancelledToken_ThrowsOperationCanceledException()
         {
+            //Arrange
             using var cts = new CancellationTokenSource();
             cts.Cancel();
 
+            //Act & Assert
             await Assert.ThrowsAsync<OperationCanceledException>(
                 () => _exportImport.ExportAsync(Stream.Null, new ExportImportOptions(), _ => { }, cts.Token));
         }
@@ -49,9 +50,11 @@ namespace VirtoCommerce.CoreModule.Tests.ExportImport
         [Fact]
         public async Task ImportAsync_PreCancelledToken_ThrowsOperationCanceledException()
         {
+            //Arrange
             using var cts = new CancellationTokenSource();
             cts.Cancel();
 
+            //Act & Assert
             await Assert.ThrowsAsync<OperationCanceledException>(
                 () => _exportImport.ImportAsync(Stream.Null, new ExportImportOptions(), _ => { }, cts.Token));
         }
@@ -61,19 +64,19 @@ namespace VirtoCommerce.CoreModule.Tests.ExportImport
         public async Task ExportAsync_LegacyOverload_DropsCancellation()
 #pragma warning restore VC0014
         {
-            // The legacy ICancellationToken overload intentionally drops cancellation
-            // and delegates to CancellationToken.None — it must not throw even when
-            // the mock token signals cancellation.
+            //Arrange — mock token that would throw if consulted
             var mockToken = new Mock<ICancellationToken>();
             mockToken.Setup(t => t.ThrowIfCancellationRequested())
                 .Throws<OperationCanceledException>();
 
+            //Act
             using var outStream = new MemoryStream();
 #pragma warning disable VC0014
             await _exportImport.ExportAsync(outStream, new ExportImportOptions(), _ => { }, mockToken.Object);
 #pragma warning restore VC0014
 
-            // No exception thrown — cancellation was dropped
+            //Assert
+            mockToken.Verify(t => t.ThrowIfCancellationRequested(), Times.Never);
         }
 
         [Fact]
@@ -81,19 +84,19 @@ namespace VirtoCommerce.CoreModule.Tests.ExportImport
         public async Task ImportAsync_LegacyOverload_DropsCancellation()
 #pragma warning restore VC0014
         {
-            // The legacy ICancellationToken overload intentionally drops cancellation
-            // and delegates to CancellationToken.None — it must not throw even when
-            // the mock token signals cancellation.
+            //Arrange — mock token that would throw if consulted
             var mockToken = new Mock<ICancellationToken>();
             mockToken.Setup(t => t.ThrowIfCancellationRequested())
                 .Throws<OperationCanceledException>();
 
+            //Act
             using var inputStream = new MemoryStream();
 #pragma warning disable VC0014
             await _exportImport.ImportAsync(inputStream, new ExportImportOptions(), _ => { }, mockToken.Object);
 #pragma warning restore VC0014
 
-            // No exception thrown — cancellation was dropped
+            //Assert
+            mockToken.Verify(t => t.ThrowIfCancellationRequested(), Times.Never);
         }
     }
 }
