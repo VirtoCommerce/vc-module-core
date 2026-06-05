@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
@@ -95,16 +96,14 @@ namespace VirtoCommerce.CoreModule.Web
             var mvcJsonOptions = appBuilder.ApplicationServices.GetService<IOptions<MvcNewtonsoftJsonOptions>>();
             mvcJsonOptions.Value.SerializerSettings.Converters.Add(new ConditionJsonConverter());
 
-            using (var serviceScope = appBuilder.ApplicationServices.CreateScope())
+            using var serviceScope = appBuilder.ApplicationServices.CreateScope();
+            var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
+            var dbContext = serviceScope.ServiceProvider.GetRequiredService<CoreDbContext>();
+            if (databaseProvider == "SqlServer")
             {
-                var databaseProvider = Configuration.GetValue("DatabaseProvider", "SqlServer");
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<CoreDbContext>();
-                if (databaseProvider == "SqlServer")
-                {
-                    dbContext.Database.MigrateIfNotApplied(MigrationName.GetUpdateV2MigrationName(ModuleInfo.Id));
-                }
-                dbContext.Database.Migrate();
+                dbContext.Database.MigrateIfNotApplied(MigrationName.GetUpdateV2MigrationName(ModuleInfo.Id));
             }
+            dbContext.Database.Migrate();
         }
 
         public void Uninstall()
@@ -112,15 +111,10 @@ namespace VirtoCommerce.CoreModule.Web
             // Method intentionally left empty.
         }
 
-        public Task ExportAsync(Stream outStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback, ICancellationToken cancellationToken)
-        {
-            return _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ExportAsync(outStream, options, progressCallback, cancellationToken);
-        }
+        public Task ExportAsync(Stream outStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback, CancellationToken cancellationToken)
+            => _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ExportAsync(outStream, options, progressCallback, cancellationToken);
 
-        public Task ImportAsync(Stream inputStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback,
-            ICancellationToken cancellationToken)
-        {
-            return _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ImportAsync(inputStream, options, progressCallback, cancellationToken);
-        }
+        public Task ImportAsync(Stream inputStream, ExportImportOptions options, Action<ExportImportProgressInfo> progressCallback, CancellationToken cancellationToken)
+            => _appBuilder.ApplicationServices.GetRequiredService<CoreExportImport>().ImportAsync(inputStream, options, progressCallback, cancellationToken);
     }
 }
