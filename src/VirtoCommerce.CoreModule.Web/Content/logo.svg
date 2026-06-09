@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Core Platform">
+  <title>Core Platform</title>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="92%" y2="100%">
+      <stop offset="0%" stop-color="#5FC8F5"/>
+      <stop offset="100%" stop-color="#265FC6"/>
+    </linearGradient>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3.5" flood-color="#0B3F66" flood-opacity="0.30"/>
+    </filter>
+  </defs>
+
+  <rect width="128" height="128" rx="28" fill="url(#bg)"/>
+
+  <g transform="translate(64,64)" filter="url(#lift)">
+    <!-- Spokes -->
+    <g stroke="#ffffff" stroke-width="5" stroke-linecap="round">
+      <line x1="0" y1="0" x2="0" y2="-38"/>
+      <line x1="0" y1="0" x2="36" y2="-12"/>
+      <line x1="0" y1="0" x2="22" y2="31"/>
+      <line x1="0" y1="0" x2="-22" y2="31"/>
+      <line x1="0" y1="0" x2="-36" y2="-12"/>
+    </g>
+
+    <!-- Module nodes -->
+    <circle cx="0" cy="-38" r="10" fill="#FFC24D"/>
+    <circle cx="36" cy="-12" r="10" fill="#3FD8B4"/>
+    <circle cx="22" cy="31" r="10" fill="#E5484D"/>
+    <circle cx="-22" cy="31" r="10" fill="#9D86F5"/>
+    <circle cx="-36" cy="-12" r="10" fill="#F87FAC"/>
+
+    <!-- Core hub -->
+    <circle cx="0" cy="0" r="18" fill="#ffffff"/>
+    <circle cx="0" cy="0" r="9" fill="#265FC6"/>
+  </g>
+</svg>
