@@ -13,13 +13,11 @@ using VirtoCommerce.CoreModule.Core.Common;
 using VirtoCommerce.CoreModule.Core.Conditions;
 using VirtoCommerce.CoreModule.Core.Currency;
 using VirtoCommerce.CoreModule.Core.Package;
-using VirtoCommerce.CoreModule.Core.Seo;
 using VirtoCommerce.CoreModule.Data.Currency;
 using VirtoCommerce.CoreModule.Data.MySql;
 using VirtoCommerce.CoreModule.Data.Package;
 using VirtoCommerce.CoreModule.Data.PostgreSql;
 using VirtoCommerce.CoreModule.Data.Repositories;
-using VirtoCommerce.CoreModule.Data.Seo;
 using VirtoCommerce.CoreModule.Data.Services;
 using VirtoCommerce.CoreModule.Data.SqlServer;
 using VirtoCommerce.CoreModule.Web.ExportImport;
@@ -73,12 +71,6 @@ namespace VirtoCommerce.CoreModule.Web
             serviceCollection.AddTransient<CoreExportImport>();
             serviceCollection.AddTransient<IUniqueNumberGenerator, SequenceNumberGeneratorService>();
             serviceCollection.AddTransient<ITenantUniqueNumberGenerator, SequenceNumberGeneratorService>();
-
-#pragma warning disable VC0010 // Type or member is obsolete
-            serviceCollection.AddTransient<ISeoDuplicatesDetector, NullSeoDuplicateDetector>();
-            serviceCollection.AddTransient<CompositeSeoBySlugResolver>();
-            serviceCollection.AddTransient<CompositeSeoResolver>();
-#pragma warning restore VC0010 // Type or member is obsolete
 
             // Money rounding
             serviceCollection.AddTransient<IMoneyRoundingPolicy, DefaultMoneyRoundingPolicy>();
