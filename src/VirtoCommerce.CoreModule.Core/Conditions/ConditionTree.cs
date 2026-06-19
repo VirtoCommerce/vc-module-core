@@ -27,26 +27,10 @@ namespace VirtoCommerce.CoreModule.Core.Conditions
             return this;
         }
 
-        [Obsolete("Use WithAvailableChildren()", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
-        public ConditionTree WithAvailConditions(params IConditionTree[] availConditions)
-        {
-            ArgumentNullException.ThrowIfNull(availConditions);
-            AvailableChildren.AddRange(availConditions.Where(c => c != null));
-            return this;
-        }
-
         public ConditionTree WithChildren(params IConditionTree[] children)
         {
             ArgumentNullException.ThrowIfNull(children);
             Children.AddRange(children.Where(c => c != null));
-            return this;
-        }
-
-        [Obsolete("Use WithChildren()", DiagnosticId = "VC0010", UrlFormat = "https://docs.virtocommerce.org/products/products-virto3-versions/")]
-        public ConditionTree WithChildrens(params IConditionTree[] childrenCondition)
-        {
-            ArgumentNullException.ThrowIfNull(childrenCondition);
-            Children.AddRange(childrenCondition.Where(c => c != null));
             return this;
         }
 
