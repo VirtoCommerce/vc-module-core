@@ -3,7 +3,8 @@
     "commands": {
       "apply-filter": "Salva e applica",
       "rebuild-index": "Costruisci indice",
-      "default": "Imposta come predefinito"
+      "default": "Imposta come predefinito",
+      "show-customers": "Mostra clienti"
     },
     "main-menu-title": {
       "search-index": "Indice di ricerca"

@@ -3,7 +3,8 @@
     "commands": {
       "apply-filter": "保存并应用",
       "rebuild-index": "构建索引",
-      "default": "设为默认"
+      "default": "设为默认",
+      "show-customers": "显示客户"
     },
     "main-menu-title": {
       "search-index": "搜索索引"

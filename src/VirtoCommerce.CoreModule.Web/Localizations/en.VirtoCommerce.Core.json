@@ -4,7 +4,7 @@
       "apply-filter": "Save and apply",
       "rebuild-index": "Build index",
       "default": "Make default",
-      "show-members": "Show members"
+      "show-customers": "Show customers"
     },
     "main-menu-title": {
       "search-index": "Search index"
