@@ -3,7 +3,8 @@
     "commands": {
       "apply-filter": "Save and apply",
       "rebuild-index": "Build index",
-      "default": "Make default"
+      "default": "Make default",
+      "show-members": "Show members"
     },
     "main-menu-title": {
       "search-index": "Search index"
