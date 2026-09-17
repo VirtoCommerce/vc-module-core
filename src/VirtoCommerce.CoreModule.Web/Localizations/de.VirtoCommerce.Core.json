@@ -3,7 +3,8 @@
     "commands": {
       "apply-filter": "Speichern und anwenden",
       "rebuild-index": "Index erstellen",
-      "default": "Als Standard festlegen"
+      "default": "Als Standard festlegen",
+      "show-customers": "Kunden anzeigen"
     },
     "main-menu-title": {
       "search-index": "Suchindex"
