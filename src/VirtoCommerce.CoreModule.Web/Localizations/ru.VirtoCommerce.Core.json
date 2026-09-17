@@ -3,7 +3,8 @@
     "commands": {
       "apply-filter": "Сохранить и применить",
       "rebuild-index": "Построить индекс",
-      "default": "Установить по умолчанию"
+      "default": "Установить по умолчанию",
+      "show-customers": "Показать клиентов"
     },
     "main-menu-title": {
       "search-index": "Поисковый индекс"

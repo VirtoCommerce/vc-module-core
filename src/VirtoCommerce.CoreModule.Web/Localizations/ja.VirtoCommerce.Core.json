@@ -3,7 +3,8 @@
     "commands": {
       "apply-filter": "保存して適用",
       "rebuild-index": "インデックスを構築",
-      "default": "デフォルトに設定"
+      "default": "デフォルトに設定",
+      "show-customers": "顧客を表示"
     },
     "main-menu-title": {
       "search-index": "検索インデックス"

@@ -81,8 +81,14 @@ angular.module('virtoCommerce.coreModule.common')
     .controller('virtoCommerce.dynamicExpressions.conditionGeoTimeZoneController', ['$scope', 'platformWebApp.common.timeZones', function ($scope, timeZones) {
         $scope.timeZones = timeZones.query();
     }])
-    .controller('virtoCommerce.dynamicExpressions.conditionUserGroupsController', ['$scope', 'platformWebApp.settings', function ($scope, settings) {
+    .controller('virtoCommerce.dynamicExpressions.conditionUserGroupsController', ['$scope', 'platformWebApp.settings', 'virtoCommerce.coreModule.common.conditionUserGroupsService', function ($scope, settings, conditionUserGroupsService) {
         $scope.groups = settings.getValues({ id: 'Customer.MemberGroups' });
+
+        $scope.showGroupDetails = function (groups) {
+            if (groups && angular.isFunction(conditionUserGroupsService.openUserGroupsDetailsCallback)) {
+                conditionUserGroupsService.openUserGroupsDetailsCallback(groups);
+            }
+        }
     }])
     .controller('virtoCommerce.dynamicExpressions.shippingMethodRewardController', ['$scope', function ($scope) {
         function initialize(storeIds) {
