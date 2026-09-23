@@ -10,6 +10,22 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
         link: function (scope, element) {
             var htmlEditor = UIkit.htmleditor(element, { mode: 'split', maxsplitsize: 1000, markdown: true, enablescripts: false, iframe: true });
             var codeMirror = htmlEditor.editor;
+            //UIkit's fit() refreshes CodeMirror before switching split mode to tab mode, so line positions are measured at half width
+            var originalFit = htmlEditor.fit;
+            htmlEditor.fit = function () {
+                originalFit.apply(this, arguments);
+                codeMirror.refresh();
+            };
+            //UIkit re-fits only on window resize, but blades change their width on maximize/restore
+            var resizeObserver = new ResizeObserver(_.debounce(function () {
+                if (htmlEditor.htmleditor.is(':visible')) {
+                    htmlEditor.fit();
+                }
+            }, 100));
+            resizeObserver.observe(htmlEditor.htmleditor[0]);
+            scope.$on('$destroy', function () {
+                resizeObserver.disconnect();
+            });
             //Besides inline scripts need to also eliminate inline event handlers on preview
             htmlEditor.on('render', function (event, uiEditor) {
                 uiEditor.currentvalue = uiEditor.currentvalue.replace(/<(script|style)\b[^<]*(?:(?!<\/(script|style))<[^<]*)*<\/(script|style)[>\s]/img, '');
@@ -24,7 +40,7 @@ angular.module('virtoCommerce.coreModule.common').directive('vcUkHtmleditor', [f
             htmlEditor.off('action.image').on('action.image', function () {
                 $('#fileUploader').trigger('click');
             });
-            var codeMirrorElement = $('.CodeMirror');
+            var codeMirrorElement = htmlEditor.code.find('.CodeMirror');
             var currentEditorLine;
             codeMirrorElement.on('dragenter', function (event) {
                 event.preventDefault();
