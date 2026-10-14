@@ -1,0 +1,5 @@
+{
+  // Commerce core admin UI for the Admin Shell host (Module Federation remote). No menu item: like the AngularJS
+  // 'moduleDetail' widgets, its screens open from widgets on the platform's module details blade (VirtoCommerce.Core).
+  "remote": { "name": "core_admin", "exposed": "./Module" }
+}

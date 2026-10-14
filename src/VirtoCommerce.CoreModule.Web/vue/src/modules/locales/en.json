@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Commerce core",
+    "COMMON": {
+      "REFRESH": "Refresh",
+      "SAVE": "Save",
+      "RESET": "Reset",
+      "ADD": "Add",
+      "CREATE": "Create",
+      "DELETE": "Delete",
+      "REQUIRED": "This field is required",
+      "CLOSE_CONFIRMATION": "You have unsaved changes. Close anyway?",
+      "SAVED": "Saved"
+    },
+    "CURRENCIES": {
+      "TITLE": "Currencies",
+      "SUBTITLE": "Commerce core",
+      "EMPTY": "No currencies",
+      "CODE": "Code",
+      "CODE_PLACEHOLDER": "ISO 4217 code, e.g. USD",
+      "NAME": "Name",
+      "SYMBOL": "Symbol",
+      "EXCHANGE_RATE": "Exchange rate",
+      "RATE_INVALID": "Must be greater than 0",
+      "PRIMARY": "Primary",
+      "PRIMARY_HINT": "The primary currency is the base for exchange rates",
+      "DECIMAL_DIGITS": "Decimal digits",
+      "CUSTOM_FORMATTING": "Custom formatting",
+      "CUSTOM_FORMATTING_HINT": "A .NET numeric format string, e.g. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Midpoint rounding",
+      "ROUNDING_TYPE": "Rounding type",
+      "NEW_TITLE": "New currency",
+      "DETAILS_SUBTITLE": "Currency",
+      "DELETE_CONFIRM": "Delete the currency {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Package types",
+      "EMPTY": "No package types",
+      "NAME": "Name",
+      "SIZE": "Size (H × W × L)",
+      "NEW_TITLE": "New package type",
+      "DETAILS_SUBTITLE": "Package type",
+      "MEASURE_UNIT": "Measure unit",
+      "MEASURE_UNIT_HINT": "Unit of the height, width and length",
+      "HEIGHT": "Height",
+      "WIDTH": "Width",
+      "LENGTH": "Length",
+      "DIMENSION_INVALID": "Must be greater than 0",
+      "DELETE_CONFIRM": "Delete the package type {name}?"
+    }
+  }
+}

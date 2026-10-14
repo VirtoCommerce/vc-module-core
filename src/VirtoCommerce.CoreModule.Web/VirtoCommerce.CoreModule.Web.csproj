@@ -18,7 +18,20 @@
     <None Remove="bower_components\**" />
     <None Remove="dist\**" />
     <None Remove="node_modules\**" />
+    <!-- Admin Shell plugin: Vue sources in vue/, built into plugins/admin-shell/ -->
+    <Compile Remove="vue\**" />
+    <Content Remove="vue\**" />
+    <EmbeddedResource Remove="vue\**" />
+    <None Remove="vue\**" />
+    <Content Remove="plugins\**" />
+    <None Remove="plugins\**" />
   </ItemGroup>
+  <ItemGroup>
+    <AdminShellPlugin Include="plugins\**" />
+  </ItemGroup>
+  <Target Name="CopyAdminShellPluginOnPublish" AfterTargets="Publish">
+    <Copy SourceFiles="@(AdminShellPlugin)" DestinationFiles="$(PublishDir)\..\%(Identity)" />
+  </Target>
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.CoreModule.Core\VirtoCommerce.CoreModule.Core.csproj" />
     <ProjectReference Include="..\VirtoCommerce.CoreModule.Data.MySql\VirtoCommerce.CoreModule.Data.MySql.csproj" />
