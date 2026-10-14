@@ -18,7 +18,8 @@ export async function api<T = unknown>(method: string, url: string, body?: unkno
   });
   const text = await response.text();
   if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}${text ? `: ${text}` : ""}`);
+    const detail = text ? `: ${text}` : "";
+    throw new Error(`${response.status} ${response.statusText}${detail}`);
   }
   return (text ? JSON.parse(text) : undefined) as T;
 }
