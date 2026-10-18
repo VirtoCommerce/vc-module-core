@@ -270,3 +270,6 @@ __pycache__/
 
 # Webpack output
 dist/
+
+# Admin Shell plugin build output
+src/VirtoCommerce.CoreModule.Web/plugins/

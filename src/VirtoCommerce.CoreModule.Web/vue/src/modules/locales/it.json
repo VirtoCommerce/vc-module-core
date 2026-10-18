@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Core commerce",
+    "COMMON": {
+      "REFRESH": "Aggiorna",
+      "SAVE": "Salva",
+      "RESET": "Reimposta",
+      "ADD": "Aggiungi",
+      "CREATE": "Crea",
+      "DELETE": "Elimina",
+      "REQUIRED": "Questo campo è obbligatorio",
+      "CLOSE_CONFIRMATION": "Ci sono modifiche non salvate. Chiudere comunque?",
+      "SAVED": "Salvato"
+    },
+    "CURRENCIES": {
+      "TITLE": "Valute",
+      "SUBTITLE": "Core commerce",
+      "EMPTY": "Nessuna valuta",
+      "CODE": "Codice",
+      "CODE_PLACEHOLDER": "Codice ISO 4217, ad es. USD",
+      "NAME": "Nome",
+      "SYMBOL": "Simbolo",
+      "EXCHANGE_RATE": "Tasso di cambio",
+      "RATE_INVALID": "Deve essere maggiore di 0",
+      "PRIMARY": "Principale",
+      "PRIMARY_HINT": "La valuta principale è la base per i tassi di cambio",
+      "DECIMAL_DIGITS": "Cifre decimali",
+      "CUSTOM_FORMATTING": "Formattazione personalizzata",
+      "CUSTOM_FORMATTING_HINT": "Una stringa di formato numerico .NET, ad es. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Arrotondamento al punto medio",
+      "ROUNDING_TYPE": "Tipo di arrotondamento",
+      "NEW_TITLE": "Nuova valuta",
+      "DETAILS_SUBTITLE": "Valuta",
+      "DELETE_CONFIRM": "Eliminare la valuta {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Tipi di pacco",
+      "EMPTY": "Nessun tipo di pacco",
+      "NAME": "Nome",
+      "SIZE": "Dimensioni (A × L × P)",
+      "NEW_TITLE": "Nuovo tipo di pacco",
+      "DETAILS_SUBTITLE": "Tipo di pacco",
+      "MEASURE_UNIT": "Unità di misura",
+      "MEASURE_UNIT_HINT": "Unità di altezza, larghezza e lunghezza",
+      "HEIGHT": "Altezza",
+      "WIDTH": "Larghezza",
+      "LENGTH": "Lunghezza",
+      "DIMENSION_INVALID": "Deve essere maggiore di 0",
+      "DELETE_CONFIRM": "Eliminare il tipo di pacco {name}?"
+    }
+  }
+}

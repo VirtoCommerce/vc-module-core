@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "コマースコア",
+    "COMMON": {
+      "REFRESH": "更新",
+      "SAVE": "保存",
+      "RESET": "リセット",
+      "ADD": "追加",
+      "CREATE": "作成",
+      "DELETE": "削除",
+      "REQUIRED": "このフィールドは必須です",
+      "CLOSE_CONFIRMATION": "保存されていない変更があります。閉じてもよろしいですか？",
+      "SAVED": "保存しました"
+    },
+    "CURRENCIES": {
+      "TITLE": "通貨",
+      "SUBTITLE": "コマースコア",
+      "EMPTY": "通貨がありません",
+      "CODE": "コード",
+      "CODE_PLACEHOLDER": "ISO 4217 コード（例: USD）",
+      "NAME": "名前",
+      "SYMBOL": "記号",
+      "EXCHANGE_RATE": "為替レート",
+      "RATE_INVALID": "0 より大きい値を入力してください",
+      "PRIMARY": "基本通貨",
+      "PRIMARY_HINT": "基本通貨は為替レートの基準になります",
+      "DECIMAL_DIGITS": "小数桁数",
+      "CUSTOM_FORMATTING": "カスタムフォーマット",
+      "CUSTOM_FORMATTING_HINT": ".NET の数値書式文字列（例: 0.00 Pt.）",
+      "MIDPOINT_ROUNDING": "中間点の丸め",
+      "ROUNDING_TYPE": "丸めタイプ",
+      "NEW_TITLE": "新しい通貨",
+      "DETAILS_SUBTITLE": "通貨",
+      "DELETE_CONFIRM": "通貨 {code} を削除しますか？"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "パッケージタイプ",
+      "EMPTY": "パッケージタイプがありません",
+      "NAME": "名前",
+      "SIZE": "サイズ（高さ × 幅 × 長さ）",
+      "NEW_TITLE": "新しいパッケージタイプ",
+      "DETAILS_SUBTITLE": "パッケージタイプ",
+      "MEASURE_UNIT": "単位",
+      "MEASURE_UNIT_HINT": "高さ、幅、長さの単位",
+      "HEIGHT": "高さ",
+      "WIDTH": "幅",
+      "LENGTH": "長さ",
+      "DIMENSION_INVALID": "0 より大きい値を入力してください",
+      "DELETE_CONFIRM": "パッケージタイプ {name} を削除しますか？"
+    }
+  }
+}

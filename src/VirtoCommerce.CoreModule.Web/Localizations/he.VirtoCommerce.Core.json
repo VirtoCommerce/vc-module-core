@@ -1,0 +1,329 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "שמירה והחלה",
+      "rebuild-index": "בניית אינדקס",
+      "default": "הגדרה כברירת מחדל",
+      "show-customers": "הצגת לקוחות"
+    },
+    "main-menu-title": {
+      "search-index": "אינדקס חיפוש"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "התחלה",
+          "end": "סיום",
+          "errors": "שגיאות",
+          "stats": "רשומות שאונדקסו: {{ processedCount }} מתוך {{ totalCount }}"
+        }
+      },
+      "index-detail": {
+        "title": "אינדקס חיפוש",
+        "title-new": "אינדקס החיפוש חסר",
+        "subtitle": "פרטי אינדקס החיפוש",
+        "labels": {
+          "no-index": "אין נתונים",
+          "build-date": "אינדוקס אחרון",
+          "content": "תוכן האינדקס"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "אין עדיין כתובות"
+        }
+      },
+      "address-detail": {
+        "subtitle": "עריכת כתובת",
+        "labels": {
+          "name": "שם הכתובת",
+          "address-type": "סוג כתובת",
+          "first-name": "שם פרטי",
+          "last-name": "שם משפחה",
+          "country": "מדינה",
+          "region": "אזור",
+          "city": "עיר",
+          "address1": "שורת כתובת 1",
+          "address2": "שורת כתובת 2",
+          "zip-code": "מיקוד",
+          "email": "דוא״ל",
+          "phone": "טלפון",
+          "description": "תיאור"
+        },
+        "placeholders": {
+          "address-type": "יש לבחור...",
+          "country": "יש לבחור...",
+          "region": "יש לבחור..."
+        }
+      },
+      "currency-list": {
+        "title": "מטבעות",
+        "subtitle": "ניהול מטבעות",
+        "labels": {
+          "exchange-rate": "שער חליפין:",
+          "no-currencies": "אין מטבעות"
+        }
+      },
+      "currency-detail": {
+        "new-title": "מטבע חדש",
+        "new-subtitle": "יש להזין את פרטי המטבע",
+        "subtitle": "עריכת פרטי המטבע",
+        "labels": {
+          "code": "קוד",
+          "name": "שם",
+          "is-primary": "הגדרה כברירת מחדל",
+          "exchange-rate": "שער חליפין",
+          "symbol": "סמל",
+          "decimalDigits": "ספרות אחרי הנקודה העשרונית",
+          "custom-formatting": "עיצוב מותאם אישית",
+          "midpoint-rounding": "עיגול נקודת אמצע",
+          "rounding-type": "סוג עיגול"
+        },
+        "descriptions": {
+          "code": "יש להזין קוד ISO 4217 בן 3 אותיות, אם רלוונטי",
+          "name": "יש להזין שם למטבע זה",
+          "is-primary": "יש להפעיל אפשרות זו כדי להגדיר מטבע זה כברירת מחדל. הערה: ניתן להגדיר רק מטבע אחד כברירת מחדל",
+          "exchange-rate": "יש להזין את שער החליפין ביחס למטבע ברירת המחדל",
+          "symbol": "יש להזין סמל למטבע זה",
+          "custom-formatting": "ניתן להזין כל מציין עיצוב מספרי סטנדרטי תקין, או כל צירוף של מציינים מותאמים אישית לעיצוב מספרי",
+          "midpoint-rounding": "יש לבחור שיטה מתאימה לעיגול נקודת אמצע",
+          "rounding-type": "יש לבחור סוג עיגול מתאים."
+        },
+        "placeholders": {
+          "symbol": "יש להזין סמל או להשאיר ריק לשימוש בתרבות ברירת המחדל",
+          "code": "יש להזין קוד מטבע...",
+          "name": "יש להזין שם מטבע...",
+          "exchange-rate": "יש להזין את שער החליפין ביחס למטבע ברירת המחדל...",
+          "custom-formatting": "יש להזין תבנית או להשאיר ריק לשימוש בברירת המחדל",
+          "midpoint-rounding": "יש לבחור מדיניות עיגול נקודת אמצע",
+          "rounding-type": "יש לבחור מדיניות עיגול"
+        },
+        "validation": {
+          "maxlength": "קוד המטבע חייב להכיל 3 אותיות"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "מדינה",
+          "region": "אזור",
+          "city": "עיר",
+          "address": "כתובת",
+          "zip-code": "מיקוד",
+          "phone": "טלפון"
+        },
+        "placeholders": {
+          "country": "יש לבחור...",
+          "region": "יש להזין מדינה או מחוז...",
+          "city": "יש להזין עיר...",
+          "address1": "יש להזין שורת כתובת 1...",
+          "address2": "יש להזין שורת כתובת 2...",
+          "zip-code": "יש להזין מיקוד...",
+          "phone": "יש להזין מספר טלפון..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "עריכת מרכז הפצה",
+        "labels": {
+          "name": "שם",
+          "description": "תיאור",
+          "max-releases": "מספר השחרורים המרבי באצווה שנבחרה",
+          "pick-delay": "השהיית אריזה"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "מרכזי הפצה",
+        "subtitle": "ניהול מרכזי הפצה"
+      },
+      "seo-list": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-list).",
+        "subtitle": "ניהול SEO",
+        "labels": {
+          "duplicates-found": "אזהרה: נמצאו כתובות URL סמנטיות מתנגשות ({{count}})!",
+          "resolve-duplicates": "פתרון התנגשויות",
+          "language-code": "שפה",
+          "container": "חנות",
+          "semanticUrl": "כתובת URL סמנטית"
+        }
+      },
+      "seo-detail": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-detail).",
+        "title-new": "SEO חדש",
+        "subtitle": "פרטי SEO",
+        "labels": {
+          "is-active": "פעיל",
+          "store": "חנות",
+          "language": "שפה",
+          "url-keyword": "מזהה URL (slug)",
+          "page-title": "כותרת הדף",
+          "meta-description": "תיאור Meta",
+          "meta-keywords": "מילות מפתח Meta",
+          "alternative-text": "טקסט חלופי לתמונה"
+        },
+        "placeholders": {
+          "store": "יש לבחור חנות...",
+          "language": "יש לבחור שפה...",
+          "url-keyword": "יש להזין מזהה URL...",
+          "page-title": "יש להזין כותרת...",
+          "meta-description": "יש להזין תיאור...",
+          "meta-keywords": "יש להזין מילות מפתח...",
+          "alternative-text": "יש להזין טקסט חלופי..."
+        },
+        "validations": {
+          "url-keyword-required": "זהו שדה חובה",
+          "url-keyword-invalid": "כתובת ה-URL מכילה תווים לא חוקיים",
+          "url-keyword-duplicate": "זוהתה כתובת URL כפולה"
+        }
+      },
+      "seo-duplicates": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-duplicates).",
+        "subtitle": "התנגשויות SEO",
+        "labels": {
+          "semanticUrl": "כתובת URL סמנטית",
+          "container": "חנות"
+        }
+      },
+      "package-type-list": {
+        "title": "גדלי אריזה מוגדרים מראש",
+        "subtitle": "ניהול סוגי האריזה במערכת",
+        "labels": {
+          "no-packages": "אין אריזות מוגדרות מראש"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "סוג אריזה חדש",
+        "new-subtitle": "יש להזין את ערכי גודל האריזה",
+        "subtitle": "עריכת פרטי גודל האריזה",
+        "labels": {
+          "name": "שם סוג האריזה",
+          "name-description": "יש להזין שם ייחודי לסוג האריזה",
+          "name-placeholder": "יש להזין שם לסוג האריזה",
+          "measureUnit": "יחידת מידה לגודל",
+          "measureUnit-description": "יחידת המידה המוגדרת כברירת מחדל לגודל",
+          "measureUnit-placeholder": "יש לבחור יחידת מידה מתאימה או להוסיף חדשה",
+          "width": "רוחב",
+          "height": "גובה",
+          "length": "אורך"
+        }
+      },
+      "document-type-list": {
+        "title": "סוגי רשומות",
+        "labels": {
+          "document-type": "סוג רשומה",
+          "indexed-docs-total": "מספר רשומות",
+          "provider": "ספק",
+          "scope": "היקף",
+          "last-indexation-date": "אינדוקס אחרון",
+          "build-index": "בניית אינדקס",
+          "rebuild-index": "בנייה מחדש של האינדקס"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "בניית אינדקס חיפוש",
+        "msg1": "יש לבחור את אופן העדכון של אינדקס החיפוש:",
+        "msg2": "בנייה: אינדוקס כל הנתונים ללא יצירה מחדש של האינדקס",
+        "msg3": "מחיקה ובנייה: מחיקת אינדקס החיפוש הקיים ובניית אינדקס חדש מאפס. הערה: לא יהיו תוצאות חיפוש עד לסיום תהליך הבנייה",
+        "index": "בנייה",
+        "reindex": "מחיקה ובנייה"
+      },
+      "address-delete": {
+        "title": "אישור מחיקה",
+        "message": "האם למחוק את הכתובת הזו?"
+      },
+      "address-save": {
+        "title": "שמירת שינויים",
+        "message": "הכתובת שונתה. האם לשמור את השינויים?"
+      },
+      "currency-delete": {
+        "title": "אישור מחיקה",
+        "message": "האם למחוק את המטבע הזה?"
+      },
+      "currency-save": {
+        "title": "שמירת שינויים",
+        "message": "המטבע שונה. האם לשמור את השינויים?"
+      },
+      "fulfillment-delete": {
+        "title": "אישור מחיקה",
+        "message": "האם למחוק את מרכז ההפצה הזה?"
+      },
+      "fulfillments-save": {
+        "title": "שמירת שינויים",
+        "message": "מרכז ההפצה שונה. האם לשמור את השינויים?"
+      },
+      "seo-save": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.dialogs.seo-save).",
+        "title": "שמירת שינויים",
+        "message": "פרטי ה-SEO שונו. האם לשמור את השינויים?"
+      },
+      "package-type-save": {
+        "title": "שמירת שינויים",
+        "message": "פרטי סוג האריזה שונו. האם לשמור את השינויים?"
+      },
+      "package-type-delete": {
+        "title": "אישור מחיקה",
+        "message": "האם למחוק את סוג האריזה הזה?"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "אונדקס <span am-time-ago='indexDate'></span>",
+        "index-old": "האינדקס הזה אינו עדכני, כי הוא נבנה <span am-time-ago='indexDate'>",
+        "no-index": "אינדקס החיפוש חסר"
+      },
+      "currency": {
+        "title": "מטבעות"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "פרטי קשר",
+        "title": "פרטי קשר"
+      },
+      "fulfillment": {
+        "title": "מרכזי הפצה"
+      },
+      "seo": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.widgets.seo).",
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "יצירת נתוני סוגי אריזה",
+    "core:packageType:update": "עדכון נתוני סוגי אריזה",
+    "core:packageType:delete": "מחיקת נתוני סוגי אריזה",
+    "core:currency:create": "יצירת נתוני מטבעות",
+    "core:currency:update": "עדכון נתוני מטבעות",
+    "core:currency:delete": "מחיקת נתוני מטבעות"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "סוגי המס הזמינים",
+      "title": "סוגי מס"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "יחידות המשקל הזמינות למוצרים פיזיים",
+      "title": "יחידות משקל"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "יחידות המידה הזמינות לגודל של מוצרים פיזיים",
+      "title": "יחידות מידה לגודל"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "דמי משלוח יבשתי קבועים",
+      "title": "דמי משלוח יבשתי"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "דמי משלוח אווירי קבועים",
+      "title": "דמי משלוח אווירי"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "שיעור מס קבוע",
+      "title": "שיעור מס קבוע (באחוזים)"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "ייצוא או ייבוא של מטבעות וסוגי אריזה"
+    }
+  }
+}
