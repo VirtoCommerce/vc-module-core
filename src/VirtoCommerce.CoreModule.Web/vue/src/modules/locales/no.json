@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Handelskjerne",
+    "COMMON": {
+      "REFRESH": "Oppdater",
+      "SAVE": "Lagre",
+      "RESET": "Tilbakestill",
+      "ADD": "Legg til",
+      "CREATE": "Opprett",
+      "DELETE": "Slett",
+      "REQUIRED": "Dette feltet er obligatorisk",
+      "CLOSE_CONFIRMATION": "Du har ulagrede endringer. Vil du lukke likevel?",
+      "SAVED": "Lagret"
+    },
+    "CURRENCIES": {
+      "TITLE": "Valutaer",
+      "SUBTITLE": "Handelskjerne",
+      "EMPTY": "Ingen valutaer",
+      "CODE": "Kode",
+      "CODE_PLACEHOLDER": "ISO 4217-kode, f.eks. USD",
+      "NAME": "Navn",
+      "SYMBOL": "Symbol",
+      "EXCHANGE_RATE": "Valutakurs",
+      "RATE_INVALID": "Må være større enn 0",
+      "PRIMARY": "Primær",
+      "PRIMARY_HINT": "Primærvalutaen er grunnlaget for valutakursene",
+      "DECIMAL_DIGITS": "Desimaler",
+      "CUSTOM_FORMATTING": "Egendefinert formatering",
+      "CUSTOM_FORMATTING_HINT": "En numerisk .NET-formatstreng, f.eks. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Midtpunktsavrunding",
+      "ROUNDING_TYPE": "Avrundingstype",
+      "NEW_TITLE": "Ny valuta",
+      "DETAILS_SUBTITLE": "Valuta",
+      "DELETE_CONFIRM": "Slette valutaen {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Pakketyper",
+      "EMPTY": "Ingen pakketyper",
+      "NAME": "Navn",
+      "SIZE": "Størrelse (H × B × L)",
+      "NEW_TITLE": "Ny pakketype",
+      "DETAILS_SUBTITLE": "Pakketype",
+      "MEASURE_UNIT": "Måleenhet",
+      "MEASURE_UNIT_HINT": "Enhet for høyde, bredde og lengde",
+      "HEIGHT": "Høyde",
+      "WIDTH": "Bredde",
+      "LENGTH": "Lengde",
+      "DIMENSION_INVALID": "Må være større enn 0",
+      "DELETE_CONFIRM": "Slette pakketypen {name}?"
+    }
+  }
+}

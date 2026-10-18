@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Ядро коммерции",
+    "COMMON": {
+      "REFRESH": "Обновить",
+      "SAVE": "Сохранить",
+      "RESET": "Сбросить",
+      "ADD": "Добавить",
+      "CREATE": "Создать",
+      "DELETE": "Удалить",
+      "REQUIRED": "Это поле обязательно",
+      "CLOSE_CONFIRMATION": "Есть несохраненные изменения. Все равно закрыть?",
+      "SAVED": "Сохранено"
+    },
+    "CURRENCIES": {
+      "TITLE": "Валюты",
+      "SUBTITLE": "Ядро коммерции",
+      "EMPTY": "Нет валют",
+      "CODE": "Код",
+      "CODE_PLACEHOLDER": "Код ISO 4217, например USD",
+      "NAME": "Название",
+      "SYMBOL": "Символ",
+      "EXCHANGE_RATE": "Обменный курс",
+      "RATE_INVALID": "Значение должно быть больше 0",
+      "PRIMARY": "Основная",
+      "PRIMARY_HINT": "Основная валюта является базой для обменных курсов",
+      "DECIMAL_DIGITS": "Десятичные знаки",
+      "CUSTOM_FORMATTING": "Пользовательское форматирование",
+      "CUSTOM_FORMATTING_HINT": "Строка числового формата .NET, например 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Округление по среднему значению",
+      "ROUNDING_TYPE": "Тип округления",
+      "NEW_TITLE": "Новая валюта",
+      "DETAILS_SUBTITLE": "Валюта",
+      "DELETE_CONFIRM": "Удалить валюту {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Типы упаковки",
+      "EMPTY": "Нет типов упаковки",
+      "NAME": "Название",
+      "SIZE": "Размер (В × Ш × Д)",
+      "NEW_TITLE": "Новый тип упаковки",
+      "DETAILS_SUBTITLE": "Тип упаковки",
+      "MEASURE_UNIT": "Единица измерения",
+      "MEASURE_UNIT_HINT": "Единица высоты, ширины и длины",
+      "HEIGHT": "Высота",
+      "WIDTH": "Ширина",
+      "LENGTH": "Длина",
+      "DIMENSION_INVALID": "Значение должно быть больше 0",
+      "DELETE_CONFIRM": "Удалить тип упаковки {name}?"
+    }
+  }
+}

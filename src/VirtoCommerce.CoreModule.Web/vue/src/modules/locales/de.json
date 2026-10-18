@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Commerce-Kern",
+    "COMMON": {
+      "REFRESH": "Aktualisieren",
+      "SAVE": "Speichern",
+      "RESET": "Zurücksetzen",
+      "ADD": "Hinzufügen",
+      "CREATE": "Erstellen",
+      "DELETE": "Löschen",
+      "REQUIRED": "Dieses Feld ist erforderlich",
+      "CLOSE_CONFIRMATION": "Sie haben nicht gespeicherte Änderungen. Trotzdem schließen?",
+      "SAVED": "Gespeichert"
+    },
+    "CURRENCIES": {
+      "TITLE": "Währungen",
+      "SUBTITLE": "Commerce-Kern",
+      "EMPTY": "Keine Währungen",
+      "CODE": "Code",
+      "CODE_PLACEHOLDER": "ISO-4217-Code, z. B. USD",
+      "NAME": "Name",
+      "SYMBOL": "Symbol",
+      "EXCHANGE_RATE": "Wechselkurs",
+      "RATE_INVALID": "Muss größer als 0 sein",
+      "PRIMARY": "Primär",
+      "PRIMARY_HINT": "Die Primärwährung ist die Basis für die Wechselkurse",
+      "DECIMAL_DIGITS": "Dezimalstellen",
+      "CUSTOM_FORMATTING": "Benutzerdefinierte Formatierung",
+      "CUSTOM_FORMATTING_HINT": "Eine .NET-Zahlenformatzeichenfolge, z. B. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Rundung zur Mitte",
+      "ROUNDING_TYPE": "Rundungstyp",
+      "NEW_TITLE": "Neue Währung",
+      "DETAILS_SUBTITLE": "Währung",
+      "DELETE_CONFIRM": "Die Währung {code} löschen?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Pakettypen",
+      "EMPTY": "Keine Pakettypen",
+      "NAME": "Name",
+      "SIZE": "Größe (H × B × L)",
+      "NEW_TITLE": "Neuer Pakettyp",
+      "DETAILS_SUBTITLE": "Pakettyp",
+      "MEASURE_UNIT": "Maßeinheit",
+      "MEASURE_UNIT_HINT": "Einheit für Höhe, Breite und Länge",
+      "HEIGHT": "Höhe",
+      "WIDTH": "Breite",
+      "LENGTH": "Länge",
+      "DIMENSION_INVALID": "Muss größer als 0 sein",
+      "DELETE_CONFIRM": "Den Pakettyp {name} löschen?"
+    }
+  }
+}

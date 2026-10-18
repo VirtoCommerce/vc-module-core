@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "商务核心",
+    "COMMON": {
+      "REFRESH": "刷新",
+      "SAVE": "保存",
+      "RESET": "重置",
+      "ADD": "添加",
+      "CREATE": "创建",
+      "DELETE": "删除",
+      "REQUIRED": "此字段为必填项",
+      "CLOSE_CONFIRMATION": "有未保存的更改。仍要关闭吗？",
+      "SAVED": "已保存"
+    },
+    "CURRENCIES": {
+      "TITLE": "货币",
+      "SUBTITLE": "商务核心",
+      "EMPTY": "没有货币",
+      "CODE": "代码",
+      "CODE_PLACEHOLDER": "ISO 4217 代码，例如 USD",
+      "NAME": "名称",
+      "SYMBOL": "符号",
+      "EXCHANGE_RATE": "汇率",
+      "RATE_INVALID": "必须大于 0",
+      "PRIMARY": "主要货币",
+      "PRIMARY_HINT": "主要货币是汇率的基准",
+      "DECIMAL_DIGITS": "小数位数",
+      "CUSTOM_FORMATTING": "自定义格式",
+      "CUSTOM_FORMATTING_HINT": ".NET 数字格式字符串，例如 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "中点舍入",
+      "ROUNDING_TYPE": "舍入类型",
+      "NEW_TITLE": "新货币",
+      "DETAILS_SUBTITLE": "货币",
+      "DELETE_CONFIRM": "删除货币 {code}？"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "包装类型",
+      "EMPTY": "没有包装类型",
+      "NAME": "名称",
+      "SIZE": "尺寸（高 × 宽 × 长）",
+      "NEW_TITLE": "新包装类型",
+      "DETAILS_SUBTITLE": "包装类型",
+      "MEASURE_UNIT": "计量单位",
+      "MEASURE_UNIT_HINT": "高度、宽度和长度的单位",
+      "HEIGHT": "高度",
+      "WIDTH": "宽度",
+      "LENGTH": "长度",
+      "DIMENSION_INVALID": "必须大于 0",
+      "DELETE_CONFIRM": "删除包装类型 {name}？"
+    }
+  }
+}
