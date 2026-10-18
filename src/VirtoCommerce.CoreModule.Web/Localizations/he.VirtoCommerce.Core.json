@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "core:packageType:create": "יצירת נתוני סוגי אריזה",
+    "core:packageType:update": "עדכון נתוני סוגי אריזה",
+    "core:packageType:delete": "מחיקת נתוני סוגי אריזה",
+    "core:currency:create": "יצירת נתוני מטבעות",
+    "core:currency:update": "עדכון נתוני מטבעות",
+    "core:currency:delete": "מחיקת נתוני מטבעות"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "סוגי המס הזמינים",
+      "title": "סוגי מס"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "יחידות המשקל הזמינות למוצרים פיזיים",
+      "title": "יחידות משקל"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "יחידות המידה הזמינות לגודל של מוצרים פיזיים",
+      "title": "יחידות מידה לגודל"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "דמי משלוח יבשתי קבועים",
+      "title": "דמי משלוח יבשתי"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "דמי משלוח אווירי קבועים",
+      "title": "דמי משלוח אווירי"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "שיעור מס קבוע",
+      "title": "שיעור מס קבוע (באחוזים)"
+    }
+  }
+}
