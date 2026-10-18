@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "core:packageType:create": "إنشاء بيانات أنواع الطرود",
+    "core:packageType:update": "تحديث بيانات أنواع الطرود",
+    "core:packageType:delete": "حذف بيانات أنواع الطرود",
+    "core:currency:create": "إنشاء بيانات العملات",
+    "core:currency:update": "تحديث بيانات العملات",
+    "core:currency:delete": "حذف بيانات العملات"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "أنواع الضرائب المتاحة",
+      "title": "أنواع الضرائب"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "وحدات الوزن المتاحة للسلع المادية",
+      "title": "وحدات الوزن"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "وحدات القياس المتاحة لأبعاد السلع المادية",
+      "title": "وحدات قياس الحجم"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "رسوم الشحن البري الثابتة",
+      "title": "رسوم الشحن البري"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "رسوم الشحن الجوي الثابتة",
+      "title": "رسوم الشحن الجوي"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "معدل الضريبة الثابت",
+      "title": "النسبة المئوية لمعدل الضريبة الثابت"
+    }
+  }
+}
