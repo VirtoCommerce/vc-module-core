@@ -1,0 +1,329 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "Lagre og bruk",
+      "rebuild-index": "Bygg indeks",
+      "default": "Angi som standard",
+      "show-customers": "Vis kunder"
+    },
+    "main-menu-title": {
+      "search-index": "Søkeindeks"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "Start",
+          "end": "Slutt",
+          "errors": "Feil",
+          "stats": "Indeksert {{ processedCount }} av {{ totalCount }} poster"
+        }
+      },
+      "index-detail": {
+        "title": "Søkeindeks",
+        "title-new": "Søkeindeks mangler",
+        "subtitle": "Detaljer for søkeindeks",
+        "labels": {
+          "no-index": "Ingen data",
+          "build-date": "Sist indeksert",
+          "content": "Indeksinnhold"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "Ingen adresser ennå"
+        }
+      },
+      "address-detail": {
+        "subtitle": "Rediger adresse",
+        "labels": {
+          "name": "Adressenavn",
+          "address-type": "Adressetype",
+          "first-name": "Fornavn",
+          "last-name": "Etternavn",
+          "country": "Land",
+          "region": "Region",
+          "city": "By",
+          "address1": "Adresselinje 1",
+          "address2": "Adresselinje 2",
+          "zip-code": "Postnummer",
+          "email": "E-post",
+          "phone": "Telefon",
+          "description": "Beskrivelse"
+        },
+        "placeholders": {
+          "address-type": "Velg...",
+          "country": "Velg...",
+          "region": "Velg..."
+        }
+      },
+      "currency-list": {
+        "title": "Valutaer",
+        "subtitle": "Administrer valutaer",
+        "labels": {
+          "exchange-rate": "Valutakurs:",
+          "no-currencies": "Ingen valutaer"
+        }
+      },
+      "currency-detail": {
+        "new-title": "Ny valuta",
+        "new-subtitle": "Angi valutadetaljer",
+        "subtitle": "Rediger valutadetaljer",
+        "labels": {
+          "code": "Kode",
+          "name": "Navn",
+          "is-primary": "Angi som standard",
+          "exchange-rate": "Valutakurs",
+          "symbol": "Symbol",
+          "decimalDigits": "Desimaler",
+          "custom-formatting": "Egendefinert formatering",
+          "midpoint-rounding": "Midtpunktsavrunding",
+          "rounding-type": "Avrundingstype"
+        },
+        "descriptions": {
+          "code": "Angi en ISO 4217-kode på 3 bokstaver, hvis aktuelt",
+          "name": "Angi et navn på denne valutaen",
+          "is-primary": "Aktiver dette alternativet for å angi denne valutaen som standard. Merk: Bare én valuta kan angis som standard",
+          "exchange-rate": "Angi valutakursen mot standardvalutaen",
+          "symbol": "Angi et symbol for denne valutaen",
+          "custom-formatting": "Kan være en hvilken som helst gyldig standard numerisk formatangivelse, eller en hvilken som helst kombinasjon av egendefinerte numeriske formatangivelser",
+          "midpoint-rounding": "Velg en passende metode for midtpunktsavrunding",
+          "rounding-type": "Velg en passende avrundingstype."
+        },
+        "placeholders": {
+          "symbol": "Angi et symbol, eller la feltet stå tomt for standardkulturen",
+          "code": "Angi valutakode...",
+          "name": "Angi valutanavn...",
+          "exchange-rate": "Angi valutakursen mot standardvalutaen...",
+          "custom-formatting": "Angi et format, eller la feltet stå tomt for standard",
+          "midpoint-rounding": "Velg policy for midtpunktsavrunding",
+          "rounding-type": "Velg avrundingspolicy"
+        },
+        "validation": {
+          "maxlength": "Valutakoden må bestå av 3 bokstaver"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "Land",
+          "region": "Region",
+          "city": "By",
+          "address": "Adresse",
+          "zip-code": "Postnummer",
+          "phone": "Telefon"
+        },
+        "placeholders": {
+          "country": "Velg...",
+          "region": "Angi delstat eller provins...",
+          "city": "Angi by...",
+          "address1": "Angi adresselinje 1...",
+          "address2": "Angi adresselinje 2...",
+          "zip-code": "Angi postnummer...",
+          "phone": "Angi telefonnummer..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "Rediger distribusjonssenter",
+        "labels": {
+          "name": "Navn",
+          "description": "Beskrivelse",
+          "max-releases": "Maksimalt antall frigivelser i valgt parti",
+          "pick-delay": "Pakkeforsinkelse"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "Distribusjonssentre",
+        "subtitle": "Administrer distribusjonssentre"
+      },
+      "seo-list": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-list).",
+        "subtitle": "Administrer SEO",
+        "labels": {
+          "duplicates-found": "Advarsel: Det er {{count}} motstridende semantiske URL-er!",
+          "resolve-duplicates": "Løs konflikter",
+          "language-code": "Språk",
+          "container": "Butikk",
+          "semanticUrl": "Semantisk URL"
+        }
+      },
+      "seo-detail": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-detail).",
+        "title-new": "Ny SEO",
+        "subtitle": "SEO-detaljer",
+        "labels": {
+          "is-active": "Aktiv",
+          "store": "Butikk",
+          "language": "Språk",
+          "url-keyword": "URL-slug",
+          "page-title": "Sidetittel",
+          "meta-description": "Metabeskrivelse",
+          "meta-keywords": "Meta-nøkkelord",
+          "alternative-text": "Alternativ tekst for bilde"
+        },
+        "placeholders": {
+          "store": "Velg butikk...",
+          "language": "Velg språk...",
+          "url-keyword": "Angi URL-slug...",
+          "page-title": "Angi tittel...",
+          "meta-description": "Angi beskrivelse...",
+          "meta-keywords": "Angi nøkkelord...",
+          "alternative-text": "Angi alternativ tekst..."
+        },
+        "validations": {
+          "url-keyword-required": "Dette feltet er obligatorisk",
+          "url-keyword-invalid": "URL-en inneholder ugyldige tegn",
+          "url-keyword-duplicate": "Duplikat-URL oppdaget"
+        }
+      },
+      "seo-duplicates": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-duplicates).",
+        "subtitle": "SEO-konflikter",
+        "labels": {
+          "semanticUrl": "Semantisk URL",
+          "container": "Butikk"
+        }
+      },
+      "package-type-list": {
+        "title": "Forhåndsdefinert pakkestørrelse",
+        "subtitle": "Administrer systemets pakketyper",
+        "labels": {
+          "no-packages": "Ingen forhåndsdefinerte pakker"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "Ny pakketype",
+        "new-subtitle": "Angi verdier for pakkestørrelse",
+        "subtitle": "Rediger detaljer for pakkestørrelse",
+        "labels": {
+          "name": "Navn på pakketype",
+          "name-description": "Angi et unikt navn på pakketypen",
+          "name-placeholder": "Angi navn på pakketype",
+          "measureUnit": "Måleenhet for størrelse",
+          "measureUnit-description": "Standard måleenhet for størrelse",
+          "measureUnit-placeholder": "Velg en aktuell måleenhet eller legg til en ny",
+          "width": "Bredde",
+          "height": "Høyde",
+          "length": "Lengde"
+        }
+      },
+      "document-type-list": {
+        "title": "Posttyper",
+        "labels": {
+          "document-type": "Posttype",
+          "indexed-docs-total": "Antall poster",
+          "provider": "Leverandør",
+          "scope": "Omfang",
+          "last-indexation-date": "Sist indeksert",
+          "build-index": "Bygg indeks",
+          "rebuild-index": "Gjenoppbygg indeks"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "Bygg søkeindeks",
+        "msg1": "Velg hvordan søkeindeksen skal oppdateres:",
+        "msg2": "Bygg: Indekser alle data uten å opprette indeksen på nytt",
+        "msg3": "Slett og bygg: Slett den eksisterende søkeindeksen og bygg en ny fra bunnen av. Merk: Ingen søkeresultater er tilgjengelige før byggeprosessen er fullført",
+        "index": "Bygg",
+        "reindex": "Slett og bygg"
+      },
+      "address-delete": {
+        "title": "Bekreft sletting",
+        "message": "Er du sikker på at du vil slette denne adressen?"
+      },
+      "address-save": {
+        "title": "Lagre endringer",
+        "message": "Adressen er endret. Vil du lagre endringene?"
+      },
+      "currency-delete": {
+        "title": "Bekreft sletting",
+        "message": "Er du sikker på at du vil slette denne valutaen?"
+      },
+      "currency-save": {
+        "title": "Lagre endringer",
+        "message": "Valutaen er endret. Vil du lagre endringene?"
+      },
+      "fulfillment-delete": {
+        "title": "Bekreft sletting",
+        "message": "Er du sikker på at du vil slette dette distribusjonssenteret?"
+      },
+      "fulfillments-save": {
+        "title": "Lagre endringer",
+        "message": "Distribusjonssenteret er endret. Vil du lagre endringene?"
+      },
+      "seo-save": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.dialogs.seo-save).",
+        "title": "Lagre endringer",
+        "message": "SEO-informasjonen er endret. Vil du lagre endringene?"
+      },
+      "package-type-save": {
+        "title": "Lagre endringer",
+        "message": "Informasjonen om pakketypen er endret. Vil du lagre endringene?"
+      },
+      "package-type-delete": {
+        "title": "Bekreft sletting",
+        "message": "Er du sikker på at du vil slette denne pakketypen?"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "Indeksert <span am-time-ago='indexDate'></span>",
+        "index-old": "Denne indeksen er utdatert, fordi den ble bygget <span am-time-ago='indexDate'>",
+        "no-index": "Søkeindeks mangler"
+      },
+      "currency": {
+        "title": "Valutaer"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "Kontaktinformasjon",
+        "title": "Kontaktinformasjon"
+      },
+      "fulfillment": {
+        "title": "Distribusjonssentre"
+      },
+      "seo": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.widgets.seo).",
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "Opprette pakketypedata",
+    "core:packageType:update": "Oppdatere pakketypedata",
+    "core:packageType:delete": "Slette pakketypedata",
+    "core:currency:create": "Opprette valutadata",
+    "core:currency:update": "Oppdatere valutadata",
+    "core:currency:delete": "Slette valutadata"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "Tilgjengelige skattetyper",
+      "title": "Skattetyper"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "Vektenheter tilgjengelige for fysiske varer",
+      "title": "Vektenheter"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "Tilgjengelige måleenheter for størrelsen på fysiske varer",
+      "title": "Måleenheter for størrelse"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "Fast gebyr for frakt på land",
+      "title": "Gebyr for landfrakt"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "Fast gebyr for flyfrakt",
+      "title": "Gebyr for flyfrakt"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "Fast skattesats",
+      "title": "Fast skattesats i prosent"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "Eksporter eller importer valutaer og pakketyper"
+    }
+  }
+}
