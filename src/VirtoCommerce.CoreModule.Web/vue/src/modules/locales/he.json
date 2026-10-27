@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "ליבת המסחר",
+    "COMMON": {
+      "REFRESH": "רענון",
+      "SAVE": "שמירה",
+      "RESET": "איפוס",
+      "ADD": "הוספה",
+      "CREATE": "יצירה",
+      "DELETE": "מחיקה",
+      "REQUIRED": "זהו שדה חובה",
+      "CLOSE_CONFIRMATION": "יש שינויים שלא נשמרו. האם לסגור בכל זאת?",
+      "SAVED": "נשמר"
+    },
+    "CURRENCIES": {
+      "TITLE": "מטבעות",
+      "SUBTITLE": "ליבת המסחר",
+      "EMPTY": "אין מטבעות",
+      "CODE": "קוד",
+      "CODE_PLACEHOLDER": "קוד ISO 4217, לדוגמה USD",
+      "NAME": "שם",
+      "SYMBOL": "סמל",
+      "EXCHANGE_RATE": "שער חליפין",
+      "RATE_INVALID": "הערך חייב להיות גדול מ-0",
+      "PRIMARY": "ראשי",
+      "PRIMARY_HINT": "המטבע הראשי הוא הבסיס לשערי החליפין",
+      "DECIMAL_DIGITS": "ספרות אחרי הנקודה העשרונית",
+      "CUSTOM_FORMATTING": "עיצוב מותאם אישית",
+      "CUSTOM_FORMATTING_HINT": "מחרוזת עיצוב מספרי של .NET, לדוגמה 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "עיגול נקודת אמצע",
+      "ROUNDING_TYPE": "סוג עיגול",
+      "NEW_TITLE": "מטבע חדש",
+      "DETAILS_SUBTITLE": "מטבע",
+      "DELETE_CONFIRM": "האם למחוק את המטבע {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "סוגי אריזות",
+      "EMPTY": "אין סוגי אריזות",
+      "NAME": "שם",
+      "SIZE": "גודל (ג × ר × א)",
+      "NEW_TITLE": "סוג אריזה חדש",
+      "DETAILS_SUBTITLE": "סוג אריזה",
+      "MEASURE_UNIT": "יחידת מידה",
+      "MEASURE_UNIT_HINT": "היחידה של הגובה, הרוחב והאורך",
+      "HEIGHT": "גובה",
+      "WIDTH": "רוחב",
+      "LENGTH": "אורך",
+      "DIMENSION_INVALID": "הערך חייב להיות גדול מ-0",
+      "DELETE_CONFIRM": "האם למחוק את סוג האריזה {name}?"
+    }
+  }
+}

@@ -1,0 +1,329 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "Tallenna ja käytä",
+      "rebuild-index": "Rakenna indeksi",
+      "default": "Aseta oletukseksi",
+      "show-customers": "Näytä asiakkaat"
+    },
+    "main-menu-title": {
+      "search-index": "Hakuindeksi"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "Alku",
+          "end": "Loppu",
+          "errors": "Virheet",
+          "stats": "Indeksoitu {{ processedCount }} / {{ totalCount }} tietuetta"
+        }
+      },
+      "index-detail": {
+        "title": "Hakuindeksi",
+        "title-new": "Hakuindeksi puuttuu",
+        "subtitle": "Hakuindeksin tiedot",
+        "labels": {
+          "no-index": "Ei tietoja",
+          "build-date": "Viimeksi indeksoitu",
+          "content": "Indeksin sisältö"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "Ei vielä osoitteita"
+        }
+      },
+      "address-detail": {
+        "subtitle": "Muokkaa osoitetta",
+        "labels": {
+          "name": "Osoitteen nimi",
+          "address-type": "Osoitteen tyyppi",
+          "first-name": "Etunimi",
+          "last-name": "Sukunimi",
+          "country": "Maa",
+          "region": "Alue",
+          "city": "Kaupunki",
+          "address1": "Osoiterivi 1",
+          "address2": "Osoiterivi 2",
+          "zip-code": "Postinumero",
+          "email": "Sähköposti",
+          "phone": "Puhelin",
+          "description": "Kuvaus"
+        },
+        "placeholders": {
+          "address-type": "Valitse...",
+          "country": "Valitse...",
+          "region": "Valitse..."
+        }
+      },
+      "currency-list": {
+        "title": "Valuutat",
+        "subtitle": "Valuuttojen hallinta",
+        "labels": {
+          "exchange-rate": "Vaihtokurssi:",
+          "no-currencies": "Ei valuuttoja"
+        }
+      },
+      "currency-detail": {
+        "new-title": "Uusi valuutta",
+        "new-subtitle": "Anna valuutan tiedot",
+        "subtitle": "Muokkaa valuutan tietoja",
+        "labels": {
+          "code": "Koodi",
+          "name": "Nimi",
+          "is-primary": "Aseta oletukseksi",
+          "exchange-rate": "Vaihtokurssi",
+          "symbol": "Symboli",
+          "decimalDigits": "Desimaalit",
+          "custom-formatting": "Mukautettu muotoilu",
+          "midpoint-rounding": "Keskipisteen pyöristys",
+          "rounding-type": "Pyöristystapa"
+        },
+        "descriptions": {
+          "code": "Anna 3-kirjaiminen ISO 4217 -koodi, jos sellainen on",
+          "name": "Anna valuutalle nimi",
+          "is-primary": "Ota tämä asetus käyttöön, jos haluat asettaa tämän valuutan oletukseksi. Huom: vain yksi valuutta voi olla oletus",
+          "exchange-rate": "Anna vaihtokurssi suhteessa oletusvaluuttaan",
+          "symbol": "Anna valuutan symboli",
+          "custom-formatting": "Voi olla mikä tahansa kelvollinen vakiomuotoinen lukumuotoilun määrite tai mikä tahansa mukautettujen lukumuotoilun määritteiden yhdistelmä",
+          "midpoint-rounding": "Valitse sopiva keskipisteen pyöristystapa",
+          "rounding-type": "Valitse sopiva pyöristystapa."
+        },
+        "placeholders": {
+          "symbol": "Anna symboli tai jätä tyhjäksi, jolloin käytetään oletuskulttuuria",
+          "code": "Anna valuuttakoodi...",
+          "name": "Anna valuutan nimi...",
+          "exchange-rate": "Anna vaihtokurssi suhteessa oletusvaluuttaan...",
+          "custom-formatting": "Anna muoto tai jätä tyhjäksi, jolloin käytetään oletusta",
+          "midpoint-rounding": "Valitse keskipisteen pyöristyskäytäntö",
+          "rounding-type": "Valitse pyöristyskäytäntö"
+        },
+        "validation": {
+          "maxlength": "Valuuttakoodin on oltava 3 kirjainta"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "Maa",
+          "region": "Alue",
+          "city": "Kaupunki",
+          "address": "Osoite",
+          "zip-code": "Postinumero",
+          "phone": "Puhelin"
+        },
+        "placeholders": {
+          "country": "Valitse...",
+          "region": "Anna osavaltio tai provinssi...",
+          "city": "Anna kaupunki...",
+          "address1": "Anna osoiterivi 1...",
+          "address2": "Anna osoiterivi 2...",
+          "zip-code": "Anna postinumero...",
+          "phone": "Anna puhelinnumero..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "Jakelukeskuksen muokkaus",
+        "labels": {
+          "name": "Nimi",
+          "description": "Kuvaus",
+          "max-releases": "Valitun erän julkaisujen enimmäismäärä",
+          "pick-delay": "Paketin viive"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "Jakelukeskukset",
+        "subtitle": "Jakelukeskusten hallinta"
+      },
+      "seo-list": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-list).",
+        "subtitle": "SEO:n hallinta",
+        "labels": {
+          "duplicates-found": "Varoitus: löytyi {{count}} ristiriitaista semanttista URL-osoitetta!",
+          "resolve-duplicates": "Ratkaise ristiriidat",
+          "language-code": "Kieli",
+          "container": "Kauppa",
+          "semanticUrl": "Semanttinen URL"
+        }
+      },
+      "seo-detail": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-detail).",
+        "title-new": "Uusi SEO",
+        "subtitle": "SEO-tiedot",
+        "labels": {
+          "is-active": "Aktiivinen",
+          "store": "Kauppa",
+          "language": "Kieli",
+          "url-keyword": "URL-tunniste",
+          "page-title": "Sivun otsikko",
+          "meta-description": "Metakuvaus",
+          "meta-keywords": "Meta-avainsanat",
+          "alternative-text": "Kuvan vaihtoehtoinen teksti"
+        },
+        "placeholders": {
+          "store": "Valitse kauppa...",
+          "language": "Valitse kieli...",
+          "url-keyword": "Anna URL-tunniste...",
+          "page-title": "Anna otsikko...",
+          "meta-description": "Anna kuvaus...",
+          "meta-keywords": "Anna avainsanat...",
+          "alternative-text": "Anna vaihtoehtoinen teksti..."
+        },
+        "validations": {
+          "url-keyword-required": "Tämä kenttä on pakollinen",
+          "url-keyword-invalid": "URL sisältää virheellisiä merkkejä",
+          "url-keyword-duplicate": "Päällekkäinen URL havaittu"
+        }
+      },
+      "seo-duplicates": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-duplicates).",
+        "subtitle": "SEO-ristiriidat",
+        "labels": {
+          "semanticUrl": "Semanttinen URL",
+          "container": "Kauppa"
+        }
+      },
+      "package-type-list": {
+        "title": "Ennalta määritetyt pakkauskoot",
+        "subtitle": "Järjestelmän pakkaustyyppien hallinta",
+        "labels": {
+          "no-packages": "Ei ennalta määritettyjä pakkauksia"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "Uusi pakkaustyyppi",
+        "new-subtitle": "Anna pakkauksen koon arvot",
+        "subtitle": "Muokkaa pakkauksen koon tietoja",
+        "labels": {
+          "name": "Pakkaustyypin nimi",
+          "name-description": "Anna pakkaustyypille yksilöllinen nimi",
+          "name-placeholder": "Anna pakkaustyypin nimi",
+          "measureUnit": "Koon mittayksikkö",
+          "measureUnit-description": "Koon oletusmittayksikkö",
+          "measureUnit-placeholder": "Valitse sopiva mittayksikkö tai lisää uusi",
+          "width": "Leveys",
+          "height": "Korkeus",
+          "length": "Pituus"
+        }
+      },
+      "document-type-list": {
+        "title": "Tietuetyypit",
+        "labels": {
+          "document-type": "Tietuetyyppi",
+          "indexed-docs-total": "Tietueiden määrä",
+          "provider": "Tarjoaja",
+          "scope": "Laajuus",
+          "last-indexation-date": "Viimeksi indeksoitu",
+          "build-index": "Rakenna indeksi",
+          "rebuild-index": "Rakenna indeksi uudelleen"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "Rakenna hakuindeksi",
+        "msg1": "Valitse, miten hakuindeksi päivitetään:",
+        "msg2": "Rakenna: indeksoi kaikki tiedot luomatta indeksiä uudelleen",
+        "msg3": "Poista ja rakenna: poista nykyinen hakuindeksi ja rakenna uusi alusta. Huom: hakutuloksia ei ole saatavilla ennen kuin rakentaminen on valmis",
+        "index": "Rakenna",
+        "reindex": "Poista ja rakenna"
+      },
+      "address-delete": {
+        "title": "Vahvista poisto",
+        "message": "Haluatko varmasti poistaa tämän osoitteen?"
+      },
+      "address-save": {
+        "title": "Tallenna muutokset",
+        "message": "Osoitetta on muokattu. Haluatko tallentaa muutokset?"
+      },
+      "currency-delete": {
+        "title": "Vahvista poisto",
+        "message": "Haluatko varmasti poistaa tämän valuutan?"
+      },
+      "currency-save": {
+        "title": "Tallenna muutokset",
+        "message": "Valuuttaa on muokattu. Haluatko tallentaa muutokset?"
+      },
+      "fulfillment-delete": {
+        "title": "Vahvista poisto",
+        "message": "Haluatko varmasti poistaa tämän jakelukeskuksen?"
+      },
+      "fulfillments-save": {
+        "title": "Tallenna muutokset",
+        "message": "Jakelukeskusta on muokattu. Haluatko tallentaa muutokset?"
+      },
+      "seo-save": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.dialogs.seo-save).",
+        "title": "Tallenna muutokset",
+        "message": "SEO-tietoja on muokattu. Haluatko tallentaa muutokset?"
+      },
+      "package-type-save": {
+        "title": "Tallenna muutokset",
+        "message": "Pakkaustyypin tietoja on muokattu. Haluatko tallentaa muutokset?"
+      },
+      "package-type-delete": {
+        "title": "Vahvista poisto",
+        "message": "Haluatko varmasti poistaa tämän pakkaustyypin?"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "Indeksoitu <span am-time-ago='indexDate'></span>",
+        "index-old": "Tämä indeksi on vanhentunut, koska se rakennettiin <span am-time-ago='indexDate'>",
+        "no-index": "Hakuindeksi puuttuu"
+      },
+      "currency": {
+        "title": "Valuutat"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "Yhteystiedot",
+        "title": "Yhteystiedot"
+      },
+      "fulfillment": {
+        "title": "Jakelukeskukset"
+      },
+      "seo": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.widgets.seo).",
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "Pakkaustyyppien tietojen luonti",
+    "core:packageType:update": "Pakkaustyyppien tietojen päivitys",
+    "core:packageType:delete": "Pakkaustyyppien tietojen poisto",
+    "core:currency:create": "Valuuttatietojen luonti",
+    "core:currency:update": "Valuuttatietojen päivitys",
+    "core:currency:delete": "Valuuttatietojen poisto"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "Käytettävissä olevat verotyypit",
+      "title": "Verotyypit"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "Fyysisten tuotteiden käytettävissä olevat painoyksiköt",
+      "title": "Painoyksiköt"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "Fyysisten tuotteiden koon käytettävissä olevat mittayksiköt",
+      "title": "Koon mittayksiköt"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "Kiinteä maakuljetusmaksu",
+      "title": "Maakuljetusmaksu"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "Kiinteä lentorahtimaksu",
+      "title": "Lentorahtimaksu"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "Kiinteä verokanta",
+      "title": "Kiinteä verokanta prosentteina"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "Vie tai tuo valuuttoja ja pakkaustyyppejä"
+    }
+  }
+}

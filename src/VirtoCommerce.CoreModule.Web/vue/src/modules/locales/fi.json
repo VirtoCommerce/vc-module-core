@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Kaupankäynnin ydin",
+    "COMMON": {
+      "REFRESH": "Päivitä",
+      "SAVE": "Tallenna",
+      "RESET": "Palauta",
+      "ADD": "Lisää",
+      "CREATE": "Luo",
+      "DELETE": "Poista",
+      "REQUIRED": "Tämä kenttä on pakollinen",
+      "CLOSE_CONFIRMATION": "Muutoksia ei ole tallennettu. Suljetaanko silti?",
+      "SAVED": "Tallennettu"
+    },
+    "CURRENCIES": {
+      "TITLE": "Valuutat",
+      "SUBTITLE": "Kaupankäynnin ydin",
+      "EMPTY": "Ei valuuttoja",
+      "CODE": "Koodi",
+      "CODE_PLACEHOLDER": "ISO 4217 -koodi, esim. USD",
+      "NAME": "Nimi",
+      "SYMBOL": "Symboli",
+      "EXCHANGE_RATE": "Vaihtokurssi",
+      "RATE_INVALID": "Arvon on oltava suurempi kuin 0",
+      "PRIMARY": "Ensisijainen",
+      "PRIMARY_HINT": "Ensisijainen valuutta on vaihtokurssien perusta",
+      "DECIMAL_DIGITS": "Desimaalit",
+      "CUSTOM_FORMATTING": "Mukautettu muotoilu",
+      "CUSTOM_FORMATTING_HINT": ".NET-lukumuotoilumerkkijono, esim. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Keskipisteen pyöristys",
+      "ROUNDING_TYPE": "Pyöristystapa",
+      "NEW_TITLE": "Uusi valuutta",
+      "DETAILS_SUBTITLE": "Valuutta",
+      "DELETE_CONFIRM": "Poistetaanko valuutta {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Pakkaustyypit",
+      "EMPTY": "Ei pakkaustyyppejä",
+      "NAME": "Nimi",
+      "SIZE": "Koko (K × L × P)",
+      "NEW_TITLE": "Uusi pakkaustyyppi",
+      "DETAILS_SUBTITLE": "Pakkaustyyppi",
+      "MEASURE_UNIT": "Mittayksikkö",
+      "MEASURE_UNIT_HINT": "Korkeuden, leveyden ja pituuden yksikkö",
+      "HEIGHT": "Korkeus",
+      "WIDTH": "Leveys",
+      "LENGTH": "Pituus",
+      "DIMENSION_INVALID": "Arvon on oltava suurempi kuin 0",
+      "DELETE_CONFIRM": "Poistetaanko pakkaustyyppi {name}?"
+    }
+  }
+}

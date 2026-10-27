@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Rdzeń handlu",
+    "COMMON": {
+      "REFRESH": "Odśwież",
+      "SAVE": "Zapisz",
+      "RESET": "Resetuj",
+      "ADD": "Dodaj",
+      "CREATE": "Utwórz",
+      "DELETE": "Usuń",
+      "REQUIRED": "To pole jest wymagane",
+      "CLOSE_CONFIRMATION": "Masz niezapisane zmiany. Zamknąć mimo to?",
+      "SAVED": "Zapisano"
+    },
+    "CURRENCIES": {
+      "TITLE": "Waluty",
+      "SUBTITLE": "Rdzeń handlu",
+      "EMPTY": "Brak walut",
+      "CODE": "Kod",
+      "CODE_PLACEHOLDER": "Kod ISO 4217, np. USD",
+      "NAME": "Nazwa",
+      "SYMBOL": "Symbol",
+      "EXCHANGE_RATE": "Kurs wymiany",
+      "RATE_INVALID": "Wartość musi być większa od 0",
+      "PRIMARY": "Podstawowa",
+      "PRIMARY_HINT": "Waluta podstawowa jest bazą dla kursów wymiany",
+      "DECIMAL_DIGITS": "Cyfry dziesiętne",
+      "CUSTOM_FORMATTING": "Niestandardowe formatowanie",
+      "CUSTOM_FORMATTING_HINT": "Ciąg formatu liczbowego .NET, np. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Zaokrąglanie do środka",
+      "ROUNDING_TYPE": "Typ zaokrąglania",
+      "NEW_TITLE": "Nowa waluta",
+      "DETAILS_SUBTITLE": "Waluta",
+      "DELETE_CONFIRM": "Usunąć walutę {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Typy paczek",
+      "EMPTY": "Brak typów paczek",
+      "NAME": "Nazwa",
+      "SIZE": "Rozmiar (W × S × D)",
+      "NEW_TITLE": "Nowy typ paczki",
+      "DETAILS_SUBTITLE": "Typ paczki",
+      "MEASURE_UNIT": "Jednostka miary",
+      "MEASURE_UNIT_HINT": "Jednostka wysokości, szerokości i długości",
+      "HEIGHT": "Wysokość",
+      "WIDTH": "Szerokość",
+      "LENGTH": "Długość",
+      "DIMENSION_INVALID": "Wartość musi być większa od 0",
+      "DELETE_CONFIRM": "Usunąć typ paczki {name}?"
+    }
+  }
+}

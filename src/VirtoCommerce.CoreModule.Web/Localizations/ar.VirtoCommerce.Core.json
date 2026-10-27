@@ -1,0 +1,329 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "حفظ وتطبيق",
+      "rebuild-index": "بناء الفهرس",
+      "default": "تعيين كافتراضي",
+      "show-customers": "عرض العملاء"
+    },
+    "main-menu-title": {
+      "search-index": "فهرس البحث"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "البداية",
+          "end": "النهاية",
+          "errors": "الأخطاء",
+          "stats": "السجلات المفهرسة: {{ processedCount }} من {{ totalCount }}"
+        }
+      },
+      "index-detail": {
+        "title": "فهرس البحث",
+        "title-new": "فهرس البحث غير موجود",
+        "subtitle": "تفاصيل فهرس البحث",
+        "labels": {
+          "no-index": "لا توجد بيانات",
+          "build-date": "آخر فهرسة",
+          "content": "محتوى الفهرس"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "لا توجد عناوين بعد"
+        }
+      },
+      "address-detail": {
+        "subtitle": "تعديل العنوان",
+        "labels": {
+          "name": "اسم العنوان",
+          "address-type": "نوع العنوان",
+          "first-name": "الاسم الأول",
+          "last-name": "اسم العائلة",
+          "country": "الدولة",
+          "region": "المنطقة",
+          "city": "المدينة",
+          "address1": "سطر العنوان 1",
+          "address2": "سطر العنوان 2",
+          "zip-code": "الرمز البريدي",
+          "email": "البريد الإلكتروني",
+          "phone": "الهاتف",
+          "description": "الوصف"
+        },
+        "placeholders": {
+          "address-type": "اختر...",
+          "country": "اختر...",
+          "region": "اختر..."
+        }
+      },
+      "currency-list": {
+        "title": "العملات",
+        "subtitle": "إدارة العملات",
+        "labels": {
+          "exchange-rate": "سعر الصرف:",
+          "no-currencies": "لا توجد عملات"
+        }
+      },
+      "currency-detail": {
+        "new-title": "عملة جديدة",
+        "new-subtitle": "أدخل تفاصيل العملة",
+        "subtitle": "تعديل تفاصيل العملة",
+        "labels": {
+          "code": "الرمز",
+          "name": "الاسم",
+          "is-primary": "تعيين كعملة افتراضية",
+          "exchange-rate": "سعر الصرف",
+          "symbol": "علامة العملة",
+          "decimalDigits": "عدد المنازل العشرية",
+          "custom-formatting": "تنسيق مخصص",
+          "midpoint-rounding": "تقريب نقطة المنتصف",
+          "rounding-type": "نوع التقريب"
+        },
+        "descriptions": {
+          "code": "أدخل رمز ISO 4217 المكوّن من 3 أحرف، إن وُجد",
+          "name": "أدخل اسمًا لهذه العملة",
+          "is-primary": "فعّل هذا الخيار لتعيين هذه العملة كعملة افتراضية. ملاحظة: يمكن تعيين عملة واحدة فقط كعملة افتراضية",
+          "exchange-rate": "أدخل سعر الصرف مقابل عملتك الافتراضية",
+          "symbol": "أدخل علامة لهذه العملة",
+          "custom-formatting": "يمكن أن يكون أي محدِّد تنسيق رقمي قياسي صالح، أو أي مجموعة من محدِّدات التنسيق الرقمي المخصصة",
+          "midpoint-rounding": "اختر طريقة مناسبة لتقريب نقطة المنتصف",
+          "rounding-type": "اختر نوع التقريب المناسب."
+        },
+        "placeholders": {
+          "symbol": "أدخل علامة أو اتركها فارغة لاستخدام الثقافة الافتراضية",
+          "code": "أدخل رمز العملة...",
+          "name": "أدخل اسم العملة...",
+          "exchange-rate": "أدخل سعر الصرف مقابل عملتك الافتراضية...",
+          "custom-formatting": "أدخل تنسيقًا أو اتركه فارغًا لاستخدام التنسيق الافتراضي",
+          "midpoint-rounding": "اختر سياسة تقريب نقطة المنتصف",
+          "rounding-type": "اختر سياسة التقريب"
+        },
+        "validation": {
+          "maxlength": "يجب أن يتكون رمز العملة من 3 أحرف أبجدية"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "الدولة",
+          "region": "المنطقة",
+          "city": "المدينة",
+          "address": "العنوان",
+          "zip-code": "الرمز البريدي",
+          "phone": "الهاتف"
+        },
+        "placeholders": {
+          "country": "اختر...",
+          "region": "أدخل الولاية أو المقاطعة...",
+          "city": "أدخل المدينة...",
+          "address1": "أدخل سطر العنوان 1...",
+          "address2": "أدخل سطر العنوان 2...",
+          "zip-code": "أدخل الرمز البريدي...",
+          "phone": "أدخل رقم الهاتف..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "تعديل مركز التوزيع",
+        "labels": {
+          "name": "الاسم",
+          "description": "الوصف",
+          "max-releases": "الحد الأقصى لعدد الإصدارات في الدفعة المحددة",
+          "pick-delay": "تأخير الطرد"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "مراكز التوزيع",
+        "subtitle": "إدارة مراكز التوزيع"
+      },
+      "seo-list": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-list).",
+        "subtitle": "إدارة SEO",
+        "labels": {
+          "duplicates-found": "تحذير: توجد عناوين URL دلالية متعارضة ({{count}})!",
+          "resolve-duplicates": "حل التعارضات",
+          "language-code": "اللغة",
+          "container": "المتجر",
+          "semanticUrl": "عنوان URL الدلالي"
+        }
+      },
+      "seo-detail": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-detail).",
+        "title-new": "SEO جديد",
+        "subtitle": "تفاصيل SEO",
+        "labels": {
+          "is-active": "نشط",
+          "store": "المتجر",
+          "language": "اللغة",
+          "url-keyword": "الاسم المختصر في URL",
+          "page-title": "عنوان الصفحة",
+          "meta-description": "الوصف التعريفي (Meta)",
+          "meta-keywords": "الكلمات المفتاحية (Meta)",
+          "alternative-text": "النص البديل للصورة"
+        },
+        "placeholders": {
+          "store": "اختر المتجر...",
+          "language": "اختر اللغة...",
+          "url-keyword": "أدخل الاسم المختصر في URL...",
+          "page-title": "أدخل العنوان...",
+          "meta-description": "أدخل الوصف...",
+          "meta-keywords": "أدخل الكلمات المفتاحية...",
+          "alternative-text": "أدخل النص البديل..."
+        },
+        "validations": {
+          "url-keyword-required": "هذا الحقل مطلوب",
+          "url-keyword-invalid": "يحتوي عنوان URL على أحرف غير صالحة",
+          "url-keyword-duplicate": "تم اكتشاف عنوان URL مكرر"
+        }
+      },
+      "seo-duplicates": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-duplicates).",
+        "subtitle": "تعارضات SEO",
+        "labels": {
+          "semanticUrl": "عنوان URL الدلالي",
+          "container": "المتجر"
+        }
+      },
+      "package-type-list": {
+        "title": "أحجام الطرود المحددة مسبقًا",
+        "subtitle": "إدارة أنواع الطرود في النظام",
+        "labels": {
+          "no-packages": "لا توجد طرود محددة مسبقًا"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "نوع طرد جديد",
+        "new-subtitle": "أدخل قيم حجم الطرد",
+        "subtitle": "تعديل تفاصيل حجم الطرد",
+        "labels": {
+          "name": "اسم نوع الطرد",
+          "name-description": "أدخل اسمًا فريدًا لنوع الطرد",
+          "name-placeholder": "أدخل اسم نوع الطرد",
+          "measureUnit": "وحدة قياس الحجم",
+          "measureUnit-description": "وحدة القياس الافتراضية للحجم",
+          "measureUnit-placeholder": "اختر وحدة قياس مناسبة أو أضف وحدة جديدة",
+          "width": "العرض",
+          "height": "الارتفاع",
+          "length": "الطول"
+        }
+      },
+      "document-type-list": {
+        "title": "أنواع السجلات",
+        "labels": {
+          "document-type": "نوع السجل",
+          "indexed-docs-total": "عدد السجلات",
+          "provider": "المزوّد",
+          "scope": "النطاق",
+          "last-indexation-date": "آخر فهرسة",
+          "build-index": "بناء الفهرس",
+          "rebuild-index": "إعادة بناء الفهرس"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "بناء فهرس البحث",
+        "msg1": "اختر طريقة تحديث فهرس البحث:",
+        "msg2": "بناء: فهرسة جميع البيانات دون إعادة إنشاء الفهرس",
+        "msg3": "حذف وبناء: حذف فهرس البحث الحالي وبناء فهرس جديد من البداية. ملاحظة: لن تتوفر أي نتائج بحث حتى تكتمل عملية البناء",
+        "index": "بناء",
+        "reindex": "حذف وبناء"
+      },
+      "address-delete": {
+        "title": "تأكيد الحذف",
+        "message": "هل تريد بالتأكيد حذف هذا العنوان؟"
+      },
+      "address-save": {
+        "title": "حفظ التغييرات",
+        "message": "تم تعديل العنوان. هل تريد حفظ التغييرات؟"
+      },
+      "currency-delete": {
+        "title": "تأكيد الحذف",
+        "message": "هل تريد بالتأكيد حذف هذه العملة؟"
+      },
+      "currency-save": {
+        "title": "حفظ التغييرات",
+        "message": "تم تعديل العملة. هل تريد حفظ التغييرات؟"
+      },
+      "fulfillment-delete": {
+        "title": "تأكيد الحذف",
+        "message": "هل تريد بالتأكيد حذف مركز التوزيع هذا؟"
+      },
+      "fulfillments-save": {
+        "title": "حفظ التغييرات",
+        "message": "تم تعديل مركز التوزيع. هل تريد حفظ التغييرات؟"
+      },
+      "seo-save": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.dialogs.seo-save).",
+        "title": "حفظ التغييرات",
+        "message": "تم تعديل معلومات SEO. هل تريد حفظ التغييرات؟"
+      },
+      "package-type-save": {
+        "title": "حفظ التغييرات",
+        "message": "تم تعديل معلومات نوع الطرد. هل تريد حفظ التغييرات؟"
+      },
+      "package-type-delete": {
+        "title": "تأكيد الحذف",
+        "message": "هل تريد بالتأكيد حذف نوع الطرد هذا؟"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "تمت الفهرسة <span am-time-ago='indexDate'></span>",
+        "index-old": "هذا الفهرس قديم، إذ تم بناؤه <span am-time-ago='indexDate'>",
+        "no-index": "فهرس البحث غير موجود"
+      },
+      "currency": {
+        "title": "العملات"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "تفاصيل الاتصال",
+        "title": "تفاصيل الاتصال"
+      },
+      "fulfillment": {
+        "title": "مراكز التوزيع"
+      },
+      "seo": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.widgets.seo).",
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "إنشاء بيانات أنواع الطرود",
+    "core:packageType:update": "تحديث بيانات أنواع الطرود",
+    "core:packageType:delete": "حذف بيانات أنواع الطرود",
+    "core:currency:create": "إنشاء بيانات العملات",
+    "core:currency:update": "تحديث بيانات العملات",
+    "core:currency:delete": "حذف بيانات العملات"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "أنواع الضرائب المتاحة",
+      "title": "أنواع الضرائب"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "وحدات الوزن المتاحة للسلع المادية",
+      "title": "وحدات الوزن"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "وحدات القياس المتاحة لأبعاد السلع المادية",
+      "title": "وحدات قياس الحجم"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "رسوم الشحن البري الثابتة",
+      "title": "رسوم الشحن البري"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "رسوم الشحن الجوي الثابتة",
+      "title": "رسوم الشحن الجوي"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "معدل الضريبة الثابت",
+      "title": "النسبة المئوية لمعدل الضريبة الثابت"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "تصدير العملات وأنواع الطرود أو استيرادها"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "نواة التجارة",
+    "COMMON": {
+      "REFRESH": "تحديث",
+      "SAVE": "حفظ",
+      "RESET": "إعادة تعيين",
+      "ADD": "إضافة",
+      "CREATE": "إنشاء",
+      "DELETE": "حذف",
+      "REQUIRED": "هذا الحقل مطلوب",
+      "CLOSE_CONFIRMATION": "لديك تغييرات غير محفوظة. هل تريد الإغلاق على أي حال؟",
+      "SAVED": "تم الحفظ"
+    },
+    "CURRENCIES": {
+      "TITLE": "العملات",
+      "SUBTITLE": "نواة التجارة",
+      "EMPTY": "لا توجد عملات",
+      "CODE": "الرمز",
+      "CODE_PLACEHOLDER": "رمز ISO 4217، مثل USD",
+      "NAME": "الاسم",
+      "SYMBOL": "علامة العملة",
+      "EXCHANGE_RATE": "سعر الصرف",
+      "RATE_INVALID": "يجب أن تكون القيمة أكبر من 0",
+      "PRIMARY": "أساسية",
+      "PRIMARY_HINT": "العملة الأساسية هي أساس أسعار الصرف",
+      "DECIMAL_DIGITS": "عدد المنازل العشرية",
+      "CUSTOM_FORMATTING": "تنسيق مخصص",
+      "CUSTOM_FORMATTING_HINT": "سلسلة تنسيق رقمي في .NET، مثل 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "تقريب نقطة المنتصف",
+      "ROUNDING_TYPE": "نوع التقريب",
+      "NEW_TITLE": "عملة جديدة",
+      "DETAILS_SUBTITLE": "العملة",
+      "DELETE_CONFIRM": "هل تريد حذف العملة {code}؟"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "أنواع الطرود",
+      "EMPTY": "لا توجد أنواع طرود",
+      "NAME": "الاسم",
+      "SIZE": "الحجم (الارتفاع × العرض × الطول)",
+      "NEW_TITLE": "نوع طرد جديد",
+      "DETAILS_SUBTITLE": "نوع الطرد",
+      "MEASURE_UNIT": "وحدة القياس",
+      "MEASURE_UNIT_HINT": "وحدة الارتفاع والعرض والطول",
+      "HEIGHT": "الارتفاع",
+      "WIDTH": "العرض",
+      "LENGTH": "الطول",
+      "DIMENSION_INVALID": "يجب أن تكون القيمة أكبر من 0",
+      "DELETE_CONFIRM": "هل تريد حذف نوع الطرد {name}؟"
+    }
+  }
+}
