@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Cœur commerce",
+    "COMMON": {
+      "REFRESH": "Actualiser",
+      "SAVE": "Enregistrer",
+      "RESET": "Réinitialiser",
+      "ADD": "Ajouter",
+      "CREATE": "Créer",
+      "DELETE": "Supprimer",
+      "REQUIRED": "Ce champ est obligatoire",
+      "CLOSE_CONFIRMATION": "Certaines modifications ne sont pas enregistrées. Fermer quand même ?",
+      "SAVED": "Enregistré"
+    },
+    "CURRENCIES": {
+      "TITLE": "Devises",
+      "SUBTITLE": "Cœur commerce",
+      "EMPTY": "Aucune devise",
+      "CODE": "Code",
+      "CODE_PLACEHOLDER": "Code ISO 4217, p. ex. USD",
+      "NAME": "Nom",
+      "SYMBOL": "Symbole",
+      "EXCHANGE_RATE": "Taux de change",
+      "RATE_INVALID": "Doit être supérieur à 0",
+      "PRIMARY": "Principale",
+      "PRIMARY_HINT": "La devise principale sert de base aux taux de change",
+      "DECIMAL_DIGITS": "Chiffres décimaux",
+      "CUSTOM_FORMATTING": "Formatage personnalisé",
+      "CUSTOM_FORMATTING_HINT": "Une chaîne de format numérique .NET, p. ex. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Arrondi médian",
+      "ROUNDING_TYPE": "Type d'arrondi",
+      "NEW_TITLE": "Nouvelle devise",
+      "DETAILS_SUBTITLE": "Devise",
+      "DELETE_CONFIRM": "Supprimer la devise {code} ?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Types de colis",
+      "EMPTY": "Aucun type de colis",
+      "NAME": "Nom",
+      "SIZE": "Taille (H × l × L)",
+      "NEW_TITLE": "Nouveau type de colis",
+      "DETAILS_SUBTITLE": "Type de colis",
+      "MEASURE_UNIT": "Unité de mesure",
+      "MEASURE_UNIT_HINT": "Unité de la hauteur, de la largeur et de la longueur",
+      "HEIGHT": "Hauteur",
+      "WIDTH": "Largeur",
+      "LENGTH": "Longueur",
+      "DIMENSION_INVALID": "Doit être supérieur à 0",
+      "DELETE_CONFIRM": "Supprimer le type de colis {name} ?"
+    }
+  }
+}

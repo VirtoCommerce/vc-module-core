@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Núcleo de comercio",
+    "COMMON": {
+      "REFRESH": "Actualizar",
+      "SAVE": "Guardar",
+      "RESET": "Restablecer",
+      "ADD": "Añadir",
+      "CREATE": "Crear",
+      "DELETE": "Eliminar",
+      "REQUIRED": "Este campo es obligatorio",
+      "CLOSE_CONFIRMATION": "Hay cambios sin guardar. ¿Cerrar de todos modos?",
+      "SAVED": "Guardado"
+    },
+    "CURRENCIES": {
+      "TITLE": "Monedas",
+      "SUBTITLE": "Núcleo de comercio",
+      "EMPTY": "No hay monedas",
+      "CODE": "Código",
+      "CODE_PLACEHOLDER": "Código ISO 4217, p. ej. USD",
+      "NAME": "Nombre",
+      "SYMBOL": "Símbolo",
+      "EXCHANGE_RATE": "Tipo de cambio",
+      "RATE_INVALID": "Debe ser mayor que 0",
+      "PRIMARY": "Principal",
+      "PRIMARY_HINT": "La moneda principal es la base de los tipos de cambio",
+      "DECIMAL_DIGITS": "Dígitos decimales",
+      "CUSTOM_FORMATTING": "Formato personalizado",
+      "CUSTOM_FORMATTING_HINT": "Una cadena de formato numérico de .NET, p. ej. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Redondeo al punto medio",
+      "ROUNDING_TYPE": "Tipo de redondeo",
+      "NEW_TITLE": "Nueva moneda",
+      "DETAILS_SUBTITLE": "Moneda",
+      "DELETE_CONFIRM": "¿Eliminar la moneda {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Tipos de paquete",
+      "EMPTY": "No hay tipos de paquete",
+      "NAME": "Nombre",
+      "SIZE": "Tamaño (Al × An × L)",
+      "NEW_TITLE": "Nuevo tipo de paquete",
+      "DETAILS_SUBTITLE": "Tipo de paquete",
+      "MEASURE_UNIT": "Unidad de medida",
+      "MEASURE_UNIT_HINT": "Unidad de la altura, la anchura y la longitud",
+      "HEIGHT": "Altura",
+      "WIDTH": "Anchura",
+      "LENGTH": "Longitud",
+      "DIMENSION_INVALID": "Debe ser mayor que 0",
+      "DELETE_CONFIRM": "¿Eliminar el tipo de paquete {name}?"
+    }
+  }
+}

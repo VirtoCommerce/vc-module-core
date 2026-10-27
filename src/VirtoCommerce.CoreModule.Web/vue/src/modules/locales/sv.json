@@ -1,0 +1,52 @@
+{
+  "CORE": {
+    "SUBTITLE": "Handelskärna",
+    "COMMON": {
+      "REFRESH": "Uppdatera",
+      "SAVE": "Spara",
+      "RESET": "Återställ",
+      "ADD": "Lägg till",
+      "CREATE": "Skapa",
+      "DELETE": "Ta bort",
+      "REQUIRED": "Fältet är obligatoriskt",
+      "CLOSE_CONFIRMATION": "Du har osparade ändringar. Stäng ändå?",
+      "SAVED": "Sparad"
+    },
+    "CURRENCIES": {
+      "TITLE": "Valutor",
+      "SUBTITLE": "Handelskärna",
+      "EMPTY": "Inga valutor",
+      "CODE": "Kod",
+      "CODE_PLACEHOLDER": "ISO 4217-kod, t.ex. USD",
+      "NAME": "Namn",
+      "SYMBOL": "Symbol",
+      "EXCHANGE_RATE": "Växelkurs",
+      "RATE_INVALID": "Måste vara större än 0",
+      "PRIMARY": "Primär",
+      "PRIMARY_HINT": "Primärvalutan är basen för växelkurserna",
+      "DECIMAL_DIGITS": "Decimaler",
+      "CUSTOM_FORMATTING": "Anpassad formatering",
+      "CUSTOM_FORMATTING_HINT": "En numerisk .NET-formatsträng, t.ex. 0.00 Pt.",
+      "MIDPOINT_ROUNDING": "Avrundning av mittpunkt",
+      "ROUNDING_TYPE": "Avrundningstyp",
+      "NEW_TITLE": "Ny valuta",
+      "DETAILS_SUBTITLE": "Valuta",
+      "DELETE_CONFIRM": "Ta bort valutan {code}?"
+    },
+    "PACKAGE_TYPES": {
+      "TITLE": "Pakettyper",
+      "EMPTY": "Inga pakettyper",
+      "NAME": "Namn",
+      "SIZE": "Storlek (H × B × L)",
+      "NEW_TITLE": "Ny pakettyp",
+      "DETAILS_SUBTITLE": "Pakettyp",
+      "MEASURE_UNIT": "Måttenhet",
+      "MEASURE_UNIT_HINT": "Enhet för höjd, bredd och längd",
+      "HEIGHT": "Höjd",
+      "WIDTH": "Bredd",
+      "LENGTH": "Längd",
+      "DIMENSION_INVALID": "Måste vara större än 0",
+      "DELETE_CONFIRM": "Ta bort pakettypen {name}?"
+    }
+  }
+}

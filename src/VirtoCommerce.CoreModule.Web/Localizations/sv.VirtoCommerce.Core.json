@@ -1,0 +1,329 @@
+{
+  "core": {
+    "commands": {
+      "apply-filter": "Spara och tillämpa",
+      "rebuild-index": "Bygg index",
+      "default": "Ange som standard",
+      "show-customers": "Visa kunder"
+    },
+    "main-menu-title": {
+      "search-index": "Sökindex"
+    },
+    "blades": {
+      "index-progress": {
+        "labels": {
+          "start": "Start",
+          "end": "Slut",
+          "errors": "Fel",
+          "stats": "Indexerat {{ processedCount }} av {{ totalCount }} poster"
+        }
+      },
+      "index-detail": {
+        "title": "Sökindex",
+        "title-new": "Sökindex saknas",
+        "subtitle": "Detaljer för sökindex",
+        "labels": {
+          "no-index": "Ingen data",
+          "build-date": "Senast indexerat",
+          "content": "Indexinnehåll"
+        }
+      },
+      "address-list": {
+        "labels": {
+          "no-addresses": "Inga adresser ännu"
+        }
+      },
+      "address-detail": {
+        "subtitle": "Redigera adress",
+        "labels": {
+          "name": "Adressnamn",
+          "address-type": "Adresstyp",
+          "first-name": "Förnamn",
+          "last-name": "Efternamn",
+          "country": "Land",
+          "region": "Region",
+          "city": "Stad",
+          "address1": "Adressrad 1",
+          "address2": "Adressrad 2",
+          "zip-code": "Postnummer",
+          "email": "E-post",
+          "phone": "Telefon",
+          "description": "Beskrivning"
+        },
+        "placeholders": {
+          "address-type": "Välj...",
+          "country": "Välj...",
+          "region": "Välj..."
+        }
+      },
+      "currency-list": {
+        "title": "Valutor",
+        "subtitle": "Hantera valutor",
+        "labels": {
+          "exchange-rate": "Växelkurs:",
+          "no-currencies": "Inga valutor"
+        }
+      },
+      "currency-detail": {
+        "new-title": "Ny valuta",
+        "new-subtitle": "Ange valutauppgifter",
+        "subtitle": "Redigera valutauppgifter",
+        "labels": {
+          "code": "Kod",
+          "name": "Namn",
+          "is-primary": "Ange som standard",
+          "exchange-rate": "Växelkurs",
+          "symbol": "Symbol",
+          "decimalDigits": "Decimaler",
+          "custom-formatting": "Anpassad formatering",
+          "midpoint-rounding": "Avrundning av mittpunkt",
+          "rounding-type": "Avrundningstyp"
+        },
+        "descriptions": {
+          "code": "Ange en ISO 4217-kod på 3 bokstäver, om tillämpligt",
+          "name": "Ange ett namn för valutan",
+          "is-primary": "Aktivera alternativet för att ange valutan som standard. Obs! Endast en valuta kan anges som standard",
+          "exchange-rate": "Ange växelkursen mot standardvalutan",
+          "symbol": "Ange en symbol för valutan",
+          "custom-formatting": "Kan vara valfri giltig standardspecifikator för numeriskt format eller valfri kombination av anpassade specifikatorer för numeriskt format",
+          "midpoint-rounding": "Välj en lämplig metod för avrundning av mittpunkt",
+          "rounding-type": "Välj en lämplig avrundningstyp."
+        },
+        "placeholders": {
+          "symbol": "Ange en symbol eller lämna tomt för standardkulturen",
+          "code": "Ange valutakod...",
+          "name": "Ange valutanamn...",
+          "exchange-rate": "Ange växelkursen mot standardvalutan...",
+          "custom-formatting": "Ange ett format eller lämna tomt för standard",
+          "midpoint-rounding": "Välj princip för avrundning av mittpunkt",
+          "rounding-type": "Välj avrundningsprincip"
+        },
+        "validation": {
+          "maxlength": "Valutakoden måste bestå av 3 bokstäver"
+        }
+      },
+      "fulfillment-center-contact": {
+        "labels": {
+          "country": "Land",
+          "region": "Region",
+          "city": "Stad",
+          "address": "Adress",
+          "zip-code": "Postnummer",
+          "phone": "Telefon"
+        },
+        "placeholders": {
+          "country": "Välj...",
+          "region": "Ange delstat eller provins...",
+          "city": "Ange stad...",
+          "address1": "Ange adressrad 1...",
+          "address2": "Ange adressrad 2...",
+          "zip-code": "Ange postnummer...",
+          "phone": "Ange telefonnummer..."
+        }
+      },
+      "fulfillment-center-detail": {
+        "subtitle": "Redigera distributionscenter",
+        "labels": {
+          "name": "Namn",
+          "description": "Beskrivning",
+          "max-releases": "Maximalt antal frisläppningar i vald batch",
+          "pick-delay": "Paketfördröjning"
+        }
+      },
+      "fulfillment-center-list": {
+        "title": "Distributionscenter",
+        "subtitle": "Hantera distributionscenter"
+      },
+      "seo-list": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-list).",
+        "subtitle": "Hantera SEO",
+        "labels": {
+          "duplicates-found": "Varning: Det finns {{count}} motstridiga semantiska URL:er!",
+          "resolve-duplicates": "Lös konflikter",
+          "language-code": "Språk",
+          "container": "Butik",
+          "semanticUrl": "Semantisk URL"
+        }
+      },
+      "seo-detail": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-detail).",
+        "title-new": "Ny SEO",
+        "subtitle": "SEO-detaljer",
+        "labels": {
+          "is-active": "Aktiv",
+          "store": "Butik",
+          "language": "Språk",
+          "url-keyword": "URL-slug",
+          "page-title": "Sidtitel",
+          "meta-description": "Metabeskrivning",
+          "meta-keywords": "Meta-nyckelord",
+          "alternative-text": "Bildens alternativa text"
+        },
+        "placeholders": {
+          "store": "Välj butik...",
+          "language": "Välj språk...",
+          "url-keyword": "Ange URL-slug...",
+          "page-title": "Ange titel...",
+          "meta-description": "Ange beskrivning...",
+          "meta-keywords": "Ange nyckelord...",
+          "alternative-text": "Ange alternativ text..."
+        },
+        "validations": {
+          "url-keyword-required": "Fältet är obligatoriskt",
+          "url-keyword-invalid": "URL:en innehåller ogiltiga tecken",
+          "url-keyword-duplicate": "Dubblett-URL upptäckt"
+        }
+      },
+      "seo-duplicates": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.blades.seo-duplicates).",
+        "subtitle": "SEO-konflikter",
+        "labels": {
+          "semanticUrl": "Semantisk URL",
+          "container": "Butik"
+        }
+      },
+      "package-type-list": {
+        "title": "Fördefinierad paketstorlek",
+        "subtitle": "Hantera systemets pakettyper",
+        "labels": {
+          "no-packages": "Inga fördefinierade paket"
+        }
+      },
+      "package-type-detail": {
+        "new-title": "Ny pakettyp",
+        "new-subtitle": "Ange värden för paketstorlek",
+        "subtitle": "Redigera uppgifter om paketstorlek",
+        "labels": {
+          "name": "Namn på pakettyp",
+          "name-description": "Ange ett unikt namn för pakettypen",
+          "name-placeholder": "Ange namn på pakettyp",
+          "measureUnit": "Måttenhet för storlek",
+          "measureUnit-description": "Standardmåttenhet för storlek",
+          "measureUnit-placeholder": "Välj en lämplig måttenhet eller lägg till en ny",
+          "width": "Bredd",
+          "height": "Höjd",
+          "length": "Längd"
+        }
+      },
+      "document-type-list": {
+        "title": "Posttyper",
+        "labels": {
+          "document-type": "Posttyp",
+          "indexed-docs-total": "Antal poster",
+          "provider": "Leverantör",
+          "scope": "Omfattning",
+          "last-indexation-date": "Senast indexerat",
+          "build-index": "Bygg index",
+          "rebuild-index": "Bygg om index"
+        }
+      }
+    },
+    "dialogs": {
+      "reindex": {
+        "title": "Bygg sökindex",
+        "msg1": "Välj hur sökindexet ska uppdateras:",
+        "msg2": "Bygg: Indexera all data utan att skapa om indexet",
+        "msg3": "Ta bort och bygg: Ta bort det befintliga sökindexet och bygg ett nytt från grunden. Obs! Inga sökresultat är tillgängliga förrän byggprocessen är klar",
+        "index": "Bygg",
+        "reindex": "Ta bort och bygg"
+      },
+      "address-delete": {
+        "title": "Bekräfta borttagning",
+        "message": "Är du säker på att du vill ta bort den här adressen?"
+      },
+      "address-save": {
+        "title": "Spara ändringar",
+        "message": "Adressen har ändrats. Vill du spara ändringarna?"
+      },
+      "currency-delete": {
+        "title": "Bekräfta borttagning",
+        "message": "Är du säker på att du vill ta bort den här valutan?"
+      },
+      "currency-save": {
+        "title": "Spara ändringar",
+        "message": "Valutan har ändrats. Vill du spara ändringarna?"
+      },
+      "fulfillment-delete": {
+        "title": "Bekräfta borttagning",
+        "message": "Är du säker på att du vill ta bort det här distributionscentret?"
+      },
+      "fulfillments-save": {
+        "title": "Spara ändringar",
+        "message": "Distributionscentret har ändrats. Vill du spara ändringarna?"
+      },
+      "seo-save": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.dialogs.seo-save).",
+        "title": "Spara ändringar",
+        "message": "SEO-informationen har ändrats. Vill du spara ändringarna?"
+      },
+      "package-type-save": {
+        "title": "Spara ändringar",
+        "message": "Informationen om pakettypen har ändrats. Vill du spara ändringarna?"
+      },
+      "package-type-delete": {
+        "title": "Bekräfta borttagning",
+        "message": "Är du säker på att du vill ta bort den här pakettypen?"
+      }
+    },
+    "widgets": {
+      "index": {
+        "index-ok": "Indexerat <span am-time-ago='indexDate'></span>",
+        "index-old": "Indexet är inaktuellt eftersom det byggdes <span am-time-ago='indexDate'>",
+        "no-index": "Sökindex saknas"
+      },
+      "currency": {
+        "title": "Valutor"
+      },
+      "fulfillmentCenterContact": {
+        "blade-subtitle": "Kontaktuppgifter",
+        "title": "Kontaktuppgifter"
+      },
+      "fulfillment": {
+        "title": "Distributionscenter"
+      },
+      "seo": {
+        "Obsolete-VC0014": "Moved to VirtoCommerce.Seo module (seo.widgets.seo).",
+        "title": "SEO"
+      }
+    }
+  },
+  "permissions": {
+    "core:packageType:create": "Skapa pakettypsdata",
+    "core:packageType:update": "Uppdatera pakettypsdata",
+    "core:packageType:delete": "Ta bort pakettypsdata",
+    "core:currency:create": "Skapa valutadata",
+    "core:currency:update": "Uppdatera valutadata",
+    "core:currency:delete": "Ta bort valutadata"
+  },
+  "settings": {
+    "VirtoCommerce.Core.General.TaxTypes": {
+      "description": "Tillgängliga skattetyper",
+      "title": "Skattetyper"
+    },
+    "VirtoCommerce.Core.General.WeightUnits": {
+      "description": "Viktenheter som är tillgängliga för fysiska varor",
+      "title": "Viktenheter"
+    },
+    "VirtoCommerce.Core.General.MeasureUnits": {
+      "description": "Tillgängliga måttenheter för storlek på fysiska varor",
+      "title": "Måttenheter för storlek"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Ground.Rate": {
+      "description": "Fast avgift för landfrakt",
+      "title": "Avgift för landfrakt"
+    },
+    "VirtoCommerce.Core.FixedRateShippingMethod.Air.Rate": {
+      "description": "Fast avgift för flygfrakt",
+      "title": "Avgift för flygfrakt"
+    },
+    "VirtoCommerce.Core.FixedTaxRateProvider.Rate": {
+      "description": "Fast skattesats",
+      "title": "Fast skattesats i procent"
+    }
+  },
+  "module": {
+    "VirtoCommerce.Core": {
+      "description": "Exportera eller importera valutor och pakettyper"
+    }
+  }
+}
