@@ -3,7 +3,11 @@
   <id>VirtoCommerce.Core</id>
   <version>3.1014.0</version>
   <version-tag />
-  <platformVersion>3.1095.0</platformVersion>
+  <platformVersion>3.1101.0</platformVersion>
+  <dependencies>
+    <dependency id="VirtoCommerce.AdminAngularJs" version="3.1098.0" optional="true" />
+    <dependency id="VirtoCommerce.AdminShell" version="3.1101.0" optional="true" />
+  </dependencies>
   <title>Commerce core module</title>
   <description>Common e-commerce domain functionality</description>
   <authors>
